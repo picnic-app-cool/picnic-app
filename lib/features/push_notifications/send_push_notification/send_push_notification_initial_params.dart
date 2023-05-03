@@ -1,0 +1,3 @@
+class SendPushNotificationInitialParams {
+  const SendPushNotificationInitialParams();
+}

@@ -1,0 +1,9 @@
+Bash script tool to convert .svg to .webp (in 3 sizes, base, 2x, and 3x).
+
+Prerequisites
+
+1. Install `cwebp` (on macOS: `brew install webp`)
+2. Install `rsvg-convert` (on macOS: `brew install librsvg`)
+3. Copy the svg in this folder
+
+Usage: ./webp <filename.svg> <base width> <base height>

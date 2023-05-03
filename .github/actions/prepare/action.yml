@@ -1,0 +1,108 @@
+name: Prepare environment
+description: Set up all required tools
+
+inputs:
+  xcode_version:
+    description: Xcode version to use
+    required: false
+    default: "14.2"
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare environment variables
+      uses: ./.github/actions/prepare_env
+
+    - name: Install bundler
+      run: |
+        gem install bundler
+      shell: bash
+
+    - name: Parse fvm config
+      uses: kuhnroyal/flutter-fvm-config-action@v1
+
+    - name: Set up flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+
+    - name: Fix flutter lock on windows
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        cd "${{ runner.tool_cache }}/flutter/${FLUTTER_CHANNEL}-${FLUTTER_VERSION}-${ARCH,,}/bin/cache"
+        rm -rf .upgrade_lock lockfile
+      shell: bash
+      env:
+        ARCH: ${{ runner.arch }} # to lowercase with bash
+
+    - name: Add empty .env file
+      run: |
+        cp .env.example .env
+      shell: bash
+
+
+    - name: Get flutter dependencies
+      run: |
+        flutter pub get
+      shell: bash
+
+    - name: Get flutter dependencies in clean architecture lints
+      working-directory: tools/custom_lints/clean_architecture_lints
+      run: |
+        flutter pub get
+      shell: bash
+
+    - name: Flutter precache
+      run: |
+        flutter precache --ios
+      shell: bash
+
+    - name: Install cider
+      run: |
+        dart pub global activate cider
+      shell: bash
+
+    - name: Setup JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: temurin
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Install ruby dependencies via bundler for android
+      run: |
+        bundle install
+      working-directory: android
+      shell: bash
+
+    - name: Install ruby dependencies via bundler for ios
+      if: ${{ runner.os == 'macOS' }} # it is required only to build ios app
+      run: |
+        bundle install
+      working-directory: ios
+      shell: bash
+
+    - name: Install ruby dependencies via bundler for scripts
+      run: |
+        bundle install
+      working-directory: scripts
+      shell: bash
+
+    - name: List changed files for debug
+      run: |
+        git status --ignored
+      shell: bash
+
+    - name: Select Xcode version
+      if: ${{ runner.os == 'macOS' }}
+      run: |
+        sudo xcode-select -s /Applications/Xcode-${{ inputs.xcode_version }}.app
+      shell: bash
+
+    - name: Set up node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16

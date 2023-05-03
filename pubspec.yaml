@@ -1,0 +1,258 @@
+name: picnic_app
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 2.10.0+202
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  picnic_ui_components:
+    path: packages/picnic-ui-components/
+
+  # architecture
+  bloc: 8.1.0
+  flutter_bloc: 8.0.1
+
+  # dependency injection
+  get_it: 7.2.0
+
+  flutter_web_auth_2: ^2.1.4
+
+  # functional programming, used for Either type
+  dartz: 0.10.1
+
+  # equality checks
+  equatable: 2.0.3
+
+  flutter_keyboard_visibility: 5.4.0
+
+  # localization
+  intl: 0.17.0
+
+  # widgets
+  gap: 2.0.1
+  country_code_picker:
+    path: packages/country-code-picker
+  dotted_border: 2.0.0+2
+  flutter_staggered_grid_view: 0.6.2
+  cached_network_image: 3.2.3
+
+  scroll_to_index: ^3.0.1
+
+  # utils
+  logger: 1.1.0
+  collection: 1.17.0
+  app_settings: 4.1.8
+  url_launcher: 6.1.8
+  flutter_app_badger: 1.5.0
+  async: 2.10.0
+
+  # webview
+  flutter_custom_tabs: 1.0.4
+
+  lottie: 1.4.1
+
+  # permissions
+  permission_handler: 10.2.0
+
+  # image picker
+  image_picker: 0.8.6
+  photo_manager: 2.5.0
+
+  # file picker
+  file_picker: 5.2.5
+
+  #firebase
+  firebase_core: 2.7.0
+  firebase_auth: 4.2.5
+  firebase_messaging: 14.2.5
+  firebase_crashlytics: 3.0.10
+  firebase_analytics: 10.1.0
+  firebase_dynamic_links: 5.0.11
+  firebase_remote_config: ^3.0.9
+
+  # Universal/app links
+  uni_links: 0.5.1
+
+  #social login
+  google_sign_in: 5.4.2
+  sign_in_with_apple: 4.3.0
+  #timeago
+  timeago: 3.2.2
+
+  #share_plus:
+  share_plus: 4.0.10
+
+  # paths
+  path_provider: 2.0.11
+
+  # dio
+  dio: 5.0.2
+
+  #photo editor
+  photo_editor_sdk: 2.7.1
+
+  #video editor
+  video_editor_sdk: 2.7.1
+
+  #in app notificatipns
+  another_flushbar: 1.12.29
+
+  flutter_secure_storage: 6.0.0
+
+  video_thumbnail: 0.5.3
+
+  video_player: 2.5.2
+
+  chewie: 1.4.0
+
+  #dismissible_page
+  dismissible_page: 1.0.1
+
+  #photo_view
+  photo_view: 0.14.0
+
+  visibility_detector: 0.3.3
+
+  #audio player
+  audioplayers: 1.1.0
+
+  #emoji
+  emoji_picker_flutter: 1.5.0
+  flutter_emoji: 2.4.0
+
+  #markdown text
+  flutter_markdown: 0.6.13
+
+  #detect links and selectable text
+  flutter_linkify: 5.0.2
+  linkify: 4.1.0
+
+  #camera
+  camera: 0.10.3+2
+
+  # app tracking dialog for iOS
+  app_tracking_transparency: 2.0.3
+
+  # restarting app
+  flutter_phoenix: 1.1.0
+
+  # hive database
+  hive: 2.2.3
+  hive_flutter: 1.1.0
+
+  #centrifuge
+  centrifuge: 0.9.2
+
+  #graphql
+  graphql: 5.1.3
+
+  device_info_plus: 8.0.0
+  package_info_plus: 3.0.2
+  flutter_exif_rotation: 0.5.1
+  shared_preferences: 2.0.17
+  connectivity_plus: 3.0.3
+  rxdart: 0.27.7
+
+  recaptcha_verification:
+    path: packages/recaptcha-verification
+
+  #getting contacts from a user device
+  contacts_service: 0.6.3
+  uuid: 3.0.7
+  flutter_dotenv: 5.0.2
+
+dependency_overrides:
+  custom_lint:
+    path: packages/dart-custom-lint/packages/custom_lint
+  collection: 1.17.0
+  test_api: 0.4.17
+  # This is here because the flutter_launcher_icons use the 3.2.2 version yet, when flutter_launcher_icons bump the version
+  # we don't need to add into dependency_overrides
+  image: 4.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # code analysis
+  lint: 2.0.1
+  dart_code_metrics: 5.7.2
+  custom_lint:
+    path: packages/dart-custom-lint/packages/custom_lint
+  clean_architecture_lints:
+    path: tools/custom_lints/clean_architecture_lints
+
+  # stability tools
+
+  # tests
+  golden_toolkit: 0.15.0
+  alchemist: 0.6.0
+  mocktail_image_network: 0.3.1
+  mocktail: 0.3.0
+  bloc_test: 9.0.3
+  fake_async: 1.3.1
+
+  # widgetbook
+  widgetbook: 2.4.1
+
+  #launcher_icons
+  flutter_launcher_icons:
+    git:
+      # This is a pre-released version of launcher_icons package. This is used because this version has support
+      # for macOS icon generation. This will be removed once this new version is released as a stable release on
+      # pub.dev
+      url: https://github.com/fluttercommunity/flutter_launcher_icons.git
+      ref: v0.11.0
+
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - .env
+    - assets/
+    - assets/images/
+    - assets/lottie/
+    - assets/imgly/
+  fonts:
+    - family: Kanit
+      fonts:
+        - asset: packages/picnic_ui_components/fonts/Kanit-Thin.ttf
+          weight: 100
+        - asset: packages/picnic_ui_components/fonts/Kanit-ExtraLight.ttf
+          weight: 200
+        - asset: packages/picnic_ui_components/fonts/Kanit-Light.ttf
+          weight: 300
+        - asset: packages/picnic_ui_components/fonts/Kanit-Regular.ttf
+          weight: 400
+        - asset: packages/picnic_ui_components/fonts/Kanit-Medium.ttf
+          weight: 500
+        - asset: packages/picnic_ui_components/fonts/Kanit-SemiBold.ttf
+          weight: 600
+        - asset: packages/picnic_ui_components/fonts/Kanit-Bold.ttf
+          weight: 700
+        - asset: packages/picnic_ui_components/fonts/Kanit-ExtraBold.ttf
+          weight: 800
+        - asset: packages/picnic_ui_components/fonts/Kanit-Black.ttf
+          weight: 900
+    - family: Arimo
+      fonts:
+        - asset: packages/picnic_ui_components/fonts/Arimo-Regular.ttf
+
+flutter_gen:
+  output: lib/resources/
+  line_length: 120
+  fonts:
+    enabled: false
+
+flutter_intl:
+  enabled: true

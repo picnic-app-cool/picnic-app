@@ -1,0 +1,42 @@
+name: Run tests with coverage
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    timeout-minutes: 30
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: write # to checkout and post comments
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Prepare unit tests
+        run: |
+          make prepare_unit_tests
+        shell: bash
+
+      - name: Run unit tests
+        run: |
+          flutter test --timeout=1h --dart-define=isCI=true --coverage --coverage-path=coverage/lcov.info --reporter=compact
+        shell: bash
+
+      - name: Report code coverage
+        uses: vebr/jest-lcov-reporter@v0.2.1
+        if: success() || failure()
+        with:
+          lcov-file: coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}

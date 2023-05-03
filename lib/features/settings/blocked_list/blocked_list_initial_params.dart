@@ -1,0 +1,3 @@
+class BlockedListInitialParams {
+  const BlockedListInitialParams();
+}

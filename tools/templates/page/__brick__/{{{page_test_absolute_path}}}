@@ -1,0 +1,43 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:{{{app_package}}}/dependency_injection/app_component.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{initial_params_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{navigator_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{page_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presentation_model_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presenter_file_name}}}';
+
+import '../../../mocks/mocks.dart';
+import '../../../test_utils/golden_tests_utils.dart';
+
+Future<void> main() async {
+  late {{page_name}} page;
+  late {{initial_params_name}} initParams;
+  late {{presentation_model_name}} model;
+  late {{presenter_name}} presenter;
+  late {{navigator_name}} navigator;
+
+  void initMvp() {
+    initParams = const {{initial_params_name}}();
+    model = {{presentation_model_name}}.initial(
+      initParams,
+    );
+    navigator = {{navigator_name}}(Mocks.appNavigator);
+    presenter = {{presenter_name}}(
+      model,
+      navigator,
+    );
+
+    getIt.registerFactoryParam<{{presenter_name}}, {{initial_params_name}}, dynamic>(
+      (initialParams, _) => presenter,
+    );
+    page = {{page_name}}(initialParams: initParams);
+  }
+
+  await screenshotTest(
+    "{{page_name.snakeCase()}}",
+    setUp: () async {
+      initMvp();
+    },
+    pageBuilder: () => page,
+  );
+}

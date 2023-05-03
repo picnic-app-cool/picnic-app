@@ -1,0 +1,125 @@
+name: picnic_ui_components
+description: A new Flutter package project.
+version: 0.0.1
+homepage: ''
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # dependency injection
+  get_it: 7.2.0
+
+  # functional programming, used for Either type
+  dartz: 0.10.1
+
+  # equality checks
+  equatable: 2.0.3
+
+  # widgets
+  gap: 2.0.1
+
+  lottie: 1.4.1
+
+dependency_overrides:
+  custom_lint:
+    path: ../dart-custom-lint/packages/custom_lint
+  collection: 1.17.0
+  test_api: 0.4.17
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  lint: 2.0.1
+  dart_code_metrics: 5.7.2
+  custom_lint:
+    path: ../dart-custom-lint/packages/custom_lint
+  clean_architecture_lints:
+    path: ../../tools/custom_lints/clean_architecture_lints
+
+  # tests
+  golden_toolkit: 0.15.0
+  alchemist: 0.6.0
+  mocktail_image_network: 0.3.1
+  mocktail: 0.3.0
+  bloc_test: 9.1.0
+  import_sorter: 4.6.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+flutter_gen:
+  output: lib/resources/
+  line_length: 120
+
+flutter_intl:
+  enabled: false
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/lottie/
+    - assets/images/
+  fonts:
+    - family: Kanit
+      fonts:
+        - asset: lib/fonts/Kanit-Thin.ttf
+          weight: 100
+        - asset: lib/fonts/Kanit-ExtraLight.ttf
+          weight: 200
+        - asset: lib/fonts/Kanit-Light.ttf
+          weight: 300
+        - asset: lib/fonts/Kanit-Regular.ttf
+          weight: 400
+        - asset: lib/fonts/Kanit-Medium.ttf
+          weight: 500
+        - asset: lib/fonts/Kanit-SemiBold.ttf
+          weight: 600
+        - asset: lib/fonts/Kanit-Bold.ttf
+          weight: 700
+        - asset: lib/fonts/Kanit-ExtraBold.ttf
+          weight: 800
+        - asset: lib/fonts/Kanit-Black.ttf
+          weight: 900
+    - family: Arimo
+      fonts:
+        - asset: lib/fonts/Arimo-Regular.ttf
+
+
+  # To add assets to your package, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  #
+  # For details regarding assets in packages, see
+  # https://flutter.dev/assets-and-images/#from-packages
+  #
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # To add custom fonts to your package, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts in packages, see
+  # https://flutter.dev/custom-fonts/#from-packages

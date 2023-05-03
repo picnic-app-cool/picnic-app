@@ -1,0 +1,70 @@
+name: Check
+description: Set up all required tools
+inputs:
+  workingDir:
+    description: 'working dir in which to perform checks'
+    required: true
+  scriptsDir:
+    description: 'scripts dir relative to workingDir'
+    required: true
+  checkArbFiles:
+    description: 'whether to run check on arb files or not'
+    required: false
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - name: Check project formatting
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        find lib test -name "*.dart" -not -name "*.g.dart"  -not -name \
+          "*.gr.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" \
+          -exec dart format -l 120 --set-exit-if-changed {} +;
+
+    - name: Check localization files for duplicates
+      if: ${{ inputs.checkArbFiles == 'true' }}
+      shell: bash
+      run: |
+        dart tools/arb_files_validator/bin/arb_files_validator.dart ${{ inputs.workingDir }}/lib/localization/
+
+    - name: Analyze with flutter
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        flutter analyze
+
+    - name: Run custom linter
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        ${{ inputs.scriptsDir }}/enable_custom_lint.sh ; flutter pub run custom_lint ; ${{ inputs.scriptsDir }}/disable_analysis_plugins.sh
+
+    - name: Run code metrics - analyze
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        ${{ inputs.scriptsDir }}/enable_dart_code_metrics.sh
+        flutter pub run dart_code_metrics:metrics analyze lib \
+          --set-exit-on-violation-level=warning --fatal-style \
+          --fatal-performance --fatal-warnings
+        ${{ inputs.scriptsDir }}/disable_analysis_plugins.sh
+
+    - name: Run code metrics - check-unused-files
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        ${{ inputs.scriptsDir }}/enable_dart_code_metrics.sh ; \
+        flutter pub run dart_code_metrics:metrics check-unused-files . \
+          --fatal-unused \
+          --exclude="{.fvm/**,ios/**,tools/**,packages/**,.dart_tool/**,lib/generated/**,widgetbook/**}"
+
+    - name: Run code metrics - check-unused-code
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        ${{ inputs.scriptsDir }}/enable_dart_code_metrics.sh ' \
+        flutter pub run dart_code_metrics:metrics check-unused-code . \
+          --fatal-unused '
+        ${{ inputs.scriptsDir }}/disable_analysis_plugins.sh
+

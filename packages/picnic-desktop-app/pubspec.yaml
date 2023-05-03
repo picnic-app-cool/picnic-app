@@ -1,0 +1,117 @@
+name: picnic_desktop_app
+description: Picnic landing pages
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+
+  # depending on the main greenfield project, ideally we should at some point in time try to extract all common parts into separate
+  # packages and have `picnic_app be mobile-only project and renamed to `picnic_mobile_app`
+  picnic_app:
+    path: ../../
+
+  # architecture
+  bloc: 8.1.0
+  flutter_bloc: 8.0.1
+
+  # dependency injection
+  get_it: 7.2.0
+
+  # functional programming, used for Either type
+  dartz: 0.10.1
+
+  # equality checks
+  equatable: 2.0.3
+
+  # localization
+  intl: 0.17.0
+
+  # widgets
+  gap: 2.0.1
+
+  # logging
+  logger: 1.1.0
+
+  desktop_webview_auth: 0.0.11
+
+  # restarting app
+  flutter_phoenix: 1.1.0
+
+  launch_at_startup: 0.2.1
+  
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+  video_player_macos: 1.0.6
+  file_selector: 0.9.2+4
+
+dependency_overrides:
+  custom_lint:
+    path: ../dart-custom-lint/packages/custom_lint
+  collection: 1.17.0
+  test_api: 0.4.17
+  image: 4.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # code analysis
+  lint: 2.0.1
+  dart_code_metrics: 5.7.2
+  custom_lint:
+    path: ../dart-custom-lint/packages/custom_lint
+  clean_architecture_lints:
+    path: ../../tools/custom_lints/clean_architecture_lints
+  flutter_launcher_icons: 0.11.0
+
+  # tests
+  golden_toolkit: 0.15.0
+  alchemist: 0.6.0
+  mocktail_image_network: 0.3.1
+  mocktail: 0.3.0
+  bloc_test: 9.1.0
+  import_sorter: 4.6.0
+
+  # graphql
+  graphql: 5.1.3
+
+  # utils
+  meta: 1.8.0
+  url_launcher: 6.1.8
+
+flutter_icons:
+  android: false
+  ios: false
+  image_path: "assets/icon/ic_launcher_macos.png"
+  macos:
+    generate: true
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/
+
+flutter_gen:
+  output: lib/resources/
+  line_length: 120
+
+flutter_intl:
+  enabled: true
+import_sorter:
+  emojis: false # Optional, defaults to false
+  comments: false # Optional, defaults to true
+  ignored_files: # Optional, defaults to []
+    - \/lib\/*

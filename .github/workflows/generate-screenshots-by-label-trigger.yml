@@ -1,0 +1,134 @@
+name: Generate UI Test screenshots (triggered by label)
+# this workflow is needed until https://github.com/flutter/flutter/issues/111739 is fixed.
+on:
+  pull_request:
+    types:
+      - labeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regenerate-screenshots:
+    timeout-minutes: 30
+    runs-on:
+      - self-hosted
+      - linux # windows has bad pixels! https://github.com/picnic-app-cool/picnic-app-greenfield/actions/runs/4055819611/jobs/6979474402
+    permissions: {}
+
+    if: ${{ github.event.label.name == 'Generate Screenshots' }}
+    outputs:
+      filesChanged: ${{ steps.check_changes.outputs.FILES_CHANGED }}
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          # so that we pull the PR branch, not a PR merge commit
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: "${{ secrets.PAT_COMMIT_MAIN }}"
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run Screenshot tests - greenfield
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: greenfield
+          workingDir: .
+          updateGoldens: true
+
+      - name: Run Screenshot tests - desktop-app
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: desktop-app
+          workingDir: ./packages/picnic-desktop-app
+          updateGoldens: true
+
+      - name: Run Screenshot tests - ui-components
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: ui-components
+          workingDir: ./packages/picnic-ui-components
+          updateGoldens: true
+
+      - name: Run Screenshot tests - landing-pages
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: landing-pages
+          workingDir: ./packages/picnic-landing-pages
+          updateGoldens: true
+
+      - name: check if there are any changes
+        id: check_changes
+        run: |
+          git diff --exit-code -- '**/*.png'
+          echo "FILES_CHANGED=$?" >> $GITHUB_OUTPUT
+        shell: bash {0}
+      - name: Commit updated screenshots
+        if: ${{ steps.check_changes.outputs.FILES_CHANGED == 1 }}
+        id: commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'test/**/*.png'
+          message: "update screenshots"
+          push: true
+
+  remove-label:
+    timeout-minutes: 5
+    runs-on:
+      - ubuntu-latest
+    permissions:
+      pull-requests: write # to remove label
+
+    if: ${{ github.event.label.name == 'Generate Screenshots' }}
+
+    steps:
+      - name: Remove label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              name: context.payload.label.name,
+            })
+
+  comment-success:
+    timeout-minutes: 5
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to checkout
+      pull-requests: write # to write comment
+
+    needs:
+      - regenerate-screenshots
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment variables
+        uses: ./.github/actions/prepare_env
+
+      - name: Post a comment with changes
+        uses: actions/github-script@v6
+        env:
+          FILES_CHANGED: ${{ needs.regenerate-screenshots.outputs.filesChanged }}
+        with:
+          script: |
+            var body = ''
+            if (process.env.FILES_CHANGED == '1') {
+              body = `screenshots were regenerated, please review them and merge the PR if they look good.` 
+            } else {
+              body = `no screenshot changes were found`
+            }
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: body,
+            })

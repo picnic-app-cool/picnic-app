@@ -1,0 +1,197 @@
+actions_path '../../tools/fastlane/actions'
+
+import('../../tools/fastlane/lanes/lane_deploy_app_store.rb')
+import('../../tools/fastlane/lanes/lane_deploy_firebase.rb')
+import('../../tools/fastlane/lanes/lane_deploy_pending_app_store_release.rb')
+import('../../tools/fastlane/lanes/lane_deploy_testflight.rb')
+import('../../tools/fastlane/constants.rb')
+
+default_platform(:ios)
+
+local_git_url = "https://github.com/picnic-app-cool/picnic-app-greenfield-certificates.git"
+
+platform :ios do
+
+  desc %{downloads and installs the appstore certificate for both CI
+and local machines. Certificate is used to sign the version released to
+itunes connect or firebase app distribution }
+  lane :prepare_certificates do
+    git_url = nil
+    unless is_ci
+      git_url = local_git_url
+    end
+    match(
+      type: "adhoc",
+      readonly: true,
+      git_url: git_url,
+    )
+    match(
+      type: "development",
+      readonly: true,
+      git_url: git_url,
+    )
+    match(
+      type: "appstore",
+      readonly: true,
+      git_url: git_url,
+    )
+  end
+
+  desc %{ prepares release notes based on JIRA tickets in commits since the last release,
+uploads the build to firebase and adds a JIRA comment to every mentioned issue with build
+ version, link to bitrise and link to firebase }
+  lane :deploy_firebase do
+    lane_deploy_firebase(
+      platform: 'iOS',
+      firebase_testers_group_prefix: "ios-testers",
+      ipa_path: IPA_PATH,
+      app_id: ENV["IOS_APP_ID"],
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      firebase_token: ENV["FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN"],
+      build_url: ENV["GITHUB_BUILD_URL"],
+      branch: GIT_BRANCH,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+      pull_request_title: ENV['PULL_REQUEST_TITLE'],
+      pull_request_number: ENV['PULL_REQUEST_NUMBER'],
+    )
+  end
+
+  desc %{ deploys the build to testflight }
+  lane :deploy_testflight do
+    lane_deploy_testflight(
+      ipa_path: IPA_PATH,
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      branch: GIT_BRANCH,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+      key_id: IOS_KEY_ID,
+      key_issuer_id: IOS_KEY_ISSUER_ID,
+      appstoreconnect_api_key: IOS_APPSTORECONNECT_API_KEY,
+    )
+    # this makes sure we prepare version in app store connect for release using currently set
+    # metadata and screenshots, and pre-warm app store's review
+    lane_deploy_app_store(
+      key_id: IOS_KEY_ID,
+      key_issuer_id: IOS_KEY_ISSUER_ID,
+      appstoreconnect_api_key: IOS_APPSTORECONNECT_API_KEY,
+      submit_for_review: true,
+      automatic_release: false,
+      skip_metadata: false,
+      skip_screenshots: false,
+      )
+
+  end
+
+  desc %{ promotes pending_release }
+  lane :deploy_pending_release do
+    lane_deploy_pending_app_store_release
+  end
+
+  desc %{ adds new device's name and udid to the certificate and
+ recreates the provisioning profiles }
+  lane :add_ios_device do
+    device_name = prompt(text: "Enter device's name (i.e: Andrew's iphone): ")
+    device_udid = prompt(text: "Enter device's UDID: ")
+    register_device(
+      name: device_name,
+      udid: device_udid,
+    )
+
+    refresh_profiles
+  end
+
+  desc %{ recreates the provisioning profiles for development, adhoc and appstore only if number
+of registered devices have changed }
+  lane :refresh_profiles do
+    git_url = nil
+    unless is_ci
+      git_url = local_git_url
+    end
+    match(
+      type: "development",
+      force_for_new_devices: true,
+      clone_branch_directly: true,
+      git_url: git_url,
+    )
+
+    match(
+      type: "adhoc",
+      force_for_new_devices: true,
+      clone_branch_directly: true,
+      git_url: git_url,
+    )
+
+    match(
+      type: "appstore",
+      force_for_new_devices: true,
+      clone_branch_directly: true,
+      git_url: git_url,
+    )
+  end
+
+  lane :download_udids do
+    firebase_app_distribution_get_udids(
+      app: ENV["IOS_APP_ID"],
+      output_file: 'fastlane/testers_udids.csv',
+      firebase_cli_token: ENV["FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN"],
+    )
+  end
+
+  desc %{ checks current version in testflight }
+  lane :check_testflight_version do
+
+    api_key = Base64.decode64(IOS_APPSTORECONNECT_API_KEY)
+    app_store_connect_api_key(
+      key_id: IOS_KEY_ID,
+      issuer_id: IOS_KEY_ISSUER_ID,
+      key_content: api_key,
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    local_version = sh("cider version")
+    local_version_code = local_version.split('+')[1].to_i
+    puts 'local version code: ' + local_version_code.to_s
+    largest_code = latest_testflight_build_number
+    if local_version_code <= largest_code
+      UI.user_error!(
+        'current version code is smaller or equal to the latest one in testflight: local: ' + local_version_code.to_s + " - testflight: " + largest_code.to_s
+      )
+    end
+  end
+
+  desc %{ creates new feature branch from specified JIRA ticket number }
+  lane :new_feature_branch do
+    create_feature_branch(
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+    )
+  end
+
+  desc %{verifies ipa and metadata using fastlane deliver and checks for common errors}
+  lane :verify_build_in_app_store do
+    api_key = Base64.decode64(IOS_APPSTORECONNECT_API_KEY)
+
+    # ======================== IMPORTANT ======================== #
+    # this requires to install `Transporter` app from App store!
+    # should be removed after https://github.com/fastlane/fastlane/pull/20738 is merged
+    ENV["FASTLANE_ITUNES_TRANSPORTER_USE_SHELL_SCRIPT"] = "1"
+    ENV["FASTLANE_ITUNES_TRANSPORTER_PATH"] = "/Applications/Transporter.app/Contents/itms"
+    # =========================================================== #
+    app_store_connect_api_key(
+      key_id: IOS_KEY_ID,
+      issuer_id: IOS_KEY_ISSUER_ID,
+      key_content: api_key,
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    deliver(
+      verify_only: true,
+      ipa: IPA_PATH,
+      skip_binary_upload: true,
+    )
+  end
+end

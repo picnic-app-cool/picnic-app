@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All Tests - no goldens" type="FlutterTestConfigType" factoryName="Flutter Test" singleton="false">
+    <option name="testDir" value="$PROJECT_DIR$/test/" />
+    <option name="useRegexp" value="false" />
+    <option name="additionalArgs" value="-x golden" />
+    <method v="2" />
+  </configuration>
+</component>

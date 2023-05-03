@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+# gem "rails"
+
+gem "fastlane", "~> 2.208"
+
+gem "jira-ruby", "~> 1.6.0" #needed by plugin 'fastlane-plugin-jira_issue_details'
+
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval_gemfile(plugins_path) if File.exist?(plugins_path)

@@ -1,0 +1,3 @@
+class CircleGroupsSelectionInitialParams {
+  const CircleGroupsSelectionInitialParams();
+}

@@ -1,0 +1,431 @@
+name: PR check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "release/**"
+      - "feature/GS-[0-9]+/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  ARTIFACT_RETENTION_DAYS: 4
+  BUILD_SOURCE_BRANCH: ${{ github.ref || github.head_ref }}
+  BUILD_SOURCE_COMMIT: ${{ github.sha }}
+
+jobs:
+  unit-tests:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/unit_tests
+        with:
+          name: greenfield
+          workingDir: .
+
+  check-store-versions:
+    if: ${{ github.base_ref == 'main' }}
+    runs-on:
+      - ubuntu-latest
+    permissions:
+      contents: read # to checkout
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Check Android Version
+        working-directory: android
+        run: |
+          bundle exec fastlane check_google_play_version
+        env:
+          PICNIC_GOOGLE_PLAY_KEY_DATA: ${{ secrets.PICNIC_GOOGLE_PLAY_KEY_DATA }}
+
+      - name: Check iOS Version
+        if: ${{ always() }}
+        working-directory: ios
+        run: |
+          bundle exec fastlane check_testflight_version
+        env:
+          PICNIC_IOS_KEY_ISSUER_ID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          PICNIC_IOS_KEY_ID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          PICNIC_APPSTORECONNECT_API_KEY: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+
+  screenshot-tests:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # windows has bad pixels! https://github.com/picnic-app-cool/picnic-app-greenfield/actions/runs/4055819611/jobs/6979474402
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run Screenshot tests
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: greenfield
+          workingDir: .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: screenshot-failures
+          path: "**/test/**/failures/*.png"
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: ignore
+
+  check-desktop-app:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # windows is not supported
+    permissions:
+      contents: read # to checkout
+      checks: write # to report test results
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run checks
+        uses: ./.github/actions/check
+        with:
+          checkArbFiles: false
+          workingDir: ./packages/picnic-desktop-app
+          scriptsDir: ../../scripts
+
+      - name: Run Screenshot tests
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: desktop-app
+          workingDir: ./packages/picnic-desktop-app
+
+      - name: Run unit tests
+        uses: ./.github/actions/unit_tests
+        with:
+          name: landing-pages
+          workingDir: ./packages/picnic-desktop-app
+
+  check-ui-components:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # windows is not supported
+    permissions:
+      contents: read # to checkout
+      checks: write # to report test results
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run checks
+        uses: ./.github/actions/check
+        with:
+          checkArbFiles: false
+          workingDir: ./packages/picnic-ui-components
+          scriptsDir: ../../scripts
+
+      - name: Run Screenshot tests
+        uses: ./.github/actions/screenshot_tests
+        with:
+          name: ui-components
+          workingDir: ./packages/picnic-ui-components
+
+      - name: Run unit tests
+        uses: ./.github/actions/unit_tests
+        with:
+          name: landing-pages
+          workingDir: ./packages/picnic-ui-components
+
+  check:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # windows is not supported
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Run 'pub get' everywhere
+        run: |
+          find . -name 'pubspec.yaml' ! -path "**/.dart_tool/**" -exec fvm flutter pub get {} \;
+
+      - name: Run checks
+        uses: ./.github/actions/check
+        with:
+          workingDir: .
+          scriptsDir: ./scripts
+
+  build-android:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Build Android
+        id: build
+        uses: ./.github/actions/build_android
+        with:
+          buildType: "profile"
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: ${{ steps.build.outputs.apk-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  build-ios:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: read # to checkout
+
+    env:
+      MATCH_KEYCHAIN_PASSWORD: build
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Build iOS
+        id: build
+        uses: ./.github/actions/build_ios
+        with:
+          buildType: "profile"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipa
+          path: ${{ steps.build.outputs.ipa-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  build-macos:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Build MacOS
+        id: build
+        uses: ./.github/actions/build_macos
+        with:
+          buildType: "profile"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          appstoreConnectAPIKey: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+          IOSKeyID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          IOSKeyIssuerID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos
+          path: ${{ steps.build.outputs.dmg-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  build-windows:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - windows
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Build Windows
+        id: build
+        uses: ./.github/actions/build_windows
+        with:
+          buildType: "profile"
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows
+          path: ${{ steps.build.outputs.zip-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  drop-previous-artifacts:
+    timeout-minutes: 2
+    runs-on:
+      - self-hosted
+    permissions:
+      actions: write # to delete artifacts
+
+    steps:
+      - name: Drop previous artifacts
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const opts = github.rest.actions.listWorkflowRunsForRepo.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              event: "pull_request",
+              branch: process.env.GITHUB_REF,
+            })
+
+            const workflow_runs = await github.paginate(opts)
+            for (const workflow_run of workflow_runs) {
+              if (workflow_run.id == context.runId) {
+                continue
+              }
+              if (workflow_run.pull_requests.length == 0) {
+                continue
+              }
+              if (workflow_run.name != context.workflow) {
+                continue
+              }
+
+              const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: workflow_run.id,
+              })
+
+              for (const artifact of artifacts.data.artifacts) {
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                })
+              }
+            }
+
+  comment-artifact-links:
+    timeout-minutes: 2
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to checkout
+      pull-requests: write # to write comment
+    needs:
+      - build-android
+      - build-ios
+      - build-macos
+      - build-windows
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment variables
+        uses: ./.github/actions/prepare_env
+
+      - name: Drop previous comments
+        id: stats-should-run
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const opts = github.rest.issues.listComments.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+            })
+
+            const comments = await github.paginate(opts)
+
+            for (const comment of comments) {
+              if (comment.body.startsWith("Build artifacts for commit")) {
+                await github.rest.issues.deleteComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: comment.id,
+                })
+              }
+            }
+
+            return true
+
+      - name: Add a comment with link to artifacts page
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: `Build artifacts for commit ${context.payload.pull_request.head.sha}:
+                You can find them on [this page](${process.env.GITHUB_BUILD_URL}#artifacts)`,
+            })

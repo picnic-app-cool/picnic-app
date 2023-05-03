@@ -1,0 +1,3 @@
+class ChatFeedInitialParams {
+  const ChatFeedInitialParams();
+}

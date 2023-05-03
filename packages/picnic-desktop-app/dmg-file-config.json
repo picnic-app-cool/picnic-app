@@ -1,0 +1,18 @@
+{
+  "title": "Picnic App",
+  "contents": [
+    {
+      "x": 448,
+      "y": 144,
+      "type": "link",
+      "path": "/Applications"
+    },
+    {
+      "x": 192,
+      "y": 144,
+      "type": "file",
+      "path": "build/macos/Build/Products/Release/picnic_desktop_app.app",
+      "name": "Picnic.app"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+enum PostOverlayTheme {
+  dark,
+  light;
+}

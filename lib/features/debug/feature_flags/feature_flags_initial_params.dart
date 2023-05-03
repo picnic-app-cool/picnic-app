@@ -1,0 +1,3 @@
+class FeatureFlagsInitialParams {
+  const FeatureFlagsInitialParams();
+}

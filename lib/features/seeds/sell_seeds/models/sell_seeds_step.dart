@@ -1,0 +1,4 @@
+enum SellSeedsStep {
+  first,
+  second,
+}

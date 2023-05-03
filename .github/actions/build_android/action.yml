@@ -1,0 +1,120 @@
+name: Build Android application
+description: Builds apk for Android
+
+inputs:
+  buildType:
+    description: Whether to build release, firebase or profile version. "release" for release version, "profile" for firebase version.
+    required: true
+  fastlaneCertificatesSSHPrivateKey:
+    description: "private ssh key for fastlane certificates repo"
+    required: true
+  matchPassword:
+    description: "password for match certificates repo"
+    required: true
+  vesdkLicenseVideoIos:
+    description: "vesdk_license_video.ios license file contents"
+    required: true
+  vesdkLicenseVideoAndroid:
+    description: "vesdk_license_video.android license file contents"
+    required: true
+  pesdkLicenseIos:
+    description: "pesdk_license.ios license file contents"
+    required: true
+  pesdkLicenseAndroid:
+    description: "pesdk_license.android license file contents"
+    required: true
+  androidKeystoreFileData:
+    description: "release.keystore file contents"
+    required: false
+  androidStorePassword:
+    description: "Store password for signing"
+    required: false
+  androidKeyAlias:
+    description: "Key alias for signing"
+    required: false
+  androidKeyPassword:
+    description: "Key password for signing"
+    required: false
+  dartDebugInfoPath:
+    description: "Path for Dart debug info (only for release)"
+    required: false
+    default: "${{ github.workspace }}/android/debug-info"
+  ENVIRONMENT_CONFIG_PRODUCTION:
+    description: '.env and firebase files config file, bas64-encoded'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
+
+    - name: Extract config
+      run: |
+        echo $ENVIRONMENT_CONFIG_PRODUCTION | base64 -d > config.zip
+        make extract_config
+      shell: bash
+      env:
+        ENVIRONMENT_CONFIG_PRODUCTION: ${{ inputs.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+    - name: Set licenses
+      uses: ./.github/actions/set_licenses
+      with:
+        vesdkLicenseVideoIos: ${{ inputs.vesdkLicenseVideoIos }}
+        vesdkLicenseVideoAndroid: ${{ inputs.vesdkLicenseVideoAndroid }}
+        pesdkLicenseIos: ${{ inputs.pesdkLicenseIos }}
+        pesdkLicenseAndroid: ${{ inputs.pesdkLicenseAndroid }}
+
+    - name: Set firebase dart envs
+      if: ${{ inputs.buildType == 'profile' }}
+      run: |
+        echo "BUILD_SOURCE_NAME=firebase" >> $GITHUB_ENV
+      shell: bash
+
+    - name: prepare keystore
+      if: ${{ inputs.buildType == 'release' }}
+      run: |
+        echo "${PICNIC_ANDROID_KEYSTORE_FILE_DATA}" | base64 -d > android/app/signing/release.keystore
+      env:
+        PICNIC_ANDROID_KEYSTORE_FILE_DATA: ${{ inputs.androidKeystoreFileData }}
+      shell: bash
+
+    - name: Build release apk
+      id: build_release
+      if: ${{ inputs.buildType == 'release' }}
+      working-directory: android
+      run: |
+        flutter build appbundle \
+          --release \
+          --dart-define="BUILD_SOURCE_NAME=google play" \
+          --split-debug-info="${{ inputs.dartDebugInfoPath }}" \
+          --obfuscate
+        echo "APK_PATH=build/app/outputs/flutter-apk/app-release.apk" >> $GITHUB_OUTPUT
+      shell: bash
+      env:
+        PICNIC_ANDROID_STORE_PASSWORD: ${{ inputs.androidStorePassword }}
+        PICNIC_ANDROID_KEY_ALIAS: ${{ inputs.androidKeyAlias }}
+        PICNIC_ANDROID_KEY_PASSWORD: ${{ inputs.androidKeyPassword }}
+
+    - name: Build profile apk
+      id: build_profile
+      if: ${{ inputs.buildType == 'profile' }}
+      working-directory: android
+      run: |
+        flutter build apk \
+          --profile \
+          --build-number ${{ github.run_number }} \
+          --dart-define="BUILD_SOURCE_NAME=${BUILD_SOURCE_NAME}" \
+          --dart-define="BUILD_SOURCE_BRANCH=${BUILD_SOURCE_BRANCH}" \
+          --dart-define="BUILD_SOURCE_COMMIT=${BUILD_SOURCE_COMMIT}"
+        echo "APK_PATH=build/app/outputs/flutter-apk/app-profile.apk" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Check pubspec.lock changes
+      run: git diff --exit-code pubspec.lock
+      shell: bash
+
+outputs:
+  apk-path:
+    description: "Path of built apk file"
+    value: "${{ steps.build_release.outputs.APK_PATH }}${{ steps.build_profile.outputs.APK_PATH }}"

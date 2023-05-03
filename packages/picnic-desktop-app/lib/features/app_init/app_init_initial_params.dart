@@ -1,0 +1,3 @@
+class AppInitInitialParams {
+  const AppInitInitialParams();
+}

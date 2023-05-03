@@ -1,0 +1,3 @@
+class GetVerifiedInitialParams {
+  const GetVerifiedInitialParams();
+}

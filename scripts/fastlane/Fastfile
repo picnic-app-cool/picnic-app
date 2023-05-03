@@ -1,0 +1,56 @@
+actions_path '../../tools/fastlane/actions'
+
+import('../../tools/fastlane/lanes/lane_jira_check_ticket_mergeable.rb')
+import('../../tools/fastlane/lanes/lane_jira_tickets_set_fixversion.rb')
+import('../../tools/fastlane/lanes/lane_release_candidate_release_notes.rb')
+import('../../tools/fastlane/constants.rb')
+
+default_platform(:android) # we don't really need platform here
+
+platform :android do
+  desc %{ gets all tickets since last tag and updates fix version for involved Jira tickets }
+  lane :jira_tickets_set_fixversion do |options|
+    lane_jira_tickets_set_fixversion(
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+    )
+  end
+
+  desc %{ gets all tickets since last tag and generates changelog out of involved Jira tickets }
+  lane :jira_get_release_notes do |options|
+    ## Retrives the type of release based on the current branch
+    release_type = get_release_type(
+      branch: GIT_BRANCH,
+    )
+  
+    lane_release_candidate_release_notes(
+      branch: GIT_BRANCH,
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+      out_file: options[:out_file],
+      release_type: release_type,
+    )
+  end
+
+  desc %{ checks whether ticket is mergeable }
+  lane :jira_check_ticket_mergeable do
+    ## Retrives the type of release based on the current branch
+    release_type = get_release_type(
+      branch: GIT_BRANCH,
+    )
+
+    lane_jira_check_ticket_mergeable(
+      branch: GIT_BRANCH,
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+      release_type: release_type,
+      pull_request_title: ENV['PULL_REQUEST_TITLE'],
+    )
+  end
+end

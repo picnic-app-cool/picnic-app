@@ -1,0 +1,22 @@
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{initial_params_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{page_file_name}}}';
+import 'package:{{{app_package}}}/navigation/app_navigator.dart';
+import 'package:{{{app_package}}}/navigation/no_routes.dart';
+
+class {{navigator_name}} with NoRoutes {
+
+  {{navigator_name}}(this.appNavigator);
+
+  @override
+  final AppNavigator appNavigator;
+}
+
+mixin {{route_name}} {
+  Future<void> open{{stem}}({{initial_params_name}} initialParams) async {
+    return appNavigator.push(
+      materialRoute({{page_name}}(initialParams: initialParams)),
+    );
+  }
+
+  AppNavigator get appNavigator;
+}

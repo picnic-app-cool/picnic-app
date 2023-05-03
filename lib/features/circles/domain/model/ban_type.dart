@@ -1,0 +1,4 @@
+enum BanType {
+  temporary,
+  permanent,
+}

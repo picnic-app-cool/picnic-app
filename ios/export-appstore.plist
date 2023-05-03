@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>compileBitcode</key>
+    <false/>
+    <key>method</key>
+    <string>app-store</string>
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>com.ambertech.amber</key>
+        <string>match AppStore com.ambertech.amber</string>
+        <key>com.ambertech.amber.Notification</key>
+        <string>match AppStore com.ambertech.amber.Notification</string>
+    </dict>
+</dict>
+</plist>

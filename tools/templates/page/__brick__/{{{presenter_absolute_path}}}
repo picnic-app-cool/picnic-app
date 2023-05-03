@@ -1,0 +1,18 @@
+import 'package:bloc/bloc.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{navigator_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presentation_model_file_name}}}';
+
+
+class {{presenter_name}} extends Cubit<{{view_model_name}}> {
+
+  {{presenter_name}}(
+    super.model,
+    this.navigator,
+  );
+
+  final {{navigator_name}} navigator;
+
+  // ignore: unused_element
+  {{presentation_model_name}} get _model => state as {{presentation_model_name}};
+
+}

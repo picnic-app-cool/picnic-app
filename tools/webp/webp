@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 3 ]; then
+    echo "Usage: ./webp <filename.svg> <width> <height>"
+    exit
+fi
+
+imagesDirectory="../../assets/images/"
+scriptDirectory=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+destinationPath=$(readlink -f "$scriptDirectory/$imagesDirectory")
+
+filename=$( basename $1 .svg )
+
+width=$(( $2 ))
+height=$(( $3 ))
+
+width2x=$(( $2 * 2))
+height2x=$(( $3 * 2))
+
+width3x=$(( $2 * 3))
+height3x=$(( $3 * 3))
+
+rsvg-convert -w $width -h $height $filename.svg -o $filename.png
+rsvg-convert -w $width2x -h $height2x $filename.svg -o ${filename}_2x.png
+rsvg-convert -w $width3x -h $height3x $filename.svg -o ${filename}_3x.png
+
+cwebp $filename.png -o $destinationPath/$filename.webp
+cwebp ${filename}_2x.png -o $destinationPath/2.0x/$filename.webp
+cwebp ${filename}_3x.png -o $destinationPath/3.0x/$filename.webp
+
+rm -rf ${filename}_3x.png
+rm -rf ${filename}_2x.png
+rm -rf $filename.png
+
+rm -rf $filename.svg

@@ -1,0 +1,61 @@
+name: Clean up after PR is merged
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+      - 'feature/GS-[0-9]+/**'
+    types:
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cancel-workflows:
+    runs-on:
+      - self-hosted
+    permissions:
+      actions: write # to list and cancel workflow runs
+
+    if: github.event.pull_request.merged
+
+    steps:
+      - name: Cancel running workflows for this PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const head_sha = context.payload.pull_request.head.sha
+
+            const opts = github.rest.actions.listWorkflowRunsForRepo.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: head_sha,
+            })
+
+            const workflow_runs = await github.paginate(opts)
+
+            for (const workflow_run of workflow_runs) {
+              // Skip finished runs
+              if (workflow_run.conclustion != null) {
+                continue
+              }
+
+              // Do not cancel self
+              if (workflow_run.id == context.runId) {
+                continue
+              }
+
+              console.log(`Cancelling workflow ${workflow_run.html_url}`)
+
+              try {
+                await github.rest.actions.cancelWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: workflow_run.id,
+                })
+              } catch {}
+            }

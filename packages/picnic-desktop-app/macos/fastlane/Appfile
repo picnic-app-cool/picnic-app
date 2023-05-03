@@ -1,0 +1,3 @@
+app_identifier("com.ambertech.amber.desktop")
+apple_id apple_id ENV["APPLE_ID"] || "nico.laqua01@gmail.com" #we use nico's email because only account holder can sign the app for macOS to be distributed outside app store
+team_id("23V2CS4649")

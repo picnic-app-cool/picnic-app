@@ -1,0 +1,31 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:{{{app_package}}}/core/utils/either_extensions.dart';
+import 'package:{{{app_package}}}/dependency_injection/app_component.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/domain/use_cases/{{{use_case_file_name}}}';
+
+void main() {
+  late {{use_case_name}} useCase;
+
+  setUp(() {
+    useCase = const {{use_case_name}}();
+  });
+
+  test(
+    'use case executes normally',
+    () async {
+      // GIVEN
+
+      // WHEN
+      final result = await useCase.execute();
+
+      // THEN
+      expect(result.isSuccess, true);
+    },
+  );
+
+
+  test("getIt resolves successfully", () async {
+    final useCase = getIt<{{use_case_name}}>();
+    expect(useCase, isNotNull);
+  });
+}

@@ -1,0 +1,136 @@
+name: Build MacOS application
+description: Builds DMG image for MacOS
+
+inputs:
+  buildType:
+    description: Whether to build release, firebase or profile version. "release" for release version, "profile" for firebase version.
+    required: true
+  fastlaneCertificatesSSHPrivateKey:
+    description: "private ssh key for fastlane certificates repo"
+    required: true
+  matchPassword:
+    description: "password for match certificates repo"
+    required: true
+  vesdkLicenseVideoIos:
+    description: "vesdk_license_video.ios license file contents"
+    required: true
+  vesdkLicenseVideoAndroid:
+    description: "vesdk_license_video.android license file contents"
+    required: true
+  pesdkLicenseIos:
+    description: "pesdk_license.ios license file contents"
+    required: true
+  pesdkLicenseAndroid:
+    description: "pesdk_license.android license file contents"
+    required: true
+  appstoreConnectAPIKey:
+    description: "App Store Connect key contents"
+    required: true
+  IOSKeyID:
+    description: "App Store Connect key ID"
+    required: true
+  IOSKeyIssuerID:
+    description: "App Store Connect issuer ID"
+    required: true
+  skipFileChangeChecks:
+    description: "if false, will run Podfile/pubspec file change checks"
+    default: "false"
+  ENVIRONMENT_CONFIG_PRODUCTION:
+    description: '.env and firebase files config file, bas64-encoded'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
+
+    - name: Extract config
+      run: |
+        echo $ENVIRONMENT_CONFIG_PRODUCTION | base64 -d > config.zip
+        make extract_config
+      shell: bash
+      env:
+        ENVIRONMENT_CONFIG_PRODUCTION: ${{ inputs.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+    - name: Prepare MacOS
+      uses: ./.github/actions/prepare_macos
+      with:
+        FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY: ${{ inputs.fastlaneCertificatesSSHPrivateKey }}
+        MATCH_PASSWORD: ${{ inputs.matchPassword }}
+
+    - name: Set licenses
+      uses: ./.github/actions/set_licenses
+      with:
+        vesdkLicenseVideoIos: ${{ inputs.vesdkLicenseVideoIos }}
+        vesdkLicenseVideoAndroid: ${{ inputs.vesdkLicenseVideoAndroid }}
+        pesdkLicenseIos: ${{ inputs.pesdkLicenseIos }}
+        pesdkLicenseAndroid: ${{ inputs.pesdkLicenseAndroid }}
+
+    - name: Build release macOS
+      if: ${{ inputs.buildType == 'release' }}
+      working-directory: packages/picnic-desktop-app
+      run: |
+        flutter build macos --release --build-number ${{ github.run_number }}
+      shell: bash
+      env:
+        VERBOSE_SCRIPT_LOGGING: "true"
+
+    - name: Build profile macOS
+      if: ${{ inputs.buildType == 'profile' }}
+      working-directory: packages/picnic-desktop-app
+      run: |
+        flutter build macos --profile --build-number ${{ github.run_number }} --dart-define="BUILD_SOURCE_NAME=${BUILD_SOURCE_NAME}" --dart-define="BUILD_SOURCE_BRANCH=${BUILD_SOURCE_BRANCH}" --dart-define="BUILD_SOURCE_COMMIT=${BUILD_SOURCE_COMMIT}"
+      shell: bash
+      env:
+        VERBOSE_SCRIPT_LOGGING: "true"
+
+    - name: Check Podfile.lock file for changes
+      if: ${{ inputs.skipFileChangeChecks == 'false' }}
+      run: git diff --exit-code packages/picnic-desktop-app/macos/Podfile.lock
+      shell: bash
+
+    - name: Check pubspec.lock changes
+      if: ${{ inputs.skipFileChangeChecks == 'false' }}
+      run: git diff --exit-code packages/picnic-desktop-app/pubspec.lock
+      shell: bash
+
+    - name: notarize macOS
+      working-directory: packages/picnic-desktop-app/macos
+      run: |
+        bundle exec fastlane notarize_macos build_type:${{ inputs.buildType }}
+      shell: bash
+      env:
+        PICNIC_APPSTORECONNECT_API_KEY: ${{ inputs.appstoreConnectAPIKey }}
+        PICNIC_IOS_KEY_ID: ${{ inputs.IOSKeyID }}
+        PICNIC_IOS_KEY_ISSUER_ID: ${{ inputs.IOSKeyIssuerID }}
+
+    - name: Fix appdmg config for profile build
+      if: ${{ inputs.buildType == 'profile' }}
+      working-directory: packages/picnic-desktop-app
+      run: sed -i '' 's#Release#Profile#g' dmg-file-config.json
+      shell: bash
+
+    - name: Bundle into DMG file
+      id: appdmg
+      working-directory: packages/picnic-desktop-app
+      run: |
+        appdmg dmg-file-config.json picnic-app.dmg
+        echo "DMG_PATH=packages/picnic-desktop-app/picnic-app.dmg" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: notarize DMG
+      if: ${{ inputs.buildType == 'release' }}
+      working-directory: packages/picnic-desktop-app/macos
+      run: |
+        bundle exec fastlane notarize_macos_dmg
+      shell: bash
+      env:
+        PICNIC_APPSTORECONNECT_API_KEY: ${{ inputs.appstoreConnectAPIKey }}
+        PICNIC_IOS_KEY_ID: ${{ inputs.IOSKeyID }}
+        PICNIC_IOS_KEY_ISSUER_ID: ${{ inputs.IOSKeyIssuerID }}
+
+outputs:
+  dmg-path:
+    description: "Path of built DMG image"
+    value: "${{ steps.appdmg.outputs.DMG_PATH }}"

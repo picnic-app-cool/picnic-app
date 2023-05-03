@@ -1,0 +1,3 @@
+class ChatMyCirclesInitialParams {
+  const ChatMyCirclesInitialParams();
+}

@@ -1,0 +1,227 @@
+name: ~REUSABLE Deploy profile internal builds
+
+on:
+  workflow_call:
+    inputs:
+      disable_deploy:
+        description: Disable deploying to Firebase and GCS bucket. Useful for testing
+        default: false
+        required: false
+        type: boolean
+      sha_commit:
+        description: SHA of the commit to checkout
+        default: ""
+        required: false
+        type: string
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  ARTIFACT_RETENTION_DAYS: 1 # we don't expose them, only pass between jobs
+  BUILD_SOURCE_BRANCH: ${{ github.ref || github.head_ref }}
+  BUILD_SOURCE_COMMIT: ${{ inputs.sha_commit || github.sha }}
+
+  # To be able to create git refs in all jobs
+  GIT_AUTHOR_NAME: "github-actions[bot]"
+  GIT_AUTHOR_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
+  GIT_COMMITTER_NAME: "github-actions[bot]"
+  GIT_COMMITTER_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
+
+jobs:
+  firebase-ios:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: write # to add and push tags
+      pull-requests: write # to write comment
+
+    env:
+      MATCH_KEYCHAIN_PASSWORD: build
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 100 # to make release notes work
+          ref: ${{ inputs.sha_commit }}
+
+      - name: Fetch tags
+        run: git fetch -f origin 'refs/tags/*:refs/tags/*'
+
+      - name: Build iOS
+        id: build
+        uses: ./.github/actions/build_ios
+        with:
+          buildType: "profile"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+
+      - name: Deploy to firebase
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_firebase
+        env:
+          FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN }}
+          IOS_APP_ID: 1:199288137804:ios:f8ac742591f9791833ace9
+          JIRA_ACCESS_TOKEN: ${{ secrets.JIRA_ACCESS_TOKEN }}
+          PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+          GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ios
+
+  firebase-android:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+    permissions:
+      contents: write # to add and push tags
+      pull-requests: write # to write comment
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 100 # to make release notes work
+          ref: ${{ inputs.sha_commit }}
+
+      - name: Fetch tags
+        run: git fetch -f origin 'refs/tags/*:refs/tags/*'
+
+      - name: Build Android
+        id: build
+        uses: ./.github/actions/build_android
+        with:
+          buildType: "profile"
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Deploy to firebase
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_firebase
+        env:
+          ANDROID_APP_ID: 1:199288137804:android:ed323a67b70a723c33ace9
+          FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN }}
+          JIRA_ACCESS_TOKEN: ${{ secrets.JIRA_ACCESS_TOKEN }}
+          PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+          GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: android
+
+  build-macos:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.sha_commit }}
+
+      - name: Build MacOS
+        id: build
+        uses: ./.github/actions/build_macos
+        with:
+          buildType: "profile"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          appstoreConnectAPIKey: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+          IOSKeyID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          IOSKeyIssuerID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          skipFileChangeChecks: true
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos
+          path: ${{ steps.build.outputs.dmg-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  build-windows:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - windows
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.sha_commit }}
+
+      - name: Build Windows
+        id: build
+        uses: ./.github/actions/build_windows
+        with:
+          buildType: "profile"
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows
+          path: ${{ steps.build.outputs.zip-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  upload-desktop:
+    timeout-minutes: 10
+    runs-on:
+      - self-hosted
+      - linux # we need strictly linux runners for credential-less GCS authorization (known as ADC)
+    permissions: {}
+
+    strategy:
+      matrix:
+        include:
+          - os: macos
+            name: picnic-app.dmg
+          - os: windows
+            name: picnic-app-windows.zip
+
+    needs:
+      # matrix usage is not supported here, so we just wait both of them
+      - build-macos
+      - build-windows
+
+    if: ${{ !inputs.disable_deploy }}
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.os }}
+
+      - name: Upload to bucket
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: ${{ matrix.name }}
+          destination: picnic-frontend-releases-internal/profile-internal

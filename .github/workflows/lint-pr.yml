@@ -1,0 +1,108 @@
+name: Validate Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "release/**"
+      - "feature/GS-[0-9]+/**"
+
+    types:
+      - opened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-title:
+    timeout-minutes: 2
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read
+    if: "${{ github.ref_name != 'main' }}"
+
+    steps:
+      - name: Check PR title
+        run: |
+          if ! [[ "${PR_TITLE}" =~ GS-[[:digit:]]+ ]]; then
+            echo "PR title does not contain JIRA ticket number!";
+            exit 1;
+          fi
+        shell: bash
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+
+  stats:
+    timeout-minutes: 5
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to collect review stats
+      issues: read # to collect review stats
+      pull-requests: write # to write comments
+
+    steps:
+      - name: Check action constraints
+        id: stats-should-run
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let day = (new Date()).getDay()
+            if(day != 4) { // run only on thursdays
+              return false
+            }
+
+            const opts = github.rest.issues.listComments.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+            })
+
+            const comments = await github.paginate(opts)
+
+            for (const comment of comments) {
+              if (comment.body.includes("Pull reviewers stats")) {
+                return false
+              }
+            }
+
+            return true
+
+      - name: Collect PR stats
+        if: ${{ fromJSON(steps.stats-should-run.outputs.result) }}
+        uses: flowwer-dev/pull-request-stats@v2
+        with:
+          period: 20
+          limit: 0
+          charts: true
+          sort-by: REVIEWS
+
+  gitleaks:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # to checkout
+      pull-requests: write # to write comments
+
+    steps:
+      - name: "PR commits + 1"
+        run: echo "PR_FETCH_DEPTH=$(( ${{ github.event.pull_request.commits }} + 2 ))" >> "${GITHUB_ENV}"
+
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: ${{ env.PR_FETCH_DEPTH }}
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITLEAKS_ENABLE_COMMENTS: true
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
+          GITLEAKS_ENABLE_SUMMARY: true

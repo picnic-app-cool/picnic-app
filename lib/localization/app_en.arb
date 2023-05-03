@@ -1,0 +1,1335 @@
+{
+  "@@locale": "en",
+  "appTitle": "Picnic",
+  "invalidInputError": "invalid input",
+  "appSubtitle": "dive into communities ✌️",
+  "username": "Username",
+  "likes": "likes",
+  "followers": "followers",
+  "views": "views",
+  "commonErrorTitle": "oops!",
+  "commonErrorMessage": "Something went wrong, please try again",
+  "resendOTPButton": "resend",
+  "okAction": "ok",
+  "getStartedAction": "get started",
+  "alreadyHaveAnAccountMessage": "already have an account?",
+  "logInAction": "login",
+  "yourUsernameTitle": "your username",
+  "yourUsernameDescription": "your unique name to be discovered!",
+  "usernameHint": "your username",
+  "fullNameHint": "your full name",
+  "bioHint": "bio",
+  "continueAction": "continue",
+  "usernameTakenErrorMessage": "this username already exists",
+  "usernameTooLongErrorMessage": "your username should be less than 30 characters",
+  "usernameEmptyErrorMessage": "your username cannot be empty",
+  "fullNameEmptyErrorMessage": "your name cannot be empty",
+  "loginPhoneFormTitle": "login to picnic",
+  "loginPhoneFormDescription": "enter your phone number or sign in using the option below",
+  "registerPhoneFormTitle": "make an account",
+  "registerPhoneFormDescription": "enter your phone number or sign up using one of the options below",
+  "orLabel": "or",
+  "signUpWithButtonTitle": "Sign up with {method}",
+  "@signUpWithButtonTitle": {
+    "placeholders": {
+      "method": {}
+    }
+  },
+  "signInWithButtonTitle": "Sign in with {method}",
+  "@signInWithButtonTitle": {
+    "placeholders": {
+      "method": {}
+    }
+  },
+  "tipPaginationFormat": "tip {index} of {total}",
+  "@tipPaginationFormat": {
+    "placeholders": {
+      "index": {},
+      "total": {}
+    }
+  },
+  "codeVerificationTitle": "verification code",
+  "codeVerificationDescription": "enter the code we texted you",
+  "codeVerificationHint": "verification code",
+  "codeVerificationError": "the entered code is invalid",
+  "languagesListFetchError": "error fetching languages",
+  "languageSelectFormTitle": "select language",
+  "languageSelectFormDescription": "what language do you speak?",
+  "languageSelectError": "please select a language",
+  "yourAgeTitle": "your age",
+  "yourAgeDescription": "please enter your age",
+  "ageHint": "your age",
+  "ageTooYoungError": "you must be over 13 in order to use the app",
+  "privateProfileEditButton": "edit profile",
+  "editRulesTitle": "edit rules",
+  "editRulesHint": "edit rules here",
+  "privateProfileSaveButton": "saved posts",
+  "settings": "settings",
+  "settingsLanguage": "language",
+  "settingsBlockedList": "blocked list",
+  "settingsCommunityGuidelines": "community guidelines",
+  "settingsInviteFriends": "invite friends",
+  "settingsGetVerified": "get verified",
+  "settingsNotificationSettings": "notification settings",
+  "settingsPrivacySettings": "privacy settings",
+  "settingsShareProfile": "share profile",
+  "linkTabAction": "link",
+  "photoTabAction": "photo",
+  "videoTabAction": "video",
+  "uploadTabAction": "upload",
+  "pollTabAction": "poll",
+  "thoughtTabAction": "thought",
+  "notificationsFormTitle": "enable notifications",
+  "notificationsFormDescription": "we need your permission to send notifications",
+  "enableNotificationsAction": "okay! let’s do it",
+  "profilePhotoFormBeforePhotoSelectionTitle": "your photo",
+  "profilePhotoFormBeforePhotoSelectionDescription": "choose a profile pic",
+  "profilePhotoFormAddPhotoAction": "add profile photo",
+  "profilePhotoFormSkipAction": "skip for now 🥲",
+  "congratsFormTitle": "welcome to picnic",
+  "congratsFormDescription": "Congrats! you’re in. Let’s find some awesome circles for you to join.",
+  "offerStateSellLabel": "change price",
+  "offerStateBuyLabel": "buy with {price} melons",
+  "@offerStateBuyLabel": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "offerStateRejectedLabel": "rejected",
+  "offerStatePurchasedLabel": "purchased",
+  "offerStateSellSecondaryLabel": "cancel offer",
+  "offerStateBuySecondaryLabel": "reject",
+  "profilePhotoFormAfterPhotoSelectionTitle": "hey gorgeous",
+  "profilePhotoFormAfterPhotoSelectionDescription": "lets continue to the app",
+  "profilePhotoFormChangePhotoAction": "change profile image",
+  "postsTabTitle": "posts",
+  "cirlcesTabTitle": "circles",
+  "collectionsTabTitle": "collections",
+  "royaltyTabTitle": "royalty",
+  "rulesTabTitle": "rules",
+  "localeSelectionEmptyLanguageSearchLabel": "No language found",
+  "localeSelectionEmptyCountrySearchLabel": "No country found",
+  "localeSelectionSystemLocaleLabel": "based on settings",
+  "circlesGroupingsSelectCirclesHint": "{count, plural, =1{ select {count} circle} other{ select {count} circles}}",
+  "@circlesGroupingsSelectCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsSelectMoreCirclesHint": "select {count} more circles",
+  "@circlesGroupingsSelectMoreCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsAppBarTitle": "choose circles",
+  "circlesGroupingsDescription": "circles are the homes 🏠 for whatever you are interested in. this will make up your curated for you page ✌️",
+  "circleGroupingsFetchError": "Error loading circle groupings",
+  "shareLinkTitle": "share a link",
+  "newCircleAction": "new circle",
+  "changeLinkAction": "change link",
+  "postAction": "post",
+  "tapToPasteDescriptiveAction": "👆 tap to paste the link",
+  "newIdeasLabel": "need ideas? try these:",
+  "socialMediaLabel": "social media title goes here",
+  "tapToPasteLabel": "tap to paste",
+  "countrySelectFormTitle": "select country",
+  "countrySelectFormDescription": "where are you based?",
+  "countrySelectFormInputHint": "select country",
+  "imagePickerAlertTitle": "choose option",
+  "imagePickerAlertOptionCamera": "camera",
+  "imagePickerAlertOptionGallery": "gallery",
+  "imageVideoPickerAlertOptionCameraImage": "take photo",
+  "imageVideoPickerAlertOptionCameraVideo": "take video",
+  "imageVideoPickerAlertOptionGalleryImage": "upload photo",
+  "imageVideoPickerAlertOptionGalleryVideo": "upload video",
+  "seedDialogTitle": "this is a seed!",
+  "seedDialogDescription": "seeds are the currency used in circles",
+  "circlesRulesTitleOne": "how are circles governed? ✨",
+  "circlesRulesTitleTwo": "what are seeds?  🌱",
+  "circlesRulesTitleThree": "how are directors elected?",
+  "circlesRulesDescriptionOne": "the circle director makes rules and appoints moderators. the seed holders vote for the circle director.",
+  "circlesRulesDescriptionTwo": "the more seeds you have, the more votes you can cast to make circle decisions (choosing the director, creating new seeds, and more!)",
+  "circlesRulesDescriptionThree": "a director election occurs at the end of each month where circle members can vote to keep the current director or elect a new director. If you have the majority of the seeds, you can keep voting to keep yourself as director.",
+  "chatTabFeed": "chat feed",
+  "chatTabCircles": "my circles",
+  "circleChatSettingsSeeFeedAction": "see feed",
+  "circleChatSettingsCirclePageAction": "circle page",
+  "chatNewMessageTitle": "new message",
+  "chatNewMessageInputHint": "add a reply... 💭",
+  "chatNewMessageSearchInputHint": "search",
+  "chatNewMessageSearchInputLabelText": "send message to:",
+  "chatMessageEmptyContentWithAttachment": "{user} sent an attachment",
+  "@chatMessageEmptyContentWithAttachment": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "chatsTitle": "chats",
+  "feedTitle": "feed",
+  "chatFeedTitle": "chat feed",
+  "profileTitle": "profile",
+  "editProfileTitle": "edit profile",
+  "ruleSelectionTitle": "who gets to make the decisions?",
+  "ruleSelectionRadioLabelOne": "DIRECTOR led - I control who gets to vote, and how many votes they get ",
+  "ruleSelectionRadioLabelTwo": "DEMOCRATIC led - all circle members get 1 vote in all decisions",
+  "ruleSelectionNote": "note: once the circle is democratic, it can not be converted back to a director led. director led circles auto convert to demotratic if no seed holders vote in a director election.",
+  "confirmSelectionAction": "confirm selection",
+  "chatTabDms": "dms",
+  "letsGoAction": "let’s go",
+  "circleRulesTitle": "circle rules",
+  "circleRulesDescription": "Set rules on how you want to manage your circle! 🌟",
+  "chatNewMessageSearchInputHintGroup": "group name (optional)",
+  "congratsSuccessTitle": "congrats!",
+  "congratsSuccessDescription": "you made a new circle! invite some friends and make it a party 🎉",
+  "awesomeAction": "awesome",
+  "circleSuccessTitle": "you are now the director of {circle} circle 👑 you will be able to:",
+  "@circleSuccessTitle": {
+    "placeholders": {
+      "circle": {}
+    }
+  },
+  "directorLedSuccessLabelOne": "appoint mods to help you run the circle, remove posts, create rules, blacklist words in chat, and more",
+  "directorLedSuccessLabelTwo": "have a live circle chat with up to 10 million members",
+  "directorLedSuccessLabelThree": "have a custom feed just for your circle",
+  "democraticSuccessLabelOne": "this circle is democratic! this means everyone has 1 vote for any circle votes. the person with the most votes each months gets to be the new circle director.",
+  "democraticSuccessLabelTwo": "the director (you right now) can appoint moderators to help run the circle. ",
+  "yesterday": "Yesterday",
+  "daysAgo": " {days} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "monthAgo": "Month ago",
+  "hoursAgo": " {hours} hours ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {}
+    }
+  },
+  "monthsAgo": " {months} months ago",
+  "@monthsAgo": {
+    "placeholders": {
+      "months": {}
+    }
+  },
+  "yearAgo": "Year ago",
+  "yearsAgo": " {years} years ago",
+  "@yearsAgo": {
+    "placeholders": {
+      "years": {}
+    }
+  },
+  "secondsTimeAgo": "{seconds}s ago",
+  "@secondsTimeAgo": {
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "minutesTimeAgo": "{minutes}m ago",
+  "@minutesTimeAgo": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "hoursTimeAgo": "{hours}h ago",
+  "@hoursTimeAgo": {
+    "placeholders": {
+      "hours": {}
+    }
+  },
+  "daysTimeAgo": "{days}d ago",
+  "@daysTimeAgo": {
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "postedTimeAgo": " posted {timeAgo}",
+  "@postedTimeAgo": {
+    "placeholders": {
+      "timeAgo": {}
+    }
+  },
+  "seeMore": "see more",
+  "seeLess": "see less",
+  "seeMoreComments": "see more comments",
+  "openCommentsChat": "open comments chat",
+  "accountExistsWithDifferentCredentialErrorMessage": "You’ve logged into this account with different provider, please use it instead",
+  "invalidCredentialErrorMessage": "Invalid credentials",
+  "userDisabledErrorMessage": "Given user is disabled",
+  "userNotFoundErrorMessage": "There is no user with such",
+  "invalidVerificationCodeErrorMessage": "Invalid verification code",
+  "followButtonActionTitle": "follow",
+  "glitterbombButtonActionTitle": "glitterbomb",
+  "followingButtonActionTitle": "following",
+  "blockedButtonActionTitle": "blocked",
+  "dmTitle": "dm",
+  "followersTitle": "followers",
+  "blockedListTitle": "blocked list",
+  "unblockedAction": "unblock",
+  "followingAction": "following",
+  "viewSeedsAction": "view seeds",
+  "chatAlertTitleMessageOnNotSent": "message not sent",
+  "chatAlertButtonTitle": "follow",
+  "chatSettingsTitle": "chat settings",
+  "followAction": "follow",
+  "chatAlertBarTitle": "message request",
+  "chatAlertBarDescription": "not in your following",
+  "muteAction": "mute",
+  "unmuteAction": "unmute",
+  "chatAlertDescription": "this person doesn’t receive messages from people they don’t follow",
+  "melonsDescription": "{count, plural, =1{{count} melon} other{{count} melons}}",
+  "@melonsDescription": {
+    "description": "Used to display the number of melons",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "discoveryCircleResults": "circle results",
+  "discoverySliceResults": "slice results",
+  "discoveryUserResults": "user results",
+  "discoverySearch": "search",
+  "joinButtonActionTitle": "join",
+  "joinAction": "join",
+  "joinedButtonActionTitle": "joined",
+  "discoveryDiscover": "discover",
+  "textInputCounterLabel": "{currentLength}/{maxLength} character",
+  "@textInputCounterLabel": {
+    "placeholders": {
+      "currentLength": {},
+      "maxLength": {}
+    }
+  },
+  "chatSearch": "chat search",
+  "reportFormAppBarTitle": "report",
+  "reportFormInputSelectLabel": "report reason",
+  "reportFormInputBodyLabel": "express your report here",
+  "reportFormAlertTitle": "select reason",
+  "reportFormButtonLabel": "send reason",
+  "reportReasonOther": "other",
+  "reportReasonTechnicalIssue": "technical issue",
+  "sendPushNotificationTitle": "send push notification",
+  "pastePostHintText": "paste post link here",
+  "notificationBodyHintText": "notification body text",
+  "sendPushNotificationInfo": "the circle mod team can send one push notification to everyone in the circle each day.",
+  "sendPushNotificationAction": "send push notification",
+  "closeAction": "close",
+  "replyAction": "reply",
+  "copyTextAction": "copy text",
+  "saveAttachmentsAction": "{count, plural, =1{save attachment} other{save attachments ({count})}}",
+  "@saveAttachmentsAction": {
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "savingAttachmentsToast": "{count, plural, =1{saving attachment} other{saving attachments ({count})}}",
+  "@savingAttachmentsToast": {
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "attachmentsSavedToast": "{count, plural, =1{attachment saved!} other{attachments saved! ({count})}}",
+  "@attachmentsSavedToast": {
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "deleteMessageAction": "delete message",
+  "deleteMultipleMessagesAction": "delete multiple messages",
+  "banUserAction": "ban user",
+  "createSliceAction": "create a new slice",
+  "slices": "slices",
+  "slice": "slice",
+  "createCircleTitle": "create a new circle",
+  "createCircleTextInputNameHint": "what’s this circle called?",
+  "createCircleTextInputDescriptionHint": "what’s the circle about?",
+  "createCircleTextInputGroupHint": "pick a group",
+  "createCircleTextInputLanguageLabel": "primary language",
+  "createCircleButtonLabel": "create new circle",
+  "membersLabel": "members",
+  "trendingPosts": "🔥 trending posts",
+  "circleWithTopic": "{topic} circles",
+  "@circleWithTopic": {
+    "placeholders": {
+      "topic": {}
+    }
+  },
+  "stepFormat": "step {step}",
+  "@stepFormat": {
+    "placeholders": {
+      "step": {}
+    }
+  },
+  "sliceWithTopic": "{topic} slices",
+  "@sliceWithTopic": {
+    "placeholders": {
+      "topic": {}
+    }
+  },
+  "notAuthenticatedErrorMessage": "You are not authenticated",
+  "missingUsernameErrorMessage": "you forgot to fill in username",
+  "notEnoughCirclesSelectedErrorMessageFormat": "not need to select at least {count} circles",
+  "@notEnoughCirclesSelectedErrorMessageFormat": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membersCount": "{count, plural, =1{{count} member} other{{count} members}}",
+  "@membersCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "votesCountFormat": " {count, plural, =1{{count} vote} other{{count} votes}}",
+  "@votesCountFormat": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "onlineCount": " {count} online",
+  "@onlineCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "percentFormat": " {percent} %",
+  "@percentFormat": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "reportAction": "report",
+  "circleSettingsTitle": "circle settings",
+  "inviteUsersAction": "invite users",
+  "banUsersAction": "ban users",
+  "modsTabAction": "mods",
+  "reportsTabAction": "reports",
+  "bannedListTabAction": "banned list",
+  "search": "search",
+  "chooseAction": "choose",
+  "leaveAction": "leave",
+  "modsAndDirectorTitle": "mods and director",
+  "addAction": "add",
+  "addActionDone": "added",
+  "muteGroupTitle": "mute group 🔇",
+  "tapToIgnoreNotificationsDescription": "tap to ignore notifications",
+  "groupNameLabel": "group name",
+  "addMembers": "add members",
+  "leaveGroupTitle": "leave group",
+  "leaveGroupAction": "yes, leave",
+  "leaveGroupMessage": "are you sure you want to leave this group? After leaving you cannot join until the director adds you.",
+  "deleteMessageTitle": "delete message",
+  "deleteMultipleMessagesTitle": "delete messages sent by",
+  "deleteMultipleMessagesText": "delete messages",
+  "deleteMessageMessage": "are you sure you want to delete this message?",
+  "deleteMessageConfirmAction": "yes, delete",
+  "fileSizeTooBigErrorTitle": "the file size is too big!",
+  "fileSizeTooBigErrorMessage": "the selected file should not exceed {amount}MB of capacity, please reduce the size accordingly",
+  "@fileSizeTooBigErrorMessage": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "fileSizeTooBigErrorConfirmAction": "okay",
+  "banUserTitle": "ban user",
+  "banUserMessage": "are you sure you want to ban this user?",
+  "banUserConfirmAction": "yes, ban",
+  "yesAction": "yes",
+  "noAction": "no",
+  "deleteGroupAction": "delete group",
+  "deleteGroupTitle": "delete group",
+  "deleteGroupMessage": "are you sure you want to delete this group chat? this action cannot be undone.",
+  "removeUserTitle": "remove user",
+  "removeUserAction": "yes, remove",
+  "removeUserMessage": "are you sure you want to remove the following user from this group chat?",
+  "settingsLabel": "settings",
+  "communityGuidelinesAppBarTitle": "community guidelines",
+  "communityGuidelinesHeadingOne": "Picnic Community Guidelines",
+  "communityGuidelinesHeadingTwo": "Respect members of the Picnic community",
+  "communityGuidelinesHeadingThree": "Respect Picnic",
+  "communityGuidelinesSectionOne": "Picnic is a community-based social media platform priding itself on creating healthy and engaging communities for all interests. At Picnic, we prioritize an environment that is  safe, inclusive, diverse, and open. Our Community Guidelines ensure every user has a safe experience to authentically create and share.\n \nWe created the Community Guidelines so you can help us foster and protect this awesome community. We’re committed to these guidelines and following the law. We hope you are too. Not following these guidelines may result in deleted content, being banned or other restrictions.\n \nOur Safety team proactively enforces these guidelines with a mix of technology and moderation reports from users and moderators. We will remove any content or ban accounts that violate our Community Guidelines.  If you come across a user, message, or server that appears to break our Community Guidelines, please report it [HERE.](report)",
+  "communityGuidelinesSectionTwo": "Do not harass others or organize, promote, or participate in harassment.\nDo not organize, promote, or participate in hate speech. It’s unacceptable to attack a person or a community based on attributes such as their race, ethnicity, national origin, sex, gender identity, sexual orientation, religious affiliation, age, serious illness, or disabilities..\nDo not make threats of violence or threaten to harm others.\nDo not use Picnic to organize, promote, or support violent extremism.\nDo not sexualize children in any way. You cannot share content or links which depict children in a pornographic, sexually suggestive, or violent way.\nDo not share sexually explicit content\nDo not share content that glorifies or promotes suicide or self-harm.\nDo not share real media depicting gore, excessive violence, or animal harm.\nFollow the law.\nDo not share false or misleading information.\nDo not coordinate or participate in malicious impersonation of an individual or an organization.\nDo not engage in activities intended to cause damage or gain unauthorized access to another user’s account, network, or system.\nShare only your content or that you have the right to share.",
+  "communityGuidelinesSectionThree": "Do not use Picnic to spam, manipulate engagement, or disrupt other people’s experience.\nDo not organize, promote, or engage in any illegal or dangerous behavior, such as sexual solicitation, human trafficking, and selling or facilitating the sale of prohibited or potentially dangerous goods (firearms, ammunition, drugs, and controlled substances). You’ll be reported to law enforcement.\nDo not use self-bots or user-bots.\nDo not mislead Picnic’s support teams.",
+  "communityGuidelinesSectionFour": "Help keep the community safe and vibrant. If you see any activity that violates these guidelines, please report it to us [HERE.](report) Thanks for doing your part to help us keep Picnic a safe and healthy place.\n \n-The Picnic Team",
+  "uploadSuccessText": "uploaded",
+  "uploadFailedText": "failed",
+  "uploadPercentText": " {percent}%",
+  "@uploadPercentText": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "backgroundCallsLimitReached": "post is being processed",
+  "backgroundCallFailed": "upload failed",
+  "languageAppBarTitle": "language",
+  "unbanAction": "unban",
+  "banAction": "ban",
+  "bannedUsersLabel": "banned users",
+  "sellSeedsHoldings": "seeds holdings",
+  "sellSeedsTotalPrice": "total price",
+  "sellSeedsMelonAmount": "melon amount",
+  "sellSeedsNumber": "number",
+  "sellSeedsSeedNumbers": "seed numbers",
+  "signOutAction": "sign out",
+  "thankYouTitle": "thank you!",
+  "reportConfirmationMessage": "you have successfully submitted your report, our agents will take action as soon as possible.",
+  "seedsTitle": "seeds",
+  "electionVoteTitle": "election time!",
+  "electionVoteDescription": "there’s an onging election right now. tap here to start voting for a new director",
+  "electionVoteAction": "vote for director",
+  "electionVoteTimeHint": "countdown",
+  "electionVoteTimeValue": "29 days, 23 hrs, 59 mins",
+  "electionVoteTimeTitle": "{percentage} of seed holders voted",
+  "@electionVoteTimeTitle": {
+    "placeholders": {
+      "percentage": {}
+    }
+  },
+  "seedsDescriptionHint": "seeds are circle specific tokens that give you votes to manage the circle (decide rules, pick directors, and more!). ",
+  "seedHoldersTitle": "seedholders",
+  "sellSeedsSendOffer": "send",
+  "remainingTimeLabel": "{remainingTime} hrs remaining",
+  "@remainingTimeLabel": {
+    "placeholders": {
+      "remainingTime": {}
+    }
+  },
+  "chatReply": "reply to {username}",
+  "@chatReply": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "seedAmount": "{amount} seeds",
+  "@seedAmount": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "seedAmountConfirmation": "are you sure to send {amount} {circle} seeds to this user?",
+  "@seedAmountConfirmation": {
+    "placeholders": {
+      "amount": {},
+      "circle": {}
+    }
+  },
+  "sellSeeds": "sell seeds",
+  "signOutConfirmation": "are you sure you want to sign out of picnic?",
+  "signOutButtonLabel": "yes, sign out",
+  "notificationTimeDescription": "until you can push again",
+  "newSeedAction": "awesome",
+  "confirmAction": "confirm",
+  "permissionLabel": "permission",
+  "addNewModsLabel": "add new mods",
+  "modLabel": "mod",
+  "editModLabel": "edit mod",
+  "addAsModLabel": "add as mod",
+  "addModLabel": "add mod",
+  "seedsInfoTitle": "what are seeds",
+  "seedsInfoDescription": "seeds let you do cool stuff in communities like vote on rules and pick new directors! \n\nyou can earn seeds by posting high quality content, engaging in chats, and serving as an owner.",
+  "seedsDoneAction": "done",
+  "notificationAppBarTitle": "notifications",
+  "notificationPostComment": "left a comment on your post",
+  "notificationFollowing": "started following you",
+  "notificationGlitterbomb": "glitterbombed you",
+  "notificationPostReaction": "reacted to your post",
+  "notificationCommentReaction": "reacted to your comment",
+  "notificationMessageReply": "replied to your message",
+  "notificationMessage": "messaged you",
+  "notificationSavedPost": "someone saved your post",
+  "notificationSharedPost": "someone shared your post",
+  "notificationSeedsReceivedTitle": "{circleName} seeds received",
+  "@notificationSeedsReceivedTitle": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationSeedsReceivedSubtitle": "{name} sent you seeds",
+  "@notificationSeedsReceivedSubtitle": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationBannedFrom": "you have been banned from {circleName}",
+  "@notificationBannedFrom": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationUnbannedFrom": "you have been unbanned from {circleName}",
+  "@notificationUnbannedFrom": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationPostReportedToModeratorTitle": "{circleName} - report received",
+  "@notificationPostReportedToModeratorTitle": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationPostReportedToModeratorSubtitle": "{username} reported a post",
+  "@notificationPostReportedToModeratorSubtitle": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "notificationBannedFromApp": "your account has been banned",
+  "notificationUnbannedFromApp": "your account has been unbanned",
+  "notificationPostRemovedPicnic": "your post got removed",
+  "notificationPostRemovedModerator": "your post got removed from {circleName}",
+  "@notificationPostRemovedModerator": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationElectionUpdateTitleFormat": "{circleName} Election Update",
+  "@notificationElectionUpdateTitleFormat": {
+    "placeholders": {
+      "circleName": {}
+    }
+  },
+  "notificationElectionAboutToLooseSubtitleFormat": "{username} is close to taking the lead in {circleName} circle election.",
+  "@notificationElectionAboutToLooseSubtitleFormat": {
+    "placeholders": {
+      "circleName": {},
+      "username": {}
+    }
+  },
+  "notificationElectionAlreadyTookLeadSubtitleFormat": "{username} has taken the lead in {circleName} circle elections",
+  "@notificationElectionAlreadyTookLeadSubtitleFormat": {
+    "placeholders": {
+      "circleName": {},
+      "username": {}
+    }
+  },
+  "notificationUserJoinedCircleTitle": "Circle joined",
+  "notificationUserJoinedCircleSubtitle": "{username} has joined {circleName} circle",
+  "@notificationUserJoinedCircleSubtitle": {
+    "placeholders": {
+      "circleName": {},
+      "username": {}
+    }
+  },
+  "notificationUserInvitedToCircleTitle": "Circle invitation",
+  "notificationUserInvitedToCircleSubtitle": "{username} invited you to join {circleName}",
+  "@notificationUserInvitedToCircleSubtitle": {
+    "placeholders": {
+      "circleName": {},
+      "username": {}
+    }
+  },
+  "commentChatAppTitle": "comments",
+  "circleElectionVoteForDirector": "vote for director",
+  "circleElectionSelectSingleDirector": "select a director",
+  "circleElectionSelectDirector": "select director",
+  "circleElectionChangeVoteForDirector": "change vote to another director",
+  "shareAction": "share",
+  "blockAction": "block",
+  "circleElectionYouVoted": "you voted",
+  "circleElectionSeedsVoted": "seeds voted",
+  "circleElectionDirectorElection": "ownership",
+  "modSettingTitle": "mod setting",
+  "modPermissionsAction": "mod permissions",
+  "removeModAction": "remove mod",
+  "removeModDescription": "are you sure you want to remove this mod?",
+  "removeModPositiveAction": "yes, remove",
+  "modRulesTitle": "mod rules",
+  "modRulesDescription": "it’s your job to keep this circle a safe and fun place for everyone! here’s what you can do:",
+  "modRuleOne": " • 24 hour or perma ban any user from this circle",
+  "modRuleTwo": " • delete messages in the circle chat",
+  "modRuleThree": " • the circle creator can add and remove circle mods",
+  "modRuleFour": " • encourage people to have fun conversations",
+  "modRuleFive": " • to delete posts from circle feed, hold down for 8 \u00A0\u00A0\u00A0seconds",
+  "modRuleSix": " • the entire mod team can send 1 push combined \u00A0\u00A0\u00A0per day",
+  "modRulesThankYouNote": "thanks for being amazing. always feel free to dm @picnic with any issues",
+  "permanentBanChoice": "permanently",
+  "dayBanChoice": "24 hours",
+  "circleElectionSeedHolders": "seed holders",
+  "newSeedsTitle": "{count, plural, =1{{count} new seed!} other{{count} new seeds!}}",
+  "@newSeedsTitle": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "newSeedsDescription": "{count, plural, =1{{count} new seed has been added to this circle!} other{{count} new seeds has been added to this circle!}}",
+  "@newSeedsDescription": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circleElectionYouHaveSeedInCircle": "{seeds} seeds in this circle",
+  "@circleElectionYouHaveSeedInCircle": {
+    "placeholders": {
+      "seeds": {}
+    }
+  },
+  "circleElectionDemocraticCircle": "this is a democratic circle",
+  "circleElectionSeedFund": "seed fund",
+  "notificationSettingsTitle": "notifications settings",
+  "likesNotificationAction": "likes",
+  "commentsNotificationAction": "comments",
+  "commentsLikesNotificationAction": "comments likes",
+  "savesPostsNotificationsAction": "saves",
+  "sharesPostsNotificationsAction": "shares",
+  "glitterbombNotificationsActions": "glitterbomb",
+  "newFollowersNotificationAction": "new followers",
+  "mentionsNotificationAction": "mentions",
+  "directMessagesNotificationAction": "direct messages",
+  "postFromAccountsYouFollowNotificationAction": "post from accounts you follow",
+  "circleChatsNotificationAction": "circle chats",
+  "groupChatsNotificationAction": "group chats",
+  "circleJoinsNotificationAction": "circle joins",
+  "circleInvitesNotificationAction": "circle invites",
+  "seedsNotificationsAction": "seeds",
+  "banUserLabel": "ban user",
+  "manageSpamTitle": "manage spam",
+  "inviteByUsernameAction": "invite by username",
+  "copyInviteLinkAction": "copy invite link",
+  "removeReasonHint": "the reason for removing the post",
+  "removeReasonTitle": "removing reason",
+  "countdownValue": "{days} d, {hours} hrs, {minutes} m",
+  "@countdownValue": {
+    "placeholders": {
+      "days": {},
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "countdownHint": "countdown",
+  "inviteAction": "invite",
+  "inviteActionDone": "invited",
+  "invitedAction": "invited",
+  "addMemberTitle": "add member",
+  "reportedPostTitle": "reported post",
+  "reportedCommentTitle": "reported comment",
+  "removePostAction": "remove post",
+  "removeCommentAction": "remove comment",
+  "privacySettingsTitle": "privacy settings",
+  "deleteAccountAction": "delete account",
+  "privacySettingsOnlyReceiveDmsFromPeopleYouFollow": "only receive dms from people you follow",
+  "privacySettingsAccessListContacts": "allow access to the list of my contacts",
+  "allowPicnicAccessContactsTitle": "allow picnic to access your contacts",
+  "allowPicnicAccessContactsMessage": "you are about to be redirected to your phone settings in order to give contact access to picnic app",
+  "takeMeToSettingsAction": "okay, take me to settings",
+  "deleteAction": "yes, delete",
+  "deleteAccountMessage": "are you sure you want to delete your account?",
+  "reportActionsLabel": "report actions",
+  "deleteAccountTitle": "delete account",
+  "enterTheCodeMessage": "enter the code we texted you",
+  "leavingReasonMessage": "leaving reason",
+  "verificationCodeHint": "verification code",
+  "whyAreYouLeavingHint": "why are you leaving us?",
+  "selectReasonHint": "select reason",
+  "fileTooBigErrorMessage": "File size too big",
+  "shareThoughtTitle": "thought",
+  "thoughtTextFieldHint": "what’s on your mind? 🤔",
+  "additionalTextFieldHint": "add more here",
+  "leaveChat": "leave chat",
+  "leaveChatMessage": "are you sure you want to leave this chat?",
+  "savedPostsTitle": "saved posts",
+  "collectionCardPostCountLabel": "{count} posts",
+  "@collectionCardPostCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "getVerifiedContentTitle": "Get verified",
+  "getVerifiedContentSubTitle": "Verification Requirements on Picnic",
+  "getVerifiedContentEnd": " if you meet the above account and eligibility requirements. Using false or misleading information during the verification process will remove your verified badge and may lead to additional action to disable your account.",
+  "getVerifiedIntro1": "In addition to following Picnic’s ",
+  "getVerifiedIntro2": "Terms of Use ",
+  "getVerifiedIntro3": "and ",
+  "getVerifiedIntro4": "Community Guidelines",
+  "getVerifiedIntro5": ", we look at the following factors when evaluating Picnic accounts to determine if they meet our verification criteria:",
+  "areVerifiedUsers": "Official Picnic Influencers with over 100k followers on any platform can get verified",
+  "applyForVerification": "Apply for verification",
+  "getVerifiedContentList": "⭐Authentic: \n Your account must represent a real person, registered business or entity\n \n ⭐Popular: \n Your account must have a significant number of real followers and views\n \n⭐Active: \n Your account must be active daily\n \n⭐Circles: \n You must be active in and a large contributor to at least one circle\n \n⭐Moderator: \n Being a moderator increases your chance of being verified\n \n⭐Long time user: \n Length of time on Picnic is considered when verifying users\n",
+  "getVerifiedContentList2": "⭐Picnic Influencers: \n",
+  "approveAction": "approve",
+  "rejectAction": "reject",
+  "searchSoundTitle": "search sounds",
+  "glitterboombAlertTitle": "BOOM! 🎉",
+  "glitterboombAlertDescription": "{username} glitterbombed you ✨",
+  "@glitterboombAlertDescription": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "glitterboombAlertButtonAction": "glitterbomb back",
+  "soundAttachmentItemCaption": "sound attached to the text",
+  "applyForVerificationAction": "apply for verification",
+  "deleteCollectionActionTitle": "delete collection",
+  "deleteCollectionConfirmationAction": "yes, delete",
+  "deleteCollectionDialogTitle": "delete collection",
+  "deleteCollectionDialogDescription": "are you sure you want to delete this collection? this action cannot be undone.",
+  "deleteAccountChallenge": "type \"delete\" to confirm",
+  "delete": "delete",
+  "editAction": "edit",
+  "invalidLinkMessage": "not a link",
+  "saveAction": "save",
+  "groupChatSubtitle": "{countMembers, plural, =1{{countMembers} member, {countOnlineMembers} online} other{{countMembers} members, {countOnlineMembers} online}}",
+  "@groupChatSubtitle": {
+    "placeholders": {
+      "countMembers": {},
+      "countOnlineMembers": {}
+    }
+  },
+  "noContent": "no content",
+  "insufficientSeeds": "insufficient seeds",
+  "nothingToShow": "there’s nothing to show",
+  "groupChatMoreSubtitle": "{countMembers, plural, =1{{countMembers} member, {countOnlineMembers} online} other{{countMembers} members, {countOnlineMembers} online}}",
+  "@groupChatMoreSubtitle": {
+    "placeholders": {
+      "countMembers": {},
+      "countOnlineMembers": {}
+    }
+  },
+  "shareToTitle": "share to",
+  "selectCircleTitle": "select circle",
+  "circleResultsTitle": "circle results",
+  "seeCircleChat": "see circle chat",
+  "emptyUserCirclesMessage": "no circles found\n\nmake sure you’ve joined at least one circle or create new one",
+  "selectPrimaryLanguageTitle": "select primary language",
+  "discoveryInitialHintTitle": "explore",
+  "discoveryInitialHintSubtitle": "search something",
+  "createCircleTextInputLanguageHint": "select a language",
+  "createPollTitle": "poll",
+  "createPost": "create post",
+  "askAQuestionHint": "ask a question",
+  "tagAfriendOrContactHint": "tag a friend or contact",
+  "chatInvitationMessage": "{username} sent you an invite ✨",
+  "@chatInvitationMessage": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "circleDetailsNoRoyaltyTitle": "no royalty yet",
+  "circleDetailsNoRoyaltyDescription": "royalty will be assigned once this circle reaches 100 members. keep on growing!",
+  "circleDetailsNoRulesTitle": "no rules yet",
+  "circleDetailsNoRulesDescription": "there’s no rules here!",
+  "director": "director",
+  "mod": "mod",
+  "usersResults": "users results",
+  "expand": "expand",
+  "uploadingPostMessage": "Uploading post...",
+  "votesDynamicLabel": "{votes} votes",
+  "@votesDynamicLabel": {
+    "placeholders": {
+      "votes": {
+        "type": "String"
+      }
+    }
+  },
+  "commentsHint": "thoughts? 💭",
+  "deletePost": "delete post",
+  "selectPost": "select post",
+  "deleteSelectedPosts": "{count, plural, other{delete selected ({count})}}",
+  "@deleteSelectedPosts": {
+    "description": "Used to display the number of selected posts",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "deletePostsConfirmation": "{count, plural, other{delete posts ({count})}}",
+  "@deletePostsConfirmation": {
+    "description": "Used to display the number of selected posts to be deleted",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "deletePostConfirmationMessage": "are you sure you want to delete this post? this action cannot be undone",
+  "deletePostsConfirmationMessage": "are you sure you want to delete these posts? this action cannot be undone",
+  "leaveCircle": "leave circle",
+  "leaveCircleConfirmation": "are you sure you want to leave this circle?",
+  "tapLeftOrRightHint": "tap left or right",
+  "languageSelectionTitle": "language selection",
+  "languageSelectionInfo": "choose what language you want to prioritize content in. The app language will be the same as your phone language.",
+  "reportedMessage": "this message",
+  "reportedComment": "this comment",
+  "reportedLabel": "reported",
+  "none": "unknown",
+  "circleRoleMember": "member",
+  "circleRoleModerator": "mod",
+  "circleRoleDirector": "director",
+  "pollVoteLabel": "your vote",
+  "deleteWord": "delete word",
+  "deleteWordMessage": "are you sure you want to delete word?",
+  "blacklistedWords": "blacklisted words",
+  "blacklistedWordsButtonConfirmationTitle": "blacklisting a word",
+  "blacklistedWordsInputHint": "the word",
+  "blacklistedWordsConfirmationButtonTitle": "add word to the blacklist",
+  "blacklistedWordsButtonConfirmationMessage": "to add multiple words at the same time, please separate them via comma",
+  "likeLabel": "like",
+  "unlikeLabel": "unlike",
+  "commentActionsTitle": "comment actions",
+  "commentActionPin": "pin",
+  "commentActionUnpin": "unpin",
+  "commentPinnedTitle": "pinned comment",
+  "changePinnedCommentConfirmationTitle": "changing pinned comment?",
+  "changePinnedCommentConfirmationMessage": "pinned comment in this post will be changed, do you wish to proceed?",
+  "changePinnedCommentConfirmationCurrentPinnedComment": "current pinned comment",
+  "changePinnedCommentConfirmationButtonTitle": "yes, continue",
+  "givePermissionToReadMedia": "Give permission to read media",
+  "unSavedProfileInfoTitle": "unsaved profile info",
+  "unSavedProfileInfoMessage": "you have edited the info on your profile",
+  "unSavedInfoSecondAction": "discard changes",
+  "unSavedInfoFirstAction": "save the changes",
+  "cancelAction": "cancel",
+  "reportDetailsTitle": "report details",
+  "deletedPostDateDynamicLabel": "this post was deleted on {date}",
+  "@deletedPostDynamicLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "unFollowAction": "unfollow",
+  "postToCircleAction": "post to circle",
+  "invitationLinkCopiedMessage": "Invitation link copied to clipboard!",
+  "resolvedReportDateLabel": "this report was resolved on",
+  "adminLabel": "admin",
+  "responsibleModLabel": "responsible mod",
+  "circleNameExistsError": "circle name already taken",
+  "circleReasonOther": "Other",
+  "circleReasonSpam": "Spam",
+  "circleReasonSexualContent": "Sexual Content",
+  "circleReasonGraphicContent": "Graphic Content",
+  "noPostsTitle": "no posts yet!",
+  "today": "Today",
+  "requestToJoinAction": "request to join",
+  "noPostsMessage": "be the first person to post here",
+  "noChatsTitle": "no chats yet!",
+  "noChatsMessage": "create a chat with a friend here",
+  "chatGlitterBombMessage": "✨ {username} glitterbombed you ✨",
+  "@chatGlitterBombMessage": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "userBannedMessage": "you are banned",
+  "searchUserLabel": "search user",
+  "pending": "pending",
+  "messageCopiedToClipboard": "message copied to clipboard",
+  "sliceRules": "slice rules",
+  "errorDialogOk": "okay",
+  "removedPostTitle": "removed post",
+  "removedPostBecause": "your post was removed because",
+  "removedPostBecauseGraphic": "it contained graphic content which is forbidden",
+  "pleaseReferTo": "please refer to",
+  "terms": "terms",
+  "forMoreDetails": "for more details",
+  "postRemovedSubtitle": "removed your post from the circle",
+  "postRemovedTitle": "{circleName} mod",
+  "@postRemovedTitle": {
+    "placeholders": {
+      "circleName": {
+        "type": "String"
+      }
+    }
+  },
+  "usernameContainsSpacesErrorMessage": "username shouldn’t contain spaces",
+  "goToSettingsAction": "go to settings",
+  "dynamicPermissionTitle": "{permissionType} is turned off",
+  "@dynamicPermissionTitle": {
+    "placeholders": {
+      "permissionType": {
+        "type": "String"
+      }
+    }
+  },
+  "dynamicPermissionDesc": "make sure to give picnic app access to {permissionType} on your smartphone settings",
+  "@dynamicPermissionDesc": {
+    "placeholders": {
+      "permissionType": {
+        "type": "String"
+      }
+    }
+  },
+  "microphoneLabel": "microphone",
+  "usernameNotLowerCaseErrorMessage": "username must be lowercase",
+  "circleInfo": "circle info",
+  "info": "info",
+  "editCircleInfo": "edit circle info",
+  "editCircleButtonLabel": "save changes",
+  "unsavedCircleInfoTitle": "edit circle info",
+  "rolesTitle": "roles",
+  "manageRolesButton": "manage roles",
+  "unsavedCircleInfoSubTitle": "you have edited the info for this circle",
+  "circlePrivateHeadline": "private 🔒",
+  "circlePrivateDescription": "private circles are still discoverable but members must be invited or approved. ",
+  "circleOpenHeadline": "open 👀",
+  "circleOpenDescription": "people are able to find this circle through search. non-discoverable circle must be joined through a link",
+  "circleClosedHeadline": "closed 🔒",
+  "circleClosedDescription": "closed circles are discoverable, but users need to request to join in order to be a member of the community",
+  "moreAttachmentsCount": "+{count}",
+  "@moreAttachmentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "1"
+      }
+    }
+  },
+  "popularAllTime": "popular all time",
+  "trendingThisWeek": "trending this week",
+  "trendingThisMonth": "trending this month",
+  "newText": "new",
+  "rising": "rising",
+  "buildInfoDescription": "build info copied to the clipboard",
+  "appInfoLabel": "Picnic {appVersion} ({buildNumber}) - {buildSource}",
+  "@appInfoLabel": {
+    "placeholders": {
+      "appVersion": {
+        "type": "String"
+      },
+      "buildNumber": {
+        "type": "String"
+      },
+      "buildSource": {
+        "type": "String"
+      }
+    }
+  },
+  "systemInfoLabel": "System: {operatingSystem} {osVersion}",
+  "@systemInfoLabel": {
+    "placeholders": {
+      "operatingSystem": {
+        "type": "String"
+      },
+      "osVersion": {
+        "type": "String"
+      }
+    }
+  },
+  "deviceInfoLabel": "Device: {device}",
+  "@deviceInfoLabel": {
+    "placeholders": {
+      "device": {
+        "type": "String"
+      }
+    }
+  },
+  "addFriendsAction": "add friends",
+  "profileLinkAction": "profile link",
+  "sortPostsBy": "sort posts by",
+  "contactAccessAction": "contact access",
+  "contactAccessDescriptionInvite": "give contact access in settings to easily invite your friends",
+  "contactAccessDescriptionProfile": "give contact access to easily share your profile with your friends",
+  "searchFriendsContactsHint": "search through friends and contacts",
+  "contacts": "contacts",
+  "inviteFriendsFollow": "invite friends to follow you!",
+  "goViral": "get more followers to get seen and go viral 🎉",
+  "languageSearchInputHint": "search",
+  "resendAction": "resend message",
+  "notSentMessage": "message not sent",
+  "notSentMessageShort": "not sent",
+  "noAccesstoGalleryTitle": "no access to gallery",
+  "noAccesstoGalleryMessage": "make sure to give picnic app access to your gallery on your smartphone settings",
+  "noAccesstoFileTitle": "no access to files",
+  "noAccesstoFileMessage": "make sure to give picnic app access to your files on your smartphone settings",
+  "loginOnlyOAuthFormDescription": "sign in using the option below",
+  "registerOnlyOAuthFormDescription": " sign up using one of the options below",
+  "noAccessToCameraTitle": "camera are turned off",
+  "noAccessToMicrophoneTitle": "microphone are turned off",
+  "noAccessToCameraMessage": "make sure to give picnic app access to camera on your smartphone settings",
+  "noAccessToMicrophoneMessage": "make sure to give picnic app access to microphone on your smartphone settings",
+  "noAccessToCameraAndMicrophoneTitle": "camera and microphone are turned off",
+  "noAccessToCameraAndMicrophoneMessage": "make sure to give picnic app access to camera and microphone on your smartphone settings",
+  "createSliceTitle": "create a new slice",
+  "sliceOf": "slice of ",
+  "sliceName": "what’s this slice called?",
+  "sliceDescription": "what’s the slice about?",
+  "slicePrivateHeadline": "private 🔒",
+  "slicePrivateDescription": "private slices are still discoverable but members must be invited or approved. ",
+  "sliceDiscoverableHeadline": "discoverable 👀",
+  "sliceDiscoverableDescription": "people are able to find this slice through search. non-discoverable slices must be joined through a link",
+  "sliceJoinTitle": "join",
+  "sliceRequestedToJoinPendingTitle": "pending",
+  "sliceJoinedTitle": "joined",
+  "sliceTabMembers": "members",
+  "sliceTabCircleInfo": "circle info",
+  "sliceTabRules": "rules",
+  "sliceChatLabel": "slice chat",
+  "slicePendingJoinRequestLabel": "pending request",
+  "joinRequestsSuffixLabel": "join requests",
+  "joinRequestsPageTitle": "join requests",
+  "approveButtonTitle": "approve",
+  "reportToCircleOwners": "report to circle owners",
+  "owner": "owner",
+  "privateSlice": "private slice",
+  "privateSliceLabel": "this slice is private, please request to join if you want to see this slice",
+  "leaveSlice": "leave slice",
+  "editSliceTitle": "edit slice",
+  "leaveSliceConfirmation": "are you sure you want to leave this slice?",
+  "circlePrivacy": "circle privacy",
+  "defaultCircleName": "Default Circle",
+  "privateCircleWarningTitle": "private circle",
+  "dateTimeFromTitle": "from",
+  "dateTimeToTitle": "to",
+  "allMessages": "all messages",
+  "pastHour": "past hour",
+  "pastDay": "past day",
+  "pastWeek": "past week",
+  "pastMonth": "past month",
+  "customTimeFrame": "custom time frame",
+  "newReleaseTitle": "new release!",
+  "newReleaseLabel": "a new update is available. please update your app to continue using the app ✨",
+  "newReleaseUpdateButtonLabel": "update",
+  "creatorTagLabel": "creator",
+  "privateCircleWarningMessage": "this circle is private, please request to join if you want to see the circle",
+  "sliceNameExistsError": "slice name already taken",
+  "successfullyPosted": "successfully posted",
+  "shareThisWithYourFriends": "share this with your friends!",
+  "sendToFriends": "send to friends",
+  "inviteCircle": "invite to circle",
+  "sharePost": "share post",
+  "inviteFriend": "invite friend",
+  "addFriend": "add friend",
+  "inviteChat": "invite to chat",
+  "skipAction": "skip for now",
+  "permissionsDescription": "let’s make your experience awesome. you can edit these anytime in settings",
+  "reachedListEnd": "you’ve reached end of the list",
+  "feedSeeMoreButton": "see more",
+  "feedSeeMoreBottomSheetTitle": "update circle carousel",
+  "feedSeeMoreBottomSheetMessage": "choose which circle feeds you want to see \uD83D\uDC40",
+  "previewTabTitle": "preview",
+  "mentionEveryoneText": "everyone",
+  "mentionEveryoneCaption": "mention everyone in the chat",
+  "chatLabel": "chat",
+  "createNewCircle": "create new circle",
+  "byContinuingYouAgreeTo": "by continuing you agree to ",
+  "appTerms": "terms ",
+  "and": "and ",
+  "policies": "policies",
+  "userAgreement": "user agreement",
+  "agreeToPicnic": "by using Picnic, you already agree to Picnic App ",
+  "stopUsingAppIfYouDoNotAgree": "if you don’t agree to the terms, please stop using the app",
+  "acceptTermsButton": "okay",
+  "discoverNewCircle": "discover new circles",
+  "sendSeedsAction": "send seeds",
+  "sendSeeds": "send seeds to",
+  "amount": "amount",
+  "howManySeeds": "how many seeds?",
+  "selectUser": "select user",
+  "sendSeedsConfirmation": "yes, send",
+  "selectAction": "select",
+  "reportProblem": "report a problem",
+  "lastUsed": "last used",
+  "seedsAction": "send seeds",
+  "electionLabel": "election time",
+  "filtersAction": "filters",
+  "userNotParticipantErrorMessage": "you are not a participant in this conversation",
+  "termsAndConditionsLabel": "terms and conditions",
+  "privacyPolicyLabel": "privacy policy",
+  "commentDeletedTitle": "comment deleted",
+  "commentDeletedDescription": "oops, seems like this comment is deleted 🥺",
+  "moreRepliesMessage": "{count, plural, =1{1 more reply} other{{count} more replies}}",
+  "@moreRepliesMessage": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "1"
+      }
+    }
+  },
+  "connectedToInternet": "connected to the internet",
+  "noInternetConnection": "no internet connection",
+  "tryingToReconnect": "trying to reconnect",
+  "noCirclesTitle": "you''re not part of any circles",
+  "findCircleLabel": "please find or create the community you like",
+  "roles": "roles",
+  "editCircle": "edit circle",
+  "circleConfig": "circle config",
+  "privacyDiscoverability": "privacy & discoverability",
+  "seedsOwnership": "seeds ownership",
+  "cooldown": "cooldown",
+  "sendNotification": "send notification",
+  "resolveWithNoActionLabel": "resolve with no action",
+  "resolveWithNoActionTitle": "resolve report?",
+  "resolveWithNoActionDescription": "are you sure you want to resolve this report with no action? this cannot be undone",
+  "resolveWithNoActionConfirmation": "yes, resolve",
+  "resolveWithNoActionCancel": "no",
+  "circleAvatarTitle": "circle avatar",
+  "circleAvatarSubtitle": "upload circle picture or select an emoji",
+  "circleAvatarPicture": "upload circle picture",
+  "mySeedHoldings": "my seed holdings",
+  "goToSettings": "go to settings",
+  "create_role_page_title": "create a new role",
+  "create_role_button_label": "create role",
+  "circle_role_name_label": "role name",
+  "generalPermissionsLabel": "general permissions",
+  "moderationPermissionsLabel": "moderation permissions",
+  "permission_post_content": "post content",
+  "permissionPostContentDescription": "allow members to post content on circle",
+  "permission_send_messages": "send messages",
+  "permissionSendMessagesDescription": "allow members to send messages on circle chats",
+  "permission_embed_links": "embed links",
+  "permissionEmbedLinksDescription": "allow members to send links on circle chats",
+  "permission_attach_files": "attach files",
+  "permissionAttachFilesDescription": "allow members to send file attachments on circle chats",
+  "permission_delete_messages": "delete messages",
+  "permission_ban_users": "ban users",
+  "permissionManageCircle": "manage circle",
+  "permissionManageCircleDescription": "allow members to edit circle info, send notifications & manage blacklisted words",
+  "permissionManageUsers": "manage users",
+  "permissionManageUsersDescription": "allow members to invite or ban circle members & manage their roles",
+  "permissionManageReports": "manage reports",
+  "permissionManageReportsDescription": "allow members to view reports and take action",
+  "permissionManagePosts": "manage posts",
+  "permissionManagePostsDescription": "allow members to delete posts from circle feed as well as turning off posting on the circle (any of the post types)",
+  "permissionManageMessages": "manage messages",
+  "permissionManageMessagesDescription": "allow members to delete messages from circle chat as well as turning off chatting on the circle chat",
+  "permissionManageRoles": "manage roles",
+  "permissionManageRolesDescription": "allow members to create new roles and edit or delete roles",
+  "permissionManageComments": "manage comments",
+  "permissionManageCommentsDescription": "allow members to delete comments",
+  "unsavedRoleChanges": "unsaved role changes",
+  "unsavedRoleChangesDetails": "you have edited the role settings",
+  "editRoles": "edit roles",
+  "directorRulesTitle": "director rules",
+  "colorPicker": "color picker",
+  "resetTitle": "reset",
+  "editRole": "edit {role}",
+  "assignRole": "assign role",
+  "selectedRoles": "selected roles",
+  "users": "users",
+  "@editRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "circleAvatarEmoji": "select an emoji",
+  "onboardingUsernameLogin": "sign in with username instead",
+  "onboardingPhoneLogin": "sign in with phone number",
+  "usernameCodeVerificationDescriptionEmail": "enter the code we sent to {email}",
+  "@usernameCodeVerificationDescriptionEmail": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "usernameCodeVerificationDescriptionPhone": "enter the code we texted to {phone}",
+  "@usernameCodeVerificationDescriptionPhone": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "useSeedsToHelpCommunity": "use seeds to help run your community",
+  "seedsInCircle": "You have 1,000 seeds in your circle, each worth one vote in monthly director elections. You can keep all of them or reward them to circle members for contributions like posting and moderating",
+  "howItWorks": "how it works",
+  "oneSeedOneVote": "owning seeds = 1 vote in election",
+  "voteOnDirectorMonthly": "vote on the director monthly",
+  "mostVotesWin": "the person who gets the most votes wins and can control circle roles and configuration",
+  "giveSeedsInCircle": "You can give the seeds to anyone in your circle, but giving away over half may allow someone else to win the director election",
+  "howToGetSeeds": "how other users can get seeds",
+  "transferSeedsPossibility": "once you give someone seeds, they can transfer them to whoever they want",
+  "seedsAreUnique": "each circle’s seeds are unique and only represent votes in that circle",
+  "tapToSelectCollection": "tap to select collection",
+  "savedToGeneral": "saved to general",
+  "saveToCollection": "save to collection",
+  "createANewCollection": "create a new collection",
+  "create": "create",
+  "collectionName": "collection name",
+  "sendAction": "send",
+  "sentAction": "sent",
+  "chooseMediaTitle": "choose media",
+  "uploadMediaTitle": "upload media",
+  "uploadMediaHint": "add your thoughts here 🤔",
+  "uploadMediaDiscardTitle": "discard changes",
+  "uploadMediaDiscardDescription": "are you sure you want to leave the posting flow? the entered content will be gone",
+  "uploadMediaConfirmationAction": "yes, discard",
+  "addModsLabel": "add mods",
+  "config": "config",
+  "circleConfigTitle": "circle config",
+  "nextAction": "next",
+  "disabledCommentsLabel": "commenting is disabled by moderators of this circle",
+  "disabledChatLabel": "chat is disabled or you''re missing permissions",
+  "disabledLabel": "disabled",
+  "postingDisabledLabel": "posting functionalities are disabled by the moderator of this circle or you do not have permission to post",
+  "postingDisabledTitle": "posting {postType} disabled",
+  "@postingDisabledTitle": {
+    "placeholders": {
+      "postType": {
+        "type": "String"
+      }
+    }
+  },
+  "postingDisabled": "This type of post has been disabled by the moderators of this circle",
+  "chattingDisabled": "Chatting was disabled by the moderators",
+  "commentingDisabled": "commenting disabled",
+  "featureDisabledByMods": "this feature is disabled by the mods of this circle",
+  "circle": "circle",
+  "postingIsDisabled": "posting is restricted",
+  "postImageTitle": "image",
+  "allReports": "all reports",
+  "unresolved": "unresolved",
+  "resolved": "resolved",
+  "postVideoTitle": "video",
+  "removeMessageAction": "remove message",
+  "reportedLabelFormat": "{formattedUsername} reported ",
+  "@reportedLabelFormat": {
+    "placeholders": {
+      "formattedUsername": {}
+    }
+  },
+  "addRoleLabel": "add role",
+  "noAttachmentsPermissionsTitle": "Adding attachment is restricted",
+  "noAttachmentsPermissionsDescription": "You do not have permission to add attachments.",
+  "sendNotificationsRestrictedTitle": "Sending notifications is restricted",
+  "sendNotificationsRestrictedDescription": "You do not have permissions to send push notifications",
+  "manageReportsRestrictedTitle": "Managing reports is restricted",
+  "manageReportsRestrictedDescription": "You do not have permissions to manage the reports",
+  "manageRolesRestrictedTitle": "Managing roles is restricted",
+  "manageRolesRestrictedDescription": "You do not have permissions to manage the roles",
+  "inviteUsersRestrictedTitle": "Inviting users is restricted",
+  "inviteUsersRestrictedDescription": "You do not have permissions to invite users",
+  "banUsersRestrictedTitle": "Banning users is restricted",
+  "banUsersRestrictedDescription": "You do not have permissions to ban users",
+  "manageBlacklistedWordsRestrictedTitle": "Managing blacklist words is restricted",
+  "manageBlacklistedWordsRestrictedDescription": "You do not have permissions to manage the blacklisted words",
+  "editCircleRestrictedTitle": "Editing circle is restricted",
+  "editCircleRestrictedDescription": "You do not have permissions to edit the circle info",
+  "manageCircleConfigRestrictedTitle": "Circle configuration is restricted",
+  "manageCircleConfigRestrictedDescription": "You do not have permissions to manage the configuration of the circle",
+  "managePrivacyRestrictedTitle": "Privacy & discoverability is restricted",
+  "managePrivacyRestrictedDescription": "You do not have permissions to change the privacy & discoverability of the circle",
+  "unableToEditConfigTitle": "Configuration change restricted",
+  "unableToEditConfigDescription": "You do not have permission to change this configuration",
+  "actionRestrictedTitle": "Action restricted",
+  "roleCanNotBeUnassigned": "This role can not be unassigned from this user.",
+  "roleCanNotBeAssigned": "This role can not be assigned to this user.",
+  "yourCircles": "your circles",
+  "usernameCopiedAction": "username copied",
+  "discordIntegrationTitle": "Discord Integration",
+  "discordIntegrationDescription": "supervise your Picnic circle and Discord server seamlessly, with the ability to manage both interchangeably",
+  "discordServerWebhook": "discord server webhook",
+  "webhook": "webhook",
+  "connect": "connect",
+  "connectedDiscordServer": "connected discord server",
+  "revokeIntegrationTitle": "revoke integration",
+  "revokeIntegrationDescription": "are you sure you want to revoke discord integration?",
+  "revokeIntegrationConfirm": "yes, revoke",
+  "linkDiscord": "link Discord",
+  "revoke": "revoke",
+  "serverAlreadyConnected": "*a server is already connected"
+}

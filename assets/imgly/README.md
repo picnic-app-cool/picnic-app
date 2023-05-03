@@ -1,0 +1,1 @@
+this folder is populated by CI/CD with the actual license files for Imgly library, please DO NOT remove this folder or this README file

@@ -1,0 +1,3 @@
+class ChatTabsInitialParams {
+  const ChatTabsInitialParams();
+}

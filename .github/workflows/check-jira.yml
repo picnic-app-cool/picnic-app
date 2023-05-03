@@ -1,0 +1,38 @@
+name: Check Jira ticket
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+    types:
+      - opened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-ticket-mergeable:
+    timeout-minutes: 5
+    runs-on:
+      - self-hosted
+      - linux
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Check Jira ticket
+        run: |
+          bundle exec fastlane jira_check_ticket_mergeable
+        env:
+          JIRA_ACCESS_TOKEN: ${{ secrets.JIRA_ACCESS_TOKEN }}
+          PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+        working-directory: scripts

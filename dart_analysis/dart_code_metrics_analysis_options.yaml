@@ -1,0 +1,94 @@
+include: basic_analysis_options.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    maximum-nesting-level: 3
+    number-of-parameters: 4
+    source-lines-of-code: 30
+  metrics-exclude:
+    - "lib/core/data/graphql/dio_link/dio_link.dart"
+    #TODO remove this exclusion https://picnic-app.atlassian.net/browse/GS-8271
+    - "lib/features/circles/circle_details/circle_details_page.dart"
+    - "test/**"
+    - "widgetbook/**"
+    - "**/*.gen.dart"
+    - "tools/**"
+    - "packages/**"
+    - ".dart_tool/**"
+    - "ios/**"
+    - "android/**"
+
+  rules-exclude:
+    - ".fvm/**"
+    - "ios/**"
+    - "android/**"
+    - "test/**"
+    - "widgetbook/**"
+    - "**/*.gen.dart"
+    - "tools/**"
+    - "packages/**"
+    - ".dart_tool/**"
+    - "ios/**"
+    - "android/**"
+  rules:
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma:
+        break-on: 3
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    - avoid-unnecessary-type-casts
+    - avoid-unnecessary-type-assertions
+    - no-magic-number
+    - prefer-first
+    - prefer-last
+    - prefer-match-file-name
+    - prefer-extracting-callbacks
+    - prefer-async-await
+    - prefer-moving-to-variable
+    - avoid-returning-widgets
+    - prefer-correct-identifier-length:
+        exceptions: [ 'i' ]
+        max-identifier-length: 40
+        min-identifier-length: 2
+    - prefer-correct-type-name:
+        min-length: 2
+        max-length: 40
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - member-ordering:
+        widgets-order:
+          - constructors
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-methods
+          - private-methods
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-methods
+          - private-methods
+    - ban-name:
+        entries:
+          - ident: FirebaseMessaging
+            description: Please use FirebaseProvider.messaging
+          - ident: FirebaseCrashlytics
+            description: Please use FirebaseProvider.crashlytics
+          - ident: FirebaseAnalytics
+            description: Please use FirebaseProvider.analytics
+          - ident: FirebaseAuth
+            description: Please use FirebaseProvider.auth
+          - ident: emit
+            description: use tryEmit instead

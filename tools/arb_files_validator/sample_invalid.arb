@@ -1,0 +1,33 @@
+{
+  "@@locale": "en",
+  "tipPaginationFormat": "tip {index} of {total}",
+  "@tipPaginationFormat": {
+    "placeholders": {
+      "index": {},
+      "total": {}
+    }
+  },
+  "offerStateSellSecondaryLabel": "cancel offer",
+  "circlesGroupingsSelectCirclesHint": "select {count} circles",
+  "@circlesGroupingsSelectCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsSelectMoreCirclesHint": "select {count} more circles",
+  "@circlesGroupingsSelectMoreCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsAppBarTitle": "choose circles",
+  "circlesGroupingsDescription": "circles are the homes 🏠 for whatever you are interested in. this will make up your curated for you page ✌️ ",
+  "circlesGroupingsDescription": "circles are the homes 🏠 for whatever you are interested in. this will make up your curated for you page ✌️ ",
+  "tapToPasteLabel": "tap to paste",
+  "countrySelectFormTitle": "select country",
+  "countrySelectFormTitle": "select country",
+  "countrySelectFormInputHint": "select country",
+  "chatTabFeed": "chat feed",
+  "chatTabCircles": "my circles",
+  "chatTabCircles": "my circles"
+}

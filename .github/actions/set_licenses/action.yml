@@ -1,0 +1,38 @@
+name: Prepare licenses
+description: Prepare all licenses used by the app
+
+inputs:
+  vesdkLicenseVideoIos:
+    description: 'vesdk_license_video.ios license file contents'
+    required: true
+  vesdkLicenseVideoAndroid:
+    description: 'vesdk_license_video.android license file contents'
+    required: true
+  pesdkLicenseIos:
+    description: 'pesdk_license.ios license file contents'
+    required: true
+  pesdkLicenseAndroid:
+    description: 'pesdk_license.android license file contents'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: create license directory
+      shell: bash
+      run: mkdir -p assets/imgly
+
+    - name: set licenses file
+      shell: bash
+      env:
+        VESDK_LICENSE_VIDEO_IOS: ${{ inputs.vesdkLicenseVideoIos }}
+        VESDK_LICENSE_VIDEO_ANDROID: ${{ inputs.vesdkLicenseVideoAndroid }}
+        PESDK_LICENSE_IOS: ${{ inputs.pesdkLicenseIos }}
+        PESDK_LICENSE_ANDROID: ${{ inputs.pesdkLicenseAndroid }}
+      run: |
+        echo $VESDK_LICENSE_VIDEO_IOS | base64 -d >> assets/imgly/vesdk_license_video.ios
+        echo $VESDK_LICENSE_VIDEO_ANDROID | base64 -d >> assets/imgly/vesdk_license_video.android
+        echo $PESDK_LICENSE_IOS | base64 -d >> assets/imgly/pesdk_license.ios
+        echo $PESDK_LICENSE_ANDROID | base64 -d >> assets/imgly/pesdk_license.android
+
+

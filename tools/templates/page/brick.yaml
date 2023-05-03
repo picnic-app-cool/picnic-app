@@ -1,0 +1,32 @@
+name: page
+description: Creates Page, Presenter, PresentationModel and relevant tests. Registers the whole structure in getIt dependency graph.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.26 <0.1.0"
+
+vars:
+  root_folder_path:
+    type: string
+    description: root folder path to project where main pubspec.yaml is located
+    default: /Users/andrzejchm/Developer/project-name
+    prompt: "ABSOLUTE path to project's root directory: "
+
+  page_name:
+    type: string
+    description: "Page name"
+    default: "Circle Details"
+    prompt: "page's name: "
+
+  feature_name:
+    type: string
+    description: "What is the name of the feature?"
+    default: "circles"
+    prompt: "Feature name (in snake_case): "
+
+  subdirectory:
+    type: string
+    description: "subdirectory name inside the feature (OPTIONAL)"
+    prompt: "subdirectory name inside the feature (OPTIONAL): "
+

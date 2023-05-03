@@ -1,0 +1,3 @@
+class PrivateProfileInitialParams {
+  const PrivateProfileInitialParams();
+}

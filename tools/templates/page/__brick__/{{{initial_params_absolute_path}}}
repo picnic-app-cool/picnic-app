@@ -1,0 +1,3 @@
+class {{initial_params_name}} {
+  const {{initial_params_name}}();
+}

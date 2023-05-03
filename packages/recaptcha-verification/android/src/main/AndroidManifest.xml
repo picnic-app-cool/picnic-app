@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="zone.picnic.recaptcha_verification">
+
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+</manifest>

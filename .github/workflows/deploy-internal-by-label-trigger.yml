@@ -1,0 +1,68 @@
+name: Deploy internal tests (triggered by label)
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trigger-deploy:
+    uses: ./.github/workflows/reusable-deploy-internal.yml
+    secrets: inherit
+    if: ${{ github.event.label.name == 'Deploy to QA' }}
+
+  remove-label:
+    timeout-minutes: 5
+    runs-on:
+      - ubuntu-latest
+    permissions:
+      pull-requests: write # to remove label
+
+    if: ${{ github.event.label.name == 'Deploy to QA' }}
+
+    steps:
+      - name: Remove label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              name: context.payload.label.name,
+            })
+
+  comment-failed:
+    timeout-minutes: 5
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to checkout
+      pull-requests: write # to write comment
+
+    needs:
+      - trigger-deploy
+
+    if: ${{ github.event.label.name == 'Deploy to QA' && failure() }}
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment variables
+        uses: ./.github/actions/prepare_env
+
+      - name: Post a comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: `Deployment to QA failed: ${process.env.GITHUB_BUILD_URL}`,
+            })

@@ -1,0 +1,3 @@
+class AchievementsInitialParams {
+  const AchievementsInitialParams();
+}

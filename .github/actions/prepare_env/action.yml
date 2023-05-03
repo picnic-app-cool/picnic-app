@@ -1,0 +1,34 @@
+name: Prepare environment variables
+description: Set up all some useful environment variables
+
+runs:
+  using: composite
+  steps:
+    - name: Set locale
+      run: |
+        echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
+        echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Prepare environment for bundler
+      run: |
+        echo "GEM_HOME=${{ runner.tool_cache }}/.gem" >> $GITHUB_ENV
+        echo "${{ runner.tool_cache }}/.gem/bin" >> $GITHUB_PATH
+      shell: bash
+
+    - name: Add homebrew to PATH
+      if: ${{ runner.os == 'macOS' }}
+      run: |
+        echo "/opt/homebrew/bin" >> $GITHUB_PATH
+      shell: bash
+
+    - name: Fix ruby for windows
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        ruby -e 'print File.dirname(RbConfig.ruby)' >> $GITHUB_PATH
+      shell: bash
+
+    - name: Prepare GITHUB_BUILD_URL
+      run: |
+        echo "GITHUB_BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+      shell: bash

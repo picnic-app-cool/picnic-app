@@ -1,0 +1,3 @@
+class OnboardingInitialParams {
+  const OnboardingInitialParams();
+}

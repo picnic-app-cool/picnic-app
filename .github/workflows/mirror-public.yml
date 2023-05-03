@@ -1,0 +1,50 @@
+name: Mirror to public repository
+
+on:
+  push:
+    branches:
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    env:
+      REMOTE_PUBLIC_NAME: public
+      REMOTE_PUBLIC_BRANCH: ${{ github.ref }}
+      REMOTE_PUBLIC_URL: git@github.com:${{ github.repository_owner }}/picnic-app.git
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run ssh-agent
+        uses: webfactory/ssh-agent@v0.6.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.PUBLIC_REPO_SSH_PRIVATE_KEY }}
+
+      - name: Setup git user
+        uses: fregante/setup-git-user@v2
+
+      - name: Add public remote
+        run: |
+          git remote add "${REMOTE_PUBLIC_NAME}" "${REMOTE_PUBLIC_URL}"
+          git fetch "${REMOTE_PUBLIC_NAME}"
+          git switch -C "${REMOTE_PUBLIC_BRANCH}" "${REMOTE_PUBLIC_NAME}/${REMOTE_PUBLIC_BRANCH}"
+
+      - name: Copy commits
+        run: |
+          git cherry-pick "${{ github.event.before }}..${{ github.event.after }}"
+          git push "${REMOTE_PUBLIC_NAME}" "${REMOTE_PUBLIC_BRANCH}"

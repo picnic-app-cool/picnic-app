@@ -1,0 +1,11 @@
+bricks:
+  use_case:
+    path: use_case
+  page:
+    path: page
+  repository:
+    path: repository
+  move_repository:
+    path: move_repository
+  move_page:
+    path: move_page

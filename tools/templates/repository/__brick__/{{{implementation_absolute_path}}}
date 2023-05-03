@@ -1,0 +1,5 @@
+{{{interface_import}}}
+
+class {{{implementation_name}}} implements {{{interface_name}}} {
+    const {{{implementation_name}}}();
+}

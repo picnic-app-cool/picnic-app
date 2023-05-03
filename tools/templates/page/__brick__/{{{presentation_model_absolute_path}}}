@@ -1,0 +1,22 @@
+import 'package:{{{app_package}}}/{{{import_path}}}/{{initial_params_file_name}}';
+
+
+
+/// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
+class {{presentation_model_name}} implements {{view_model_name}} {
+  /// Creates the initial state
+  {{presentation_model_name}}.initial(
+    // ignore: avoid_unused_constructor_parameters
+    {{initial_params_name}} initialParams,
+  );
+
+  /// Used for the copyWith method
+  {{presentation_model_name}}._();
+
+  {{presentation_model_name}} copyWith() {
+    return {{presentation_model_name}}._();
+  }
+}
+
+/// Interface to expose fields used by the view (page).
+abstract class {{view_model_name}} {}

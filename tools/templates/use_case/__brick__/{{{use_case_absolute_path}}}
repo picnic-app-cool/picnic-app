@@ -1,0 +1,11 @@
+import 'package:dartz/dartz.dart';
+import 'package:{{{app_package}}}/core/utils/either_extensions.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/domain/model/{{{failure_file_name}}}';
+
+class {{use_case_name}} {
+  const {{use_case_name}}();
+
+  Future<Either<{{failure_name}}, Unit>> execute() async {
+    return failure(const {{failure_name}}.unknown());
+  }
+}

@@ -1,0 +1,3 @@
+enum GroupChatMorePageResult {
+  groupAbandoned,
+}

@@ -1,0 +1,3 @@
+class SavedPostsInitialParams {
+  const SavedPostsInitialParams();
+}

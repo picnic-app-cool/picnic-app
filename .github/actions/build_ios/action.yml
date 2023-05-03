@@ -1,0 +1,102 @@
+name: Build iOS application
+description: Builds ipa for iOS
+
+inputs:
+  buildType:
+    description: Whether to build release, firebase or profile version. "release" for release version, "profile" for firebase version.
+    required: true
+  fastlaneCertificatesSSHPrivateKey:
+    description: "private ssh key for fastlane certificates repo"
+    required: true
+  matchPassword:
+    description: "password for match certificates repo"
+    required: true
+  vesdkLicenseVideoIos:
+    description: "vesdk_license_video.ios license file contents"
+    required: true
+  vesdkLicenseVideoAndroid:
+    description: "vesdk_license_video.android license file contents"
+    required: true
+  pesdkLicenseIos:
+    description: "pesdk_license.ios license file contents"
+    required: true
+  pesdkLicenseAndroid:
+    description: "pesdk_license.android license file contents"
+    required: true
+  dartDebugInfoPath:
+    description: "Path for Dart debug info (only for release)"
+    required: false
+    default: "${{ github.workspace }}/ios/debug-info"
+  ENVIRONMENT_CONFIG_PRODUCTION:
+    description: '.env and firebase files config file, bas64-encoded'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
+
+    - name: Extract config
+      run: |
+        echo $ENVIRONMENT_CONFIG_PRODUCTION | base64 -d > config.zip
+        make extract_config
+      shell: bash
+      env:
+        ENVIRONMENT_CONFIG_PRODUCTION: ${{ inputs.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+    - name: Prepare iOS
+      uses: ./.github/actions/prepare_ios
+      with:
+        FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY: ${{ inputs.fastlaneCertificatesSSHPrivateKey }}
+        MATCH_PASSWORD: ${{ inputs.matchPassword }}
+
+    - name: Set licenses
+      uses: ./.github/actions/set_licenses
+      with:
+        vesdkLicenseVideoIos: ${{ inputs.vesdkLicenseVideoIos }}
+        vesdkLicenseVideoAndroid: ${{ inputs.vesdkLicenseVideoAndroid }}
+        pesdkLicenseIos: ${{ inputs.pesdkLicenseIos }}
+        pesdkLicenseAndroid: ${{ inputs.pesdkLicenseAndroid }}
+
+    - name: Set firebase dart envs
+      if: ${{ inputs.buildType == 'profile' }}
+      run: |
+        echo "BUILD_SOURCE_NAME=firebase" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Build release ipa
+      id: build_release
+      if: ${{ inputs.buildType == 'release' }}
+      run: |
+        flutter build ipa \
+          --release \
+          --export-options-plist ios/export-appstore.plist \
+          --dart-define="BUILD_SOURCE_NAME=app store" \
+          --split-debug-info="${{ inputs.dartDebugInfoPath }}" \
+          --obfuscate
+        echo "IPA_PATH=build/ios/ipa/Picnic.ipa" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Build profile ipa
+      id: build_profile
+      if: ${{ inputs.buildType == 'profile' }}
+      run: |
+        flutter build ipa \
+          --profile \
+          --build-number ${{ github.run_number }} \
+          --export-options-plist ios/export-adhoc.plist \
+          --dart-define="BUILD_SOURCE_NAME=${BUILD_SOURCE_NAME}" \
+          --dart-define="BUILD_SOURCE_BRANCH=${BUILD_SOURCE_BRANCH}" \
+          --dart-define="BUILD_SOURCE_COMMIT=${BUILD_SOURCE_COMMIT}"
+        echo "IPA_PATH=build/ios/ipa/Picnic.ipa" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Check Podfile.lock changes
+      run: git diff --exit-code ios/Podfile.lock
+      shell: bash
+
+outputs:
+  ipa-path:
+    description: "Path of built ipa file"
+    value: "${{ steps.build_release.outputs.IPA_PATH }}${{ steps.build_profile.outputs.IPA_PATH }}"

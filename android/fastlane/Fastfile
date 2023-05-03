@@ -1,0 +1,86 @@
+actions_path '../../tools/fastlane/actions'
+
+import('../../tools/fastlane/lanes/lane_deploy_firebase.rb')
+import('../../tools/fastlane/lanes/lane_deploy_google_alpha.rb')
+import('../../tools/fastlane/lanes/lane_deploy_google_play.rb')
+import('../../tools/fastlane/constants.rb')
+
+default_platform(:android)
+
+platform :android do
+
+  desc %{ prepares release notes based on JIRA tickets in commits since the last release,
+uploads the build to firebase and adds a JIRA comment to every mentioned issue with build
+ version, link to bitrise and link to firebase }
+  lane :deploy_firebase do
+    lane_deploy_firebase(
+      platform: 'Android',
+      firebase_testers_group_prefix: "android-testers",
+      android_artifact_type: "APK",
+      android_artifact_path: APK_PATH,
+      app_id: ENV["ANDROID_APP_ID"],
+      jira_url: JIRA_URL,
+      jira_user: JIRA_USER,
+      jira_token: JIRA_ACCESS_TOKEN,
+      firebase_token: ENV["FIREBASE_APP_DISTRIBUTION_SECRET_TOKEN"],
+      build_url: ENV["GITHUB_BUILD_URL"],
+      branch: ENV["GIT_BRANCH"] || git_branch,
+      jira_ticket_prefix: JIRA_TICKET_PREFIX,
+      pull_request_title: ENV['PULL_REQUEST_TITLE'],
+      pull_request_number: ENV['PULL_REQUEST_NUMBER'],
+    )
+  end
+
+  desc %{ prepares release for google play }
+  lane :deploy_google_alpha do
+    lane_deploy_google_alpha(
+      android_artifact_path: "../build/app/outputs/bundle/release/app-release.aab",
+    )
+  end
+
+  desc %{ promotes latest alpha build to production }
+  lane :deploy_google_play do
+    lane_deploy_google_play
+  end
+
+  desc %{ checks current version in google play alpha }
+  lane :check_google_play_version do
+    local_version = sh("cider version")
+    local_version_code = local_version.split('+')[1].to_i
+    puts 'local version code: ' + local_version_code.to_s
+    json_key = ENV["PICNIC_GOOGLE_PLAY_KEY_DATA"]
+    json_key = Base64.decode64(json_key)
+    largest_code = 0
+    ['alpha', 'beta', 'production'].map { |track|
+      version_code = google_play_track_version_codes(
+        json_key_data: json_key,
+        track: track,
+      ).first
+
+      if version_code.to_i > largest_code.to_i
+        largest_code = version_code.to_i
+      end
+    }
+    if local_version_code <= largest_code
+      UI.user_error!(
+        'current version code is smaller or equal to the latest one in google play: local: ' + local_version_code.to_s + " - google play: " + largest_code.to_s
+      )
+    end
+  end
+
+  desc %{verifies aab and metadata using fastlane deliver and checks for common errors}
+  lane :verify_build_in_google_play do
+    json_key = ENV["PICNIC_GOOGLE_PLAY_KEY_DATA"]
+    json_key = Base64.decode64(json_key)
+
+    supply(
+      validate_only: true,
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_aab: false,
+      skip_upload_apk: true,
+      track: 'alpha',
+      json_key_data: json_key,
+      skip_upload_changelogs: true,
+      )
+  end
+end

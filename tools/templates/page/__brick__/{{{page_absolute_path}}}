@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:{{{app_package}}}/core/utils/mvp_extensions.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presentation_model_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presenter_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{initial_params_file_name}}}';
+
+class {{page_name}} extends StatefulWidget with HasInitialParams {
+
+  const {{page_name}}({
+    super.key,
+    required this.initialParams,
+  });
+
+  @override
+  final {{initial_params_name}} initialParams;
+
+  @override
+  State<{{page_name}}> createState() => _{{page_name}}State();
+}
+
+class _{{page_name}}State extends State<{{page_name}}>
+    with PresenterStateMixinAuto<{{view_model_name}}, {{presenter_name}}, {{page_name}}> {
+
+  @override
+  Widget build(BuildContext context) => const Scaffold(
+      body: Center(
+        child: Text("{{page_name}}\n(NOT IMPLEMENTED YET)"),
+      ),
+    );
+
+}

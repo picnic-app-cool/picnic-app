@@ -1,0 +1,31 @@
+PODS:
+  - Flutter (1.0.0)
+  - ReCaptcha (1.6.0):
+    - ReCaptcha/Core (= 1.6.0)
+  - ReCaptcha/Core (1.6.0)
+  - recaptcha_verification (0.0.1):
+    - Flutter
+    - ReCaptcha (= 1.6)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - recaptcha_verification (from `.symlinks/plugins/recaptcha_verification/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ReCaptcha
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  recaptcha_verification:
+    :path: ".symlinks/plugins/recaptcha_verification/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  ReCaptcha: d493ed256054a7b6a7eabcaf0b47ec9a8f42a16e
+  recaptcha_verification: 54c33ff37b57ca85fa300c5dd7a8964f4c6b2bf9
+
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+
+COCOAPODS: 1.11.3

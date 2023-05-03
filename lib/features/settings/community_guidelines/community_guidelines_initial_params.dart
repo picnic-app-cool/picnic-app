@@ -1,0 +1,3 @@
+class CommunityGuidelinesInitialParams {
+  const CommunityGuidelinesInitialParams();
+}

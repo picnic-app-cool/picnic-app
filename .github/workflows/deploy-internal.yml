@@ -1,0 +1,45 @@
+name: ▶️ Deploy internal tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 23 * * 0-6" # time in UTC // 23:00 sunday-saturday
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trigger-deploy:
+    uses: ./.github/workflows/reusable-deploy-internal.yml
+    secrets: inherit
+
+  widgetbook:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Build widgetbook web
+        run: |
+          flutter create . --org com.ambertech.amber --project-name picnic_app --platform=web
+          rm -rf test/widget_test.dart
+          flutter build web -t widgetbook/main.dart --profile
+        shell: bash
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1
+        with:
+          publish-dir: build/web
+        env:
+          NETLIFY_SITE_ID: 832f0f55-66a7-4fa7-9027-9e0f42cbf6a1
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}

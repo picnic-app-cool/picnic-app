@@ -1,0 +1,39 @@
+name: use_case
+description: Create use case and failure classes
+
+# The following defines the version and build number for your brick.
+# A version number is three numbers separated by dots, like 1.2.34
+# followed by an optional build number (separated by a +).
+version: 0.1.0+1
+
+# The following defines the environment for the current brick.
+# It includes the version of mason that the brick requires.
+environment:
+  mason: ">=0.1.0-dev.26 <0.1.0"
+
+# Variables specify dynamic values that your brick depends on.
+# Zero or more variables can be specified for a given brick.
+# Each variable has:
+#  * a type (string, number, boolean, enum, or array)
+#  * an optional short description
+#  * an optional default value
+#  * an optional list of default values (array only)
+#  * an optional prompt phrase used when asking for the variable
+#  * a list of values (enums only)
+vars:
+  root_folder_path:
+    type: string
+    description: root folder path to project where main pubspec.yaml is located
+    default: /Users/andrzejchm/Developer/project-name
+    prompt: "ABSOLUTE path to project's root directory: "
+
+  use_case_name:
+    type: string
+    description: UseCase name
+    default: LogInUseCase
+    prompt: "UseCase name:"
+
+  feature_name:
+    type: string
+    description: "What is the name of the feature? Leave blank if it should be in core package"
+    prompt: "Feature name (in snake_case), leave blank if it should be in 'core' package"

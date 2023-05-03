@@ -1,0 +1,232 @@
+name: ~REUSABLE Deploy release candidate builds
+
+on:
+  workflow_call:
+    inputs:
+      disable_deploy:
+        description: Disable deploying to Testflight, Google Play beta and GCS bucket. Useful for testing
+        default: false
+        required: false
+        type: boolean
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  ARTIFACT_RETENTION_DAYS: 1 # we don't expose them, only pass between jobs
+  BUILD_SOURCE_BRANCH: ${{ github.ref || github.head_ref }}
+  BUILD_SOURCE_COMMIT: ${{ github.sha }}
+
+jobs:
+  testflight-ios:
+    timeout-minutes: 45
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: write # to add and push tags
+
+    env:
+      MATCH_KEYCHAIN_PASSWORD: build
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }} # to fetch latest commit from the current branch (useful when we bump version)
+
+      - name: Build iOS
+        id: build
+        uses: ./.github/actions/build_ios
+        with:
+          buildType: "release"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Check version
+        run: |
+          bundle exec fastlane check_testflight_version
+        env:
+          PICNIC_IOS_KEY_ISSUER_ID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          PICNIC_IOS_KEY_ID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          PICNIC_APPSTORECONNECT_API_KEY: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+        working-directory: ios
+
+      - name: Validate build
+        run: |
+          bundle exec fastlane verify_build_in_app_store
+        env:
+          PICNIC_IOS_KEY_ISSUER_ID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          PICNIC_IOS_KEY_ID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          PICNIC_APPSTORECONNECT_API_KEY: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+        working-directory: ios
+
+      - name: Deploy to testflight
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_testflight
+        env:
+          PICNIC_IOS_KEY_ISSUER_ID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          PICNIC_IOS_KEY_ID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          JIRA_ACCESS_TOKEN: ${{ secrets.JIRA_ACCESS_TOKEN }}
+          PICNIC_APPSTORECONNECT_API_KEY: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+        working-directory: ios
+
+  google-play-alpha-android:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+    permissions:
+      contents: write # to add and push tags
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }} # to fetch latest commit from the current branch (useful when we bump version)
+
+      - name: Build Android
+        id: build
+        uses: ./.github/actions/build_android
+        with:
+          buildType: "release"
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          androidKeystoreFileData: ${{ secrets.PICNIC_ANDROID_KEYSTORE_FILE_DATA }}
+          androidStorePassword: ${{ secrets.PICNIC_ANDROID_STORE_PASSWORD }}
+          androidKeyAlias: ${{ secrets.PICNIC_ANDROID_KEY_ALIAS }}
+          androidKeyPassword: ${{ secrets.PICNIC_ANDROID_KEY_PASSWORD }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Check version
+        run: |
+          bundle exec fastlane check_google_play_version
+        env:
+          PICNIC_GOOGLE_PLAY_KEY_DATA: ${{ secrets.PICNIC_GOOGLE_PLAY_KEY_DATA }}
+        working-directory: android
+
+      - name: Validate build
+        run: |
+          bundle exec fastlane verify_build_in_google_play
+        env:
+          PICNIC_GOOGLE_PLAY_KEY_DATA: ${{ secrets.PICNIC_GOOGLE_PLAY_KEY_DATA }}
+        working-directory: android
+
+      - name: Deploy to google play alpha
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_google_alpha
+        env:
+          PICNIC_GOOGLE_PLAY_KEY_DATA: ${{ secrets.PICNIC_GOOGLE_PLAY_KEY_DATA }}
+        working-directory: android
+
+  build-macos:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }} # to fetch latest commit from the current branch (useful when we bump version)
+
+      - name: Build MacOS
+        id: build
+        uses: ./.github/actions/build_macos
+        with:
+          buildType: "release"
+          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          appstoreConnectAPIKey: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+          IOSKeyID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          IOSKeyIssuerID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          skipFileChangeChecks: true
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos
+          path: ${{ steps.build.outputs.dmg-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  build-windows:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - windows
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }} # to fetch latest commit from the current branch (useful when we bump version)
+
+      - name: Build Windows
+        id: build
+        uses: ./.github/actions/build_windows
+        with:
+          buildType: "release"
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows
+          path: ${{ steps.build.outputs.zip-path }}
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+          if-no-files-found: error
+
+  upload-desktop:
+    timeout-minutes: 10
+    runs-on:
+      - self-hosted
+      - linux # we need strictly linux runners for credential-less GCS authorization (known as ADC)
+    permissions: {}
+
+    strategy:
+      matrix:
+        include:
+          - os: macos
+            name: picnic-app.dmg
+          - os: windows
+            name: picnic-app-windows.zip
+
+    needs:
+      # matrix usage is not supported here, so we just wait both of them
+      - build-macos
+      - build-windows
+
+    if: ${{ !inputs.disable_deploy }}
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.os }}
+
+      - name: Upload to bucket
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: ${{ matrix.name }}
+          destination: picnic-frontend-releases-public/release-candidate/

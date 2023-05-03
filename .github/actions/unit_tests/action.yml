@@ -1,0 +1,19 @@
+name: Screenshot Tests
+description: Set up all required tools
+inputs:
+  workingDir:
+    description: 'working dir in which to perform checks'
+    required: true
+  name:
+    description: 'name for this run'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Run unit tests
+      shell: bash
+      working-directory: ${{ inputs.workingDir }}
+      run: |
+        flutter pub global activate junitreport
+        flutter test -x golden --timeout=6m --dart-define=isCI=true --reporter=compact

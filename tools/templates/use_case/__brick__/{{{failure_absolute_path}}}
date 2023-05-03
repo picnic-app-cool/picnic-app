@@ -1,0 +1,24 @@
+import 'package:{{{app_package}}}/core/domain/model/displayable_failure.dart';
+
+class {{failure_name}} implements HasDisplayableFailure {
+  // ignore: avoid_field_initializers_in_const_classes
+  const {{failure_name}}.unknown([this.cause]) : type = {{failure_name}}Type.unknown;
+
+  final {{failure_name}}Type type;
+  final Object? cause;
+
+  @override
+  DisplayableFailure displayableFailure() {
+    switch (type) {
+      case {{failure_name}}Type.unknown:
+        return DisplayableFailure.commonError();
+    }
+  }
+
+  @override
+  String toString() => '{{failure_name}}{type: $type, cause: $cause}';
+}
+
+enum {{failure_name}}Type {
+  unknown,
+}

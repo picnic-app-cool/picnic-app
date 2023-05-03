@@ -1,0 +1,131 @@
+name: ~Deploy Testflight/Google Play Alpha (deprecated)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false # we don't want to abort releases
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy-release-candidate:
+    uses: ./.github/workflows/reusable-deploy-release-candidate.yml
+    secrets: inherit
+
+  version:
+    timeout-minutes: 10
+    runs-on:
+      - self-hosted
+      - linux
+    permissions:
+      contents: write # to update pubspec.yaml and push tags
+      pull-requests: write # to create PR -> develop
+    needs:
+      - deploy-release-candidate
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.PAT_COMMIT_MAIN }}"
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Parse current version from pubspec.yaml
+        id: current_version
+        run: |
+          VERSION_FULL=$(cider version)
+          echo "VERSION_FULL=${VERSION_FULL}" >> $GITHUB_OUTPUT
+
+      - name: Bump version
+        run: |
+          cider bump build
+
+      - name: Parse upcomming version from pubspec.yaml
+        id: upcoming_version
+        run: |
+          VERSION_FULL=$(cider version)
+          echo "VERSION_FULL=${VERSION_FULL}" >> $GITHUB_OUTPUT
+
+      - name: Commit updated pubspec.yaml
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: pubspec.yaml
+          message: "[skip ci] bump version to ${{ steps.upcoming_version.outputs.VERSION_FULL }}"
+          push: true
+
+      - name: Create tags
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/" + process.env.TAG_IOS,
+              sha: context.sha,
+            })
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/" + process.env.TAG_ANDROID,
+              sha: context.sha,
+            })
+        env:
+          TAG_IOS: Picnic-iOS-${{ steps.current_version.outputs.VERSION_FULL }}
+          TAG_ANDROID: Picnic-Android-${{ steps.current_version.outputs.VERSION_FULL }}
+
+      - name: Create a PR -> develop
+        if: ${{ github.ref_name == 'main' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: context.ref,
+              base: "develop",
+              title: `${process.env.VERSION} release: ${context.ref.split('/')[2]} -> develop`,
+              maintainer_can_modify: true,
+            })
+        env:
+          VERSION: ${{ steps.current_version.outputs.VERSION_FULL }}
+
+  deploy-internal:
+    uses: ./.github/workflows/deploy-internal.yml
+    secrets: inherit
+    needs:
+      - version
+
+  notify-failed:
+    timeout-minutes: 2
+    runs-on:
+      - self-hosted
+      - linux
+    if: ${{ failure() }}
+    needs:
+      - deploy-release-candidate
+
+    steps:
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: sa-devops@picnic.zone
+          password: ${{ secrets.NOTIFY_EMAIL_PASSWORD }}
+          subject: Frontend release failed
+          to: frontend@picnic.zone
+          cc: devops@picnic.zone,qa@picnic.zone,all-openg@picnic.zone
+          from: GitHub Actions
+          body: |
+            Release candidate failed :(
+            Check out ${{ env.GITHUB_BUILD_URL }} for more info.

@@ -1,0 +1,75 @@
+name: ▶️ Restart Jira checks
+
+on:
+  schedule:
+    - cron: "13 * * * 1-5" # time in UTC // every hour on monday-friday
+    - cron: "13 */6 * * 0,6" # time in UTC // every 6 hours on saturday-sunday
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  restart-jira-workflows:
+    timeout-minutes: 10
+    runs-on:
+      - ubuntu-latest
+    permissions:
+      actions: write # to list and restart
+      pull-requests: read # to check PR
+
+    steps:
+      - name: Restart failed check-jira.yml workflow runs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const opts = github.rest.actions.listWorkflowRuns.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: process.env.WORKFLOW_ID,
+              status: "failure",
+            })
+
+            const workflow_runs = await github.paginate(opts)
+
+            for (const workflow_run of workflow_runs) {
+              if (workflow_run.pull_requests.length == 0) {
+                continue
+              }
+
+              pr = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: workflow_run.pull_requests[0].number,
+              })
+
+              // skip closed PRs
+              if (pr.data.state != "open") {
+                continue
+              }
+
+              // skip drafts
+              if (pr.data.draft) {
+                continue
+              }
+
+              // skip outdated runs
+              if (workflow_run.head_sha != pr.data.head.sha) {
+                continue
+              }
+
+              console.log(`Restarting workflow ${workflow_run.html_url}`)
+
+              try {
+                await github.rest.actions.reRunWorkflowFailedJobs({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: workflow_run.id,
+                })
+              } catch {
+                console.log(`Failed restarting workflow ${workflow_run.html_url}`)
+              }
+            }
+        env:
+          WORKFLOW_ID: check-jira.yml

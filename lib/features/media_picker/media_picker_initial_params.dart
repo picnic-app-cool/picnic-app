@@ -1,0 +1,3 @@
+class MediaPickerInitialParams {
+  const MediaPickerInitialParams();
+}

@@ -1,0 +1,3 @@
+class PhotoEditorInitialParams {
+  const PhotoEditorInitialParams();
+}

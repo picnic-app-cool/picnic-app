@@ -1,0 +1,63 @@
+name: Prepare MacOS build
+description: Set up all required tools for macos build
+inputs:
+  FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY:
+    description: "private ssh key for fastlane certificates repo"
+    required: true
+  MATCH_PASSWORD:
+    description: "password for match certificates repo"
+    required: true
+  MATCH_KEYCHAIN_PASSWORD:
+    description: "Password for temporary keychain"
+    default: "build"
+
+runs:
+  using: composite
+  steps:
+    - name: Flutter precache
+      run: |
+        flutter precache --macos
+      shell: bash
+      working-directory: packages/picnic-desktop-app/macos
+
+    - name: Run ssh-agent
+      uses: webfactory/ssh-agent@v0.6.0
+      with:
+        ssh-private-key: |
+          ${{ inputs.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+
+    - name: Install ruby dependencies via bundler for macOS
+      if: ${{ runner.os == 'macOS' }} # it is required only to build macOS app
+      run: |
+        bundle install
+      working-directory: packages/picnic-desktop-app/macos
+      shell: bash
+
+    - name: Prepare keychain
+      shell: bash
+      run: |
+        export MATCH_KEYCHAIN_NAME=${{ runner.temp }}/build
+        echo "MATCH_KEYCHAIN_NAME=${{ runner.temp }}/build" >> $GITHUB_ENV
+        bundle exec fastlane run create_keychain path:"${MATCH_KEYCHAIN_NAME}" password:"${MATCH_KEYCHAIN_PASSWORD}" default_keychain:"true" timeout:"0" unlock:"true"
+      env:
+        MATCH_KEYCHAIN_PASSWORD: "${{ inputs.MATCH_KEYCHAIN_PASSWORD }}"
+      working-directory: packages/picnic-desktop-app/macos
+
+    - name: Prepare fastlane certificates
+      shell: bash
+      run: |
+        git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
+        bundle exec fastlane prepare_certificates
+      env:
+        MATCH_PASSWORD: "${{ inputs.MATCH_PASSWORD }}"
+      working-directory: packages/picnic-desktop-app/macos
+
+    - name: Pod repo update
+      shell: bash
+      working-directory: packages/picnic-desktop-app/macos
+      run: pod repo update
+
+    - name: Install appdmg
+      shell: bash
+      run: npm install -g appdmg

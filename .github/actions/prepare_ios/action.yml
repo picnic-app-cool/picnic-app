@@ -1,0 +1,48 @@
+name: Prepare iOS build
+description: Set up all required tools for ios build
+inputs:
+  FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY:
+    description: 'private ssh key for fastlane certificates repo'
+    required: true
+  MATCH_PASSWORD:
+    description: 'password for match certificates repo'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Flutter precache
+      run: |
+        flutter precache --ios
+      shell: bash
+      working-directory: ios
+
+    - name: Run ssh-agent
+      uses: webfactory/ssh-agent@v0.6.0
+      with:
+        ssh-private-key: |
+          ${{ inputs.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+
+    - name: Prepare keychain
+      shell: bash
+      run: |
+        export MATCH_KEYCHAIN_NAME=${{ runner.temp }}/build
+        echo "MATCH_KEYCHAIN_NAME=${{ runner.temp }}/build" >> $GITHUB_ENV
+        bundle exec fastlane run create_keychain path:"${MATCH_KEYCHAIN_NAME}" password:"${MATCH_KEYCHAIN_PASSWORD}" default_keychain:"true" timeout:"0" unlock:"true"
+      working-directory: ios
+
+    - name: Prepare fastlane certificates
+      shell: bash
+      run: |
+        git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
+        bundle exec fastlane prepare_certificates
+      env:
+        MATCH_PASSWORD: "${{ inputs.MATCH_PASSWORD }}"
+      working-directory: ios
+
+    - name: Pod repo update
+      shell: bash
+      working-directory: ios
+      run: pod repo update
+

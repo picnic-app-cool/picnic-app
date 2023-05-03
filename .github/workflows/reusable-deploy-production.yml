@@ -1,0 +1,96 @@
+name: Deploy production builds
+
+on:
+  workflow_call:
+    inputs:
+      disable_deploy:
+        description: Disable deploying to AppStore, Google Play and GCS bucket. Useful for testing
+        default: false
+        required: false
+        type: boolean
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  ARTIFACT_RETENTION_DAYS: 1 # we don't expose them, only pass between jobs
+  BUILD_SOURCE_BRANCH: ${{ github.ref || github.head_ref }}
+  BUILD_SOURCE_COMMIT: ${{ github.sha }}
+
+jobs:
+  appstore-ios:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - macosx
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 100 # to make release notes work
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Promote latest testflight build
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_pending_release
+        env:
+          PICNIC_IOS_KEY_ISSUER_ID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+          PICNIC_IOS_KEY_ID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+          JIRA_ACCESS_TOKEN: ${{ secrets.JIRA_ACCESS_TOKEN }}
+          PICNIC_APPSTORECONNECT_API_KEY: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+        working-directory: ios
+
+  google-play-android:
+    timeout-minutes: 20
+    runs-on:
+      - self-hosted
+      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+    permissions:
+      contents: read # to checkout
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 100 # to make release notes work
+
+      - name: Prepare environment
+        uses: ./.github/actions/prepare
+
+      - name: Promote latest google play alpha build
+        if: ${{ !inputs.disable_deploy }}
+        run: |
+          bundle exec fastlane deploy_google_play
+        env:
+          PICNIC_GOOGLE_PLAY_KEY_DATA: ${{ secrets.PICNIC_GOOGLE_PLAY_KEY_DATA }}
+        working-directory: android
+
+  promote-desktop:
+    timeout-minutes: 10
+    runs-on:
+      - self-hosted
+      - linux # we need strictly linux runners for credential-less GCS authorization (known as ADC)
+    permissions: {}
+
+    strategy:
+      matrix:
+        include:
+          - os: macos
+            name: picnic-app.dmg
+          - os: windows
+            name: picnic-app-windows.zip
+
+    steps:
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Promote latest build
+        run: |
+          gsutil cp gs://picnic-frontend-releases-public/release-candidate/${{ matrix.name }} gs://picnic-frontend-releases-public/${{ matrix.name }}

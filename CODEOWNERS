@@ -1,0 +1,86 @@
+#The team
+# @andrzejchm @wal33d006 @ValeryPonomarenko @zorgonred @canergulaypicnic @wkozak90
+# @aherrarte2019037 @TimurMukhortov @nkhoudor @aherrarte2019037 @mdccxv
+
+# GENERAL
+
+# top-level owners of everything else in the app
+* @picnic-app-cool/front-end
+
+CODEOWNERS @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+.github/ @picnic-app-cool/devops @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+**/fastlane/**  @picnic-app-cool/devops @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+analysis_options.yaml @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+/android/ @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+/ios/ @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+/macos/ @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+Makefile @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+README.md @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+tools/ @picnic-app-cool/devops @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+scripts/ @picnic-app-cool/devops @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+pubspec.* @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+# FEATURES
+
+**/features/** @picnic-app-cool/front-end
+
+**/features/chat/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+
+**/features/circles/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/create_circle/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+
+**/features/discover/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+
+**/features/feed/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+
+**/features/onboarding/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/posts/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+
+**/features/profile/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/push_notifications/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/in_app_notifications/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/deeplink_handler/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/reports/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/seeds/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+**/features/settings/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+packages/picnic-desktop-app/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+
+# GENERAL FEATURES
+
+**/features/app_init/** @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+**/features/auth/** @picnic-app-cool/code-leaders @picnic-app-cool/front-end
+
+**/features/avatar_selection/** @picnic-app-cool/front-end
+
+**/features/image_picker/** @picnic-app-cool/front-end
+
+**/features/photo_editor/** @picnic-app-cool/front-end
+
+**/features/video_editor/** @picnic-app-cool/front-end
+
+**/features/debug/** @picnic-app-cool/front-end
+
+**/features/main/** @picnic-app-cool/front-end
+
+widgetbook/** @picnic-app-cool/front-end

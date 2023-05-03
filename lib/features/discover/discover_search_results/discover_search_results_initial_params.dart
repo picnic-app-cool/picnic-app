@@ -1,0 +1,3 @@
+class DiscoverSearchResultsInitialParams {
+  const DiscoverSearchResultsInitialParams();
+}

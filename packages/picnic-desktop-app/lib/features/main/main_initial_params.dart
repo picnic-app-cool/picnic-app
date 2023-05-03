@@ -1,0 +1,3 @@
+class MainInitialParams {
+  const MainInitialParams();
+}

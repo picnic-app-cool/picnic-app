@@ -1,0 +1,3 @@
+class ImagePickerInitialParams {
+  const ImagePickerInitialParams();
+}

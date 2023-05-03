@@ -1,0 +1,149 @@
+include: package:lint/strict.yaml
+
+analyzer:
+  exclude:
+    - '.fvm/**'
+    - "lib/**/*.g.dart"
+    - "lib/**/*.freezed.dart"
+    - "lib/**/*.gql.dart"
+    - "lib/generated/**/*.dart"
+    - "lib/generated/*.dart"
+    - "build/**"
+    - "lib/**.gr.dart"
+    - "lib/**.config.dart"
+    - "tools/**" #here every tool should implement their own analyzer
+    - "packages/**" #here every package should implement their own analyzer
+    - "ios/**"
+    - "android/**"
+    - ".dart_tool/**"
+    - "test/coverage_helper_test.dart"
+    - "lib/localization/generated/**"
+
+  language:
+    strict-raw-types: true
+
+  strong-mode:
+    implicit-dynamic: true
+  errors:
+    invalid_annotation_target: warning
+    argument_type_not_assignable: warning
+    field_initializer_not_assignable: warning
+    map_value_type_not_assignable: warning
+    invalid_assignment: warning
+    return_of_invalid_type_from_closure: warning
+    return_of_invalid_type: warning
+    unnecessary_new: warning
+    sort_pub_dependencies: ignore
+    avoid_setters_without_getters: ignore
+    import_of_legacy_library_into_null_safe: warning
+    avoid_single_cascade_in_expression_statements: ignore
+    null_aware_in_logical_operator: warning
+    missing_required_param: warning
+    implicit_dynamic_map_literal: ignore
+    prefer_single_quotes: ignore
+    missing_return: warning
+    always_declare_return_types: warning
+    override_on_non_overriding_member: warning
+    annotate_overrides: warning
+    avoid_relative_lib_imports: warning
+    avoid_empty_else: warning
+    avoid_returning_null_for_future: warning
+    empty_statements: warning
+    always_put_control_body_on_new_line: warning
+    always_require_non_null_named_parameters: warning
+    avoid_renaming_method_parameters: warning
+    avoid_void_async: warning
+    parameter_assignments: warning
+    constant_identifier_names: warning
+    unawaited_futures: warning
+    non_constant_identifier_names: warning
+    only_throw_errors: warning
+    exhaustive_cases: warning
+    always_use_package_imports: warning
+    missing_enum_constant_in_switch: warning
+    prefer_const_constructors: warning
+    depend_on_referenced_packages: ignore
+    use_setters_to_change_properties: ignore
+    avoid_classes_with_only_static_members: ignore
+    avoid_positional_boolean_parameters: warning
+    avoid_dynamic_calls: warning
+    require_trailing_commas: warning
+    #TODO re-enable those rules 1 by 1 - GS-4958
+    no_leading_underscores_for_local_identifiers: ignore #TODO GS-4958
+    use_colored_box: ignore #TODO GS-4958
+    prefer_final_locals: ignore #TODO GS-4958
+    use_super_parameters: ignore #TODO GS-4958
+    unnecessary_to_list_in_spreads: ignore #TODO GS-4958
+
+linter:
+  rules:
+    - avoid_unnecessary_containers
+    - no_logic_in_create_state
+    - constant_identifier_names
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - annotate_overrides
+    - await_only_futures
+    - camel_case_types
+    - cancel_subscriptions
+    - close_sinks
+    - comment_references
+    - control_flow_in_finally
+    - empty_statements
+    - always_declare_return_types
+    - avoid_empty_else
+    - avoid_relative_lib_imports
+    - avoid_returning_null_for_future
+    - always_put_control_body_on_new_line
+    - always_require_non_null_named_parameters
+    - avoid_renaming_method_parameters
+    - avoid_void_async
+    - parameter_assignments
+    - file_names
+    - empty_constructor_bodies
+    - unnecessary_parenthesis
+    - unnecessary_overrides
+    - use_rethrow_when_possible
+    - always_use_package_imports
+    - avoid_init_to_null
+    - avoid_null_checks_in_equality_operators
+    - avoid_return_types_on_setters
+    - avoid_shadowing_type_parameters
+    - avoid_types_as_parameter_names
+    - camel_case_extensions
+    - curly_braces_in_flow_control_structures
+    - empty_catches
+    - library_names
+    - library_prefixes
+    - no_duplicate_case_values
+    - null_closures
+    - omit_local_variable_types
+    - prefer_adjacent_string_concatenation
+    - prefer_collection_literals
+    - prefer_conditional_assignment
+    - prefer_contains
+    - prefer_equal_for_default_values
+    - prefer_final_fields
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_generic_function_type_aliases
+    - prefer_if_null_operators
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_iterable_whereType
+    - prefer_single_quotes
+    - prefer_spread_collections
+    - recursive_getters
+    - slash_for_doc_comments
+    - type_init_formals
+    - unawaited_futures
+    - unnecessary_const
+    - unnecessary_new
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_this
+    - unrelated_type_equality_checks
+    - use_function_type_syntax_for_parameters
+    - valid_regexps
+    - exhaustive_cases
+    - require_trailing_commas

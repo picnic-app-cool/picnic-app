@@ -1,0 +1,4 @@
+enum PollImageSide {
+  left,
+  right,
+}

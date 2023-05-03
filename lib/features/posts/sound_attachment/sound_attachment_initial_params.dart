@@ -1,0 +1,3 @@
+class SoundAttachmentInitialParams {
+  const SoundAttachmentInitialParams();
+}

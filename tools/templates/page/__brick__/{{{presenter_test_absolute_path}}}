@@ -1,0 +1,28 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{initial_params_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presentation_model_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presenter_file_name}}}';
+
+import '../mocks/{{{feature}}}_mock_definitions.dart';
+
+void main() {
+  late {{presentation_model_name}} model;
+  late {{presenter_name}} presenter;
+  late Mock{{navigator_name}} navigator;
+
+  test(
+    'sample test',
+        () {
+      expect(presenter, isNotNull); // TODO implement this
+    },
+  );
+
+  setUp(() {
+    model = {{presentation_model_name}}.initial(const {{initial_params_name}}());
+    navigator = Mock{{navigator_name}}();
+    presenter = {{presenter_name}}(
+      model,
+      navigator,
+    );
+  });
+}

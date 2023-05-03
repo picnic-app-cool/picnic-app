@@ -1,0 +1,23 @@
+name: clean_architecture_lints
+environment:
+  sdk: '>=2.16.0 <3.0.0'
+
+dependency_overrides:
+  custom_lint:
+    path: ../../../packages/dart-custom-lint/packages/custom_lint
+
+  custom_lint_builder:
+    path: ../../../packages/dart-custom-lint/packages/custom_lint_builder
+  recase: 4.0.0
+
+dependencies:
+  collection:
+  # we will use analyzer for inspecting Dart files
+  analyzer: 5.3.1
+  analyzer_plugin: 0.11.2
+  # custom_lint_builder will give us tools for writing lints
+  custom_lint_builder: 0.0.16
+
+
+dev_dependencies:
+  lint: 1.8.2

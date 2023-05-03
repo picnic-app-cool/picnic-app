@@ -1,0 +1,105 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:mac)
+
+platform :mac do
+  lane :prepare_certificates do
+    match(
+      type: "development",
+      readonly: true,
+    )
+    match(
+      type: "developer_id",
+      readonly: true,
+    )
+    match(
+      type: "appstore",
+      readonly: true,
+    )
+    mac_intermediate_cert
+  end
+
+  desc %{ adds new device's name and udid to the certificate and
+ recreates the provisioning profiles }
+  lane :add_macos_device do
+    device_name = prompt(text: "Enter device's name (i.e: Andrew's macbook pro): ")
+    device_udid = prompt(text: "Enter device's UDID: ")
+    register_device(
+      name: device_name,
+      platform: "mac",
+      udid: device_udid,
+    )
+    refresh_profiles
+  end
+
+  desc %{ recreates the provisioning profiles for development, adhoc and appstore only if number
+of registered devices have changed }
+  lane :refresh_profiles do
+    match(
+      type: "development",
+      force_for_new_devices: true,
+      )
+
+    match(
+      type: "developer_id",
+      force_for_new_devices: true,
+      )
+
+    match(
+      type: "appstore",
+      force_for_new_devices: true,
+      )
+  end
+
+  desc %{notarizes macOS build to make it available for everyone to install without any gatekeeper errors}
+  lane :notarize_macos do |options|
+    build_type = options[:build_type] || 'release'
+    build_type = build_type.downcase.capitalize
+    UI.message "build type for notarization is '" + build_type + "'"
+    api_key = Base64.decode64(ENV["PICNIC_APPSTORECONNECT_API_KEY"])
+    app_store_connect_api_key(
+      key_id: ENV['PICNIC_IOS_KEY_ID'],
+      issuer_id: ENV['PICNIC_IOS_KEY_ISSUER_ID'],
+      key_content: api_key,
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    notarize(
+      package: "../build/macos/Build/Products/" + build_type + "/picnic_desktop_app.app",
+      bundle_id: "com.ambertech.amber.desktop",
+      print_log: true,
+      verbose: true,
+    )
+  end
+
+  desc %{notarizes macOS DMG image to make it available for everyone to install without any gatekeeper errors}
+  lane :notarize_macos_dmg do
+    api_key = Base64.decode64(ENV["PICNIC_APPSTORECONNECT_API_KEY"])
+    app_store_connect_api_key(
+      key_id: ENV['PICNIC_IOS_KEY_ID'],
+      issuer_id: ENV['PICNIC_IOS_KEY_ISSUER_ID'],
+      key_content: api_key,
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    notarize(
+      package: "../picnic-app.dmg",
+      bundle_id: "com.ambertech.amber.desktop",
+      print_log: true,
+      verbose: true,
+    )
+  end
+end

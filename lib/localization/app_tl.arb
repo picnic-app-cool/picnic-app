@@ -1,0 +1,705 @@
+{
+  "@@locale": "tl",
+  "appTitle": "Picnic",
+  "invalidInputError": "Di -wastong input",
+  "appSubtitle": "sumisid sa mga pamayanan ✌️",
+  "username": "Username",
+  "likes": "kagustuhan",
+  "followers": "mga tagasunod",
+  "views": "tanawin",
+  "commonErrorTitle": "Error",
+  "commonErrorMessage": "May mali, mangyaring subukang muli",
+  "resendOTPButton": "Magpareserba",
+  "okAction": "OK",
+  "getStartedAction": "Magsimula",
+  "alreadyHaveAnAccountMessage": "Mayroon nang account?",
+  "logInAction": "mag log in",
+  "yourUsernameTitle": "ang iyong username",
+  "yourUsernameDescription": "Ang iyong natatanging pangalan na natuklasan!",
+  "usernameHint": "ang iyong username",
+  "fullNameHint": "Ang iyong buong pangalan",
+  "bioHint": "bio",
+  "continueAction": "Magpatuloy",
+  "usernameTakenErrorMessage": "Ang username na ito ay mayroon na",
+  "loginPhoneFormTitle": "Mag -login sa piknik",
+  "loginPhoneFormDescription": "Ipasok ang iyong numero ng telepono o mag -sign in gamit ang pagpipilian sa ibaba",
+  "registerPhoneFormTitle": "gumawa ng isang account",
+  "registerPhoneFormDescription": "Ipasok ang iyong numero ng telepono o mag -sign up gamit ang isa sa mga pagpipilian sa ibaba",
+  "orLabel": "o",
+  "signUpWithButtonTitle": "Mag-sign up gamit ang {method}",
+  "@signUpWithButtonTitle": {
+    "placeholders": {
+      "method": {}
+    }
+  },
+  "signInWithButtonTitle": "Mag -sign in kasama {method}",
+  "@signInWithButtonTitle": {
+    "placeholders": {
+      "method": {}
+    }
+  },
+  "tipPaginationFormat": "Tip {index} ng {total}",
+  "@tipPaginationFormat": {
+    "placeholders": {
+      "index": {},
+      "total": {}
+    }
+  },
+  "codeVerificationTitle": "Verification Code",
+  "codeVerificationDescription": "Ipasok ang code na na -text namin sa iyo",
+  "codeVerificationHint": "Verification Code",
+  "codeVerificationError": "Ang ipinasok na code ay hindi wasto",
+  "languagesListFetchError": "error sa pagkuha ng mga wika",
+  "languageSelectFormTitle": "Piliin ang Wika",
+  "languageSelectFormDescription": "Anong lengguwahe ninyo?",
+  "languageSelectError": "Mangyaring pumili ng isang wika",
+  "yourAgeTitle": "Edad mo",
+  "yourAgeDescription": "Mangyaring ipasok ang iyong edad",
+  "ageHint": "Edad mo",
+  "ageTooYoungError": "Dapat kang higit sa 13 upang magamit ang app",
+  "privateProfileEditButton": "Ibahin",
+  "editRulesTitle": "i -edit ang mga patakaran",
+  "editRulesHint": "I -edit ang mga patakaran dito",
+  "privateProfileSaveButton": "mga post",
+  "settings": "Mga setting",
+  "settingsLanguage": "Wika",
+  "settingsBlockedList": "Naka -block na listahan",
+  "settingsCommunityGuidelines": "Mga Patnubay sa Komunidad",
+  "settingsInviteFriends": "mag-imbita ng mga kaibigan",
+  "settingsGetVerified": "patotohanan",
+  "settingsNotificationSettings": "Mga Setting ng Abiso",
+  "settingsPrivacySettings": "settings para sa pagsasa-pribado",
+  "settingsShareProfile": "ibahagi ang profile",
+  "linkTabAction": "link",
+  "photoTabAction": "Larawan",
+  "videoTabAction": "video",
+  "uploadTabAction": "Mag -upload",
+  "pollTabAction": "poll",
+  "thoughtTabAction": "naisip",
+  "notificationsFormTitle": "Paganahin ang mga notification",
+  "notificationsFormDescription": "Kailangan namin ang iyong pahintulot upang magpadala ng mga abiso",
+  "enableNotificationsAction": "Sige! gawin natin",
+  "profilePhotoFormBeforePhotoSelectionTitle": "ang iyong larawan",
+  "profilePhotoFormBeforePhotoSelectionDescription": "Pumili ng isang profile pic",
+  "profilePhotoFormAddPhotoAction": "Magdagdag ng larawan ng profile",
+  "profilePhotoFormSkipAction": "Laktawan para sa ngayon 🥲",
+  "congratsFormTitle": "Maligayang pagdating sa piknik",
+  "congratsFormDescription": "Congrats! Pumasok ka. Hanapin natin ang ilang mga kahanga -hangang bilog para sumali ka.",
+  "offerStateSellLabel": "baguhin ang presyo",
+  "offerStateBuyLabel": "Bumili ka {price} melon",
+  "@offerStateBuyLabel": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "offerStateRejectedLabel": "tinanggihan",
+  "offerStatePurchasedLabel": "binili",
+  "offerStateSellSecondaryLabel": "Kanselahin ang alok",
+  "offerStateBuySecondaryLabel": "tanggihan",
+  "profilePhotoFormAfterPhotoSelectionTitle": "Hoy napakarilag",
+  "profilePhotoFormAfterPhotoSelectionDescription": "Hinahayaan magpatuloy sa app",
+  "profilePhotoFormChangePhotoAction": "Baguhin ang imahe ng profile",
+  "postsTabTitle": "Mga post",
+  "cirlcesTabTitle": "mga bilog",
+  "collectionsTabTitle": "mga koleksyon",
+  "royaltyTabTitle": "Royalty",
+  "rulesTabTitle": "Mga Batas",
+  "localeSelectionEmptyLanguageSearchLabel": "Walang nahanap na wika",
+  "localeSelectionEmptyCountrySearchLabel": "Walang nahanap na bansa",
+  "localeSelectionSystemLocaleLabel": "Batay sa mga setting",
+  "circlesGroupingsSelectCirclesHint": "{count, plural, =1{ piliin {count} bilog} other{ piliin {count} bilog}}",
+  "@circlesGroupingsSelectCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsSelectMoreCirclesHint": "piliin {count} Marami pang mga bilog",
+  "@circlesGroupingsSelectMoreCirclesHint": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circlesGroupingsAppBarTitle": "Pumili ng mga bilog",
+  "circlesGroupingsDescription": "Ang mga bilog ay ang mga tahanan 🏠 para sa anumang interesado ka. Ito ang gagawa ng iyong curated para sa iyo pahina ✌️",
+  "circleGroupingsFetchError": "Paglo -load ng mga pangkat ng bilog",
+  "shareLinkTitle": "magbahagi ng isang link",
+  "newCircleAction": "Bagong bilog",
+  "changeLinkAction": "Baguhin ang link",
+  "postAction": "Mag -post",
+  "tapToPasteDescriptiveAction": "👆 Tapikin upang i -paste ang link",
+  "newIdeasLabel": "need ideas? try these:",
+  "socialMediaLabel": "Ang pamagat ng social media ay napupunta dito",
+  "tapToPasteLabel": "Tapikin ang i -paste",
+  "countrySelectFormTitle": "Piliin ang bansa",
+  "countrySelectFormDescription": "saan ka nakabase?",
+  "countrySelectFormInputHint": "Piliin ang bansa",
+  "imagePickerAlertTitle": "Piliin ang pagpipilian",
+  "imagePickerAlertOptionCamera": "camera",
+  "imagePickerAlertOptionGallery": "Gallery",
+  "seedDialogTitle": "Ito ay isang binhi!",
+  "seedDialogDescription": "Ang mga buto ay ang pera na ginamit sa mga bilog",
+  "circlesRulesTitleOne": "Paano pinamamahalaan ang mga bilog? ✨",
+  "circlesRulesTitleTwo": "Ano ang mga buto?  🌱",
+  "circlesRulesTitleThree": "Paano nahalal ang mga direktor?",
+  "circlesRulesDescriptionOne": "Ang direktor ng bilog ay gumagawa ng mga patakaran at humirang ng mga moderator. Ang mga may hawak ng binhi ay bumoto para sa direktor ng bilog.",
+  "circlesRulesDescriptionTwo": "Ang mas maraming mga buto na mayroon ka, mas maraming mga boto na maaari mong palayasin upang gumawa ng mga desisyon sa bilog (pagpili ng direktor, paglikha ng mga bagong buto, at higit pa!)",
+  "circlesRulesDescriptionThree": "Ang isang direktor ng halalan ay nangyayari sa pagtatapos ng bawat buwan kung saan ang mga miyembro ng bilog ay maaaring bumoto upang mapanatili ang kasalukuyang direktor o pumili ng isang bagong direktor. Kung mayroon kang karamihan ng mga buto, maaari mong panatilihin ang pagboto upang mapanatili ang iyong sarili bilang direktor.",
+  "chatTabFeed": "chat feed",
+  "chatTabCircles": "ang aking mga bilog",
+  "circleChatSettingsSeeFeedAction": "tingnan ang feed",
+  "circleChatSettingsCirclePageAction": "pahina ng bilog",
+  "chatNewMessageTitle": "bagong mensahe",
+  "chatNewMessageInputHint": "Magdagdag ng isang tugon... 💭",
+  "chatNewMessageSearchInputHint": "maghanap",
+  "chatNewMessageSearchInputLabelText": "Magpadala ng mensahe kay:",
+  "editProfileTitle": "Ibahin ang profile",
+  "ruleSelectionTitle": "Sino ang makakakuha ng mga pagpapasya?",
+  "ruleSelectionRadioLabelOne": "Direktor LED - Kinokontrol ko kung sino ang makakaboto, at kung gaano karaming mga boto ang nakukuha nila ",
+  "ruleSelectionRadioLabelTwo": "Demokratikong LED - Lahat ng mga miyembro ng bilog ay nakakakuha ng 1 boto sa lahat ng mga pagpapasya",
+  "ruleSelectionNote": "Tandaan: Kapag ang bilog ay demokratiko, hindi ito ma -convert pabalik sa isang direktor na LED. Pinangunahan ng Direktor ang mga bilog na auto convert sa demotratic kung walang mga may hawak ng binhi sa isang halalan ng direktor.",
+  "confirmSelectionAction": "kumpirmahin ang pagpili",
+  "chatTabDms": "dms",
+  "letsGoAction": "Tayo na",
+  "circleRulesTitle": "Mga panuntunan sa bilog",
+  "circleRulesDescription": "Magtakda ng mga patakaran sa kung paano mo nais na pamahalaan ang iyong bilog!🌟",
+  "chatNewMessageSearchInputHintGroup": "Pangalan ng Pangkat (Opsyonal)",
+  "congratsSuccessTitle": "Congrats!",
+  "congratsSuccessDescription": "Gumawa ka ng isang bagong bilog! Anyayahan ang ilang mga kaibigan at gawin itong isang pagdiriwang 🎉",
+  "awesomeAction": "Galing",
+  "yesterday": "Kahapon",
+  "daysAgo": " {days} araw na ang nakakaraan",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "monthAgo": "Buwan na ang nakakaraan",
+  "monthsAgo": " {months} mga buwan na nakalipas",
+  "@monthsAgo": {
+    "placeholders": {
+      "months": {}
+    }
+  },
+  "yearAgo": "Taon na ang nakalilipas",
+  "yearsAgo": " {years} Taong nakalipas",
+  "@yearsAgo": {
+    "placeholders": {
+      "years": {}
+    }
+  },
+  "accountExistsWithDifferentCredentialErrorMessage": "Nag -log ka sa account na ito sa iba’t ibang tagapagbigay ng serbisyo, mangyaring gamitin ito sa halip",
+  "invalidCredentialErrorMessage": "Di-wastong mga kredensyal",
+  "userDisabledErrorMessage": "Ang ibinigay na gumagamit ay hindi pinagana",
+  "userNotFoundErrorMessage": "Walang gumagamit na may ganyan",
+  "invalidVerificationCodeErrorMessage": "Hindi wastong code ng pag -verify",
+  "followButtonActionTitle": "Sundin",
+  "glitterbombButtonActionTitle": "Glitterbomb",
+  "followingButtonActionTitle": "sumusunod",
+  "blockedButtonActionTitle": "Na -block",
+  "dmTitle": "dm",
+  "followersTitle": "mga tagasunod",
+  "blockedListTitle": "Naka -block na listahan",
+  "unblockedAction": "unblock",
+  "followingAction": "sumusunod",
+  "viewSeedsAction": "Tingnan ang mga buto",
+  "chatAlertTitleMessageOnNotSent": "hindi ipinadala ang mensahe",
+  "chatAlertButtonTitle": "Sundin",
+  "chatSettingsTitle": "Mga setting ng chat",
+  "followAction": "Sundin",
+  "chatAlertBarTitle": "kahilingan ng mensahe",
+  "chatAlertBarDescription": "wala sa iyong sumusunod",
+  "muteAction": "pipi",
+  "unmuteAction": "i-unmute",
+  "chatAlertDescription": "Ang taong ito ay hindi tumatanggap ng mga mensahe mula sa mga taong hindi nila sinusunod",
+  "melonsDescription": "{count, plural, =1{{count} melon} other{{count} melons}}",
+  "@melonsDescription": {
+    "description": "Ginamit upang ipakita ang bilang ng mga melon",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "discoveryCircleResults": "Mga resulta ng bilog",
+  "discoverySliceResults": "Mga resulta ng hiwa",
+  "discoveryUserResults": "Mga resulta ng gumagamit",
+  "discoverySearch": "maghanap",
+  "joinButtonActionTitle": "Sumali",
+  "joinAction": "Sumali",
+  "joinedButtonActionTitle": "sumali",
+  "discoveryDiscover": "matuklasan",
+  "textInputCounterLabel": "{currentLength}/{maxLength} Katangian",
+  "@textInputCounterLabel": {
+    "placeholders": {
+      "currentLength": {},
+      "maxLength": {}
+    }
+  },
+  "chatSearch": "Paghahanap sa chat",
+  "reportFormAppBarTitle": "ulat",
+  "reportFormInputSelectLabel": "Iulat ang dahilan",
+  "reportFormInputBodyLabel": "Ipahayag ang iyong ulat dito",
+  "reportFormAlertTitle": "Piliin ang Dahilan",
+  "reportFormButtonLabel": "Magpadala ng dahilan",
+  "reportReasonSpam": "spam",
+  "reportReasonGraphicContent": "Graphic content",
+  "reportReasonSexualContent": "sekswal na nilalaman",
+  "reportReasonOther": "iba pa",
+  "sendPushNotificationTitle": "Magpadala ng abiso sa push sa bilog",
+  "pastePostHintText": "I -paste ang link ng post dito",
+  "notificationBodyHintText": "Teksto ng Katawan ng Abiso",
+  "sendPushNotificationInfo": "Ang koponan ng Circle Mod ay maaaring magpadala ng isang abiso sa pagtulak sa lahat sa bilog araw -araw.",
+  "sendPushNotificationAction": "Magpadala ng abiso sa push",
+  "closeAction": "malapit",
+  "replyAction": "Sumagot",
+  "copyTextAction": "Kopyahin ang teksto",
+  "deleteMessageAction": "tanggalin ang mensahe",
+  "createCircleTitle": "Lumikha ng isang bagong bilog",
+  "createCircleTextInputNameHint": "Ano ang tawag sa bilog na ito?",
+  "createCircleTextInputDescriptionHint": "Ano ang bilog?",
+  "createCircleTextInputGroupHint": "Pumili ng isang pangkat",
+  "createCircleTextInputLanguageLabel": "Pangunahing wika",
+  "createCircleButtonLabel": "Lumikha ng bagong bilog",
+  "membersLabel": "mga miyembro",
+  "trendingPosts": "🔥 mga poste ng trending",
+  "circleWithTopic": "{topic} mga bilog",
+  "@circleWithTopic": {
+    "placeholders": {
+      "topic": {}
+    }
+  },
+  "stepFormat": "Hakbang {step}",
+  "@stepFormat": {
+    "placeholders": {
+      "step": {}
+    }
+  },
+  "sliceWithTopic": "{topic} hiwa",
+  "@sliceWithTopic": {
+    "placeholders": {
+      "topic": {}
+    }
+  },
+  "notAuthenticatedErrorMessage": "Hindi ka napatunayan",
+  "missingUsernameErrorMessage": "Nakalimutan mong punan ang username",
+  "notEnoughCirclesSelectedErrorMessageFormat": "hindi na kailangang pumili ng hindi bababa sa {count} mga bilog",
+  "@notEnoughCirclesSelectedErrorMessageFormat": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membersCount": " {count, plural, =1{{count} member} other{{count} mga miyembro}}",
+  "@membersCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "votesCountFormat": " {count, plural, =1{{count} vote} other{{count} boto}}",
+  "@votesCountFormat": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "onlineCount": " {count} Online",
+  "@onlineCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "percentFormat": " {percent} %",
+  "@percentFormat": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "reportAction": "ulat",
+  "circleSettingsTitle": "Mga Setting ng Bilog",
+  "inviteUsersAction": "Anyayahan",
+  "banUsersAction": "Ban",
+  "modsTabAction": "mods",
+  "reportsTabAction": "ulat",
+  "bannedListTabAction": "Ipinagbabawal na listahan",
+  "search": "maghanap",
+  "chooseAction": "Piliin",
+  "leaveAction": "umalis",
+  "modsAndDirectorTitle": "Mga Mods at Direktor",
+  "addAction": "Idagdag",
+  "muteGroupTitle": "Mute Group 🔇",
+  "tapToIgnoreNotificationsDescription": "Tapikin upang huwag pansinin ang mga abiso",
+  "groupNameLabel": "Pangalan ng grupo",
+  "addMembers": "Magdagdag ng mga miyembro",
+  "leaveGroupTitle": "umalis sa grupo",
+  "leaveGroupAction": "Oo, umalis",
+  "leaveGroupMessage": "Sigurado ka bang nais mong iwanan ang pangkat na ito? Pagkatapos umalis ay hindi ka maaaring sumali hanggang sa idagdag ka ng direktor.",
+  "yesAction": "Oo",
+  "noAction": "hindi",
+  "deleteGroupAction": "Tanggalin ang pangkat",
+  "deleteGroupTitle": "Tanggalin ang pangkat",
+  "deleteGroupMessage": "Sigurado ka bang nais mong tanggalin ang chat ng pangkat na ito? ang gawaing ito ay hindi pwedeng baguhin.",
+  "removeUserTitle": "Alisin ang gumagamit",
+  "removeUserAction": "Oo, alisin",
+  "removeUserMessage": "Sigurado ka bang nais mong alisin ang sumusunod na gumagamit sa chat ng pangkat na ito?",
+  "settingsLabel": "Mga setting",
+  "communityGuidelinesAppBarTitle": "Mga Patnubay sa Komunidad",
+  "communityGuidelinesHeadingOne": "Mga patnubay sa komunidad ng piknik",
+  "communityGuidelinesHeadingTwo": "Igalang ang mga miyembro ng komunidad ng piknik",
+  "communityGuidelinesHeadingThree": "Igalang ang piknik",
+  "communityGuidelinesSectionOne": "Ang Picnic ay isang platform ng social media na nakabase sa komunidad na nagpoproseso ng sarili sa paglikha ng malusog at nakakaengganyo na mga komunidad para sa lahat ng interes. Sa Picnic, inuuna namin ang isang kapaligiran na ligtas, kasama, magkakaibang, at bukas. Tiyakin ng aming mga patnubay sa komunidad na ang bawat gumagamit ay may ligtas na karanasan upang tunay na lumikha at magbahagi. Nilikha ng mga patnubay sa komunidad upang matulungan mo kaming mapangalagaan at protektahan ang kahanga -hangang komunidad na ito. Kami ay nakatuon sa mga patnubay na ito at sumusunod sa batas. Inaasahan namin na ikaw din. Ang hindi pagsunod sa mga patnubay na ito ay maaaring magresulta sa tinanggal na nilalaman, na pinagbawalan o iba pang mga paghihigpit. Aalisin namin ang anumang nilalaman o pagbawalan ng mga account na lumalabag sa aming mga alituntunin sa komunidad. Kung nakatagpo ka ng isang gumagamit, mensahe, o server na lilitaw upang masira ang aming mga alituntunin sa komunidad, mangyaring iulat ito [dito.](report)",
+  "communityGuidelinesSectionTwo": "Huwag abalahin ang iba o ayusin, itaguyod, o makilahok sa panliligalig. \n Hindi mag -ayos, magsulong, o makilahok sa pagsasalita ng poot. Hindi katanggap -tanggap na salakayin ang isang tao o isang pamayanan batay sa Nagbabanta na saktan ang iba. \n hindi gumamit ng piknik upang ayusin, itaguyod, o suportahan ang marahas na ekstremismo. \n hindi ay hindi sekswal sa anumang paraan. Hindi ka maaaring magbahagi ng nilalaman o mga link na naglalarawan sa mga bata sa isang pornograpiya, sekswal na nagmumungkahi, o marahas na paraan. \n Hindi magbabahagi ng sekswal na nilalaman na hindi nagbabahagi ng nilalaman na niluluwalhati o nagtataguyod ng pagpapakamatay o pagpipinsala sa sarili. \n Hindi magbahagi ng tunay na media na naglalarawan ng gore , labis na karahasan, o pinsala sa hayop. Hindi awtorisadong pag -access sa account ng ibang gumagamit, network, o system. \n share lamang ang iyong nilalaman o mayroon kang karapatang ibahagi.",
+  "communityGuidelinesSectionThree": "Huwag gumamit ng piknik sa spam, manipulahin ang pakikipag -ugnayan, o makagambala sa karanasan ng ibang tao. Mapanganib na kalakal (baril, bala, gamot, at kinokontrol na sangkap). Mag-uulat ka sa pagpapatupad ng batas. \n Hindi gumamit ng mga self-bots o user-bots. \n Hindi linlangin ang mga koponan ng suporta ng piknik.",
+  "communityGuidelinesSectionFour": "Tulungan na panatilihing ligtas at masigla ang komunidad. Kung nakakita ka ng anumang aktibidad na lumalabag sa mga patnubay na ito, mangyaring iulat ito sa amin [dito.] (Mag-ulat) Salamat sa paggawa ng iyong bahagi upang matulungan kaming panatilihing ligtas at malusog na lugar ang piknik.",
+  "languageAppBarTitle": "Wika",
+  "unbanAction": "Kaluluwa",
+  "banAction": "Banggan",
+  "bannedUsersLabel": "Ipinagbabawal na mga gumagamit",
+  "sellSeedsHoldings": "Mga hawak na buto",
+  "sellSeedsTotalPrice": "Kabuuang presyo",
+  "sellSeedsMelonAmount": "halaga ng melon",
+  "sellSeedsNumber": "bilang",
+  "sellSeedsSeedNumbers": "mga numero ng binhi",
+  "signOutAction": "Mag -sign out",
+  "thankYouTitle": "Salamat!",
+  "reportConfirmationMessage": "Matagumpay mong isinumite ang iyong ulat, ang aming mga ahente ay gagawa ng aksyon sa lalong madaling panahon.",
+  "seedsTitle": "Mga buto",
+  "electionVoteTitle": "Oras ng halalan!",
+  "electionVoteDescription": "Mayroong patuloy na halalan ngayon. Tapikin dito upang simulan ang pagboto para sa isang bagong direktor",
+  "electionVoteAction": "Bumoto para sa Direktor",
+  "electionVoteTimeHint": "countdown",
+  "electionVoteTimeValue": "29 araw, 23 oras, 59 mins",
+  "electionVoteTimeTitle": "Halalan - 32% ng mga miyembro ang bumoto",
+  "seedsDescriptionHint": "Ang mga buto ay mga tiyak na mga token na nagbibigay sa iyo ng mga boto \n upang pamahalaan ang bilog (magpasya ng mga patakaran, pumili ng mga direktor, \n at higit pa!).",
+  "seedHoldersTitle": "mga may hawak ng binhi",
+  "sellSeedsSendOffer": "Magpadala ng alok",
+  "remainingTimeLabel": "{remainingTime} natitira ang oras",
+  "@remainingTimeLabel": {
+    "placeholders": {
+      "remainingTime": {}
+    }
+  },
+  "chatReply": "tumugon sa {username}",
+  "@chatReply": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "seedAmount": "{amount} Mga buto",
+  "@seedAmount": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "sellSeeds": "magbenta ng mga buto",
+  "signOutConfirmation": "Sigurado ka bang nais mong mag -sign out sa piknik?",
+  "signOutButtonLabel": "Oo, mag -sign out",
+  "notificationTimeDescription": "Hanggang sa maaari mong itulak muli",
+  "newSeedAction": "Galing",
+  "confirmAction": "Kumpirmahin",
+  "permissionLabel": "pahintulot",
+  "addNewModsLabel": "Magdagdag ng mga bagong mod",
+  "modLabel": "MOD",
+  "editModLabel": "I -edit ang mod",
+  "addAsModLabel": "Idagdag bilang mod",
+  "addModLabel": "Magdagdag ng mod",
+  "seedsInfoTitle": "Ano ang mga buto",
+  "seedsInfoDescription": "Hinahayaan ka ng mga binhi na gawin ang mga cool na bagay sa mga pamayanan tulad ng boto sa mga patakaran at pumili ng mga bagong direktor! \n \n you ay maaaring kumita ng mga buto sa pamamagitan ng pag -post ng mataas na kalidad na nilalaman, pakikipag -ugnay sa mga chat, at nagsisilbing may -ari.",
+  "seedsDoneAction": "Tapos na",
+  "notificationAppBarTitle": "Mga abiso",
+  "notificationPostComment": "Nag -iwan ng komento sa iyong post",
+  "notificationFollowing": "nagsimulang sundan ka",
+  "notificationGlitterbomb": "binobomba ka",
+  "notificationPostReaction": "nag-react sa iyong post",
+  "notificationCommentReaction": "nag-react sa iyong komento",
+  "notificationMessageReply": "tumugon sa iyong mensahe",
+  "notificationMessage": "nagmessage sa iyo",
+  "commentChatAppTitle": "mga komento",
+  "circleElectionVoteForDirector": "Bumoto para sa Direktor",
+  "circleElectionSelectSingleDirector": "Pumili ng isang Direktor",
+  "circleElectionSelectDirector": "Piliin ang Direktor",
+  "circleElectionChangeVoteForDirector": "Baguhin ang boto sa ibang direktor",
+  "shareAction": "ibahagi",
+  "blockAction": "I -block",
+  "circleElectionYouVoted": "ikaw ay bumoto",
+  "circleElectionSeedsVoted": "Bumoto ang mga buto",
+  "circleElectionDirectorElection": "Direktor ng Direktor",
+  "modSettingTitle": "setting ng mod",
+  "modPermissionsAction": "Mga pahintulot ng MOD",
+  "removeModAction": "Alisin ang mod",
+  "removeModDescription": "Sigurado ka bang nais mong alisin ang mod na ito?",
+  "removeModPositiveAction": "Oo, alisin",
+  "modRulesTitle": "Mga panuntunan sa mod",
+  "modRulesDescription": "Trabaho mo na panatilihing ligtas at masaya na lugar ang bilog na ito para sa lahat! Narito kung ano ang maaari mong gawin:",
+  "modRuleOne": " • 24 oras o perma pagbabawal ng sinumang gumagamit mula sa bilog na ito",
+  "modRuleTwo": " • Tanggalin ang mga mensahe sa Circle Chat",
+  "modRuleThree": " • Ang tagalikha ng bilog ay maaaring magdagdag at mag -alis ng mga mode ng bilog",
+  "modRuleFour": " • Hikayatin ang mga tao na magkaroon ng masayang pag -uusap",
+  "modRuleFive": " • Upang tanggalin ang mga post mula sa Circle Feed, humawak ng 8 segundo",
+  "modRuleSix": " • Ang buong koponan ng Mod ay maaaring magpadala ng 1 itulak na pinagsama bawat araw",
+  "modRulesThankYouNote": "Salamat sa pagiging kamangha -manghang. Laging huwag mag -atubiling dm @picnic sa anumang mga isyu",
+  "permanentBanChoice": "permanenteng",
+  "dayBanChoice": "24 na oras",
+  "circleElectionSeedHolders": "mga may hawak ng binhi",
+  "newSeedsTitle": "{count, plural, =1{{count} Bagong binhi!} other{{count} Mga bagong buto!}}",
+  "@newSeedsTitle": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "newSeedsDescription": "{count, plural, =1{{count} Ang mga bagong binhi ay naidagdag sa bilog na ito!} other {{count} Ang mga bagong buto ay naidagdag sa bilog na ito!}}",
+  "@newSeedsDescription": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "circleElectionYouHaveSeedInCircle": "mayroon ka {seeds} Mga buto sa bilog na ito",
+  "@circleElectionYouHaveSeedInCircle": {
+    "placeholders": {
+      "Mga buto": {}
+    }
+  },
+  "circleElectionDemocraticCircle": "Ito ay isang demokratikong bilog",
+  "circleElectionSeedFund": "Pondo ng Binhi",
+  "notificationSettingsTitle": "Mga Setting ng Mga Abiso",
+  "likesNotificationAction": "kagustuhan",
+  "commentsNotificationAction": "Mga komento",
+  "newFollowersNotificationAction": "mga bagong tagasunod",
+  "mentionsNotificationAction": "binabanggit",
+  "directMessagesNotificationAction": "direktang mensahe",
+  "postFromAccountsYouFollowNotificationAction": "Mag -post mula sa mga account na sinusunod mo",
+  "circleChatsNotificationAction": "Circle Chats",
+  "groupChatsNotificationAction": "Mga chat sa pangkat",
+  "banUserLabel": "Bawal ang gumagamit",
+  "manageSpamTitle": "Pamahalaan ang spam",
+  "inviteByUsernameAction": "Anyayahan sa pamamagitan ng username",
+  "copyInviteLinkAction": "Kopyahin ang link ng imbitasyon",
+  "removeReasonHint": "Ang dahilan ng pag -alis ng post",
+  "removeReasonTitle": "Pag -alis ng dahilan",
+  "countdownValue": "{days} araw, {hours} oras, {minutes} Mins",
+  "@countdownValue": {
+    "placeholders": {
+      "days": {},
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "countdownHint": "countdown",
+  "inviteAction": "mag-anyaya",
+  "addMemberTitle": "Magdagdag ng Miyembro",
+  "reportedPostTitle": "naiulat na post",
+  "reportedCommentTitle": "iniulat na komento",
+  "removePostAction": "Alisin ang post",
+  "removeCommentAction": "alisin ang komento",
+  "privacySettingsTitle": "settings para sa pagsasa-pribado",
+  "deleteAccountAction": "tanggalin ang account",
+  "privacySettingsOnlyReceiveDmsFromPeopleYouFollow": "Tumatanggap lamang ng mga DM mula sa mga taong sinusunod mo",
+  "deleteAction": "Oo, tanggalin",
+  "deleteAccountMessage": "Sigurado ka bang nais mong tanggalin ang iyong account?",
+  "reportActionsLabel": "mag -ulat ng mga aksyon",
+  "deleteAccountTitle": "tanggalin ang account",
+  "enterTheCodeMessage": "Ipasok ang code na na -text namin sa iyo",
+  "leavingReasonMessage": "nag -iiwan ng dahilan",
+  "verificationCodeHint": "Verification Code",
+  "whyAreYouLeavingHint": "Bakit mo kami iniiwan?",
+  "deleteAccountReasonHaveAnotherAccount": "Mayroon na akong isa pang account",
+  "deleteAccountReasonTakingBreak": "nagpapahinga",
+  "deleteAccountReasonOther": "iba pa",
+  "selectReasonHint": "Piliin ang Dahilan",
+  "fileTooBigErrorMessage": "Masyadong malaki ang laki ng file",
+  "shareThoughtTitle": "magbahagi ng isang pag -iisip",
+  "thoughtTextFieldHint": "ano ang nasa isip mo? 🤔",
+  "additionalTextFieldHint": "Magdagdag pa dito",
+  "leaveChat": "Iwanan ang chat",
+  "leaveChatMessage": "Sigurado ka bang nais mong iwanan ang chat na ito?",
+  "savedPostsTitle": "mga post",
+  "collectionCardPostCountLabel": "{count} Mga post",
+  "@collectionCardPostCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "getVerifiedContentTitle": "Patotohanan",
+  "getVerifiedContentSubTitle": "Mga kinakailangan sa pag -verify sa piknik",
+  "getVerifiedContentEnd": " Kung natutugunan mo ang mga kinakailangan sa itaas at mga kinakailangan sa pagiging karapat -dapat. Ang paggamit ng maling o maling impormasyon sa panahon ng proseso ng pag -verify ay aalisin ang iyong na -verify na badge at maaaring humantong sa karagdagang pagkilos upang hindi paganahin ang iyong account.",
+  "getVerifiedIntro1": "Bilang karagdagan sa pagsunod sa Picnic’s ",
+  "getVerifiedIntro2": "Mga Tuntunin ng Paggamit",
+  "getVerifiedIntro3": "at ",
+  "getVerifiedIntro4": "Mga Patnubay sa Komunidad",
+  "getVerifiedIntro5": ", Tinitingnan namin ang mga sumusunod na kadahilanan kapag sinusuri ang mga account sa piknik upang matukoy kung natutugunan nila ang aming pamantayan sa pag -verify:",
+  "areVerifiedUsers": "Opisyal Picnic Ang mga influencer na may higit sa 100K mga tagasunod sa anumang platform ay maaaring mapatunayan",
+  "applyForVerification": "Mag -apply para sa pagpapatunay",
+  "getVerifiedContentList": "⭐Authentic: \n Ang iyong account ay dapat na kumatawan sa isang tunay na tao, nakarehistrong negosyo o nilalang \n \n ⭐Popular: \n ang iyong account ay dapat magkaroon ng isang makabuluhang bilang ng mga tunay na tagasunod at pananaw \n \n⭐active: \n ang iyong account ay dapat Aktibo araw -araw \n \n⭐circles: \n dapat kang maging aktibo sa at isang malaking nag -aambag sa hindi bababa sa isang bilog Gumagamit: \n haba ng oras sa piknik ay isinasaalang -alang kapag nagpapatunay ng mga gumagamit \n",
+  "getVerifiedContentList2": "⭐Picnic Influencers: \n",
+  "approveAction": "aprubahan",
+  "rejectAction": "tanggihan",
+  "searchSoundTitle": "Mga tunog ng paghahanap",
+  "glitterboombAlertTitle": "Boom! 🎉",
+  "glitterboombAlertDescription": "{username} Glitterbombed ka ✨",
+  "@glitterboombAlertDescription": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "glitterboombAlertButtonAction": "Bumalik ang Glitterbomb",
+  "soundAttachmentItemCaption": "tunog na nakakabit sa teksto",
+  "applyForVerificationAction": "Mag -apply para sa pagpapatunay",
+  "deleteCollectionActionTitle": "Tanggalin ang koleksyon",
+  "deleteCollectionConfirmationAction": "Oo, tanggalin",
+  "deleteCollectionDialogTitle": "Tanggalin ang koleksyon",
+  "deleteCollectionDialogDescription": "Sigurado ka bang nais mong tanggalin ang koleksyon na ito? ang gawaing ito ay hindi pwedeng baguhin.",
+  "deleteAccountChallenge": "i -type \"delete\" upang kumpirmahin",
+  "delete": "tanggalin",
+  "editAction": "I -edit",
+  "saveAction": "i -save",
+  "groupChatSubtitle": "{countMembers, plural, =1{{countMembers} miyembro, {countOnlineMembers} Online} other{{countMembers} mga miyembro {countOnlineMembers} Online}}",
+  "@groupChatSubtitle": {
+    "placeholders": {
+      "countMembers": {},
+      "countOnlineMembers": {}
+    }
+  },
+  "noContent": "Walang laman",
+  "insufficientSeeds": "hindi sapat na mga buto",
+  "nothingToShow": "Walang maipakita",
+  "groupChatMoreSubtitle": "{countMembers, plural, =1{{countMembers} miyembro, {countOnlineMembers} Online} other{{countMembers} mga miyembro, {countOnlineMembers} online}}",
+  "@groupChatMoreSubtitle": {
+    "placeholders": {
+      "countMembers": {},
+      "countOnlineMembers": {}
+    }
+  },
+  "shareToTitle": "ibahagi sa",
+  "selectCircleTitle": "Piliin ang Bilog",
+  "circleResultsTitle": "Mga resulta ng bilog",
+  "seeCircleChat": "Tingnan ang Circle Chat",
+  "emptyUserCirclesMessage": "Walang nahanap na bilog sa siguraduhin na sumali ka ng kahit isang bilog o lumikha ng bago",
+  "selectPrimaryLanguageTitle": "Piliin ang Pangunahing Wika",
+  "discoveryInitialHintTitle": "Galugarin",
+  "discoveryInitialHintSubtitle": "Maghanap ng isang bagay",
+  "createCircleTextInputLanguageHint": "Pumili ng isang wika",
+  "createPollTitle": "Lumikha ng poll",
+  "askAQuestionHint": "Magtanong",
+  "chatInvitationMessage": "{username} nagpadala sa iyo ng isang imbitasyon ✨",
+  "@chatInvitationMessage": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "circleDetailsNoRoyaltyTitle": "Wala pang royalty",
+  "circleDetailsNoRoyaltyDescription": "Ang Royalty ay itatalaga sa sandaling umabot ang bilog na ito sa 100 mga miyembro. Patuloy na lumalaki!",
+  "circleDetailsNoRulesTitle": "Wala pang mga patakaran",
+  "circleDetailsNoRulesDescription": "Walang mga patakaran dito!",
+  "director": "direktor",
+  "mod": "MOD",
+  "usersResults": "Mga Resulta ng Mga Gumagamit",
+  "expand": "Palawakin",
+  "uploadingPostMessage": "Pag -upload ng post...",
+  "votesDynamicLabel": "{votes} boto",
+  "@votesDynamicLabel": {
+    "placeholders": {
+      "votes": {
+        "type": "String"
+      }
+    }
+  },
+  "deletePost": "tanggalin ang post",
+  "deletePostConfirmationMessage": "sigurado ka bang gusto mong tanggalin ang post na ito?",
+  "commentsHint": "Mga saloobin? 💭",
+  "languageSelectionTitle": "pagpili ng wika",
+  "leaveCircle": "umalis sa bilog",
+  "leaveCircleConfirmation": "sigurado ka bang gusto mong umalis sa lupong ito?",
+  "languageSelectionInfo": "piliin kung anong wika ang gusto mong unahin ang nilalaman. Ang wika ng app ay magiging kapareho ng wika ng iyong telepono.",
+  "reportedMessage": "ang mensaheng ito",
+  "reportedComment": "ang komentong ito",
+  "reportedLabel": "iniulat",
+  "reportDetailsTitle": "mga detalye ng ulat",
+  "deletedPostDateDynamicLabel": "Ang post na ito ay tinanggal noong {date}",
+  "tapLeftOrRightHint": "tapikin ang kaliwa o kanan",
+  "none": "hindi kilala",
+  "circleRoleMember": "miyembro",
+  "circleRoleModerator": "MOD",
+  "circleRoleDirector": "direktor",
+  "pollVoteLabel": "iyong boto",
+  "deleteWord": "tanggalin ang salita",
+  "deleteWordMessage": "sigurado ka bang gusto mong tanggalin ang salita?",
+  "blacklistedWords": "mga salitang naka-blacklist",
+  "blacklistedWordsButtonConfirmationTitle": "pag-blacklist ng isang salita",
+  "blacklistedWordsInputHint": "ang salita",
+  "blacklistedWordsConfirmationButtonTitle": "magdagdag ng salita sa blacklist",
+  "blacklistedWordsButtonConfirmationMessage": "upang magdagdag ng maraming salita nang sabay-sabay, mangyaring paghiwalayin ang mga ito sa pamamagitan ng kuwit",
+  "likeLabel": "gusto",
+  "unlikeLabel": "no gusto",
+  "commentActionsTitle": "mga aksyon ng komento",
+  "givePermissionToReadMedia": "Bigyan ng pahintulot na basahin ang media",
+  "unSavedProfileInfoTitle": "hindi na-save na impormasyon ng profile",
+  "unSavedProfileInfoMessage": "na-edit mo ang impormasyon sa iyong profile",
+  "unSavedProfileInfoSecondAction": "itapon ang mga pagbabago",
+  "unSavedProfileInfoFirstAction": "i-save ang mga pagbabago",
+  "cancelAction": "kanselahin",
+  "@deletedPostDynamicLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "responbleModLabel": "responsable mod",
+  "circleReasonOther": "Iba pa",
+  "circleReasonSpam": "Spam",
+  "circleReasonSexualContent": "Sekswal na Nilalaman",
+  "circleReasonGraphicContent": "Graphic na Nilalaman",
+  "resolvedReportDateLabel": "nalutas ang ulat na ito noong",
+  "postToCircleAction": "i-post sa bilog",
+  "invitationLinkCopiedMessage": "Nakopya ang link ng imbitasyon sa clipboard!",
+  "noPostsTitle": "wala pang mga post!",
+  "noPostsMessage": "maging ang unang taong mag-post dito",
+  "today": "Ngayon",
+  "usernameContainsSpacesErrorMessage": "hindi dapat maglaman ng mga puwang ang username",
+  "usernameNotLowerCaseErrorMessage": "Ang username ay dapat maging maliit na titik",
+  "goToSettingsAction": "pumunta sa mga setting",
+  "dynamicPermissionTitle": "Naka-off ang {permissionType}",
+  "@dynamicPermissionTitle": {
+    "placeholders": {
+      "permissionType": {
+        "type": "String"
+      }
+    }
+  },
+  "dynamicPermissionDesc": "tiyaking magbigay ng access sa picnic app sa {permissionType} sa iyong mga setting ng smartphone",
+  "@dynamicPermissionDesc": {
+    "placeholders": {
+      "permissionType": {
+        "type": "String"
+      }
+    }
+  },
+  "microphoneLabel": "mikropono",
+  "userBannedMessage": "ikaw ay pinagbawalan",
+  "circleInfo": "impormasyon ng lupon",
+  "info": "impormasyon",
+  "editCircleInfo": "baguhin ang impormasyon ng bilog",
+  "editCircleButtonLabel": "I-save ang mga pagbabago",
+  "noAccesstoGalleryTitle": "walang access sa gallery",
+  "noAccesstoGalleryMessage": "tiyaking bigyan ng access ng picnic app ang iyong gallery sa mga setting ng iyong smartphone",
+  "goToSettings": "pumunta sa mga setting",
+  "createSliceTitle": "lumikha ng bagong hiwa",
+  "sliceOf": "hiwa ng ",
+  "sliceName": "ano ang tawag sa slice na ito?",
+  "sliceDescription": "tungkol saan ang slice?",
+  "slicePrivateHeadline": "pribado 🔒",
+  "slicePrivateDescription": "nakikita pa rin ang mga pribadong hiwa ngunit kailangang imbitahan o aprubahan ang mga miyembro. ",
+  "sliceDiscoverableHeadline": "natutuklasan 👀",
+  "sliceDiscoverableDescription": "Nakakahanap ang mga tao ng hiwa na ito sa pamamagitan ng paghahanap. Ang mga hindi natutuklasang hiwa ay dapat isama sa pamamagitan ng isang link",
+  "reportToCircleOwners": "mag-ulat sa mga may-ari ng lupon",
+  "users": "mga gumagamit",
+  "searchUserLabel": "gumagamit ng paghahanap",
+  "pending": "nakabinbin",
+  "owner": "may-ari",
+  "privateSlice": "pribadong hiniwa",
+  "privateSliceLabel": "ang hiniwang ito ay pribado, mangyaring humingi ng permiso kung gusto mong makita ang hiniwang ito",
+  "tapToSelectCollection": "tapikin upang piliin ang koleksyon",
+  "savedToGeneral": "na-save sa pangkalahatan",
+  "saveToCollection": "i-save sa koleksyon",
+  "createANewCollection": "lumikha ng isang bagong koleksyon",
+  "create": "lumikha",
+  "collectionName": "pangalan ng koleksyon"
+}

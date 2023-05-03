@@ -1,0 +1,3 @@
+class LogConsoleInitialParams {
+  const LogConsoleInitialParams();
+}

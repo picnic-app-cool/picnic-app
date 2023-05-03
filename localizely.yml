@@ -1,0 +1,31 @@
+config_version: 1.0
+project_id: d69d322f-ad4a-4573-bba8-172ea5df3fab
+file_type: flutter_arb
+upload:
+  files:
+    - file: lib/localization/app_en.arb
+      locale_code: en
+download:
+  files:
+    - file: lib/localization/app_en.arb
+      locale_code: en
+    - file: lib/localization/app_de.arb
+      locale_code: de
+    - file: lib/localization/app_es.arb
+      locale_code: es
+    - file: lib/localization/app_fr.arb
+      locale_code: fr
+    - file: lib/localization/app_hi.arb
+      locale_code: hi
+    - file: lib/localization/app_pt.arb
+      locale_code: pt
+    - file: lib/localization/app_tl.arb
+      locale_code: tl
+    - file: lib/localization/app_ko.arb
+      locale_code: ko
+    - file: lib/localization/app_zh.arb
+      locale_code: zh
+    - file: lib/localization/app_ja.arb
+      locale_code: ja
+    - file: lib/localization/app_ka.arb
+      locale_code: ka

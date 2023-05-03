@@ -1,0 +1,102 @@
+##### Labeler ##########################################################################################################
+# Enable "labeler" for your PR that would add labels to PRs based on the paths that are modified in the PR.
+labelPRBasedOnFilePath:
+  '✨chat':
+    - '**/features/chat/**/*'
+  '✨circles':
+    - '**/features/circles/**/*'
+  '✨discover':
+    - '**/features/discover/**/*'
+  '✨feed':
+    - '**/features/feed/**/*'
+  '✨onboarding':
+    - '**/features/onboarding/**/*'
+  '✨posts':
+    - '**/features/posts/**/*'
+  '✨profile':
+    - '**/features/profile/**/*'
+  '✨notifications':
+    - '**/features/push_notifications/**/*'
+  '✨reports':
+    - '**/features/reports/**/*'
+  '✨seeds':
+    - '**/features/seeds/**/*'
+  '✨settings':
+    - '**/features/settings/**/*'
+  '✔️tests':
+    - 'test/**/*'
+
+# Various Flags to control behaviour of the "Labeler"
+labelerFlags:
+  # If this flag is changed to 'false', labels would only be added when the PR is first created and not when existing 
+  # PR is updated.
+  # The default is 'true' which means the labels would be added when PR is updated even if they were removed by the user   
+  labelOnPRUpdates: true
+
+##### Greetings ########################################################################################################
+# Comment to be posted to welcome users when they open their first PR
+firstPRWelcomeComment: >
+  Congrats on your first Pull Request 🎉! Please check out our (Contributing)[CONTRIBUTING.md] guidelines.
+#
+## Comment to be posted to congratulate user on their first merged PR
+#firstPRMergeComment: >
+#  Awesome work, congrats on your first merged pull request!
+#
+## Comment to be posted to on first time issues
+#firstIssueWelcomeComment: >
+#  Thanks for opening your first issue here! Be sure to follow the issue template!
+
+###### IssueLink Adder #################################################################################################
+# Insert Issue (Jira/Github etc) link in PR description based on the Issue ID in PR title.
+insertIssueLinkInPrDescription:
+  # specify the placeholder for the issue link that should be present in the description
+  descriptionIssuePlaceholderRegexp: "^Issue link: (.*)$"
+  matchers:
+    # you can have several matches - for different types of issues
+    # only the first matching entry is replaced
+    jiraIssueMatch:
+      # specify the regexp of issue id that you can find in the title of the PR
+      # the match groups can be used to build the issue id (${1}, ${2}, etc.).
+      titleIssueIdRegexp: (GS-[0-9]{1,5})
+      # the issue link to be added. ${1}, ${2} ... are replaced with the match groups from the
+      # title match (remember to use quotes)
+      descriptionIssueLink: "JIRA Ticket: [${1}](https://picnic-app.atlassian.net/browse/GS-${1})"
+#    docOnlyIssueMatch:
+#      titleIssueIdRegexp: \[(AIRFLOW-X{4})\]
+#      descriptionIssueLink: "`Document only change, no JIRA issue`"
+
+###### Title Validator #################################################################################################
+# Verifies if commit/PR titles match the regexp specified
+#verifyTitles:
+  # Regular expression that should be matched by titles of commits or PR
+#  titleRegexp: ^GS-[0-9]{1,5}.*$
+  # If set to true, it will always check the PR title (as opposed to the individual commits).
+#  alwaysUsePrTitle: true
+  # If set to true, it will only check the commit in case there is a single commit.
+  # In case of multiple commits it will check PR title.
+  # This reflects the standard behaviour of Github that for `Squash & Merge` GitHub
+  # uses the PR title rather than commit messages for the squashed commit ¯\_(ツ)_/¯
+  # For single-commit PRs it takes the squashed commit message from the commit as expected.
+  #
+  # If set to false it will check all commit messages. This is useful when you do not squash commits at merge.
+#  validateEitherPrOrSingleCommitTitle: true
+  # The title the GitHub status should appear from.
+#  statusTitle: "Title Validator"
+  # A custom message to be displayed when the title passes validation.
+#  successMessage: "Validation successful!"
+  # A custom message to be displayed when the title fails validation.
+  # Allows insertion of ${type} (commit/PR), ${title} (the title validated) and ${regex} (the titleRegexp above).
+#  failureMessage: "Wrong ${type} title: ${title}, add JIRA ticket number in the beginning"
+#
+####### PR/Branch Up-To-Date Checker ####################################################################################
+## Check if the branch is up to date with main when certain files are modified
+#checkUpToDate:
+#  # The default branch is "main", change the branch if you want to check against a different target branch
+#  targetBranch: main
+#  files:
+#    # File paths that you want to check for
+#    # In this example, it checks if the branch is up to date when alembic migrations are modified in the PR.
+#    # It helps avoid multiple heads in alembic migrations in a collaborative development project.
+#    - airflow/migrations/*
+#    - airflow/migrations/**/*
+#    - airflow/alembic.ini

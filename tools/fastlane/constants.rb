@@ -1,0 +1,10 @@
+JIRA_URL = "https://picnic-app.atlassian.net"
+JIRA_USER = "ci@picnic.zone"
+JIRA_ACCESS_TOKEN = ENV["JIRA_ACCESS_TOKEN"]
+GIT_BRANCH = ENV["GIT_BRANCH"] || git_branch
+IPA_PATH = "../build/ios/ipa/Picnic.ipa"
+APK_PATH = "../build/app/outputs/flutter-apk/app-profile.apk"
+JIRA_TICKET_PREFIX = "GS"
+IOS_KEY_ID = ENV['PICNIC_IOS_KEY_ID']
+IOS_KEY_ISSUER_ID = ENV['PICNIC_IOS_KEY_ISSUER_ID']
+IOS_APPSTORECONNECT_API_KEY = ENV["PICNIC_APPSTORECONNECT_API_KEY"]

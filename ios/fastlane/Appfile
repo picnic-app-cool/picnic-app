@@ -1,0 +1,3 @@
+app_identifier("com.ambertech.amber")
+apple_id apple_id ENV["APPLE_ID"] || "ci@picnic.zone"
+team_id("23V2CS4649")

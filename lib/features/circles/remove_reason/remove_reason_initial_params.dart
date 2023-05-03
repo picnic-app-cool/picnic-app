@@ -1,0 +1,3 @@
+class RemoveReasonInitialParams {
+  const RemoveReasonInitialParams();
+}

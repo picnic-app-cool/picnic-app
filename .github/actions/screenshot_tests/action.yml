@@ -1,0 +1,23 @@
+name: Screenshot Tests
+description: Set up all required tools
+inputs:
+  workingDir:
+    description: 'working dir in which to perform checks'
+    required: true
+  name:
+    description: 'name for this run'
+    required: true
+  updateGoldens:
+    description: 'should update goldens or not'
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - name: Run screenshot tests
+      working-directory: ${{ inputs.workingDir }}
+      shell: bash
+      run: |
+        flutter pub global activate junitreport
+        flutter test -t golden --timeout=6m ${{ inputs.updateGoldens == 'true' && '--update-goldens' || '' }} --dart-define=isCI=true --reporter=compact
+        
+

@@ -1,0 +1,3 @@
+class SeedsInitialParams {
+  const SeedsInitialParams();
+}
