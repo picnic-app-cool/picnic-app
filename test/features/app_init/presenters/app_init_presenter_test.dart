@@ -14,6 +14,7 @@ import 'package:picnic_app/features/chat/domain/model/id.dart';
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../force_update/mocks/force_update_mocks.dart';
+import '../../profile/mocks/profile_mocks.dart';
 import '../../user_agreement/mocks/user_agreement_mocks.dart';
 import '../mocks/app_init_mock_definitions.dart';
 import '../mocks/app_init_mocks.dart';
@@ -250,8 +251,10 @@ void main() {
       ForceUpdateMocks.shouldShowForceUpdateUseCase,
       UserAgreementMocks.hasUserAgreedToAppsTermsUseCase,
       UserAgreementMocks.acceptAppsTermsUseCase,
+      ProfileMocks.getPrivateProfileUseCase,
       Mocks.getShouldShowCirclesSelectionUseCase,
       Mocks.userStore,
+      Mocks.localStoreRepository,
     );
 
     when(() => Mocks.getShouldShowCirclesSelectionUseCase.execute()).thenAnswer((_) => successFuture(false));

@@ -53,18 +53,7 @@ query(\$userID: String!) {
 String getMyProfileQuery = """
 query() {
   myProfile {
-    ${GqlTemplate().user}
-    followers
-    melonsAmount
-    likes
-    views
-    languages
-    age
-    phone
-    email
-    meta {
-      pendingSteps
-    }
+    ${GqlTemplate().fullUser}
   }
 }
 """;

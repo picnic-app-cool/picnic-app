@@ -11,4 +11,28 @@ profileImage
 createdAt
 shareLink
 ''';
+
+  String get fullUser => '''
+  id
+  username
+  fullName
+  bio
+  email
+  age
+  phone
+  languages
+  likes
+  views
+  languages
+  followers
+  melonsAmount
+  seedsAmount
+  isVerified
+  profileImage
+  createdAt
+  shareLink
+  meta{
+    pendingSteps
+  }
+  ''';
 }

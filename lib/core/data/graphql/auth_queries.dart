@@ -18,16 +18,7 @@ mutation signInWithFirebase(\$credentials: FirebaseAuthInput!) {
         ${includeDebugOption ? _debugOption : ""}
     ) {
         user {
-            id,
-            username,
-            fullName,
-            email,
-            phone,
-            isVerified,
-            languages,
-            melonsAmount,
-            seedsAmount
-            profileImage
+            ${GqlTemplate().fullUser}
         }
         authInfo {
             accessToken
@@ -45,15 +36,7 @@ mutation signUpWithFirebase(\$credentials: FirebaseAuthInput!, \$userInfo: UserS
         ${includeDebugOption ? _debugOption : ""}
     ) {
         user {
-            id,
-            username,
-            fullName,
-            email,
-            phone,
-            isVerified,
-            languages,
-            melonsAmount,
-            seedsAmount
+            ${GqlTemplate().fullUser}
         }
         authInfo {
             accessToken
@@ -71,18 +54,7 @@ mutation refreshTokens(\$accessToken: String!, \$refreshToken: String!) {
         ${includeDebugOption ? _debugOption : ""}
     ) {
         user{
-            id
-            username
-            fullName
-            bio
-            followers
-            likes
-            views
-            profileImage
-            phone
-            email
-            isVerified
-            languages
+            ${GqlTemplate().fullUser}
         },
         authInfo {
             accessToken
@@ -104,15 +76,7 @@ String checkVerificationCodeQuery = """
 mutation checkVerificationCode(\$code: String!, \$sessionInfo: String!) {
   checkVerificationCode(code: \$code, sessionInfo: \$sessionInfo) {
     user { 
-      ${GqlTemplate().user}
-      followers
-      melonsAmount
-      likes
-      views
-      languages
-      age
-      phone
-      email
+      ${GqlTemplate().fullUser}
     }
     authInfo {
       accessToken
@@ -135,20 +99,7 @@ String signInWithDiscordMutation = """
     mutation signInWithDiscord(\$credentials: DiscordTokenInput!) {
       signInWithDiscord(credentials: \$credentials) {
         user {
-          id
-          username
-          fullName
-          email
-          age
-          phone
-          isVerified
-          languages
-          melonsAmount
-          seedsAmount
-          profileImage
-          meta{
-            pendingSteps
-          }
+          ${GqlTemplate().fullUser}
         }
         authInfo {
           accessToken
