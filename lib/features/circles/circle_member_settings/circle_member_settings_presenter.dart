@@ -98,6 +98,8 @@ class CircleMemberSettingsPresenter extends Cubit<CircleMemberSettingsViewModel>
         );
   }
 
+  void onTapProfile() => navigator.openProfile(userId: _model.publicProfile.id);
+
   Future<void> _toggleFollow() async {
     final previousFollowState = _model.publicProfile.iFollow;
 

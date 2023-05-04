@@ -15,7 +15,7 @@ jobs:
     runs-on:
       - self-hosted
       - linux # windows has bad pixels! https://github.com/picnic-app-cool/picnic-app-greenfield/actions/runs/4055819611/jobs/6979474402
-    permissions: {}
+    permissions: { }
 
     if: ${{ github.event.label.name == 'Generate Screenshots' }}
     outputs:
@@ -51,13 +51,6 @@ jobs:
         with:
           name: ui-components
           workingDir: ./packages/picnic-ui-components
-          updateGoldens: true
-
-      - name: Run Screenshot tests - landing-pages
-        uses: ./.github/actions/screenshot_tests
-        with:
-          name: landing-pages
-          workingDir: ./packages/picnic-landing-pages
           updateGoldens: true
 
       - name: check if there are any changes

@@ -216,7 +216,9 @@ class Circle extends Equatable {
 
   bool get hasPermissionToManageComments => permissions.canManageComments;
 
-  CircleCustomRole? get mainRole => roles.roles.firstWhereOrNull((role) => role.id.value == roles.mainRoleId);
+  CircleCustomRole? get mainRole => roles.roles
+      .whereNot((element) => element.name == 'default')
+      .firstWhereOrNull((role) => role.id.value == roles.mainRoleId);
 
   TextColor get formattedMainRoleColor => mainRole != null ? TextColor.fromString(mainRole!.color) : TextColor.black;
 

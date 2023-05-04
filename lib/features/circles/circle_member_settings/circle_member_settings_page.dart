@@ -48,6 +48,7 @@ class _CircleMemberSettingsPageState extends State<CircleMemberSettingsPage>
           children: [
             ProfileWidget(
               publicProfile: state.publicProfile,
+              onTapProfile: presenter.onTapProfile,
             ),
             if (state.roles.isNotEmpty) ...[
               Padding(
@@ -64,7 +65,7 @@ class _CircleMemberSettingsPageState extends State<CircleMemberSettingsPage>
                         duration: const ShortDuration(),
                         curve: Curves.easeInOut,
                         child: RolesHorizontalContainer(
-                          roles: state.roles,
+                          roles: state.rolesModified,
                         ),
                       ),
               ),

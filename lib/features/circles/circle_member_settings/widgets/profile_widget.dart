@@ -10,9 +10,14 @@ import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({Key? key, required this.publicProfile}) : super(key: key);
+  const ProfileWidget({
+    Key? key,
+    required this.publicProfile,
+    required this.onTapProfile,
+  }) : super(key: key);
 
   final PublicProfile publicProfile;
+  final VoidCallback onTapProfile;
 
   static const double _badgeSize = 20.0;
   static const double _avatarSize = 72;
@@ -26,6 +31,7 @@ class ProfileWidget extends StatelessWidget {
       child: Row(
         children: [
           PicnicAvatar(
+            onTap: onTapProfile,
             size: _avatarSize,
             boxFit: PicnicAvatarChildBoxFit.cover,
             imageSource: PicnicImageSource.url(
@@ -35,39 +41,42 @@ class ProfileWidget extends StatelessWidget {
             placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
           ),
           const Gap(8),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                textAlign: TextAlign.center,
-                publicProfile.user.fullName,
-                style: styles.title40,
-              ),
-              Row(
-                children: [
-                  ShaderMask(
-                    blendMode: BlendMode.srcIn,
-                    shaderCallback: (bounds) => PicnicColors.rainbowGradient.createShader(
-                      Rect.fromLTWH(
-                        0,
-                        0,
-                        bounds.width,
-                        bounds.height,
+          InkWell(
+            onTap: onTapProfile,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  textAlign: TextAlign.center,
+                  publicProfile.user.fullName,
+                  style: styles.title40,
+                ),
+                Row(
+                  children: [
+                    ShaderMask(
+                      blendMode: BlendMode.srcIn,
+                      shaderCallback: (bounds) => PicnicColors.rainbowGradient.createShader(
+                        Rect.fromLTWH(
+                          0,
+                          0,
+                          bounds.width,
+                          bounds.height,
+                        ),
+                      ),
+                      child: Text(
+                        publicProfile.user.username.formattedUsername,
+                        style: styles.body30,
                       ),
                     ),
-                    child: Text(
-                      publicProfile.user.username.formattedUsername,
-                      style: styles.body30,
-                    ),
-                  ),
-                  if (publicProfile.isVerified) ...[
-                    const Gap(2),
-                    Assets.images.achievement.image(width: _badgeSize),
+                    if (publicProfile.isVerified) ...[
+                      const Gap(2),
+                      Assets.images.achievement.image(width: _badgeSize),
+                    ],
                   ],
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

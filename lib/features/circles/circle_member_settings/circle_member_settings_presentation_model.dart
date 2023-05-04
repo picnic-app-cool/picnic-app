@@ -99,6 +99,9 @@ class CircleMemberSettingsPresentationModel implements CircleMemberSettingsViewM
   @override
   bool get isLoadingRoles => getUserRolesResult.isPending();
 
+  @override
+  List<CircleCustomRole> get rolesModified => roles.where((role) => role.name != 'default').toList();
+
   CircleMemberSettingsPresentationModel byUpdatingPublicProfile({
     required PublicProfile publicProfile,
   }) =>
@@ -147,6 +150,8 @@ abstract class CircleMemberSettingsViewModel {
   PublicProfileAction get action;
 
   List<CircleCustomRole> get roles;
+
+  List<CircleCustomRole> get rolesModified;
 
   bool get isLoadingProfileStats;
 

@@ -37,7 +37,10 @@ Future<void> main() async {
       initParams,
       Mocks.userStore,
     );
-    navigator = CircleMemberSettingsNavigator(Mocks.appNavigator);
+    navigator = CircleMemberSettingsNavigator(
+      Mocks.appNavigator,
+      Mocks.userStore,
+    );
 
     when(() => Mocks.getUserUseCase.execute(userId: Stubs.user.id))
         .thenAnswer((invocation) => successFuture(Stubs.publicProfile.copyWith(user: user)));

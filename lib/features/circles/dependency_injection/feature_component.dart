@@ -428,7 +428,7 @@ void _configureMvp() {
           ),
         )
         ..registerFactory<CircleMemberSettingsNavigator>(
-          () => CircleMemberSettingsNavigator(getIt()),
+          () => CircleMemberSettingsNavigator(getIt(), getIt()),
         )
         ..registerFactoryParam<CircleMemberSettingsViewModel, CircleMemberSettingsInitialParams, dynamic>(
           (params, _) => CircleMemberSettingsPresentationModel.initial(
