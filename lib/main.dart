@@ -70,14 +70,10 @@ void main() async {
 Future<void> _initFirebase() async {
   // we initialize firebase here and not in AppInitUseCase, because we want crashlytics
   // to be set up as soon as possible and cover potential failures on app start
-
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    logError(e);
-  }
+  await Firebase.initializeApp(
+    name: 'picnic_app',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 void _runPicnicApp() {

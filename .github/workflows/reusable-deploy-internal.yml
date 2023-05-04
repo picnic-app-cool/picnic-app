@@ -63,6 +63,7 @@ jobs:
           vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
           pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
           pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
 
       - name: Deploy to firebase
         if: ${{ !inputs.disable_deploy }}

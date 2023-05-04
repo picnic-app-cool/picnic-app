@@ -48,41 +48,43 @@ class _PostDetailsPageState extends State<PostDetailsPage>
       sigmaY: _blur,
     );
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: PicnicAppBar(
-        height: _appBarHeight,
-        backButtonBackdropFilter: state.isTransparent ? _buttonBackdropFilter : null,
-        backButtonColor: state.isTransparent ? _whiteColorWithOpacity : null,
-        backButtonIconColor: state.isTransparent ? _whiteColor : null,
-        actions: [
-          if (state.showOptions)
-            PicnicContainerIconButton(
-              iconPath: Assets.images.moreCircle.path,
-              onTap: presenter.onUserTap,
-              iconTintColor: state.isTransparent ? _whiteColor : null,
-              buttonColor: state.isTransparent ? _whiteColorWithOpacity : null,
-              backdropFilter: state.isTransparent ? _buttonBackdropFilter : null,
-            ),
-        ],
-      ),
-      extendBodyBehindAppBar: true,
-      body: stateObserver(
-        buildWhen: (prev, current) => prev.isLoading != current.isLoading || prev.post != current.post,
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(child: PicnicLoadingIndicator());
-          }
-          return PostListItem(
-            onReport: (_) => presenter.onTapReportPost(),
-            post: state.post,
-            reportId: state.reportId,
-            postDetailsMode: state.mode,
-            overlaySize: PostOverlaySize.minimized,
-            onPostUpdated: presenter.onPostUpdated,
-            showTimestamp: true,
-          );
-        },
+    return stateObserver(
+      builder: (context, state) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: PicnicAppBar(
+          height: _appBarHeight,
+          backButtonBackdropFilter: state.isTransparent ? _buttonBackdropFilter : null,
+          backButtonColor: state.isTransparent ? _whiteColorWithOpacity : null,
+          backButtonIconColor: state.isTransparent ? _whiteColor : null,
+          actions: [
+            if (state.showOptions)
+              PicnicContainerIconButton(
+                iconPath: Assets.images.moreCircle.path,
+                onTap: presenter.onUserTap,
+                iconTintColor: state.isTransparent ? _whiteColor : null,
+                buttonColor: state.isTransparent ? _whiteColorWithOpacity : null,
+                backdropFilter: state.isTransparent ? _buttonBackdropFilter : null,
+              ),
+          ],
+        ),
+        extendBodyBehindAppBar: true,
+        body: stateObserver(
+          buildWhen: (prev, current) => prev.isLoading != current.isLoading || prev.post != current.post,
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(child: PicnicLoadingIndicator());
+            }
+            return PostListItem(
+              onReport: (_) => presenter.onTapReportPost(),
+              post: state.post,
+              reportId: state.reportId,
+              postDetailsMode: state.mode,
+              overlaySize: PostOverlaySize.minimized,
+              onPostUpdated: presenter.onPostUpdated,
+              showTimestamp: true,
+            );
+          },
+        ),
       ),
     );
   }

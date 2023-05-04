@@ -18,6 +18,7 @@ import 'package:picnic_app/navigation/utils/root_navigator_observer.dart';
 import 'package:picnic_app/ui/widgets/bottom_navigation/picnic_bottom_navigation.dart';
 import 'package:picnic_app/ui/widgets/bottom_navigation/picnic_nav_item.dart';
 
+//ignore: max
 class MainPage extends StatefulWidget with HasPresenter<MainPresenter> {
   const MainPage({
     required this.presenter,
@@ -117,9 +118,12 @@ class _MainPageState extends State<MainPage> with PresenterStateMixin<MainViewMo
                   bottom: 0,
                   child: SizedBox(
                     width: screenWidth * _circlesSideMenuWidthPercentage,
-                    child: CirclesSideMenuPage(
-                      initialParams: CirclesSideMenuInitialParams(
-                        onCircleSideMenuAction: presenter.onCircleSideMenuAction,
+                    child: GestureDetector(
+                      onHorizontalDragEnd: handleHorizontalDragEnd,
+                      child: CirclesSideMenuPage(
+                        initialParams: CirclesSideMenuInitialParams(
+                          onCircleSideMenuAction: presenter.onCircleSideMenuAction,
+                        ),
                       ),
                     ),
                   ),
@@ -130,5 +134,11 @@ class _MainPageState extends State<MainPage> with PresenterStateMixin<MainViewMo
         },
       ),
     );
+  }
+
+  Future<void> handleHorizontalDragEnd(DragEndDetails dragDetails) async {
+    if (dragDetails.velocity.pixelsPerSecond.dx < 1) {
+      presenter.onCirclesSideMenuToggled();
+    }
   }
 }
