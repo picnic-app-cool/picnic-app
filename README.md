@@ -12,9 +12,48 @@
 
 # Picnic Greenfield
 
-![Picnic Logo](docs/picnic_logo.png)
-
 Flutter project for the Picnic app
+
+## Contributors ✨
+
+Thanks go to these wonderful people:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+    <tbody>
+    <tr>
+        <td align="center"><a href="https://appflate.io"><img
+                src="https://avatars.githubusercontent.com/u/1711474?s=100" width="100px;"
+                alt="Andrzej Chmielewski"/>
+            <br/><sub><b>Andrzej Chmielewski</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/zorgonred"><img
+                src="https://avatars.githubusercontent.com/u/20926893?s=100" width="100px;"
+                alt="Daniel de Oliveira"/>
+            <br/><sub><b>Daniel de Oliveira</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/paul-pasc"><img
+                src="https://avatars.githubusercontent.com/u/117663250?s=100" width="100px;"
+                alt="Paul Pasc"/>
+            <br/><sub><b>Paul Pasc</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/wkozak90"><img
+                src="https://avatars.githubusercontent.com/u/13345102?s=100" width="100px;"
+                alt="Wojciech Kozak"/>
+            <br/><sub><b>Wojciech Kozak</b></sub></a><br/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+![Picnic Logo](docs/picnic_logo.png)
 
 <!-- TOC -->
 
