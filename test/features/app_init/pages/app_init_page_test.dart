@@ -13,7 +13,6 @@ import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../force_update/mocks/force_update_mocks.dart';
-import '../../profile/mocks/profile_mocks.dart';
 import '../../user_agreement/mocks/user_agreement_mocks.dart';
 import '../mocks/app_init_mock_definitions.dart';
 import '../mocks/app_init_mocks.dart';
@@ -38,10 +37,8 @@ Future<void> main() async {
       ForceUpdateMocks.shouldShowForceUpdateUseCase,
       UserAgreementMocks.hasUserAgreedToAppsTermsUseCase,
       UserAgreementMocks.acceptAppsTermsUseCase,
-      ProfileMocks.getPrivateProfileUseCase,
       Mocks.getShouldShowCirclesSelectionUseCase,
       UserStore(),
-      Mocks.localStoreRepository,
     );
     page = AppInitPage(presenter: presenter);
   }

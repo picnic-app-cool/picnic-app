@@ -47,7 +47,7 @@ class PrivateProfile extends Equatable {
 
   String get username => user.username;
 
-  bool get agePending => meta.pendingSteps.contains(ProfileSetupStep.age) || age == 0;
+  bool get agePending => meta.pendingSteps.contains(ProfileSetupStep.age);
 
   bool get circlesPending => meta.pendingSteps.contains(ProfileSetupStep.circles);
 

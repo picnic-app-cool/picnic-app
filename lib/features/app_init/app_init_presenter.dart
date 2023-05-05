@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
-import 'package:picnic_app/core/domain/repositories/local_storage_repository.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/domain/use_cases/app_init_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_should_show_circles_selection_use_case.dart';
@@ -18,7 +17,6 @@ import 'package:picnic_app/features/main/main_initial_params.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_initial_params.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
-import 'package:picnic_app/features/profile/domain/use_cases/get_private_profile_use_case.dart';
 import 'package:picnic_app/features/user_agreement/domain/use_cases/accept_apps_terms_use_case.dart';
 import 'package:picnic_app/features/user_agreement/domain/use_cases/has_user_agreed_to_apps_terms_use_case.dart';
 
@@ -30,10 +28,8 @@ class AppInitPresenter extends Cubit<AppInitViewModel> with SubscriptionsMixin {
     this.shouldShowForceUpdateUseCase,
     this.hasUserAgreedToAppsTermsUseCase,
     this.acceptAppsTermsUseCase,
-    this._getPrivateProfileUseCase,
     this._getShouldShowCirclesSelectionUseCase,
     this._userStore,
-    this._localStorageRepository,
   ) : super(model) {
     listenTo<PrivateProfile>(
       stream: _userStore.stream,
@@ -50,8 +46,6 @@ class AppInitPresenter extends Cubit<AppInitViewModel> with SubscriptionsMixin {
   final AppInitNavigator navigator;
   final AppInitUseCase appInitUseCase;
   final UserStore _userStore;
-  final LocalStorageRepository _localStorageRepository;
-  final GetPrivateProfileUseCase _getPrivateProfileUseCase;
   final GetShouldShowCirclesSelectionUseCase _getShouldShowCirclesSelectionUseCase;
 
   static const _userStoreSubscription = "userStoreSubscription";
@@ -118,34 +112,12 @@ class AppInitPresenter extends Cubit<AppInitViewModel> with SubscriptionsMixin {
           success: (shouldShow) async {
             if (shouldShow) {
               await _navigateToOnboardingCirclesSelection();
-            } else if (_model.user.agePending) {
-              _checkForProfileOutdated();
             } else {
               await _navigateToMain();
             }
           },
           fail: (_) => _navigateToMain(),
         );
-  }
-
-  //check if user profile is outdated. Let's request an update from the backend and check if the age is still pending
-  void _checkForProfileOutdated() {
-    _getPrivateProfileUseCase.execute().doOn(
-          success: (profile) async {
-            await _saveUserInfo(profile);
-            if (profile.agePending) {
-              await navigator.openOnboarding(const OnboardingInitialParams());
-            } else {
-              await _navigateToMain();
-            }
-          },
-          fail: (_) => _navigateToMain(),
-        );
-  }
-
-  Future<void> _saveUserInfo(PrivateProfile user) async {
-    _userStore.privateProfile = user;
-    await _localStorageRepository.saveCurrentUser(user: user);
   }
 
   Future<void> _navigateToMain() async {
