@@ -46,6 +46,14 @@ Thanks go to these wonderful people:
             </a>
         </td>
     </tr>
+    <tr>
+       <td align="center"><a href="https://www.linkedin.com/in/omar-hussein-9b374512b"><img
+                src="https://avatars.githubusercontent.com/u/24321397?s=100" width="100px;"
+                alt="Omar Hussein"/>
+            <br/><sub><b>Omar Hussein</b></sub></a><br/>
+            </a>
+        </td>
+      </tr>
     </tbody>
 </table>
 
