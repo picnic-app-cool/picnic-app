@@ -39,7 +39,7 @@ Thanks go to these wonderful people:
             <br/><sub><b>Paul Pasc</b></sub></a><br/>
             </a>
         </td>
-        <td align="center"><a href="https://github.com/wkozak90"><img
+        <td align="center"><a href="https://www.linkedin.com/in/wojciech-kozak/"><img
                 src="https://avatars.githubusercontent.com/u/13345102?s=100" width="100px;"
                 alt="Wojciech Kozak"/>
             <br/><sub><b>Wojciech Kozak</b></sub></a><br/>
