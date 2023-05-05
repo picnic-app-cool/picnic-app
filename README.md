@@ -59,6 +59,12 @@ Thanks go to these wonderful people:
     <br/><sub><b>Diones Camargo</b></sub></a><br/>
     </a>
 </td>
+<td align="center"><a href="https://github.com/ValeryPonomarenko"><img
+                src="https://avatars.githubusercontent.com/u/17588574?s=100" width="100px;"
+                alt="Valery Ponomarenko"/>
+            <br/><sub><b>Valery Ponomarenko</b></sub></a><br/>
+            </a>
+        </td>
       </tr>
     </tbody>
 </table>
