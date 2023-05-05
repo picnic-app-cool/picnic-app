@@ -53,6 +53,12 @@ Thanks go to these wonderful people:
             <br/><sub><b>Omar Hussein</b></sub></a><br/>
             </a>
         </td>
+        <td align="center"><a href="https://github.com/dionesxxx"><img
+        src="https://avatars.githubusercontent.com/u/5229299?s=100" width="100px;"
+        alt="Diones Camargo"/>
+    <br/><sub><b>Diones Camargo</b></sub></a><br/>
+    </a>
+</td>
       </tr>
     </tbody>
 </table>
