@@ -35,35 +35,35 @@ pubspec.* @picnic-app-cool/code-leaders @picnic-app-cool/front-end
 
 **/features/** @picnic-app-cool/front-end
 
-**/features/chat/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+**/features/chat/**  @picnic-app-cool/front-end
 
-**/features/circles/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/circles/**  @picnic-app-cool/front-end
 
-**/features/create_circle/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+**/features/create_circle/**  @picnic-app-cool/front-end
 
-**/features/discover/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+**/features/discover/**  @picnic-app-cool/front-end
 
-**/features/feed/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+**/features/feed/**  @picnic-app-cool/front-end
 
-**/features/onboarding/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/onboarding/**  @picnic-app-cool/front-end
 
-**/features/posts/** @picnic-app-cool/squad-wojtek @picnic-app-cool/front-end
+**/features/posts/**  @picnic-app-cool/front-end
 
-**/features/profile/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/profile/**  @picnic-app-cool/front-end
 
-**/features/push_notifications/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/push_notifications/**  @picnic-app-cool/front-end
 
-**/features/in_app_notifications/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/in_app_notifications/**  @picnic-app-cool/front-end
 
-**/features/deeplink_handler/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/deeplink_handler/**  @picnic-app-cool/front-end
 
-**/features/reports/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/reports/**  @picnic-app-cool/front-end
 
-**/features/seeds/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/seeds/**  @picnic-app-cool/front-end
 
-**/features/settings/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+**/features/settings/**  @picnic-app-cool/front-end
 
-packages/picnic-desktop-app/** @picnic-app-cool/squad-daniel @picnic-app-cool/front-end
+packages/picnic-desktop-app/**  @picnic-app-cool/front-end
 
 # GENERAL FEATURES
 
