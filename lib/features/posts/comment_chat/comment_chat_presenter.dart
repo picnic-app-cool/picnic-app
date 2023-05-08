@@ -35,8 +35,6 @@ import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_u
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
 import 'package:picnic_app/ui/widgets/poll_post/picnic_poll_post.dart';
@@ -272,11 +270,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
   }
 
   void onTapProfile(Id userId) {
-    if (userId == _model.user.id) {
-      navigator.openPrivateProfile(const PrivateProfileInitialParams());
-    } else {
-      navigator.openPublicProfile(PublicProfileInitialParams(userId: userId));
-    }
+    navigator.openProfile(userId: userId);
   }
 
   void onTap(TreeComment comment) {

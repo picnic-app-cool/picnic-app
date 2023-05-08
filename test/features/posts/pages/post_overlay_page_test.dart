@@ -70,7 +70,10 @@ Future<void> main() async {
       Mocks.featureFlagsStore,
       Mocks.userStore,
     );
-    navigator = PostOverlayNavigator(Mocks.appNavigator);
+    navigator = PostOverlayNavigator(
+      Mocks.appNavigator,
+      Mocks.userStore,
+    );
     presenter = PostOverlayPresenter(
       model,
       navigator,

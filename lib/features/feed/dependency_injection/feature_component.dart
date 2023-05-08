@@ -301,7 +301,7 @@ void _configureMvp() {
           ),
         )
         ..registerFactory<CommentChatNavigator>(
-          () => CommentChatNavigator(getIt()),
+          () => CommentChatNavigator(getIt(), getIt()),
         )
         ..registerFactoryParam<CommentChatViewModel, CommentChatInitialParams, dynamic>(
           (params, _) => CommentChatPresentationModel.initial(

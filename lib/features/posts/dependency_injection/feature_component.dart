@@ -393,7 +393,7 @@ void _configureMvp() {
           ),
         )
         ..registerFactory<PostsListNavigator>(
-          () => PostsListNavigator(getIt()),
+          () => PostsListNavigator(getIt(), getIt()),
         )
         ..registerFactoryParam<PostsListPresentationModel, PostsListInitialParams, dynamic>(
           (params, _) => PostsListPresentationModel.initial(
@@ -429,7 +429,7 @@ void _configureMvp() {
           (params, _) => SoundAttachmentPage(presenter: getIt(param1: params)),
         )
         ..registerFactory<PostOverlayNavigator>(
-          () => PostOverlayNavigator(getIt()),
+          () => PostOverlayNavigator(getIt(), getIt()),
         )
         ..registerFactoryParam<PostOverlayViewModel, PostOverlayInitialParams, dynamic>(
           (params, _) => PostOverlayPresentationModel.initial(

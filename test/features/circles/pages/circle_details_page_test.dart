@@ -87,7 +87,6 @@ void main() {
       Mocks.savePostToCollectionUseCase,
       PostsMocks.getPostUseCase,
       Mocks.followUserUseCase,
-      Mocks.userStore,
       CirclesMocks.getCircleMembersByRoleUseCase,
     );
 

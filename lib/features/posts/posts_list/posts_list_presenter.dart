@@ -15,8 +15,6 @@ import 'package:picnic_app/features/posts/post_creation_index/post_creation_inde
 import 'package:picnic_app/features/posts/posts_list/posts_list_initial_params.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_navigator.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_presentation_model.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
 
@@ -102,11 +100,7 @@ class PostsListPresenter extends Cubit<PostsListViewModel> {
   }
 
   void onTapAuthor(Id userId) {
-    if (userId == _model.privateProfile.id) {
-      navigator.openPrivateProfile(const PrivateProfileInitialParams());
-    } else {
-      navigator.openPublicProfile(PublicProfileInitialParams(userId: userId));
-    }
+    navigator.openProfile(userId: userId);
   }
 
   void onTapReport(Post post) {

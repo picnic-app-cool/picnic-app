@@ -53,7 +53,10 @@ Future<void> main() async {
       replyingComment: replyMode ? Stubs.comments.children[0] : null,
       featureFlags: disableFeatureFlags ? flags : null,
     );
-    final navigator = CommentChatNavigator(Mocks.appNavigator);
+    final navigator = CommentChatNavigator(
+      Mocks.appNavigator,
+      Mocks.userStore,
+    );
     final presenter = CommentChatPresenter(
       model,
       navigator,

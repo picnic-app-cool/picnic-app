@@ -18,8 +18,6 @@ import 'package:picnic_app/features/posts/post_creation_index/post_creation_inde
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_navigator.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_navigator.dart';
 import 'package:picnic_app/features/profile/common/profile_route.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_navigator.dart';
 import 'package:picnic_app/features/seeds/seed_holders/seed_holders_navigator.dart';
@@ -66,8 +64,6 @@ class CircleDetailsNavigator
         FeatureDisabledBottomSheetRoute,
         CommentChatRoute,
         SavePostToCollectionRoute,
-        PrivateProfileRoute,
-        PublicProfileRoute,
         CircleMemberSettingsRoute,
         CircleRoleRoute,
         InviteUsersRoute,

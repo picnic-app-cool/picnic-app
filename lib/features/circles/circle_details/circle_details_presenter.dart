@@ -10,7 +10,6 @@ import 'package:picnic_app/core/domain/model/public_profile.dart';
 import 'package:picnic_app/core/domain/model/save_post_to_collection_failure.dart';
 import 'package:picnic_app/core/domain/model/slice.dart';
 import 'package:picnic_app/core/domain/model/stat_type.dart';
-import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/domain/use_cases/delete_posts_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/follow_unfollow_user_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_circle_stats_use_case.dart';
@@ -61,8 +60,6 @@ import 'package:picnic_app/features/posts/post_overlay/widgets/saved_post_snackb
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_initial_params.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params.dart';
 import 'package:picnic_app/features/posts/single_feed/sorting_handler.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
@@ -101,7 +98,6 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     this._savePostToCollectionUseCase,
     this._getPostUseCase,
     this._followUnfollowUseCase,
-    this._userStore,
     this._getMembersByRoleUseCase,
   ) : super(model);
 
@@ -126,7 +122,6 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
   final SavePostToCollectionUseCase _savePostToCollectionUseCase;
   final GetPostUseCase _getPostUseCase;
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
-  final UserStore _userStore;
   final GetCircleMembersByRoleUseCase _getMembersByRoleUseCase;
 
   // ignore: unused_element
@@ -551,11 +546,8 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
       ),
     );
     final id = post.author.id;
-    if (_userStore.isMe(id)) {
-      await navigator.openPrivateProfile(const PrivateProfileInitialParams());
-    } else {
-      await navigator.openPublicProfile(PublicProfileInitialParams(userId: id));
-    }
+    await navigator.openProfile(userId: id);
+
     await _refreshPostDetails(post);
   }
 

@@ -75,7 +75,10 @@ Future<void> main() async {
       initialParams,
       Mocks.userStore,
     );
-    navigator = PostsListNavigator(Mocks.appNavigator);
+    navigator = PostsListNavigator(
+      Mocks.appNavigator,
+      Mocks.userStore,
+    );
     presenter = PostsListPresenter(
       model,
       navigator,

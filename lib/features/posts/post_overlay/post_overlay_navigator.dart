@@ -1,9 +1,9 @@
+import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/circles/reported_content/reported_content_navigator.dart';
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_navigator.dart';
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_navigator.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
+import 'package:picnic_app/features/profile/common/profile_route.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
@@ -18,15 +18,17 @@ class PostOverlayNavigator
         ReportedContentRoute,
         ShareRoute,
         CircleDetailsRoute,
-        PublicProfileRoute,
-        PrivateProfileRoute,
+        ProfileRoute,
         ErrorBottomSheetRoute,
         CloseRoute,
         ReportFormRoute,
         CommentActionsRoute,
         SnackBarRoute,
         SavePostToCollectionRoute {
-  PostOverlayNavigator(this.appNavigator);
+  PostOverlayNavigator(this.appNavigator, this.userStore);
+
+  @override
+  final UserStore userStore;
 
   @override
   final AppNavigator appNavigator;

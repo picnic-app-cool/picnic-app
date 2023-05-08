@@ -50,7 +50,7 @@ void _configureMvp() {
   // ignore: unnecessary_statements
   getIt
         ..registerFactory<DeeplinkHandlerNavigator>(
-          () => DeeplinkHandlerNavigator(getIt()),
+          () => DeeplinkHandlerNavigator(getIt(), getIt()),
         )
         ..registerFactory<DeeplinkHandlerPresenter>(
           () => DeeplinkHandlerPresenter(

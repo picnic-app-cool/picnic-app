@@ -16,8 +16,6 @@ import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link.dart
 import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link_circle.dart';
 import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link_profile.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_initial_params.dart';
-import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
-import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
 import 'package:picnic_app/features/seeds/seeds/seeds_initial_params.dart';
 
@@ -87,11 +85,7 @@ class DeeplinkHandlerPresenter {
   }
 
   void _openProfile(Id userId) {
-    if (_userStore.privateProfile.id == userId) {
-      _navigator.openPrivateProfile(const PrivateProfileInitialParams());
-    } else {
-      _navigator.openPublicProfile(PublicProfileInitialParams(userId: userId));
-    }
+    _navigator.openProfile(userId: userId);
   }
 
   void _openCircleDetails(Id circleId) {
