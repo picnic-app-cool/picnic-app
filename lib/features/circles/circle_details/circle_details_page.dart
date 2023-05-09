@@ -138,7 +138,7 @@ class _CircleDetailsPageState extends State<CircleDetailsPage>
                                     isMember: state.circle.iJoined,
                                     showSeedHolders: state.areSeedsEnabled,
                                     onTapPost: presenter.onTapPostToCircle,
-                                    onTapInviteUsers: () => presenter.onTapInviteUsers,
+                                    onTapInviteUsers: presenter.onTapInviteUsers,
                                     isPostingEnabled: state.isPostingEnabled,
                                     hasPermissionToManageCircle: state.hasPermissionToManageCircle,
                                   ),
