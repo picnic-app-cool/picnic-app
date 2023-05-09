@@ -12,9 +12,65 @@
 
 # Picnic Greenfield
 
-![Picnic Logo](docs/picnic_logo.png)
-
 Flutter project for the Picnic app
+
+## Contributors ✨
+
+Thanks go to these wonderful people:
+
+<table>
+    <tbody>
+    <tr>
+        <td align="center"><a href="https://appflate.io"><img
+                src="https://avatars.githubusercontent.com/u/1711474?s=100" width="100px;"
+                alt="Andrzej Chmielewski"/>
+            <br/><sub><b>Andrzej Chmielewski</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/zorgonred"><img
+                src="https://avatars.githubusercontent.com/u/20926893?s=100" width="100px;"
+                alt="Daniel de Oliveira"/>
+            <br/><sub><b>Daniel de Oliveira</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/paul-pasc"><img
+                src="https://avatars.githubusercontent.com/u/117663250?s=100" width="100px;"
+                alt="Paul Pasc"/>
+            <br/><sub><b>Paul Pasc</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://www.linkedin.com/in/wojciech-kozak/"><img
+                src="https://avatars.githubusercontent.com/u/13345102?s=100" width="100px;"
+                alt="Wojciech Kozak"/>
+            <br/><sub><b>Wojciech Kozak</b></sub></a><br/>
+            </a>
+        </td>
+    </tr>
+    <tr>
+       <td align="center"><a href="https://www.linkedin.com/in/omar-hussein-9b374512b"><img
+                src="https://avatars.githubusercontent.com/u/24321397?s=100" width="100px;"
+                alt="Omar Hussein"/>
+            <br/><sub><b>Omar Hussein</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/dionesxxx"><img
+        src="https://avatars.githubusercontent.com/u/5229299?s=100" width="100px;"
+        alt="Diones Camargo"/>
+    <br/><sub><b>Diones Camargo</b></sub></a><br/>
+    </a>
+</td>
+<td align="center"><a href="https://github.com/ValeryPonomarenko"><img
+                src="https://avatars.githubusercontent.com/u/17588574?s=100" width="100px;"
+                alt="Valery Ponomarenko"/>
+            <br/><sub><b>Valery Ponomarenko</b></sub></a><br/>
+            </a>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
+![Picnic Logo](docs/picnic_logo.png)
 
 <!-- TOC -->
 
