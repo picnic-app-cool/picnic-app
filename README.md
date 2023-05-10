@@ -54,15 +54,21 @@ Thanks go to these wonderful people:
             </a>
         </td>
         <td align="center"><a href="https://github.com/dionesxxx"><img
-        src="https://avatars.githubusercontent.com/u/5229299?s=100" width="100px;"
-        alt="Diones Camargo"/>
-    <br/><sub><b>Diones Camargo</b></sub></a><br/>
-    </a>
-</td>
-<td align="center"><a href="https://github.com/ValeryPonomarenko"><img
+                src="https://avatars.githubusercontent.com/u/5229299?s=100" width="100px;"
+                alt="Diones Camargo"/>
+            <br/><sub><b>Diones Camargo</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/ValeryPonomarenko"><img
                 src="https://avatars.githubusercontent.com/u/17588574?s=100" width="100px;"
                 alt="Valery Ponomarenko"/>
             <br/><sub><b>Valery Ponomarenko</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://www.linkedin.com/in/wyverx"><img
+                src="https://media.licdn.com/dms/image/C4D03AQHE1-9lf8JaVw/profile-displayphoto-shrink_400_400/0/1544887973307?e=1689206400&v=beta&t=6pmHatTVCxld3YW0AZVr5ucajcz1hwhYFx4IzapVLr4" width="100px;"
+                alt="Alexander Topchiy"/>
+            <br/><sub><b>Alexander Topchiy</b></sub></a><br/>
             </a>
         </td>
       </tr>
