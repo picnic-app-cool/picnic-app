@@ -37,7 +37,7 @@ class PostCreationIndexPresenter extends Cubit<PostCreationIndexViewModel> {
   void onTabChanged(PostCreationPreviewType type) => tryEmit(_model.copyWith(type: type));
 
   Future<void> onTapPost(CreatePostInput postInput) async => postInput.withCaption
-      ? _openUploadMedia(postInput)
+      ? _openUploadMedia(postInput.copyWith(circleId: _model.preselectedCircleId))
       : _model.preselectedCircleId == const Id.empty()
           ? _openSelectCircle(postInput)
           : _createPost(postInput.copyWith(circleId: _model.preselectedCircleId));
