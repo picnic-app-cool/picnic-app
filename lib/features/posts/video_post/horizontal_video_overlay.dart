@@ -9,7 +9,7 @@ import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/video_player/widget/icon_button_with_counter.dart';
-import 'package:picnic_app/ui/widgets/video_player/widget/like_button_with_counter.dart';
+import 'package:picnic_app/ui/widgets/video_player/widget/like_dislike_button_with_counter.dart';
 import 'package:picnic_app/ui/widgets/video_player/widget/video_player_controls_dimensions.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
@@ -44,7 +44,6 @@ class _HorizontalVideoOverlayState extends State<HorizontalVideoOverlay>
     final colors = theme.colors;
     final whiteColor = colors.blackAndWhite.shade100;
     const spacing = Gap(8);
-    final overlayTheme = state.post.overlayTheme;
 
     /// this padding makes sure that we move comment's bar up when keyboard is shown
     final mediaQuery = MediaQuery.of(context);
@@ -104,38 +103,38 @@ class _HorizontalVideoOverlayState extends State<HorizontalVideoOverlay>
                         children: [
                           stateObserver(
                             builder: (context, state) {
+                              final contentStats = state.post.contentStats;
                               return stateListener(
                                 child: SizedBox(
                                   width: VideoPlayerControlsDimensions.horizontalVideoPostButtonsWidth,
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      LikeButtonWithCounter(
-                                        isLiked: state.post.iReacted,
-                                        likes: state.post.likesCount.toString(),
-                                        overlayTheme: overlayTheme,
-                                        onTap: presenter.onTapHeart,
+                                      LikeDislikeButtonWithCounter(
+                                        isLiked: state.post.iLiked,
+                                        isDisliked: state.post.iDisliked,
+                                        likes: contentStats.likes.toString(),
+                                        onTapLike: presenter.onTapLikePost,
+                                        onTapDislike: presenter.onTapDislikePost,
                                       ),
                                       spacing,
                                       IconButtonWithCounter(
                                         onTap: presenter.onTapChat,
-                                        counterText: state.post.commentsCount.toString(),
-                                        overlayTheme: overlayTheme,
+                                        counterText: contentStats.comments.toString(),
                                         iconPath: Assets.images.chat.path,
                                       ),
                                       spacing,
                                       IconButtonWithCounter(
                                         onTap: presenter.onTapShare,
-                                        overlayTheme: overlayTheme,
-                                        counterText: state.post.sharesCount.toString(),
+                                        counterText: contentStats.shares.toString(),
                                         iconPath: Assets.images.upload.path,
                                       ),
                                       spacing,
                                       if (state.savedPostsEnabled)
                                         IconButtonWithCounter(
                                           onTap: presenter.onTapBookmark,
-                                          isSelected: state.post.iSaved,
-                                          counterText: state.post.savesCount.toString(),
-                                          overlayTheme: overlayTheme,
+                                          isSelected: state.post.context.saved,
+                                          counterText: contentStats.saves.toString(),
                                           iconPath: Assets.images.bookmark.path,
                                           isLoading: state.isPostSaving,
                                         ),

@@ -9,10 +9,12 @@ import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 class PostBarButton extends StatelessWidget {
   const PostBarButton({
     required this.params,
+    this.decoration,
     super.key,
   });
 
   final PostBarButtonParams params;
+  final BoxDecoration? decoration;
 
   static const defaultFontSize = 12.0;
 
@@ -20,13 +22,13 @@ class PostBarButton extends StatelessWidget {
   static const _iconSizeMedium = 30.0;
   static const _iconSizeLarge = 32.0;
 
-  static const _horizontalIconSizeSmall = 17.0;
-  static const _horizontalIconSizeMedium = 20.0;
-  static const _horizontalIconSizeLarge = 20.0;
+  static const _horizontalIconSizeSmall = 28.0;
+  static const _horizontalIconSizeMedium = 30.0;
+  static const _horizontalIconSizeLarge = 32.0;
 
-  static const _fontSizeSmall = 14.0;
-  static const _fontSizeMedium = 16.0;
-  static const _fontSizeLarge = 16.0;
+  static const _fontSizeSmall = 16.0;
+  static const _fontSizeMedium = 18.0;
+  static const _fontSizeLarge = 20.0;
 
   static double iconSize(BuildContext context) => context.responsiveValue(
         small: _iconSizeSmall,
@@ -55,24 +57,32 @@ class PostBarButton extends StatelessWidget {
 
     switch (params.overlayTheme) {
       case PostOverlayTheme.dark:
-        foregroundColor = params.selected ? colors.blackAndWhite.shade100 : colors.darkBlue.shade600;
+        foregroundColor = colors.darkBlue.shade600;
         textColor = colors.darkBlue.shade600;
         break;
       case PostOverlayTheme.light:
-        foregroundColor = params.lightIconColor ?? colors.blackAndWhite.shade100;
+        foregroundColor =
+            params.selected ? colors.darkBlue.shade600 : (params.lightIconColor ?? colors.blackAndWhite.shade100);
         textColor = colors.blackAndWhite.shade100;
         break;
     }
 
     final topAvatarSize = params.isVertical ? iconSize(context) : horizontalIconSize(context);
     final children = <Widget>[
-      Image.asset(
-        params.overlayTheme == PostOverlayTheme.light ? params.filledIcon! : params.outlinedIcon!,
-        width: topAvatarSize,
-        height: topAvatarSize,
-        color: foregroundColor == Colors.transparent ? null : foregroundColor,
+      Container(
+        decoration: decoration,
+        child: Image.asset(
+          params.overlayTheme == PostOverlayTheme.light
+              ? params.filledIcon!
+              : params.selected
+                  ? params.filledIcon!
+                  : params.outlinedIcon!,
+          width: topAvatarSize,
+          height: topAvatarSize,
+          color: foregroundColor == Colors.transparent ? null : foregroundColor,
+        ),
       ),
-      if (!params.isVertical) const Gap(8),
+      if (!params.isVertical) const Gap(10),
       if (params.text != null)
         Text(
           params.text ?? '',
@@ -91,7 +101,6 @@ class PostBarButton extends StatelessWidget {
       onTap: params.onTap,
       child: Container(
         width: params.isVertical ? null : params.width,
-        padding: params.isVertical ? null : const EdgeInsets.symmetric(vertical: 16),
         color: Colors.transparent,
         child: params.isVertical
             ? Column(

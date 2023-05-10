@@ -47,7 +47,7 @@ class PicnicVerticalPostBuilder extends StatelessWidget {
         return PicnicVerticalPost.text(
           footer: footer,
           onTapView: () => onTapView(post),
-          views: post.viewsCount,
+          views: post.contentStats.impressions,
           text: content.text,
           gradient: colorToColorOption(content.color),
           hideAuthorAvatar: hideAuthorAvatar,
@@ -63,7 +63,7 @@ class PicnicVerticalPostBuilder extends StatelessWidget {
         return PicnicVerticalPost.image(
           footer: footer,
           onTapView: () => onTapView(post),
-          views: post.viewsCount,
+          views: post.contentStats.impressions,
           imageUrl: content.imageUrl,
           hideAuthorAvatar: hideAuthorAvatar,
           avatarUrl: post.author.profileImageUrl,
@@ -78,7 +78,7 @@ class PicnicVerticalPostBuilder extends StatelessWidget {
         return PicnicVerticalPost.video(
           footer: footer,
           onTapView: () => onTapView(post),
-          views: post.viewsCount,
+          views: post.contentStats.impressions,
           imageUrl: content.thumbnailUrl,
           hideAuthorAvatar: hideAuthorAvatar,
           avatarUrl: post.author.profileImageUrl,
@@ -93,7 +93,7 @@ class PicnicVerticalPostBuilder extends StatelessWidget {
         return PicnicVerticalPost.link(
           footer: footer,
           onTapView: () => onTapView(post),
-          views: post.viewsCount,
+          views: post.contentStats.impressions,
           link: content.linkUrl,
           linkMetadata: content.metadata,
           hideAuthorAvatar: hideAuthorAvatar,
@@ -109,7 +109,7 @@ class PicnicVerticalPostBuilder extends StatelessWidget {
         return PicnicVerticalPost.poll(
           footer: footer,
           onTapView: () => onTapView(post),
-          views: post.viewsCount,
+          views: post.contentStats.impressions,
           hideAuthorAvatar: hideAuthorAvatar,
           avatarUrl: post.author.profileImageUrl,
           onTapAvatar: () => onTapAvatar?.call(post.author.id),

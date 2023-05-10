@@ -528,6 +528,7 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<CircleDetailsPage, CircleDetailsInitialParams, dynamic>(

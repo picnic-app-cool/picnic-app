@@ -224,25 +224,25 @@ flutter:
     - assets/lottie/
     - assets/imgly/
   fonts:
-    - family: Kanit
+    - family: Figtree
       fonts:
-        - asset: packages/picnic_ui_components/fonts/Kanit-Thin.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 100
-        - asset: packages/picnic_ui_components/fonts/Kanit-ExtraLight.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 200
-        - asset: packages/picnic_ui_components/fonts/Kanit-Light.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 300
-        - asset: packages/picnic_ui_components/fonts/Kanit-Regular.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Regular.ttf
           weight: 400
-        - asset: packages/picnic_ui_components/fonts/Kanit-Medium.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Medium.ttf
           weight: 500
-        - asset: packages/picnic_ui_components/fonts/Kanit-SemiBold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-SemiBold.ttf
           weight: 600
-        - asset: packages/picnic_ui_components/fonts/Kanit-Bold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Bold.ttf
           weight: 700
-        - asset: packages/picnic_ui_components/fonts/Kanit-ExtraBold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-ExtraBold.ttf
           weight: 800
-        - asset: packages/picnic_ui_components/fonts/Kanit-Black.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Black.ttf
           weight: 900
     - family: Arimo
       fonts:

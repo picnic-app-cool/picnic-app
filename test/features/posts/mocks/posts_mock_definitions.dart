@@ -29,6 +29,7 @@ import "package:picnic_app/features/posts/domain/model/get_post_collections_fail
 import 'package:picnic_app/features/posts/domain/model/get_sounds_list_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_comment_failure.dart';
 import "package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart";
+import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import "package:picnic_app/features/posts/domain/model/vote_in_poll_failure.dart";
 import 'package:picnic_app/features/posts/domain/repositories/comments_repository.dart';
 import 'package:picnic_app/features/posts/domain/repositories/posts_repository.dart';
@@ -43,10 +44,11 @@ import "package:picnic_app/features/posts/domain/use_cases/get_link_metadata_use
 import 'package:picnic_app/features/posts/domain/use_cases/get_pinned_comments_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_sounds_list_use_case.dart';
+import "package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart";
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
-import "package:picnic_app/features/posts/domain/use_cases/like_unlike_post_use_case.dart";
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import "package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart";
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_initial_params.dart';
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_navigator.dart';
@@ -355,7 +357,7 @@ class MockGetPostsListUseCase extends Mock implements GetFeedPostsListUseCase {}
 
 class MockLikeUnlikePostFailure extends Mock implements LikeUnlikePostFailure {}
 
-class MockLikeUnlikePostUseCase extends Mock implements LikeUnlikePostUseCase {}
+class MockLikeDislikePostUseCase extends Mock implements LikeDislikePostUseCase {}
 
 class MockGetSoundsListFailure extends Mock implements GetSoundsListFailure {}
 
@@ -406,6 +408,10 @@ class MockPinCommentUseCase extends Mock implements PinCommentUseCase {}
 class MockUnpinCommentUseCase extends Mock implements UnpinCommentUseCase {}
 
 class MockGetPostCollectionsFailure extends Mock implements GetPostCollectionsFailure {}
+
+class MockUnreactToPostFailure extends Mock implements UnreactToPostFailure {}
+
+class MockUnreactToPostUseCase extends Mock implements UnreactToPostUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

@@ -13,6 +13,6 @@ class FontFamily {
   /// Font family: Arimo
   static const String arimo = 'Arimo';
 
-  /// Font family: Kanit
-  static const String kanit = 'Kanit';
+  /// Font family: Figtree
+  static const String figtree = 'Figtree';
 }

@@ -186,14 +186,14 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         .execute(
           input: SavePostInput(
             postId: _model.feedPost.id,
-            save: !_model.feedPost.iSaved,
+            save: !_model.feedPost.context.saved,
           ),
         )
         .observeStatusChanges(
           (result) => tryEmit(_model.copyWith(savingPostResult: result)),
         )
         .doOn(
-          success: (post) => tryEmit(_model.byUpdatingSavedStatus(saved: post.iSaved)),
+          success: (post) => tryEmit(_model.byUpdatingSavedStatus(saved: post.context.saved)),
           fail: (fail) => navigator.showError(fail.displayableFailure()),
         );
   }
@@ -508,7 +508,9 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
             : CommentsFocusTargetComment(scrollToComment),
         replyingComment: const TreeComment.none(),
         commentsRoot: updatedCommentsTree,
-        feedPost: _model.feedPost.copyWith(commentsCount: _model.feedPost.commentsCount + 1),
+        feedPost: _model.feedPost.copyWith(
+          contentStats: _model.feedPost.contentStats.copyWith(comments: _model.feedPost.contentStats.comments + 1),
+        ),
       ),
     );
   }

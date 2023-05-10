@@ -92,6 +92,7 @@ import 'package:picnic_app/features/posts/domain/model/post_contents/video_post_
 import 'package:picnic_app/features/posts/domain/model/post_contents/video_post_content_input.dart';
 import 'package:picnic_app/features/posts/domain/model/post_report.dart';
 import 'package:picnic_app/features/posts/domain/model/post_route_result.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/content_stats_for_content.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/sound.dart';
 import 'package:picnic_app/features/posts/domain/model/text_post_color.dart';
@@ -459,7 +460,7 @@ class Stubs {
           ),
         ),
         circle: const BasicCircle.empty().copyWith(name: '#Startups', emoji: '🚀'),
-        viewsCount: 44000,
+        contentStats: const ContentStatsForContent.empty().copyWith(impressions: 44000),
         postedAtString: '2020-01-31',
         createdAtString: '2020-01-31',
       );
@@ -490,7 +491,7 @@ class Stubs {
   static Post get videoPost => const Post.empty().copyWith(
         author: Stubs.postAuthor,
         content: const VideoPostContent.empty(),
-        viewsCount: 0,
+        contentStats: const ContentStatsForContent.empty().copyWith(impressions: 0),
         postedAtString: '2020-01-31',
         createdAtString: '2020-01-31',
       );
@@ -502,7 +503,7 @@ class Stubs {
           metadata: linkMetadata,
         ),
         circle: const BasicCircle.empty().copyWith(name: '#Startups', emoji: '🚀'),
-        viewsCount: 44000,
+        contentStats: const ContentStatsForContent.empty().copyWith(impressions: 44000),
         postedAtString: '2020-01-31',
         createdAtString: '2020-01-31',
       );
@@ -541,7 +542,7 @@ class Stubs {
           ],
         ),
         circle: const BasicCircle.empty().copyWith(name: '#Startups', emoji: '🚀'),
-        viewsCount: 44000,
+        contentStats: const ContentStatsForContent.empty().copyWith(impressions: 44000),
         postedAtString: '2020-01-31',
         createdAtString: '2020-01-31',
       );

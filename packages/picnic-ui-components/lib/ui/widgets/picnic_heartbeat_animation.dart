@@ -25,7 +25,7 @@ class PicnicHeartbeatAnimation extends StatefulWidget {
 class _PicnicHeartbeatAnimationState extends State<PicnicHeartbeatAnimation> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   double _opacity = 0.0;
-  static const _dimension = 150.0;
+  static const _dimension = 200.0;
   Timer? _hideButtonTimer;
 
   @override
@@ -40,7 +40,7 @@ class _PicnicHeartbeatAnimationState extends State<PicnicHeartbeatAnimation> wit
       opacity: _opacity,
       child: IgnorePointer(
         child: Lottie.asset(
-          Assets.lottie.heartbeat,
+          Assets.lottie.likeAnimation,
           onWarning: widget.onWarning,
           animate: !isUnitTests,
           width: _dimension,

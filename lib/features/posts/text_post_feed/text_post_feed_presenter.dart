@@ -62,9 +62,4 @@ class TextPostFeedPresenter extends Cubit<TextPostFeedViewModel> with Subscripti
     await postOverlayPresenter.onTapChat();
     await commentChatPresenter.loadComments(fromScratch: true);
   }
-
-  Future<void> onTapSend(String text) async {
-    await postOverlayPresenter.onTapSend(text);
-    await commentChatPresenter.loadComments(fromScratch: true);
-  }
 }

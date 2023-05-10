@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:picnic_ui_components/resources/fonts.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme_data.dart';
@@ -6,8 +7,10 @@ import 'package:picnic_ui_components/ui/theme/picnic_theme_data.dart';
 class PicnicStyles {
   //ignore: long-method
   factory PicnicStyles(PhoneSize size) {
+    const baseTextStyle = TextStyle(fontFeatures: <FontFeature>[FontFeature('liga', 0)]);
+
     return PicnicStyles._(
-      display20: TextStyle(
+      display20: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w800,
@@ -16,7 +19,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      title40: TextStyle(
+      title40: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w600,
@@ -25,7 +28,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      title30: TextStyle(
+      title30: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w500,
@@ -34,7 +37,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      title20: TextStyle(
+      title20: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w500,
@@ -43,7 +46,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      title10: TextStyle(
+      title10: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w500,
@@ -52,7 +55,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      body40: TextStyle(
+      body40: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w400,
@@ -61,7 +64,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.white,
       ),
-      body30: TextStyle(
+      body30: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w400,
@@ -70,7 +73,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      body20: TextStyle(
+      body20: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w400,
@@ -79,7 +82,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      body10: TextStyle(
+      body10: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w400,
@@ -88,7 +91,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      body0: TextStyle(
+      body0: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w400,
@@ -97,7 +100,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      caption30: TextStyle(
+      caption30: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w300,
@@ -106,7 +109,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      caption20: TextStyle(
+      caption20: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w300,
@@ -115,7 +118,7 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
-      caption10: TextStyle(
+      caption10: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontWeight: FontWeight.w300,
@@ -143,7 +146,7 @@ class PicnicStyles {
     required this.caption10,
   });
 
-  static const String fontFamily = FontFamily.kanit;
+  static const String fontFamily = FontFamily.figtree;
 
   // If a caracter is not found in default font there is a callback to try find it again
   // For example, those fonts(ʚɞ) are not shown in android devices

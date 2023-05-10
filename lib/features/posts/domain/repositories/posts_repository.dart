@@ -13,11 +13,13 @@ import 'package:picnic_app/features/posts/domain/model/get_link_metadata_failure
 import 'package:picnic_app/features/posts/domain/model/get_post_by_id_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_posts_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_sounds_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/link_metadata.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/sound.dart';
+import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/view_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/vote_in_poll_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/vote_in_poll_input.dart';
@@ -65,9 +67,13 @@ abstract class PostsRepository {
 
   /// Since [Post] now has `isLiked` variable, we don't need to pass a separate parameter stating whether the user
   /// liked/unliked the post
-  Future<Either<LikeUnlikePostFailure, bool>> likeUnlikePost({
+  Future<Either<LikeUnlikePostFailure, Unit>> likeUnlikePost({
     required Id id,
-    required bool like,
+    required LikeDislikeReaction likeDislikeReaction,
+  });
+
+  Future<Either<UnreactToPostFailure, Unit>> unReactToPost({
+    required Id postId,
   });
 
   Future<Either<GetLinkMetadataFailure, LinkMetadata>> getLinkMetadata({

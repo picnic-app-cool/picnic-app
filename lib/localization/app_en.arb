@@ -1331,5 +1331,11 @@
   "revokeIntegrationConfirm": "yes, revoke",
   "linkDiscord": "link Discord",
   "revoke": "revoke",
-  "serverAlreadyConnected": "*a server is already connected"
+  "serverAlreadyConnected": "*a server is already connected",
+  "viewsCount": " • {views} views",
+  "@viewsCount": {
+    "placeholders": {
+      "views": {}
+    }
+  }
 }

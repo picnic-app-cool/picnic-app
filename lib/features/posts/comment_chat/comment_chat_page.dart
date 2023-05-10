@@ -110,7 +110,7 @@ class _CommentChatPageState extends State<CommentChatPage>
                     builder: (context, state) => Padding(
                       padding: const EdgeInsets.only(top: 12, bottom: 14),
                       child: Text(
-                        'comments: ${state.feedPost.commentsCount}',
+                        'comments: ${state.feedPost.contentStats.comments}',
                         style: theme.styles.body10,
                       ),
                     ),

@@ -149,7 +149,7 @@ class CommentChatPresentationModel implements CommentChatViewModel {
   bool get shouldInstantCommandsBeVisible => featureFlags[FeatureFlagType.commentInstantCommandsEnabled];
 
   @override
-  bool get postSaved => feedPost.iSaved;
+  bool get postSaved => feedPost.context.saved;
 
   @override
   bool get showReportAction => reportedComment != null;
@@ -250,7 +250,7 @@ class CommentChatPresentationModel implements CommentChatViewModel {
       );
 
   CommentChatPresentationModel byUpdatingSavedStatus({required bool saved}) => copyWith(
-        feedPost: feedPost.copyWith(iSaved: saved),
+        feedPost: feedPost.copyWith(context: feedPost.context.copyWith(saved: saved)),
       );
 
   CommentChatPresentationModel byUpdatingAuthorWithFollow({required bool follow}) {

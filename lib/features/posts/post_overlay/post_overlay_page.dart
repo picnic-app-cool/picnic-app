@@ -7,6 +7,7 @@ import 'package:picnic_app/features/posts/domain/model/comments_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/post_contents/post_with_caption.dart';
 import 'package:picnic_app/features/posts/domain/model/post_details_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_size.dart';
+import 'package:picnic_app/features/posts/domain/model/post_type.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presenter.dart';
 import 'package:picnic_app/features/posts/post_overlay/widgets/overlay_comment_section.dart';
@@ -105,137 +106,169 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                       },
                     ),
                     IgnoreAutomaticKeyboardHide(
-                      child: Column(
+                      child: Stack(
                         children: [
-                          if (displayOptions.detailsMode != PostDetailsMode.report) ...[
-                            if (displayOptions.overlaySize == PostOverlaySize.fullscreen) const PostInFeedNavbarGap(),
-                          ],
-                          if (displayOptions.detailsMode == PostDetailsMode.feed) const Gap(12),
-                          stateObserver(
-                            builder: (context, state) {
-                              return !displayOptions.showPostSummaryBarAbovePost && displayOptions.showPostSummaryBar
-                                  ? PostSummaryBar(
-                                      author: state.author,
-                                      post: state.post,
-                                      overlayTheme: state.post.overlayTheme,
-                                      onToggleFollow: presenter.onTapFollow,
-                                      onTapTag: presenter.onTapShowCircle,
-                                      onTapAuthor: presenter.onTapProfile,
-                                      onTapJoinCircle: presenter.onJoinCircle,
-                                      showTagBackground: true,
-                                      showTimestamp: displayOptions.showTimestamp,
-                                    )
-                                  : const SizedBox.shrink();
-                            },
-                          ),
-                          const Spacer(),
-                          if (displayOptions.commentsMode == CommentsMode.list) //
-                            AnimatedOpacity(
-                              opacity: state.shouldCommentsBeVisible ? 1.0 : 0.0,
-                              duration: const Duration(milliseconds: 250),
-                              child: CommentList(
-                                comments: state.comments,
-                                onTapCommentAuthor: (id) => presenter.onTapProfile(id: id),
-                                onTapReply: presenter.onTapReply,
-                                onTapComment: (comment) => presenter.onTapComment(comment.toTreeComment()),
-                                onDoubleTapComment: presenter.onDoubleTapComment,
-                                onTapLikeUnlike: presenter.onTapLikeUnlike,
-                                onLongTapComment: presenter.onLongPress,
-                              ),
-                            ),
-                          if (displayOptions.commentsMode == CommentsMode.overlay) //
-                            if (state.shouldCommentsBeVisible) ...[
-                              IgnorePointer(
-                                ignoring: !state.shouldCommentsBeVisible,
-                                child: AnimatedOpacity(
-                                  opacity: state.shouldCommentsBeVisible ? 1.0 : 0.0,
-                                  duration: const Duration(milliseconds: 250),
-                                  child: OverlayCommentSection(
-                                    comments: state.comments,
-                                    onTapCommentAuthor: (id) => presenter.onTapProfile(id: id),
-                                    onTapReply: (comment) => presenter.onTapReply(comment),
-                                    onTapLikeUnlike: (comment) => presenter.onTapLikeUnlike(comment),
-                                    onTapComment: (comment) => presenter.onTapComment(comment.toTreeComment()),
-                                    onLongTapComment: (comment) => presenter.onLongPress(comment),
-                                    onDoubleTapComment: (comment) => presenter.onDoubleTapComment(comment),
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 38),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (displayOptions.detailsMode != PostDetailsMode.report) ...[
+                                  if (displayOptions.overlaySize == PostOverlaySize.fullscreen)
+                                    const PostInFeedNavbarGap(),
+                                ],
+                                if (displayOptions.detailsMode == PostDetailsMode.feed) const Gap(12),
+                                stateObserver(
+                                  builder: (context, state) {
+                                    return !displayOptions.showPostSummaryBarAbovePost &&
+                                            displayOptions.showPostSummaryBar
+                                        ? PostSummaryBar(
+                                            author: state.author,
+                                            post: state.post,
+                                            overlayTheme: state.post.overlayTheme,
+                                            onToggleFollow: presenter.onTapFollow,
+                                            onTapTag: presenter.onTapShowCircle,
+                                            onTapAuthor: presenter.onTapProfile,
+                                            onTapJoinCircle: presenter.onJoinCircle,
+                                            showTagBackground: true,
+                                            showTimestamp: displayOptions.showTimestamp,
+                                          )
+                                        : const SizedBox.shrink();
+                                  },
                                 ),
-                              ),
-                            ],
-                          if (postContent is PostWithCaption) ...[
-                            PostCaption(text: (postContent as PostWithCaption).text),
-                            const Gap(12),
-                          ],
-                          if (displayOptions.showPostCommentBar)
-                            SizeReportingWidget(
-                              onSizeChange: (size) => presenter.commentBarHeightChanged(size.height),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: stateObserver(
-                                      builder: (context, state) {
-                                        final overlayTheme = state.post.overlayTheme;
-
-                                        return stateListener(
-                                          child: PostCommentBar(
-                                            hasActionsBelow: state.showReportAction,
-                                            bookmarkEnabled: state.savedPostsEnabled,
-                                            likeButtonParams: PostBarLikeButtonParams(
-                                              isLiked: state.post.iReacted,
-                                              likes: state.post.likesCount.toString(),
-                                              onTap: presenter.onTapHeart,
-                                              overlayTheme: overlayTheme,
-                                            ),
-                                            commentsButtonParams: PostBarButtonParams(
-                                              onTap: presenter.onTapChat,
-                                              overlayTheme: overlayTheme,
-                                              text: state.post.commentsCount.toString(),
-                                            ),
-                                            shareButtonParams: PostBarButtonParams(
-                                              onTap: presenter.onTapShare,
-                                              overlayTheme: overlayTheme,
-                                              text: state.post.sharesCount.toString(),
-                                            ),
-                                            bookmarkButtonParams: PostBarButtonParams(
-                                              onTap: presenter.onTapBookmark,
-                                              overlayTheme: overlayTheme,
-                                              text: state.post.savesCount.toString(),
-                                              selected: state.post.iSaved,
-                                            ),
-                                            onTapSend: presenter.onTapSend,
-                                            overlayTheme: overlayTheme,
-                                            replyingComment: state.replyingComment,
-                                            onTapCancelReply: presenter.onTapCancelReply,
-                                            focusNode: _focusNode,
-                                            canComment: state.post.circle.commentsEnabled,
-                                          ),
-                                          listenWhen: (old, newModel) =>
-                                              old.replyingComment != newModel.replyingComment &&
-                                              newModel.replyingComment != const CommentPreview.empty(),
-                                          listener: (BuildContext context, PostOverlayViewModel state) =>
-                                              _focusNode.requestFocus(),
-                                        );
-                                      },
+                                const Spacer(),
+                                if (displayOptions.commentsMode == CommentsMode.list) //
+                                  AnimatedOpacity(
+                                    opacity: state.shouldCommentsBeVisible ? 1.0 : 0.0,
+                                    duration: const Duration(milliseconds: 250),
+                                    child: CommentList(
+                                      comments: state.comments,
+                                      onTapCommentAuthor: (id) => presenter.onTapProfile(id: id),
+                                      onTapReply: presenter.onTapReply,
+                                      onTapComment: (comment) => presenter.onTapComment(comment.toTreeComment()),
+                                      onDoubleTapComment: presenter.onDoubleTapComment,
+                                      onTapLikeUnlike: presenter.onTapLikeUnlikeComment,
+                                      onLongTapComment: presenter.onLongPress,
                                     ),
                                   ),
-                                  if (state.showReportAction) ...[
-                                    const Gap(8),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                        child: PicnicButton(
-                                          title: appLocalizations.reportActionsLabel,
-                                          onTap: presenter.onTapReportActions,
-                                          titleColor: colors.red,
-                                          color: whiteColor,
+                                if (displayOptions.commentsMode == CommentsMode.overlay) //
+                                  if (state.shouldCommentsBeVisible) ...[
+                                    IgnorePointer(
+                                      ignoring: !state.shouldCommentsBeVisible,
+                                      child: AnimatedOpacity(
+                                        opacity: state.shouldCommentsBeVisible ? 1.0 : 0.0,
+                                        duration: const Duration(milliseconds: 250),
+                                        child: OverlayCommentSection(
+                                          comments: state.comments,
+                                          onTapCommentAuthor: (id) => presenter.onTapProfile(id: id),
+                                          onTapReply: (comment) => presenter.onTapReply(comment),
+                                          onTapLikeUnlike: (comment) => presenter.onTapLikeUnlikeComment(comment),
+                                          onTapComment: (comment) => presenter.onTapComment(comment.toTreeComment()),
+                                          onLongTapComment: (comment) => presenter.onLongPress(comment),
+                                          onDoubleTapComment: (comment) => presenter.onDoubleTapComment(comment),
                                         ),
                                       ),
                                     ),
                                   ],
+                                if (postContent is PostWithCaption) ...[
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        const Spacer(),
+                                        PostCaption(
+                                          text: (postContent as PostWithCaption).text,
+                                        ),
+                                        if (state.post.type == PostType.video) const Gap(56) else const Gap(12),
+                                      ],
+                                    ),
+                                  ),
                                 ],
+                              ],
+                            ),
+                          ),
+                          if (displayOptions.showPostCommentBar)
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: SizeReportingWidget(
+                                onSizeChange: (size) => presenter.commentBarHeightChanged(size.height),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: stateObserver(
+                                        builder: (context, state) {
+                                          final overlayTheme = state.post.overlayTheme;
+                                          final contentStats = state.post.contentStats;
+                                          final reactButtonsVertical = state.post.reactButtonsVertical;
+                                          return stateListener(
+                                            child: PostCommentBar(
+                                              buttonsAreVertical: reactButtonsVertical,
+                                              hasActionsBelow: state.showReportAction,
+                                              bookmarkEnabled: state.savedPostsEnabled,
+                                              likeButtonParams: PostBarLikeButtonParams(
+                                                isLiked: state.post.iLiked,
+                                                likes: contentStats.likes.toString(),
+                                                onTap: presenter.onTapLikePost,
+                                                overlayTheme: overlayTheme,
+                                                isVertical: reactButtonsVertical,
+                                              ),
+                                              dislikeButtonParams: PostBarButtonParams(
+                                                selected: state.post.iDisliked,
+                                                onTap: presenter.onTapDislikePost,
+                                                overlayTheme: overlayTheme,
+                                                isVertical: reactButtonsVertical,
+                                              ),
+                                              commentsButtonParams: PostBarButtonParams(
+                                                onTap: presenter.onTapChat,
+                                                overlayTheme: overlayTheme,
+                                                text: contentStats.comments.toString(),
+                                                isVertical: reactButtonsVertical,
+                                              ),
+                                              shareButtonParams: PostBarButtonParams(
+                                                onTap: presenter.onTapShare,
+                                                overlayTheme: overlayTheme,
+                                                text: contentStats.shares.toString(),
+                                                isVertical: reactButtonsVertical,
+                                              ),
+                                              bookmarkButtonParams: PostBarButtonParams(
+                                                onTap: presenter.onTapBookmark,
+                                                overlayTheme: overlayTheme,
+                                                text: contentStats.saves.toString(),
+                                                selected: state.post.context.saved,
+                                                isVertical: reactButtonsVertical,
+                                              ),
+                                              overlayTheme: overlayTheme,
+                                              replyingComment: state.replyingComment,
+                                              onTapCancelReply: presenter.onTapCancelReply,
+                                              focusNode: _focusNode,
+                                            ),
+                                            listenWhen: (old, newModel) =>
+                                                old.replyingComment != newModel.replyingComment &&
+                                                newModel.replyingComment != const CommentPreview.empty(),
+                                            listener: (BuildContext context, PostOverlayViewModel state) =>
+                                                _focusNode.requestFocus(),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    if (state.showReportAction) ...[
+                                      const Gap(8),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                          child: PicnicButton(
+                                            title: appLocalizations.reportActionsLabel,
+                                            onTap: presenter.onTapReportActions,
+                                            titleColor: colors.red,
+                                            color: whiteColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
                               ),
                             ),
                         ],

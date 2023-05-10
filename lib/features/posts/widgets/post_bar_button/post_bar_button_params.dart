@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 
-class PostBarButtonParams {
+class PostBarButtonParams extends Equatable {
   const PostBarButtonParams({
     required this.onTap,
     required this.overlayTheme,
@@ -23,4 +24,17 @@ class PostBarButtonParams {
   final bool selected;
   final bool isVertical;
   final double? width;
+
+  @override
+  List<Object?> get props => [
+        filledIcon,
+        outlinedIcon,
+        lightIconColor,
+        onTap,
+        text,
+        overlayTheme,
+        selected,
+        isVertical,
+        width,
+      ];
 }

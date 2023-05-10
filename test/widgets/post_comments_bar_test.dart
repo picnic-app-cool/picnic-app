@@ -72,6 +72,7 @@ Widget _buildCommentBar({
   bool postLiking = false,
   bool isPostSaved = false,
   bool canComment = true,
+  bool isDisliked = false,
   int likesCount = 123,
   int commentsCount = 123,
   int savesCount = 123,
@@ -115,7 +116,11 @@ Widget _buildCommentBar({
         text: savesCount.toString(),
         selected: isPostSaved,
       ),
-      canComment: canComment,
+      dislikeButtonParams: PostBarButtonParams(
+        onTap: () {},
+        overlayTheme: overlayTheme,
+        selected: isDisliked,
+      ),
     ),
   );
 }

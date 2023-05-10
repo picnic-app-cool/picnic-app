@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 import 'package:picnic_app/utils/extensions/string_extensions.dart';
 
@@ -51,6 +53,9 @@ class PicnicRichTextController extends TextEditingController {
 
     onMatchChanged?.call(matches);
 
-    return TextSpan(style: style, children: children);
+    return TextSpan(
+      style: style?.copyWith(fontFeatures: <FontFeature>[const FontFeature('liga', 0)]),
+      children: children,
+    );
   }
 }

@@ -328,24 +328,9 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
         );
       }
 
-      final newSavedPostStatus = updatedPost.iSaved;
-      if (isSamePostId && post.iSaved != newSavedPostStatus) {
-        tempPost = tempPost.copyWith(iSaved: newSavedPostStatus);
-      }
-
-      final newLikePostStatus = updatedPost.iReacted;
-      if (isSamePostId && post.iReacted != newLikePostStatus) {
-        tempPost = tempPost.copyWith(iReacted: newLikePostStatus);
-      }
-
-      final newPostSharesCount = updatedPost.sharesCount;
-      if (isSamePostId && post.sharesCount != newPostSharesCount) {
-        tempPost = tempPost.copyWith(sharesCount: newPostSharesCount);
-      }
-
-      final newPostCommentsCount = updatedPost.commentsCount;
-      if (isSamePostId && post.commentsCount != newPostCommentsCount) {
-        tempPost = tempPost.copyWith(commentsCount: newPostCommentsCount);
+      if (isSamePostId) {
+        tempPost = tempPost.copyWith(context: updatedPost.context);
+        tempPost = tempPost.copyWith(contentStats: updatedPost.contentStats);
       }
 
       newPostsList.add(tempPost);

@@ -28,11 +28,13 @@ import 'package:picnic_app/features/posts/domain/model/get_link_metadata_failure
 import 'package:picnic_app/features/posts/domain/model/get_post_by_id_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_posts_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_sounds_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/link_metadata.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/sound.dart';
+import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/view_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/vote_in_poll_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/vote_in_poll_input.dart';
@@ -140,21 +142,36 @@ class GraphQlPostsRepository implements PostsRepository {
           );
 
   @override
-  Future<Either<LikeUnlikePostFailure, bool>> likeUnlikePost({
+  Future<Either<LikeUnlikePostFailure, Unit>> likeUnlikePost({
     required Id id,
-    required bool like,
+    required LikeDislikeReaction likeDislikeReaction,
   }) =>
       _gqlClient
           .mutate(
             document: reactPostMutation,
             variables: {
-              'id': id.value,
-              'react': like,
+              'postId': id.value,
+              'reaction': likeDislikeReaction.value,
             },
-            parseData: (_) => unit,
+            parseData: (json) => GqlSuccessPayload.fromJson(json['reactToPost'] as Map<String, dynamic>),
           )
-          .mapFailure(LikeUnlikePostFailure.unknown)
-          .mapSuccess((_) => like);
+          .mapFailure((fail) => const LikeUnlikePostFailure.unknown())
+          .mapSuccessPayload(onFailureReturn: const LikeUnlikePostFailure.unknown());
+
+  @override
+  Future<Either<UnreactToPostFailure, Unit>> unReactToPost({
+    required Id postId,
+  }) =>
+      _gqlClient
+          .mutate(
+            document: unReactToPostMutation,
+            variables: {
+              'postId': postId.value,
+            },
+            parseData: (json) => GqlSuccessPayload.fromJson(json['unreactToPost'] as Map<String, dynamic>),
+          )
+          .mapFailure((fail) => const UnreactToPostFailure.unknown())
+          .mapSuccessPayload(onFailureReturn: const UnreactToPostFailure.unknown());
 
   @override
   Future<Either<SavePostToCollectionFailure, bool>> updatePostCollectionStatus({

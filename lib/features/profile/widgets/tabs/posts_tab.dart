@@ -16,7 +16,8 @@ class PostsTab extends StatelessWidget {
     super.key,
     required this.posts,
     required this.onLoadMore,
-    required this.onTapHeart,
+    required this.onTapLike,
+    required this.onTapDislike,
     required this.onTapComments,
     required this.onTapShare,
     required this.onTapBookmark,
@@ -51,7 +52,8 @@ class PostsTab extends StatelessWidget {
   final VoidCallback? onTapClosePostsSelection;
   final VoidCallback? onTapConfirmPostsSelection;
   final bool bookmarkEnabled;
-  final ValueChanged<Post> onTapHeart;
+  final ValueChanged<Post> onTapLike;
+  final ValueChanged<Post> onTapDislike;
   final ValueChanged<Post> onTapComments;
   final ValueChanged<Post> onTapShare;
   final ValueChanged<Post> onTapBookmark;
@@ -78,29 +80,36 @@ class PostsTab extends StatelessWidget {
           onPostUpdated: onPostUpdated,
           onReport: onReport,
           likeButtonParams: PostBarLikeButtonParams(
-            isLiked: post.iReacted,
-            likes: post.likesCount.toString(),
-            onTap: () => onTapHeart(post),
+            isLiked: post.iLiked,
+            likes: post.contentStats.likes.toString(),
+            onTap: () => onTapLike(post),
             overlayTheme: overlayTheme,
             isVertical: false,
+          ),
+          dislikeButtonParams: PostBarButtonParams(
+            onTap: () => onTapDislike(post),
+            overlayTheme: overlayTheme,
+            isVertical: false,
+            selected: post.iDisliked,
+            text: '0',
           ),
           commentsButtonParams: PostBarButtonParams(
             onTap: () => onTapComments(post),
             overlayTheme: overlayTheme,
-            text: post.commentsCount.toString(),
+            text: post.contentStats.comments.toString(),
             isVertical: false,
           ),
           shareButtonParams: PostBarButtonParams(
             onTap: () => onTapShare(post),
             overlayTheme: overlayTheme,
-            text: post.sharesCount.toString(),
+            text: post.contentStats.shares.toString(),
             isVertical: false,
           ),
           bookmarkButtonParams: PostBarButtonParams(
             onTap: () => onTapBookmark(post),
             overlayTheme: overlayTheme,
-            text: post.savesCount.toString(),
-            selected: post.iSaved,
+            text: post.contentStats.saves.toString(),
+            selected: post.context.saved,
             isVertical: false,
           ),
           bookmarkEnabled: bookmarkEnabled,

@@ -165,7 +165,7 @@ class PostSummaryBar extends StatelessWidget {
           titleBadge: titleBadge,
           titlePadding: const EdgeInsets.only(bottom: 4.0),
           onTitleTap: onTapAuthor,
-          viewsCount: post.viewsCount,
+          viewsCount: post.contentStats.impressions,
           viewsCountColor: viewsCountColor,
         ),
       ),

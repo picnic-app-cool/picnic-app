@@ -120,7 +120,7 @@ class _PollPostPageState extends State<PollPostPage>
                                     availableHeight: constraints.maxHeight - minPostSize,
                                     comments: state.comments,
                                     onTapReply: (comment) => _overlayPresenter?.onTapReply(comment),
-                                    onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlike(comment),
+                                    onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlikeComment(comment),
                                     onTapComment: (comment) => _overlayPresenter?.onTapComment(comment.toTreeComment()),
                                     onLongTapComment: (comment) => _overlayPresenter?.onLongPress(comment),
                                     onTapCommentAuthor: (id) => _overlayPresenter?.onTapProfile(id: id),

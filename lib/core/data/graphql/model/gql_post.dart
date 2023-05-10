@@ -1,5 +1,7 @@
 import 'package:picnic_app/core/data/graphql/model/gql_basic_circle.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_basic_public_profile.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_content_stats_for_content.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_post_context.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_sound.dart';
 import 'package:picnic_app/core/data/graphql/model/post_content/gql_image_post_content.dart';
 import 'package:picnic_app/core/data/graphql/model/post_content/gql_link_post_content.dart';
@@ -25,16 +27,12 @@ class GqlPost {
     required this.imageContent,
     required this.videoContent,
     required this.pollContent,
-    required this.likesCount,
     required this.title,
     required this.sound,
-    required this.viewsCount,
-    required this.savesCount,
-    required this.sharesCount,
-    required this.iReacted,
-    required this.iSaved,
     required this.shareLink,
     required this.createdAt,
+    required this.gqlPostContext,
+    required this.gqlContentStatsForContent,
   });
 
   factory GqlPost.fromJson(
@@ -55,18 +53,14 @@ class GqlPost {
       imageContent: GqlImagePostContent.fromJson(asT<Map<String, dynamic>>(json, 'imageContent')),
       videoContent: GqlVideoPostContent.fromJson(asT<Map<String, dynamic>>(json, 'videoContent')),
       pollContent: GqlPollPostContent.fromJson(asT<Map<String, dynamic>>(json, 'pollContent')),
-      likesCount: asT<int>(json, 'likesCount'),
       title: asT<String>(json, 'title'),
       sound: GqlSound.fromJson(
         asT<Map<String, dynamic>>(json, 'sound'),
       ),
-      viewsCount: asT<int>(json, 'viewsCount'),
-      savesCount: asT<int>(json, 'savesCount'),
-      sharesCount: asT<int>(json, 'sharesCount'),
-      iReacted: asT<bool>(json, 'iReacted'),
-      iSaved: asT<bool>(json, 'iSaved'),
       shareLink: asT<String>(json, 'shareLink'),
       createdAt: asT<String>(json, 'createdAt'),
+      gqlPostContext: GqlPostContext.fromJson(asT<Map<String, dynamic>>(json, 'context')),
+      gqlContentStatsForContent: GqlContentStatsForContent.fromJson(asT<Map<String, dynamic>>(json, 'counters')),
     );
   }
 
@@ -90,25 +84,17 @@ class GqlPost {
 
   final GqlPollPostContent pollContent;
 
-  final int likesCount;
-
   final String title;
 
-  final int viewsCount;
-
-  final int savesCount;
-
-  final int sharesCount;
-
   final GqlSound sound;
-
-  final bool iReacted;
-
-  final bool iSaved;
 
   final String shareLink;
 
   final String createdAt;
+
+  final GqlPostContext gqlPostContext;
+
+  final GqlContentStatsForContent gqlContentStatsForContent;
 
   PostContent get domainContent {
     final postType = PostType.fromString(type);
@@ -132,17 +118,12 @@ class GqlPost {
         id: Id(id ?? ""),
         author: author.toDomain(userStore),
         circle: circle.toDomain(),
-        commentsCount: commentsCount,
         content: domainContent,
-        likesCount: likesCount,
         title: title,
         sound: sound.toDomain(),
-        viewsCount: viewsCount,
-        iReacted: iReacted,
-        iSaved: iSaved,
         shareLink: shareLink,
-        sharesCount: sharesCount,
-        savesCount: savesCount,
         createdAtString: createdAt,
+        context: gqlPostContext.toDomain(),
+        contentStats: gqlContentStatsForContent.toDomain(),
       );
 }

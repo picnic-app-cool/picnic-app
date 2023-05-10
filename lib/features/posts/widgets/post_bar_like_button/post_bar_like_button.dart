@@ -11,10 +11,12 @@ import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 class PostBarLikeButton extends StatelessWidget {
   const PostBarLikeButton({
     required this.params,
+    this.decoration,
     super.key,
   });
 
   final PostBarLikeButtonParams params;
+  final BoxDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -31,31 +33,38 @@ class PostBarLikeButton extends StatelessWidget {
         break;
       case PostOverlayTheme.light:
         textColor = colors.blackAndWhite.shade100;
-        foregroundColor = null;
+        foregroundColor = params.isLiked ? colors.darkBlue.shade600 : colors.blackAndWhite.shade100;
         break;
     }
+
+    final likeFilledIcon = Assets.images.likeFilled;
 
     final children = <Widget>[
       PicnicLikeButton(
         isLiked: params.isLiked,
         onTap: params.onTap,
-        image: params.overlayTheme == PostOverlayTheme.light
-            ? Assets.images.heart
-            : params.isVertical
-                ? Assets.images.heartOutlined
-                : Assets.images.heartOutlinedMedium,
+        image: params.overlayTheme == PostOverlayTheme.light ? likeFilledIcon : Assets.images.likeOutlined,
         size: params.isVertical ? PostBarButton.iconSize(context) : PostBarButton.horizontalIconSize(context),
         strokeColor: foregroundColor,
+        decoration: decoration,
       ),
-      if (!params.isVertical) const Gap(8),
-      Text(
-        params.likes,
-        style: theme.styles.body0.copyWith(
-          color: textColor,
-          fontSize: params.isVertical ? PostBarButton.defaultFontSize : PostBarButton.fontSize(context),
-          shadows: [
-            if (params.overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
-          ],
+      if (params.isVertical) const Gap(4) else const Gap(2),
+      Flexible(
+        child: Container(
+          constraints: const BoxConstraints(minWidth: 24),
+          child: Center(
+            child: Text(
+              params.likes,
+              maxLines: 1,
+              style: theme.styles.body0.copyWith(
+                color: textColor,
+                fontSize: params.isVertical ? PostBarButton.defaultFontSize : PostBarButton.fontSize(context),
+                shadows: [
+                  if (params.overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     ];
@@ -64,7 +73,6 @@ class PostBarLikeButton extends StatelessWidget {
       onTap: params.onTap,
       child: Container(
         width: params.isVertical ? null : params.width,
-        padding: params.isVertical ? null : const EdgeInsets.symmetric(vertical: 16),
         color: Colors.transparent,
         child: params.isVertical
             ? Column(

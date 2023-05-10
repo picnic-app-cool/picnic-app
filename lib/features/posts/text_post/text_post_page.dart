@@ -74,7 +74,7 @@ class _TextPostPageState extends State<TextPostPage>
                               commentBarHeight: _commentBarHeight,
                               onTapJoinCircle: () => _overlayPresenter?.onJoinCircle(),
                               onTapReply: (comment) => _overlayPresenter?.onTapReply(comment),
-                              onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlike(comment),
+                              onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlikeComment(comment),
                               onLongTapComment: (comment) => _overlayPresenter?.onLongPress(comment),
                               onTapCommentAuthor: (id) => _overlayPresenter?.onTapProfile(id: id),
                               padding: !displayOptions.showPostCommentBar ? EdgeInsets.zero : null,

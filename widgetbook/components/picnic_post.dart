@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/core/domain/model/basic_public_profile.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/content_stats_for_content.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/ui/widgets/picnic_post/picnic_post.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -192,12 +193,14 @@ class PicnicPostUseCases extends WidgetbookComponent {
                         initialValue: 'payamdaliri',
                       ),
                     ),
-                    viewsCount: context.knobs
-                        .number(
-                          label: 'Views Count',
-                          initialValue: 3581,
-                        )
-                        .toInt(),
+                    contentStats: const ContentStatsForContent.empty().copyWith(
+                      impressions: context.knobs
+                          .number(
+                            label: 'Views Count',
+                            initialValue: 3581,
+                          )
+                          .toInt(),
+                    ),
                   ),
                   subTitle: context.knobs.options(
                     label: 'Subtitle',

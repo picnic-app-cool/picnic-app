@@ -204,6 +204,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/discord.webp
   AssetGenImage get discord => const AssetGenImage('assets/images/discord.webp');
 
+  /// File path: assets/images/dislike_filled.webp
+  AssetGenImage get dislikeFilled => const AssetGenImage('assets/images/dislike_filled.webp');
+
+  /// File path: assets/images/dislike_outlined.webp
+  AssetGenImage get dislikeOutlined => const AssetGenImage('assets/images/dislike_outlined.webp');
+
   /// File path: assets/images/document.webp
   AssetGenImage get document => const AssetGenImage('assets/images/document.webp');
 
@@ -287,6 +293,12 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/lightning_off.webp
   AssetGenImage get lightningOff => const AssetGenImage('assets/images/lightning_off.webp');
+
+  /// File path: assets/images/like_filled.webp
+  AssetGenImage get likeFilled => const AssetGenImage('assets/images/like_filled.webp');
+
+  /// File path: assets/images/like_outlined.webp
+  AssetGenImage get likeOutlined => const AssetGenImage('assets/images/like_outlined.webp');
 
   /// File path: assets/images/link.webp
   AssetGenImage get link => const AssetGenImage('assets/images/link.webp');
@@ -637,6 +649,8 @@ class $AssetsImagesGen {
         deleteSolid,
         democracy,
         discord,
+        dislikeFilled,
+        dislikeOutlined,
         document,
         done,
         edit,
@@ -665,6 +679,8 @@ class $AssetsImagesGen {
         infoSquareOutlined,
         lightning,
         lightningOff,
+        likeFilled,
+        likeOutlined,
         link,
         lock,
         login,
@@ -788,17 +804,14 @@ class $AssetsImglyGen {
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
-  /// File path: assets/lottie/button_like.json
-  String get buttonLike => 'assets/lottie/button_like.json';
-
   /// File path: assets/lottie/check_animation.json
   String get checkAnimation => 'assets/lottie/check_animation.json';
 
   /// File path: assets/lottie/glitter_effect.json
   String get glitterEffect => 'assets/lottie/glitter_effect.json';
 
-  /// File path: assets/lottie/heartbeat.json
-  String get heartbeat => 'assets/lottie/heartbeat.json';
+  /// File path: assets/lottie/like_animation.json
+  String get likeAnimation => 'assets/lottie/like_animation.json';
 
   /// File path: assets/lottie/onboarding_background.json
   String get onboardingBackground => 'assets/lottie/onboarding_background.json';
@@ -808,7 +821,7 @@ class $AssetsLottieGen {
 
   /// List of all assets
   List<String> get values =>
-      [buttonLike, checkAnimation, glitterEffect, heartbeat, onboardingBackground, soundAttachmentPlaying];
+      [checkAnimation, glitterEffect, likeAnimation, onboardingBackground, soundAttachmentPlaying];
 }
 
 class Assets {

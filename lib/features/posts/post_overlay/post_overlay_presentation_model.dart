@@ -128,14 +128,6 @@ class PostOverlayPresentationModel implements PostOverlayViewModel {
   @override
   bool get showSavePostToCollection => featureFlags[FeatureFlagType.collectionsEnabled];
 
-  PostOverlayViewModel byUpdatingLikeStatus({required bool iReacted}) {
-    return copyWith(
-      post: post.byUpdatingLikeStatus(
-        iReacted: iReacted,
-      ),
-    );
-  }
-
   PostOverlayViewModel byUpdatingSavedStatus({required bool iSaved}) {
     return copyWith(
       post: post.byUpdatingSavedStatus(

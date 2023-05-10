@@ -132,7 +132,7 @@ class PostsMocks {
   static late MockGetPostsListUseCase getPostsListUseCase;
 
   static late MockLikeUnlikePostFailure likeUnlikePostFailure;
-  static late MockLikeUnlikePostUseCase likeUnlikePostUseCase;
+  static late MockLikeDislikePostUseCase likeUnlikePostUseCase;
 
   static late MockGetSoundsListFailure getSoundsListFailure;
   static late MockGetSoundsListUseCase getSoundsListUseCase;
@@ -169,6 +169,9 @@ class PostsMocks {
   static late MockGetPinnedCommentsUseCase getPinnedCommentsUseCase;
   static late MockPinCommentUseCase pinCommentUseCase;
   static late MockUnpinCommentUseCase unpinCommentUseCase;
+
+  static late MockUnreactToPostFailure unreactToPostFailure;
+  static late MockUnreactToPostUseCase unreactToPostUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
@@ -303,7 +306,7 @@ class PostsMocks {
     getPostsListFailure = MockGetPostsListFailure();
     getPostsListUseCase = MockGetPostsListUseCase();
     likeUnlikePostFailure = MockLikeUnlikePostFailure();
-    likeUnlikePostUseCase = MockLikeUnlikePostUseCase();
+    likeUnlikePostUseCase = MockLikeDislikePostUseCase();
 
     getSoundsListFailure = MockGetSoundsListFailure();
     getSoundsListUseCase = MockGetSoundsListUseCase();
@@ -341,6 +344,9 @@ class PostsMocks {
     unpinCommentUseCase = MockUnpinCommentUseCase();
 
     getPostCollectionsFailure = MockGetPostCollectionsFailure();
+
+    unreactToPostFailure = MockUnreactToPostFailure();
+    unreactToPostUseCase = MockUnreactToPostUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
@@ -462,7 +468,7 @@ class PostsMocks {
     registerFallbackValue(MockGetPostsListFailure());
     registerFallbackValue(MockGetPostsListUseCase());
     registerFallbackValue(MockLikeUnlikePostFailure());
-    registerFallbackValue(MockLikeUnlikePostUseCase());
+    registerFallbackValue(MockLikeDislikePostUseCase());
     registerFallbackValue(MockLikeUnlikeCommentFailure());
     registerFallbackValue(MockLikeUnlikeCommentUseCase());
     registerFallbackValue(MockGetCommentsFailure());
@@ -491,6 +497,9 @@ class PostsMocks {
     registerFallbackValue(MockDeleteCommentUseCase());
 
     registerFallbackValue(MockGetPostCollectionsFailure());
+
+    registerFallbackValue(MockUnreactToPostFailure());
+    registerFallbackValue(MockUnreactToPostUseCase());
 
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 

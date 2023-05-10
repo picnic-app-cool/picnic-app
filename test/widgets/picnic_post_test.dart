@@ -2,6 +2,7 @@ import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/content_stats_for_content.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
 import 'package:picnic_app/ui/widgets/picnic_post/picnic_post.dart';
@@ -15,7 +16,7 @@ void main() {
     circle: const BasicCircle.empty().copyWith(
       name: '🚀 startups',
     ),
-    viewsCount: 3581,
+    contentStats: const ContentStatsForContent.empty().copyWith(impressions: 3581),
     author: Stubs.postAuthor,
   );
   final postSummaryBarWithTag = PostSummaryBar(

@@ -31,8 +31,8 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/glitter_effect.json
   String get glitterEffect => 'assets/lottie/glitter_effect.json';
 
-  /// File path: assets/lottie/heartbeat.json
-  String get heartbeat => 'assets/lottie/heartbeat.json';
+  /// File path: assets/lottie/like_animation.json
+  String get likeAnimation => 'assets/lottie/like_animation.json';
 
   /// File path: assets/lottie/onboarding_background.json
   String get onboardingBackground => 'assets/lottie/onboarding_background.json';
@@ -41,7 +41,7 @@ class $AssetsLottieGen {
   String get soundAttachmentPlaying => 'assets/lottie/sound_attachment_playing.json';
 
   /// List of all assets
-  List<String> get values => [buttonLike, glitterEffect, heartbeat, onboardingBackground, soundAttachmentPlaying];
+  List<String> get values => [buttonLike, glitterEffect, likeAnimation, onboardingBackground, soundAttachmentPlaying];
 }
 
 class Assets {

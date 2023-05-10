@@ -21,7 +21,6 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_extensions/widget_tester_extensions.dart';
 import '../../../test_utils/golden_tests_utils.dart';
-import '../../../test_utils/keyboard_simulator_view.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../feed_tests_utils.dart';
@@ -83,12 +82,12 @@ Future<void> main() async {
       Mocks.followUserUseCase,
       Mocks.joinCircleUseCase,
       PostsMocks.getCommentsPreviewUseCase,
-      PostsMocks.createCommentUseCase,
       PostsMocks.deleteCommentUseCase,
       PostsMocks.getPostUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.currentTimeProvider,
       Mocks.sharePostUseCase,
+      PostsMocks.unreactToPostUseCase,
     );
     page = PostOverlayPage(presenter: presenter);
   }
@@ -112,18 +111,6 @@ Future<void> main() async {
     },
     pageBuilder: () => _OverlayContainer(
       child: page,
-    ),
-  );
-  await screenshotTest(
-    'post_overlay_page',
-    variantName: 'keyboard_open',
-    setUp: () async {
-      initMvp();
-    },
-    pageBuilder: () => KeyboardSimulatorView(
-      child: _OverlayContainer(
-        child: page,
-      ),
     ),
   );
 

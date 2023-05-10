@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
+import 'package:gap/gap.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 
@@ -11,21 +11,18 @@ class IconButtonWithCounter extends StatelessWidget {
     required this.onTap,
     required this.iconPath,
     this.counterText,
-    required this.overlayTheme,
     this.isSelected = false,
     this.isLoading = false,
   });
 
   final VoidCallback? onTap;
   final String? counterText;
-  final PostOverlayTheme overlayTheme;
   final String iconPath;
   final bool isSelected;
   final bool isLoading;
 
   static const _blur = 8.0;
   static const _lightOpacity = 0.1;
-  static const _darkOpacity = 0.05;
   static const _iconSize = 20.0;
 
   @override
@@ -36,20 +33,11 @@ class IconButtonWithCounter extends StatelessWidget {
     final Color foregroundColor;
     final Color textColor;
     final double opacity;
-    switch (overlayTheme) {
-      case PostOverlayTheme.dark:
-        backgroundColor = isSelected ? colors.blue.shade800 : colors.darkBlue.shade600;
-        foregroundColor = isSelected ? colors.blackAndWhite.shade100 : colors.darkBlue.shade600;
-        textColor = colors.darkBlue.shade600;
-        opacity = _darkOpacity;
-        break;
-      case PostOverlayTheme.light:
-        backgroundColor = isSelected ? colors.blue.shade800 : colors.blackAndWhite.shade100;
-        foregroundColor = colors.blackAndWhite.shade100;
-        textColor = colors.blackAndWhite.shade100;
-        opacity = _lightOpacity;
-        break;
-    }
+    final white = colors.blackAndWhite.shade100;
+    backgroundColor = isSelected ? colors.blue.shade800 : white;
+    foregroundColor = white;
+    textColor = white;
+    opacity = _lightOpacity;
 
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -68,17 +56,19 @@ class IconButtonWithCounter extends StatelessWidget {
                   ? const PicnicLoadingIndicator(color: Colors.white)
                   : Row(
                       children: [
+                        const Spacer(),
                         Image.asset(
                           iconPath,
                           color: foregroundColor,
                           height: _iconSize,
                           width: _iconSize,
                         ),
-                        const Spacer(),
+                        const Gap(4),
                         Text(
                           counterText?.toString() ?? '0',
                           style: theme.styles.body0.copyWith(color: textColor),
                         ),
+                        const Spacer(),
                       ],
                     ),
             ),

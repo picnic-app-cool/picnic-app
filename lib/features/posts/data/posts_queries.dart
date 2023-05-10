@@ -23,14 +23,23 @@ query linkMetaData(\$link: String!){
 }
 """;
 
-const String reactPostMutation = r'''
-mutation ($id: String!, $react: Boolean!) {
-    setReactPost(data: {
-        id: $id
-        react: $react
-        reaction: ":heart:"
-    }){
-        success
+String reactPostMutation = '''
+mutation (\$postId: String!, \$reaction: String!) {
+    reactToPost(
+        postId: \$postId
+        reaction: \$reaction
+    ){
+        ${GqlTemplate().successPayload}
+    }
+}
+''';
+
+String unReactToPostMutation = '''
+mutation (\$postId: String!) {
+    unreactToPost(
+       postId: \$postId
+    ){
+        ${GqlTemplate().successPayload}
     }
 }
 ''';

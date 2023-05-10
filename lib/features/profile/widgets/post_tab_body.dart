@@ -3,8 +3,8 @@ import 'package:picnic_app/features/posts/domain/model/post_details_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/features/posts/domain/model/post_type.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
+import 'package:picnic_app/features/posts/widgets/horizontal_post_bar_buttons.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
-import 'package:picnic_app/features/posts/widgets/post_bar_buttons.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_list_item.dart';
 import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
@@ -17,6 +17,7 @@ class PostTabBody extends StatelessWidget {
     required this.commentsButtonParams,
     required this.shareButtonParams,
     required this.bookmarkButtonParams,
+    required this.dislikeButtonParams,
     required this.bookmarkEnabled,
     required this.onToggleFollow,
     required this.onTapAuthor,
@@ -34,6 +35,7 @@ class PostTabBody extends StatelessWidget {
   final PostBarButtonParams commentsButtonParams;
   final PostBarButtonParams shareButtonParams;
   final PostBarButtonParams bookmarkButtonParams;
+  final PostBarButtonParams dislikeButtonParams;
   final bool bookmarkEnabled;
   final ValueChanged<Post>? onToggleFollow;
   final ValueChanged<Post>? onTapAuthor;
@@ -99,12 +101,13 @@ class PostTabBody extends StatelessWidget {
             ),
           ],
         ),
-        PostBarButtons(
+        HorizontalPostBarButtons(
           likeButtonParams: likeButtonParams,
           commentsButtonParams: commentsButtonParams,
           shareButtonParams: shareButtonParams,
           bookmarkButtonParams: bookmarkButtonParams,
           bookmarkEnabled: bookmarkEnabled,
+          dislikeButtonParams: dislikeButtonParams,
           padding: const EdgeInsets.symmetric(
             horizontal: 8,
           ),

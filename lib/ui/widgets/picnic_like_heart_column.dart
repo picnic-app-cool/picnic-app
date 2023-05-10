@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/buttons/picnic_like_button.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
@@ -28,6 +29,7 @@ class PicnicLikeHeartColumn extends StatelessWidget {
           isLiked: liked,
           onTap: onTapLikeHeart,
           size: _heartIconSize,
+          image: Assets.images.likeOutlined,
         ),
         Text(
           likesCount.toString(),

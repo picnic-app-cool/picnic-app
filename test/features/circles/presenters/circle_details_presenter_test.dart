@@ -520,6 +520,7 @@ void main() {
       PostsMocks.getPostUseCase,
       Mocks.followUserUseCase,
       CirclesMocks.getCircleMembersByRoleUseCase,
+      PostsMocks.unreactToPostUseCase,
     );
   });
 }

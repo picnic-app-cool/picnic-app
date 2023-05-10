@@ -68,25 +68,25 @@ flutter:
     - assets/lottie/
     - assets/images/
   fonts:
-    - family: Kanit
+    - family: Figtree
       fonts:
-        - asset: lib/fonts/Kanit-Thin.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 100
-        - asset: lib/fonts/Kanit-ExtraLight.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 200
-        - asset: lib/fonts/Kanit-Light.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Light.ttf
           weight: 300
-        - asset: lib/fonts/Kanit-Regular.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Regular.ttf
           weight: 400
-        - asset: lib/fonts/Kanit-Medium.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Medium.ttf
           weight: 500
-        - asset: lib/fonts/Kanit-SemiBold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-SemiBold.ttf
           weight: 600
-        - asset: lib/fonts/Kanit-Bold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Bold.ttf
           weight: 700
-        - asset: lib/fonts/Kanit-ExtraBold.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-ExtraBold.ttf
           weight: 800
-        - asset: lib/fonts/Kanit-Black.ttf
+        - asset: packages/picnic_ui_components/fonts/Figtree-Black.ttf
           weight: 900
     - family: Arimo
       fonts:

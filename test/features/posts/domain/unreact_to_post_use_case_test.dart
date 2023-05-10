@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
-import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_post_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
@@ -11,19 +11,18 @@ import '../../../test_utils/test_utils.dart';
 import '../mocks/posts_mocks.dart';
 
 void main() {
-  late LikeUnlikePostUseCase useCase;
+  late UnreactToPostUseCase useCase;
 
   setUp(() {
-    useCase = LikeUnlikePostUseCase(
+    useCase = UnreactToPostUseCase(
       PostsMocks.postsRepository,
       Mocks.hapticFeedbackUseCase,
     );
     when(
-      () => PostsMocks.postsRepository.likeUnlikePost(
-        id: Stubs.imagePost.id,
-        like: true,
+      () => PostsMocks.postsRepository.unReactToPost(
+        postId: Stubs.imagePost.id,
       ),
-    ).thenAnswer((_) => successFuture(true));
+    ).thenAnswer((_) => successFuture(unit));
     when(
       () => PostsMocks.postsRepository.getPostById(
         id: Stubs.imagePost.id,
@@ -43,11 +42,9 @@ void main() {
 
       // WHEN
       final result = await useCase.execute(
-        id: Stubs.imagePost.id,
-        like: true,
+        postId: Stubs.imagePost.id,
       );
 
-      // TODO: Update this test when the repository is implemented and the use case returns true
       // THEN
       expect(result.isSuccess, true);
       verify(() => Mocks.hapticFeedbackUseCase.execute());
@@ -55,7 +52,7 @@ void main() {
   );
 
   test("getIt resolves successfully", () async {
-    final useCase = getIt<LikeUnlikePostUseCase>();
+    final useCase = getIt<UnreactToPostUseCase>();
     expect(useCase, isNotNull);
   });
 }

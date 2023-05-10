@@ -151,10 +151,10 @@ class _PicnicVideoPlayerCustomControls extends State<PicnicVideoPlayerCustomCont
           //ignore: no-magic-number
           left: chewieController.isFullScreen
               ? VideoPlayerControlsDimensions.horizontalVideoHorizontalMargin
-              : VideoPlayerControlsDimensions.verticalVideoScrubbingHorizontalMargin,
+              : VideoPlayerControlsDimensions.verticalVideoScrubbingLeftMargin,
           right: chewieController.isFullScreen
               ? VideoPlayerControlsDimensions.horizontalScrubbingRightMargin
-              : VideoPlayerControlsDimensions.verticalVideoScrubbingHorizontalMargin,
+              : VideoPlayerControlsDimensions.verticalVideoScrubbingRightMargin,
           //ignore: no-magic-number
         ),
         child: Column(

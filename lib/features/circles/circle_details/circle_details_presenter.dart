@@ -50,11 +50,12 @@ import 'package:picnic_app/features/circles/members/members_initial_params.dart'
 import 'package:picnic_app/features/circles/user_roles/user_roles_initial_params.dart';
 import 'package:picnic_app/features/create_slice/presentation/create_slice_initial_params.dart';
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_initial_params.dart';
-import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
-import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_post_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import 'package:picnic_app/features/posts/post_creation_index/post_creation_index_initial_params.dart';
 import 'package:picnic_app/features/posts/post_overlay/widgets/saved_post_snackbar.dart';
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_initial_params.dart';
@@ -94,11 +95,12 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     this._getLastUsedSortingOptionUseCase,
     this._logAnalyticsEventUseCase,
     this._sharePostUseCase,
-    this._likeUnlikePostUseCase,
+    this._likeDislikePostUseCase,
     this._savePostToCollectionUseCase,
     this._getPostUseCase,
     this._followUnfollowUseCase,
     this._getMembersByRoleUseCase,
+    this._unReactToPostUseCase,
   ) : super(model);
 
   final CircleDetailsNavigator navigator;
@@ -118,11 +120,12 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
   final GetLastUsedSortingOptionUseCase _getLastUsedSortingOptionUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final SharePostUseCase _sharePostUseCase;
-  final LikeUnlikePostUseCase _likeUnlikePostUseCase;
+  final LikeDislikePostUseCase _likeDislikePostUseCase;
   final SavePostToCollectionUseCase _savePostToCollectionUseCase;
   final GetPostUseCase _getPostUseCase;
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
   final GetCircleMembersByRoleUseCase _getMembersByRoleUseCase;
+  final UnreactToPostUseCase _unReactToPostUseCase;
 
   // ignore: unused_element
   CircleDetailsPresentationModel get _model => state as CircleDetailsPresentationModel;
@@ -449,14 +452,24 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     tryEmit(_model.copyWith(showAppBarBackgroundColor: true));
   }
 
-  Future<void> onTapHeart(Post post) {
+  Future<void> onTapLike(Post post) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.postLikeButton,
-        targetValue: (!post.iReacted).toString(),
+        targetValue: (!post.iLiked).toString(),
       ),
     );
-    return _executeLikeUnlikeUseCase(post);
+    await _executeLikeReactUnRectUseCase(post);
+  }
+
+  Future<void> onTapDislike(Post post) async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postDislikeButton,
+        targetValue: (!post.iDisliked).toString(),
+      ),
+    );
+    await _executeDislikeReactUnRectUseCase(post);
   }
 
   Future<void> onTapComments(Post post) async {
@@ -638,33 +651,66 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     tryEmit(_model.byUpdateFollowAction(members[index]));
   }
 
-  Future<Either<LikeUnlikePostFailure, Post>> _executeLikeUnlikeUseCase(Post post) {
-    final previousState = post.iReacted;
-
-    void emitStatus({required bool liked}) {
-      final newPost = post.byUpdatingLikeStatus(iReacted: liked);
-      onPostUpdated(newPost);
-    }
+  Future<void> _executeLikeReactUnRectUseCase(Post post) async {
+    final initialReaction = post.context.reaction;
+    final iLikedPreviously = post.iLiked;
 
     //this updates the UI immediately on tap
-    emitStatus(liked: !previousState);
-    return _likeUnlikePostUseCase
-        .execute(
-      id: post.id,
-      like: !previousState,
-    )
-        .doOn(
-      success: (post) {
-        emitStatus(liked: post.iReacted);
-      },
-      fail: (fail) {
-        emitStatus(liked: previousState);
-      },
-    );
+    late Post newPost;
+    newPost = iLikedPreviously ? post.byUnReactingToPost() : post.byLikingPost();
+    onPostUpdated(newPost);
+
+    if (iLikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: post.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: post, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: post.id,
+        likeDislikeReaction: LikeDislikeReaction.like,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: post, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  Future<void> _executeDislikeReactUnRectUseCase(Post post) async {
+    final initialReaction = post.context.reaction;
+    final iDisLikedPreviously = post.iDisliked;
+
+    //this updates the UI immediately on tap
+    late Post newPost;
+    newPost = iDisLikedPreviously ? post.byUnReactingToPost() : post.byDislikingPost();
+    onPostUpdated(newPost);
+
+    if (iDisLikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: post.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: post, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: post.id,
+        likeDislikeReaction: LikeDislikeReaction.dislike,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: post, initialReaction: initialReaction);
+        },
+      );
+    }
   }
 
   Future<Either<SavePostToCollectionFailure, Post>> _executeBookmarkUseCase(Post post) {
-    final previousState = post.iSaved;
+    final previousState = post.context.saved;
 
     void emitStatus({required bool saved}) {
       final newPost = post.byUpdatingSavedStatus(iSaved: saved);
@@ -686,15 +732,34 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
       },
     ).doOn(
       success: (post) {
-        emitStatus(saved: post.iSaved);
+        emitStatus(saved: post.context.saved);
         _showSavePostSuccess(post);
       },
       fail: (fail) => emitStatus(saved: previousState),
     );
   }
 
+  void _reEmitInitialReaction({
+    required Post post,
+    required LikeDislikeReaction initialReaction,
+  }) {
+    late Post newPost;
+    switch (initialReaction) {
+      case LikeDislikeReaction.like:
+        newPost = post.byLikingPost();
+        break;
+      case LikeDislikeReaction.dislike:
+        newPost = post.byDislikingPost();
+        break;
+      case LikeDislikeReaction.noReaction:
+        newPost = post.byUnReactingToPost();
+        break;
+    }
+    onPostUpdated(newPost);
+  }
+
   void _showSavePostSuccess(Post post) {
-    if (_model.showSavePostToCollection && post.iSaved) {
+    if (_model.showSavePostToCollection && post.context.saved) {
       navigator.showSnackBarWithWidget(
         SavedPostSnackBar(
           post: post,

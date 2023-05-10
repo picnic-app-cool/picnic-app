@@ -131,9 +131,11 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                     ),
                                   ),
                                   const Gap(12),
-                                  const Padding(
+                                  Padding(
                                     padding: _contentPadding,
-                                    child: Divider(),
+                                    child: Divider(
+                                      color: blackAndWhite.shade400,
+                                    ),
                                   ),
                                   const Gap(12),
                                   Padding(
@@ -141,32 +143,40 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                     child: PostCommentBar(
                                       hasActionsBelow: postOverlayViewModel.showReportAction,
                                       bookmarkEnabled: postOverlayViewModel.savedPostsEnabled,
-                                      onTapSend: presenter.onTapSend,
                                       likeButtonParams: PostBarLikeButtonParams(
-                                        isLiked: post.iReacted,
-                                        likes: post.likesCount.toString(),
-                                        onTap: presenter.postOverlayPresenter.onTapHeart,
+                                        isLiked: post.iLiked,
+                                        likes: post.contentStats.likes.toString(),
+                                        onTap: presenter.postOverlayPresenter.onTapLikePost,
                                         overlayTheme: post.overlayTheme,
+                                        isVertical: post.reactButtonsVertical,
+                                      ),
+                                      dislikeButtonParams: PostBarButtonParams(
+                                        onTap: presenter.postOverlayPresenter.onTapDislikePost,
+                                        overlayTheme: post.overlayTheme,
+                                        selected: post.iDisliked,
+                                        isVertical: post.reactButtonsVertical,
                                       ),
                                       commentsButtonParams: PostBarButtonParams(
                                         onTap: presenter.postOverlayPresenter.onTapChat,
                                         overlayTheme: post.overlayTheme,
-                                        text: post.commentsCount.toString(),
+                                        text: post.contentStats.comments.toString(),
+                                        isVertical: post.reactButtonsVertical,
                                       ),
                                       shareButtonParams: PostBarButtonParams(
                                         onTap: presenter.postOverlayPresenter.onTapShare,
                                         overlayTheme: post.overlayTheme,
-                                        text: post.sharesCount.toString(),
+                                        text: post.contentStats.shares.toString(),
+                                        isVertical: post.reactButtonsVertical,
                                       ),
                                       bookmarkButtonParams: PostBarButtonParams(
                                         onTap: presenter.postOverlayPresenter.onTapBookmark,
                                         overlayTheme: post.overlayTheme,
-                                        text: post.savesCount.toString(),
-                                        selected: post.iSaved,
+                                        text: post.contentStats.saves.toString(),
+                                        selected: post.context.saved,
+                                        isVertical: post.reactButtonsVertical,
                                       ),
                                       overlayTheme: post.overlayTheme,
                                       focusNode: _newThoughtFocusNode,
-                                      canComment: state.post.circle.commentsEnabled,
                                     ),
                                   ),
                                   const Gap(12),

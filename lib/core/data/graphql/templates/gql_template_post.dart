@@ -41,13 +41,18 @@ extension GqlTemplatePost on GqlTemplate {
               }
               votesTotal
           }
-          viewsCount
-          sharesCount
-          savesCount
-          commentsCount
-          likesCount
-          iReacted
-          iSaved
+          context {
+            reaction,
+            saved,
+            pollAnswerId
+          }
+          counters {
+            saves
+            shares
+            comments
+            impressions
+            reactions
+          }
           author {
             ${GqlTemplate().basicPublicProfile}
           }

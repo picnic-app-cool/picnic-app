@@ -23,6 +23,7 @@ enum AnalyticsTapTarget {
   postJoinCircleButton('post_join_circle_button'),
   postFollowUserButton('post_follow_user_button'),
   postLikeButton('post_like_button'),
+  postDislikeButton('post_dislike_button'),
   postLikeDoubleTap('post_like_double_tap'),
   postSendCommentButton('post_send_comment_button'),
   postOpenChatButton('post_open_chat_button'),

@@ -9,6 +9,7 @@ import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/domain/model/post_contents/image_post_content.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/content_stats_for_content.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/profile/domain/use_cases/get_user_posts_use_case.dart';
 
@@ -30,7 +31,7 @@ void main() {
           pageInfo: const PageInfo.firstPage(),
           items: [
             const Post.empty().copyWith(
-              viewsCount: 1,
+              contentStats: const ContentStatsForContent.empty().copyWith(impressions: 1),
               author: const BasicPublicProfile.empty(),
               content: const ImagePostContent(
                 text: 'text',

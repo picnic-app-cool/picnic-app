@@ -11,7 +11,7 @@ class PostCaption extends StatelessWidget {
 
   final String text;
 
-  static const double horizontalPadding = 8.0;
+  static const double horizontalPadding = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class PostCaption extends StatelessWidget {
           return Text(
             isExpanded ? appLocalizations.seeLess : appLocalizations.seeMore,
             style: captionStyle.copyWith(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.left,
           );
         },
       ),

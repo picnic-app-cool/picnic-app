@@ -31,10 +31,11 @@ import "package:picnic_app/features/posts/domain/use_cases/get_link_metadata_use
 import 'package:picnic_app/features/posts/domain/use_cases/get_pinned_comments_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_sounds_list_use_case.dart';
+import "package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart";
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
-import "package:picnic_app/features/posts/domain/use_cases/like_unlike_post_use_case.dart";
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import "package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart";
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_initial_params.dart';
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_navigator.dart';
@@ -115,7 +116,6 @@ import "package:picnic_app/features/posts/video_post_recording/video_post_record
 import 'package:picnic_app/features/posts/video_post_recording/video_post_recording_page.dart';
 import "package:picnic_app/features/posts/video_post_recording/video_post_recording_presentation_model.dart";
 import "package:picnic_app/features/posts/video_post_recording/video_post_recording_presenter.dart";
-
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
@@ -178,8 +178,8 @@ void _configureUseCases() {
         ..registerFactory<GetFeedPostsListUseCase>(
           () => GetFeedPostsListUseCase(getIt()),
         )
-        ..registerFactory<LikeUnlikePostUseCase>(
-          () => LikeUnlikePostUseCase(
+        ..registerFactory<LikeDislikePostUseCase>(
+          () => LikeDislikePostUseCase(
             getIt(),
             getIt(),
           ),
@@ -236,6 +236,12 @@ void _configureUseCases() {
         )
         ..registerFactory<UnpinCommentUseCase>(
           () => UnpinCommentUseCase(getIt()),
+        )
+        ..registerFactory<UnreactToPostUseCase>(
+          () => UnreactToPostUseCase(
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG

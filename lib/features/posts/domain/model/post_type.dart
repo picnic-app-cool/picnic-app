@@ -33,4 +33,21 @@ enum PostType {
         return PostOverlayTheme.dark;
     }
   }
+
+  bool get reactButtonsVertical {
+    switch (this) {
+      case PostType.text:
+        return false;
+      case PostType.image:
+        return true;
+      case PostType.video:
+        return true;
+      case PostType.link:
+        return false;
+      case PostType.poll:
+        return false;
+      case PostType.unknown:
+        return false;
+    }
+  }
 }

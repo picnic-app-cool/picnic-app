@@ -21,17 +21,17 @@ import 'package:picnic_app/features/posts/comment_chat/comment_chat_initial_para
 import 'package:picnic_app/features/posts/domain/model/comment_preview.dart';
 import 'package:picnic_app/features/posts/domain/model/comments_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/get_post_by_id_failure.dart';
-import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/post_details_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
-import 'package:picnic_app/features/posts/domain/use_cases/create_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/delete_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_comments_preview_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
-import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_post_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_navigator.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_overlay/widgets/saved_post_snackbar.dart';
@@ -43,33 +43,33 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   PostOverlayPresenter(
     super.model,
     this.navigator,
-    this._likeUnlikePostUseCase,
+    this._likeDislikePostUseCase,
     this._likeUnlikeCommentUseCase,
     this._savePostToCollectionUseCase,
     this._followUnfollowUseCase,
     this._joinCircleUseCase,
     this._getCommentsPreviewUseCase,
-    this._createCommentUseCase,
     this._deleteCommentUseCase,
     this._getPostUseCase,
     this._logAnalyticsEventUseCase,
     this._currentTimeProvider,
     this._sharePostUseCase,
+    this._unReactToPostUseCase,
   );
 
   final PostOverlayNavigator navigator;
-  final LikeUnlikePostUseCase _likeUnlikePostUseCase;
+  final LikeDislikePostUseCase _likeDislikePostUseCase;
   final LikeUnlikeCommentUseCase _likeUnlikeCommentUseCase;
   final SavePostToCollectionUseCase _savePostToCollectionUseCase;
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
   final JoinCircleUseCase _joinCircleUseCase;
   final GetCommentsPreviewUseCase _getCommentsPreviewUseCase;
-  final CreateCommentUseCase _createCommentUseCase;
   final DeleteCommentUseCase _deleteCommentUseCase;
   final GetPostUseCase _getPostUseCase;
   final SharePostUseCase _sharePostUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final CurrentTimeProvider _currentTimeProvider;
+  final UnreactToPostUseCase _unReactToPostUseCase;
 
   PostOverlayPresentationModel get _model => state as PostOverlayPresentationModel;
 
@@ -79,7 +79,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     }
   }
 
-  void onTapLikeUnlike(CommentPreview comment) {
+  void onTapLikeUnlikeComment(CommentPreview comment) {
     final previousState = comment.isLiked;
 
     _logAnalyticsEventUseCase.execute(
@@ -139,24 +139,34 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   Future<void> onDoubleTapPost() async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.postLikeDoubleTap,
-        targetValue: (!_model.post.iReacted).toString(),
+        target: AnalyticsTapTarget.postLikeButton,
+        targetValue: (!_model.post.iLiked).toString(),
       ),
     );
-    if (!_model.post.iReacted) {
+    if (!_model.post.iLiked) {
       emitAndNotify(_model.copyWith(heartLastAnimatedAt: _currentTimeProvider.currentTime));
-      await _executeLikeUnlikeUseCase();
+      await _executeLikeReactUnReactUseCase();
     }
   }
 
-  Future<void> onTapHeart() {
+  Future<void> onTapLikePost() async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.postLikeButton,
-        targetValue: (!_model.post.iReacted).toString(),
+        targetValue: (!_model.post.iLiked).toString(),
       ),
     );
-    return _executeLikeUnlikeUseCase();
+    await _executeLikeReactUnReactUseCase();
+  }
+
+  Future<void> onTapDislikePost() async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postDislikeButton,
+        targetValue: (!_model.post.iDisliked).toString(),
+      ),
+    );
+    await _executeDislikeReactUnReactUseCase();
   }
 
   Future<void> onTapChat() async {
@@ -275,24 +285,6 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     await _refreshPostDetails();
   }
 
-  Future<void> onTapSend(String text) async {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.postSendCommentButton,
-      ),
-    );
-
-    await _createCommentUseCase
-        .execute(
-          postId: _model.post.id,
-          text: text,
-          parentCommentId: _model.replyingComment.id,
-          postAuthorId: _model.post.author.id,
-        )
-        .doOn(success: (_) => _refreshCommentsAndPost())
-        .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));
-  }
-
   void didUpdateDependencies({
     required Post post,
     required PostDetailsMode mode,
@@ -341,7 +333,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       },
       onTapLike: () {
         navigator.close();
-        onTapLikeUnlike(comment);
+        onTapLikeUnlikeComment(comment);
       },
       onTapDelete: _model.post.circle.permissions.canManageComments || comment.author.id == _model.privateProfile.id
           ? () {
@@ -358,7 +350,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
 
   void onDoubleTapComment(CommentPreview comment) {
     if (!comment.isLiked) {
-      onTapLikeUnlike(comment);
+      onTapLikeUnlikeComment(comment);
     }
   }
 
@@ -405,33 +397,85 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         );
   }
 
-  Future<Either<LikeUnlikePostFailure, Post>> _executeLikeUnlikeUseCase() {
-    final previousState = _model.post.iReacted;
-
-    void emitStatus({required bool liked}) {
-      emitAndNotify(_model.byUpdatingLikeStatus(iReacted: liked));
-      _model.messenger.postUpdated(_model.post);
-    }
+  Future<void> _executeLikeReactUnReactUseCase() async {
+    final initialReaction = _model.post.context.reaction;
+    final iLikedPreviously = _model.post.iLiked;
 
     //this updates the UI immediately on tap
-    emitStatus(liked: !previousState);
-    return _likeUnlikePostUseCase
-        .execute(
-      id: _model.post.id,
-      like: !previousState,
-    )
-        .doOn(
-      success: (post) {
-        emitStatus(liked: post.iReacted);
-      },
-      fail: (fail) {
-        emitStatus(liked: previousState);
-      },
-    );
+    late Post newPost;
+    newPost = iLikedPreviously ? _model.post.byUnReactingToPost() : _model.post.byLikingPost();
+    emitAndNotify(_model.copyWith(post: newPost));
+
+    if (iLikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: _model.post.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: _model.post.id,
+        likeDislikeReaction: LikeDislikeReaction.like,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  Future<void> _executeDislikeReactUnReactUseCase() async {
+    final initialReaction = _model.post.context.reaction;
+    final iDislikedPreviously = _model.post.iDisliked;
+
+    //this updates the UI immediately on tap
+    late Post newPost;
+    newPost = iDislikedPreviously ? _model.post.byUnReactingToPost() : _model.post.byDislikingPost();
+    emitAndNotify(_model.copyWith(post: newPost));
+
+    if (iDislikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: _model.post.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: _model.post.id,
+        likeDislikeReaction: LikeDislikeReaction.dislike,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  void _reEmitInitialReaction({
+    required Post post,
+    required LikeDislikeReaction initialReaction,
+  }) {
+    late Post newPost;
+    switch (initialReaction) {
+      case LikeDislikeReaction.like:
+        newPost = post.byLikingPost();
+        break;
+      case LikeDislikeReaction.dislike:
+        newPost = post.byDislikingPost();
+        break;
+      case LikeDislikeReaction.noReaction:
+        newPost = post.byUnReactingToPost();
+        break;
+    }
+    emitAndNotify(_model.copyWith(post: newPost));
   }
 
   Future<Either<SavePostToCollectionFailure, Post>> _executeBookmarkUseCase() {
-    final previousState = _model.post.iSaved;
+    final previousState = _model.post.context.saved;
 
     void emitStatus({required bool saved}) {
       emitAndNotify(_model.byUpdatingSavedStatus(iSaved: saved));
@@ -453,7 +497,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       },
     ).doOn(
       success: (post) {
-        emitStatus(saved: post.iSaved);
+        emitStatus(saved: post.context.saved);
         _showSavePostSuccess(post);
       },
       fail: (fail) => emitStatus(saved: previousState),
@@ -461,7 +505,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   }
 
   void _showSavePostSuccess(Post post) {
-    if (_model.showSavePostToCollection && post.iSaved) {
+    if (_model.showSavePostToCollection && post.context.saved) {
       navigator.showSnackBarWithWidget(
         SavedPostSnackBar(
           post: post,

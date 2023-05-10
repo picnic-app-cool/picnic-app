@@ -99,7 +99,7 @@ class _LinkPostPageState extends State<LinkPostPage>
                                   comments: state.comments,
                                   onTapComment: (comment) => _overlayPresenter?.onTapComment(comment.toTreeComment()),
                                   onDoubleTapComment: (comment) => _overlayPresenter?.onDoubleTapComment(comment),
-                                  onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlike(comment),
+                                  onTapLikeUnlike: (comment) => _overlayPresenter?.onTapLikeUnlikeComment(comment),
                                   onTapCommentAuthor: (id) => _overlayPresenter?.onTapProfile(id: id),
                                   onTapReply: (comment) => _overlayPresenter?.onTapReply(comment),
                                   onLongTapComment: (comment) => _overlayPresenter?.onLongPress(comment),

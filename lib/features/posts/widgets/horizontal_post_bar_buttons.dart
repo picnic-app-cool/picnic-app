@@ -7,14 +7,14 @@ import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_
 
 import 'package:picnic_app/resources/assets.gen.dart';
 
-class PostBarButtons extends StatelessWidget {
-  const PostBarButtons({
+class HorizontalPostBarButtons extends StatelessWidget {
+  const HorizontalPostBarButtons({
     required this.likeButtonParams,
     required this.commentsButtonParams,
     required this.shareButtonParams,
     required this.bookmarkButtonParams,
     required this.bookmarkEnabled,
-    this.spacing,
+    required this.dislikeButtonParams,
     this.padding,
     super.key,
   });
@@ -23,48 +23,54 @@ class PostBarButtons extends StatelessWidget {
   final PostBarButtonParams commentsButtonParams;
   final PostBarButtonParams shareButtonParams;
   final PostBarButtonParams bookmarkButtonParams;
+  final PostBarButtonParams dislikeButtonParams;
   final bool bookmarkEnabled;
-  final Gap? spacing;
   final EdgeInsetsGeometry? padding;
-
-  static const _width = 80.0;
 
   @override
   Widget build(BuildContext context) {
     const images = Assets.images;
     final bookmarkCheckedPath = images.bookmarkChecked.path;
-    final hasSpacing = spacing != null;
-    final buttonWidth = hasSpacing ? null : _width;
-
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: Row(
-        mainAxisAlignment: hasSpacing ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          PostBarLikeButton(
-            params: PostBarLikeButtonParams(
-              isLiked: likeButtonParams.isLiked,
-              likes: likeButtonParams.likes,
-              overlayTheme: likeButtonParams.overlayTheme,
-              onTap: likeButtonParams.onTap,
-              isVertical: likeButtonParams.isVertical,
-              width: buttonWidth,
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PostBarLikeButton(
+                params: PostBarLikeButtonParams(
+                  isLiked: likeButtonParams.isLiked,
+                  likes: likeButtonParams.likes,
+                  overlayTheme: likeButtonParams.overlayTheme,
+                  onTap: likeButtonParams.onTap,
+                  isVertical: likeButtonParams.isVertical,
+                ),
+              ),
+              const Gap(2),
+              PostBarButton(
+                params: PostBarButtonParams(
+                  filledIcon: images.dislikeFilled.path,
+                  outlinedIcon: images.dislikeOutlined.path,
+                  onTap: dislikeButtonParams.onTap,
+                  overlayTheme: dislikeButtonParams.overlayTheme,
+                  isVertical: dislikeButtonParams.isVertical,
+                  selected: dislikeButtonParams.selected,
+                ),
+              ),
+            ],
           ),
-          if (hasSpacing) spacing!,
           PostBarButton(
             params: PostBarButtonParams(
               filledIcon: images.chat.path,
               outlinedIcon: images.chatOutlined.path,
               onTap: commentsButtonParams.onTap,
-              lightIconColor: Colors.transparent,
               text: commentsButtonParams.text.toString(),
               overlayTheme: commentsButtonParams.overlayTheme,
               isVertical: commentsButtonParams.isVertical,
-              width: buttonWidth,
             ),
           ),
-          if (hasSpacing) spacing!,
           PostBarButton(
             params: PostBarButtonParams(
               overlayTheme: shareButtonParams.overlayTheme,
@@ -74,10 +80,8 @@ class PostBarButtons extends StatelessWidget {
               outlinedIcon: images.sendOutlined.path,
               onTap: shareButtonParams.onTap,
               isVertical: shareButtonParams.isVertical,
-              width: buttonWidth,
             ),
           ),
-          if (hasSpacing) spacing!,
           if (bookmarkEnabled)
             PostBarButton(
               params: PostBarButtonParams(
@@ -85,14 +89,9 @@ class PostBarButtons extends StatelessWidget {
                 overlayTheme: bookmarkButtonParams.overlayTheme,
                 filledIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmark.path,
                 lightIconColor: Colors.transparent,
-                outlinedIcon: bookmarkButtonParams.selected
-                    ? bookmarkCheckedPath
-                    : spacing != null
-                        ? images.bookmarkOutlined.path
-                        : images.bookmarkOutlinedMedium.path,
+                outlinedIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmarkOutlined.path,
                 onTap: bookmarkButtonParams.onTap,
                 isVertical: bookmarkButtonParams.isVertical,
-                width: buttonWidth,
               ),
             ),
         ],
