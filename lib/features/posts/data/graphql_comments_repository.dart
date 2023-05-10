@@ -6,7 +6,6 @@ import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.d
 import 'package:picnic_app/core/data/graphql/model/gql_success_payload.dart';
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
-import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/data/comments_queries.dart';
@@ -32,14 +31,12 @@ import 'package:picnic_app/utils/extensions/tree_extension.dart';
 class GraphQlCommentsRepository implements CommentsRepository {
   GraphQlCommentsRepository(
     this._gqlClient,
-    this._userStore,
     this._getCommentsQueryGenerator,
   );
 
   static const permissionDenied = 'PermissionDenied';
 
   final GraphQLClient _gqlClient;
-  final UserStore _userStore;
 
   final GetCommentsQueryGenerator _getCommentsQueryGenerator;
 
@@ -128,6 +125,7 @@ class GraphQlCommentsRepository implements CommentsRepository {
   Future<Either<CreateCommentFailure, TreeComment>> createComment({
     required Id postId,
     required String text,
+    required Id postAuthorId,
     Id parentCommentId = const Id.empty(),
   }) {
     return _gqlClient
@@ -145,7 +143,7 @@ class GraphQlCommentsRepository implements CommentsRepository {
         )
         .mapSuccess(
           (response) => response.toTreeComment(
-            postAuthorId: _userStore.privateProfile.id,
+            postAuthorId: postAuthorId,
           ),
         )
         .mapFailure(

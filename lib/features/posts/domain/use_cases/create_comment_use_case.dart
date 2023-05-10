@@ -12,12 +12,14 @@ class CreateCommentUseCase {
   Future<Either<CreateCommentFailure, TreeComment>> execute({
     required Id postId,
     required String text,
+    required Id postAuthorId,
     Id parentCommentId = const Id.none(),
   }) async {
     return _commentsRepository.createComment(
       postId: postId,
       text: text,
       parentCommentId: parentCommentId,
+      postAuthorId: postAuthorId,
     );
   }
 }

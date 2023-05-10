@@ -281,11 +281,13 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         target: AnalyticsTapTarget.postSendCommentButton,
       ),
     );
+
     await _createCommentUseCase
         .execute(
           postId: _model.post.id,
           text: text,
           parentCommentId: _model.replyingComment.id,
+          postAuthorId: _model.post.author.id,
         )
         .doOn(success: (_) => _refreshCommentsAndPost())
         .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));

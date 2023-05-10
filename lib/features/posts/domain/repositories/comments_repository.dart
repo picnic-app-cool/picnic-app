@@ -34,6 +34,7 @@ abstract class CommentsRepository {
 
   Future<Either<CreateCommentFailure, TreeComment>> createComment({
     required Id postId,
+    required Id postAuthorId,
     required String text,
     Id parentCommentId,
   });

@@ -45,7 +45,6 @@ void main() {
     ).thenAnswer((_) => '');
     repository = GraphQlCommentsRepository(
       Mocks.graphQlClient,
-      Mocks.userStore,
       PostsMocks.getCommentsQueryGenerator,
     );
   });

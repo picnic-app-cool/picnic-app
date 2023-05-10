@@ -19,6 +19,7 @@ void main() {
         postId: any(named: 'postId'),
         parentCommentId: any(named: 'parentCommentId'),
         text: any(named: 'text'),
+        postAuthorId: any(named: 'postAuthorId'),
       ),
     ).thenAnswer((_) => successFuture(Stubs.comments));
   });
@@ -32,6 +33,7 @@ void main() {
       final result = await useCase.execute(
         postId: const Id.empty(),
         text: 'test',
+        postAuthorId: const Id.empty(),
       );
 
       // THEN

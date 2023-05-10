@@ -153,7 +153,6 @@ void _configureRepositories() {
           () => GraphQlCommentsRepository(
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
 

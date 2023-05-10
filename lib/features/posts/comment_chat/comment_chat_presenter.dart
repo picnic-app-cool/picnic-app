@@ -257,11 +257,13 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     if (trimmedText.isEmpty) {
       return false;
     }
+
     _createCommentUseCase
         .execute(
           postId: _model.postId,
           text: trimmedText,
           parentCommentId: _model.replyingComment.id,
+          postAuthorId: _model.feedPost.author.id,
         )
         .doOn(success: (comment) => _handleCreateCommentEvent(comment))
         .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));
