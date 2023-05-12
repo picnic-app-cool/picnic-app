@@ -85,6 +85,12 @@ Thanks go to these wonderful people:
     <br/><sub><b>Angel Herrarte</b></sub></a><br/>
     </a>
 </td>
+      <td align="center"><a href="https://www.linkedin.com/in/wyverx"><img
+                 src="https://media.licdn.com/dms/image/C4D03AQHE1-9lf8JaVw/profile-displayphoto-shrink_400_400/0/1544887973307?e=1689206400&v=beta&t=6pmHatTVCxld3YW0AZVr5ucajcz1hwhYFx4IzapVLr4" width="100px;"
+                 alt="Alexander Topchiy"/>
+             <br/><sub><b>Alexander Topchiy</b></sub></a><br/>
+             </a>
+         </td>
       </tr>
     </tbody>
 </table>
