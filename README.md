@@ -65,6 +65,26 @@ Thanks go to these wonderful people:
             <br/><sub><b>Valery Ponomarenko</b></sub></a><br/>
             </a>
         </td>
+<td align="center"><a href="https://www.linkedin.com/in/waleed006/"><img
+                src="https://media.licdn.com/dms/image/D4D03AQF8j72kqHvqwA/profile-displayphoto-shrink_200_200/0/1664687882821?e=1689206400&v=beta&t=qHz1leyxvO8TpiRfzO7auetG9XU6DPShz32XtB_N830" width="100px;"
+                alt="Waleed Arshad"/>
+            <br/><sub><b>Waleed Arshad</b></sub></a><br/>
+            </a>
+        </td>
+      </tr>
+   <tr>
+       <td align="center"><a href="https://github.com/mdccxv"><img
+                src="https://avatars.githubusercontent.com/u/60363853?v=4" width="100px;"
+                alt="Janusz Dziedzic"/>
+            <br/><sub><b>Janusz Dziedzic</b></sub></a><br/>
+            </a>
+        </td>
+        <td align="center"><a href="https://github.com/aherrarte2019037"><img
+        src="https://avatars.githubusercontent.com/u/61743730?v=4" width="100px;"
+        alt="Angel Herrarte"/>
+    <br/><sub><b>Angel Herrarte</b></sub></a><br/>
+    </a>
+</td>
       </tr>
     </tbody>
 </table>
@@ -75,56 +95,56 @@ Thanks go to these wonderful people:
 <!-- TOC -->
 
 - [Picnic Greenfield](#picnic-greenfield)
-  - [Setup](#setup)
-  - [Architecture](#architecture)
-    - [UI](#ui)
-    - [Presentation](#presentation)
-    - [Domain](#domain)
-    - [Data](#data)
-    - [Navigation](#navigation)
-      - [Navigator](#navigator)
-      - [Route](#route)
-      - [AppNavigator class](#appnavigator-class)
-    - [Example](#example)
-  - [Tools](#tools)
-    - [FVM](#fvm)
-    - [Code templates](#code-templates)
-      - [Make commands](#make-commands)
-      - [Mason commands](#mason-commands)
-    - [Custom lints](#custom-lints)
-    - [Fluttergen](#fluttergen)
-    - [Dart code metrics](#dart-code-metrics)
-    - [Fastlane](#fastlane)
-    - [Flutter Launcher Icons](#flutter-launcher-icons)
-      - [Update launcher icon](#update-launcher-icon)
-      - [Attributes](#attributes)
-    - [Widgetbook](#widgetbook)
-      - [About](#about)
-      - [Setup](#setup)
-      - [Widgetbook app structure](#widgetbook-app-structure)
-      - [Properties](#properties)
-      - [Knobs](#knobs)
-      - [New use case](#new-use-case)
-      - [Run](#run)
-    - [Localization](#localization)
-  - [Code best practices & guidelines](#code-best-practices--guidelines)
-    - [Pull Requests checklist](#pull-requests-checklist)
-    - [General](#general)
-    - [UseCase](#usecase)
-    - [Repository](#repository)
-    - [Failures](#failures)
-      - [Example](#example)
-    - [Domain entity](#domain-entity)
-      - [Example](#example)
-    - [Presenter](#presenter)
-    - [ViewModel](#viewmodel)
-    - [PresentationModel](#presentationmodel)
-    - [Page](#page)
-    - [Json classes](#json-classes)
-      - [Example](#example)
-  - [Collaborating guidelines](#collaborating-guidelines)
-    - [Pull requests](#pull-requests)
-    - [New libraries](#new-libraries)
+    - [Setup](#setup)
+    - [Architecture](#architecture)
+        - [UI](#ui)
+        - [Presentation](#presentation)
+        - [Domain](#domain)
+        - [Data](#data)
+        - [Navigation](#navigation)
+            - [Navigator](#navigator)
+            - [Route](#route)
+            - [AppNavigator class](#appnavigator-class)
+        - [Example](#example)
+    - [Tools](#tools)
+        - [FVM](#fvm)
+        - [Code templates](#code-templates)
+            - [Make commands](#make-commands)
+            - [Mason commands](#mason-commands)
+        - [Custom lints](#custom-lints)
+        - [Fluttergen](#fluttergen)
+        - [Dart code metrics](#dart-code-metrics)
+        - [Fastlane](#fastlane)
+        - [Flutter Launcher Icons](#flutter-launcher-icons)
+            - [Update launcher icon](#update-launcher-icon)
+            - [Attributes](#attributes)
+        - [Widgetbook](#widgetbook)
+            - [About](#about)
+            - [Setup](#setup)
+            - [Widgetbook app structure](#widgetbook-app-structure)
+            - [Properties](#properties)
+            - [Knobs](#knobs)
+            - [New use case](#new-use-case)
+            - [Run](#run)
+        - [Localization](#localization)
+    - [Code best practices & guidelines](#code-best-practices--guidelines)
+        - [Pull Requests checklist](#pull-requests-checklist)
+        - [General](#general)
+        - [UseCase](#usecase)
+        - [Repository](#repository)
+        - [Failures](#failures)
+            - [Example](#example)
+        - [Domain entity](#domain-entity)
+            - [Example](#example)
+        - [Presenter](#presenter)
+        - [ViewModel](#viewmodel)
+        - [PresentationModel](#presentationmodel)
+        - [Page](#page)
+        - [Json classes](#json-classes)
+            - [Example](#example)
+    - [Collaborating guidelines](#collaborating-guidelines)
+        - [Pull requests](#pull-requests)
+        - [New libraries](#new-libraries)
 
 <!-- TOC -->
 
@@ -135,13 +155,14 @@ Thanks go to these wonderful people:
    ```bash  
    fluttergen -c pubspec.yaml
    ```  
-   
-2. Ask your leader to give you acccess to `config.zip` file containing config specific to the app, that cannot be source-controlled. put the `config.zip` file in the root folder of the project and run:
+
+2. Ask your leader to give you acccess to `config.zip` file containing config specific to the app, that cannot be
+   source-controlled. put the `config.zip` file in the root folder of the project and run:
 
     ```bash
     make extract_config
     ```
-   
+
 3. Install git hooks (optional)
 
    ```bash  
@@ -154,7 +175,8 @@ Thanks go to these wonderful people:
    make check  
    ```  
 
-This command comes useful when you want to make sure your code is clean and ready to be code-reviewed. it does the following:
+This command comes useful when you want to make sure your code is clean and ready to be code-reviewed. it does the
+following:
 
 - runs [flutter_gen](https://pub.dev/packages/flutter_gen)
 - formats your code
@@ -207,7 +229,8 @@ Navigation within the app uses the concept of mixin Routes and per-page Navigato
 
 #### Navigator
 
-Navigator is a class that consist of 0 or more `Route`s mixins, its only job is to open another page. let's see it on an example:
+Navigator is a class that consist of 0 or more `Route`s mixins, its only job is to open another page. let's see it on an
+example:
 
 Assume we have a navigator for the `LoginPage` called `LoginNavigator`:
 
@@ -220,8 +243,10 @@ class LoginNavigator with NoRoutes {
 }
 ```
 
-by default, its mixed in with `NoRoutes` mixin that is a placeholder to be replaced with other routes. This navigator is used
-by `LoginPresenter` to open other pages, lets add possibility to Navigate to `DashboardPage` from within `LoginNavigator`. We can do it
+by default, its mixed in with `NoRoutes` mixin that is a placeholder to be replaced with other routes. This navigator is
+used
+by `LoginPresenter` to open other pages, lets add possibility to Navigate to `DashboardPage` from
+within `LoginNavigator`. We can do it
 in the following way:
 
 ```dart
@@ -250,16 +275,21 @@ mixin DashboardRoute {
 }
 ```
 
-it specifies the the `openDashboard` method that now can be used on the `LoginNavigator` in order to open DashboardPage. It uses
-`appNavigator` under the hood that is a wrapper around Flutter navigation that streamlines navigation, more on `AppNavigator` below.
+it specifies the the `openDashboard` method that now can be used on the `LoginNavigator` in order to open DashboardPage.
+It uses
+`appNavigator` under the hood that is a wrapper around Flutter navigation that streamlines navigation, more
+on `AppNavigator` below.
 
-The takeaway from this is that Routes specify how given pages are opened, while Navigators gather those routes together and expose them to
+The takeaway from this is that Routes specify how given pages are opened, while Navigators gather those routes together
+and expose them to
 the caller by mixing them in.
 
 #### AppNavigator class
 
-`AppNavigator` is a wrapper around Flutter navigation that allows us to perform navigation without the need of providing `BuildContext`
-by default, it will use `MaterialApp`'s root navigator unless you provide `BuildContext` explicitly in order to use nested navigation
+`AppNavigator` is a wrapper around Flutter navigation that allows us to perform navigation without the need of
+providing `BuildContext`
+by default, it will use `MaterialApp`'s root navigator unless you provide `BuildContext` explicitly in order to use
+nested navigation
 through an embeded `Navigator` widget from the flutter's SDK.
 
 ### Example
@@ -274,9 +304,12 @@ Here is a list of different tools we use in the project that augment and help wi
 
 ### FVM
 
-In order to keep consistent version of flutter and dart for all developers in the team, we use [fvm](https://fvm.app/) which is flutter
-version manager. we have a config commited to this repository under the [.fvm/fvm_config.json](.fvm/fvm_config.json) file specifying
-exact version of flutter to use. After you install fvm on your machine, you can issue this command in the root directory to install
+In order to keep consistent version of flutter and dart for all developers in the team, we use [fvm](https://fvm.app/)
+which is flutter
+version manager. we have a config commited to this repository under the [.fvm/fvm_config.json](.fvm/fvm_config.json)
+file specifying
+exact version of flutter to use. After you install fvm on your machine, you can issue this command in the root directory
+to install
 proper flutter version:
 
 ```bash
@@ -301,8 +334,9 @@ make move_page # moves and/or renames the page file with all auxiliary files (pr
 make move_repository # moves and/or renames repository files
 ```
 
-if you want to dig into more detail or use mason templates directly, have a look into [Makefile](Makefile) to see how the commands are called there or simply see below
- 
+if you want to dig into more detail or use mason templates directly, have a look into [Makefile](Makefile) to see how
+the commands are called there or simply see below
+
 #### Mason commands
 
 | 🔴**NOTE**🔴                                                                    |  
@@ -326,11 +360,13 @@ We host a set of our own custom lints inside the `tools/custom_lints/` folder. t
  fvm flutter pub run custom_lint
 ```
 
-you can find the list of all the lints inside the [custom_lint.dart](tools/custom_lints/clean_architecture_lints/bin/custom_lint.dart)
+you can find the list of all the lints inside
+the [custom_lint.dart](tools/custom_lints/clean_architecture_lints/bin/custom_lint.dart)
 
 ### Fluttergen
 
-We use [Fluttergen](https://pub.dev/packages/flutter_gen) to properly generate index files for our assets, this way all the paths are saved into constants and you don't have
+We use [Fluttergen](https://pub.dev/packages/flutter_gen) to properly generate index files for our assets, this way all
+the paths are saved into constants and you don't have
 to remembember about updating them or type them in manually whenever you need to use an asset.
 
 after you install it in your system, you can run the following command:
@@ -359,8 +395,10 @@ fvm flutter pub run dart_code_metrics:metrics check-unused-files . --fatal-unuse
 
 [Fastlane Docs](https://fastlane.tools/)
 
-we use fastlane for various tasks inside `ios` and `android` subfolders. Both platforms reuse a lot of code by referencing the
-scripts inside `tools/fastlane` folder. To understand more about what can be done with Fastlane, have a look at their respective READMEs:
+we use fastlane for various tasks inside `ios` and `android` subfolders. Both platforms reuse a lot of code by
+referencing the
+scripts inside `tools/fastlane` folder. To understand more about what can be done with Fastlane, have a look at their
+respective READMEs:
 
 - [iOS fastlane README](ios/fastlane/README.md)
 - [Android fastlane README](android/fastlane/README.md)
@@ -369,7 +407,9 @@ scripts inside `tools/fastlane` folder. To understand more about what can be don
 
 [Flutter Launcher Icons Docs](https://pub.dev/packages/flutter_launcher_icons)
 
-A command-line tool which simplifies the task of updating Flutter app's launcher icon. Fully flexible, allowing us to choose which platform to update the launch icon for, the option to keep our old launcher icon in case we want to revert back sometime in the future.
+A command-line tool which simplifies the task of updating Flutter app's launcher icon. Fully flexible, allowing us to
+choose which platform to update the launch icon for, the option to keep our old launcher icon in case we want to revert
+back sometime in the future.
 
 #### Update launcher icon
 
@@ -481,7 +521,9 @@ either `chrome`  or `macos`.
 
 ### Localization
 
-We are using [Localizely](https://localizely.com) to automate localization of the app. You just need to add new strings to `app_en.arb` and once the changes will be merged to `develop` branch, the process of localization will be started and after a while all translations will be added to repository automaticaly.
+We are using [Localizely](https://localizely.com) to automate localization of the app. You just need to add new strings
+to `app_en.arb` and once the changes will be merged to `develop` branch, the process of localization will be started and
+after a while all translations will be added to repository automaticaly.
 
 ## Code best practices & guidelines
 
@@ -670,7 +712,8 @@ Here are few rules/thoughts to remember when working on this project
 
 ### Pull requests
 
-1. Make sure your pull request is as small as possible! It's extremely hard to review code that is over 1000 lines of code changed
+1. Make sure your pull request is as small as possible! It's extremely hard to review code that is over 1000 lines of
+   code changed
 2. always include JIRA ticket id (i.e: `PG-1012`) in the PR's title
 3. make sure your pull requests fixes just single JIRA issue and not multiple
 
