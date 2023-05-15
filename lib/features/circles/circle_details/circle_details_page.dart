@@ -132,6 +132,7 @@ class _CircleDetailsPageState extends State<CircleDetailsPage>
                                   onTapElection: presenter.onTapOpenElection,
                                   onTapSeeds: presenter.onTapSeedHolders,
                                   circleButtons: CircleDetailsButtons(
+                                    onTapViewPods: presenter.onTapViewPods,
                                     onTapCircleChat: presenter.onTapCircleChat,
                                     onTapJoin: presenter.onTapJoin,
                                     onTapSeedHolders: presenter.onTapSeedHolders,

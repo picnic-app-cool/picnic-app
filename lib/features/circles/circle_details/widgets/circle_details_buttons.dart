@@ -18,9 +18,11 @@ class CircleDetailsButtons extends StatelessWidget {
     required this.onTapInviteUsers,
     required this.isPostingEnabled,
     required this.hasPermissionToManageCircle,
+    required this.onTapViewPods,
   }) : super(key: key);
 
   final VoidCallback onTapCircleChat;
+  final VoidCallback onTapViewPods;
   final VoidCallback onTapJoin;
   final VoidCallback onTapPost;
   final VoidCallback onTapInviteUsers;
@@ -35,14 +37,15 @@ class CircleDetailsButtons extends StatelessWidget {
   static const padding = EdgeInsets.symmetric(horizontal: 48, vertical: 12);
 
   static const _borderWidth = 2.0;
-  static const _rowSpacing = 12.0;
+  static const _rowSpacing = 8.0;
 
   static const _inviteButtonRadius = 100.0;
 
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final whiteColor = theme.colors.blackAndWhite.shade100;
+    final blackAndWhite = theme.colors.blackAndWhite;
+    final whiteColor = blackAndWhite.shade100;
     final yellowColor = theme.colors.yellow.shade500;
 
     var _icon = '';
@@ -60,42 +63,58 @@ class CircleDetailsButtons extends StatelessWidget {
         _title = appLocalizations.joinAction;
     }
 
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Flexible(
-          child: PicnicButton(
-            icon: Assets.images.chat.path,
-            title: appLocalizations.chatLabel,
-            borderRadius: const PicnicButtonRadius.round(),
-            color: theme.colors.green.shade500,
-            padding: padding,
-            titleColor: whiteColor,
-            onTap: onTapCircleChat,
-          ),
+        PicnicButton(
+          icon: Assets.images.wand.path,
+          title: appLocalizations.pods,
+          borderRadius: const PicnicButtonRadius.round(),
+          color: theme.colors.purple.shade500,
+          padding: padding,
+          titleColor: whiteColor,
+          onTap: onTapViewPods,
         ),
-        const Gap(_rowSpacing),
-        Flexible(
-          child: PicnicButton(
-            icon: _icon,
-            title: _title,
-            borderRadius: const PicnicButtonRadius.round(),
-            color: yellowColor,
-            borderColor: yellowColor,
-            padding: padding,
-            borderWidth: _borderWidth,
-            titleColor: whiteColor,
-            onTap: _onTap,
-            opacity: isPostingEnabled || !isMember ? 1 : PicnicButton.opacityDisabled,
-          ),
+        const Gap(8),
+        Row(
+          children: [
+            Flexible(
+              child: PicnicButton(
+                icon: Assets.images.chat.path,
+                title: appLocalizations.chatLabel,
+                borderRadius: const PicnicButtonRadius.round(),
+                color: theme.colors.green.shade500,
+                padding: padding,
+                titleColor: whiteColor,
+                onTap: onTapCircleChat,
+              ),
+            ),
+            const Gap(_rowSpacing),
+            Flexible(
+              child: PicnicButton(
+                icon: _icon,
+                title: _title,
+                borderRadius: const PicnicButtonRadius.round(),
+                color: yellowColor,
+                borderColor: yellowColor,
+                padding: padding,
+                borderWidth: _borderWidth,
+                titleColor: whiteColor,
+                onTap: _onTap,
+                opacity: isPostingEnabled || !isMember ? 1 : PicnicButton.opacityDisabled,
+              ),
+            ),
+            if (isMember && hasPermissionToManageCircle) ...[
+              const Gap(_rowSpacing),
+              PicnicContainerIconButton(
+                radius: _inviteButtonRadius,
+                iconPath: Assets.images.addUser.path,
+                onTap: onTapInviteUsers,
+                buttonColor: blackAndWhite.shade200,
+              ),
+            ],
+          ],
         ),
-        const Gap(_rowSpacing),
-        if (isMember && hasPermissionToManageCircle) ...[
-          PicnicContainerIconButton(
-            radius: _inviteButtonRadius,
-            iconPath: Assets.images.addUser.path,
-            onTap: onTapInviteUsers,
-          ),
-        ],
       ],
     );
   }

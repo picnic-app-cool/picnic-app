@@ -8,6 +8,7 @@ import 'package:picnic_app/features/circles/circle_details/models/posts_sorting_
 import 'package:picnic_app/features/circles/circle_member_settings/circle_member_settings_navigator.dart';
 import 'package:picnic_app/features/circles/circle_role/circle_role_navigator.dart';
 import 'package:picnic_app/features/circles/circle_settings/circle_settings_navigator.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_navigator.dart';
 import 'package:picnic_app/features/circles/edit_rules/edit_rules_navigator.dart';
 import 'package:picnic_app/features/circles/invite_user_list/invite_user_list_navigator.dart';
 import 'package:picnic_app/features/circles/members/members_navigator.dart';
@@ -67,7 +68,8 @@ class CircleDetailsNavigator
         CircleMemberSettingsRoute,
         CircleRoleRoute,
         InviteUsersRoute,
-        UserRolesRoute {
+        UserRolesRoute,
+        DiscoverPodsRoute {
   CircleDetailsNavigator(this.appNavigator, this.userStore);
 
   @override

@@ -14,6 +14,7 @@ abstract class PicnicImageSource {
     Color? color,
     TextStyle? emojiTextStyle,
     EdgeInsets? emojiPadding,
+    double borderRadius = 0,
   }) {
     if (imageUrl.isEmoji) {
       assert(
@@ -62,6 +63,7 @@ abstract class PicnicImageSource {
         fit: fit,
         width: width,
         height: height,
+        borderRadius: borderRadius,
       );
     }
   }
@@ -71,12 +73,14 @@ abstract class PicnicImageSource {
     BoxFit? fit,
     double? width,
     double? height,
+    double borderRadius = 0,
   }) =>
       UrlPicnicImageSource(
         url,
         width: width,
         height: height,
         fit: fit,
+        borderRadius: borderRadius,
       );
 
   factory PicnicImageSource.asset(
@@ -175,12 +179,14 @@ class UrlPicnicImageSource implements PicnicImageSource {
     this.height,
     this.width,
     this.fit,
+    this.borderRadius = 0,
   });
 
   final ImageUrl url;
   final double? height;
   final double? width;
   final BoxFit? fit;
+  final double borderRadius;
 
   @override
   PicnicImageSourceType get type => PicnicImageSourceType.url;

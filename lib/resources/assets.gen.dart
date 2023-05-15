@@ -387,6 +387,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/plus.webp
   AssetGenImage get plus => const AssetGenImage('assets/images/plus.webp');
 
+  /// File path: assets/images/pod_placeholder_img.webp
+  AssetGenImage get podPlaceholderImg => const AssetGenImage('assets/images/pod_placeholder_img.webp');
+
   /// File path: assets/images/pointing_arrow.webp
   AssetGenImage get pointingArrow => const AssetGenImage('assets/images/pointing_arrow.webp');
 
@@ -562,6 +565,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/volume-x.webp
   AssetGenImage get volumeX => const AssetGenImage('assets/images/volume-x.webp');
 
+  /// File path: assets/images/wand.webp
+  AssetGenImage get wand => const AssetGenImage('assets/images/wand.webp');
+
   /// File path: assets/images/warning_round.webp
   AssetGenImage get warningRound => const AssetGenImage('assets/images/warning_round.webp');
 
@@ -710,6 +716,7 @@ class $AssetsImagesGen {
         pinnedComment,
         play,
         plus,
+        podPlaceholderImg,
         pointingArrow,
         pollPostPlaceholder,
         post,
@@ -768,6 +775,7 @@ class $AssetsImagesGen {
         usersBold,
         volume2,
         volumeX,
+        wand,
         warningRound,
         watermelon2,
         watermelonSeeds,

@@ -117,6 +117,16 @@ class CirclesMocks {
   static late MockCircleConfigInitialParams circleConfigInitialParams;
   static late MockCircleConfigNavigator circleConfigNavigator;
 
+  static late MockDiscoverPodsPresenter discoverPodsPresenter;
+  static late MockDiscoverPodsPresentationModel discoverPodsPresentationModel;
+  static late MockDiscoverPodsInitialParams discoverPodsInitialParams;
+  static late MockDiscoverPodsNavigator discoverPodsNavigator;
+
+  static late MockPodWebViewPresenter podWebViewPresenter;
+  static late MockPodWebViewPresentationModel podWebViewPresentationModel;
+  static late MockPodWebViewInitialParams podWebViewInitialParams;
+  static late MockPodWebViewNavigator podWebViewNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -192,6 +202,9 @@ class CirclesMocks {
 
   static late MockGetDefaultCircleConfigFailure getDefaultCircleConfigFailure;
   static late MockGetDefaultCircleConfigUseCase getDefaultCircleConfigUseCase;
+
+  static late MockGetPodsFailure getPodsFailure;
+  static late MockGetPodsUseCase getPodsUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
@@ -321,6 +334,16 @@ class CirclesMocks {
     circleConfigInitialParams = MockCircleConfigInitialParams();
     circleConfigNavigator = MockCircleConfigNavigator();
 
+    discoverPodsPresenter = MockDiscoverPodsPresenter();
+    discoverPodsPresentationModel = MockDiscoverPodsPresentationModel();
+    discoverPodsInitialParams = MockDiscoverPodsInitialParams();
+    discoverPodsNavigator = MockDiscoverPodsNavigator();
+
+    podWebViewPresenter = MockPodWebViewPresenter();
+    podWebViewPresentationModel = MockPodWebViewPresentationModel();
+    podWebViewInitialParams = MockPodWebViewInitialParams();
+    podWebViewNavigator = MockPodWebViewNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -399,6 +422,9 @@ class CirclesMocks {
 
     getDefaultCircleConfigFailure = MockGetDefaultCircleConfigFailure();
     getDefaultCircleConfigUseCase = MockGetDefaultCircleConfigUseCase();
+
+    getPodsFailure = MockGetPodsFailure();
+    getPodsUseCase = MockGetPodsUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
@@ -522,6 +548,16 @@ class CirclesMocks {
     registerFallbackValue(MockCircleConfigInitialParams());
     registerFallbackValue(MockCircleConfigNavigator());
 
+    registerFallbackValue(MockDiscoverPodsPresenter());
+    registerFallbackValue(MockDiscoverPodsPresentationModel());
+    registerFallbackValue(MockDiscoverPodsInitialParams());
+    registerFallbackValue(MockDiscoverPodsNavigator());
+
+    registerFallbackValue(MockPodWebViewPresenter());
+    registerFallbackValue(MockPodWebViewPresentationModel());
+    registerFallbackValue(MockPodWebViewInitialParams());
+    registerFallbackValue(MockPodWebViewNavigator());
+
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES
@@ -594,6 +630,9 @@ class CirclesMocks {
 
     registerFallbackValue(MockGetDefaultCircleConfigFailure());
     registerFallbackValue(MockGetDefaultCircleConfigUseCase());
+
+    registerFallbackValue(MockGetPodsFailure());
+    registerFallbackValue(MockGetPodsUseCase());
 
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 

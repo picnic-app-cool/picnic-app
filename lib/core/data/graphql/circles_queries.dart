@@ -1,4 +1,5 @@
 import 'package:picnic_app/core/data/graphql/templates/gql_template.dart';
+import 'package:picnic_app/core/data/graphql/templates/gql_template_app.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_chat_message.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_circle.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_connection.dart';
@@ -219,6 +220,25 @@ String get getCircleReportsConnectionQuery => '''
   ){
     ${GqlTemplate().connection(nodeTemplate: GqlTemplate().reports)}
     }  
+  }
+''';
+
+String get getCirclePods => '''
+  query(\$circleId: ID!, \$cursor: CursorInput!) {
+    circleApps(input: { circleId: \$circleId, cursor: \$cursor }) {
+      apps {
+        circleId
+        app {
+          $app
+        }
+      }
+      pageInfo {
+          firstId
+          lastId
+          hasNextPage
+          hasPreviousPage
+      }
+    }
   }
 ''';
 

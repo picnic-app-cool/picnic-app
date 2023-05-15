@@ -46,6 +46,10 @@ import 'package:picnic_app/features/circles/circle_settings/circle_settings_init
 import 'package:picnic_app/features/circles/circle_settings/circle_settings_navigator.dart';
 import 'package:picnic_app/features/circles/circle_settings/circle_settings_presentation_model.dart';
 import 'package:picnic_app/features/circles/circle_settings/circle_settings_presenter.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_initial_params.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_navigator.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_presentation_model.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_presenter.dart';
 import 'package:picnic_app/features/circles/domain/model/add_blacklisted_words_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/assign_user_role_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/ban_user_failure.dart';
@@ -59,6 +63,7 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_roles_failur
 import 'package:picnic_app/features/circles/domain/model/get_circle_sorted_posts_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_default_circle_config_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_last_used_sorting_option_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_reports_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_roles_for_user_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_royalty_failure.dart';
@@ -87,6 +92,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/get_circle_roles_us
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_sorted_posts_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_default_circle_config_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_sorting_option_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_chat_messages_feed_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_messages_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_reports_use_case.dart';
@@ -112,6 +118,10 @@ import 'package:picnic_app/features/circles/invite_user_list/invite_user_list_na
 import 'package:picnic_app/features/circles/invite_user_list/invite_user_list_presentation_model.dart';
 import 'package:picnic_app/features/circles/invite_user_list/invite_user_list_presenter.dart';
 import 'package:picnic_app/features/circles/members/members_navigator.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_initial_params.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_navigator.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_presentation_model.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_presenter.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_initial_params.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_navigator.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_presentation_model.dart';
@@ -341,6 +351,22 @@ class MockCircleConfigInitialParams extends Mock implements CircleConfigInitialP
 
 class MockCircleConfigNavigator extends Mock implements CircleConfigNavigator {}
 
+class MockDiscoverPodsPresenter extends MockCubit<DiscoverPodsViewModel> implements DiscoverPodsPresenter {}
+
+class MockDiscoverPodsPresentationModel extends Mock implements DiscoverPodsPresentationModel {}
+
+class MockDiscoverPodsInitialParams extends Mock implements DiscoverPodsInitialParams {}
+
+class MockDiscoverPodsNavigator extends Mock implements DiscoverPodsNavigator {}
+
+class MockPodWebViewPresenter extends MockCubit<PodWebViewViewModel> implements PodWebViewPresenter {}
+
+class MockPodWebViewPresentationModel extends Mock implements PodWebViewPresentationModel {}
+
+class MockPodWebViewInitialParams extends Mock implements PodWebViewInitialParams {}
+
+class MockPodWebViewNavigator extends Mock implements PodWebViewNavigator {}
+
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 
 // USE CASES
@@ -443,6 +469,10 @@ class MockGetLastUsedSortingOptionUseCase extends Mock implements GetLastUsedSor
 class MockGetDefaultCircleConfigFailure extends Mock implements GetDefaultCircleConfigFailure {}
 
 class MockGetDefaultCircleConfigUseCase extends Mock implements GetDefaultCircleConfigUseCase {}
+
+class MockGetPodsFailure extends Mock implements GetPodsFailure {}
+
+class MockGetPodsUseCase extends Mock implements GetPodsUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

@@ -1331,11 +1331,14 @@
   "revokeIntegrationConfirm": "yes, revoke",
   "linkDiscord": "link Discord",
   "revoke": "revoke",
-  "serverAlreadyConnected": "*a server is already connected",
   "viewsCount": " • {views} views",
   "@viewsCount": {
     "placeholders": {
       "views": {}
     }
-  }
+  },
+  "serverAlreadyConnected": "*a server is already connected",
+  "pods": "pods",
+  "newFeature": "new feature",
+  "podsDescription": "pods are added by circle owners to add cool new features and tools for circle members to use. check them out!"
 }

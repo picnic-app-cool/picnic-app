@@ -57,6 +57,10 @@ import 'package:picnic_app/features/circles/circle_settings/circle_settings_pres
 import 'package:picnic_app/features/circles/data/graph_ql_circle_reports_repository.dart';
 import 'package:picnic_app/features/circles/data/graphql_circle_moderator_actions_repository.dart';
 import 'package:picnic_app/features/circles/data/graphql_circle_posts_repository.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_initial_params.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_navigator.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_presentation_model.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_presenter.dart';
 import 'package:picnic_app/features/circles/domain/repositories/circle_moderator_actions_repository.dart';
 import 'package:picnic_app/features/circles/domain/repositories/circle_posts_repository.dart';
 import 'package:picnic_app/features/circles/domain/repositories/circle_reports_repository.dart';
@@ -74,6 +78,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/get_circle_roles_us
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_sorted_posts_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_default_circle_config_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_sorting_option_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_chat_messages_feed_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_messages_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_reports_use_case.dart';
@@ -107,6 +112,10 @@ import 'package:picnic_app/features/circles/members/members_navigator.dart';
 import 'package:picnic_app/features/circles/members/members_page.dart';
 import 'package:picnic_app/features/circles/members/members_presentation_model.dart';
 import 'package:picnic_app/features/circles/members/members_presenter.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_initial_params.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_navigator.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_presentation_model.dart';
+import 'package:picnic_app/features/circles/pods/pod_web_view_presenter.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_initial_params.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_navigator.dart';
 import 'package:picnic_app/features/circles/remove_reason/remove_reason_page.dart';
@@ -147,6 +156,7 @@ import 'package:picnic_app/features/reports/report_details/resolved_report_detai
 import 'package:picnic_app/features/reports/report_details/resolved_report_details_page.dart';
 import 'package:picnic_app/features/reports/report_details/resolved_report_details_presentation_model.dart';
 import 'package:picnic_app/features/reports/report_details/resolved_report_details_presenter.dart';
+
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
@@ -299,6 +309,9 @@ void _configureUseCases() {
         )
         ..registerFactory<GetDefaultCircleConfigUseCase>(
           () => GetDefaultCircleConfigUseCase(getIt()),
+        )
+        ..registerFactory<GetPodsUseCase>(
+          () => GetPodsUseCase(getIt()),
         )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
@@ -777,6 +790,29 @@ void _configureMvp() {
         )
         ..registerFactoryParam<CircleConfigPage, CircleConfigInitialParams, dynamic>(
           (params, _) => CircleConfigPage(presenter: getIt(param1: params)),
+        )
+        ..registerFactory<DiscoverPodsNavigator>(
+          () => DiscoverPodsNavigator(getIt()),
+        )
+        ..registerFactoryParam<DiscoverPodsViewModel, DiscoverPodsInitialParams, dynamic>(
+          (params, _) => DiscoverPodsPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<DiscoverPodsPresenter, DiscoverPodsInitialParams, dynamic>(
+          (params, _) => DiscoverPodsPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactory<PodWebViewNavigator>(
+          () => PodWebViewNavigator(getIt()),
+        )
+        ..registerFactoryParam<PodWebViewViewModel, PodWebViewInitialParams, dynamic>(
+          (params, _) => PodWebViewPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<PodWebViewPresenter, PodWebViewInitialParams, dynamic>(
+          (params, _) => PodWebViewPresenter(getIt(param1: params), getIt()),
         )
 
 //DO-NOT-REMOVE MVP_GET_IT_CONFIG

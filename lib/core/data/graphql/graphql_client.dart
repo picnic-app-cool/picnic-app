@@ -36,6 +36,7 @@ class GraphQLClient {
     Map<String, dynamic> variables = const {},
   }) async {
     await _ensureIsolateInitialized();
+
     return isolateManager
         .sendMessageToIsolate(
           QueryIsolateMessage<T>(

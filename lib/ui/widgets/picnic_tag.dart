@@ -15,6 +15,7 @@ class PicnicTag extends StatelessWidget {
     Key? key,
     required this.title,
     this.backgroundColor,
+    this.gradient,
     this.prefixIcon,
     this.style = PicnicTagStyle.filled,
     this.borderWidth = 0,
@@ -42,6 +43,8 @@ class PicnicTag extends StatelessWidget {
 
   final PicnicTagStyle style;
   final Color? backgroundColor;
+  final Gradient? gradient;
+
   final Color? borderColor;
   final VoidCallback? onTap;
   final VoidCallback? onSuffixTap;
@@ -69,6 +72,7 @@ class PicnicTag extends StatelessWidget {
     final tag = _Tag(
       padding: padding,
       backgroundColor: blurRadius != null ? opacityColor : backgroundColor,
+      gradient: gradient,
       borderRadius: borderRadius,
       style: style,
       titleTextStyle: titleTextStyle,
@@ -102,7 +106,8 @@ class _Tag extends StatelessWidget {
   const _Tag({
     Key? key,
     required this.padding,
-    required this.backgroundColor,
+    this.backgroundColor,
+    this.gradient,
     this.borderRadius = defaultBorderRadius,
     required this.style,
     this.borderWidth = defaultBorderWidth,
@@ -118,6 +123,8 @@ class _Tag extends StatelessWidget {
 
   final EdgeInsets padding;
   final Color? backgroundColor;
+  final Gradient? gradient;
+
   final double? borderRadius;
   final PicnicTagStyle style;
   final double borderWidth;
@@ -154,6 +161,7 @@ class _Tag extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor,
+        gradient: gradient,
         borderRadius: BorderRadius.circular(
           borderRadius!,
         ),

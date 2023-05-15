@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/core/domain/model/circle.dart';
+import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
 import 'package:picnic_app/core/domain/model/circle_role.dart';
 import 'package:picnic_app/core/domain/model/circle_stats.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
@@ -28,6 +29,7 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_members_fail
 import 'package:picnic_app/features/circles/domain/model/get_circle_roles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_groups_of_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_onboarding_circles_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_user_roles_in_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/invite_user_to_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
@@ -119,5 +121,10 @@ abstract class CirclesRepository {
   Future<Either<GetUserRolesInCircleFailure, CircleMemberCustomRoles>> getUserRolesInCircle({
     required Id circleId,
     required Id userId,
+  });
+
+  Future<Either<GetPodsFailure, PaginatedList<CirclePodApp>>> getPods({
+    required Id circleId,
+    required Cursor cursor,
   });
 }

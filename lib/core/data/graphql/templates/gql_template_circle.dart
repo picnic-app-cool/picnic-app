@@ -139,4 +139,8 @@ circles {
   $basicCircle
 }
 ''';
+
+  String get pods => '''
+apps
+''';
 }

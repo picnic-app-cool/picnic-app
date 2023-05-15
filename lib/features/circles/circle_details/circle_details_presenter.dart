@@ -36,6 +36,7 @@ import 'package:picnic_app/features/circles/circle_member_settings/circle_member
 import 'package:picnic_app/features/circles/circle_role/circle_role_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_role/circle_role_presentation_model.dart';
 import 'package:picnic_app/features/circles/circle_settings/circle_settings_initial_params.dart';
+import 'package:picnic_app/features/circles/discover_pods/discover_pods_initial_params.dart';
 import 'package:picnic_app/features/circles/domain/model/circle_member.dart';
 import 'package:picnic_app/features/circles/domain/model/get_circle_sorted_posts_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/royalty.dart';
@@ -307,6 +308,14 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
       );
 
   void onTapRoyal(Royalty royalty) => notImplemented();
+
+  Future<void> onTapViewPods() async {
+    await navigator.openDiscoverPods(
+      DiscoverPodsInitialParams(circleId: _model.circle.id),
+    );
+    _getCirclesInfo();
+    await _loadPosts(fromScratch: true);
+  }
 
   Future<void> onTapCircleChat() async {
     await _getChatUseCase

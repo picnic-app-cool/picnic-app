@@ -36,18 +36,21 @@ class PicnicImage extends StatelessWidget {
             ? placeholderWidget()
             : DoubleTapDetector(
                 onDoubleTap: () => onDoubleTap?.call(),
-                child: CachedNetworkImage(
-                  imageUrl: source.url.url,
-                  width: source.width,
-                  height: source.height,
-                  fit: source.fit,
-                  placeholder: (_, __) => placeholderWidget(),
-                  errorWidget: (
-                    _,
-                    __,
-                    ___,
-                  ) =>
-                      placeholderWidget(),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(source.borderRadius),
+                  child: CachedNetworkImage(
+                    imageUrl: source.url.url,
+                    width: source.width,
+                    height: source.height,
+                    fit: source.fit,
+                    placeholder: (_, __) => placeholderWidget(),
+                    errorWidget: (
+                      _,
+                      __,
+                      ___,
+                    ) =>
+                        placeholderWidget(),
+                  ),
                 ),
               );
       },
