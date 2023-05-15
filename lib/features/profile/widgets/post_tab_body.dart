@@ -101,15 +101,18 @@ class PostTabBody extends StatelessWidget {
             ),
           ],
         ),
-        HorizontalPostBarButtons(
-          likeButtonParams: likeButtonParams,
-          commentsButtonParams: commentsButtonParams,
-          shareButtonParams: shareButtonParams,
-          bookmarkButtonParams: bookmarkButtonParams,
-          bookmarkEnabled: bookmarkEnabled,
-          dislikeButtonParams: dislikeButtonParams,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: HorizontalPostBarButtons(
+            likeButtonParams: likeButtonParams,
+            commentsButtonParams: commentsButtonParams,
+            shareButtonParams: shareButtonParams,
+            bookmarkButtonParams: bookmarkButtonParams,
+            bookmarkEnabled: bookmarkEnabled,
+            dislikeButtonParams: dislikeButtonParams,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ),
           ),
         ),
       ],

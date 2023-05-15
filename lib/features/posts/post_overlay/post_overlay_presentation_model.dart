@@ -114,6 +114,9 @@ class PostOverlayPresentationModel implements PostOverlayViewModel {
   bool get shouldCommentsBeVisible => featureFlags[FeatureFlagType.postOverlayCommentsEnabled] && !videoControlsVisible;
 
   @override
+  bool get shouldDetailsBeVisible => !videoControlsVisible;
+
+  @override
   bool get isPostSaving => savePostResult.isPending();
 
   @override
@@ -256,4 +259,6 @@ abstract class PostOverlayViewModel {
   VoidCallback? get onCommentsDrawerClosed;
 
   bool get showSavePostToCollection;
+
+  bool get shouldDetailsBeVisible;
 }

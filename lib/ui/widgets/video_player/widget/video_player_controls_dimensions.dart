@@ -8,6 +8,6 @@ class VideoPlayerControlsDimensions {
 
   static const verticalVideoScrubbingBottomMargin = 58.0;
   static const verticalVideoScrubbingLeftMargin = 16.0;
-  static const verticalVideoScrubbingRightMargin = 50.0;
+  static const verticalVideoScrubbingRightMargin = 16.0;
   static const scrubbingControlsHeight = 62.0;
 }
