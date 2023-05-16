@@ -12,12 +12,12 @@ class CircleListItem extends StatelessWidget {
     super.key,
     required this.circle,
     required this.onTap,
-    required this.postingEnabled,
+    this.onTapEnabled = true,
   });
 
   final Circle circle;
   final VoidCallback onTap;
-  final bool postingEnabled;
+  final bool onTapEnabled;
   static const _avatarSize = 40.0;
   static const _emojiSize = 20.0;
   static const _disabledInfoIconHeight = 16.0;
@@ -33,7 +33,7 @@ class CircleListItem extends StatelessWidget {
       onTap: onTap,
       height: null,
       titleStyle: theme.styles.title10,
-      trailing: postingEnabled
+      trailing: onTapEnabled
           ? PicnicButton(
               title: appLocalizations.chooseAction,
               borderRadius: const PicnicButtonRadius.round(),

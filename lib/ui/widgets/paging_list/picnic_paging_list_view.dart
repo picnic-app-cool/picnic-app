@@ -16,6 +16,7 @@ class PicnicPagingListView<T> extends StatefulWidget {
     this.shrinkWrap = false,
     this.reverse = false,
     this.clipBehavior = Clip.hardEdge,
+    this.scrollDirection = Axis.vertical,
   }) : super(key: key);
 
   final PaginatedList<T> paginatedList;
@@ -28,6 +29,7 @@ class PicnicPagingListView<T> extends StatefulWidget {
   final bool reverse;
   final ScrollPhysics? physics;
   final Clip clipBehavior;
+  final Axis scrollDirection;
 
   @override
   State<PicnicPagingListView<T>> createState() => _PicnicPagingListViewState<T>();
@@ -41,6 +43,7 @@ class _PicnicPagingListViewState<T> extends State<PicnicPagingListView<T>> {
     if (widget.separatorBuilder != null) {
       return ListView.separated(
         reverse: widget.reverse,
+        scrollDirection: widget.scrollDirection,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         separatorBuilder: widget.separatorBuilder!,
         padding: widget.padding,
@@ -55,6 +58,7 @@ class _PicnicPagingListViewState<T> extends State<PicnicPagingListView<T>> {
     }
 
     return ListView.builder(
+      scrollDirection: widget.scrollDirection,
       reverse: widget.reverse,
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: widget.padding,

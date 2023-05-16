@@ -9,6 +9,7 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
+import '../../circles/mocks/circles_mocks.dart';
 import '../../feed/mocks/feed_mock_definitions.dart';
 import '../../feed/mocks/feed_mocks.dart';
 import '../mocks/discover_mock_definitions.dart';
@@ -50,6 +51,7 @@ void main() {
       navigator,
       useCase,
       popularFeedUseCase,
+      CirclesMocks.getPodsUseCase,
     );
   });
 }

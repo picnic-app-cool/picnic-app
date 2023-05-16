@@ -1340,5 +1340,7 @@
   "serverAlreadyConnected": "*a server is already connected",
   "pods": "pods",
   "newFeature": "new feature",
-  "podsDescription": "pods are added by circle owners to add cool new features and tools for circle members to use. check them out!"
+  "podsDescription": "pods are added by circle owners to add cool new features and tools for circle members to use. check them out!",
+  "discoverPods": "discover pods",
+  "discoverPodsDescription": "use pods to add cool features to your circle and make it the best home for circle members"
 }

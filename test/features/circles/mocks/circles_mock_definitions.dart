@@ -2,6 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/use_cases/join_circle_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/join_circles_use_case.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_navigator.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_presentation_model.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_presenter.dart';
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_initial_params.dart";
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_navigator.dart";
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_presentation_model.dart";
@@ -366,6 +370,14 @@ class MockPodWebViewPresentationModel extends Mock implements PodWebViewPresenta
 class MockPodWebViewInitialParams extends Mock implements PodWebViewInitialParams {}
 
 class MockPodWebViewNavigator extends Mock implements PodWebViewNavigator {}
+
+class MockAddCirclePodPresenter extends MockCubit<AddCirclePodViewModel> implements AddCirclePodPresenter {}
+
+class MockAddCirclePodPresentationModel extends Mock implements AddCirclePodPresentationModel {}
+
+class MockAddCirclePodInitialParams extends Mock implements AddCirclePodInitialParams {}
+
+class MockAddCirclePodNavigator extends Mock implements AddCirclePodNavigator {}
 
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 

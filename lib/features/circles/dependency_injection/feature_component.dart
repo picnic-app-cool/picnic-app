@@ -1,4 +1,8 @@
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_navigator.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_presentation_model.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_presenter.dart';
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_initial_params.dart";
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_navigator.dart";
 import "package:picnic_app/features/circles/add_word_blacklist/add_black_list_word_page.dart";
@@ -813,6 +817,20 @@ void _configureMvp() {
         )
         ..registerFactoryParam<PodWebViewPresenter, PodWebViewInitialParams, dynamic>(
           (params, _) => PodWebViewPresenter(getIt(param1: params), getIt()),
+        )
+        ..registerFactory<AddCirclePodNavigator>(
+          () => AddCirclePodNavigator(getIt()),
+        )
+        ..registerFactoryParam<AddCirclePodViewModel, AddCirclePodInitialParams, dynamic>(
+          (params, _) => AddCirclePodPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<AddCirclePodPresenter, AddCirclePodInitialParams, dynamic>(
+          (params, _) => AddCirclePodPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE MVP_GET_IT_CONFIG

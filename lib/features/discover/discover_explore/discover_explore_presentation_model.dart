@@ -1,5 +1,7 @@
+import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flag_type.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flags.dart';
+import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/stores/feature_flags_store.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
 import 'package:picnic_app/features/discover/domain/model/circle_group.dart';
@@ -14,6 +16,7 @@ class DiscoverExplorePresentationModel implements DiscoverExploreViewModel {
     FeatureFlagsStore featureFlagsStore,
   )   : feedGroups = <CircleGroup>[],
         popularFeedPosts = <Post>[],
+        pods = const PaginatedList.empty(),
         featureFlags = featureFlagsStore.featureFlags;
 
   /// Used for the copyWith method
@@ -21,6 +24,7 @@ class DiscoverExplorePresentationModel implements DiscoverExploreViewModel {
     required this.feedGroups,
     required this.popularFeedPosts,
     required this.featureFlags,
+    required this.pods,
   });
 
   final FeatureFlags featureFlags;
@@ -32,17 +36,29 @@ class DiscoverExplorePresentationModel implements DiscoverExploreViewModel {
   final List<Post> popularFeedPosts;
 
   @override
+  final PaginatedList<CirclePodApp> pods;
+
+  @override
   bool get areTrendingPostsEnabled => featureFlags[FeatureFlagType.areTrendingPostsEnabled];
+
+  DiscoverExplorePresentationModel byAppendingPodsList({
+    required PaginatedList<CirclePodApp> newList,
+  }) =>
+      copyWith(
+        pods: pods + newList,
+      );
 
   DiscoverExplorePresentationModel copyWith({
     List<CircleGroup>? feedGroups,
     List<Post>? popularFeedPosts,
     FeatureFlags? featureFlags,
+    PaginatedList<CirclePodApp>? pods,
   }) {
     return DiscoverExplorePresentationModel._(
       feedGroups: feedGroups ?? this.feedGroups,
       popularFeedPosts: popularFeedPosts ?? this.popularFeedPosts,
       featureFlags: featureFlags ?? this.featureFlags,
+      pods: pods ?? this.pods,
     );
   }
 }
@@ -54,4 +70,6 @@ abstract class DiscoverExploreViewModel {
   List<Post> get popularFeedPosts;
 
   bool get areTrendingPostsEnabled;
+
+  PaginatedList<CirclePodApp> get pods;
 }

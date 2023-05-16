@@ -127,6 +127,11 @@ class CirclesMocks {
   static late MockPodWebViewInitialParams podWebViewInitialParams;
   static late MockPodWebViewNavigator podWebViewNavigator;
 
+  static late MockAddCirclePodPresenter addCirclePodPresenter;
+  static late MockAddCirclePodPresentationModel addCirclePodPresentationModel;
+  static late MockAddCirclePodInitialParams addCirclePodInitialParams;
+  static late MockAddCirclePodNavigator addCirclePodNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -344,6 +349,21 @@ class CirclesMocks {
     podWebViewInitialParams = MockPodWebViewInitialParams();
     podWebViewNavigator = MockPodWebViewNavigator();
 
+    discoverPodsPresenter = MockDiscoverPodsPresenter();
+    discoverPodsPresentationModel = MockDiscoverPodsPresentationModel();
+    discoverPodsInitialParams = MockDiscoverPodsInitialParams();
+    discoverPodsNavigator = MockDiscoverPodsNavigator();
+
+    podWebViewPresenter = MockPodWebViewPresenter();
+    podWebViewPresentationModel = MockPodWebViewPresentationModel();
+    podWebViewInitialParams = MockPodWebViewInitialParams();
+    podWebViewNavigator = MockPodWebViewNavigator();
+
+    addCirclePodPresenter = MockAddCirclePodPresenter();
+    addCirclePodPresentationModel = MockAddCirclePodPresentationModel();
+    addCirclePodInitialParams = MockAddCirclePodInitialParams();
+    addCirclePodNavigator = MockAddCirclePodNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -557,6 +577,21 @@ class CirclesMocks {
     registerFallbackValue(MockPodWebViewPresentationModel());
     registerFallbackValue(MockPodWebViewInitialParams());
     registerFallbackValue(MockPodWebViewNavigator());
+
+    registerFallbackValue(MockDiscoverPodsPresenter());
+    registerFallbackValue(MockDiscoverPodsPresentationModel());
+    registerFallbackValue(MockDiscoverPodsInitialParams());
+    registerFallbackValue(MockDiscoverPodsNavigator());
+
+    registerFallbackValue(MockPodWebViewPresenter());
+    registerFallbackValue(MockPodWebViewPresentationModel());
+    registerFallbackValue(MockPodWebViewInitialParams());
+    registerFallbackValue(MockPodWebViewNavigator());
+
+    registerFallbackValue(MockAddCirclePodPresenter());
+    registerFallbackValue(MockAddCirclePodPresentationModel());
+    registerFallbackValue(MockAddCirclePodInitialParams());
+    registerFallbackValue(MockAddCirclePodNavigator());
 
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 

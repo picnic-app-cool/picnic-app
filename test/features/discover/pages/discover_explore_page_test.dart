@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
+import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_navigator.dart';
@@ -12,6 +14,7 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
+import '../../circles/mocks/circles_mocks.dart';
 import '../../feed/mocks/feed_mock_definitions.dart';
 import '../../feed/mocks/feed_mocks.dart';
 import '../mocks/discover_mock_definitions.dart';
@@ -35,6 +38,19 @@ Future<void> main() async {
     when(() => FeedMocks.getPopularFeedUseCase.execute()).thenAnswer((invocation) {
       return successFuture(Stubs.posts);
     });
+
+    when(
+      () => CirclesMocks.getPodsUseCase.execute(
+        circleId: any(named: "circleId"),
+        cursor: any(named: "cursor"),
+      ),
+    ).thenAnswer(
+      (_) => successFuture(
+        const PaginatedList.singlePage(
+          [CirclePodApp.empty()],
+        ),
+      ),
+    );
     initParams = const DiscoverExploreInitialParams();
     model = DiscoverExplorePresentationModel.initial(
       initParams,
@@ -46,12 +62,7 @@ Future<void> main() async {
     );
     useCase = DiscoverMocks.discoverUseCase;
     popularFeedUseCase = FeedMocks.getPopularFeedUseCase;
-    presenter = DiscoverExplorePresenter(
-      model,
-      navigator,
-      useCase,
-      popularFeedUseCase,
-    );
+    presenter = DiscoverExplorePresenter(model, navigator, useCase, popularFeedUseCase, CirclesMocks.getPodsUseCase);
     page = DiscoverExplorePage(presenter: presenter);
   }
 

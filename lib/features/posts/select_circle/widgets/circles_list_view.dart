@@ -3,7 +3,6 @@ import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/utils/durations.dart';
 import 'package:picnic_app/features/posts/domain/model/post_type.dart';
-import 'package:picnic_app/features/posts/select_circle/utils/post_permission_getter.dart';
 import 'package:picnic_app/features/posts/select_circle/widgets/circle_list_item.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/ui/widgets/empty_message_widget.dart';
@@ -17,14 +16,16 @@ class CirclesListView extends StatelessWidget {
     required this.loadMore,
     required this.onTapCircle,
     required this.isEmpty,
-    required this.postType,
+    this.postType,
+    this.onTapEnabled = false,
   });
 
   final Future<void> Function() loadMore;
   final ValueChanged<Circle> onTapCircle;
   final PaginatedList<Circle> circles;
   final bool isEmpty;
-  final PostType postType;
+  final PostType? postType;
+  final bool onTapEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,6 @@ class CirclesListView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: CircleListItem(
                   circle: circle,
-                  postingEnabled: isPostingEnabled(postType: postType, circle: circle),
                   onTap: () => onTapCircle(circle),
                 ),
               ),

@@ -40,6 +40,8 @@ class PodWidget extends StatelessWidget {
               source: PicnicImageSource.url(
                 ImageUrl(pod.imageUrl),
                 borderRadius: radius,
+                width: width,
+                height: height,
               ),
             ),
           ),
