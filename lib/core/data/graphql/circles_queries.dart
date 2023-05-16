@@ -226,18 +226,14 @@ String get getCircleReportsConnectionQuery => '''
 String get getCirclePods => '''
   query(\$circleId: ID!, \$cursor: CursorInput!) {
     circleApps(input: { circleId: \$circleId, cursor: \$cursor }) {
-      apps {
-        circleId
+      ${GqlTemplate().connection(
+      nodeTemplate: '''
+      circleId
         app {
           $app
         }
-      }
-      pageInfo {
-          firstId
-          lastId
-          hasNextPage
-          hasPreviousPage
-      }
+      ''',
+    )}
     }
   }
 ''';

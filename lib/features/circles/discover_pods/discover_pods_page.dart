@@ -115,7 +115,7 @@ class _DiscoverPodsPageState extends State<DiscoverPodsPage>
                   const Gap(radius),
                   Expanded(
                     child: PagingGridView<CirclePodApp>(
-                      paging: state.mockedPodsList,
+                      paging: state.pods,
                       columns: _columns,
                       aspectRatio: (widthLeftForPods / MediaQuery.of(context).size.height) / _aspectRatio,
                       loadMore: presenter.loadMore,
@@ -123,7 +123,7 @@ class _DiscoverPodsPageState extends State<DiscoverPodsPage>
                       crossAxisSpacing: _spacing,
                       mainAxisSpacing: _spacing,
                       itemBuilder: (context, index) {
-                        final pod = state.mockedPodsList.items[index];
+                        final pod = state.pods.items[index];
                         return PodWidget(
                           width: podWidth,
                           height: podWidth * _invertedAspectRatio,

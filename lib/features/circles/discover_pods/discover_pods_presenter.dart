@@ -40,7 +40,7 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
         )
         .doOn(
           success: (pods) {
-            tryEmit(_model.copyWith(pods: pods));
+            tryEmit(_model.copyWith(pods: _model.pods.byAppending(pods)));
           },
           fail: (fail) => _navigator.showError(fail.displayableFailure()),
         );
