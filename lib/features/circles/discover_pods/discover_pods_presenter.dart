@@ -3,6 +3,9 @@ import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
 import 'package:picnic_app/core/domain/use_cases/get_auth_token_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
+import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
+import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_target.dart';
+import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_navigator.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_presentation_model.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
@@ -14,11 +17,13 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
     this._navigator,
     this._getPodsUseCase,
     this._getAuthTokenUseCase,
+    this._logAnalyticsEventUseCase,
   );
 
   final DiscoverPodsNavigator _navigator;
   final GetPodsUseCase _getPodsUseCase;
   final GetAuthTokenUseCase _getAuthTokenUseCase;
+  final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
 
   // ignore: unused_element
   DiscoverPodsPresentationModel get _model => state as DiscoverPodsPresentationModel;
@@ -53,6 +58,13 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
         'circleId': _model.circleId.value,
       },
     ).toString();
+
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.circlePodWebView,
+        targetValue: pod.app.name,
+      ),
+    );
     await _navigator.openPodWebView(
       PodWebViewInitialParams(
         pod: pod.app.copyWith(url: fullPodUrl),

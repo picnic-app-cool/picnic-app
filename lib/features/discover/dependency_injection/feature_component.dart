@@ -115,6 +115,7 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<DiscoverExplorePage, DiscoverExploreInitialParams, dynamic>(

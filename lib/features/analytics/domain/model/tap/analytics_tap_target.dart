@@ -92,6 +92,8 @@ enum AnalyticsTapTarget {
   settingsPrivacyDeleteAccountYesTap('settings_privacy_delete_account_yes_tap'),
   settingsPrivacyDeleteAccountNoTap('settings_privacy_delete_account_no_tap'),
   settingsShareProfileTap('settings_share_profile_tap'),
+  circlePod('circle_pod_discover'),
+  circlePodWebView('circle_pod_web_view'),
   settingsSignOutTap('settings_sign_out_tap');
 
   final String value;

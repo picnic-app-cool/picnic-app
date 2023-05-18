@@ -14,6 +14,7 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
+import '../../analytics/mocks/analytics_mocks.dart';
 import '../../circles/mocks/circles_mocks.dart';
 import '../../feed/mocks/feed_mock_definitions.dart';
 import '../../feed/mocks/feed_mocks.dart';
@@ -62,7 +63,14 @@ Future<void> main() async {
     );
     useCase = DiscoverMocks.discoverUseCase;
     popularFeedUseCase = FeedMocks.getPopularFeedUseCase;
-    presenter = DiscoverExplorePresenter(model, navigator, useCase, popularFeedUseCase, CirclesMocks.getPodsUseCase);
+    presenter = DiscoverExplorePresenter(
+      model,
+      navigator,
+      useCase,
+      popularFeedUseCase,
+      CirclesMocks.getPodsUseCase,
+      AnalyticsMocks.logAnalyticsEventUseCase,
+    );
     page = DiscoverExplorePage(presenter: presenter);
   }
 

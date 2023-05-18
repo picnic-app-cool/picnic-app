@@ -807,6 +807,7 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactory<PodWebViewNavigator>(
