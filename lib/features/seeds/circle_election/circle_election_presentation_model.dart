@@ -7,8 +7,7 @@ import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
-import 'package:picnic_app/features/seeds/domain/model/election.dart';
-import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
+import 'package:picnic_app/features/seeds/domain/model/vote_candidate.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class CircleElectionPresentationModel implements CircleElectionViewModel {
@@ -19,13 +18,13 @@ class CircleElectionPresentationModel implements CircleElectionViewModel {
     FeatureFlagsStore featureFlagsStore,
     this.currentTimeProvider,
   )   : candidates = const PaginatedList.empty(),
-        selectedCandidate = const Selectable(item: ElectionCandidate.empty()),
+        selectedCandidate = const Selectable(item: VoteCandidate.empty()),
         seedsInCircle = 0,
         isDemocraticCircle = false,
-        election = const Election.empty(),
         featureFlags = featureFlagsStore.featureFlags,
         circle = initialParams.circle,
-        circleId = initialParams.circleId;
+        circleId = initialParams.circleId,
+        searchQuery = '';
 
   /// Used for the copyWith method
   CircleElectionPresentationModel._({
@@ -34,17 +33,17 @@ class CircleElectionPresentationModel implements CircleElectionViewModel {
     required this.seedsInCircle,
     required this.isDemocraticCircle,
     required this.currentTimeProvider,
-    required this.election,
     required this.circle,
     required this.featureFlags,
     required this.circleId,
+    required this.searchQuery,
   });
 
   @override
-  final PaginatedList<ElectionCandidate> candidates;
+  final PaginatedList<VoteCandidate> candidates;
 
   @override
-  final Selectable<ElectionCandidate> selectedCandidate;
+  final Selectable<VoteCandidate> selectedCandidate;
 
   final FeatureFlags featureFlags;
 
@@ -58,56 +57,44 @@ class CircleElectionPresentationModel implements CircleElectionViewModel {
   final CurrentTimeProvider currentTimeProvider;
 
   @override
-  final Election election;
-
-  @override
   final Circle circle;
 
   @override
   final Id circleId;
 
   @override
-  bool get voted => election.iVoted;
+  final String searchQuery;
 
+  //TODO BE NEEDS TO ADD THIS
   @override
-  bool get eligible => election.isSeedHolder;
+  bool get eligible => true;
 
   @override
   bool get showCountDownWidget => featureFlags[FeatureFlagType.enableEectionCountDownWidget];
 
   @override
-  bool get voteEnabled => eligible && selectedCandidate.item != const ElectionCandidate.empty();
-
-  @override
-  double get electionProgress =>
-      election.maxSeedsVoted == 0 ? 0 : election.seedsVoted / election.maxSeedsVoted.toDouble();
-
-  @override
-  int get seedsVoted => election.seedsVoted;
+  bool get voteEnabled => eligible && selectedCandidate.item != const VoteCandidate.empty();
 
   @override
   bool get showCircleProgressWidget => featureFlags[FeatureFlagType.enableElectionCircularGraph];
 
-  @override
-  DateTime? get deadline => election.dueToFormat;
-
   CircleElectionPresentationModel byAppendingCandidatesList({
-    required PaginatedList<ElectionCandidate> newList,
+    required PaginatedList<VoteCandidate> newList,
   }) =>
       copyWith(
         candidates: candidates + newList,
       );
 
   CircleElectionPresentationModel copyWith({
-    PaginatedList<ElectionCandidate>? candidates,
-    Selectable<ElectionCandidate>? selectedCandidate,
+    PaginatedList<VoteCandidate>? candidates,
+    Selectable<VoteCandidate>? selectedCandidate,
     FeatureFlags? featureFlags,
     int? seedsInCircle,
     bool? isDemocraticCircle,
     CurrentTimeProvider? currentTimeProvider,
-    Election? election,
     Circle? circle,
     Id? circleId,
+    String? searchQuery,
   }) {
     return CircleElectionPresentationModel._(
       candidates: candidates ?? this.candidates,
@@ -116,34 +103,24 @@ class CircleElectionPresentationModel implements CircleElectionViewModel {
       seedsInCircle: seedsInCircle ?? this.seedsInCircle,
       isDemocraticCircle: isDemocraticCircle ?? this.isDemocraticCircle,
       currentTimeProvider: currentTimeProvider ?? this.currentTimeProvider,
-      election: election ?? this.election,
       circle: circle ?? this.circle,
       circleId: circleId ?? this.circleId,
+      searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 }
 
 /// Interface to expose fields used by the view (page).
 abstract class CircleElectionViewModel {
-  PaginatedList<ElectionCandidate> get candidates;
+  PaginatedList<VoteCandidate> get candidates;
 
-  Selectable<ElectionCandidate> get selectedCandidate;
-
-  bool get voted;
+  Selectable<VoteCandidate> get selectedCandidate;
 
   int get seedsInCircle;
 
   bool get isDemocraticCircle;
 
   CurrentTimeProvider get currentTimeProvider;
-
-  DateTime? get deadline;
-
-  Election get election;
-
-  double get electionProgress;
-
-  int get seedsVoted;
 
   Id get circleId;
 
@@ -156,4 +133,6 @@ abstract class CircleElectionViewModel {
   bool get voteEnabled;
 
   bool get showCountDownWidget;
+
+  String get searchQuery;
 }

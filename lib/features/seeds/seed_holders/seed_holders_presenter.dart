@@ -31,12 +31,15 @@ class SeedHoldersPresenter extends Cubit<SeedHoldersViewModel> {
 
   Future<void> onTapInfo() => navigator.openAboutElections(const AboutElectionsInitialParams());
 
-  void onTapSendSeeds() => navigator.openSellSeeds(SellSeedsInitialParams(circleId: _model.circleId));
+  Future<void> onTapSendSeeds() async {
+    await navigator.openSellSeeds(SellSeedsInitialParams(circleId: _model.circleId));
+    getSeedHolders();
+  }
 
   void getSeedHolders() => _getSeedHoldersUseCase
           .execute(circleId: _model.circleId)
           .doOn(
-            success: (list) => tryEmit(_model.copyWith(seedHolders: _model.seedHolders + list)),
+            success: (list) => tryEmit(_model.copyWith(seedHolders: list)),
             fail: (fail) => navigator.showError(fail.displayableFailure()),
           )
           .observeStatusChanges(

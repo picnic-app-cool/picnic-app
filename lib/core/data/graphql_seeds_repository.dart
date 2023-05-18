@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/data/graphql/graphql_client.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_connection.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.dart';
-import 'package:picnic_app/core/data/graphql/model/gql_election.dart';
-import 'package:picnic_app/core/data/graphql/model/gql_election_candidate.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_governance.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_success_payload.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_vote_candidate.dart';
 import 'package:picnic_app/core/data/graphql/model/seed/gql_seed.dart';
 import 'package:picnic_app/core/data/graphql/model/seed/gql_seed_holder.dart';
 import 'package:picnic_app/core/data/graphql/seeds_queries.dart';
@@ -18,18 +18,18 @@ import 'package:picnic_app/core/domain/repositories/seeds_repository.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
-import 'package:picnic_app/features/seeds/domain/model/election.dart';
-import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_election_candidates_failure.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_election_failure.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_seedholders_failure.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_seeds_failure.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_user_seeds_total_failure.dart';
+import 'package:picnic_app/features/seeds/domain/model/governance.dart';
 import 'package:picnic_app/features/seeds/domain/model/seed.dart';
 import 'package:picnic_app/features/seeds/domain/model/seed_holder.dart';
 import 'package:picnic_app/features/seeds/domain/model/seeds_offer.dart';
 import 'package:picnic_app/features/seeds/domain/model/sell_seeds_failure.dart';
 import 'package:picnic_app/features/seeds/domain/model/transfer_seeds_failure.dart';
+import 'package:picnic_app/features/seeds/domain/model/vote_candidate.dart';
 import 'package:picnic_app/features/seeds/domain/model/vote_director_failure.dart';
 import 'package:picnic_app/utils/extensions/future_retarder.dart';
 
@@ -116,41 +116,45 @@ class GraphqlSeedsRepository with FutureRetarder implements SeedsRepository {
           .mapSuccessPayload(onFailureReturn: const AcceptSeedsOfferFailure.unknown());
 
   @override
-  Future<Either<VoteDirectorFailure, Id>> voteDirector({required Id electionId, required Id userId}) => _gqlClient
-      .mutate(
-        document: electionVoteMutation,
-        variables: {
-          'electionId': electionId.value,
-          'nomineeId': userId.value,
-        },
-        parseData: (json) => GqlSuccessPayload.fromJson(json['electionVote'] as Map<String, dynamic>),
-      )
-      .mapFailure(VoteDirectorFailure.unknown)
-      .mapSuccess((response) => userId);
+  Future<Either<VoteDirectorFailure, Id>> voteDirector({
+    required Id circleId,
+    required Id userId,
+  }) =>
+      _gqlClient
+          .mutate(
+            document: voteForDirectorMutation,
+            variables: {
+              'circleId': circleId.value,
+              'userId': userId.value,
+            },
+            parseData: (json) => GqlSuccessPayload.fromJson(json['voteForDirector'] as Map<String, dynamic>),
+          )
+          .mapFailure(VoteDirectorFailure.unknown)
+          .mapSuccess((response) => userId);
 
   @override
-  Future<Either<GetElectionCandidatesFailure, PaginatedList<ElectionCandidate>>> getElectionCandidates({
+  Future<Either<GetElectionCandidatesFailure, PaginatedList<VoteCandidate>>> getCandidatesThatCanBeVoted({
     required Id circleId,
     required Cursor nextPageCursor,
-    bool votes = true,
+    required String searchQuery,
   }) =>
       _gqlClient
           .query(
-            document: electionParticipantsConnection,
+            document: searchVoteCandidatesQuery,
             variables: {
               'circleId': circleId.value,
               'cursor': nextPageCursor.toGqlCursorInput(),
-              'votes': votes,
+              'search': searchQuery,
             },
             parseData: (json) {
-              final data = json['electionParticipantsConnection'] as Map<String, dynamic>;
+              final data = json['searchVoteCandidates'] as Map<String, dynamic>;
               return GqlConnection.fromJson(data);
             },
           )
           .mapFailure(GetElectionCandidatesFailure.unknown)
           .mapSuccess(
             (connection) => connection.toDomain(
-              nodeMapper: (node) => GqlElectionCandidate.fromJson(node).toDomain(_userStore),
+              nodeMapper: (node) => GqlVoteCandidate.fromJson(node).toDomain(_userStore),
             ),
           );
 
@@ -169,17 +173,19 @@ class GraphqlSeedsRepository with FutureRetarder implements SeedsRepository {
           .mapSuccessPayload(onFailureReturn: const CancelSeedsOfferFailure.unknown());
 
   @override
-  Future<Either<GetElectionFailure, Election>> getElection({required Id circleId}) => _gqlClient
+  Future<Either<GetElectionFailure, Governance>> getGovernance({required Id circleId}) => _gqlClient
       .query(
-        document: getSeedElectionQuery,
+        document: getGovernanceQuery,
         variables: {
           'circleId': circleId.value,
         },
-        parseData: (json) => GqlElection.fromJson(asT(json, 'getElection')),
+        parseData: (json) {
+          return GqlGovernance.fromJson(asT(json, 'getGovernance'));
+        },
       )
       .mapFailure(GetElectionFailure.unknown)
       .mapSuccess(
-        (response) => response.toDomain(),
+        (response) => response.toDomain(_userStore),
       );
 
   @override

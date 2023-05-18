@@ -64,8 +64,8 @@ import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params
 import 'package:picnic_app/features/posts/single_feed/sorting_handler.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
-import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
-import 'package:picnic_app/features/seeds/domain/use_cases/get_election_use_case.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
+import 'package:picnic_app/features/seeds/domain/use_cases/get_governance_use_case.dart';
 import 'package:picnic_app/features/seeds/domain/use_cases/get_seed_holders_use_case.dart';
 import 'package:picnic_app/features/seeds/seed_holders/seed_holders_initial_params.dart';
 import 'package:picnic_app/features/slices/domain/model/slice_settings_page_result.dart';
@@ -92,7 +92,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     this._getCircleSortedPostsUseCase,
     this._deletePostsUseCase,
     this._getSeedHoldersUseCase,
-    this._getElectionUseCase,
+    this._getGovernanceUseCase,
     this._getLastUsedSortingOptionUseCase,
     this._logAnalyticsEventUseCase,
     this._sharePostUseCase,
@@ -117,7 +117,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
   final JoinSliceUseCase _joinSliceUseCase;
   final GetSeedHoldersUseCase _getSeedHoldersUseCase;
   final DeletePostsUseCase _deletePostsUseCase;
-  final GetElectionUseCase _getElectionUseCase;
+  final GetGovernanceUseCase _getGovernanceUseCase;
   final GetLastUsedSortingOptionUseCase _getLastUsedSortingOptionUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final SharePostUseCase _sharePostUseCase;
@@ -134,7 +134,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
   void onInit() {
     _getCirclesInfo();
     _getSeedHolders();
-    _getElection();
+    _getGovernance();
     _getLastUsedSortingOption();
   }
 
@@ -171,7 +171,10 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
         onTapClose: navigator.close,
       );
 
-  void onTapOpenElection() => navigator.openCircleElection(CircleElectionInitialParams(circle: _model.circle));
+  Future<void> onTapOpenElection() async {
+    await navigator.openCircleGovernance(CircleGovernanceInitialParams(circle: _model.circle));
+    onInit();
+  }
 
   void onTapSettings() => navigator.openCircleSettings(
         CircleSettingsInitialParams(
@@ -334,9 +337,12 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     _getCirclesInfo();
   }
 
-  void onTapSeedHolders() => navigator.openSeedHolders(
-        SeedHoldersInitialParams(circleId: _model.circle.id, isSeedHolder: _model.election.isSeedHolder),
-      );
+  Future<void> onTapSeedHolders() async {
+    await navigator.openSeedHolders(
+      SeedHoldersInitialParams(circleId: _model.circle.id, isSeedHolder: _model.election.isSeedHolder),
+    );
+    _getCirclesInfo();
+  }
 
   Future<void> loadMoreRoyals() => _getRoyaltyUseCase.execute().doOn(
         fail: (failure) => navigator.showError(failure.displayableFailure()),
@@ -794,7 +800,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     );
   }
 
-  Future<void> _getElection() => _getElectionUseCase.execute(circleId: _model.id).doOn(
+  Future<void> _getGovernance() => _getGovernanceUseCase.execute(circleId: _model.id).doOn(
         success: (election) => tryEmit(_model.copyWith(election: election)),
         fail: (fail) => navigator.showError(fail.displayableFailure()),
       );

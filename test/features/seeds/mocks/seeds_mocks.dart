@@ -38,6 +38,11 @@ class SeedsMocks {
   static late MockAboutElectionsInitialParams aboutElectionsInitialParams;
   static late MockAboutElectionsNavigator aboutElectionsNavigator;
 
+  static late MockCircleGovernancePresenter circleGovernancePresenter;
+  static late MockCircleGovernancePresentationModel circleGovernancePresentationModel;
+  static late MockCircleGovernanceInitialParams circleGovernanceInitialParams;
+  static late MockCircleGovernanceNavigator circleGovernanceNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -55,7 +60,7 @@ class SeedsMocks {
   static late MockGetElectionCandidatesUseCase getElectionCandidatesUseCase;
 
   static late MockGetElectionFailure getElectionFailure;
-  static late MockGetElectionUseCase getElectionUseCase;
+  static late MockGetGovernanceUseCase getGovernanceUseCase;
 
   static late MockGetSeedholdersFailure getSeedholdersFailure;
   static late MockGetSeedholdersUseCase getSeedholdersUseCase;
@@ -115,6 +120,11 @@ class SeedsMocks {
     aboutElectionsInitialParams = MockAboutElectionsInitialParams();
     aboutElectionsNavigator = MockAboutElectionsNavigator();
 
+    circleGovernancePresenter = MockCircleGovernancePresenter();
+    circleGovernancePresentationModel = MockCircleGovernancePresentationModel();
+    circleGovernanceInitialParams = MockCircleGovernanceInitialParams();
+    circleGovernanceNavigator = MockCircleGovernanceNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -131,7 +141,7 @@ class SeedsMocks {
     getElectionCandidatesUseCase = MockGetElectionCandidatesUseCase();
 
     getElectionFailure = MockGetElectionFailure();
-    getElectionUseCase = MockGetElectionUseCase();
+    getGovernanceUseCase = MockGetGovernanceUseCase();
 
     getSeedholdersFailure = MockGetSeedholdersFailure();
     getSeedholdersUseCase = MockGetSeedholdersUseCase();
@@ -186,6 +196,11 @@ class SeedsMocks {
     registerFallbackValue(MockAboutElectionsInitialParams());
     registerFallbackValue(MockAboutElectionsNavigator());
 
+    registerFallbackValue(MockCircleGovernancePresenter());
+    registerFallbackValue(MockCircleGovernancePresentationModel());
+    registerFallbackValue(MockCircleGovernanceInitialParams());
+    registerFallbackValue(MockCircleGovernanceNavigator());
+
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES
@@ -202,7 +217,7 @@ class SeedsMocks {
     registerFallbackValue(MockGetElectionCandidatesUseCase());
 
     registerFallbackValue(MockGetElectionFailure());
-    registerFallbackValue(MockGetElectionUseCase());
+    registerFallbackValue(MockGetGovernanceUseCase());
 
     registerFallbackValue(MockGetSeedholdersFailure());
     registerFallbackValue(MockGetSeedholdersUseCase());

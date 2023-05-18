@@ -1,16 +1,16 @@
 import 'package:picnic_app/core/data/graphql/templates/gql_template.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_circle.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_connection.dart';
+import 'package:picnic_app/core/data/graphql/templates/gql_template_director_vote.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_success_payload.dart';
 
-const String electionVoteMutation = """
-mutation electionVote(\$electionId: ID!, \$nomineeId: ID!) {
-    electionVote(electionVoteInput: {
-        nomineeId:\$nomineeId,
-        electionId:\$electionId
-
-    }) {
-        userId
+String voteForDirectorMutation = """
+mutation voteForDirector(\$circleId: ID!, \$userId: ID!) {
+    voteForDirector(
+        userId:\$userId,
+        circleId:\$circleId
+    ) {
+      ${GqlTemplate().successPayload}  
     }
 }
 """;
@@ -52,12 +52,14 @@ query myProfile( \$cursor: CursorInput!) {
 }
 """;
 
-String electionParticipantsConnection = """
-query getCircleById(\$circleId: ID!, \$cursor: CursorInput!,  \$votes: Boolean! ) {
-  electionParticipantsConnection(
-    electionParticipantsConnectionInput: {circleId: \$circleId, votes: \$votes, cursor: \$cursor}
+String searchVoteCandidatesQuery = """
+query searchVoteCandidate(\$circleId: ID!, \$cursor: CursorInput!, \$search: String!) {
+  searchVoteCandidates(
+      circleId: \$circleId, 
+      search: \$search, 
+      cursor: \$cursor
   ) {
-            ${GqlTemplate().connection(nodeTemplate: GqlTemplate().electionCandidate)}
+            ${GqlTemplate().connection(nodeTemplate: GqlTemplate().voteCandidate)}
         }
     }
 """;
@@ -151,23 +153,21 @@ String rejectExchangeOffer = """
  }
  """;
 
-String getSeedElectionQuery = """
-query(\$circleId: ID!) {
-  getElection(
-    electionInput: { 
-      circleId: \$circleId
+String getGovernanceQuery = """
+  query(\$circleId: ID!) {
+    getGovernance(
+        circleId: \$circleId
+    ){
+      circleId
+      allVotesTotal 
+      myVotesTotal
+      mySeedsCount
+      allVotes {
+        ${GqlTemplate().directorVote}
+      }
+      myVotes {
+        ${GqlTemplate().directorVote}
+      }
     }
-  ){
-    id
-    circleId
-    dueTo 
-    membersVoted 
-    seedsVoted 
-    maxSeedsVoted
-    iVoted
-    circleMembersCount
-    votesPercent
-    isSeedHolder
   }
-}
 """;

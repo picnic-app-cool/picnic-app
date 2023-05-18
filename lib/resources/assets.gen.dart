@@ -258,6 +258,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/glitter_outline.webp
   AssetGenImage get glitterOutline => const AssetGenImage('assets/images/glitter_outline.webp');
 
+  /// File path: assets/images/green_checkmark.webp
+  AssetGenImage get greenCheckmark => const AssetGenImage('assets/images/green_checkmark.webp');
+
   /// File path: assets/images/heart.webp
   AssetGenImage get heart => const AssetGenImage('assets/images/heart.webp');
 
@@ -673,6 +676,7 @@ class $AssetsImagesGen {
         follow,
         glitter,
         glitterOutline,
+        greenCheckmark,
         heart,
         heartBold,
         heartOutlined,

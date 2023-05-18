@@ -246,7 +246,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
     navigator.openSeeds(const SeedsInitialParams());
   }
 
-  void onTapEnterCircle(Id circleId) {
+  Future<void> onTapEnterCircle(Id circleId) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.profileOpenCircleTap,
@@ -254,12 +254,14 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       ),
     );
 
-    navigator.openCircleDetails(
+    await navigator.openCircleDetails(
       CircleDetailsInitialParams(
         circleId: circleId,
         onCircleMembershipChange: _onCircleUpdated,
       ),
     );
+
+    await onLoadMoreCircles(fromScratch: true);
   }
 
   Future<void> onTapViewPost(Post post) async {
@@ -435,7 +437,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
 
   Future<void> _loadUserCircles({bool fromScratch = false}) async {
     await _getUserCirclesUseCase.execute(
-      nextPageCursor: fromScratch ? const Cursor.empty() : _model.userCirclesCursor,
+      nextPageCursor: fromScratch ? const Cursor.firstPage() : _model.userCirclesCursor,
       roles: [
         CircleRole.director,
         CircleRole.moderator,

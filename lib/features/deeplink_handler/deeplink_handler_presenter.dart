@@ -16,7 +16,7 @@ import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link.dart
 import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link_circle.dart';
 import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link_profile.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_initial_params.dart';
-import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
 import 'package:picnic_app/features/seeds/seeds/seeds_initial_params.dart';
 
 class DeeplinkHandlerPresenter {
@@ -58,8 +58,8 @@ class DeeplinkHandlerPresenter {
         PostDetailsInitialParams.fromDeepLink(deepLink: deepLink),
       ),
       onUserSeeds: (deepLink) => _navigator.openSeeds(const SeedsInitialParams()),
-      onElection: (deepLink) => _navigator.openCircleElection(
-        CircleElectionInitialParams.byId(circleId: deepLink.circleId),
+      onElection: (deepLink) => _navigator.openCircleGovernance(
+        CircleGovernanceInitialParams.byId(circleId: deepLink.circleId),
       ),
     );
   }

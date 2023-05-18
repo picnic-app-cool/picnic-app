@@ -13,7 +13,6 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
-import '../../circles/mocks/circles_mocks.dart';
 import '../mocks/seeds_mocks.dart';
 
 Future<void> main() async {
@@ -24,7 +23,7 @@ Future<void> main() async {
   late CircleElectionNavigator navigator;
 
   void _initMvp() {
-    initParams = CircleElectionInitialParams(circle: Stubs.circle);
+    initParams = CircleElectionInitialParams(circle: Stubs.circle, circleId: Stubs.circle.id);
     when(() => Mocks.currentTimeProvider.currentTime).thenReturn(DateTime(2022, 9, 3));
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
@@ -39,11 +38,10 @@ Future<void> main() async {
       navigator,
       SeedsMocks.voteDirectorUseCase,
       SeedsMocks.getElectionCandidatesUseCase,
-      SeedsMocks.getElectionUseCase,
-      CirclesMocks.getCircleDetailsUseCase,
+      Mocks.debouncer,
     );
     when(
-      () => SeedsMocks.getElectionUseCase.execute(circleId: Stubs.circle.id),
+      () => SeedsMocks.getGovernanceUseCase.execute(circleId: Stubs.circle.id),
     ).thenAnswer(
       (_) => successFuture(
         Stubs.election,
@@ -53,13 +51,14 @@ Future<void> main() async {
       () => SeedsMocks.getElectionCandidatesUseCase.execute(
         circleId: Stubs.circle.id,
         nextPageCursor: any(named: 'nextPageCursor'),
+        searchQuery: '',
       ),
     ).thenAnswer(
       (_) => successFuture(
         PaginatedList.singlePage(
           List.filled(
             4,
-            Stubs.electionCandidate,
+            Stubs.voteCandidate,
           ),
         ),
       ),

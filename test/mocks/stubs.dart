@@ -102,10 +102,12 @@ import 'package:picnic_app/features/profile/domain/model/profile_notifications/p
 import 'package:picnic_app/features/profile/domain/model/profile_notifications/profile_notification_glitterbomb.dart';
 import 'package:picnic_app/features/reports/domain/model/report_reason.dart';
 import 'package:picnic_app/features/reports/domain/model/resolve_status.dart';
-import 'package:picnic_app/features/seeds/domain/model/election.dart';
+import 'package:picnic_app/features/seeds/domain/model/director_vote.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
+import 'package:picnic_app/features/seeds/domain/model/governance.dart';
 import 'package:picnic_app/features/seeds/domain/model/seed.dart';
 import 'package:picnic_app/features/seeds/domain/model/seed_holder.dart';
+import 'package:picnic_app/features/seeds/domain/model/vote_candidate.dart';
 import 'package:picnic_app/features/settings/domain/model/delete_account_reason.dart';
 import 'package:picnic_app/features/settings/domain/model/notification_settings.dart';
 import 'package:picnic_app/features/settings/domain/model/privacy_settings.dart';
@@ -572,6 +574,14 @@ class Stubs {
         votesPercent: 10.0,
         role: CircleRole.director,
         circleId: const Id('123'),
+        publicProfile: const PublicProfile.empty().copyWith(
+          user: const User.empty().copyWith(username: '#Daniel', id: const Id('123')),
+        ),
+      );
+
+  static VoteCandidate get voteCandidate => const VoteCandidate.empty().copyWith(
+        votesCount: 1,
+        votesPercent: 10.0,
         publicProfile: const PublicProfile.empty().copyWith(
           user: const User.empty().copyWith(username: '#Daniel', id: const Id('123')),
         ),
@@ -1188,17 +1198,17 @@ class Stubs {
     ],
   );
 
-  static Election get election => const Election(
-        id: Id.empty(),
-        circleId: Id.empty(),
-        dueTo: '',
-        membersVoted: 20,
-        seedsVoted: 200,
-        maxSeedsVoted: 500,
-        totalMembers: 100,
-        votesPercent: 100,
-        iVoted: false,
-        isSeedHolder: true,
+  static Governance get election => Governance(
+        circleId: const Id.empty(),
+        allVotesTotal: 1000,
+        myVotesTotal: 200,
+        allVotes: [
+          const DirectorVote.empty().copyWith(candidate: const VoteCandidate.empty().copyWith(votesCount: 1000))
+        ],
+        myVotes: [
+          const DirectorVote.empty().copyWith(candidate: const VoteCandidate.empty().copyWith(votesCount: 200))
+        ],
+        mySeedsCount: 200,
       );
 
   static NotifyType get inviteFriendNotifyType => NotifyType.inviteFriend;

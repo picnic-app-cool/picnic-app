@@ -9,8 +9,12 @@ import 'package:picnic_app/features/seeds/circle_election/circle_election_naviga
 import 'package:picnic_app/features/seeds/circle_election/circle_election_page.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_presentation_model.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_presenter.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_navigator.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_presentation_model.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_presenter.dart';
 import "package:picnic_app/features/seeds/domain/use_cases/get_election_candidates_use_case.dart";
-import "package:picnic_app/features/seeds/domain/use_cases/get_election_use_case.dart";
+import "package:picnic_app/features/seeds/domain/use_cases/get_governance_use_case.dart";
 import "package:picnic_app/features/seeds/domain/use_cases/get_seed_holders_use_case.dart";
 import "package:picnic_app/features/seeds/domain/use_cases/get_seeds_use_case.dart";
 import 'package:picnic_app/features/seeds/domain/use_cases/get_user_seeds_total_use_case.dart';
@@ -107,8 +111,8 @@ void _configureUseCases() {
             getIt(),
           ),
         )
-        ..registerFactory<GetElectionUseCase>(
-          () => GetElectionUseCase(
+        ..registerFactory<GetGovernanceUseCase>(
+          () => GetGovernanceUseCase(
             getIt(),
           ),
         )
@@ -252,7 +256,6 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
         ..registerFactoryParam<CircleElectionPage, CircleElectionInitialParams, dynamic>(
@@ -288,6 +291,23 @@ void _configureMvp() {
         )
         ..registerFactoryParam<AboutElectionsPage, AboutElectionsInitialParams, dynamic>(
           (params, _) => AboutElectionsPage(presenter: getIt(param1: params)),
+        )
+        ..registerFactory<CircleGovernanceNavigator>(
+          () => CircleGovernanceNavigator(
+            getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactoryParam<CircleGovernanceViewModel, CircleGovernanceInitialParams, dynamic>(
+          (params, _) => CircleGovernancePresentationModel.initial(params),
+        )
+        ..registerFactoryParam<CircleGovernancePresenter, CircleGovernanceInitialParams, dynamic>(
+          (params, _) => CircleGovernancePresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE MVP_GET_IT_CONFIG

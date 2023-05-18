@@ -19,8 +19,8 @@ void main() {
       // GIVEN
 
       // WHEN
-      final result = await useCase.execute(electionId: id, userId: id);
-      verify(() => Mocks.seedsRepository.voteDirector(userId: id, electionId: id));
+      final result = await useCase.execute(circleId: id, userId: id);
+      verify(() => Mocks.seedsRepository.voteDirector(userId: id, circleId: id));
 
       // THEN
       expect(result.isSuccess, true);
@@ -35,9 +35,9 @@ void main() {
   setUp(() {
     useCase = VoteDirectorUseCase(Mocks.seedsRepository);
 
-    when(() => Mocks.seedsRepository.voteDirector(userId: id, electionId: id)) //
+    when(() => Mocks.seedsRepository.voteDirector(userId: id, circleId: id)) //
         .thenAnswer((_) => successFuture(id));
 
-    when(() => SeedsMocks.voteDirectorUseCase.execute(userId: id, electionId: id)).thenAnswer((_) => successFuture(id));
+    when(() => SeedsMocks.voteDirectorUseCase.execute(userId: id, circleId: id)).thenAnswer((_) => successFuture(id));
   });
 }

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/model/circle.dart';
+import 'package:picnic_app/core/domain/model/circle_stats.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_presentation_model.dart';
@@ -52,6 +53,10 @@ void main() {
     () {
       //GIVEN
       when(() => navigator.openSeedHolders(any())).thenAnswer((_) => Future.value());
+      when(() => Mocks.getCircleStatsUseCase.execute(circleId: Stubs.circle.id))
+          .thenAnswer((_) => successFuture(const CircleStats.empty()));
+      when(() => CirclesMocks.getCircleDetailsUseCase.execute(circleId: Stubs.circle.id))
+          .thenAnswer((_) => successFuture(const Circle.empty()));
 
       //WHEN
       presenter.onTapSeedHolders();
@@ -511,7 +516,7 @@ void main() {
       CirclesMocks.getCircleSortedPostsUseCase,
       Mocks.deletePostsUseCase,
       SeedsMocks.getSeedholdersUseCase,
-      SeedsMocks.getElectionUseCase,
+      SeedsMocks.getGovernanceUseCase,
       CirclesMocks.getLastUsedSortingOptionUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.sharePostUseCase,

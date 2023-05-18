@@ -327,7 +327,7 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
     }
   }
 
-  void onTapEnterCircle(Id circleId) {
+  Future<void> onTapEnterCircle(Id circleId) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.profileOpenCircleTap,
@@ -335,7 +335,8 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
       ),
     );
 
-    navigator.openCircleDetails(CircleDetailsInitialParams(circleId: circleId));
+    await navigator.openCircleDetails(CircleDetailsInitialParams(circleId: circleId));
+    await _loadUserCircles();
   }
 
   void onTapViewPost(Post post) {
@@ -458,10 +459,10 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
         fail: (fail) => tryEmit(_model.copyWith(profileStats: const ProfileStats.empty())),
       );
 
-  Future<void> _loadUserCircles() async {
+  Future<void> _loadUserCircles({bool fromScratch = false}) async {
     await _getUserCirclesUseCase
         .execute(
-          nextPageCursor: _model.userCirclesCursor,
+          nextPageCursor: fromScratch ? const Cursor.firstPage() : _model.userCirclesCursor,
           userId: _model.userId,
           roles: [
             CircleRole.director,
@@ -473,7 +474,11 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
           (userCirclesResult) => tryEmit(_model.copyWith(userCirclesResult: userCirclesResult)),
         )
         .doOn(
-          success: (list) => tryEmit(_model.copyWith(userCircles: _model.userCircles.byAppending(list))),
+          success: (list) => tryEmit(
+            fromScratch
+                ? _model.copyWith(userCircles: list)
+                : _model.copyWith(userCircles: _model.userCircles.byAppending(list)),
+          ),
           fail: (fail) => navigator.showError(
             fail.displayableFailure(),
           ),

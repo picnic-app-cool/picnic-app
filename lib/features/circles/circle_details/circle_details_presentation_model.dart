@@ -26,7 +26,7 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_details_fail
 import 'package:picnic_app/features/circles/domain/model/get_last_used_sorting_option_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/royalty.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
-import 'package:picnic_app/features/seeds/domain/model/election.dart';
+import 'package:picnic_app/features/seeds/domain/model/governance.dart';
 import 'package:picnic_app/features/seeds/domain/model/seed_holder.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
@@ -54,7 +54,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
         featureFlags = featureFlagsStore.featureFlags,
         postSortOption = PostsSortingType.trendingThisWeek,
         isMultiSelectionEnabled = false,
-        election = const Election.empty(),
+        election = const Governance.empty(),
         selectedPosts = [],
         showSortInAppBar = false,
         showAppBarBackgroundColor = false,
@@ -118,7 +118,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
   final bool pageVisible;
 
   @override
-  final Election election;
+  final Governance election;
 
   @override
   final Circle circle;
@@ -166,9 +166,6 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
 
   @override
   final PrivateProfile privateProfile;
-
-  @override
-  DateTime? get deadline => election.dueToFormat;
 
   @override
   bool get isLoadingCircle => circleDetailsResult.isPending();
@@ -223,10 +220,8 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
   @override
   bool get showCountDownWidget => featureFlags[FeatureFlagType.enableEectionCountDownWidget];
 
-  //TODO: remove once BE integrated : https://picnic-app.atlassian.net/browse/GS-6903
   @override
-  int get seedsCount =>
-      seedHolders.items.fold(0, (previousValue, seedHolder) => previousValue + seedHolder.amountTotal);
+  int get seedsCount => election.mySeedsCount;
 
   @override
   //ignore: no-magic-number
@@ -361,7 +356,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
     bool? showSortInAppBar,
     bool? showSettingsIconButton,
     bool? pageVisible,
-    Election? election,
+    Governance? election,
     FutureResult<Either<SavePostToCollectionFailure, Post>>? savePostResult,
     int? maxCommentsCount,
     bool? showAppBarBackgroundColor,
@@ -462,9 +457,7 @@ abstract class CircleDetailsViewModel {
 
   CurrentTimeProvider get currentTimeProvider;
 
-  DateTime? get deadline;
-
-  Election get election;
+  Governance get election;
 
   bool get isLoadingLastUsedSortingOption;
 

@@ -28,7 +28,7 @@ import 'package:picnic_app/features/photo_editor/photo_editor_initial_params.dar
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/seeds/about_elections/about_elections_initial_params.dart';
-import 'package:picnic_app/features/seeds/circle_election/circle_election_initial_params.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_initial_params.dart';
 import 'package:picnic_app/features/slices/slice_details/slice_details_initial_params.dart';
 import 'package:picnic_app/features/video_editor/video_editor_initial_params.dart';
@@ -92,7 +92,8 @@ class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with Subscrip
 
   void onTapNewSeeds() => navigator.openNewSeeds();
 
-  void onTapCircleElection() => navigator.openCircleElection(CircleElectionInitialParams(circle: const Circle.empty()));
+  void onTapCircleElection() =>
+      navigator.openCircleGovernance(CircleGovernanceInitialParams(circle: const Circle.empty()));
 
   void onTapShowDialog() => navigator.openInfoSeeds();
 

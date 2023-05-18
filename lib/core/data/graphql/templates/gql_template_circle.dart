@@ -75,15 +75,14 @@ roles {
 }
 ''';
 
-  String get electionCandidate => '''
-circleId
-role
+  String get voteCandidate => '''
 user {
    $memberProfile
 }
 votesCount
-iVoted
-votesPercent 
+votesPercent
+position
+margin
 ''';
 
   String get reports => '''

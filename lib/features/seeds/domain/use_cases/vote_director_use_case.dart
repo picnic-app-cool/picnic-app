@@ -8,7 +8,7 @@ class VoteDirectorUseCase {
 
   final SeedsRepository _seedsRepository;
 
-  Future<Either<VoteDirectorFailure, Id>> execute({required Id electionId, required Id userId}) async {
-    return _seedsRepository.voteDirector(electionId: electionId, userId: userId);
+  Future<Either<VoteDirectorFailure, Id>> execute({required Id circleId, required Id userId}) async {
+    return _seedsRepository.voteDirector(circleId: circleId, userId: userId);
   }
 }

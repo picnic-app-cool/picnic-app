@@ -8,6 +8,10 @@ import 'package:picnic_app/features/seeds/circle_election/circle_election_initia
 import 'package:picnic_app/features/seeds/circle_election/circle_election_navigator.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_presentation_model.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_presenter.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_navigator.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_presentation_model.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_presenter.dart';
 import "package:picnic_app/features/seeds/domain/model/get_election_candidates_failure.dart";
 import "package:picnic_app/features/seeds/domain/model/get_election_failure.dart";
 import "package:picnic_app/features/seeds/domain/model/get_seedholders_failure.dart";
@@ -17,7 +21,7 @@ import "package:picnic_app/features/seeds/domain/model/sell_seeds_failure.dart";
 import 'package:picnic_app/features/seeds/domain/model/transfer_seeds_failure.dart';
 import "package:picnic_app/features/seeds/domain/model/vote_director_failure.dart";
 import "package:picnic_app/features/seeds/domain/use_cases/get_election_candidates_use_case.dart";
-import "package:picnic_app/features/seeds/domain/use_cases/get_election_use_case.dart";
+import "package:picnic_app/features/seeds/domain/use_cases/get_governance_use_case.dart";
 import "package:picnic_app/features/seeds/domain/use_cases/get_seed_holders_use_case.dart";
 import "package:picnic_app/features/seeds/domain/use_cases/get_seeds_use_case.dart";
 import 'package:picnic_app/features/seeds/domain/use_cases/get_user_seeds_total_use_case.dart';
@@ -113,6 +117,14 @@ class MockAboutElectionsInitialParams extends Mock implements AboutElectionsInit
 
 class MockAboutElectionsNavigator extends Mock implements AboutElectionsNavigator {}
 
+class MockCircleGovernancePresenter extends MockCubit<CircleGovernanceViewModel> implements CircleGovernancePresenter {}
+
+class MockCircleGovernancePresentationModel extends Mock implements CircleGovernancePresentationModel {}
+
+class MockCircleGovernanceInitialParams extends Mock implements CircleGovernanceInitialParams {}
+
+class MockCircleGovernanceNavigator extends Mock implements CircleGovernanceNavigator {}
+
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 
 // USE CASES
@@ -134,7 +146,7 @@ class MockGetElectionCandidatesUseCase extends Mock implements GetElectionCandid
 
 class MockGetElectionFailure extends Mock implements GetElectionFailure {}
 
-class MockGetElectionUseCase extends Mock implements GetElectionUseCase {}
+class MockGetGovernanceUseCase extends Mock implements GetGovernanceUseCase {}
 
 class MockGetSeedholdersFailure extends Mock implements GetSeedHoldersFailure {}
 

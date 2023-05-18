@@ -79,7 +79,7 @@ void main() {
       CirclesMocks.getCircleSortedPostsUseCase,
       Mocks.deletePostsUseCase,
       SeedsMocks.getSeedholdersUseCase,
-      SeedsMocks.getElectionUseCase,
+      SeedsMocks.getGovernanceUseCase,
       CirclesMocks.getLastUsedSortingOptionUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.sharePostUseCase,
@@ -130,7 +130,7 @@ void main() {
     when(() => Mocks.getCircleStatsUseCase.execute(circleId: Stubs.id)) //
         .thenSuccess((_) => Stubs.circleStats);
 
-    when(() => SeedsMocks.getElectionUseCase.execute(circleId: Stubs.id)) //
+    when(() => SeedsMocks.getGovernanceUseCase.execute(circleId: Stubs.id)) //
         .thenSuccess((_) => Stubs.election);
 
     when(

@@ -663,7 +663,7 @@
       "count": {}
     }
   },
-  "circleElectionYouHaveSeedInCircle": "{seeds} seeds in this circle",
+  "circleElectionYouHaveSeedInCircle": "you have {seeds} seeds in this circle",
   "@circleElectionYouHaveSeedInCircle": {
     "placeholders": {
       "seeds": {}
@@ -1342,5 +1342,30 @@
   "newFeature": "new feature",
   "podsDescription": "pods are added by circle owners to add cool new features and tools for circle members to use. check them out!",
   "discoverPods": "discover pods",
-  "discoverPodsDescription": "use pods to add cool features to your circle and make it the best home for circle members"
+  "discoverPodsDescription": "use pods to add cool features to your circle and make it the best home for circle members",
+  "ofAllVotes": "{percentage}% of all votes",
+  "@ofAllVotes": {
+    "placeholders": {
+      "percentage": {}
+    }
+  },
+  "circleElectionVote": "vote",
+  "circleElectionChangeVote": "change vote",
+  "electionCandidateResults": "user results",
+  "liveResults": "live results",
+  "searchUsers": "search users",
+  "votesCount": "{votesNumber} votes ",
+  "@votesCount": {
+    "placeholders": {
+      "votesNumber": {}
+    }
+  },
+  "myVote": "my vote",
+  "electedDirector": "elected director",
+  "directorMargin": "{margin} margin",
+  "@directorMargin": {
+    "placeholders": {
+      "margin": {}
+    }
+  }
 }

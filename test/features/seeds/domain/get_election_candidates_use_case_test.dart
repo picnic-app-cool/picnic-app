@@ -20,7 +20,11 @@ void main() {
       // GIVEN
 
       // WHEN
-      final result = await useCase.execute(circleId: Stubs.circle.id, nextPageCursor: const Cursor.firstPage());
+      final result = await useCase.execute(
+        circleId: Stubs.circle.id,
+        nextPageCursor: const Cursor.firstPage(),
+        searchQuery: '',
+      );
 
       // THEN
       expect(result.isSuccess, true);
@@ -36,21 +40,23 @@ void main() {
     useCase = GetElectionCandidatesUseCase(Mocks.seedsRepository);
 
     when(
-      () => Mocks.seedsRepository.getElectionCandidates(
+      () => Mocks.seedsRepository.getCandidatesThatCanBeVoted(
         circleId: Stubs.circle.id,
         nextPageCursor: const Cursor.firstPage(),
+        searchQuery: '',
       ),
     ).thenAnswer(
-      (_) => successFuture(PaginatedList.singlePage(List.filled(2, Stubs.electionCandidate))),
+      (_) => successFuture(PaginatedList.singlePage(List.filled(2, Stubs.voteCandidate))),
     );
 
     when(
       () => SeedsMocks.getElectionCandidatesUseCase.execute(
         circleId: Stubs.circle.id,
         nextPageCursor: const Cursor.firstPage(),
+        searchQuery: '',
       ),
     ).thenAnswer((_) {
-      return successFuture(PaginatedList.singlePage(List.filled(2, Stubs.electionCandidate)));
+      return successFuture(PaginatedList.singlePage(List.filled(2, Stubs.voteCandidate)));
     });
   });
 }

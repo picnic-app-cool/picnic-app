@@ -18,7 +18,7 @@ import 'package:picnic_app/features/profile/private_profile/private_profile_navi
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/push_notifications/send_push_notification/send_push_notification_navigator.dart';
 import 'package:picnic_app/features/seeds/about_elections/about_elections_navigator.dart';
-import 'package:picnic_app/features/seeds/circle_election/circle_election_navigator.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_navigator.dart';
 import 'package:picnic_app/features/seeds/info_seeds/info_seed_route.dart';
 import 'package:picnic_app/features/seeds/new_seeds/new_seed_route.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_navigator.dart';
@@ -40,7 +40,7 @@ class FeaturesIndexNavigator
         NotificationsRoute,
         CircleSettingsRoute,
         SellSeedsRoute,
-        CircleElectionRoute,
+        CircleGovernanceRoute,
         NewSeedRoute,
         InfoSeedRoute,
         MainRoute,

@@ -21,6 +21,7 @@ import 'package:picnic_app/features/posts/single_feed/single_feed_navigator.dart
 import 'package:picnic_app/features/profile/common/profile_route.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
 import 'package:picnic_app/features/seeds/circle_election/circle_election_navigator.dart';
+import 'package:picnic_app/features/seeds/circle_governance/circle_governance_navigator.dart';
 import 'package:picnic_app/features/seeds/seed_holders/seed_holders_navigator.dart';
 import 'package:picnic_app/features/slices/slice_details/slice_details_navigator.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
@@ -63,6 +64,7 @@ class CircleDetailsNavigator
         VerticalActionBottomSheetRoute,
         CircleElectionRoute,
         FeatureDisabledBottomSheetRoute,
+        CircleGovernanceRoute,
         CommentChatRoute,
         SavePostToCollectionRoute,
         CircleMemberSettingsRoute,
