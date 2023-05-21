@@ -47,7 +47,7 @@
     <img alt="discord community" title="Join our community" src="https://custom-icon-badges.herokuapp.com/discord/1081806596914548746?color=4651C2&logo=comments&logoColor=white&style=for-the-badge&labelColor=5865F2"/></a><br>
 </p>
 
-[Picnic](https://discord.gg/shiba) is a open source social media project meant to become the future of online communities.
+[Picnic](https://deeplink.getpicnic.app/) is a open source social media project meant to become the future of online communities.
 
 <!-- TOC -->
 
