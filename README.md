@@ -10,93 +10,44 @@
 }
 -->
 
-# Picnic Greenfield
-
-Flutter project for the Picnic app
-
-## Contributors ✨
-
-Thanks go to these wonderful people:
-
-<table>
-    <tbody>
-    <tr>
-        <td align="center"><a href="https://appflate.io"><img
-                src="https://avatars.githubusercontent.com/u/1711474?s=100" width="100px;"
-                alt="Andrzej Chmielewski"/>
-            <br/><sub><b>Andrzej Chmielewski</b></sub></a><br/>
-            </a>
-        </td>
-        <td align="center"><a href="https://github.com/zorgonred"><img
-                src="https://avatars.githubusercontent.com/u/20926893?s=100" width="100px;"
-                alt="Daniel de Oliveira"/>
-            <br/><sub><b>Daniel de Oliveira</b></sub></a><br/>
-            </a>
-        </td>
-        <td align="center"><a href="https://github.com/paul-pasc"><img
-                src="https://avatars.githubusercontent.com/u/117663250?s=100" width="100px;"
-                alt="Paul Pasc"/>
-            <br/><sub><b>Paul Pasc</b></sub></a><br/>
-            </a>
-        </td>
-        <td align="center"><a href="https://www.linkedin.com/in/wojciech-kozak/"><img
-                src="https://avatars.githubusercontent.com/u/13345102?s=100" width="100px;"
-                alt="Wojciech Kozak"/>
-            <br/><sub><b>Wojciech Kozak</b></sub></a><br/>
-            </a>
-        </td>
-    </tr>
-    <tr>
-       <td align="center"><a href="https://www.linkedin.com/in/omar-hussein-9b374512b"><img
-                src="https://avatars.githubusercontent.com/u/24321397?s=100" width="100px;"
-                alt="Omar Hussein"/>
-            <br/><sub><b>Omar Hussein</b></sub></a><br/>
-            </a>
-        </td>
-        <td align="center"><a href="https://github.com/dionesxxx"><img
-        src="https://avatars.githubusercontent.com/u/5229299?s=100" width="100px;"
-        alt="Diones Camargo"/>
-    <br/><sub><b>Diones Camargo</b></sub></a><br/>
-    </a>
-</td>
-<td align="center"><a href="https://github.com/ValeryPonomarenko"><img
-                src="https://avatars.githubusercontent.com/u/17588574?s=100" width="100px;"
-                alt="Valery Ponomarenko"/>
-            <br/><sub><b>Valery Ponomarenko</b></sub></a><br/>
-            </a>
-        </td>
-<td align="center"><a href="https://www.linkedin.com/in/waleed006/"><img
-                src="https://media.licdn.com/dms/image/D4D03AQF8j72kqHvqwA/profile-displayphoto-shrink_200_200/0/1664687882821?e=1689206400&v=beta&t=qHz1leyxvO8TpiRfzO7auetG9XU6DPShz32XtB_N830" width="100px;"
-                alt="Waleed Arshad"/>
-            <br/><sub><b>Waleed Arshad</b></sub></a><br/>
-            </a>
-        </td>
-      </tr>
-   <tr>
-       <td align="center"><a href="https://github.com/mdccxv"><img
-                src="https://avatars.githubusercontent.com/u/60363853?v=4" width="100px;"
-                alt="Janusz Dziedzic"/>
-            <br/><sub><b>Janusz Dziedzic</b></sub></a><br/>
-            </a>
-        </td>
-        <td align="center"><a href="https://github.com/aherrarte2019037"><img
-        src="https://avatars.githubusercontent.com/u/61743730?v=4" width="100px;"
-        alt="Angel Herrarte"/>
-    <br/><sub><b>Angel Herrarte</b></sub></a><br/>
-    </a>
-</td>
-      <td align="center"><a href="https://www.linkedin.com/in/wyverx"><img
-                 src="https://media.licdn.com/dms/image/C4D03AQHE1-9lf8JaVw/profile-displayphoto-shrink_400_400/0/1544887973307?e=1689206400&v=beta&t=6pmHatTVCxld3YW0AZVr5ucajcz1hwhYFx4IzapVLr4" width="100px;"
-                 alt="Alexander Topchiy"/>
-             <br/><sub><b>Alexander Topchiy</b></sub></a><br/>
-             </a>
-         </td>
-      </tr>
-    </tbody>
-</table>
+<a href="https://deeplink.getpicnic.app/">
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/2uiuE6M.png">
+  <img alt="" src="https://i.imgur.com/Ei4dHx2.png">
+</picture></p></a> 
 
 
-![Picnic Logo](docs/picnic_logo.png)
+<p align="center">
+<a href="https://play.google.com/store/apps/details?id=com.ambertech.amber">
+<img src="https://svgshare.com/i/tP8.svg" width="275px"/></a>
+<a href="https://apps.apple.com/es/app/picnic-dive-into-communities/id1544626265">
+<img src="https://svgshare.com/i/tP9.svg" width="275px"/></a></p>
+
+<p align="center">
+  <a href="https://tiktok.com/@picnic_app" target="_blank"><img src="https://img.shields.io/badge/TikTok-000000.svg?style=for-the-badge&logo=TikTok&logoColor=white" alt="TikTok"></a>
+<a href="https://twitter.com/thepicnicapp" target="_blank"><img src="https://img.shields.io/badge/Twitter-1DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter"></a>
+<a href="https://www.instagram.com/getpicnicapp" target="_blank"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"></a>
+<a href="https://discord.gg/Ms4uPMyX" target="_blank"><img src="https://img.shields.io/badge/Discord-5865F2.svg?style=for-the-badge&logo=Discord&logoColor=white" alt="Discord"></a>
+<a href="https://www.linkedin.com/company/get-picnic" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <br/>
+  <a title="Downloads" alt="App Downloads" href="https://play.google.com/store/apps/details?id=com.ambertech.amber" target="_blank">
+    <img src="https://PlayBadges.pavi2410.me/badge/downloads?id=com.ambertech.amber&pretty" alt="Latest Release" />
+  </a>
+    <a title="Ratings" alt="App Ratings" href="https://play.google.com/store/apps/details?id=com.ambertech.amber" target="_blank">
+    <img src="https://PlayBadges.pavi2410.me/badge/ratings?id=com.ambertech.amber&pretty" alt="Latest Release" />
+  </a>
+  <br/>
+    <a href="https://deeplink.getpicnic.app/">
+    <img alt="total stars" title="Total stars on GitHub" src="https://custom-icon-badges.herokuapp.com/badge/dynamic/json?logo=star-fill&host=formatted-dynamic-badges.herokuapp.com&formatter=metric&style=for-the-badge&color=E1AD0E&labelColor=C79600&label=stars&logoColor=white&query=%24.stars&url=https%3A%2F%2Fapi.github-star-counter.workers.dev%2Fuser%2Fpicnic-app-cool"/></a>
+  <a title="Visits" href="https://deeplink.getpicnic.app/">
+    <img alt="Views" title="Views" src="https://kounter.tk/badge/picnic-app?label=&color=white&style=for-the-badge&cntSuffix=%20Views"/></a>
+  <br/>
+  <a href="https://www.discord.gg/Ms4uPMyX">
+    <img alt="discord community" title="Join our community" src="https://custom-icon-badges.herokuapp.com/discord/1081806596914548746?color=4651C2&logo=comments&logoColor=white&style=for-the-badge&labelColor=5865F2"/></a><br>
+</p>
+
+[Picnic](https://discord.gg/shiba) is a open source social media project meant to become the future of online communities.
 
 <!-- TOC -->
 
@@ -711,6 +662,14 @@ class UserJson {
       );
 } 
 ```
+## Contributors ✨
+
+  Thanks go to these wonderful people:
+  <p>
+<a href="https://github.com/picnic-app-cool/picnic-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=picnic-app-cool/picnic-app" />
+</a>
+</p>
 
 ## Collaborating guidelines
 
