@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/utils/extensions/responsive_extensions.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_icon_button.dart';
 
 class PicnicCommentTextInput extends StatelessWidget {
   const PicnicCommentTextInput({
@@ -16,6 +18,7 @@ class PicnicCommentTextInput extends StatelessWidget {
     this.isDense = false,
     this.maxLines = 1,
     this.dropShadow = false,
+    this.onTapSend,
   }) : super(key: key);
 
   final String hintText;
@@ -27,11 +30,13 @@ class PicnicCommentTextInput extends StatelessWidget {
   final bool isDense;
   final int? maxLines;
   final bool dropShadow;
+  final VoidCallback? onTapSend;
 
   static const _defaultBorderRadius = 40.0;
   static const _defaultBlurRadius = 4.0;
   static const _shadowOpacity = 0.1;
   static const _shadowBlurRadius = 40.0;
+  static const _sendButtonSize = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +54,12 @@ class PicnicCommentTextInput extends StatelessWidget {
         .copyWith(
           color: textColor ?? blackAndWhite.shade100,
         );
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(
+        color: blackAndWhite.shade300,
+      ),
+    );
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -76,14 +87,24 @@ class PicnicCommentTextInput extends StatelessWidget {
             style: textStyle,
             decoration: InputDecoration(
               fillColor: fillColor,
-              filled: true,
-              border: InputBorder.none,
+              filled: false,
+              enabledBorder: border,
+              focusedBorder: border,
               contentPadding: isDense
-                  ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+                  ? const EdgeInsets.symmetric(horizontal: 18, vertical: 14)
                   : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               isDense: isDense,
               hintText: hintText,
               hintStyle: textStyle,
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8),
+                child: PicnicIconButton(
+                  size: _sendButtonSize,
+                  icon: Assets.images.arrowRight.path,
+                  color: theme.colors.blue,
+                  onTap: onTapSend,
+                ),
+              ),
             ),
             maxLines: maxLines,
           ),

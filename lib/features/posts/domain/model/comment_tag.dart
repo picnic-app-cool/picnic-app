@@ -18,7 +18,7 @@ extension CommentTagExtensions on CommentTag {
     final colors = PicnicTheme.of(context).colors;
     switch (this) {
       case CommentTag.creator:
-        return colors.green.shade600;
+        return colors.blue.shade800;
     }
   }
 
@@ -26,7 +26,7 @@ extension CommentTagExtensions on CommentTag {
     final colors = PicnicTheme.of(context).colors;
     switch (this) {
       case CommentTag.creator:
-        return colors.green.shade200;
+        return colors.blue.shade200;
     }
   }
 }

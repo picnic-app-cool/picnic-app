@@ -99,7 +99,7 @@ class FeatureFlagsDefaults extends Equatable {
       case FeatureFlagType.areTrendingPostsEnabled:
         return false;
       case FeatureFlagType.circlesSeeMoreEnabled:
-        return true;
+        return false;
       case FeatureFlagType.enableElectionCircularGraph:
         return false;
       case FeatureFlagType.searchReportsEnabled:

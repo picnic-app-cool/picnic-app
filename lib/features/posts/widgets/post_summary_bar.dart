@@ -69,7 +69,7 @@ class PostSummaryBar extends StatelessWidget {
     final colors = theme.colors;
     final whiteColor = colors.blackAndWhite.shade100;
     final blackColor = colors.blackAndWhite.shade900;
-    final greenColor = colors.green.shade500;
+    final blueColor = colors.blue;
 
     Color? tagBackgroundColor;
 
@@ -121,8 +121,8 @@ class PostSummaryBar extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             boxFit: PicnicAvatarChildBoxFit.cover,
-            followButtonBackgroundColor: overlayTheme == PostOverlayTheme.dark ? greenColor : whiteColor,
-            followButtonForegroundColor: overlayTheme == PostOverlayTheme.dark ? whiteColor : greenColor,
+            followButtonBackgroundColor: overlayTheme == PostOverlayTheme.dark ? blueColor : whiteColor,
+            followButtonForegroundColor: overlayTheme == PostOverlayTheme.dark ? whiteColor : blueColor,
           ),
           tag: displayTag
               ? PicnicTag(

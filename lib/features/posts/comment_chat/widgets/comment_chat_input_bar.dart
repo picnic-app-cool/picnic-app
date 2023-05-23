@@ -9,7 +9,6 @@ import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_comment_text_input.dart';
 import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
-import 'package:picnic_ui_components/ui/widgets/picnic_icon_button.dart';
 
 class CommentChatInputBar extends StatelessWidget {
   const CommentChatInputBar({
@@ -54,7 +53,6 @@ class CommentChatInputBar extends StatelessWidget {
 
     const attachmentButtonsPadding = 5.0;
     const attachmentButtonsSize = 18.0 + attachmentButtonsPadding * 2;
-    const sendButtonSize = 34.0;
 
     return Container(
       decoration: BoxDecoration(
@@ -116,29 +114,16 @@ class CommentChatInputBar extends StatelessWidget {
                 Expanded(
                   child: PicnicCommentTextInput(
                     textController: textController,
-                    hintText: appLocalizations.chatNewMessageInputHint,
+                    hintText: appLocalizations.addCommentHint,
                     fillColor: textFieldFillColor,
                     textColor: textFieldTextColor,
                     onChanged: onCommentUpdated,
                     focusNode: focusNode,
                     maxLines: null,
                     isDense: true,
+                    onTapSend: onTapSend,
                   ),
                 ),
-                const Gap(12),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: endPadding),
-                    child: PicnicIconButton(
-                      size: sendButtonSize,
-                      icon: Assets.images.send.path,
-                      color: theme.colors.green,
-                      onTap: onTapSend,
-                    ),
-                  ),
-                ),
-                const Gap(5),
               ],
             ),
           ],

@@ -144,9 +144,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/checkbox_square_empty.webp
   AssetGenImage get checkboxSquareEmpty => const AssetGenImage('assets/images/checkbox_square_empty.webp');
 
-  /// File path: assets/images/circle_badge.webp
-  AssetGenImage get circleBadge => const AssetGenImage('assets/images/circle_badge.webp');
-
   /// File path: assets/images/clock.webp
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.webp');
 
@@ -341,6 +338,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/notification.webp
   AssetGenImage get notification => const AssetGenImage('assets/images/notification.webp');
+
+  /// File path: assets/images/notification_bell.webp
+  AssetGenImage get notificationBell => const AssetGenImage('assets/images/notification_bell.webp');
 
   /// File path: assets/images/offline.webp
   AssetGenImage get offline => const AssetGenImage('assets/images/offline.webp');
@@ -562,6 +562,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/users_bold.webp
   AssetGenImage get usersBold => const AssetGenImage('assets/images/users_bold.webp');
 
+  /// File path: assets/images/ver_badge.webp
+  AssetGenImage get verBadge => const AssetGenImage('assets/images/ver_badge.webp');
+
+  /// File path: assets/images/verification_badge_pink.webp
+  AssetGenImage get verificationBadgePink => const AssetGenImage('assets/images/verification_badge_pink.webp');
+
   /// File path: assets/images/volume-2.webp
   AssetGenImage get volume2 => const AssetGenImage('assets/images/volume-2.webp');
 
@@ -638,7 +644,6 @@ class $AssetsImagesGen {
         checkboxCircle,
         checkboxSquare,
         checkboxSquareEmpty,
-        circleBadge,
         clock,
         close,
         closeCircleTransparent,
@@ -704,6 +709,7 @@ class $AssetsImagesGen {
         mute,
         noAccessToGallery,
         notification,
+        notificationBell,
         offline,
         online,
         paper,
@@ -777,6 +783,8 @@ class $AssetsImagesGen {
         uploadSuccess,
         uploadVideo,
         usersBold,
+        verBadge,
+        verificationBadgePink,
         volume2,
         volumeX,
         wand,

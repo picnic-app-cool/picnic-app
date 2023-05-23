@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:picnic_app/core/domain/model/image_url.dart';
 import 'package:picnic_app/core/domain/model/public_profile.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/default_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
@@ -37,6 +39,7 @@ class UsersSearchResult extends StatelessWidget {
               imageSource: PicnicImageSource.url(currentUser.profileImageUrl, fit: BoxFit.cover),
               placeholder: () => DefaultAvatar.user(),
               isVerified: currentUser.isVerified,
+              verificationBadgeImage: ImageUrl(Assets.images.verificationBadgePink.path),
               boxFit: PicnicAvatarChildBoxFit.cover,
             );
 

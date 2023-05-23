@@ -392,7 +392,7 @@ class _VerificationBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     var badge = badgeUrl;
     if (badge == const ImageUrl.empty()) {
-      badge = ImageUrl(Assets.images.achievement.path);
+      badge = ImageUrl(Assets.images.verificationBadgePink.path);
     }
 
     return SizedBox(

@@ -34,7 +34,6 @@ class _DiscoverExplorePageState extends State<DiscoverExplorePage>
   late final FocusNode focusNode;
 
   static const _midPadding = 16.0;
-  static const _highPadding = 24.0;
   static const _radius = 16.0;
   static const _tagRadius = 100.0;
 
@@ -167,7 +166,7 @@ class _DiscoverExplorePageState extends State<DiscoverExplorePage>
                       children: [
                         PicnicTitleTextWithPadding(
                           text: appLocalizations.circleWithTopic(element.name),
-                          topPadding: _highPadding,
+                          topPadding: 0,
                           bottomPadding: 0,
                         ),
                         PicnicCircleListView(

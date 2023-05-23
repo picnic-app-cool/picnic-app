@@ -41,7 +41,7 @@ class FollowerListItem extends StatelessWidget {
       height: _avatarSize,
       child: Align(
         alignment: Alignment.bottomRight,
-        child: Assets.images.achievement.image(width: _avatarSize * _badeRatio),
+        child: Assets.images.verificationBadgePink.image(width: _avatarSize * _badeRatio),
       ),
     );
 

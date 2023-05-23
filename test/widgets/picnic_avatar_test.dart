@@ -145,7 +145,7 @@ void main() {
               imageSource: PicnicImageSource.asset(
                 ImageUrl(Assets.images.picnicLogo.path),
               ),
-              verificationBadgeImage: ImageUrl(Assets.images.circleBadge.path),
+              verificationBadgeImage: ImageUrl(Assets.images.verBadge.path),
             ),
           ),
         )

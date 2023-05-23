@@ -60,7 +60,7 @@ class VerifiedAvatar extends StatelessWidget {
                 height: avatarSize,
                 child: Align(
                   alignment: Alignment.bottomRight,
-                  child: Assets.images.achievement.image(width: _badgeSize),
+                  child: Assets.images.verificationBadgePink.image(width: _badgeSize),
                 ),
               ),
             ],

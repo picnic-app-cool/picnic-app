@@ -17,7 +17,7 @@ class AchievementBadge extends StatelessWidget {
     switch (type) {
       case AchievementBadgeType.verifiedBlue:
         return Image.asset(
-          Assets.images.achievementBadgeBlue.path,
+          Assets.images.verificationBadgePink.path,
           height: _achievementIconSize,
           width: _achievementIconSize,
         );

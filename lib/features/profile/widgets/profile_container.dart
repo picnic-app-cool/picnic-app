@@ -91,7 +91,7 @@ class ProfileContainer extends StatelessWidget {
                   ),
                   if (user.isVerified) ...[
                     const Gap(2),
-                    Assets.images.achievement.image(width: _badgeSize),
+                    Assets.images.verificationBadgePink.image(width: _badgeSize),
                   ],
                 ],
               ),

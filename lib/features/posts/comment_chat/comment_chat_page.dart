@@ -155,6 +155,7 @@ class _CommentChatPageState extends State<CommentChatPage>
                       replyingComment: state.replyingComment,
                       textController: _textController,
                       textFieldTextColor: blackAndWhite.shade600,
+                      textFieldFillColor: blackAndWhite.shade100,
                       hideAttachmentButton: !state.shouldAttachmentBeVisible,
                       hideInstantCommandsButton: !state.shouldInstantCommandsBeVisible,
                       onTapSend: _onTapSend,

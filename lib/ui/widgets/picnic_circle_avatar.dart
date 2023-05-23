@@ -35,7 +35,7 @@ class PicnicCircleAvatar extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final avatarBgColor = bgColor ?? theme.colors.green.shade200;
     final avatarPlaceholder = placeholder ?? DefaultAvatar.circle();
-    final verifiedBadge = Assets.images.circleBadge.path;
+    final verifiedBadge = Assets.images.verBadge.path;
     return image.isNotEmpty
         ? PicnicAvatar(
             size: avatarSize,

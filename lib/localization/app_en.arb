@@ -1361,6 +1361,7 @@
     }
   },
   "myVote": "my vote",
+  "addCommentHint": "add a comment",
   "electedDirector": "elected director",
   "directorMargin": "{margin} margin",
   "@directorMargin": {
