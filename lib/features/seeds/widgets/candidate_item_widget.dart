@@ -41,6 +41,7 @@ class CandidateItemWidget extends StatelessWidget {
     const opacity = 0.05;
     const borderRadius = 16.0;
     final caption10GreyStyle = styles.caption10.copyWith(color: blackAndWhite.shade600);
+    const nrOfDecimalsToShow = 2;
 
     return GestureDetector(
       onTap: onTapCandidate,
@@ -92,7 +93,7 @@ class CandidateItemWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          appLocalizations.ofAllVotes(candidate.votesPercent.toString()),
+                          appLocalizations.ofAllVotes(candidate.votesPercent.toStringAsFixed(nrOfDecimalsToShow)),
                           style: caption10GreyStyle,
                         ),
                       ],

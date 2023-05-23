@@ -99,6 +99,7 @@ class _MainPageState extends State<MainPage> with PresenterStateMixin<MainViewMo
                               showDecoration: selectedItem != PicnicNavItem.feed,
                               onTabSwiped: presenter.onSelectedTab,
                               unreadChatsCount: state.unreadChatsCount,
+                              userImageUrl: state.user.profileImageUrl.url,
                             ),
                           ),
                         ),

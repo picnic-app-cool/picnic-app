@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/repositories/background_api_repository.dart';
 import 'package:picnic_app/core/domain/stores/unread_counters_store.dart';
+import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
@@ -22,6 +24,7 @@ class MainPresenter extends Cubit<MainViewModel> with SubscriptionsMixin {
     this._logAnalyticsEventUseCase,
     this._currentTimeProvider,
     this._backgroundApiRepository,
+    this._userStore,
     UnreadCountersStore unreadCountersStore,
   ) : super(model) {
     listenTo<List<UnreadChat>>(
@@ -29,13 +32,22 @@ class MainPresenter extends Cubit<MainViewModel> with SubscriptionsMixin {
       subscriptionId: _unreadCountersStoreSubscription,
       onChange: (unreadChats) => tryEmit(_model.copyWith(unreadChatsCount: unreadChats.length)),
     );
+    listenTo<PrivateProfile>(
+      stream: _userStore.stream,
+      subscriptionId: _userStoreSubscription,
+      onChange: (privateProfile) {
+        tryEmit(_model.copyWith(user: privateProfile));
+      },
+    );
   }
 
   final MainNavigator navigator;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final CurrentTimeProvider _currentTimeProvider;
   final BackgroundApiRepository _backgroundApiRepository;
+  final UserStore _userStore;
 
+  static const _userStoreSubscription = "mainPageUserStoreSubscription";
   static const _unreadCountersStoreSubscription = "unreadCountersStoreMainSubscription";
 
   MainPresentationModel get _model => state as MainPresentationModel;

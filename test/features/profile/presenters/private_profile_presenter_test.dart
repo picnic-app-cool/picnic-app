@@ -142,7 +142,7 @@ void main() {
       presenter.onTapViewPost(Stubs.linkPost);
 
       // THEN
-      verify(() => navigator.openSingleFeed(any()));
+      verify(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot')));
     },
   );
 
@@ -153,7 +153,7 @@ void main() {
       presenter.onTapViewSavedPost(Stubs.linkPost);
 
       // THEN
-      verify(() => navigator.openSingleFeed(any()));
+      verify(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot')));
     },
   );
 
@@ -267,6 +267,9 @@ void main() {
       return Future.value();
     });
     when(() => navigator.openSingleFeed(any())).thenAnswer((invocation) {
+      return Future.value();
+    });
+    when(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot'))).thenAnswer((invocation) {
       return Future.value();
     });
 

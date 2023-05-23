@@ -117,8 +117,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/chat_feed.webp
   AssetGenImage get chatFeed => const AssetGenImage('assets/images/chat_feed.webp');
 
-  /// File path: assets/images/chat_navigation_filled.webp
-  AssetGenImage get chatNavigationFilled => const AssetGenImage('assets/images/chat_navigation_filled.webp');
+  /// File path: assets/images/chat_navigation_filled_black.webp
+  AssetGenImage get chatNavigationFilledBlack => const AssetGenImage('assets/images/chat_navigation_filled_black.webp');
+
+  /// File path: assets/images/chat_navigation_outlined_black.webp
+  AssetGenImage get chatNavigationOutlinedBlack =>
+      const AssetGenImage('assets/images/chat_navigation_outlined_black.webp');
+
+  /// File path: assets/images/chat_navigation_outlined_white.webp
+  AssetGenImage get chatNavigationOutlinedWhite =>
+      const AssetGenImage('assets/images/chat_navigation_outlined_white.webp');
 
   /// File path: assets/images/chat_outlined.webp
   AssetGenImage get chatOutlined => const AssetGenImage('assets/images/chat_outlined.webp');
@@ -200,6 +208,15 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/discord.webp
   AssetGenImage get discord => const AssetGenImage('assets/images/discord.webp');
+
+  /// File path: assets/images/discover_filled.webp
+  AssetGenImage get discoverFilled => const AssetGenImage('assets/images/discover_filled.webp');
+
+  /// File path: assets/images/discover_outlined_black.webp
+  AssetGenImage get discoverOutlinedBlack => const AssetGenImage('assets/images/discover_outlined_black.webp');
+
+  /// File path: assets/images/discover_outlined_white.webp
+  AssetGenImage get discoverOutlinedWhite => const AssetGenImage('assets/images/discover_outlined_white.webp');
 
   /// File path: assets/images/dislike_filled.webp
   AssetGenImage get dislikeFilled => const AssetGenImage('assets/images/dislike_filled.webp');
@@ -389,6 +406,12 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/plus.webp
   AssetGenImage get plus => const AssetGenImage('assets/images/plus.webp');
+
+  /// File path: assets/images/plus_post.webp
+  AssetGenImage get plusPost => const AssetGenImage('assets/images/plus_post.webp');
+
+  /// File path: assets/images/plus_post_grey.webp
+  AssetGenImage get plusPostGrey => const AssetGenImage('assets/images/plus_post_grey.webp');
 
   /// File path: assets/images/pod_placeholder_img.webp
   AssetGenImage get podPlaceholderImg => const AssetGenImage('assets/images/pod_placeholder_img.webp');
@@ -635,7 +658,9 @@ class $AssetsImagesGen {
         chart,
         chat,
         chatFeed,
-        chatNavigationFilled,
+        chatNavigationFilledBlack,
+        chatNavigationOutlinedBlack,
+        chatNavigationOutlinedWhite,
         chatOutlined,
         chatOutlinedMedium,
         chatStroked,
@@ -663,6 +688,9 @@ class $AssetsImagesGen {
         deleteSolid,
         democracy,
         discord,
+        discoverFilled,
+        discoverOutlinedBlack,
+        discoverOutlinedWhite,
         dislikeFilled,
         dislikeOutlined,
         document,
@@ -726,6 +754,8 @@ class $AssetsImagesGen {
         pinnedComment,
         play,
         plus,
+        plusPost,
+        plusPostGrey,
         podPlaceholderImg,
         pointingArrow,
         pollPostPlaceholder,

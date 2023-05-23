@@ -17,9 +17,10 @@ class ReportFormNavigator
 }
 
 mixin ReportFormRoute {
-  Future<bool?> openReportForm(ReportFormInitialParams initialParams) async {
+  Future<bool?> openReportForm(ReportFormInitialParams initialParams, {bool useRoot = false}) async {
     return appNavigator.push(
       materialRoute(getIt<ReportFormPage>(param1: initialParams)),
+      useRoot: false,
     );
   }
 

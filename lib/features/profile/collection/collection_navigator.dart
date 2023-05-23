@@ -62,9 +62,10 @@ class CollectionNavigator with ErrorBottomSheetRoute, VerticalActionBottomSheetR
 }
 
 mixin CollectionRoute {
-  Future<void> openCollection(CollectionInitialParams initialParams) async {
+  Future<void> openCollection(CollectionInitialParams initialParams, {bool useRoot = false}) async {
     return appNavigator.push(
       materialRoute(getIt<CollectionPage>(param1: initialParams)),
+      useRoot: useRoot,
     );
   }
 

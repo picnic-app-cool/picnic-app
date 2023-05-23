@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/utils/durations.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/bottom_navigation/picnic_nav_item.dart';
 import 'package:picnic_app/ui/widgets/swipe_detector.dart';
 import 'package:picnic_app/ui/widgets/unread_counter_badge.dart';
@@ -20,6 +19,7 @@ class PicnicBottomNavigation extends StatelessWidget {
     required this.onTap,
     required this.items,
     required this.onTabSwiped,
+    required this.userImageUrl,
     this.unreadChatsCount = 0,
   }) : super(key: key);
 
@@ -30,52 +30,45 @@ class PicnicBottomNavigation extends StatelessWidget {
   final List<PicnicNavItem> items;
   final Function(PicnicNavItem) onTabSwiped;
   final int unreadChatsCount;
+  final String? userImageUrl;
 
+  static const double tabsPadding = 6.0;
   static const double barHeight = 64;
-  static const double _barBorderRadius = 32;
+  static const double _defaultIconSize = 28;
+  static const double _addPostIconHeight = 36 + tabsPadding;
+  static const double _addPostIconWidth = 52 + tabsPadding;
 
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final blackAndWhite = theme.colors.blackAndWhite;
 
-    const radius = BorderRadius.only(
-      topLeft: Radius.circular(_barBorderRadius),
-      topRight: Radius.circular(_barBorderRadius),
-    );
     return SwipeDetector(
       onSwipeLeft: _onSwipeLeft,
       onSwipeRight: _onSwipeRight,
       child: Material(
-        color: showDecoration ? theme.colors.blackAndWhite.shade100 : Colors.transparent,
-        borderRadius: radius,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: radius,
-            border: showDecoration ? Border.all(color: PicnicColors.lightGrey) : null,
-          ),
+        color: showDecoration
+            ? blackAndWhite.shade100
+            : (overlayTheme == PostOverlayTheme.light ? blackAndWhite.shade900 : blackAndWhite.shade100),
+        child: SizedBox(
           height: barHeight + bottomPadding,
           child: Padding(
             padding: EdgeInsets.only(bottom: bottomPadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: items.map((it) {
-                if (it == PicnicNavItem.add) {
-                  return Flexible(
-                    child: _PicnicBottomNavigationAddItem(
-                      item: PicnicNavItem.add,
-                      onTap: onTap,
-                    ),
-                  );
-                }
-
-                return Flexible(
+                return SizedBox(
+                  width: _getTabWidth(it, activeItem == it),
                   child: _PicnicBottomNavigationItem(
                     item: it,
                     isActive: activeItem == it,
                     overlayTheme: overlayTheme,
                     onTap: onTap,
                     unreadChatsCount: unreadChatsCount,
+                    iconWidth: it == PicnicNavItem.add ? _addPostIconWidth : _defaultIconSize,
+                    iconHeight: it == PicnicNavItem.add ? _addPostIconHeight : _defaultIconSize,
+                    userImageUrl: userImageUrl,
                   ),
                 );
               }).toList(),
@@ -84,6 +77,17 @@ class PicnicBottomNavigation extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double _getTabWidth(PicnicNavItem navItem, bool isActive) {
+    if (navItem == PicnicNavItem.add) {
+      return _addPostIconWidth;
+    } else {
+      if (navItem == PicnicNavItem.profile && isActive) {
+        return _defaultIconSize + tabsPadding;
+      }
+      return _defaultIconSize + tabsPadding;
+    }
   }
 
   void _onSwipeLeft() {
@@ -109,6 +113,9 @@ class _PicnicBottomNavigationItem extends StatelessWidget {
     required this.overlayTheme,
     required this.onTap,
     required this.unreadChatsCount,
+    required this.iconWidth,
+    required this.iconHeight,
+    required this.userImageUrl,
   }) : super(key: key);
 
   final PicnicNavItem item;
@@ -116,37 +123,46 @@ class _PicnicBottomNavigationItem extends StatelessWidget {
   final PostOverlayTheme overlayTheme;
   final Function(PicnicNavItem) onTap;
   final int unreadChatsCount;
+  final double iconWidth;
+  final double iconHeight;
+  final String? userImageUrl;
 
-  static const double _iconSize = 28;
-  static const double _activeIconWidth = 25;
-  static const double _activeIconHeight = 10;
+  static const double _activeIconWidth = 6;
+  static const double _activeIconHeight = 6;
 
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
-    final iconColor = _getColor(colors);
-    final showBadge = unreadChatsCount > 0 && item == PicnicNavItem.chat;
+    final iconColor = item == PicnicNavItem.feed ? _getColor(colors) : null;
+    final showUnreadMessagesBadge = unreadChatsCount > 0 && item == PicnicNavItem.chat;
 
     return InkResponse(
       onTap: () => onTap(item),
       child: AnimatedSwitcher(
         duration: const ShortDuration(),
         child: SizedBox(
-          key: ValueKey(iconColor),
+          key: ValueKey(item.value),
           child: Stack(
             children: [
               Center(
                 child: Stack(
                   children: [
-                    ImageIcon(
-                      AssetImage(
-                        isActive ? item.getActiveIcon() : item.getIcon(),
+                    if (item == PicnicNavItem.profile && userImageUrl != null && userImageUrl!.isNotEmpty)
+                      _UserProfileImageTab(
+                        userImageUrl: userImageUrl!,
+                        isActive: isActive,
+                        iconHeight: iconHeight,
+                        iconWidth: iconWidth,
+                      )
+                    else
+                      Image.asset(
+                        isActive ? item.getActiveIcon(overlayTheme) : item.getIcon(overlayTheme),
+                        width: iconWidth,
+                        height: iconHeight,
+                        color: iconColor,
                       ),
-                      size: _iconSize,
-                      color: iconColor,
-                    ),
-                    if (showBadge)
+                    if (showUnreadMessagesBadge)
                       Positioned(
                         right: 0,
                         child: UnreadCounterBadge(count: unreadChatsCount),
@@ -154,16 +170,18 @@ class _PicnicBottomNavigationItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (isActive)
+              if (showUnreadMessagesBadge)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Image.asset(
-                      Assets.images.bottomNavigationActive.path,
+                    child: Container(
                       width: _activeIconWidth,
                       height: _activeIconHeight,
-                      color: iconColor,
+                      decoration: BoxDecoration(
+                        color: colors.pink,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
                 ),
@@ -174,7 +192,7 @@ class _PicnicBottomNavigationItem extends StatelessWidget {
     );
   }
 
-  Color _getColor(PicnicColors colors) {
+  Color? _getColor(PicnicColors colors) {
     switch (overlayTheme) {
       case PostOverlayTheme.dark:
         return colors.blackAndWhite.shade900;
@@ -184,50 +202,66 @@ class _PicnicBottomNavigationItem extends StatelessWidget {
   }
 }
 
-class _PicnicBottomNavigationAddItem extends StatelessWidget {
-  const _PicnicBottomNavigationAddItem({
-    Key? key,
-    required this.item,
-    required this.onTap,
-  }) : super(key: key);
+class _UserProfileImageTab extends StatelessWidget {
+  const _UserProfileImageTab({
+    required this.userImageUrl,
+    required this.isActive,
+    required this.iconHeight,
+    required this.iconWidth,
+  });
 
-  final PicnicNavItem item;
-  final Function(PicnicNavItem) onTap;
+  final String userImageUrl;
+  final bool isActive;
+  final double iconHeight;
+  final double iconWidth;
 
-  static const double _buttonWidth = 48;
-  static const double _buttonHeight = 40;
-  static const double _buttonRadius = 10;
+  static const radius = 50.0;
+  static const borderSize = 2.0;
 
   @override
   Widget build(BuildContext context) {
-    final bwColors = PicnicTheme.of(context).colors.blackAndWhite;
+    final colors = PicnicTheme.of(context).colors;
 
-    return InkResponse(
-      onTap: () => onTap(item),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        width: _buttonWidth,
-        height: _buttonHeight,
-        decoration: BoxDecoration(
-          color: bwColors.shade100,
-          borderRadius: BorderRadius.circular(_buttonRadius),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0xFFF1013F),
-              offset: Offset(0, -3),
+    return Stack(
+      children: [
+        if (isActive)
+          Center(
+            child: Stack(
+              children: [
+                Center(
+                  child: Container(
+                    width: iconWidth + PicnicBottomNavigation.tabsPadding,
+                    height: iconHeight + PicnicBottomNavigation.tabsPadding,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: colors.blackAndWhite.shade900,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    width: iconWidth + (PicnicBottomNavigation.tabsPadding - borderSize),
+                    height: iconHeight + (PicnicBottomNavigation.tabsPadding - borderSize),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: colors.blackAndWhite.shade100,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            BoxShadow(
-              color: Color(0xFF41DA01),
-              offset: Offset(0, 3),
+          ),
+        Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(radius),
+            child: Image.network(
+              userImageUrl,
+              width: iconWidth,
+              height: iconHeight,
             ),
-          ],
+          ),
         ),
-        child: Image.asset(
-          item.getIcon(),
-          fit: BoxFit.cover,
-          color: bwColors.shade900,
-        ),
-      ),
+      ],
     );
   }
 }

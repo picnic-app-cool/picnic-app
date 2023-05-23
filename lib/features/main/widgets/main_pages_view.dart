@@ -4,10 +4,14 @@ import 'package:picnic_app/core/utils/logging.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_initial_params.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_page.dart';
+import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
+import 'package:picnic_app/features/discover/discover_explore/discover_explore_page.dart';
 import 'package:picnic_app/features/feed/feed_home/feed_home_initial_params.dart';
 import 'package:picnic_app/features/feed/feed_home/feed_home_page.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_presentation_model.dart';
+import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
+import 'package:picnic_app/features/profile/private_profile/private_profile_page.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/utils/root_navigator_observer.dart';
 import 'package:picnic_app/navigation/utils/simple_navigator_observer.dart';
@@ -132,10 +136,6 @@ class _MainPagesViewState extends State<MainPagesView> {
 
   void _pageControllerListener() {
     if (_index != _controller.currentPage) {
-      final newSelectionItem = widget.items[_controller.currentPage];
-      if (newSelectionItem != widget.selectedItem) {
-        widget.onChangedPage(newSelectionItem);
-      }
       _index = _controller.currentPage;
       // we want all subpages to open in nested navigators by default, thus
       // we replace nestedNavigatorKey with the currently displayed tab's navigator
@@ -159,12 +159,18 @@ class _MainPagesViewState extends State<MainPagesView> {
             ),
           );
           break;
+        case PicnicNavItem.discover:
+          page = getIt<DiscoverExplorePage>(param1: const DiscoverExploreInitialParams());
+          break;
         case PicnicNavItem.add:
           logError("We dont support ${PicnicNavItem.add} as main tab");
           page = const SizedBox.shrink();
           break;
         case PicnicNavItem.chat:
           page = getIt<ChatTabsPage>(param1: const ChatTabsInitialParams());
+          break;
+        case PicnicNavItem.profile:
+          page = getIt<PrivateProfilePage>(param1: const PrivateProfileInitialParams());
           break;
       }
       _pages[tab] = page;

@@ -280,6 +280,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
         loadMore: () => _loadPosts().mapFailure((f) => f.displayableFailure()),
         refresh: () => _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
+      useRoot: true,
     );
 
     _getProfileStats();
@@ -294,6 +295,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
         loadMore: () => _getSavedPosts().mapFailure((f) => f.displayableFailure()),
         refresh: () => _getSavedPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
+      useRoot: true,
     );
 
     _getProfileStats();
@@ -313,6 +315,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
   void onTapCollection(Collection collection) {
     navigator.openCollection(
       CollectionInitialParams(collection: collection, onPostRemovedCallback: () => loadCollection(fromScratch: true)),
+      useRoot: true,
     );
   }
 
@@ -360,6 +363,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       CreateCircleInitialParams(
         createCircleWithoutPost: true,
       ),
+      useRoot: true,
     );
   }
 
@@ -529,6 +533,7 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
         entityId: _model.circle.id,
         reportEntityType: ReportEntityType.circle,
       ),
+      useRoot: true,
     );
   }
 

@@ -18,7 +18,7 @@ class GqlVoteCandidate {
     return GqlVoteCandidate(
       user: GqlPublicProfile.fromJson(asT<Map<String, dynamic>>(json, 'user')),
       votesCount: asT<int>(json, 'votesCount'),
-      votesPercent: asT<int>(json, 'votesPercent'),
+      votesPercent: asT<double>(json, 'votesPercent'),
       position: asT<int>(json, 'position'),
       margin: asT<double>(json, 'margin'),
     );
@@ -26,16 +26,18 @@ class GqlVoteCandidate {
 
   final GqlPublicProfile user;
   final int votesCount;
-  final int votesPercent;
+  final double votesPercent;
   final int position;
   final double margin;
 
-  VoteCandidate toDomain(UserStore userStore) => VoteCandidate(
-        publicProfile: user.toDomain(userStore),
-        votesCount: votesCount,
-        votesPercent: votesPercent.toDouble(),
-        position: position,
-        isDirector: position == 1,
-        margin: margin,
-      );
+  VoteCandidate toDomain(UserStore userStore) {
+    return VoteCandidate(
+      publicProfile: user.toDomain(userStore),
+      votesCount: votesCount,
+      votesPercent: votesPercent,
+      position: position,
+      isDirector: position == 1,
+      margin: margin,
+    );
+  }
 }

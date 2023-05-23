@@ -1,4 +1,6 @@
+import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/stores/unread_counters_store.dart';
+import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/features/main/main_initial_params.dart';
 import 'package:picnic_app/features/main/selected_tab_info.dart';
@@ -13,6 +15,7 @@ class MainPresentationModel implements MainViewModel {
     MainInitialParams initialParams,
     CurrentTimeProvider currentTimeProvider,
     UnreadCountersStore unreadCountersStore,
+    UserStore userStore,
   )   : selectedTab = SelectedTabInfo(
           initialOpenTime: currentTimeProvider.currentTime,
           item: PicnicNavItem.feed,
@@ -20,7 +23,8 @@ class MainPresentationModel implements MainViewModel {
         postOverlayTheme = PostOverlayTheme.dark,
         postToShow = initialParams.postToShow,
         unreadChatsCount = unreadCountersStore.unreadChats.length,
-        isCirclesSideMenuOpen = false;
+        isCirclesSideMenuOpen = false,
+        user = userStore.privateProfile;
 
   /// Used for the copyWith method
   MainPresentationModel._({
@@ -29,6 +33,7 @@ class MainPresentationModel implements MainViewModel {
     required this.postToShow,
     required this.unreadChatsCount,
     required this.isCirclesSideMenuOpen,
+    required this.user,
   });
 
   @override
@@ -43,23 +48,33 @@ class MainPresentationModel implements MainViewModel {
   @override
   final bool isCirclesSideMenuOpen;
 
+  @override
+  final PrivateProfile user;
+
   final PostOverlayTheme postOverlayTheme;
 
   @override
-  PostOverlayTheme get overlayTheme =>
-      selectedTab.item == PicnicNavItem.chat ? PostOverlayTheme.dark : postOverlayTheme;
+  PostOverlayTheme get overlayTheme => (selectedTab.item == PicnicNavItem.chat ||
+          selectedTab.item == PicnicNavItem.discover ||
+          selectedTab.item == PicnicNavItem.profile)
+      ? PostOverlayTheme.dark
+      : postOverlayTheme;
 
   @override
   List<PicnicNavItem> get tabs => [
         PicnicNavItem.feed,
+        PicnicNavItem.discover,
         PicnicNavItem.chat,
+        PicnicNavItem.profile,
       ];
 
   @override
   List<PicnicNavItem> get tabButtons => [
         PicnicNavItem.feed,
+        PicnicNavItem.discover,
         PicnicNavItem.add,
         PicnicNavItem.chat,
+        PicnicNavItem.profile,
       ];
 
   MainPresentationModel copyWith({
@@ -69,6 +84,7 @@ class MainPresentationModel implements MainViewModel {
     Post? postToShow,
     int? unreadChatsCount,
     bool? isCirclesSideMenuOpen,
+    PrivateProfile? user,
   }) {
     return MainPresentationModel._(
       selectedTab: selectedTab ?? this.selectedTab,
@@ -76,6 +92,7 @@ class MainPresentationModel implements MainViewModel {
       postToShow: postToShow ?? this.postToShow,
       unreadChatsCount: unreadChatsCount ?? this.unreadChatsCount,
       isCirclesSideMenuOpen: isCirclesSideMenuOpen ?? this.isCirclesSideMenuOpen,
+      user: user ?? this.user,
     );
   }
 }
@@ -95,4 +112,6 @@ abstract class MainViewModel {
   int get unreadChatsCount;
 
   bool get isCirclesSideMenuOpen;
+
+  PrivateProfile get user;
 }

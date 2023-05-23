@@ -19,8 +19,16 @@ class PicnicBottomNavigationUseCase extends WidgetbookComponent {
                       value: PicnicNavItem.feed,
                     ),
                     Option(
+                      label: 'Discover',
+                      value: PicnicNavItem.discover,
+                    ),
+                    Option(
                       label: 'Chat',
                       value: PicnicNavItem.chat,
+                    ),
+                    Option(
+                      label: 'Profile',
+                      value: PicnicNavItem.profile,
                     ),
                   ],
                 ),
@@ -30,6 +38,7 @@ class PicnicBottomNavigationUseCase extends WidgetbookComponent {
                 onTap: (_) {},
                 items: PicnicNavItem.values,
                 onTabSwiped: (_) {},
+                userImageUrl: '',
               ),
             ),
           ],

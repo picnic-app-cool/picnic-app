@@ -1,3 +1,4 @@
+import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 
 //ignore_for_file: no-magic-number
@@ -7,14 +8,24 @@ enum PicnicNavItem {
     'feed',
     showAsTab: true,
   ),
-  add(
+  discover(
     1,
+    'add',
+    showAsTab: true,
+  ),
+  add(
+    2,
     'add',
     showAsTab: false,
   ),
   chat(
-    2,
+    3,
     'chat',
+    showAsTab: true,
+  ),
+  profile(
+    4,
+    'profile',
     showAsTab: true,
   );
 
@@ -31,25 +42,37 @@ enum PicnicNavItem {
     required this.showAsTab,
   });
 
-  String getIcon() {
+  String getIcon(PostOverlayTheme overlayTheme) {
     switch (this) {
       case PicnicNavItem.feed:
         return Assets.images.feedStroked.path;
       case PicnicNavItem.add:
-        return Assets.images.add.path;
+        return overlayTheme == PostOverlayTheme.light ? Assets.images.plusPost.path : Assets.images.plusPostGrey.path;
       case PicnicNavItem.chat:
-        return Assets.images.chatStroked.path;
+        return overlayTheme == PostOverlayTheme.light
+            ? Assets.images.chatNavigationOutlinedWhite.path
+            : Assets.images.chatNavigationOutlinedBlack.path;
+      case PicnicNavItem.discover:
+        return overlayTheme == PostOverlayTheme.light
+            ? Assets.images.discoverOutlinedWhite.path
+            : Assets.images.discoverOutlinedBlack.path;
+      case PicnicNavItem.profile:
+        return Assets.images.contact.path;
     }
   }
 
-  String getActiveIcon() {
+  String getActiveIcon(PostOverlayTheme overlayTheme) {
     switch (this) {
       case PicnicNavItem.feed:
         return Assets.images.feedFilled.path;
       case PicnicNavItem.add:
-        return Assets.images.add.path;
+        return overlayTheme == PostOverlayTheme.light ? Assets.images.plusPost.path : Assets.images.plusPostGrey.path;
       case PicnicNavItem.chat:
-        return Assets.images.chatNavigationFilled.path;
+        return Assets.images.chatNavigationFilledBlack.path;
+      case PicnicNavItem.discover:
+        return Assets.images.discoverFilled.path;
+      case PicnicNavItem.profile:
+        return Assets.images.contact.path;
     }
   }
 }

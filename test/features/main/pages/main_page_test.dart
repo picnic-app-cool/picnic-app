@@ -8,6 +8,8 @@ import 'package:picnic_app/features/chat/chat_dms/chat_dms_page.dart';
 import 'package:picnic_app/features/chat/chat_feed/chat_feed_page.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_page.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_presenter.dart';
+import 'package:picnic_app/features/discover/discover_explore/discover_explore_page.dart';
+import 'package:picnic_app/features/discover/discover_explore/discover_explore_presenter.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presentation_model.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presenter.dart';
@@ -21,6 +23,8 @@ import 'package:picnic_app/features/main/main_page.dart';
 import 'package:picnic_app/features/main/main_presentation_model.dart';
 import 'package:picnic_app/features/main/main_presenter.dart';
 import 'package:picnic_app/features/profile/domain/model/unread_notifications_count.dart';
+import 'package:picnic_app/features/profile/private_profile/private_profile_page.dart';
+import 'package:picnic_app/features/profile/private_profile/private_profile_presenter.dart';
 import 'package:picnic_app/navigation/utils/root_navigator_observer.dart';
 
 import '../../../mocks/mock_definitions.dart';
@@ -70,12 +74,14 @@ Future<void> main() async {
         roles: any(named: 'roles'),
       ),
     ).thenAnswer((invocation) => successFuture(const PaginatedList.empty()));
+    when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
     initParams = const MainInitialParams();
     model = MainPresentationModel.initial(
       initParams,
       Mocks.currentTimeProvider,
       Mocks.unreadCountersStore,
+      Mocks.userStore,
     );
     navigator = MainNavigator(Mocks.appNavigator);
     presenter = MainPresenter(
@@ -84,6 +90,7 @@ Future<void> main() async {
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.currentTimeProvider,
       Mocks.backgroundApiRepository,
+      Mocks.userStore,
       Mocks.unreadCountersStore,
     );
     page = MainPage(presenter: presenter);
@@ -100,6 +107,8 @@ Future<void> main() async {
       getIt.registerFactory<AnalyticsObserver>(() => MockAnalyticsObserver());
       getIt.registerFactory<FeedHomePage>(() => const _TestFeedHomePage());
       getIt.registerFactory<ChatTabsPage>(() => const _TestChatTabsPage());
+      getIt.registerFactory<DiscoverExplorePage>(() => const _TestDiscoverExploreTabsPage());
+      getIt.registerFactory<PrivateProfilePage>(() => const _TestPrivateProfileTabsPage());
 
       getIt.registerFactory<NotificationsPresenter>(
         () => NotificationsPresenter(
@@ -189,6 +198,46 @@ class _TestChatTabsPageState extends State<_TestChatTabsPage> {
   Widget build(BuildContext context) {
     return const Center(
       child: Text("TEST CHAT TABS PAGE"),
+    );
+  }
+}
+
+//ignore: avoid_implementing_value_types
+class _TestDiscoverExploreTabsPage extends StatefulWidget implements DiscoverExplorePage {
+  const _TestDiscoverExploreTabsPage({Key? key}) : super(key: key);
+
+  @override
+  State<_TestDiscoverExploreTabsPage> createState() => _TestDiscoverExploreTabsPageState();
+
+  @override
+  DiscoverExplorePresenter get presenter => throw UnimplementedError();
+}
+
+class _TestDiscoverExploreTabsPageState extends State<_TestDiscoverExploreTabsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("TEST DISCOVER EXPLORE TABS PAGE"),
+    );
+  }
+}
+
+//ignore: avoid_implementing_value_types
+class _TestPrivateProfileTabsPage extends StatefulWidget implements PrivateProfilePage {
+  const _TestPrivateProfileTabsPage({Key? key}) : super(key: key);
+
+  @override
+  State<_TestPrivateProfileTabsPage> createState() => _TestPrivateProfileTabsPageState();
+
+  @override
+  PrivateProfilePresenter get presenter => throw UnimplementedError();
+}
+
+class _TestPrivateProfileTabsPageState extends State<_TestPrivateProfileTabsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("TEST DISCOVER EXPLORE TABS PAGE"),
     );
   }
 }

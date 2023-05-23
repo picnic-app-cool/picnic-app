@@ -14,6 +14,7 @@ mixin PodWebViewRoute {
   Future<void> openPodWebView(PodWebViewInitialParams initialParams) async {
     return appNavigator.push(
       materialRoute(PodWebViewPage(initialParams: initialParams)),
+      useRoot: true,
     );
   }
 

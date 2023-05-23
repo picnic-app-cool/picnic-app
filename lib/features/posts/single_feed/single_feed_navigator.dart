@@ -53,9 +53,10 @@ class SingleFeedNavigator
 }
 
 mixin SingleFeedRoute {
-  Future<void> openSingleFeed(SingleFeedInitialParams initialParams) async {
+  Future<void> openSingleFeed(SingleFeedInitialParams initialParams, {bool useRoot = false}) async {
     return appNavigator.push(
       materialRoute(getIt<SingleFeedPage>(param1: initialParams)),
+      useRoot: useRoot,
     );
   }
 

@@ -36,7 +36,7 @@ class GqlElectionCandidate {
       role: asT<String>(json, 'role'),
       circleId: asT<String>(json, 'circleId'),
       votesCount: asT<int>(json, 'votesCount'),
-      votesPercent: asT<int>(json, 'votesPercent'),
+      votesPercent: asT<double>(json, 'votesPercent'),
       bannedAt: asT<String>(json, 'bannedAt'),
       bannedTime: asT<int>(json, 'bannedTime'),
       iVoted: asT<bool>(json, 'iVoted'),
@@ -49,7 +49,7 @@ class GqlElectionCandidate {
   final bool isBanned;
   final String role;
   final int votesCount;
-  final int votesPercent;
+  final double votesPercent;
   final String bannedAt;
   final int bannedTime;
   final bool iVoted;
@@ -61,7 +61,7 @@ class GqlElectionCandidate {
         role: CircleRole.fromString(role),
         circleId: Id(circleId),
         votesCount: votesCount,
-        votesPercent: votesPercent.toDouble(),
+        votesPercent: votesPercent,
         bannedAtString: bannedAt,
         bannedTime: bannedTime,
         iVoted: iVoted,

@@ -71,11 +71,13 @@ void _configureMvp() {
             params,
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<MainPresenter, MainInitialParams, dynamic>(
           (params, _) => MainPresenter(
             getIt(param1: params),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),
