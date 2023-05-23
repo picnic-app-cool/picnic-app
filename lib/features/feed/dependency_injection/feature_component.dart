@@ -277,6 +277,8 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<FeedHomePage, FeedHomeInitialParams, dynamic>(

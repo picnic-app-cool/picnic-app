@@ -16,6 +16,7 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_initial_params.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_page.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_presenter.dart';
+import 'package:picnic_app/features/profile/domain/model/unread_notifications_count.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
@@ -23,6 +24,7 @@ import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../../posts/mocks/posts_mocks.dart';
+import '../../profile/mocks/profile_mocks.dart';
 import '../mocks/feed_mocks.dart';
 
 Future<void> main() async {
@@ -71,6 +73,13 @@ Future<void> main() async {
       currentPost: post,
     );
     navigator = FeedHomeNavigator(Mocks.appNavigator);
+
+    when(() => ProfileMocks.getUnreadNotificationsCountUseCase.execute()).thenAnswer(
+      (invocation) => successFuture(const UnreadNotificationsCount(count: 7)),
+    );
+
+    when(() => Mocks.updateAppBadgeCountUseCase.execute(any())).thenAnswer((_) => Future.value());
+
     presenter = FeedHomePresenter(
       model,
       navigator,
@@ -78,6 +87,8 @@ Future<void> main() async {
       FeedMocks.getViewPostUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       FeedMocks.localFeedsStore,
+      ProfileMocks.getUnreadNotificationsCountUseCase,
+      Mocks.updateAppBadgeCountUseCase,
       Mocks.userCirclesStore,
     );
     page = FeedHomePage(presenter: presenter);

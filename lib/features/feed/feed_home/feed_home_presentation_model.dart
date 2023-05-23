@@ -15,6 +15,7 @@ import 'package:picnic_app/features/feed/feed_home/feed_home_initial_params.dart
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_presentation_model.dart';
+import 'package:picnic_app/features/profile/domain/model/unread_notifications_count.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class FeedHomePresentationModel implements FeedHomeViewModel {
@@ -34,6 +35,7 @@ class FeedHomePresentationModel implements FeedHomeViewModel {
         localFeeds = [],
         forYouLocalPost = initialParams.postToShow,
         userCircles = userCirclesStore.userCircles,
+        unreadNotificationsCount = const UnreadNotificationsCount.empty(),
         privateProfile = userStore.privateProfile,
         onCirclesSideMenuToggled = initialParams.onCirclesSideMenuToggled;
 
@@ -49,6 +51,7 @@ class FeedHomePresentationModel implements FeedHomeViewModel {
     required this.localFeeds,
     required this.userCircles,
     required this.privateProfile,
+    required this.unreadNotificationsCount,
     required this.onCirclesSideMenuToggled,
   });
 
@@ -76,6 +79,9 @@ class FeedHomePresentationModel implements FeedHomeViewModel {
   final List<Feed> localFeeds;
 
   final PrivateProfile privateProfile;
+
+  @override
+  final UnreadNotificationsCount unreadNotificationsCount;
 
   @override
   List<Feed> get feeds => [...remoteFeeds, ...localFeeds];
@@ -109,6 +115,7 @@ class FeedHomePresentationModel implements FeedHomeViewModel {
     PaginatedList<BasicCircle>? userCircles,
     PrivateProfile? privateProfile,
     VoidCallback? onCirclesSideMenuToggled,
+    UnreadNotificationsCount? unreadNotificationsCount,
   }) {
     return FeedHomePresentationModel._(
       remoteFeedsResult: remoteFeedsResult ?? this.remoteFeedsResult,
@@ -122,6 +129,7 @@ class FeedHomePresentationModel implements FeedHomeViewModel {
       userCircles: userCircles ?? this.userCircles,
       privateProfile: privateProfile ?? this.privateProfile,
       onCirclesSideMenuToggled: onCirclesSideMenuToggled ?? this.onCirclesSideMenuToggled,
+      unreadNotificationsCount: unreadNotificationsCount ?? this.unreadNotificationsCount,
     );
   }
 }
@@ -147,4 +155,6 @@ abstract class FeedHomeViewModel {
   PaginatedList<BasicCircle> get userCircles;
 
   ImageUrl get profileImageUrl;
+
+  UnreadNotificationsCount get unreadNotificationsCount;
 }

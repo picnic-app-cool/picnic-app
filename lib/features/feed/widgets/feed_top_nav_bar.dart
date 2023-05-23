@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:picnic_app/core/domain/model/image_url.dart';
 import 'package:picnic_app/features/feed/domain/model/feed.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/feed_items_bar.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_icon_button.dart';
@@ -13,8 +11,7 @@ import 'package:picnic_ui_components/ui/widgets/picnic_icon_button.dart';
 class FeedTopNavBar extends StatelessWidget {
   const FeedTopNavBar({
     Key? key,
-    required this.onTapProfile,
-    required this.onTapSearch,
+    required this.onTapNotifications,
     required this.onTabChanged,
     required this.onTapCirclesSideMenu,
     required this.selectedTab,
@@ -22,11 +19,10 @@ class FeedTopNavBar extends StatelessWidget {
     required this.overlayTheme,
     required this.onTapSeeMore,
     required this.showSeeMoreButton,
-    required this.profileImageUrl,
+    this.unreadNotificationsCount = 0,
   }) : super(key: key);
 
-  final VoidCallback onTapSearch;
-  final VoidCallback onTapProfile;
+  final VoidCallback onTapNotifications;
   final VoidCallback onTapCirclesSideMenu;
   final Function(Feed) onTabChanged;
   final VoidCallback onTapSeeMore;
@@ -34,9 +30,7 @@ class FeedTopNavBar extends StatelessWidget {
   final List<Feed> tabs;
   final PostOverlayTheme overlayTheme;
   final bool showSeeMoreButton;
-  final ImageUrl profileImageUrl;
-
-  static const _avatarSize = 24.0;
+  final int unreadNotificationsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -76,20 +70,11 @@ class FeedTopNavBar extends StatelessWidget {
           ),
         ),
         const Gap(spacing16),
-        PicnicIconButton(
-          icon: Assets.images.search.path,
-          iconColor: iconColor,
-          style: PicnicIconButtonStyle.minimal,
-          onTap: onTapSearch,
-        ),
-        const Gap(spacing16),
-        PicnicAvatar(
-          imageSource: profileImageUrl.isAsset
-              ? PicnicImageSource.asset(profileImageUrl, fit: BoxFit.cover)
-              : PicnicImageSource.url(profileImageUrl, fit: BoxFit.cover),
-          size: _avatarSize,
-          boxFit: PicnicAvatarChildBoxFit.cover,
-          onTap: onTapProfile,
+        PicnicContainerIconButton(
+          iconPath: Assets.images.notificationBell.path,
+          badgeValue: unreadNotificationsCount,
+          onTap: onTapNotifications,
+          iconTintColor: iconColor,
         ),
         const Gap(spacing16),
       ],

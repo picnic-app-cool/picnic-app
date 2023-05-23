@@ -75,15 +75,14 @@ class _FeedHomePageState extends State<FeedHomePage>
                     child: stateObserver(
                       builder: (context, state) => FeedTopNavBar(
                         overlayTheme: state.overlayTheme,
-                        onTapProfile: presenter.onTapProfile,
-                        onTapSearch: presenter.onTapSearch,
+                        onTapNotifications: presenter.onTapNotifications,
                         tabs: state.feeds,
                         selectedTab: state.selectedFeed,
                         onTapSeeMore: presenter.onTapSeeMore,
                         onTabChanged: presenter.onFeedChanged,
                         showSeeMoreButton: state.showSeeMoreButton,
-                        profileImageUrl: state.profileImageUrl,
                         onTapCirclesSideMenu: presenter.onTapCirclesSideMenu,
+                        unreadNotificationsCount: state.unreadNotificationsCount.count,
                       ),
                     ),
                   ),

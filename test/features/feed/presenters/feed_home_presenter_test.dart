@@ -9,6 +9,7 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../profile/mocks/profile_mocks.dart';
 import '../mocks/feed_mock_definitions.dart';
 import '../mocks/feed_mocks.dart';
 
@@ -18,21 +19,21 @@ void main() {
   late MockFeedHomeNavigator navigator;
 
   test(
-    'on tap search and open Discovery Explore',
+    'on tap notification bell and open Notifications list',
     () {
       // GIVEN
       when(
-        () => navigator.openDiscoverExplore(any()),
+        () => navigator.openNotifications(any()),
       ).thenAnswer(
         (_) => successFuture(unit),
       );
 
       // WHEN
-      presenter.onTapSearch();
+      presenter.onTapNotifications();
 
       // THEN
       verify(
-        () => navigator.openDiscoverExplore(any()),
+        () => navigator.openNotifications(any()),
       );
     },
   );
@@ -60,6 +61,8 @@ void main() {
       FeedMocks.getViewPostUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       FeedMocks.localFeedsStore,
+      ProfileMocks.getUnreadNotificationsCountUseCase,
+      Mocks.updateAppBadgeCountUseCase,
       Mocks.userCirclesStore,
     );
   });

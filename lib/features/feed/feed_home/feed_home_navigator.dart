@@ -7,6 +7,7 @@ import 'package:picnic_app/features/posts/link_post/link_post_navigator.dart';
 import 'package:picnic_app/features/posts/poll_post/poll_post_navigator.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_navigator.dart';
 import 'package:picnic_app/features/posts/text_post/text_post_navigator.dart';
+import 'package:picnic_app/features/profile/notifications/notifications_list_navigator.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
@@ -23,7 +24,8 @@ class FeedHomeNavigator
         FeedMoreRoute,
         OnBoardingCirclesPickerRoute,
         CloseRoute,
-        CirclesSideMenuRoute {
+        CirclesSideMenuRoute,
+        NotificationsListRoute {
   FeedHomeNavigator(this.appNavigator);
 
   @override
