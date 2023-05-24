@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
-import 'package:picnic_app/core/domain/use_cases/get_auth_token_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
@@ -16,22 +16,22 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
     super.model,
     this._navigator,
     this._getPodsUseCase,
-    this._getAuthTokenUseCase,
+    this._getUserScopedPodTokenUseCase,
     this._logAnalyticsEventUseCase,
   );
 
   final DiscoverPodsNavigator _navigator;
   final GetPodsUseCase _getPodsUseCase;
-  final GetAuthTokenUseCase _getAuthTokenUseCase;
+  final GetUserScopedPodTokenUseCase _getUserScopedPodTokenUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
 
   // ignore: unused_element
   DiscoverPodsPresentationModel get _model => state as DiscoverPodsPresentationModel;
 
   Future<void> onTapPod(CirclePodApp pod) async {
-    await _getAuthTokenUseCase.execute().doOn(
-          success: (authToken) {
-            _openPodWebPage(accessToken: authToken.accessToken, pod: pod);
+    await _getUserScopedPodTokenUseCase.execute(podId: pod.app.id).doOn(
+          success: (generatedToken) {
+            _openPodWebPage(accessToken: generatedToken.jwtToken, pod: pod);
           },
           fail: (fail) => _navigator.showError(fail.displayableFailure()),
         );

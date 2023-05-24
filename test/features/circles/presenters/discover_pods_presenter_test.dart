@@ -28,7 +28,7 @@ void main() {
       model,
       navigator,
       CirclesMocks.getPodsUseCase,
-      Mocks.getAuthTokenUseCase,
+      Mocks.getUserScopedPodTokenUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
     );
   });

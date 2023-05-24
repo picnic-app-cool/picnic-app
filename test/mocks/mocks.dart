@@ -239,6 +239,9 @@ class Mocks {
   static late MockGetCircleByNameFailure getCircleByNameFailure;
   static late MockGetCircleByNameUseCase getCircleByNameUseCase;
 
+  static late MockGetUserScopedPodTokenFailure getUserScopedPodTokenFailure;
+  static late MockGetUserScopedPodTokenUseCase getUserScopedPodTokenUseCase;
+
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
@@ -292,6 +295,8 @@ class Mocks {
   static late MockPostsRepository postsRepository;
 
   static late MockAuthTokenRepository authTokenRepository;
+
+  static late MockPodsRepository podsRepository;
 //DO-NOT-REMOVE REPOSITORIES_MOCKS_STATIC_FIELD
 
   // STORES
@@ -548,6 +553,9 @@ class Mocks {
     getAuthTokenFailure = MockGetAuthTokenFailure();
     getAuthTokenUseCase = MockGetAuthTokenUseCase();
 
+    getUserScopedPodTokenFailure = MockGetUserScopedPodTokenFailure();
+    getUserScopedPodTokenUseCase = MockGetUserScopedPodTokenUseCase();
+
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
     // REPOSITORIES
@@ -585,6 +593,7 @@ class Mocks {
     cacheManagementRepository = MockCacheManagementRepository();
     postsRepository = MockPostsRepository();
     authTokenRepository = MockAuthTokenRepository();
+    podsRepository = MockPodsRepository();
 //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS
 
     // STORES
@@ -788,6 +797,9 @@ class Mocks {
     registerFallbackValue(MockGetCircleByNameFailure());
     registerFallbackValue(MockGetCircleByNameUseCase());
 
+    registerFallbackValue(MockGetUserScopedPodTokenFailure());
+    registerFallbackValue(MockGetUserScopedPodTokenUseCase());
+
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 
     // REPOSITORIES
@@ -816,6 +828,7 @@ class Mocks {
     registerFallbackValue(MockConnectionStatusRepository());
     registerFallbackValue(MockCacheManagementRepository());
     registerFallbackValue(MockAuthTokenRepository());
+    registerFallbackValue(MockPodsRepository());
 //DO-NOT-REMOVE REPOSITORIES_MOCK_FALLBACK_VALUE
 
     // STORES

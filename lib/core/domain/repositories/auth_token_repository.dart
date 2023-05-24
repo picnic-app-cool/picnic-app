@@ -7,6 +7,5 @@ abstract class AuthTokenRepository {
   Stream<AuthToken> listenAuthToken();
   Future<Either<GetAuthTokenFailure, AuthToken>> getAuthToken();
   Future<Either<SaveAuthTokenFailure, Unit>> saveAuthToken(AuthToken token);
-
   Future<Either<SaveAuthTokenFailure, Unit>> deleteAuthToken();
 }

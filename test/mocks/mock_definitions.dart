@@ -38,6 +38,7 @@ import 'package:picnic_app/core/domain/model/get_slices_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_by_username_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_circles_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_failure.dart';
+import 'package:picnic_app/core/domain/model/get_user_scoped_pod_token_failure.dart';
 import "package:picnic_app/core/domain/model/haptic_feedback_failure.dart";
 import "package:picnic_app/core/domain/model/join_circle_failure.dart";
 import 'package:picnic_app/core/domain/model/join_slice_failure.dart';
@@ -79,6 +80,7 @@ import 'package:picnic_app/core/domain/repositories/feature_flags_repository.dar
 import 'package:picnic_app/core/domain/repositories/haptic_repository.dart';
 import 'package:picnic_app/core/domain/repositories/local_storage_repository.dart';
 import 'package:picnic_app/core/domain/repositories/phone_gallery_repository.dart';
+import 'package:picnic_app/core/domain/repositories/pods_repository.dart';
 import 'package:picnic_app/core/domain/repositories/post_creation_circles_repository.dart';
 import 'package:picnic_app/core/domain/repositories/private_profile_repository.dart';
 import 'package:picnic_app/core/domain/repositories/recaptcha_repository.dart';
@@ -123,6 +125,7 @@ import 'package:picnic_app/core/domain/use_cases/get_slice_members_by_role_use_c
 import 'package:picnic_app/core/domain/use_cases/get_slices_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_by_username_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_use_case.dart';
 import "package:picnic_app/core/domain/use_cases/haptic_feedback_use_case.dart";
 import 'package:picnic_app/core/domain/use_cases/image_watermark_use_case.dart';
@@ -444,6 +447,10 @@ class MockGetCircleByNameFailure extends Mock implements GetCircleByNameFailure 
 
 class MockGetCircleByNameUseCase extends Mock implements GetCircleByNameUseCase {}
 
+class MockGetUserScopedPodTokenFailure extends Mock implements GetUserScopedPodTokenFailure {}
+
+class MockGetUserScopedPodTokenUseCase extends Mock implements GetUserScopedPodTokenUseCase {}
+
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 
 // REPOSITORIES
@@ -567,3 +574,5 @@ class MockUserPreferencesRepository extends Mock implements UserPreferencesRepos
 class MockLocalStorageValueListener<T> extends Mock implements LocalStorageValueListener<T> {}
 
 class MockDioClient extends Mock implements dio.Dio {}
+
+class MockPodsRepository extends Mock implements PodsRepository {}

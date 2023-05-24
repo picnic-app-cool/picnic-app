@@ -32,6 +32,7 @@ import 'package:picnic_app/core/data/graphql_cache_management_repository.dart';
 import 'package:picnic_app/core/data/graphql_circles_repository.dart';
 import 'package:picnic_app/core/data/graphql_collections_repository.dart';
 import 'package:picnic_app/core/data/graphql_get_contacts_repository.dart';
+import 'package:picnic_app/core/data/graphql_pods_repository.dart';
 import 'package:picnic_app/core/data/graphql_post_creation_circles_repository.dart';
 import 'package:picnic_app/core/data/graphql_seeds_repository.dart';
 import 'package:picnic_app/core/data/graphql_slices_repository.dart';
@@ -73,6 +74,7 @@ import 'package:picnic_app/core/domain/repositories/haptic_repository.dart';
 import 'package:picnic_app/core/domain/repositories/library_initializer.dart';
 import 'package:picnic_app/core/domain/repositories/local_storage_repository.dart';
 import 'package:picnic_app/core/domain/repositories/phone_gallery_repository.dart';
+import 'package:picnic_app/core/domain/repositories/pods_repository.dart';
 import 'package:picnic_app/core/domain/repositories/post_creation_circles_repository.dart';
 import 'package:picnic_app/core/domain/repositories/private_profile_repository.dart';
 import 'package:picnic_app/core/domain/repositories/recaptcha_repository.dart';
@@ -113,6 +115,7 @@ import 'package:picnic_app/core/domain/use_cases/get_slice_members_by_role_use_c
 import 'package:picnic_app/core/domain/use_cases/get_slices_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_by_username_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/haptic_feedback_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/image_watermark_use_case.dart';
@@ -513,6 +516,11 @@ void _configureRepositories() {
             getIt(),
           ),
         )
+        ..registerFactory<PodsRepository>(
+          () => GraphqlPodsRepository(
+            getIt(),
+          ),
+        )
 
 //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
 
@@ -804,6 +812,11 @@ void _configureUseCases() {
         )
         ..registerFactory<GetCircleByNameUseCase>(
           () => GetCircleByNameUseCase(getIt()),
+        )
+        ..registerFactory<GetUserScopedPodTokenUseCase>(
+          () => GetUserScopedPodTokenUseCase(
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
