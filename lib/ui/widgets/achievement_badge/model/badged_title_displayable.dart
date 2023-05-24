@@ -42,7 +42,7 @@ extension UserToBadgedTitleDisplayableMapper on User {
     return BadgedTitleDisplayable(
       name: formatName ? username.formattedUsername : username,
       badges: [
-        if (isVerified) AchievementBadgeType.verifiedBlue,
+        if (isVerified) AchievementBadgeType.verifiedRed,
       ],
     );
   }

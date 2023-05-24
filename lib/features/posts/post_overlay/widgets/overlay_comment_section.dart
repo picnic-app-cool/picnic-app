@@ -73,7 +73,7 @@ class OverlayCommentSection extends StatelessWidget {
                           username: it.author.username.formattedUsername,
                           titleColor: whiteWithOpacity,
                           usernameBadge: it.author.isVerified
-                              ? const AchievementBadge(type: AchievementBadgeType.verifiedBlue)
+                              ? const AchievementBadge(type: AchievementBadgeType.verifiedRed)
                               : null,
                           commentColor: whiteColor,
                           comment: it.text,

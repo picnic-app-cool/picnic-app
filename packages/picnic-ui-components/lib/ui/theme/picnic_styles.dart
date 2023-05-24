@@ -127,6 +127,15 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
+      link15: baseTextStyle.copyWith(
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        fontWeight: FontWeight.w600,
+        fontSize: _resolveSize(size, s: 13, m: 14, l: 15),
+        height: 1.3,
+        fontStyle: FontStyle.normal,
+        color: Colors.black,
+      ),
     );
   }
 
@@ -144,6 +153,7 @@ class PicnicStyles {
     required this.caption30,
     required this.caption20,
     required this.caption10,
+    required this.link15,
   });
 
   static const String fontFamily = FontFamily.figtree;
@@ -169,6 +179,8 @@ class PicnicStyles {
   final TextStyle caption30;
   final TextStyle caption20;
   final TextStyle caption10;
+
+  final TextStyle link15;
 
   static double _resolveSize(
     PhoneSize size, {

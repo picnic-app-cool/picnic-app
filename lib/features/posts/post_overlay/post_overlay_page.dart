@@ -87,6 +87,23 @@ class _PostOverlayPageState extends State<PostOverlayPage>
         builder: (context, state) {
           final postContent = state.post.content;
           final displayOptions = state.displayOptions;
+          final postType = state.post.type;
+
+          final postSummaryBar = displayOptions.detailsMode == PostDetailsMode.feed &&
+                  !displayOptions.showPostSummaryBarAbovePost &&
+                  displayOptions.showPostSummaryBar
+              ? PostSummaryBar(
+                  author: state.author,
+                  post: state.post,
+                  overlayTheme: state.post.overlayTheme,
+                  onToggleFollow: presenter.onTapFollow,
+                  onTapTag: presenter.onTapShowCircle,
+                  onTapAuthor: presenter.onTapProfile,
+                  onTapJoinCircle: presenter.onJoinCircle,
+                  showTagBackground: true,
+                  showTimestamp: displayOptions.showTimestamp,
+                )
+              : const SizedBox.shrink();
 
           return Padding(
             padding: EdgeInsets.only(
@@ -117,25 +134,7 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                                   if (displayOptions.overlaySize == PostOverlaySize.fullscreen)
                                     const PostInFeedNavbarGap(),
                                 ],
-                                if (displayOptions.detailsMode == PostDetailsMode.feed) const Gap(12),
-                                stateObserver(
-                                  builder: (context, state) {
-                                    return !displayOptions.showPostSummaryBarAbovePost &&
-                                            displayOptions.showPostSummaryBar
-                                        ? PostSummaryBar(
-                                            author: state.author,
-                                            post: state.post,
-                                            overlayTheme: state.post.overlayTheme,
-                                            onToggleFollow: presenter.onTapFollow,
-                                            onTapTag: presenter.onTapShowCircle,
-                                            onTapAuthor: presenter.onTapProfile,
-                                            onTapJoinCircle: presenter.onJoinCircle,
-                                            showTagBackground: true,
-                                            showTimestamp: displayOptions.showTimestamp,
-                                          )
-                                        : const SizedBox.shrink();
-                                  },
-                                ),
+                                if (postType != PostType.image && postType != PostType.video) postSummaryBar,
                                 const Spacer(),
                                 if (displayOptions.commentsMode == CommentsMode.list) //
                                   Padding(
@@ -176,22 +175,26 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                                       ),
                                     ),
                                   ],
-                                if (postContent is PostWithCaption) ...[
-                                  Expanded(
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 52),
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Spacer(),
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 38),
-                                          child: PostCaption(
+                                        if (postType == PostType.image || postType == PostType.video)
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 8),
+                                            child: postSummaryBar,
+                                          ),
+                                        if (postContent is PostWithCaption)
+                                          PostCaption(
                                             text: (postContent as PostWithCaption).text,
                                           ),
-                                        ),
-                                        if (state.post.type == PostType.video) const Gap(0) else const Gap(0),
                                       ],
                                     ),
                                   ),
-                                ],
+                                ),
                               ],
                             ),
                             if (displayOptions.showPostCommentBar)

@@ -56,7 +56,7 @@ class CommentPreviewItem extends StatelessWidget {
       onLongPress: onLongPress,
       child: PicnicListItem(
         title: comment.author.username.formattedUsername,
-        titleBadge: comment.author.isVerified ? const AchievementBadge(type: AchievementBadgeType.verifiedBlue) : null,
+        titleBadge: comment.author.isVerified ? const AchievementBadge(type: AchievementBadgeType.verifiedRed) : null,
         subTitle: comment.text,
         titleStyle: textStyleBody0,
         subTitleStyle: textStyleCaption10,

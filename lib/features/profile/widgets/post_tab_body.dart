@@ -78,7 +78,6 @@ class PostTabBody extends StatelessWidget {
               showTimestamp: true,
               displayTag: false,
               isDense: true,
-              showViewCountAtEnd: true,
             ),
           ),
         Stack(

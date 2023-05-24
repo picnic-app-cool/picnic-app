@@ -18,7 +18,7 @@ class PostCaption extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
     final whiteColor = colors.blackAndWhite.shade100;
-    final captionStyle = theme.styles.caption20.copyWith(color: whiteColor);
+    final captionStyle = theme.styles.body10.copyWith(color: whiteColor);
     final maxWidth = MediaQuery.of(context).size.width - horizontalPadding * 2;
 
     return Padding(

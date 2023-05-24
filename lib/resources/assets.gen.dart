@@ -24,6 +24,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/achievement_badge_white.webp
   AssetGenImage get achievementBadgeWhite => const AssetGenImage('assets/images/achievement_badge_white.webp');
 
+  /// File path: assets/images/achievements_badge_red.webp
+  AssetGenImage get achievementsBadgeRed => const AssetGenImage('assets/images/achievements_badge_red.webp');
+
   /// File path: assets/images/acorn.webp
   AssetGenImage get acorn => const AssetGenImage('assets/images/acorn.webp');
 
@@ -229,6 +232,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/done.webp
   AssetGenImage get done => const AssetGenImage('assets/images/done.webp');
+
+  /// File path: assets/images/down_right_arrow.webp
+  AssetGenImage get downRightArrow => const AssetGenImage('assets/images/down_right_arrow.webp');
 
   /// File path: assets/images/edit.webp
   AssetGenImage get edit => const AssetGenImage('assets/images/edit.webp');
@@ -630,6 +636,7 @@ class $AssetsImagesGen {
         achievement,
         achievementBadgeBlue,
         achievementBadgeWhite,
+        achievementsBadgeRed,
         acorn,
         add,
         addUser,
@@ -698,6 +705,7 @@ class $AssetsImagesGen {
         dislikeOutlined,
         document,
         done,
+        downRightArrow,
         edit,
         editStroked,
         election,

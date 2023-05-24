@@ -271,6 +271,7 @@ class PicnicVerticalPost extends StatelessWidget {
                     username: footer,
                     viewsCount: views,
                     titleColor: white,
+                    subtitleColor: white,
                     onUsernameTap: onTapAvatar,
                   ),
                 ],

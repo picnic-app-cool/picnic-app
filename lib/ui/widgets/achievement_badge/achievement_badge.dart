@@ -15,7 +15,7 @@ class AchievementBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (type) {
-      case AchievementBadgeType.verifiedBlue:
+      case AchievementBadgeType.verifiedRed:
         return Image.asset(
           Assets.images.verificationBadgePink.path,
           height: _achievementIconSize,

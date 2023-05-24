@@ -1331,7 +1331,7 @@
   "revokeIntegrationConfirm": "yes, revoke",
   "linkDiscord": "link Discord",
   "revoke": "revoke",
-  "viewsCount": " • {views} views",
+  "viewsCount": "{views} views",
   "@viewsCount": {
     "placeholders": {
       "views": {}

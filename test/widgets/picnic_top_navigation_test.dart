@@ -9,8 +9,8 @@ import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_app/ui/widgets/picnic_tag.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/feed_items_bar.dart';
+import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_details.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_avatar_title.dart';
-import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_tag_avatar.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_title_badge.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_three_icons_bar.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
@@ -49,9 +49,9 @@ void main() {
           GoldenTestScenario(
             name: "bar with tag avatar",
             child: TestWidgetContainer(
-              child: PicnicBarWithTagAvatar(
+              child: PicnicBarWithAuthorDetails(
                 viewsCount: 1234,
-                tag: PicnicTag(
+                postDetails: PicnicTag(
                   title: 'startups',
                   backgroundColor: colors.blackAndWhite.shade900.withOpacity(0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),

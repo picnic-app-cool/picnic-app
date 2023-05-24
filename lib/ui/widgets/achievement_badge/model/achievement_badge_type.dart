@@ -1,5 +1,5 @@
 enum AchievementBadgeType {
   verifiedWhite,
-  verifiedBlue,
+  verifiedRed,
   moderator;
 }

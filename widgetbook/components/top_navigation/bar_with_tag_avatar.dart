@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_tag.dart';
-import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_tag_avatar.dart';
+import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_details.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -11,7 +11,7 @@ import '../picnic_avatar.dart';
 class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
   PicnicBarWithTagAvatarUseCase()
       : super(
-          name: '$PicnicBarWithTagAvatar',
+          name: '$PicnicBarWithAuthorDetails',
           useCases: [
             WidgetbookUseCase(
               name: 'Bar with tag avatar',
@@ -20,7 +20,7 @@ class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
                 return Center(
                   child: Container(
                     color: colors.indigo,
-                    child: PicnicBarWithTagAvatar(
+                    child: PicnicBarWithAuthorDetails(
                       avatar: _getAvatar(context),
                       title: context.knobs.text(label: 'title', initialValue: 'startups'),
                       viewsCount: context.knobs.options(
@@ -36,7 +36,7 @@ class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
                           ),
                         ],
                       ),
-                      tag: PicnicTag(
+                      postDetails: PicnicTag(
                         title: context.knobs.text(label: 'tag', initialValue: 'startups'),
                         backgroundColor: colors.blackAndWhite.withOpacity(0.07),
                         suffixIcon: Image.asset(Assets.images.add.path),

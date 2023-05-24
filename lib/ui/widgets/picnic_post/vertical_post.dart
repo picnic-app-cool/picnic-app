@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/ui/widgets/picnic_post/picnic_post.dart';
-import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_tag_avatar.dart';
+import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_details.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_styles.dart';
 
@@ -41,7 +41,7 @@ class VerticalPost extends StatelessWidget {
 
   final Widget? postSummaryBar;
 
-  /// The position of the [PicnicBarWithTagAvatar] in the stack
+  /// The position of the [PicnicBarWithAuthorDetails] in the stack
   static const _picnicBarWithAvatarPadding = 10.0;
 
   /// The max lines of [bodyText] [title] in the [VerticalPost] until an ellipsis (..) is given
