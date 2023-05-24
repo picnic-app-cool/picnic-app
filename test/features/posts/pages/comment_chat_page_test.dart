@@ -76,6 +76,7 @@ Future<void> main() async {
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.followUserUseCase,
       Mocks.userStore,
+      Mocks.deletePostsUseCase,
     );
     return CommentChatPage(presenter: presenter);
   }

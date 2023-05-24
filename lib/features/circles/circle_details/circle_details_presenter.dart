@@ -228,9 +228,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
       SingleFeedInitialParams(
         preloadedPosts: _model.posts,
         initialIndex: _model.posts.indexOf(post),
-        onPostsListUpdated: (posts) => tryEmit(
-          _model.copyWith(posts: posts),
-        ),
+        onPostsListUpdated: (posts) => {},
         sortingHandler: SortingHandler(
           selectedSortOption: () => _model.postSortOption,
           onTapSort: _openSortScreen,
@@ -239,6 +237,9 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
         refresh: () => _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
     );
+    _getCircleStats();
+
+    await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
   }
 
   void onTapCircleMember(PublicProfile user) {

@@ -5,6 +5,7 @@ import 'package:picnic_app/core/domain/model/basic_public_profile.dart';
 import 'package:picnic_app/core/domain/model/link_url.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
+import 'package:picnic_app/core/domain/use_cases/delete_posts_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/follow_unfollow_user_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/join_circle_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_post_to_collection_use_case.dart';
@@ -25,6 +26,7 @@ import 'package:picnic_app/features/posts/comment_chat/comment_chat_presentation
 import 'package:picnic_app/features/posts/comment_chat/comments_focus_target.dart';
 import 'package:picnic_app/features/posts/domain/model/get_comments_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
+import 'package:picnic_app/features/posts/domain/model/post_route_result.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
@@ -41,6 +43,8 @@ import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_c
 import 'package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
+import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/navigation/confirmation_bottom_sheet_route.dart';
 import 'package:picnic_app/ui/widgets/poll_post/picnic_poll_post.dart';
 import 'package:picnic_app/utils/extensions/tree_extension.dart';
 
@@ -64,6 +68,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     this._logAnalyticsEventUseCase,
     this._followUnfollowUseCase,
     this._userStore,
+    this._deletePostsUseCase,
   ) {
     listenTo<PrivateProfile>(
       stream: _userStore.stream,
@@ -100,15 +105,17 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
 
   final JoinCircleUseCase _joinCircleUseCase;
 
-  final SavePostToCollectionUseCase _savePostToCollectionUseCase;
-
   final VoteInPollUseCase _voteInPollUseCase;
 
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
 
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
 
+  final SavePostToCollectionUseCase _savePostToCollectionUseCase;
+
   final UserStore _userStore;
+
+  final DeletePostsUseCase _deletePostsUseCase;
 
   CommentChatPresentationModel get _model => state as CommentChatPresentationModel;
 
@@ -210,6 +217,25 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
           fail: (fail) => navigator.showError(fail.displayableFailure()),
         );
   }
+
+  void onTapOptions() => navigator.onTapMore(
+        onTapDeletePost: _model.canDeletePost
+            ? () {
+                navigator.close();
+                _onTapDeletePost();
+              }
+            : null,
+        onTapReport: _model.canReportPost ? onTapReportPost : null,
+      );
+
+  void onTapReportPost() => navigator.openReportForm(
+        ReportFormInitialParams(
+          entityId: _model.feedPost.id,
+          circleId: _model.feedPost.circle.id,
+          reportEntityType: ReportEntityType.post,
+          contentAuthorId: _model.feedPost.author.id,
+        ),
+      );
 
   void onTapLikeUnlike(TreeComment comment) {
     _logAnalyticsEventUseCase.execute(
@@ -574,6 +600,30 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     if (oldPost != newPost) {
       _model.onPostUpdatedCallback?.call(newPost);
     }
+  }
+
+  void _onTapDeletePost() {
+    navigator.close();
+    navigator.showConfirmationBottomSheet(
+      title: appLocalizations.deletePost,
+      message: appLocalizations.deletePostConfirmationMessage,
+      primaryAction: ConfirmationAction(
+        roundedButton: true,
+        title: appLocalizations.deletePost,
+        action: () {
+          navigator.close();
+          _deletePostsUseCase.execute(postIds: [_model.feedPost.id]).doOn(
+            success: (success) => navigator.closeWithResult(
+              const PostRouteResult(postRemoved: true),
+            ),
+            fail: (fail) => navigator.showError(fail.displayableFailure()),
+          );
+        },
+      ),
+      secondaryAction: ConfirmationAction.negative(
+        action: () => navigator.close(),
+      ),
+    );
   }
 
   void _onReportComment(TreeComment comment) => navigator.openReportForm(

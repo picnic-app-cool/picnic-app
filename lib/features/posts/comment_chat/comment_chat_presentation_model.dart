@@ -172,6 +172,15 @@ class CommentChatPresentationModel implements CommentChatViewModel {
   @override
   bool get isReplying => replyingComment != const TreeComment.empty();
 
+  @override
+  bool get canDeletePost => isAuthor || feedPost.circle.permissions.canManagePosts;
+
+  @override
+  bool get canReportPost => !isAuthor;
+
+  @override
+  bool get isAuthor => user.id == feedPost.author.id;
+
   bool isFirstLevelComment(TreeComment comment) => rootComment.children.contains(comment);
 
   CommentChatPresentationModel byAddingMoreComments({
@@ -360,4 +369,10 @@ abstract class CommentChatViewModel {
   List<Id> get collapsedCommentIds;
 
   int get scrollIndex;
+
+  bool get canDeletePost;
+
+  bool get isAuthor;
+
+  bool get canReportPost;
 }

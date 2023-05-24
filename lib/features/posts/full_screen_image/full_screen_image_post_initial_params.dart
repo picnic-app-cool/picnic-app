@@ -1,9 +1,9 @@
-import 'package:picnic_app/features/posts/domain/model/post_contents/image_post_content.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 
 class FullScreenImagePostInitialParams {
   const FullScreenImagePostInitialParams({
-    required this.imageContent,
+    required this.post,
   });
 
-  final ImagePostContent imageContent;
+  final Post post;
 }

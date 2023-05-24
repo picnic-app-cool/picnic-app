@@ -276,29 +276,15 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       SingleFeedInitialParams(
         preloadedPosts: _model.posts,
         initialIndex: _model.posts.indexOf(post),
-        onPostsListUpdated: (posts) => tryEmit(_model.copyWith(posts: posts)),
+        onPostsListUpdated: (posts) => {},
         loadMore: () => _loadPosts().mapFailure((f) => f.displayableFailure()),
         refresh: () => _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
       useRoot: true,
     );
-
     _getProfileStats();
-  }
 
-  Future<void> onTapViewSavedPost(Post post) async {
-    await navigator.openSingleFeed(
-      SingleFeedInitialParams(
-        preloadedPosts: _model.savedPosts,
-        initialIndex: _model.savedPosts.indexOf(post),
-        onPostsListUpdated: (savePosts) => tryEmit(_model.copyWith(savedPosts: savePosts)),
-        loadMore: () => _getSavedPosts().mapFailure((f) => f.displayableFailure()),
-        refresh: () => _getSavedPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
-      ),
-      useRoot: true,
-    );
-
-    _getProfileStats();
+    await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
   }
 
   //TODO(GS-282): https://picnic-app.atlassian.net/browse/GS-282

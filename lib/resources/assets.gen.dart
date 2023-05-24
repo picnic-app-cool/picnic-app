@@ -365,6 +365,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/online.webp
   AssetGenImage get online => const AssetGenImage('assets/images/online.webp');
 
+  /// File path: assets/images/options.webp
+  AssetGenImage get options => const AssetGenImage('assets/images/options.webp');
+
   /// File path: assets/images/paper.webp
   AssetGenImage get paper => const AssetGenImage('assets/images/paper.webp');
 
@@ -740,6 +743,7 @@ class $AssetsImagesGen {
         notificationBell,
         offline,
         online,
+        options,
         paper,
         paperClip,
         pasteIcon,

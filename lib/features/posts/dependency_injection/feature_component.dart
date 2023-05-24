@@ -611,10 +611,14 @@ void _configureMvp() {
           () => FullScreenImagePostNavigator(getIt()),
         )
         ..registerFactoryParam<FullScreenImagePostViewModel, FullScreenImagePostInitialParams, dynamic>(
-          (params, _) => FullScreenImagePostPresentationModel.initial(params),
+          (params, _) => FullScreenImagePostPresentationModel.initial(params, getIt()),
         )
         ..registerFactoryParam<FullScreenImagePostPresenter, FullScreenImagePostInitialParams, dynamic>(
-          (params, _) => FullScreenImagePostPresenter(getIt(param1: params), getIt()),
+          (params, _) => FullScreenImagePostPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE MVP_GET_IT_CONFIG

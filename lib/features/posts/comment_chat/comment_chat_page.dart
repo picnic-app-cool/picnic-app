@@ -84,15 +84,13 @@ class _CommentChatPageState extends State<CommentChatPage>
                   actions: [
                     stateObserver(
                       builder: (context, state) {
-                        final icon =
-                            state.postSaved ? Assets.images.bookmarkChecked.path : Assets.images.bookmarkStroked.path;
                         return PicnicContainerButton(
                           buttonColor: blackAndWhite.shade100,
                           height: _buttonSize,
                           width: _buttonSize,
-                          onTap: state.isSavingPost ? null : presenter.onTapBookmark,
+                          onTap: state.isSavingPost ? null : presenter.onTapOptions,
                           child: Image.asset(
-                            icon,
+                            Assets.images.options.path,
                             color: theme.colors.darkBlue.shade600,
                           ),
                         );

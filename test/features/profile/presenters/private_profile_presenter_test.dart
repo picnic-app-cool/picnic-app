@@ -136,28 +136,6 @@ void main() {
   );
 
   test(
-    'tapping on post should open SingleFeedPage',
-    () {
-      // WHEN
-      presenter.onTapViewPost(Stubs.linkPost);
-
-      // THEN
-      verify(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot')));
-    },
-  );
-
-  test(
-    'tapping on save post should open SingleFeedPage',
-    () {
-      // WHEN
-      presenter.onTapViewSavedPost(Stubs.linkPost);
-
-      // THEN
-      verify(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot')));
-    },
-  );
-
-  test(
     'tapping on settings should open SettingsHomePage',
     () {
       // WHEN
@@ -267,9 +245,6 @@ void main() {
       return Future.value();
     });
     when(() => navigator.openSingleFeed(any())).thenAnswer((invocation) {
-      return Future.value();
-    });
-    when(() => navigator.openSingleFeed(any(), useRoot: any(named: 'useRoot'))).thenAnswer((invocation) {
       return Future.value();
     });
 

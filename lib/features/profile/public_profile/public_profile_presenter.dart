@@ -339,7 +339,7 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
     await _loadUserCircles();
   }
 
-  void onTapViewPost(Post post) {
+  Future<void> onTapViewPost(Post post) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.profileOpenPostTap,
@@ -347,16 +347,18 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
       ),
     );
 
-    navigator.openSingleFeed(
+    await navigator.openSingleFeed(
       SingleFeedInitialParams(
         preloadedPosts: _model.posts,
         initialIndex: _model.posts.indexOf(post),
-        onPostsListUpdated: (posts) => tryEmit(_model.copyWith(posts: posts)),
+        onPostsListUpdated: (posts) => {},
         loadMore: () => _loadPosts().mapFailure((f) => f.displayableFailure()),
         refresh: () => _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
     );
     _getProfileStats();
+
+    await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
   }
 
   void onTabChanged(int index) {

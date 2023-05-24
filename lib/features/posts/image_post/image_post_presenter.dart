@@ -27,6 +27,5 @@ class ImagePostPresenter extends Cubit<ImagePostViewModel> {
 
   void onUpdatedComments(List<CommentPreview> comments) => tryEmit(_model.copyWith(comments: comments));
 
-  void onImageTap() =>
-      navigator.openFullScreenImagePost(FullScreenImagePostInitialParams(imageContent: _model.imageContent));
+  void onImageTap() => navigator.openFullScreenImagePost(FullScreenImagePostInitialParams(post: _model.post));
 }

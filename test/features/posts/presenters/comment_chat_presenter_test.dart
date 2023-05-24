@@ -236,6 +236,7 @@ void main() {
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.followUserUseCase,
       Mocks.userStore,
+      Mocks.deletePostsUseCase,
     );
     registerFallbackValue(const Post.empty());
   });
