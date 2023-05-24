@@ -220,6 +220,9 @@ void main() {
     presenter = CommentChatPresenter(
       model,
       navigator,
+      PostsMocks.likeUnlikePostUseCase,
+      PostsMocks.unreactToPostUseCase,
+      Mocks.sharePostUseCase,
       PostsMocks.likeUnlikeCommentUseCase,
       PostsMocks.getCommentsUseCase,
       PostsMocks.createCommentUseCase,

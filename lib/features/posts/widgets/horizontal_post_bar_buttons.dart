@@ -33,67 +33,72 @@ class HorizontalPostBarButtons extends StatelessWidget {
     final bookmarkCheckedPath = images.bookmarkChecked.path;
     return Padding(
       padding: padding ?? EdgeInsets.zero,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PostBarLikeButton(
-                params: PostBarLikeButtonParams(
-                  isLiked: likeButtonParams.isLiked,
-                  likes: likeButtonParams.likes,
-                  overlayTheme: likeButtonParams.overlayTheme,
-                  onTap: likeButtonParams.onTap,
-                  isVertical: likeButtonParams.isVertical,
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PostBarLikeButton(
+                    params: PostBarLikeButtonParams(
+                      isLiked: likeButtonParams.isLiked,
+                      likes: likeButtonParams.likes,
+                      overlayTheme: likeButtonParams.overlayTheme,
+                      onTap: likeButtonParams.onTap,
+                      isVertical: likeButtonParams.isVertical,
+                    ),
+                  ),
+                  const Gap(2),
+                  PostBarButton(
+                    params: PostBarButtonParams(
+                      filledIcon: images.dislikeFilled.path,
+                      outlinedIcon: images.dislikeOutlined.path,
+                      onTap: dislikeButtonParams.onTap,
+                      overlayTheme: dislikeButtonParams.overlayTheme,
+                      isVertical: dislikeButtonParams.isVertical,
+                      selected: dislikeButtonParams.selected,
+                    ),
+                  ),
+                ],
               ),
-              const Gap(2),
               PostBarButton(
                 params: PostBarButtonParams(
-                  filledIcon: images.dislikeFilled.path,
-                  outlinedIcon: images.dislikeOutlined.path,
-                  onTap: dislikeButtonParams.onTap,
-                  overlayTheme: dislikeButtonParams.overlayTheme,
-                  isVertical: dislikeButtonParams.isVertical,
-                  selected: dislikeButtonParams.selected,
+                  filledIcon: images.chat.path,
+                  outlinedIcon: images.chatOutlined.path,
+                  onTap: commentsButtonParams.onTap,
+                  text: commentsButtonParams.text.toString(),
+                  overlayTheme: commentsButtonParams.overlayTheme,
+                  isVertical: commentsButtonParams.isVertical,
                 ),
               ),
+              PostBarButton(
+                params: PostBarButtonParams(
+                  overlayTheme: shareButtonParams.overlayTheme,
+                  text: shareButtonParams.text.toString(),
+                  filledIcon: images.send.path,
+                  lightIconColor: Colors.transparent,
+                  outlinedIcon: images.sendOutlined.path,
+                  onTap: shareButtonParams.onTap,
+                  isVertical: shareButtonParams.isVertical,
+                ),
+              ),
+              if (bookmarkEnabled)
+                PostBarButton(
+                  params: PostBarButtonParams(
+                    text: bookmarkButtonParams.text.toString(),
+                    overlayTheme: bookmarkButtonParams.overlayTheme,
+                    filledIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmark.path,
+                    lightIconColor: Colors.transparent,
+                    outlinedIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmarkOutlined.path,
+                    onTap: bookmarkButtonParams.onTap,
+                    isVertical: bookmarkButtonParams.isVertical,
+                  ),
+                ),
             ],
           ),
-          PostBarButton(
-            params: PostBarButtonParams(
-              filledIcon: images.chat.path,
-              outlinedIcon: images.chatOutlined.path,
-              onTap: commentsButtonParams.onTap,
-              text: commentsButtonParams.text.toString(),
-              overlayTheme: commentsButtonParams.overlayTheme,
-              isVertical: commentsButtonParams.isVertical,
-            ),
-          ),
-          PostBarButton(
-            params: PostBarButtonParams(
-              overlayTheme: shareButtonParams.overlayTheme,
-              text: shareButtonParams.text.toString(),
-              filledIcon: images.send.path,
-              lightIconColor: Colors.transparent,
-              outlinedIcon: images.sendOutlined.path,
-              onTap: shareButtonParams.onTap,
-              isVertical: shareButtonParams.isVertical,
-            ),
-          ),
-          if (bookmarkEnabled)
-            PostBarButton(
-              params: PostBarButtonParams(
-                text: bookmarkButtonParams.text.toString(),
-                overlayTheme: bookmarkButtonParams.overlayTheme,
-                filledIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmark.path,
-                lightIconColor: Colors.transparent,
-                outlinedIcon: bookmarkButtonParams.selected ? bookmarkCheckedPath : images.bookmarkOutlined.path,
-                onTap: bookmarkButtonParams.onTap,
-                isVertical: bookmarkButtonParams.isVertical,
-              ),
-            ),
         ],
       ),
     );

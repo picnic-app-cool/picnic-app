@@ -8,6 +8,7 @@ import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/domain/use_cases/follow_unfollow_user_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/join_circle_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_post_to_collection_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/share_post_use_case.dart';
 import 'package:picnic_app/core/fx_effect_overlay/lottie_fx_effect.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
@@ -23,6 +24,7 @@ import 'package:picnic_app/features/posts/comment_chat/comment_chat_navigator.da
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_presentation_model.dart';
 import 'package:picnic_app/features/posts/comment_chat/comments_focus_target.dart';
 import 'package:picnic_app/features/posts/domain/model/get_comments_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
@@ -31,9 +33,11 @@ import 'package:picnic_app/features/posts/domain/use_cases/create_comment_use_ca
 import 'package:picnic_app/features/posts/domain/use_cases/delete_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_comments_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_pinned_comments_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
@@ -44,6 +48,9 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
   CommentChatPresenter(
     super.model,
     this.navigator,
+    this._likeDislikePostUseCase,
+    this._unReactToPostUseCase,
+    this._sharePostUseCase,
     this._likeUnlikeCommentUseCase,
     this._getCommentsUseCase,
     this._createCommentUseCase,
@@ -70,6 +77,12 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
   final CommentChatNavigator navigator;
 
   static const _userStoreSubscription = "commentChatUserStoreSubscription";
+
+  final LikeDislikePostUseCase _likeDislikePostUseCase;
+
+  final UnreactToPostUseCase _unReactToPostUseCase;
+
+  final SharePostUseCase _sharePostUseCase;
 
   final LikeUnlikeCommentUseCase _likeUnlikeCommentUseCase;
 
@@ -437,6 +450,121 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         loadComments(fromScratch: true);
       },
     );
+  }
+
+  Future<void> onTapLikePost() async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postLikeButton,
+        targetValue: (!_model.feedPost.iLiked).toString(),
+      ),
+    );
+    await _executeLikeReactUnReactUseCase();
+  }
+
+  Future<void> onTapDislikePost() async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postDislikeButton,
+        targetValue: (!_model.feedPost.iDisliked).toString(),
+      ),
+    );
+    await _executeDislikeReactUnReactUseCase();
+  }
+
+  void onTapShare() {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postShareButton,
+      ),
+    );
+    navigator.shareText(text: _model.feedPost.shareLink);
+
+    _sharePostUseCase
+        .execute(
+          postId: _model.feedPost.id,
+        )
+        .doOn(
+          success: (_) => _emitAndNotify(_model.byUpdatingShareStatus()),
+        )
+        .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));
+  }
+
+  Future<void> _executeLikeReactUnReactUseCase() async {
+    final initialReaction = _model.feedPost.context.reaction;
+    final iLikedPreviously = _model.feedPost.iLiked;
+
+    //this updates the UI immediately on tap
+    late Post newPost;
+    newPost = iLikedPreviously ? _model.feedPost.byUnReactingToPost() : _model.feedPost.byLikingPost();
+    _emitAndNotify(_model.copyWith(feedPost: newPost));
+
+    if (iLikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: _model.feedPost.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: _model.feedPost.id,
+        likeDislikeReaction: LikeDislikeReaction.like,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  Future<void> _executeDislikeReactUnReactUseCase() async {
+    final initialReaction = _model.feedPost.context.reaction;
+    final iDislikedPreviously = _model.feedPost.iDisliked;
+
+    //this updates the UI immediately on tap
+    late Post newPost;
+    newPost = iDislikedPreviously ? _model.feedPost.byUnReactingToPost() : _model.feedPost.byDislikingPost();
+    _emitAndNotify(_model.copyWith(feedPost: newPost));
+
+    if (iDislikedPreviously) {
+      await _unReactToPostUseCase.execute(postId: _model.feedPost.id).doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikePostUseCase
+          .execute(
+        id: _model.feedPost.id,
+        likeDislikeReaction: LikeDislikeReaction.dislike,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  void _reEmitInitialReaction({
+    required Post post,
+    required LikeDislikeReaction initialReaction,
+  }) {
+    late Post newPost;
+    switch (initialReaction) {
+      case LikeDislikeReaction.like:
+        newPost = post.byLikingPost();
+        break;
+      case LikeDislikeReaction.dislike:
+        newPost = post.byDislikingPost();
+        break;
+      case LikeDislikeReaction.noReaction:
+        newPost = post.byUnReactingToPost();
+        break;
+    }
+    _emitAndNotify(_model.copyWith(feedPost: newPost));
   }
 
   void _emitAndNotify(CommentChatPresentationModel state) {

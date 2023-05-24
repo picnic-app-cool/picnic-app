@@ -22,13 +22,13 @@ class PostBarButton extends StatelessWidget {
   static const _iconSizeMedium = 30.0;
   static const _iconSizeLarge = 32.0;
 
-  static const _horizontalIconSizeSmall = 28.0;
-  static const _horizontalIconSizeMedium = 30.0;
-  static const _horizontalIconSizeLarge = 32.0;
+  static const _horizontalIconSizeSmall = 22.0;
+  static const _horizontalIconSizeMedium = 24.0;
+  static const _horizontalIconSizeLarge = 26.0;
 
-  static const _fontSizeSmall = 16.0;
-  static const _fontSizeMedium = 18.0;
-  static const _fontSizeLarge = 20.0;
+  static const _fontSizeSmall = 12.0;
+  static const _fontSizeMedium = 14.0;
+  static const _fontSizeLarge = 16.0;
 
   static double iconSize(BuildContext context) => context.responsiveValue(
         small: _iconSizeSmall,
@@ -82,7 +82,7 @@ class PostBarButton extends StatelessWidget {
           color: foregroundColor == Colors.transparent ? null : foregroundColor,
         ),
       ),
-      if (!params.isVertical) const Gap(10),
+      if (!params.isVertical) const Gap(2),
       if (params.text != null)
         Text(
           params.text ?? '',

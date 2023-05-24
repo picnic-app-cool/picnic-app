@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
+import 'package:picnic_app/core/helpers.dart';
 import 'package:picnic_app/core/utils/durations.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/main/widgets/size_reporting_widget.dart';
 import 'package:picnic_app/features/posts/comment_chat/comments_focus_target.dart';
 import 'package:picnic_app/features/posts/comment_chat/widgets/feed_post_preview_in_comments.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
@@ -10,6 +12,9 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
 import 'package:picnic_app/features/posts/widgets/comment_tree.dart';
 import 'package:picnic_app/features/posts/widgets/comments_key_storage.dart';
+import 'package:picnic_app/features/posts/widgets/horizontal_post_bar_buttons.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
 import 'package:picnic_app/ui/widgets/paging_list/load_more_scroll_notification.dart';
 import 'package:picnic_app/ui/widgets/poll_post/picnic_poll_post.dart';
@@ -40,6 +45,10 @@ class CommentsListCustomScrollView extends StatefulWidget {
     required this.user,
     required this.showPostSummary,
     required this.collapsedCommentIds,
+    required this.onTapLikePost,
+    required this.onTapDislikePost,
+    required this.onTapShare,
+    required this.onTapBookmark,
     this.onTap,
     this.isPolling = false,
     this.vote,
@@ -72,12 +81,20 @@ class CommentsListCustomScrollView extends StatefulWidget {
   final CommentsOnTapCallback? onTap;
   final CommentsOnDoubleTapLikeCallback onDoubleTap;
   final CommentsOnLongPressCallback onLongPress;
+  final VoidCallback onTapLikePost;
+  final VoidCallback onTapDislikePost;
+  final VoidCallback onTapShare;
+  final VoidCallback onTapBookmark;
 
   @override
   State<CommentsListCustomScrollView> createState() => _CommentsListCustomScrollViewState();
 }
 
 class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollView> {
+  var _topWidgetHeight = 0.0;
+  var _actionsBarWidgetHeight = 0.0;
+  static const _contentPadding = EdgeInsets.all(16);
+
   @override
   void didUpdateWidget(covariant CommentsListCustomScrollView oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -90,71 +107,167 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
   Widget build(BuildContext context) {
     final commentsRoot = widget.commentsRoot;
     final topLevelComments = commentsRoot.children;
-    return LoadMoreScrollNotification(
-      emptyItems: false,
-      hasMore: topLevelComments.hasNextPage,
-      loadMore: () => widget.onLoadMore(commentsRoot),
-      builder: (context) => CustomScrollView(
-        controller: widget.scrollController,
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        // Without this param - `_scrollController.position.maxScrollExtent` gives incorrect value
-        cacheExtent: double.maxFinite,
-        slivers: [
-          if (widget.showPostSummary)
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  PostSummaryBar(
-                    post: widget.post,
-                    author: widget.post.author,
-                    onToggleFollow: widget.onToggleFollow,
-                    onTapTag: widget.onTapTag,
-                    onTapAuthor: () => widget.onTapProfile(widget.post.author.id),
-                    overlayTheme: PostOverlayTheme.dark,
-                    showTagBackground: true,
-                  ),
-                  FeedPostPreviewInComments(
-                    post: widget.post,
-                    onTapLink: widget.onTapLink,
-                    onVoted: widget.onVoted,
-                    user: widget.user,
-                    isPolling: widget.isPolling,
-                    vote: widget.vote,
-                  ),
-                  const Gap(20),
-                ],
-              ),
-            ),
-          if (widget.isLoadingComments)
-            const SliverFillRemaining(
-              hasScrollBody: false,
-              child: PicnicLoadingIndicator(),
-            )
-          else
-            CommentTree(
-              controller: widget.scrollController,
-              keyStorage: widget.commentsKeyStorage,
-              commentsRoot: widget.commentsRoot,
-              onTapMore: widget.onTapMore,
-              onTap: (comment) => widget.onTap?.call(comment),
-              onDoubleTap: widget.onDoubleTap,
-              onLongPress: widget.onLongPress,
-              onTapLike: widget.onTapLike,
-              onReply: widget.onTapReply,
-              onLoadMore: widget.onLoadMore,
-              onProfileTap: widget.onTapProfile,
-              commentToBeHighlighted: widget.commentToBeHighlighted,
-              onTapLink: widget.onTapLink,
-              collapsedCommentIds: widget.collapsedCommentIds,
-            ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              key: widget.anchorKey,
-            ),
-          ),
-        ],
+
+    final post = widget.post;
+
+    const overlayTheme = PostOverlayTheme.dark;
+
+    final actionsBarWidget = Padding(
+      padding: _contentPadding,
+      child: HorizontalPostBarButtons(
+        likeButtonParams: PostBarLikeButtonParams(
+          isLiked: post.iLiked,
+          likes: post.contentStats.likes.toString(),
+          onTap: widget.onTapLikePost,
+          overlayTheme: overlayTheme,
+          isVertical: false,
+        ),
+        dislikeButtonParams: PostBarButtonParams(
+          onTap: widget.onTapDislikePost,
+          overlayTheme: overlayTheme,
+          selected: post.iDisliked,
+          isVertical: false,
+        ),
+        commentsButtonParams: PostBarButtonParams(
+          onTap: doNothing,
+          overlayTheme: overlayTheme,
+          text: post.contentStats.comments.toString(),
+          isVertical: false,
+        ),
+        shareButtonParams: PostBarButtonParams(
+          onTap: widget.onTapShare,
+          overlayTheme: overlayTheme,
+          text: post.contentStats.shares.toString(),
+          isVertical: false,
+        ),
+        bookmarkButtonParams: PostBarButtonParams(
+          onTap: widget.onTapBookmark,
+          overlayTheme: overlayTheme,
+          text: post.contentStats.saves.toString(),
+          selected: post.context.saved,
+          isVertical: false,
+        ),
+        bookmarkEnabled: true,
       ),
     );
+
+    final topWidget = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        PostSummaryBar(
+          post: widget.post,
+          author: widget.post.author,
+          onToggleFollow: widget.onToggleFollow,
+          onTapTag: widget.onTapTag,
+          onTapAuthor: () => widget.onTapProfile(widget.post.author.id),
+          overlayTheme: PostOverlayTheme.dark,
+          showTagBackground: true,
+        ),
+        FeedPostPreviewInComments(
+          post: widget.post,
+          onTapLink: widget.onTapLink,
+          onVoted: widget.onVoted,
+          user: widget.user,
+          isPolling: widget.isPolling,
+          vote: widget.vote,
+        ),
+      ],
+    );
+
+    return Stack(
+      children: [
+        Opacity(
+          opacity: 0,
+          child: SizeReportingWidget(
+            onSizeChange: _onTopWidgetSizeChanged,
+            child: topWidget,
+          ),
+        ),
+        Opacity(
+          opacity: 0,
+          child: SizeReportingWidget(
+            onSizeChange: _onActionsBarWidgetSizeChanged,
+            child: actionsBarWidget,
+          ),
+        ),
+        LoadMoreScrollNotification(
+          emptyItems: false,
+          hasMore: topLevelComments.hasNextPage,
+          loadMore: () => widget.onLoadMore(commentsRoot),
+          builder: (context) => CustomScrollView(
+            controller: widget.scrollController,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            // Without this param - `_scrollController.position.maxScrollExtent` gives incorrect value
+            cacheExtent: double.maxFinite,
+            slivers: [
+              if (widget.showPostSummary && _topWidgetHeight != 0) ...[
+                SliverAppBar(
+                  expandedHeight: _topWidgetHeight + _actionsBarWidgetHeight,
+                  toolbarHeight: 0,
+                  //collapsedHeight: _actionsBarWidgetHeight,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: topWidget,
+                  ),
+                  backgroundColor: Colors.white,
+                  //shadowColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
+                  pinned: true,
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(_actionsBarWidgetHeight),
+                    child: Container(
+                      color: Colors.white,
+                      child: actionsBarWidget,
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Gap(20),
+                ),
+              ],
+              if (widget.isLoadingComments)
+                const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: PicnicLoadingIndicator(),
+                )
+              else
+                CommentTree(
+                  controller: widget.scrollController,
+                  keyStorage: widget.commentsKeyStorage,
+                  commentsRoot: widget.commentsRoot,
+                  onTapMore: widget.onTapMore,
+                  onTap: (comment) => widget.onTap?.call(comment),
+                  onDoubleTap: widget.onDoubleTap,
+                  onLongPress: widget.onLongPress,
+                  onTapLike: widget.onTapLike,
+                  onReply: widget.onTapReply,
+                  onLoadMore: widget.onLoadMore,
+                  onProfileTap: widget.onTapProfile,
+                  commentToBeHighlighted: widget.commentToBeHighlighted,
+                  onTapLink: widget.onTapLink,
+                  collapsedCommentIds: widget.collapsedCommentIds,
+                ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  key: widget.anchorKey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _onTopWidgetSizeChanged(Size size) {
+    setState(() {
+      _topWidgetHeight = size.height;
+    });
+  }
+
+  void _onActionsBarWidgetSizeChanged(Size size) {
+    setState(() {
+      _actionsBarWidgetHeight = size.height;
+    });
   }
 
   void _onFocusTargetChanged(CommentsFocusTarget focusTarget) {

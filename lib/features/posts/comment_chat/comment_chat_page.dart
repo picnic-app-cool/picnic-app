@@ -145,6 +145,10 @@ class _CommentChatPageState extends State<CommentChatPage>
                         showPostSummary: state.showPostSummary,
                         onTap: presenter.onTap,
                         collapsedCommentIds: state.collapsedCommentIds,
+                        onTapLikePost: presenter.onTapLikePost,
+                        onTapDislikePost: presenter.onTapDislikePost,
+                        onTapShare: presenter.onTapShare,
+                        onTapBookmark: presenter.onTapBookmark,
                       );
                     },
                   ),

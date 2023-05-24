@@ -261,6 +261,12 @@ class CommentChatPresentationModel implements CommentChatViewModel {
     );
   }
 
+  CommentChatPresentationModel byUpdatingShareStatus() {
+    return copyWith(
+      feedPost: feedPost.byIncrementingShareCount(),
+    );
+  }
+
   CommentChatPresentationModel copyWith({
     Post? feedPost,
     TreeComment? commentsRoot,
