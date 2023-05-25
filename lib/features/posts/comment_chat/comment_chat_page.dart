@@ -80,7 +80,6 @@ class _CommentChatPageState extends State<CommentChatPage>
         builder: (context, state) => Scaffold(
           appBar: state.showAppBar
               ? PicnicAppBar(
-                  titleText: appLocalizations.commentChatAppTitle,
                   actions: [
                     stateObserver(
                       builder: (context, state) {

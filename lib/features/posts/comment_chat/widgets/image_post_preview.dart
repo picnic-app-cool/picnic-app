@@ -11,7 +11,7 @@ class ImagePostPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final postHeight = MediaQuery.of(context).size.height / 3.9;
+    final postHeight = MediaQuery.of(context).size.height / 2.4;
     final theme = PicnicTheme.of(context);
     final blackAndWhite = theme.colors.blackAndWhite;
     final blackColor = blackAndWhite.shade900;
@@ -19,30 +19,27 @@ class ImagePostPreview extends StatelessWidget {
     final black30 = blackColor.withOpacity(0.3);
     final black70 = blackColor.withOpacity(0.7);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
         height: postHeight,
         width: double.infinity,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
-          child: Container(
-            foregroundDecoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  black70,
-                  black30,
-                  black20,
-                  black30,
-                  black70,
-                ],
-              ),
+        child: Container(
+          foregroundDecoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                black70,
+                black30,
+                black20,
+                black30,
+                black70,
+              ],
             ),
-            child: Image.network(
-              imageUrl.url,
-              fit: BoxFit.cover,
-            ),
+          ),
+          child: Image.network(
+            imageUrl.url,
+            fit: BoxFit.cover,
           ),
         ),
       ),

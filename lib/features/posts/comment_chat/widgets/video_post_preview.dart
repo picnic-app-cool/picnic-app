@@ -26,7 +26,7 @@ class _VideoPostPreviewState extends State<VideoPostPreview> {
 
   @override
   Widget build(BuildContext context) {
-    final postHeight = MediaQuery.of(context).size.height / 3.9;
+    final postHeight = MediaQuery.of(context).size.height / 2.4;
     final theme = PicnicTheme.of(context);
     final blackAndWhite = theme.colors.blackAndWhite;
     final blackColor = blackAndWhite.shade900;
@@ -39,50 +39,47 @@ class _VideoPostPreviewState extends State<VideoPostPreview> {
     return GestureDetector(
       onTap: _onVideoTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: SizedBox(
           height: postHeight,
           width: double.infinity,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(VideoPostPreview.borderRadius),
-            child: _playVideo
-                ? PicnicVideoPlayer(
-                    url: widget.videoUrl,
-                    isInPreviewMode: true,
-                  )
-                : Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Container(
-                          foregroundDecoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                black70,
-                                black30,
-                                black20,
-                                black30,
-                                black70,
-                              ],
-                            ),
-                          ),
-                          child: Image.network(
-                            widget.thumbnailUrl.url,
-                            fit: BoxFit.cover,
+          child: _playVideo
+              ? PicnicVideoPlayer(
+                  url: widget.videoUrl,
+                  isInPreviewMode: true,
+                )
+              : Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Container(
+                        foregroundDecoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              black70,
+                              black30,
+                              black20,
+                              black30,
+                              black70,
+                            ],
                           ),
                         ),
-                      ),
-                      Center(
-                        child: Image.asset(
-                          Assets.images.play.path,
-                          height: playIconSize,
-                          width: playIconSize,
+                        child: Image.network(
+                          widget.thumbnailUrl.url,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ],
-                  ),
-          ),
+                    ),
+                    Center(
+                      child: Image.asset(
+                        Assets.images.play.path,
+                        height: playIconSize,
+                        width: playIconSize,
+                      ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );

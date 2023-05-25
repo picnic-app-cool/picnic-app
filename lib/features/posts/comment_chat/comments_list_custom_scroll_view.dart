@@ -18,6 +18,7 @@ import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_
 import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
 import 'package:picnic_app/ui/widgets/paging_list/load_more_scroll_notification.dart';
 import 'package:picnic_app/ui/widgets/poll_post/picnic_poll_post.dart';
+import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -91,9 +92,11 @@ class CommentsListCustomScrollView extends StatefulWidget {
 }
 
 class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollView> {
+  static const thickness = 10.0;
+
   var _topWidgetHeight = 0.0;
   var _actionsBarWidgetHeight = 0.0;
-  static const _contentPadding = EdgeInsets.all(16);
+  static const _contentPadding = EdgeInsets.symmetric(vertical: 4, horizontal: 22);
 
   @override
   void didUpdateWidget(covariant CommentsListCustomScrollView oldWidget) {
@@ -204,12 +207,10 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
                 SliverAppBar(
                   expandedHeight: _topWidgetHeight + _actionsBarWidgetHeight,
                   toolbarHeight: 0,
-                  //collapsedHeight: _actionsBarWidgetHeight,
                   flexibleSpace: FlexibleSpaceBar(
                     background: topWidget,
                   ),
                   backgroundColor: Colors.white,
-                  //shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
                   pinned: true,
                   bottom: PreferredSize(
@@ -221,7 +222,19 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
                   ),
                 ),
                 const SliverToBoxAdapter(
-                  child: Gap(20),
+                  child: Gap(12),
+                ),
+              ],
+              if (commentsRoot.children.isNotEmpty) ...[
+                SliverToBoxAdapter(
+                  child: Divider(
+                    height: 1,
+                    thickness: thickness,
+                    color: PicnicTheme.of(context).colors.blackAndWhite.shade200,
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Gap(12),
                 ),
               ],
               if (widget.isLoadingComments)

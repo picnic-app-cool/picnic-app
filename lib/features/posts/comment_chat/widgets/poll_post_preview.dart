@@ -20,25 +20,29 @@ class PollPostPreview extends StatelessWidget {
   final PicnicPollVote? vote;
   final bool isPolling;
 
+  static const radius = 5.0;
+
   @override
   Widget build(BuildContext context) {
-    final postHeight = MediaQuery.of(context).size.height / 3.9;
+    final postHeight = MediaQuery.of(context).size.height / 2.4;
     final content = post.content as PollPostContent;
 
     return SizedBox(
       height: postHeight,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: PicnicPollPost(
-          onVote: onVoted,
-          leftImage: content.leftPollAnswer.imageUrl,
-          rightImage: content.rightPollAnswer.imageUrl,
-          userImageUrl: user.profileImageUrl,
-          leftVotes: content.leftVotesPercentage,
-          rightVotes: content.rightVotesPercentage,
-          vote: vote,
-          isLoading: isPolling,
-          withRoundedCorners: true,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: PicnicPollPost(
+            onVote: onVoted,
+            leftImage: content.leftPollAnswer.imageUrl,
+            rightImage: content.rightPollAnswer.imageUrl,
+            userImageUrl: user.profileImageUrl,
+            leftVotes: content.leftVotesPercentage,
+            rightVotes: content.rightVotesPercentage,
+            vote: vote,
+            isLoading: isPolling,
+          ),
         ),
       ),
     );

@@ -15,6 +15,7 @@ class PicnicLinkPost extends StatelessWidget {
     this.height,
     this.onDoubleTap,
     this.withRoundedCorners = true,
+    this.radius,
   }) : super(key: key);
 
   final LinkMetadata linkMetadata;
@@ -23,6 +24,7 @@ class PicnicLinkPost extends StatelessWidget {
   final ValueChanged<LinkUrl> onTap;
   final VoidCallback? onDoubleTap;
   final bool withRoundedCorners;
+  final BorderRadius? radius;
 
   static const _titleMaxLines = 2;
 
@@ -34,7 +36,7 @@ class PicnicLinkPost extends StatelessWidget {
     final white = colors.blackAndWhite.shade100;
     final whiteWithOpacity = white.withOpacity(0.7);
     final defaultHeight = height ?? MediaQuery.of(context).size.height / 2;
-    final borderRadius = withRoundedCorners ? BorderRadius.circular(24) : BorderRadius.zero;
+    final borderRadius = radius ?? (withRoundedCorners ? BorderRadius.circular(24) : BorderRadius.zero);
     final image = Stack(
       children: [
         PicnicImage(

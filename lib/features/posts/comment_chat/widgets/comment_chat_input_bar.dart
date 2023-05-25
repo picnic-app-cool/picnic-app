@@ -49,85 +49,79 @@ class CommentChatInputBar extends StatelessWidget {
     final theme = PicnicTheme.of(context);
 
     final blackAndWhite = theme.colors.blackAndWhite;
-    final borderColor = blackAndWhite.shade300;
 
     const attachmentButtonsPadding = 5.0;
     const attachmentButtonsSize = 18.0 + attachmentButtonsPadding * 2;
 
     return Container(
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 15,
+        top: 15,
+      ),
+      margin: const EdgeInsets.only(
+        top: 1,
+        left: 1,
+        right: 1,
+      ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
         ),
-        color: borderColor,
+        color: blackAndWhite.shade100,
       ),
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        margin: const EdgeInsets.only(
-          top: 1,
-          left: 1,
-          right: 1,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
-          ),
-          color: blackAndWhite.shade100,
-        ),
-        child: Column(
-          children: [
-            if (replyingComment != const CommentPreview.empty() && replyingComment != const TreeComment.none()) ...[
-              CommentChatReplyBar(
-                comment: replyingComment,
-                onTapCancelReply: onTapCancelReply,
-              ),
-              const Gap(14),
-            ],
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    if (!hideAttachmentButton)
-                      PicnicContainerIconButton(
-                        iconPath: Assets.images.paperClip.path,
-                        onTap: onTapAttachment,
-                        buttonColor: Colors.transparent,
-                        padding: attachmentButtonsPadding,
-                        height: attachmentButtonsSize,
-                        width: attachmentButtonsSize,
-                      ),
-                    if (!hideInstantCommandsButton)
-                      PicnicContainerIconButton(
-                        iconPath: Assets.images.electric.path,
-                        onTap: onTapElectric,
-                        buttonColor: Colors.transparent,
-                        padding: attachmentButtonsPadding,
-                        height: attachmentButtonsSize,
-                        width: attachmentButtonsSize,
-                      ),
-                    const Gap(7),
-                  ],
-                ),
-                Expanded(
-                  child: PicnicCommentTextInput(
-                    textController: textController,
-                    hintText: appLocalizations.addCommentHint,
-                    fillColor: textFieldFillColor,
-                    textColor: textFieldTextColor,
-                    onChanged: onCommentUpdated,
-                    focusNode: focusNode,
-                    maxLines: null,
-                    isDense: true,
-                    onTapSend: onTapSend,
-                  ),
-                ),
-              ],
+      child: Column(
+        children: [
+          if (replyingComment != const CommentPreview.empty() && replyingComment != const TreeComment.none()) ...[
+            CommentChatReplyBar(
+              comment: replyingComment,
+              onTapCancelReply: onTapCancelReply,
             ),
+            const Gap(14),
           ],
-        ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  if (!hideAttachmentButton)
+                    PicnicContainerIconButton(
+                      iconPath: Assets.images.paperClip.path,
+                      onTap: onTapAttachment,
+                      buttonColor: Colors.transparent,
+                      padding: attachmentButtonsPadding,
+                      height: attachmentButtonsSize,
+                      width: attachmentButtonsSize,
+                    ),
+                  if (!hideInstantCommandsButton)
+                    PicnicContainerIconButton(
+                      iconPath: Assets.images.electric.path,
+                      onTap: onTapElectric,
+                      buttonColor: Colors.transparent,
+                      padding: attachmentButtonsPadding,
+                      height: attachmentButtonsSize,
+                      width: attachmentButtonsSize,
+                    ),
+                  const Gap(7),
+                ],
+              ),
+              Expanded(
+                child: PicnicCommentTextInput(
+                  textController: textController,
+                  hintText: appLocalizations.addCommentHint,
+                  fillColor: textFieldFillColor,
+                  textColor: textFieldTextColor,
+                  onChanged: onCommentUpdated,
+                  focusNode: focusNode,
+                  maxLines: null,
+                  isDense: true,
+                  onTapSend: onTapSend,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
