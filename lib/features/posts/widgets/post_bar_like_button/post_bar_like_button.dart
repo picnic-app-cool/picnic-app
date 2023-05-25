@@ -12,11 +12,13 @@ class PostBarLikeButton extends StatelessWidget {
   const PostBarLikeButton({
     required this.params,
     this.decoration,
+    this.color,
     super.key,
   });
 
   final PostBarLikeButtonParams params;
   final BoxDecoration? decoration;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

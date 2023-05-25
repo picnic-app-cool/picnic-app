@@ -39,6 +39,7 @@ import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_c
 import "package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart";
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_initial_params.dart';
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_navigator.dart';
+import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_page.dart';
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_presentation_model.dart';
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_presenter.dart';
 import 'package:picnic_app/features/posts/link_post_creation/link_post_creation_initial_params.dart';
@@ -607,8 +608,11 @@ void _configureMvp() {
         ..registerFactoryParam<UploadMediaPage, UploadMediaInitialParams, dynamic>(
           (params, _) => UploadMediaPage(presenter: getIt(param1: params)),
         )
+        ..registerFactoryParam<FullScreenImagePostPage, FullScreenImagePostInitialParams, dynamic>(
+          (params, _) => FullScreenImagePostPage(presenter: getIt(param1: params)),
+        )
         ..registerFactory<FullScreenImagePostNavigator>(
-          () => FullScreenImagePostNavigator(getIt()),
+          () => FullScreenImagePostNavigator(getIt(), getIt()),
         )
         ..registerFactoryParam<FullScreenImagePostViewModel, FullScreenImagePostInitialParams, dynamic>(
           (params, _) => FullScreenImagePostPresentationModel.initial(params, getIt()),
@@ -616,6 +620,13 @@ void _configureMvp() {
         ..registerFactoryParam<FullScreenImagePostPresenter, FullScreenImagePostInitialParams, dynamic>(
           (params, _) => FullScreenImagePostPresenter(
             getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
             getIt(),
             getIt(),
           ),

@@ -11,6 +11,8 @@ import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_po
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../../analytics/mocks/analytics_mocks.dart';
+import '../mocks/posts_mocks.dart';
 
 Future<void> main() async {
   late FullScreenImagePostPage page;
@@ -30,17 +32,24 @@ Future<void> main() async {
       initParams,
       Mocks.userStore,
     );
-    navigator = FullScreenImagePostNavigator(Mocks.appNavigator);
+    navigator = FullScreenImagePostNavigator(Mocks.appNavigator, Mocks.userStore);
     presenter = FullScreenImagePostPresenter(
       model,
       navigator,
       Mocks.deletePostsUseCase,
+      Mocks.joinCircleUseCase,
+      AnalyticsMocks.logAnalyticsEventUseCase,
+      PostsMocks.getPostUseCase,
+      Mocks.sharePostUseCase,
+      PostsMocks.likeUnlikePostUseCase,
+      PostsMocks.unreactToPostUseCase,
+      Mocks.savePostToCollectionUseCase,
     );
 
     getIt.registerFactoryParam<FullScreenImagePostPresenter, FullScreenImagePostInitialParams, dynamic>(
       (initialParams, _) => presenter,
     );
-    page = FullScreenImagePostPage(initialParams: initParams);
+    page = FullScreenImagePostPage(presenter: presenter);
   }
 
   await screenshotTest(

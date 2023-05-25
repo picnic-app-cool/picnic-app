@@ -7,7 +7,9 @@ import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_po
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
+import '../../analytics/mocks/analytics_mocks.dart';
 import '../mocks/posts_mock_definitions.dart';
+import '../mocks/posts_mocks.dart';
 
 void main() {
   late FullScreenImagePostPresentationModel model;
@@ -33,6 +35,13 @@ void main() {
       model,
       navigator,
       Mocks.deletePostsUseCase,
+      Mocks.joinCircleUseCase,
+      AnalyticsMocks.logAnalyticsEventUseCase,
+      PostsMocks.getPostUseCase,
+      Mocks.sharePostUseCase,
+      PostsMocks.likeUnlikePostUseCase,
+      PostsMocks.unreactToPostUseCase,
+      Mocks.savePostToCollectionUseCase,
     );
   });
 }
