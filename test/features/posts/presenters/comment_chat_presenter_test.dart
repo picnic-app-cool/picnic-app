@@ -102,6 +102,7 @@ void main() {
           onTapPin: any(named: 'onTapPin'),
           onTapUnpin: any(named: 'onTapUnpin'),
           onTapShare: any(named: 'onTapShare'),
+          onTapShareCommentItem: any(named: 'onTapShareCommentItem'),
         ),
       );
     },

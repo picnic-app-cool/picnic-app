@@ -48,6 +48,7 @@ class CommentsListCustomScrollView extends StatefulWidget {
     required this.collapsedCommentIds,
     required this.onTapLikePost,
     required this.onTapDislikePost,
+    required this.onTapShareCommentItem,
     required this.onTapShare,
     required this.onTapBookmark,
     this.onTap,
@@ -85,6 +86,8 @@ class CommentsListCustomScrollView extends StatefulWidget {
   final VoidCallback onTapLikePost;
   final VoidCallback onTapDislikePost;
   final VoidCallback onTapShare;
+  final Function(String) onTapShareCommentItem;
+
   final VoidCallback onTapBookmark;
 
   @override
@@ -258,6 +261,7 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
                   commentToBeHighlighted: widget.commentToBeHighlighted,
                   onTapLink: widget.onTapLink,
                   collapsedCommentIds: widget.collapsedCommentIds,
+                  onTapShareCommentItem: widget.onTapShareCommentItem,
                 ),
               SliverToBoxAdapter(
                 child: SizedBox(

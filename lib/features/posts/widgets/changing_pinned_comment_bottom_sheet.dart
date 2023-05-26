@@ -16,11 +16,15 @@ class ChangingPinnedCommentBottomSheet extends StatelessWidget {
     required this.comment,
     required this.onTapChange,
     required this.onTapCancel,
+    required this.onTapShare,
+    required this.onTapShareCommentItem,
   }) : super(key: key);
 
   final BasicComment comment;
   final VoidCallback onTapChange;
   final VoidCallback onTapCancel;
+  final VoidCallback onTapShare;
+  final Function(String) onTapShareCommentItem;
 
   static const topAvatarSize = 40.0;
   static const _horizontalPadding = 20.0;
@@ -64,6 +68,7 @@ class ChangingPinnedCommentBottomSheet extends StatelessWidget {
               treeComment: comment as TreeComment,
               showChildren: false,
               maxTextLines: Constants.commentInBottomSheetMaxLines,
+              onTapShareCommentItem: onTapShareCommentItem,
             ),
           ),
           const Gap(20),

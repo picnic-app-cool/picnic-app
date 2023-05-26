@@ -12,10 +12,11 @@ import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/badged_title.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/model/badged_title_displayable.dart';
+import 'package:picnic_app/ui/widgets/buttons/picnic_like_button.dart';
 import 'package:picnic_app/ui/widgets/expandable_link_text.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
+import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
-import 'package:picnic_app/ui/widgets/picnic_like_heart_column.dart';
 import 'package:picnic_app/utils/extensions/time_ago_formatting.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/animated_vertical_slide.dart';
@@ -41,6 +42,7 @@ class CommentTreeItem extends StatelessWidget {
     this.onTapLink,
     this.showMoreRepliesButton = true,
     super.key,
+    required this.onTapShareCommentItem,
   });
 
   final TreeComment treeComment;
@@ -61,6 +63,7 @@ class CommentTreeItem extends StatelessWidget {
   final int? maxTextLines;
   final Function(LinkUrl)? onTapLink;
   final bool showMoreRepliesButton;
+  final Function(String) onTapShareCommentItem;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class CommentTreeItem extends StatelessWidget {
     final lightGrey = blackAndWhite.shade300;
     final darkGrey = blackAndWhite.shade600;
 
-    final authorNameColor = blackAndWhite.shade900.withOpacity(0.4);
+    final authorNameColor = blackAndWhite.shade900;
     final styleBody0 = theme.styles.body0;
     final authorStyle = styleBody0.copyWith(
       color: authorNameColor,
@@ -90,7 +93,8 @@ class CommentTreeItem extends StatelessWidget {
     const chatIconSize = 16.0;
     const expandIconSize = 24.0;
 
-    final hasMore = treeComment.repliesCount > 0;
+    final repliesCount = treeComment.repliesCount;
+    final hasMore = repliesCount > 0;
 
     const maxNestedCount = Constants.defaultCommentsDepthLevel;
 
@@ -106,6 +110,62 @@ class CommentTreeItem extends StatelessWidget {
 
     const maxLines = 3;
 
+    final styleCaption = styleCaption10.copyWith(color: blackAndWhite.shade600);
+    final commentActions = Row(
+      children: [
+        PicnicLikeButton(
+          isLiked: treeComment.isLiked,
+          onTap: () => onLikeUnlikeTap?.call(treeComment),
+          strokeColor: blackAndWhite.shade600,
+          size: 16,
+          image: Assets.images.likeOutlined,
+        ),
+        const Gap(4),
+        Text(
+          treeComment.likesCount.toString(),
+          style: styleCaption,
+        ),
+        const Gap(12),
+        Image.asset(
+          Assets.images.dislikeOutlined.path,
+          color: blackAndWhite.shade600,
+          width: chatIconSize,
+          height: chatIconSize,
+        ),
+        const Gap(38),
+        GestureDetector(
+          onTap: () => onReply?.call(context, treeComment),
+          behavior: HitTestBehavior.opaque,
+          child: Image.asset(
+            Assets.images.chatStroked.path,
+            color: blackAndWhite.shade600,
+            width: chatIconSize,
+            height: chatIconSize,
+          ),
+        ),
+        const Gap(4),
+        Text(
+          repliesCount.toString(),
+          style: styleCaption,
+        ),
+        const Gap(40),
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTapShareCommentItem(treeComment.text),
+          child: Image.asset(
+            Assets.images.sendOutlined.path,
+            color: blackAndWhite.shade600,
+            width: chatIconSize,
+            height: chatIconSize,
+          ),
+        ),
+        const Gap(4),
+        Text(
+          appLocalizations.shareAction,
+          style: styleCaption,
+        ),
+      ],
+    );
     return Stack(
       children: [
         if (highlightSingleColor != null)
@@ -205,6 +265,13 @@ class CommentTreeItem extends StatelessWidget {
                                               ),
                                             ),
                                             const Gap(4),
+                                            if (timeElapsed != null) ...[
+                                              Text(
+                                                '• $timeElapsed ',
+                                                style: styleCaption10.copyWith(color: blackAndWhite.shade800),
+                                              ),
+                                            ],
+                                            const Gap(4),
                                             if (treeComment.tag != null) CommentBadge(tag: treeComment.tag!),
                                           ],
                                         ),
@@ -258,43 +325,18 @@ class CommentTreeItem extends StatelessWidget {
                               ),
                             ),
                             const Gap(8),
-                            PicnicLikeHeartColumn(
-                              likesCount: treeComment.likesCount,
-                              onTapLikeHeart: () => onLikeUnlikeTap?.call(treeComment),
-                              liked: treeComment.isLiked,
+                            PicnicContainerIconButton(
+                              iconPath: Assets.images.options.path,
+                              onTap: () => onLongPress?.call(treeComment),
                             ),
                           ],
                         ),
                         const Gap(4),
                         Row(
                           children: [
-                            GestureDetector(
-                              onTap: () => onReply?.call(context, treeComment),
-                              behavior: HitTestBehavior.opaque,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
-                                child: Row(
-                                  children: [
-                                    if (timeElapsed != null) ...[
-                                      Text(
-                                        '$timeElapsed • ',
-                                        style: styleCaption10.copyWith(color: blackAndWhite.shade800),
-                                      ),
-                                    ],
-                                    Image.asset(
-                                      Assets.images.chatStroked.path,
-                                      color: blackAndWhite.shade600,
-                                      width: chatIconSize,
-                                      height: chatIconSize,
-                                    ),
-                                    const Gap(4),
-                                    Text(
-                                      appLocalizations.replyAction,
-                                      style: styleCaption10.copyWith(color: blackAndWhite.shade600),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: commentActions,
                             ),
                             if (isCollapsed) ...[
                               const Gap(8),
@@ -313,7 +355,7 @@ class CommentTreeItem extends StatelessWidget {
                                       const Gap(8),
                                       Flexible(
                                         child: Text(
-                                          appLocalizations.moreRepliesMessage(treeComment.repliesCount),
+                                          appLocalizations.moreRepliesMessage(repliesCount),
                                           style: theme.styles.body20.copyWith(color: green),
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -345,6 +387,7 @@ class CommentTreeItem extends StatelessWidget {
                                   maxTextLines: maxTextLines,
                                   collapsedCommentIds: collapsedCommentIds,
                                   suppressBottomPadding: child == children.last,
+                                  onTapShareCommentItem: onTapShareCommentItem,
                                 ),
                               const Gap(4),
                             ],
@@ -352,7 +395,7 @@ class CommentTreeItem extends StatelessWidget {
                         ),
                         if (showMoreRepliesButton && hasMore && treeComment.parentsCount == maxNestedCount)
                           CommentMoreRepliesButton(
-                            moreRepliesCount: treeComment.repliesCount,
+                            moreRepliesCount: repliesCount,
                             onTap: () => onTapMore?.call(treeComment),
                           ),
                         if (!childrenShouldBeShown && !suppressBottomPadding) const Gap(18),

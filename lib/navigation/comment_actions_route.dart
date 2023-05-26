@@ -16,6 +16,7 @@ mixin CommentActionsRoute {
     required VoidCallback? onTapPin,
     required VoidCallback? onTapUnpin,
     required VoidCallback? onTapShare,
+    required Function(String) onTapShareCommentItem,
   }) {
     showPicnicBottomSheet(
       CommentActionsBottomSheet(
@@ -28,6 +29,7 @@ mixin CommentActionsRoute {
         onTapPin: onTapPin,
         onTapUnpin: onTapUnpin,
         onTapShare: onTapShare,
+        onTapShareCommentItem: onTapShareCommentItem,
       ),
       useRootNavigator: true,
     );

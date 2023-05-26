@@ -10,12 +10,16 @@ mixin ChangingPinnedCommentRoute {
     required BasicComment comment,
     required VoidCallback onTapChange,
     required VoidCallback onTapCancel,
+    required VoidCallback onTapShare,
+    required Function(String) onTapShareCommentItem,
   }) {
     showPicnicBottomSheet(
       ChangingPinnedCommentBottomSheet(
         comment: comment,
         onTapChange: onTapChange,
         onTapCancel: onTapCancel,
+        onTapShare: onTapShare,
+        onTapShareCommentItem: onTapShareCommentItem,
       ),
       useRootNavigator: true,
     );

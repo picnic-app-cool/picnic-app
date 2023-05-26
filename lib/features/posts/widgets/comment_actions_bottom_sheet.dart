@@ -25,6 +25,7 @@ class CommentActionsBottomSheet extends StatelessWidget {
     required this.onTapPin,
     required this.onTapUnpin,
     required this.onTapShare,
+    required this.onTapShareCommentItem,
   }) : super(key: key);
 
   final BasicComment comment;
@@ -36,6 +37,7 @@ class CommentActionsBottomSheet extends StatelessWidget {
   final VoidCallback? onTapPin;
   final VoidCallback? onTapUnpin;
   final VoidCallback? onTapShare;
+  final Function(String) onTapShareCommentItem;
 
   static const topAvatarSize = 40.0;
   static const _horizontalPadding = 20.0;
@@ -80,6 +82,7 @@ class CommentActionsBottomSheet extends StatelessWidget {
                 treeComment: comment as TreeComment,
                 showChildren: false,
                 maxTextLines: Constants.commentInBottomSheetMaxLines,
+                onTapShareCommentItem: onTapShareCommentItem,
               ),
             ),
           divider,
@@ -171,7 +174,7 @@ class CommentActionsBottomSheet extends StatelessWidget {
                       width: _iconWidth,
                     ),
                     label: appLocalizations.shareAction,
-                    onTap: onTapShare,
+                    onTap: () => onTapShare,
                   ),
                 ),
             ],

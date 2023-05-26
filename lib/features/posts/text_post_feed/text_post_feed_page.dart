@@ -203,6 +203,8 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                               onProfileTap: presenter.commentChatPresenter.onTapProfile,
                                               onTapLink: presenter.commentChatPresenter.onTapLink,
                                               collapsedCommentIds: state.commentChatViewModel.collapsedCommentIds,
+                                              onTapShareCommentItem:
+                                                  presenter.commentChatPresenter.onTapShareCommentItem,
                                             ),
                                           ],
                                         ),

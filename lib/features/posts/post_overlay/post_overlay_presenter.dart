@@ -345,7 +345,12 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       onTapUnpin: null,
       onTapShare: () => navigator.shareText(text: comment.text),
       onTapClose: navigator.close,
+      onTapShareCommentItem: onTapShareCommentItem,
     );
+  }
+
+  void onTapShareCommentItem(String text) {
+    navigator.shareText(text: text);
   }
 
   void onDoubleTapComment(CommentPreview comment) {

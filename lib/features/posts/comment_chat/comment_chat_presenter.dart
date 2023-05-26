@@ -372,6 +372,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
           : null,
       onTapShare: () => navigator.shareText(text: comment.text),
       onTapClose: navigator.close,
+      onTapShareCommentItem: onTapShareCommentItem,
     );
   }
 
@@ -444,6 +445,8 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
             await loadComments(),
           },
           onTapCancel: navigator.close,
+          onTapShare: onTapShare,
+          onTapShareCommentItem: onTapShareCommentItem,
         );
       }
     } else {
@@ -462,6 +465,28 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
             ),
           ),
         );
+  }
+
+  void onTapShareCommentItem(String text) {
+    navigator.shareText(text: text);
+  }
+
+  void onTapShare() {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postShareButton,
+      ),
+    );
+    navigator.shareText(text: _model.feedPost.shareLink);
+
+    _sharePostUseCase
+        .execute(
+          postId: _model.feedPost.id,
+        )
+        .doOn(
+          success: (_) => _emitAndNotify(_model.byUpdatingShareStatus()),
+        )
+        .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));
   }
 
   Future<void> onUnpinComment(TreeComment comment) async {
@@ -496,24 +521,6 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
       ),
     );
     await _executeDislikeReactUnReactUseCase();
-  }
-
-  void onTapShare() {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.postShareButton,
-      ),
-    );
-    navigator.shareText(text: _model.feedPost.shareLink);
-
-    _sharePostUseCase
-        .execute(
-          postId: _model.feedPost.id,
-        )
-        .doOn(
-          success: (_) => _emitAndNotify(_model.byUpdatingShareStatus()),
-        )
-        .doOn(fail: (fail) => navigator.showError(fail.displayableFailure()));
   }
 
   Future<void> _executeLikeReactUnReactUseCase() async {

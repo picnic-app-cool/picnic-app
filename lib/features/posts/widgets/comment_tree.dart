@@ -34,6 +34,7 @@ class CommentTree extends StatelessWidget {
     required this.collapsedCommentIds,
     this.commentToBeHighlighted,
     this.keyStorage,
+    required this.onTapShareCommentItem,
     super.key,
   });
 
@@ -53,6 +54,7 @@ class CommentTree extends StatelessWidget {
   final Function(LinkUrl) onTapLink;
   final TreeComment? commentToBeHighlighted;
   final List<Id> collapsedCommentIds;
+  final Function(String) onTapShareCommentItem;
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +85,7 @@ class CommentTree extends StatelessWidget {
                 onLoadMore: onLoadMore,
                 onProfileTap: onProfileTap,
                 onTapLink: onTapLink,
+                onTapShareCommentItem: onTapShareCommentItem,
                 collapsedCommentIds: collapsedCommentIds,
                 highlightAllColor: comment.id == commentToBeHighlighted?.id ? pink : null,
                 highlightSingleColor:

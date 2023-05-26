@@ -46,7 +46,8 @@ class _PicnicLikeButtonState extends State<PicnicLikeButton> with TickerProvider
           fit: BoxFit.cover,
           color: widget.isLiked
               ? colors.green.shade600
-              : (widget.image == Assets.images.likeFilled ? colors.blackAndWhite.shade100 : colors.darkBlue.shade600),
+              : widget.strokeColor ??
+                  (widget.image == Assets.images.likeFilled ? colors.blackAndWhite.shade100 : colors.darkBlue.shade600),
           width: widget.size,
           height: widget.size,
         ),

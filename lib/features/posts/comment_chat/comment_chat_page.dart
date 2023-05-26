@@ -144,8 +144,9 @@ class _CommentChatPageState extends State<CommentChatPage>
                         collapsedCommentIds: state.collapsedCommentIds,
                         onTapLikePost: presenter.onTapLikePost,
                         onTapDislikePost: presenter.onTapDislikePost,
-                        onTapShare: presenter.onTapShare,
                         onTapBookmark: presenter.onTapBookmark,
+                        onTapShareCommentItem: presenter.onTapShareCommentItem,
+                        onTapShare: presenter.onTapShare,
                       );
                     },
                   ),
