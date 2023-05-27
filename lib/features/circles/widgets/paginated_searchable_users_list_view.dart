@@ -49,7 +49,7 @@ class PaginatedSearchableUsersListView extends StatelessWidget {
         iconPathLeft: closeImagePath,
         child: Text(
           title,
-          style: styles.title20,
+          style: styles.subtitle30,
         ),
       ),
       body: Column(
@@ -69,7 +69,7 @@ class PaginatedSearchableUsersListView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
               appLocalizations.usersResults,
-              style: styles.title30,
+              style: styles.subtitle40,
             ),
           ),
           PaginatedUsersListView(

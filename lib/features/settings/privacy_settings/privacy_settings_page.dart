@@ -44,7 +44,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage>
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
     final pinkColor = colors.pink;
-    final itemTextStyle = theme.styles.title20;
+    final itemTextStyle = theme.styles.subtitle30;
 
     final appBar = PicnicAppBar(
       backgroundColor: theme.colors.blackAndWhite.shade100,
@@ -85,7 +85,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage>
                               value: state.privacySettings.directMessagesFromAccountsYouFollow,
                               onChanged: (value) => presenter.onTapToggle(selected: value),
                               size: PicnicSwitchSize.regular,
-                              color: colors.green,
+                              color: colors.blue,
                             ),
                     ),
                   ),
@@ -104,7 +104,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage>
                                   selected: value,
                                 ),
                                 size: PicnicSwitchSize.regular,
-                                color: colors.green,
+                                color: colors.blue,
                               ),
                       ),
                     ),

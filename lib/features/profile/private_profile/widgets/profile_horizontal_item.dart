@@ -36,13 +36,13 @@ class ProfileHorizontalItem extends StatelessWidget {
       ),
       child: PicnicListItem(
         title: title,
-        titleStyle: styles.title10,
+        titleStyle: styles.subtitle20,
         onTapDetails: onTapTrailing,
         onTap: onTap,
         height: _itemHeight,
         trailing: Text(
           trailingText,
-          style: styles.body30.copyWith(color: colors.green),
+          style: styles.body30.copyWith(color: colors.blue),
         ),
         fillColor: blackAndWhite.shade200,
         borderRadius: _itemRadius,

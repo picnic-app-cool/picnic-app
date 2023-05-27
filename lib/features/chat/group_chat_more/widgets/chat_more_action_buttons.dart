@@ -24,13 +24,13 @@ class ChatMoreActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
     final redColor = colors.pink.shade500;
-    final greenColor = colors.green.shade500;
+    final blueColor = colors.blue.shade500;
 
     final addMoreButton = PicnicButton(
       minWidth: double.infinity,
       title: appLocalizations.addMembers,
-      borderColor: greenColor,
-      titleColor: greenColor,
+      borderColor: blueColor,
+      titleColor: blueColor,
       color: Colors.white,
       style: PicnicButtonStyle.outlined,
       borderWidth: _buttonBorderWidth,

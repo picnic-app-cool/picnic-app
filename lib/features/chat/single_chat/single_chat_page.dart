@@ -52,7 +52,7 @@ class _SingleChatPageState extends State<SingleChatPage>
     final white = colors.blackAndWhite.shade100;
     final darkBlue = colors.darkBlue.shade600;
     final gray = colors.blackAndWhite.shade600;
-    final green = colors.green.shade600;
+    final blue = colors.blue.shade600;
 
     final bottomNavBarHeight = BottomNavigationSizeQuery.of(context).height;
     final padding = EdgeInsets.only(
@@ -96,7 +96,7 @@ class _SingleChatPageState extends State<SingleChatPage>
                     isReplying: state.replyMessage.selected,
                     replyMessage: state.replyMessage.item,
                     sendMessageColor: darkBlue,
-                    attachmentIconColor: state.isMediaPickerVisible ? green : gray,
+                    attachmentIconColor: state.isMediaPickerVisible ? blue : gray,
                     onTapCloseReply: presenter.onTapCloseReply,
                     onMessageUpdated: presenter.onMessageTextUpdated,
                     onTapSendMessage: state.sendMessageEnabled ? presenter.onTapSendNewMassage : null,

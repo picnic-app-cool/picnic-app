@@ -40,7 +40,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                 ),
                 child: Text(
                   appLocalizations.yourCircles,
-                  style: PicnicTheme.of(context).styles.title20,
+                  style: PicnicTheme.of(context).styles.subtitle30,
                 ),
               ),
               Flexible(

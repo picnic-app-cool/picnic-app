@@ -35,7 +35,7 @@ class _ImagePickerPageState extends State<ImagePickerPage>
       ),
       title: Text(
         appLocalizations.imagePickerAlertTitle,
-        style: theme.styles.title20.copyWith(color: lightBlue), //
+        style: theme.styles.subtitle30.copyWith(color: lightBlue), //
       ),
       children: state.availableOptions
           .map(

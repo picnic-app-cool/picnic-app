@@ -27,14 +27,14 @@ class CircleRolePermissionSection extends StatelessWidget {
           children: [
             Text(
               text,
-              style: theme.styles.title20,
+              style: theme.styles.subtitle30,
             ),
             const Spacer(),
             PicnicSwitch(
               value: initialSwitchValue,
               onChanged: onSwitchChanged,
               size: PicnicSwitchSize.regular,
-              color: theme.colors.green,
+              color: theme.colors.blue,
             ),
           ],
         ),

@@ -148,14 +148,14 @@ class _Tag extends StatelessWidget {
     final suffixIconExists = suffixIcon != null;
 
     final theme = PicnicTheme.of(context);
-    final textStyleTitle10 = theme.styles.title10.copyWith(
+    final textStyleSubitle20 = theme.styles.subtitle20.copyWith(
       color: theme.colors.blackAndWhite.shade100,
       fontWeight: FontWeight.bold,
     );
 
     var tagTitleStyle = titleTextStyle;
 
-    tagTitleStyle ??= textStyleTitle10;
+    tagTitleStyle ??= textStyleSubitle20;
 
     return Container(
       padding: padding,

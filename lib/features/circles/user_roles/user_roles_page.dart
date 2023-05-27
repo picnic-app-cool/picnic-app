@@ -55,7 +55,7 @@ class _UserRolesPageState extends State<UserRolesPage>
                   const Gap(16),
                   Text(
                     appLocalizations.selectedRoles,
-                    style: styles.title30,
+                    style: styles.subtitle40,
                     textAlign: TextAlign.left,
                   ),
                   const Gap(16),
@@ -66,7 +66,7 @@ class _UserRolesPageState extends State<UserRolesPage>
                   const Gap(16),
                   Text(
                     appLocalizations.rolesTitle,
-                    style: theme.styles.title30,
+                    style: theme.styles.subtitle40,
                     textAlign: TextAlign.left,
                   ),
                   Expanded(
@@ -80,7 +80,7 @@ class _UserRolesPageState extends State<UserRolesPage>
                         return RoleItem(
                           roleName: role.name,
                           roleEmoji: role.emoji,
-                          titleStyle: theme.styles.title10.copyWith(color: role.formattedColor.color),
+                          titleStyle: theme.styles.subtitle20.copyWith(color: role.formattedColor.color),
                           trailing: isSelected
                               ? Image.asset(
                                   Assets.images.checkboxSquare.path,

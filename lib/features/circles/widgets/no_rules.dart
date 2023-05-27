@@ -46,12 +46,12 @@ class NoRules extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(appLocalizations.rulesTabTitle, style: styles.title30),
+                  Text(appLocalizations.rulesTabTitle, style: styles.subtitle40),
                   if (isMod)
                     PicnicTextButton(
                       label: appLocalizations.editAction,
                       onTap: onTapEdit,
-                      labelStyle: theme.styles.title20.copyWith(color: theme.colors.green),
+                      labelStyle: theme.styles.subtitle30.copyWith(color: theme.colors.blue),
                     ),
                 ],
               ),

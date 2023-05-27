@@ -43,7 +43,7 @@ class RecipientsList extends StatelessWidget {
             title: appLocalizations.chooseAction,
             onTap: () => onTapSelectRecipient(publicProfile),
             titleColor: theme.colors.blackAndWhite.shade100,
-            color: theme.colors.green,
+            color: theme.colors.blue,
           );
           final picnicAvatar = PicnicAvatar(
             backgroundColor: theme.colors.lightBlue.shade100,
@@ -59,7 +59,7 @@ class RecipientsList extends StatelessWidget {
           return PicnicListItem(
             leading: picnicAvatar,
             title: publicProfile.username,
-            titleStyle: theme.styles.title10,
+            titleStyle: theme.styles.subtitle20,
             trailing: trailing,
           );
         },

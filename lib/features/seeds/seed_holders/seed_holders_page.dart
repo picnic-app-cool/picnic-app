@@ -91,7 +91,7 @@ class _SeedHoldersPageState extends State<SeedHoldersPage>
                 ),
                 child: Text(
                   appLocalizations.circleElectionSeedHolders,
-                  style: styles.title30.copyWith(
+                  style: styles.subtitle40.copyWith(
                     color: bwShade900,
                   ),
                 ),
@@ -127,7 +127,7 @@ class _SeedHoldersPageState extends State<SeedHoldersPage>
                               const Gap(4),
                               Text(
                                 state.seedCount.toString(),
-                                style: styles.title20.copyWith(color: bwShade900),
+                                style: styles.subtitle30.copyWith(color: bwShade900),
                               ),
                             ],
                           ),
@@ -149,7 +149,7 @@ class _SeedHoldersPageState extends State<SeedHoldersPage>
                     leftGap: _sidePadding,
                     trailingGap: _sidePadding,
                     title: seedHolder.username,
-                    titleStyle: styles.title10.copyWith(
+                    titleStyle: styles.subtitle20.copyWith(
                       color: bwShade900,
                     ),
                     subTitleStyle: styles.caption10,
@@ -165,7 +165,7 @@ class _SeedHoldersPageState extends State<SeedHoldersPage>
                     ),
                     trailing: Text(
                       seedHolder.amountTotal.toString(),
-                      style: styles.title30.copyWith(color: colors.green.shade500),
+                      style: styles.subtitle40.copyWith(color: colors.blue.shade500),
                     ),
                   );
                 },

@@ -47,7 +47,7 @@ class WordList extends StatelessWidget {
                   onTap: () => onTapEditWord(word),
                   child: Image.asset(
                     Assets.images.edit.path,
-                    color: themeData.colors.green.shade300,
+                    color: themeData.colors.blue.shade300,
                   ),
                 ),
                 const Gap(24),

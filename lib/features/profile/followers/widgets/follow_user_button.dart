@@ -24,7 +24,7 @@ class FollowUserButton extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
     final followingColor = this.followingColor ?? colors.pink.shade500;
-    final notFollowingColor = this.notFollowingColor ?? colors.green;
+    final notFollowingColor = this.notFollowingColor ?? colors.blue;
 
     return PicnicButton(
       title: isFollowing ? appLocalizations.followingAction : appLocalizations.followAction,

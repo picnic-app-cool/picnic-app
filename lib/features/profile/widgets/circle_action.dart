@@ -23,7 +23,7 @@ class CircleAction extends StatelessWidget {
     final shade900 = colors.blackAndWhite.shade900;
 
     final white = colors.blackAndWhite.shade100;
-    final title30Black = textTheme.title30.copyWith(
+    final title30Black = textTheme.subtitle40.copyWith(
       color: shade900,
     );
     return Padding(

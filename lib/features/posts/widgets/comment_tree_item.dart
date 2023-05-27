@@ -70,7 +70,7 @@ class CommentTreeItem extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
     final blackAndWhite = colors.blackAndWhite;
-    final green = colors.green;
+    final blue = colors.blue;
     final lightGrey = blackAndWhite.shade300;
     final darkGrey = blackAndWhite.shade600;
 
@@ -113,56 +113,71 @@ class CommentTreeItem extends StatelessWidget {
     final styleCaption = styleCaption10.copyWith(color: blackAndWhite.shade600);
     final commentActions = Row(
       children: [
-        PicnicLikeButton(
-          isLiked: treeComment.isLiked,
-          onTap: () => onLikeUnlikeTap?.call(treeComment),
-          strokeColor: blackAndWhite.shade600,
-          size: 16,
-          image: Assets.images.likeOutlined,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PicnicLikeButton(
+              isLiked: treeComment.isLiked,
+              onTap: () => onLikeUnlikeTap?.call(treeComment),
+              strokeColor: blackAndWhite.shade600,
+              size: 16,
+              image: Assets.images.likeOutlined,
+            ),
+            const Gap(2),
+            Text(
+              treeComment.likesCount.toString(),
+              style: styleCaption,
+            ),
+            const Gap(6),
+            Image.asset(
+              Assets.images.dislikeOutlined.path,
+              color: blackAndWhite.shade600,
+              width: chatIconSize,
+              height: chatIconSize,
+            ),
+          ],
         ),
-        const Gap(4),
-        Text(
-          treeComment.likesCount.toString(),
-          style: styleCaption,
+        const Gap(20),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: () => onReply?.call(context, treeComment),
+              behavior: HitTestBehavior.opaque,
+              child: Image.asset(
+                Assets.images.chatStroked.path,
+                color: blackAndWhite.shade600,
+                width: chatIconSize,
+                height: chatIconSize,
+              ),
+            ),
+            const Gap(2),
+            Text(
+              repliesCount.toString(),
+              style: styleCaption,
+            ),
+          ],
         ),
-        const Gap(12),
-        Image.asset(
-          Assets.images.dislikeOutlined.path,
-          color: blackAndWhite.shade600,
-          width: chatIconSize,
-          height: chatIconSize,
-        ),
-        const Gap(38),
-        GestureDetector(
-          onTap: () => onReply?.call(context, treeComment),
-          behavior: HitTestBehavior.opaque,
-          child: Image.asset(
-            Assets.images.chatStroked.path,
-            color: blackAndWhite.shade600,
-            width: chatIconSize,
-            height: chatIconSize,
-          ),
-        ),
-        const Gap(4),
-        Text(
-          repliesCount.toString(),
-          style: styleCaption,
-        ),
-        const Gap(40),
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => onTapShareCommentItem(treeComment.text),
-          child: Image.asset(
-            Assets.images.sendOutlined.path,
-            color: blackAndWhite.shade600,
-            width: chatIconSize,
-            height: chatIconSize,
-          ),
-        ),
-        const Gap(4),
-        Text(
-          appLocalizations.shareAction,
-          style: styleCaption,
+        const Gap(20),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => onTapShareCommentItem(treeComment.text),
+              child: Image.asset(
+                Assets.images.sendOutlined.path,
+                color: blackAndWhite.shade600,
+                width: chatIconSize,
+                height: chatIconSize,
+              ),
+            ),
+            const Gap(2),
+            Text(
+              appLocalizations.shareAction,
+              style: styleCaption,
+            ),
+          ],
         ),
       ],
     );
@@ -289,7 +304,7 @@ class CommentTreeItem extends StatelessWidget {
                                             const Gap(4),
                                             Text(
                                               appLocalizations.commentPinnedTitle,
-                                              style: styleBody0.copyWith(color: green),
+                                              style: styleBody0.copyWith(color: blue),
                                             ),
                                           ],
                                         ),
@@ -315,7 +330,7 @@ class CommentTreeItem extends StatelessWidget {
                                         expandTextBuilder: (context, isExpanded) {
                                           return Text(
                                             isExpanded ? appLocalizations.seeLess : appLocalizations.seeMore,
-                                            style: styleCaption10.copyWith(color: green),
+                                            style: styleCaption10.copyWith(color: blue),
                                           );
                                         },
                                       ),
@@ -350,13 +365,13 @@ class CommentTreeItem extends StatelessWidget {
                                         Assets.images.reply.path,
                                         height: expandIconSize,
                                         width: expandIconSize,
-                                        color: green,
+                                        color: blue,
                                       ),
                                       const Gap(8),
                                       Flexible(
                                         child: Text(
                                           appLocalizations.moreRepliesMessage(repliesCount),
-                                          style: theme.styles.body20.copyWith(color: green),
+                                          style: theme.styles.body20.copyWith(color: blue),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

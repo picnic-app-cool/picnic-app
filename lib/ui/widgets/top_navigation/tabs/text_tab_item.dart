@@ -22,7 +22,7 @@ class TextTabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final titleStyle = theme.styles.title10.copyWith(color: titleColor ?? theme.colors.blackAndWhite.shade100);
+    final titleStyle = theme.styles.subtitle20.copyWith(color: titleColor ?? theme.colors.blackAndWhite.shade100);
 
     final color = titleStyle.color?.withOpacity(
       isActive ? Constants.fullOpacityValue : Constants.lowOpacityValue,

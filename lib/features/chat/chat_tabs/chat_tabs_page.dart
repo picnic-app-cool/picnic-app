@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_page.dart';
 import 'package:picnic_app/features/chat/chat_feed/chat_feed_page.dart';
@@ -8,7 +6,6 @@ import 'package:picnic_app/features/chat/chat_my_circles/chat_my_circles_initial
 import 'package:picnic_app/features/chat/chat_my_circles/chat_my_circles_page.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_presentation_model.dart';
 import 'package:picnic_app/features/chat/chat_tabs/chat_tabs_presenter.dart';
-import 'package:picnic_app/features/chat/chat_tabs/widgets/chat_profile_bar.dart';
 import 'package:picnic_app/features/chat/chat_tabs/widgets/chat_tab_bar.dart';
 import 'package:picnic_app/features/chat/chat_tabs/widgets/chat_tab_container.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_tab_type.dart';
@@ -55,25 +52,19 @@ class _ChatTabsPageState extends State<ChatTabsPage>
         body: SafeArea(
           bottom: false,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   stateObserver(
                     builder: (context, state) {
-                      return Expanded(
-                        child: ChatTabBar(
-                          selectedType: state.selectedChatTabType,
-                          onTap: _onMenuItemTap,
-                        ),
+                      return ChatTabBar(
+                        selectedType: state.selectedChatTabType,
+                        onTap: _onMenuItemTap,
                       );
                     },
                   ),
-                  ChatProfileBar(
-                    onTapProfile: presenter.onTapProfile,
-                    onTapSearch: presenter.onTapSearch,
-                  ),
-                  const Gap(Constants.mediumPadding),
                 ],
               ),
               Expanded(

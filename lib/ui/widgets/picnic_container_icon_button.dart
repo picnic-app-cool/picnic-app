@@ -44,7 +44,7 @@ class PicnicContainerIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = buttonColor ?? Colors.transparent;
-    final secondaryColor = iconTintColor ?? PicnicTheme.of(context).colors.darkBlue.shade600;
+    final secondaryColor = iconTintColor ?? PicnicTheme.of(context).colors.darkBlue.shade800;
 
     return PicnicContainerButton(
       buttonColor: selected ? secondaryColor : primaryColor,

@@ -51,7 +51,7 @@ class _DeleteMultipleMessagesBottomSheetState extends State<DeleteMultipleMessag
             children: [
               Text(
                 appLocalizations.deleteMultipleMessagesTitle,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
                 textAlign: TextAlign.left,
               ),
               const Gap(20),
@@ -59,7 +59,7 @@ class _DeleteMultipleMessagesBottomSheetState extends State<DeleteMultipleMessag
                 leftGap: 0,
                 height: _avatarSize,
                 title: state.user.username,
-                titleStyle: theme.styles.title10,
+                titleStyle: theme.styles.subtitle20,
                 leading: PicnicAvatar(
                   size: _avatarSize,
                   boxFit: PicnicAvatarChildBoxFit.cover,

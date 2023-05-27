@@ -32,7 +32,7 @@ class ChatInviteCard extends StatelessWidget {
     final colors = theme.colors;
     final styles = theme.styles;
     const buttonBorderWidth = 2.0;
-    final greenColor = colors.green.shade500;
+    final blueColor = colors.blue.shade500;
 
     final circle = (message.component!.payload as ChatCircleInvite).circle;
     final circleName = circle.name;
@@ -50,8 +50,8 @@ class ChatInviteCard extends StatelessWidget {
       buttonTitle = appLocalizations.joinedButtonActionTitle;
       buttonStyle = PicnicButtonStyle.outlined;
       borderWidth = buttonBorderWidth;
-      borderColor = greenColor;
-      titleColor = greenColor;
+      borderColor = blueColor;
+      titleColor = blueColor;
     } else {
       onTapButton = () => onTapJoinCircle(message);
       buttonTitle = appLocalizations.joinButtonActionTitle;
@@ -75,7 +75,7 @@ class ChatInviteCard extends StatelessWidget {
             imageSource: PicnicImageSource.url(
               ImageUrl(circleAvatar),
             ),
-            backgroundColor: colors.green.shade200,
+            backgroundColor: colors.blue.shade200,
             size: avatarSize,
           ),
           const Gap(16),
@@ -85,7 +85,7 @@ class ChatInviteCard extends StatelessWidget {
               children: [
                 Text(
                   circleName,
-                  style: styles.title20,
+                  style: styles.subtitle30,
                 ),
                 const Gap(2),
                 Text(

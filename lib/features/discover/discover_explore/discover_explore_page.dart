@@ -111,7 +111,7 @@ class _DiscoverExplorePageState extends State<DiscoverExplorePage>
                           children: [
                             Text(
                               appLocalizations.discoverPods,
-                              style: theme.styles.title30,
+                              style: theme.styles.subtitle40,
                             ),
                             const Gap(_radius),
                             PicnicTag(

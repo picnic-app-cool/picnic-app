@@ -77,7 +77,7 @@ class SliceItem extends StatelessWidget {
                     children: [
                       Text(
                         slice.name,
-                        style: styles.title10.copyWith(color: colors.pink),
+                        style: styles.subtitle20.copyWith(color: colors.pink),
                       ),
                       const Gap(4),
                       if (isPrivate) _lockIcon,
@@ -100,7 +100,7 @@ class SliceItem extends StatelessWidget {
           PicnicButton(
             title: _buttonTitle,
             borderRadius: const PicnicButtonRadius.semiRound(),
-            color: iJoined ? white : colors.green,
+            color: iJoined ? white : colors.blue,
             titleColor: iJoined ? colors.red : white,
             style: PicnicButtonStyle.outlined,
             borderWidth: iJoined ? _notJoinedBorderWidth : _joinedBorderWidth,

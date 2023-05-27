@@ -28,7 +28,7 @@ class PicnicVerticalLinkPost extends StatelessWidget {
             metadata.title,
             overflow: TextOverflow.ellipsis,
             maxLines: _textMaxLines,
-            style: theme.styles.title20.copyWith(
+            style: theme.styles.subtitle30.copyWith(
               color: textColor,
             ),
           ),

@@ -57,7 +57,7 @@ class InviteFriends extends StatelessWidget {
                 children: [
                   Text(
                     appLocalizations.congratsSuccessTitle,
-                    style: styles.title30,
+                    style: styles.subtitle40,
                     textAlign: TextAlign.center,
                   ),
                   const Gap(8),
@@ -71,7 +71,7 @@ class InviteFriends extends StatelessWidget {
                   const Gap(16),
                   Text(
                     appLocalizations.settingsInviteFriends,
-                    style: styles.title30,
+                    style: styles.subtitle40,
                   ),
                   const Gap(8),
                   PicnicSoftSearchBar(

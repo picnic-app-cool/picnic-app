@@ -25,8 +25,8 @@ class PicnicStats extends StatelessWidget {
     final styles = themeData.styles;
     final colors = themeData.colors;
 
-    final _textStyle = styles.title40;
-    final _labelStyle = styles.caption20.copyWith(color: colors.blackAndWhite.shade600);
+    final _textStyle = styles.title30;
+    final _labelStyle = styles.caption10.copyWith(color: colors.blackAndWhite.shade800);
 
     return Row(
       mainAxisAlignment:
@@ -39,7 +39,6 @@ class PicnicStats extends StatelessWidget {
                 : _PicnicStatColumnWidget(
                     value: stat.count,
                     valueStyle: _textStyle,
-                    emoji: stat.type.emoji,
                     subtext: stat.type.title,
                     subtextStyle: _labelStyle,
                     onTap: () => onTap(stat.type),
@@ -56,7 +55,6 @@ class _PicnicStatColumnWidget extends StatelessWidget {
     Key? key,
     required this.value,
     required this.valueStyle,
-    required this.emoji,
     required this.subtext,
     required this.subtextStyle,
     this.usage = PicnicStatUsage.circle,
@@ -65,7 +63,6 @@ class _PicnicStatColumnWidget extends StatelessWidget {
 
   final int value;
   final TextStyle valueStyle;
-  final String emoji;
   final String subtext;
   final TextStyle subtextStyle;
   final VoidCallback? onTap;
@@ -78,7 +75,6 @@ class _PicnicStatColumnWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _PicnicStatsEmojiRowWidget(
-          emoji: emoji,
           label: subtext,
           labelStyle: subtextStyle,
         ),
@@ -91,14 +87,14 @@ class _PicnicStatColumnWidget extends StatelessWidget {
 
     final statsOnLabelColumn = Column(
       children: [
+        _PicnicStatsEmojiRowWidget(
+          label: subtext,
+          labelStyle: subtextStyle,
+        ),
+        const Padding(padding: EdgeInsets.all(4.0)),
         Text(
           formattingToStat,
           style: valueStyle,
-        ),
-        _PicnicStatsEmojiRowWidget(
-          emoji: emoji,
-          label: subtext,
-          labelStyle: subtextStyle,
         ),
       ],
     );
@@ -112,12 +108,10 @@ class _PicnicStatColumnWidget extends StatelessWidget {
 class _PicnicStatsEmojiRowWidget extends StatelessWidget {
   const _PicnicStatsEmojiRowWidget({
     Key? key,
-    required this.emoji,
     required this.label,
     required this.labelStyle,
   }) : super(key: key);
 
-  final String emoji;
   final String label;
   final TextStyle labelStyle;
 
@@ -126,9 +120,6 @@ class _PicnicStatsEmojiRowWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          emoji,
-        ),
         Text(
           label,
           style: labelStyle,

@@ -25,7 +25,7 @@ class RuleDecisionView extends StatelessWidget {
       children: [
         Text(
           appLocalizations.ruleSelectionTitle,
-          style: theme.styles.title30,
+          style: theme.styles.subtitle40,
         ),
         const Gap(20),
         ...rules

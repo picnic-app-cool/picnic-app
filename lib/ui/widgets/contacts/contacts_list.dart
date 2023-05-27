@@ -34,7 +34,7 @@ class ContactsList extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
     final white = colors.blackAndWhite.shade100;
-    final green = colors.green;
+    final blue = colors.blue;
 
     return PicnicPagingListView<UserContact>(
       paginatedList: userContacts,
@@ -51,7 +51,7 @@ class ContactsList extends StatelessWidget {
           title: user.name,
           subTitle: user.contactPhoneNumber.number,
           subTitleStyle: theme.styles.caption10.copyWith(color: colors.blackAndWhite.shade600),
-          titleStyle: theme.styles.title10,
+          titleStyle: theme.styles.subtitle20,
           leading: Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: ContactAvatar(phoneContact: phoneContact),
@@ -66,9 +66,9 @@ class ContactsList extends StatelessWidget {
             onTap: () => onTapInvite(user),
             style: PicnicButtonStyle.outlined,
             borderWidth: user.invited ? _invitedBorderWidth : _borderWidth,
-            borderColor: green,
-            titleColor: user.invited ? green : white,
-            color: user.invited ? white : green,
+            borderColor: blue,
+            titleColor: user.invited ? blue : white,
+            color: user.invited ? white : blue,
           ),
         );
       },

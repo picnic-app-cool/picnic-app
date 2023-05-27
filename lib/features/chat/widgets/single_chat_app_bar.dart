@@ -47,7 +47,7 @@ class SingleChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Gap(8),
               BadgedTitle(
                 model: user.toBadgedAuthorDisplayable(formatName: false),
-                style: theme.styles.title20,
+                style: theme.styles.subtitle30,
               ),
               const Gap(12),
               DownArrow(),

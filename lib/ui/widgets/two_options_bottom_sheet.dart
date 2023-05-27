@@ -40,7 +40,7 @@ class TwoOptionsBottomSheet extends StatelessWidget {
         children: [
           Text(
             title,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
             textAlign: TextAlign.left,
           ),
           const Gap(8),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 
@@ -19,6 +18,7 @@ class PrivateProfileButtons extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final whiteColor = theme.colors.blackAndWhite.shade100;
 
+    final darkBlue = theme.colors.darkBlue;
     return Row(
       children: [
         Flexible(
@@ -31,8 +31,8 @@ class PrivateProfileButtons extends StatelessWidget {
               title: appLocalizations.privateProfileEditButton,
               onTap: onTapEditProfile,
               minWidth: double.infinity,
-              icon: Assets.images.edit.path,
-              titleColor: whiteColor,
+              color: darkBlue.shade300,
+              titleColor: darkBlue.shade800,
             ),
           ),
         ),
@@ -46,8 +46,7 @@ class PrivateProfileButtons extends StatelessWidget {
               title: appLocalizations.createPost,
               onTap: onTapCreatePosts,
               minWidth: double.infinity,
-              color: theme.colors.pink.shade500,
-              icon: Assets.images.plus.path,
+              color: theme.colors.blue.shade500,
               titleColor: whiteColor,
             ),
           ),

@@ -98,7 +98,7 @@ class SavedPostSnackBar extends StatelessWidget {
                       Text(
                         appLocalizations.tapToSelectCollection,
                         style: styles.body20.copyWith(
-                          color: colors.green,
+                          color: colors.blue,
                         ),
                       ),
                       Text(

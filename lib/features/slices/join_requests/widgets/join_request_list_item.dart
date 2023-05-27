@@ -66,10 +66,10 @@ class JoinRequestListItem extends StatelessWidget {
       height: _joinRequestItemHeight,
       leading: avatar,
       title: userProfile.username,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
       trailing: PicnicButton(
         title: appLocalizations.approveButtonTitle,
-        color: colors.green,
+        color: colors.blue,
         titleColor: colors.blackAndWhite.shade100,
         onTap: () => onTapApprove(userProfile),
       ),

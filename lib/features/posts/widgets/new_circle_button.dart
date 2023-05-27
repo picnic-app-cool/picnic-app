@@ -19,8 +19,8 @@ class NewCircleButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       title: appLocalizations.newCircleAction,
       color: Colors.transparent,
-      titleStyle: theme.styles.title10.copyWith(
-        color: theme.colors.green.shade600,
+      titleStyle: theme.styles.subtitle20.copyWith(
+        color: theme.colors.blue.shade600,
       ),
       onTap: onTap,
     );

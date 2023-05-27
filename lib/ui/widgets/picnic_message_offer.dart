@@ -124,10 +124,10 @@ class _PicnicMessageOfferPrimaryButton extends StatelessWidget {
 
     return PicnicButton(
       style: PicnicButtonStyle.outlined,
-      borderColor: colors.green,
+      borderColor: colors.blue,
       borderWidth: isPurchased ? _borderWidth : 0,
       color: _buttonColor(colors),
-      titleColor: isPurchased ? colors.green : whiteColor,
+      titleColor: isPurchased ? colors.blue : whiteColor,
       title: messageOfferState.getPrimaryLabel(price),
       size: PicnicButtonSize.large,
       onTap: onTap,
@@ -139,7 +139,7 @@ class _PicnicMessageOfferPrimaryButton extends StatelessWidget {
                   Text(
                     '${price.formattedPrice} melons',
                     style: styles.body10.copyWith(
-                      color: isPurchased ? colors.green : whiteColor,
+                      color: isPurchased ? colors.blue : whiteColor,
                     ),
                   ),
                 ],
@@ -158,7 +158,7 @@ class _PicnicMessageOfferPrimaryButton extends StatelessWidget {
         return Colors.transparent;
 
       default:
-        return colors.green;
+        return colors.blue;
     }
   }
 }
@@ -193,7 +193,7 @@ class _PicnicMessageOfferContent extends StatelessWidget {
       children: [
         PicnicAvatar(
           size: _defaultAvatarSize,
-          backgroundColor: theme.colors.green.shade200,
+          backgroundColor: theme.colors.blue.shade200,
           imageSource: PicnicImageSource.url(
             ImageUrl(avatarImage),
           ),
@@ -205,7 +205,7 @@ class _PicnicMessageOfferContent extends StatelessWidget {
             children: [
               Text(
                 '${seedsCount.formattedPrice} $circleName seeds',
-                style: theme.styles.title20,
+                style: theme.styles.subtitle30,
               ),
               const Gap(10),
               _PicnicMessageOfferPrimaryButton(

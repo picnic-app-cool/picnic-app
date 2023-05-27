@@ -89,11 +89,11 @@ class _PrimaryButton extends StatelessWidget {
     switch (formType) {
       case ProfilePhotoFormType.beforePhotoSelection:
         onTap = onTapSelectPhoto;
-        color = theme.colors.green;
+        color = theme.colors.blue;
         break;
       case ProfilePhotoFormType.afterPhotoSelection:
         onTap = onTapContinue;
-        color = theme.colors.pink;
+        color = theme.colors.blue;
     }
 
     return PicnicButton(

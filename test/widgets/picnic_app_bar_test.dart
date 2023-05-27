@@ -29,7 +29,7 @@ void main() {
               iconPathLeft: Assets.images.close.path,
               child: Text(
                 'Picnic picnic Picnic picnic Picnic picnic Picnic picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),
@@ -47,7 +47,7 @@ void main() {
               ],
               child: Text(
                 'Picnic picnic Picnic picnic Picnic picnic Picnic picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),
@@ -68,7 +68,7 @@ void main() {
               ],
               child: Text(
                 'Picnic picnic Picnic picnic Picnic picnic Picnic picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),
@@ -92,7 +92,7 @@ void main() {
               ],
               child: Text(
                 'Picnic picnic Picnic picnic Picnic picnic Picnic picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),
@@ -116,7 +116,7 @@ void main() {
               ],
               child: Text(
                 'Picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),
@@ -140,7 +140,7 @@ void main() {
               ],
               child: Text(
                 'Picnic',
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
           ),

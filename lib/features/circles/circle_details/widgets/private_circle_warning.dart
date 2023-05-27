@@ -37,7 +37,7 @@ class PrivateCircleWarning extends StatelessWidget {
         const Gap(16),
         Text(
           appLocalizations.privateCircleWarningTitle,
-          style: styles.title30,
+          style: styles.subtitle40,
         ),
         Text(
           appLocalizations.privateCircleWarningMessage,

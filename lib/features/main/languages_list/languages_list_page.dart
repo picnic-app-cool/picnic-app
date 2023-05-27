@@ -48,7 +48,7 @@ class _LanguagesListPageState extends State<LanguagesListPage>
               children: [
                 Text(
                   appLocalizations.selectPrimaryLanguageTitle,
-                  style: theme.styles.title30,
+                  style: theme.styles.subtitle40,
                 ),
                 const Gap(12),
                 LanguagesListView(

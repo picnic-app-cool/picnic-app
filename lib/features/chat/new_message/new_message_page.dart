@@ -72,7 +72,7 @@ class _NewMessagePageState extends State<NewMessagePage>
     final blackAndWhite = colors.blackAndWhite;
     final darkBlue = colors.darkBlue.shade600;
     final gray = colors.blackAndWhite.shade600;
-    final green = colors.green.shade600;
+    final blue = colors.blue.shade600;
 
     final appBar = PicnicAppBar(
       iconPathLeft: Assets.images.close.path,
@@ -111,7 +111,7 @@ class _NewMessagePageState extends State<NewMessagePage>
                 onTapAddAttachment: presenter.onTapAddAttachment,
                 onMessageUpdated: presenter.onMessageTextUpdated,
                 sendMessageColor: darkBlue,
-                attachmentIconColor: state.isMediaPickerVisible ? green : gray,
+                attachmentIconColor: state.isMediaPickerVisible ? blue : gray,
                 focusNode: focusNodeChatBarInput,
                 attachments: state.selectedAttachments,
                 onTapDeleteAttachment: presenter.onTapDeleteAttachment,

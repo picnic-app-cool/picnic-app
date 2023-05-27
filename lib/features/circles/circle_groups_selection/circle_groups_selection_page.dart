@@ -64,7 +64,7 @@ class _CircleGroupsSelectionPageState extends State<CircleGroupsSelectionPage>
         children: [
           Text(
             appLocalizations.createCircleTextInputGroupHint,
-            style: themeStyles.title30,
+            style: themeStyles.subtitle40,
           ),
           const Gap(16),
           stateObserver(

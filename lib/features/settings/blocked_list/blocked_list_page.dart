@@ -70,7 +70,7 @@ class _BlockedListPageState extends State<BlockedListPage>
                     ),
                   ),
                   title: user.username,
-                  titleStyle: theme.styles.title10,
+                  titleStyle: theme.styles.subtitle20,
                   trailing: BlockUserButton(
                     onTapToggleBlock: () => presenter.onTapToggleBlock(user),
                     isBlocked: user.isBlocked,

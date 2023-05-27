@@ -51,7 +51,7 @@ class _FeedMorePageState extends State<FeedMorePage>
               children: [
                 Text(
                   appLocalizations.feedSeeMoreBottomSheetTitle,
-                  style: theme.styles.title30,
+                  style: theme.styles.subtitle40,
                   textAlign: TextAlign.left,
                 ),
                 const Gap(12),

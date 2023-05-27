@@ -52,8 +52,8 @@ class _CircleChatPageState extends State<CircleChatPage>
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
     final grey = colors.blackAndWhite.shade600;
-    final lightGreen = colors.green.shade500;
-    final green = colors.green.shade600;
+    final lightGreen = colors.blue.shade500;
+    final green = colors.blue.shade600;
     final disabledGreyColor = grey.withOpacity(0.5);
 
     final bottomNavBarHeight = BottomNavigationSizeQuery.of(context).height;

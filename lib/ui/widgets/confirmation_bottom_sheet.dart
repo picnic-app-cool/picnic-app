@@ -57,7 +57,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
                 textAlign: TextAlign.left,
               ),
               if (titleAction != null) ...[
@@ -85,8 +85,8 @@ class ConfirmationBottomSheet extends StatelessWidget {
                 primaryAction.roundedButton ? const PicnicButtonRadius.round() : const PicnicButtonRadius.semiRound(),
             minWidth: double.infinity,
             title: primaryAction.title,
-            color: primaryAction.isPositive ? colors.green : colors.pink,
-            borderColor: primaryAction.isPositive ? colors.green : colors.pink,
+            color: primaryAction.isPositive ? colors.blue : colors.pink,
+            borderColor: primaryAction.isPositive ? colors.blue : colors.pink,
             titleColor: Colors.white,
             style: PicnicButtonStyle.outlined,
             borderWidth: borderButtonWidth,

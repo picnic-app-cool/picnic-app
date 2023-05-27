@@ -72,7 +72,7 @@ class _AfterPostDialogPageState extends State<AfterPostDialogPage>
               children: [
                 Text(
                   appLocalizations.successfullyPosted,
-                  style: styles.title30,
+                  style: styles.subtitle40,
                 ),
                 Text(
                   appLocalizations.shareThisWithYourFriends,
@@ -85,7 +85,7 @@ class _AfterPostDialogPageState extends State<AfterPostDialogPage>
                   alignment: Alignment.centerLeft,
                   child: Text(
                     appLocalizations.sendToFriends,
-                    style: styles.title30,
+                    style: styles.subtitle40,
                   ),
                 ),
                 stateObserver(

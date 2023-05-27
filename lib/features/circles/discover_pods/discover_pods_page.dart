@@ -89,7 +89,7 @@ class _DiscoverPodsPageState extends State<DiscoverPodsPage>
                             children: [
                               Text(
                                 appLocalizations.pods,
-                                style: theme.styles.title20,
+                                style: theme.styles.subtitle30,
                               ),
                               const Gap(radius),
                               PicnicTag(

@@ -33,7 +33,7 @@ class _CommunityGuidelinesPageState extends State<CommunityGuidelinesPage>
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final textStyleTitle30 = theme.styles.title30;
+    final textStyleSubtitle40 = theme.styles.subtitle40;
 
     final appBar = PicnicAppBar(
       backgroundColor: theme.colors.blackAndWhite.shade100,
@@ -51,7 +51,7 @@ class _CommunityGuidelinesPageState extends State<CommunityGuidelinesPage>
               children: [
                 Text(
                   appLocalizations.communityGuidelinesHeadingOne,
-                  style: textStyleTitle30,
+                  style: textStyleSubtitle40,
                 ),
                 const Gap(8),
                 PicnicMarkdownText(
@@ -66,14 +66,14 @@ class _CommunityGuidelinesPageState extends State<CommunityGuidelinesPage>
                 const Gap(8),
                 Text(
                   appLocalizations.communityGuidelinesHeadingTwo,
-                  style: textStyleTitle30,
+                  style: textStyleSubtitle40,
                 ),
                 const Gap(8),
                 UnorderedTextListItem(textSrc: appLocalizations.communityGuidelinesSectionTwo),
                 const Gap(8),
                 Text(
                   appLocalizations.communityGuidelinesHeadingThree,
-                  style: textStyleTitle30,
+                  style: textStyleSubtitle40,
                 ),
                 const Gap(8),
                 UnorderedTextListItem(textSrc: appLocalizations.communityGuidelinesSectionThree),

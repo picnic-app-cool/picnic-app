@@ -115,7 +115,7 @@ class _CircleTagWidget extends StatelessWidget {
     return PicnicTag(
       onTap: () => onTapCircle(circle, circleGroup),
       title: circle.item.name,
-      titleTextStyle: theme.styles.title10.copyWith(
+      titleTextStyle: theme.styles.subtitle20.copyWith(
         color: blackAndWhite.shade900,
       ),
       suffixIcon: circle.selected

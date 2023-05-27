@@ -60,7 +60,7 @@ class CommentTree extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
     final pink = colors.pink[100];
-    final green = colors.green[200];
+    final green = colors.blue[200];
     final comments = commentsRoot.children;
 
     return SliverPadding(

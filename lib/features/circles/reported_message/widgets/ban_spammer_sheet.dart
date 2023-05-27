@@ -48,7 +48,7 @@ class BanSpammerSheet extends StatelessWidget {
               const Gap(20.0),
               Text(
                 appLocalizations.reportedMessage,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
               const Gap(20.0),
               PicnicButton(

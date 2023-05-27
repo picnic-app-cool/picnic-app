@@ -54,7 +54,7 @@ class _CreateSlicePageState extends State<CreateSlicePage>
                     PicnicSubtitle(
                       subtitle: state.circle.name,
                       subtitleStyle: styleCaption10.copyWith(
-                        color: theme.colors.green.shade600,
+                        color: theme.colors.blue.shade600,
                       ),
                     ),
                   ],

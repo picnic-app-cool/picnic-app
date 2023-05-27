@@ -46,7 +46,7 @@ class _SavePostToCollectionPageState extends State<SavePostToCollectionPage>
         children: [
           Text(
             appLocalizations.saveToCollection,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           Flexible(
             child: stateObserver(

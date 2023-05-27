@@ -65,7 +65,7 @@ class SliceInfoView extends StatelessWidget {
                   image: circleImage,
                   avatarSize: _avatarSize,
                   emojiSize: _emojiSize,
-                  bgColor: theme.colors.green.shade200,
+                  bgColor: theme.colors.blue.shade200,
                 ),
                 const Gap(16),
                 Column(
@@ -81,7 +81,7 @@ class SliceInfoView extends StatelessWidget {
                       borderColor: pink,
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                       style: PicnicButtonStyle.outlined,
-                      titleStyle: theme.styles.title10.copyWith(color: pink),
+                      titleStyle: theme.styles.subtitle20.copyWith(color: pink),
                       borderWidth: _buttonBorderWidth,
                       borderRadius: const PicnicButtonRadius.semiRound(),
                       onTap: onTapReport,
@@ -94,7 +94,7 @@ class SliceInfoView extends StatelessWidget {
           const Gap(16),
           Text(
             appLocalizations.circleRulesTitle,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           const Gap(8),
           PicnicMarkdownText(

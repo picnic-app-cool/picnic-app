@@ -27,7 +27,7 @@ class ContactsPermissionWidget extends StatelessWidget {
         const Gap(16),
         PicnicButton(
           color: colors.pink.shade500,
-          titleStyle: styles.title20.copyWith(color: bw.shade100),
+          titleStyle: styles.subtitle30.copyWith(color: bw.shade100),
           title: appLocalizations.contactAccessAction,
           onTap: onTapAllowImportContacts,
         ),

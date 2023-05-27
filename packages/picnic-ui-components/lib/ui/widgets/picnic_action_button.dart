@@ -17,7 +17,7 @@ class PicnicActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
 
-    final textStyle = theme.styles.body20.copyWith(
+    final textStyle = theme.styles.subtitle15.copyWith(
       color: theme.colors.blue.shade800,
     );
     return InkWell(

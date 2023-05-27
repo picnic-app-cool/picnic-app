@@ -27,7 +27,7 @@ class FeedListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
-    final titleTextStyle = theme.styles.title30;
+    final titleTextStyle = theme.styles.subtitle40;
     final subTitleTextStyle = theme.styles.caption10.copyWith(color: colors.blackAndWhite.shade600);
 
     final circleAvatar = PicnicCircleAvatar(

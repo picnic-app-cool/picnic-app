@@ -25,7 +25,7 @@ class DiscoverabilitySettingList extends StatelessWidget {
       children: [
         Text(
           appLocalizations.circlePrivacy,
-          style: styles.title20,
+          style: styles.subtitle30,
         ),
         const Gap(16),
         DiscoverabilitySettingSection(

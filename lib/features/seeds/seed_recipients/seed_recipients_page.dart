@@ -54,7 +54,7 @@ class _SeedRecipientsPageState extends State<SeedRecipientsPage>
                 padding: _edgeInsets,
                 child: Text(
                   appLocalizations.selectUser,
-                  style: theme.styles.title30,
+                  style: theme.styles.subtitle40,
                   textAlign: TextAlign.left,
                 ),
               ),

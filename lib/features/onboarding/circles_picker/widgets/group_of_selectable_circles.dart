@@ -36,7 +36,7 @@ class GroupOfSelectableCircles extends StatelessWidget {
       children: [
         Text(
           selectableGroupedCircles.groupName,
-          style: styles.title10,
+          style: styles.subtitle20,
         ),
         const Gap(13),
         Wrap(

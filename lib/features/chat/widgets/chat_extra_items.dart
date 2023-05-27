@@ -65,7 +65,7 @@ class ChatExtraItems extends StatelessWidget {
         titleStyle: body20,
         leading: PicnicAvatar(
           size: _avatarSizeCircle,
-          backgroundColor: theme.colors.green.shade200,
+          backgroundColor: theme.colors.blue.shade200,
           imageSource: PicnicImageSource.asset(ImageUrl(Assets.images.acorn.path)),
         ),
       ),

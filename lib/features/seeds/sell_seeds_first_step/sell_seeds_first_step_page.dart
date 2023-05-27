@@ -41,7 +41,7 @@ class _SellSeedsFirstStepPageState extends State<SellSeedsFirstStepPage>
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Text(
             appLocalizations.sellSeedsHoldings,
-            style: theme.styles.title30.copyWith(
+            style: theme.styles.subtitle40.copyWith(
               color: theme.colors.blackAndWhite.shade900,
             ),
           ),

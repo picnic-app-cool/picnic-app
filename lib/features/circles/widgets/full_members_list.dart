@@ -45,8 +45,8 @@ class FullMembersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final title30 = theme.styles.title30;
-    final greenColor = theme.styles.title20.copyWith(color: theme.colors.green);
+    final title30 = theme.styles.subtitle40;
+    final blueColor = theme.styles.subtitle30.copyWith(color: theme.colors.blue);
 
     return LoadMoreScrollNotification(
       emptyItems: emptyItems,
@@ -70,7 +70,7 @@ class FullMembersList extends StatelessWidget {
                         PicnicTextButton(
                           label: appLocalizations.addRoleLabel,
                           onTap: () => onTapAddRole(),
-                          labelStyle: greenColor,
+                          labelStyle: blueColor,
                           padding: EdgeInsets.zero,
                           alignment: AlignmentDirectional.centerEnd,
                         ),
@@ -107,7 +107,7 @@ class FullMembersList extends StatelessWidget {
                         PicnicTextButton(
                           label: appLocalizations.inviteAction,
                           onTap: () => onTapInviteUsers(),
-                          labelStyle: greenColor,
+                          labelStyle: blueColor,
                           padding: EdgeInsets.zero,
                           alignment: AlignmentDirectional.centerEnd,
                         ),

@@ -53,7 +53,7 @@ class NewMessageRecipientTags extends StatelessWidget {
           suffixIcon: removeTagButton,
           backgroundColor: blackAndWhite.shade300,
           blurRadius: null,
-          titleTextStyle: theme.styles.title10.copyWith(color: blackAndWhite.shade700),
+          titleTextStyle: theme.styles.subtitle20.copyWith(color: blackAndWhite.shade700),
           borderRadius: _tagBorderRadius,
         );
       },

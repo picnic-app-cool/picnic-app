@@ -35,7 +35,7 @@ class AuthTokenSection extends StatelessWidget {
             Center(
               child: Text(
                 "Auth token",
-                style: textStyles.title20,
+                style: textStyles.subtitle30,
               ),
             ),
             Text(

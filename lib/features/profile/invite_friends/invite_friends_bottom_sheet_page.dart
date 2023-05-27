@@ -71,7 +71,7 @@ class _InviteFriendsBottomSheetPageState extends State<InviteFriendsBottomSheetP
             children: [
               Text(
                 appLocalizations.inviteFriendsFollow,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
               const Gap(8),
               Text(

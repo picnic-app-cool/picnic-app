@@ -62,7 +62,7 @@ class _PollPostCreationPageState extends State<PollPostCreationPage>
                   : null,
               child: Text(
                 appLocalizations.createPollTitle,
-                style: PicnicTheme.of(context).styles.title20,
+                style: PicnicTheme.of(context).styles.subtitle30,
               ),
             ),
             body: SizedBox.expand(

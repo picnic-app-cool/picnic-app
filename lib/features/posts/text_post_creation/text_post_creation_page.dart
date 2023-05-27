@@ -66,7 +66,7 @@ class _TextPostCreationPageState extends State<TextPostCreationPage>
               : null,
           child: Text(
             appLocalizations.shareThoughtTitle,
-            style: styles.title20,
+            style: styles.subtitle30,
           ),
         ),
         body: AutomaticKeyboardHide(

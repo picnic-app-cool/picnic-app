@@ -178,7 +178,7 @@ class _NotificationsListPageState extends State<NotificationsListPage>
                         onUser: (_) => null,
                       ),
                       subTitleStyle: styles.caption20.copyWith(color: colors.blackAndWhite.shade600),
-                      titleStyle: styles.title10,
+                      titleStyle: styles.subtitle20,
                       trailing: notification.when(
                         onGlitterbomb: (_) => null,
                         onUnknown: (_) => null,
@@ -199,7 +199,7 @@ class _NotificationsListPageState extends State<NotificationsListPage>
                             NotificationsListTrailingImage(notification.contentImageUrl),
                         onMessage: (notification) => NotificationsListTrailingImage(notification.contentImageUrl),
                         onFollow: (notification) {
-                          final followButtonColor = theme.colors.green;
+                          final followButtonColor = theme.colors.blue;
                           return FollowUserButton(
                             followingColor: followButtonColor,
                             notFollowingColor: followButtonColor,

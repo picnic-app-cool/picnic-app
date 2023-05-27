@@ -57,7 +57,7 @@ class _ErrorBottomSheetState extends State<ErrorBottomSheet> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   failure.title,
-                  style: theme.styles.title30,
+                  style: theme.styles.subtitle40,
                   textAlign: TextAlign.start,
                 ),
               ),

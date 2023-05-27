@@ -29,7 +29,7 @@ class PicnicSortButton extends StatelessWidget {
         decoration: isSelected
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(_borderRadius),
-                color: colors.green.withOpacity(
+                color: colors.blue.withOpacity(
                   _selectedColorOpacity,
                 ),
               )

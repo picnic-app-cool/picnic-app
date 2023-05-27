@@ -17,14 +17,14 @@ class ChangeCircleAvatarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
-    final green = colors.green;
+    final green = colors.blue;
     final white = colors.blackAndWhite.shade100;
     return PicnicButton(
       borderRadius: const PicnicButtonRadius.round(),
       minWidth: double.infinity,
       title: text,
       color: filled ? green : white,
-      borderColor: colors.green,
+      borderColor: colors.blue,
       titleColor: filled ? white : green,
       style: PicnicButtonStyle.outlined,
       borderWidth: borderButtonWidth,

@@ -101,7 +101,7 @@ class _LinkDiscordPageState extends State<LinkDiscordPage>
                       child: PicnicButton(
                         opacity: state.isButtonEnabled ? enableddOpacity : disabledOpacity,
                         title: state.serverIsConnected ? appLocalizations.revoke : appLocalizations.connect,
-                        color: state.serverIsConnected ? colors.pink : colors.green,
+                        color: state.serverIsConnected ? colors.pink : colors.blue,
                         onTap: presenter.onTapBottomButton,
                       ),
                     ),

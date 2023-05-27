@@ -13,14 +13,14 @@ class PicnicColors {
   final MaterialColor blue = const MaterialColor(
     _primaryBlue,
     {
-      100: Color(0xFFE8F1FF),
-      200: Color(0xFFBBD6FF),
-      300: Color(0xFF8EBBFF),
-      400: Color(0xFF61A0FF),
+      100: Color(0xFFF0F7FF),
+      200: Color(0xFFCCE4FF),
+      300: Color(0xFF99CAFF),
+      400: Color(0xFF57A8FF),
       500: Color(_primaryBlue),
-      600: Color(0xFF1453B3),
-      700: Color(0xFF0F3C80),
-      800: Color(0xFF09244C),
+      600: Color(0xFF0065D1),
+      700: Color(0xFF004FA3),
+      800: Color(0xFF002463),
       900: Color(0xFF030C19),
     },
   );
@@ -42,14 +42,14 @@ class PicnicColors {
   final MaterialColor purple = const MaterialColor(
     _primaryPurple,
     {
-      100: Color(0xFFF2EBFF),
-      200: Color(0xFFD9C2FF),
-      300: Color(0xFFC09AFF),
-      400: Color(0xFFA771FF),
+      100: Color(0xFFEBECFE),
+      200: Color(0xFFBFBEFC),
+      300: Color(0xFFA996FF),
+      400: Color(0xFF9875FF),
       500: Color(_primaryPurple),
-      600: Color(0xFF5A24B3),
-      700: Color(0xFF411A80),
-      800: Color(0xFF27104C),
+      600: Color(0xFF610BEF),
+      700: Color(0xFF4700AB),
+      800: Color(0xFF2E036A),
       900: Color(0xFF0D0519),
     },
   );
@@ -57,14 +57,14 @@ class PicnicColors {
   final MaterialColor pink = const MaterialColor(
     _primaryPink,
     {
-      100: Color(0xFFFFEFF2),
-      200: Color(0xFFFFCED7),
-      300: Color(0xFFFFBECA),
-      400: Color(0xFFFF7D95),
+      100: Color(0xFFFFE7EB),
+      200: Color(0xFFFFC2CC),
+      300: Color(0xFFFF9CAE),
+      400: Color(0xFFFF5473),
       500: Color(_primaryPink),
-      600: Color(0xFFCC4A62),
-      700: Color(0xFF99384A),
-      800: Color(0xFF4C1C25),
+      600: Color(0xFFE61944),
+      700: Color(0xFFB9153D),
+      800: Color(0xFF8F1235),
       900: Color(0xFF19090C),
     },
   );
@@ -132,14 +132,14 @@ class PicnicColors {
   final MaterialColor green = const MaterialColor(
     _primaryGreen,
     {
-      100: Color(0xFFF5FCF2),
-      200: Color(0xFFE0F6D8),
-      300: Color(0xFFC0ECB0),
-      400: Color(0xFFABE696),
+      100: Color(0xFFEAF6E5),
+      200: Color(0xFFC8ECCB),
+      300: Color(0xFFA6E2B1),
+      400: Color(0xFF83ED9A),
       500: Color(_primaryGreen),
-      600: Color(0xFF78B363),
-      700: Color(0xFF4B703E),
-      800: Color(0xFF2D4325),
+      600: Color(0xFF53B357),
+      700: Color(0xFF3F8943),
+      800: Color(0xFF2B6030),
       900: Color(0xFF0F160C),
     },
   );
@@ -152,7 +152,7 @@ class PicnicColors {
       300: Color(0xFF9EF4E5),
       400: Color(0xFF77F0DA),
       500: Color(_primaryTeal),
-      600: Color(0xFF78B363),
+      600: Color(0xFF3AC5AE),
       700: Color(0xFF1E7565),
       800: Color(0xFF12463D),
       900: Color(0xFF061714),
@@ -192,15 +192,15 @@ class PicnicColors {
   final MaterialColor darkBlue = const MaterialColor(
     _primaryDarkBlue,
     {
-      100: Color(0xFFF1F7FC),
-      200: Color(0xFFC0C4D5),
-      300: Color(0xFF818AAB),
-      400: Color(0xFF616D96),
+      100: Color(0xFFFCFCFC),
+      200: Color(0xFFF7F8FC),
+      300: Color(0xFFEFF1F6),
+      400: Color(0xFFD9E0E9),
       500: Color(_primaryDarkBlue),
-      600: Color(0xFF2B3F6C),
-      700: Color(0xFF122740),
-      800: Color(0xFF0E1F33),
-      900: Color(0xFF101820),
+      600: Color(0xFF6E7E91),
+      700: Color(0xFF4B5466),
+      800: Color(0xFF232838),
+      900: Color(0xFF141D2A),
     },
   );
 
@@ -261,19 +261,19 @@ class PicnicColors {
     ],
   );
 
-  static const int _primaryBlue = 0xFF1D77FF;
+  static const int _primaryBlue = 0xFF007BFF;
   static const int _primaryIndigo = 0xFF5034FF;
-  static const int _primaryPurple = 0xFF8134FF;
-  static const int _primaryPink = 0xFFFF5D7B;
+  static const int _primaryPurple = 0xFF8B4DFF;
+  static const int _primaryPink = 0xFFFF264F;
   static const int _primaryRed = 0xFFFF3459;
   static const int _primaryOrange = 0xFFFF6534;
   static const int _primaryYellow = 0xFFE8C23E;
   static const int _primaryLime = 0xFFBCE93C;
-  static const int _primaryGreen = 0xFF96E07C;
+  static const int _primaryGreen = 0xFF66E26B;
   static const int _primaryTeal = 0xFF3ED9BD;
   static const int _primaryCyan = 0xFF3CE9E9;
   static const int _primaryLightBlue = 0xFF68D2FF;
-  static const int _primaryDarkBlue = 0xFF39487C;
+  static const int _primaryDarkBlue = 0xFFA0AABD;
   static const int _primaryBlackWhite = 0xFFB3B3B3;
 
   Color get activeTabColor => primaryTabBlue;

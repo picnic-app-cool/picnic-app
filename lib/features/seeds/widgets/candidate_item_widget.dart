@@ -89,7 +89,7 @@ class CandidateItemWidget extends StatelessWidget {
                         Flexible(
                           child: Text(
                             candidate.username,
-                            style: styles.title10.copyWith(color: blackAndWhite.shade900),
+                            style: styles.subtitle20.copyWith(color: blackAndWhite.shade900),
                           ),
                         ),
                         Text(
@@ -105,7 +105,7 @@ class CandidateItemWidget extends StatelessWidget {
                     children: [
                       Text(
                         appLocalizations.votesCount(candidate.votesCount.toString()),
-                        style: styles.title10.copyWith(
+                        style: styles.subtitle20.copyWith(
                           color: _getVotesColor(votingPosition: candidate.position, colors: colors),
                         ),
                       ),
@@ -137,7 +137,7 @@ class CandidateItemWidget extends StatelessWidget {
                           PicnicTag(
                             title: appLocalizations.electedDirector,
                             titleTextStyle: styles.body0.copyWith(color: blackAndWhite.shade100),
-                            backgroundColor: colors.green.shade500,
+                            backgroundColor: colors.blue.shade500,
                             opacity: 1.0,
                           ),
                         ],

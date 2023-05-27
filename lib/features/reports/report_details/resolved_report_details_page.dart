@@ -42,7 +42,7 @@ class _ResolvedReportDetailsPage extends State<ResolvedReportDetailsPage>
           stateObserver(
             builder: (context, state) => PicnicListItem(
               title: state.reportedUserProfile.username,
-              titleStyle: theme.styles.title10,
+              titleStyle: theme.styles.subtitle20,
               subTitle: appLocalizations.responsibleModLabel,
               subTitleStyle: theme.styles.caption10.copyWith(color: theme.colors.blackAndWhite.shade900),
               leading: PicnicAvatar(

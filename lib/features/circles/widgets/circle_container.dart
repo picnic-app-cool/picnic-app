@@ -160,7 +160,7 @@ class CircleContainer extends StatelessWidget {
             children: [
               Text(
                 circle.name,
-                style: styles.title30,
+                style: styles.subtitle40,
                 textAlign: TextAlign.start,
               ),
               const Gap(8),

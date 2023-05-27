@@ -50,7 +50,7 @@ class PicnicLoadingCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           const Gap(8),
           Text(
@@ -65,7 +65,7 @@ class PicnicLoadingCard extends StatelessWidget {
                   imageSource: circleAvatarEmoji!,
                   size: avatarSizeCircle,
                   borderColor: theme.colors.blackAndWhite.shade100,
-                  backgroundColor: theme.colors.green.shade200,
+                  backgroundColor: theme.colors.blue.shade200,
                 ),
                 const Gap(8),
                 Text(circleName!, style: theme.styles.body30),

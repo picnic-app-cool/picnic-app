@@ -22,7 +22,7 @@ class InviteUserBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final greenColor = theme.colors.green;
+    final blueColor = theme.colors.blue;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -34,7 +34,7 @@ class InviteUserBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
                 appLocalizations.inviteUsersAction,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
             ),
             SizedBox(
@@ -49,8 +49,8 @@ class InviteUserBottomSheet extends StatelessWidget {
               width: double.infinity,
               child: PicnicButton(
                 title: appLocalizations.copyInviteLinkAction,
-                borderColor: greenColor,
-                titleColor: greenColor,
+                borderColor: blueColor,
+                titleColor: blueColor,
                 borderWidth: _borderWidth,
                 style: PicnicButtonStyle.outlined,
                 onTap: onTapCopyLink,

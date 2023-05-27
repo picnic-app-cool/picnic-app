@@ -68,7 +68,7 @@ class FollowerListItem extends StatelessWidget {
       height: _followerItemHeight,
       leading: avatar,
       title: follower.username,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
       trailing: follower.id == privateProfile.id
           ? null
           : FollowUserButton(

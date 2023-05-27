@@ -52,7 +52,7 @@ class _ReportedContentPageState extends State<ReportedContentPage>
               const Gap(20.0),
               Text(
                 title,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
               const Gap(20.0),
               SizedBox(

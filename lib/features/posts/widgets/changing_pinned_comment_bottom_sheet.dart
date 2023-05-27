@@ -50,7 +50,7 @@ class ChangingPinnedCommentBottomSheet extends StatelessWidget {
           const Gap(_verticalSpacing),
           Text(
             appLocalizations.changePinnedCommentConfirmationTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           const Gap(_verticalSpacing),
           Text(

@@ -35,7 +35,7 @@ class SortBottomSheet<T> extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               appLocalizations.sortPostsBy,
-              style: styles.title30,
+              style: styles.subtitle40,
             ),
           ),
           ...sortOptions.map(

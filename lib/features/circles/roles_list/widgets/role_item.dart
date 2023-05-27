@@ -35,7 +35,7 @@ class RoleItem extends StatelessWidget {
       size: _avatarSize,
       imageSource: PicnicImageSource.emoji(
         roleEmoji,
-        style: theme.styles.title10.copyWith(fontSize: 20.0),
+        style: theme.styles.subtitle20.copyWith(fontSize: 20.0),
       ),
       placeholder: () => DefaultAvatar.user(),
     );

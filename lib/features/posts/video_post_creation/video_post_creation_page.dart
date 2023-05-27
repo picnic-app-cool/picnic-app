@@ -56,7 +56,7 @@ class _VideoPostCreationPageState extends State<VideoPostCreationPage>
                   iconPathLeft: Assets.images.arrowlefttwo.path,
                   child: Text(
                     appLocalizations.postVideoTitle,
-                    style: theme.styles.title20,
+                    style: theme.styles.subtitle30,
                   ),
                 ),
                 body: Center(child: PostingDisabledCard(postingType: PostType.video, circleName: state.circleName)),

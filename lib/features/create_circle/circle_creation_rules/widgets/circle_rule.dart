@@ -21,12 +21,12 @@ class CircleRule extends StatelessWidget {
       children: [
         Text(
           title,
-          style: theme.styles.title30,
+          style: theme.styles.subtitle40,
         ),
         const Gap(8),
         Text(
           description,
-          style: theme.styles.title10.copyWith(
+          style: theme.styles.subtitle20.copyWith(
             color: blackAndWhite.shade500,
             fontWeight: FontWeight.normal,
           ),

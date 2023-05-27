@@ -24,9 +24,9 @@ class GetVerifiedList extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final themeStyles = theme.styles;
     final titleStyle = themeStyles.title40;
-    final subTitleStyle = themeStyles.title30;
+    final subTitleStyle = themeStyles.subtitle40;
     final contentStyle = themeStyles.body20;
-    final contentStyleGreen = contentStyle.copyWith(color: theme.colors.green.shade600);
+    final contentStyleGreen = contentStyle.copyWith(color: theme.colors.blue.shade600);
 
     final onTapHyperLinkTuText = TextSpan(
       text: appLocalizations.getVerifiedIntro2,

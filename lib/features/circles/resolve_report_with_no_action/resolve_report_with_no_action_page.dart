@@ -42,7 +42,7 @@ class _ResolveReportWithNoActionPageState extends State<ResolveReportWithNoActio
               const Gap(20.0),
               Text(
                 appLocalizations.resolveWithNoActionTitle,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
               const Gap(8.0),
               Text(

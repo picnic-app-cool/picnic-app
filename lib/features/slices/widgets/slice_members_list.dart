@@ -51,7 +51,7 @@ class SliceMembersList extends StatelessWidget {
               child: PicnicListItem(
                 height: null,
                 title: sliceMember.user.username,
-                titleStyle: styles.title10,
+                titleStyle: styles.subtitle20,
                 leading: PicnicAvatar(
                   size: _avatarSize,
                   boxFit: PicnicAvatarChildBoxFit.cover,
@@ -64,7 +64,7 @@ class SliceMembersList extends StatelessWidget {
                 trailing: onTapFollow != null
                     ? PicnicButton(
                         padding: _primaryFilledButtonPadding,
-                        titleStyle: styles.title10.copyWith(
+                        titleStyle: styles.subtitle20.copyWith(
                           color: white,
                         ),
                         title:
@@ -73,7 +73,7 @@ class SliceMembersList extends StatelessWidget {
                       )
                     : Text(
                         sliceType.valueToDisplay,
-                        style: styles.title30.copyWith(
+                        style: styles.subtitle40.copyWith(
                           color: PicnicColors.bluishCyan,
                         ),
                       ),

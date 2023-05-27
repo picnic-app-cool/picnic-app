@@ -31,7 +31,7 @@ class TermsAndPoliciesDisclaimer extends StatelessWidget {
       color: textColor,
     );
     final greenStyle = body10.copyWith(
-      color: colors.green[600],
+      color: colors.blue[600],
     );
     return Row(
       mainAxisSize: MainAxisSize.min,

@@ -53,14 +53,14 @@ class CreateSliceFormSection extends StatelessWidget {
                 children: [
                   Text(
                     appLocalizations.slicePrivateHeadline,
-                    style: styles.title20,
+                    style: styles.subtitle30,
                   ),
                   const Spacer(),
                   PicnicSwitch(
                     value: form.private,
                     onChanged: (value) => onPrivateValueChanged(value),
                     size: PicnicSwitchSize.regular,
-                    color: colors.green,
+                    color: colors.blue,
                   ),
                 ],
               ),
@@ -80,14 +80,14 @@ class CreateSliceFormSection extends StatelessWidget {
                 children: [
                   Text(
                     appLocalizations.sliceDiscoverableHeadline,
-                    style: styles.title20,
+                    style: styles.subtitle30,
                   ),
                   const Spacer(),
                   PicnicSwitch(
                     value: form.discoverable,
                     onChanged: (value) => onDiscoverableValueChanged(value),
                     size: PicnicSwitchSize.regular,
-                    color: colors.green,
+                    color: colors.blue,
                   ),
                 ],
               ),

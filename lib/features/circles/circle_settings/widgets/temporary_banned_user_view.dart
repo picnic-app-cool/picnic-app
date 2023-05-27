@@ -35,7 +35,7 @@ class TemporaryBannedUserView extends StatelessWidget {
     return PicnicListItem(
       height: null,
       title: user.userName,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
       leading: PicnicAvatar(
         size: _avatarSize,
         boxFit: PicnicAvatarChildBoxFit.cover,

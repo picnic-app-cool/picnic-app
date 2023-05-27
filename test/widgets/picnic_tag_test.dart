@@ -23,7 +23,7 @@ void main() {
             child: TestWidgetContainer(
               child: PicnicTag(
                 title: '#Startups',
-                titleTextStyle: styles.title10.copyWith(color: blackColor),
+                titleTextStyle: styles.subtitle20.copyWith(color: blackColor),
                 prefixIcon: Image.asset(Assets.images.rocket.path),
                 suffixIcon: Image.asset(
                   Assets.images.add.path,
@@ -39,7 +39,7 @@ void main() {
               child: PicnicTag(
                 title: '#Startups',
                 blurRadius: null,
-                titleTextStyle: styles.title10.copyWith(color: blackColor),
+                titleTextStyle: styles.subtitle20.copyWith(color: blackColor),
                 prefixIcon: Image.asset(Assets.images.rocket.path),
                 suffixIcon: Image.asset(
                   Assets.images.add.path,
@@ -55,7 +55,7 @@ void main() {
               child: PicnicTag(
                 title: '#Startups',
                 blurRadius: null,
-                titleTextStyle: styles.title10.copyWith(color: blackColor),
+                titleTextStyle: styles.subtitle20.copyWith(color: blackColor),
                 backgroundColor: colors.green,
               ),
             ),
@@ -67,7 +67,7 @@ void main() {
                 title: 'gacha',
                 style: PicnicTagStyle.outlined,
                 blurRadius: null,
-                titleTextStyle: styles.title10.copyWith(color: blackColor),
+                titleTextStyle: styles.subtitle20.copyWith(color: blackColor),
                 backgroundColor: colors.blackAndWhite.shade100,
                 borderColor: colors.blackAndWhite.shade400,
               ),

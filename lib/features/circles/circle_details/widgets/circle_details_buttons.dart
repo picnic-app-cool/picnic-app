@@ -34,7 +34,7 @@ class CircleDetailsButtons extends StatelessWidget {
   final VoidCallback onTapSeedHolders;
   final bool isMember;
   final bool showSeedHolders;
-  static const padding = EdgeInsets.symmetric(horizontal: 48, vertical: 12);
+  static const padding = EdgeInsets.symmetric(horizontal: 48, vertical: 14);
 
   static const _borderWidth = 2.0;
   static const _rowSpacing = 8.0;
@@ -46,23 +46,21 @@ class CircleDetailsButtons extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final blackAndWhite = theme.colors.blackAndWhite;
     final whiteColor = blackAndWhite.shade100;
-    final yellowColor = theme.colors.yellow.shade500;
+    final blueColor = theme.colors.blue.shade500;
 
-    var _icon = '';
     var _title = '';
     var _onTap = onTapJoin;
     switch (isMember) {
       case true:
-        _icon = Assets.images.plus.path;
         _title = appLocalizations.postAction;
         _onTap = onTapPost;
         break;
       case false:
         _onTap = onTapJoin;
-        _icon = Assets.images.star.path;
         _title = appLocalizations.joinAction;
     }
 
+    final darkBlue = theme.colors.darkBlue;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -78,25 +76,23 @@ class CircleDetailsButtons extends StatelessWidget {
         const Gap(8),
         Row(
           children: [
-            Flexible(
+            Expanded(
               child: PicnicButton(
-                icon: Assets.images.chat.path,
                 title: appLocalizations.chatLabel,
                 borderRadius: const PicnicButtonRadius.round(),
-                color: theme.colors.green.shade500,
+                color: darkBlue.shade300,
                 padding: padding,
-                titleColor: whiteColor,
+                titleColor: darkBlue.shade800,
                 onTap: onTapCircleChat,
               ),
             ),
             const Gap(_rowSpacing),
-            Flexible(
+            Expanded(
               child: PicnicButton(
-                icon: _icon,
                 title: _title,
                 borderRadius: const PicnicButtonRadius.round(),
-                color: yellowColor,
-                borderColor: yellowColor,
+                color: blueColor,
+                borderColor: blueColor,
                 padding: padding,
                 borderWidth: _borderWidth,
                 titleColor: whiteColor,
@@ -109,8 +105,9 @@ class CircleDetailsButtons extends StatelessWidget {
               PicnicContainerIconButton(
                 radius: _inviteButtonRadius,
                 iconPath: Assets.images.addUser.path,
+                iconTintColor: darkBlue.shade800,
                 onTap: onTapInviteUsers,
-                buttonColor: blackAndWhite.shade200,
+                buttonColor: darkBlue.shade300,
               ),
             ],
           ],

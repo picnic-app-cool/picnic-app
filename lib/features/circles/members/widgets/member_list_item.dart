@@ -78,12 +78,12 @@ class MemberListItem extends StatelessWidget {
     final trailing = isDirectorsList
         ? Text(
             member.type.valueToDisplay,
-            style: theme.styles.title30.copyWith(color: PicnicColors.bluishCyan),
+            style: theme.styles.subtitle40.copyWith(color: PicnicColors.bluishCyan),
           )
         : hasPermissionToManageUsers
             ? GestureDetector(
                 onTap: onTapEditRole != null ? () => onTapEditRole!(member) : null,
-                child: Image.asset(Assets.images.edit.path, color: theme.colors.green),
+                child: Image.asset(Assets.images.edit.path, color: theme.colors.blue),
               )
             : followButton;
     final usernameColor = member.formattedMainRoleColor;
@@ -92,7 +92,7 @@ class MemberListItem extends StatelessWidget {
       height: _followerItemHeight,
       leading: avatar,
       title: member.user.username,
-      titleStyle: theme.styles.title10.copyWith(color: usernameColor.color),
+      titleStyle: theme.styles.subtitle20.copyWith(color: usernameColor.color),
       trailing: trailing,
     );
   }

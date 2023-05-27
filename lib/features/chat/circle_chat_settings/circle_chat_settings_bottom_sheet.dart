@@ -68,13 +68,13 @@ class _CircleChatSettingsPageState extends State<CircleChatSettingsBottomSheet>
               const Gap(_verticalSpacing),
               Text(
                 appLocalizations.chatSettingsTitle,
-                style: theme.styles.title30,
+                style: theme.styles.subtitle40,
               ),
               PicnicListItem(
                 title: state.circleName,
                 leftGap: 0,
                 trailingGap: 0,
-                titleStyle: theme.styles.title20,
+                titleStyle: theme.styles.subtitle30,
                 onTap: presenter.onTapCirclePage,
                 leading: PicnicCircleAvatar(
                   emoji: state.circleEmoji,

@@ -52,7 +52,7 @@ class _CreateCirclePageState extends State<CreateCirclePage>
             backButtonIconColor: state.coverExists ? _whiteColor : null,
             child: Text(
               appLocalizations.createCircleTitle,
-              style: _styles.title20.copyWith(color: state.coverExists ? _whiteColor : null),
+              style: _styles.subtitle30.copyWith(color: state.coverExists ? _whiteColor : null),
             ),
           ),
           body: SafeArea(

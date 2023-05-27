@@ -38,8 +38,9 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final pink = theme.colors.pink;
-    final green = theme.colors.green;
+    final themeBlue = theme.colors.blue;
+    final blue = themeBlue;
+    final darkBlue = themeBlue.shade600;
     return OnboardingPageContainer(
       dialog: PicnicDialog(
         image: PicnicAvatar(
@@ -63,13 +64,13 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
                   PicnicButton(
                     onTap: state.notificationsPermissionAlreadyRequested ? null : presenter.onTapEnableNotifications,
                     title: appLocalizations.notificationAppBarTitle,
-                    color: state.notificationsPermissionGranted ? green : pink,
+                    color: state.notificationsPermissionGranted ? darkBlue : blue,
                   ),
                 const Gap(8),
                 PicnicButton(
                   onTap: state.contactsPermissionAlreadyRequested ? null : presenter.onTapEnableContacts,
                   title: appLocalizations.contacts,
-                  color: state.contactsPermissionGranted ? green : pink,
+                  color: state.contactsPermissionGranted ? darkBlue : blue,
                 ),
               ],
             ),

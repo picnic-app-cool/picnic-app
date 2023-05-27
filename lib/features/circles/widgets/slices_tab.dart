@@ -41,11 +41,11 @@ class SlicesTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(appLocalizations.sliceWithTopic(sliceCount), style: styles.title30),
+              Text(appLocalizations.sliceWithTopic(sliceCount), style: styles.subtitle40),
               PicnicTextButton(
                 label: appLocalizations.createSliceAction,
                 onTap: onTapCreateSlice,
-                labelStyle: theme.styles.title20.copyWith(color: theme.colors.green),
+                labelStyle: theme.styles.subtitle30.copyWith(color: theme.colors.blue),
               ),
             ],
           ),

@@ -114,7 +114,7 @@ class _ChatDmsPageState extends State<ChatDmsPage>
               padding: EdgeInsets.only(bottom: bottomPadding),
               child: PicnicFloatingButton(
                 onTap: presenter.onTapCreateNewMessage,
-                backgroundColor: PicnicTheme.of(context).colors.green,
+                backgroundColor: PicnicTheme.of(context).colors.blue,
               ),
             ),
           ),

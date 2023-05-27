@@ -331,15 +331,15 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                         options: [
                           Option(
                             label: "Title 10",
-                            value: styles.title10,
+                            value: styles.subtitle20,
                           ),
                           Option(
                             label: "Title 30",
-                            value: styles.title30,
+                            value: styles.subtitle40,
                           ),
                           Option(
                             label: "Title 20",
-                            value: styles.title20,
+                            value: styles.subtitle30,
                           ),
                           Option(
                             label: "Body 20",
@@ -362,7 +362,7 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                             label: "Single Text : director",
                             value: Text(
                               "director",
-                              style: styles.title30.copyWith(color: themeColors.lightBlue),
+                              style: styles.subtitle40.copyWith(color: themeColors.lightBlue),
                             ),
                           ),
                           Option(
@@ -404,7 +404,7 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                               children: [
                                 Text(
                                   "director",
-                                  style: styles.title30.copyWith(color: themeColors.lightBlue),
+                                  style: styles.subtitle40.copyWith(color: themeColors.lightBlue),
                                 ),
                                 Row(
                                   children: [
@@ -415,7 +415,7 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                                     Text(
                                       "link",
                                       textAlign: TextAlign.end,
-                                      style: styles.title10.copyWith(color: themeColors.blue.shade800),
+                                      style: styles.subtitle20.copyWith(color: themeColors.blue.shade800),
                                     ),
                                   ],
                                 ),
@@ -430,12 +430,12 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                               children: [
                                 Text(
                                   "75%",
-                                  style: styles.title30.copyWith(color: themeColors.lightBlue),
+                                  style: styles.subtitle40.copyWith(color: themeColors.lightBlue),
                                 ),
                                 Text(
                                   "55 seeds",
                                   textAlign: TextAlign.end,
-                                  style: styles.title10.copyWith(
+                                  style: styles.subtitle20.copyWith(
                                     color: themeColors.blue.shade800,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -467,7 +467,7 @@ class PicnicListItemUseCases extends WidgetbookComponent {
                                       "countdown",
                                       textAlign: TextAlign.end,
                                       style:
-                                          styles.title10.copyWith(fontSize: 12, fontWeight: FontWeight.w300, height: 0),
+                                          styles.subtitle20.copyWith(fontSize: 12, fontWeight: FontWeight.w300, height: 0),
                                     ),
                                   ],
                                 ),

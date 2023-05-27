@@ -27,7 +27,7 @@ class PermanentBannedUserView extends StatelessWidget {
     return PicnicListItem(
       height: null,
       title: user.userName,
-      titleStyle: PicnicTheme.of(context).styles.title10,
+      titleStyle: PicnicTheme.of(context).styles.subtitle20,
       leading: PicnicAvatar(
         size: _avatarSize,
         boxFit: PicnicAvatarChildBoxFit.cover,

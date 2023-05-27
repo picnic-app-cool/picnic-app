@@ -37,7 +37,7 @@ class CommentChatReplyBar extends StatelessWidget {
     );
 
     final verticalDivider = Container(
-      color: theme.colors.green.shade600,
+      color: theme.colors.blue.shade600,
       width: 1.5,
       height: 32,
       margin: const EdgeInsets.symmetric(vertical: 2.5),

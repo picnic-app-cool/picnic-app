@@ -26,7 +26,7 @@ class PostCollectionListItem extends StatelessWidget {
     return PicnicListItem(
       height: _height,
       title: postCollection.title,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
       onTap: onTap,
       leading: SizedBox.square(
         dimension: _leadingImageSizeDimension,

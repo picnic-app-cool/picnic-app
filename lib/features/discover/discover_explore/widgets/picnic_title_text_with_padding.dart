@@ -30,7 +30,7 @@ class PicnicTitleTextWithPadding extends StatelessWidget {
         _highPadding,
         bottomPadding ?? _lowPadding,
       ),
-      child: Text(text, style: styles.title30),
+      child: Text(text, style: styles.subtitle40),
     );
   }
 }

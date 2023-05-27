@@ -42,7 +42,7 @@ class ChatCircleSearchResults extends StatelessWidget {
 
     final avatar = PicnicAvatar(
       size: _avatarSizeCircle,
-      backgroundColor: theme.colors.green.shade200,
+      backgroundColor: theme.colors.blue.shade200,
       imageSource: PicnicImageSource.emoji('😁'),
     );
     final blackAndWhite = theme.colors.blackAndWhite;

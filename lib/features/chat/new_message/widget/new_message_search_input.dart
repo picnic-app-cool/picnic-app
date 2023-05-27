@@ -45,7 +45,7 @@ class NewMessageSearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
 
-    final green = theme.colors.green;
+    final blue = theme.colors.blue;
     final blackAndWhite = theme.colors.blackAndWhite;
 
     final textStyleBody20 = theme.styles.body20;
@@ -67,7 +67,7 @@ class NewMessageSearchInput extends StatelessWidget {
 
     final personIconSuffix = Image.asset(
       Assets.images.personOutline.path,
-      color: green,
+      color: blue,
     );
 
     return Padding(
@@ -78,7 +78,7 @@ class NewMessageSearchInput extends StatelessWidget {
           Text(
             appLocalizations.chatNewMessageSearchInputLabelText,
             style: textStyleBody20.copyWith(
-              color: userTyping ? green : blackAndWhite.shade700,
+              color: userTyping ? blue : blackAndWhite.shade700,
             ),
           ),
           const Gap(3),
@@ -88,7 +88,7 @@ class NewMessageSearchInput extends StatelessWidget {
               decoration: BoxDecoration(
                 color: userTyping ? blackAndWhite.shade100 : blackAndWhite.shade200,
                 border: Border.all(
-                  color: focusNode.hasFocus ? green : blackAndWhite.shade100,
+                  color: focusNode.hasFocus ? blue : blackAndWhite.shade100,
                 ),
                 borderRadius: BorderRadius.circular(_defaultRadius),
               ),

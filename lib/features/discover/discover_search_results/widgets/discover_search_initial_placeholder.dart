@@ -31,7 +31,7 @@ class DiscoverSearchInitialPlaceholder extends StatelessWidget {
         ),
         Text(
           appLocalizations.discoveryInitialHintTitle,
-          style: styles.title30,
+          style: styles.subtitle40,
         ),
         Text(
           appLocalizations.discoveryInitialHintSubtitle,

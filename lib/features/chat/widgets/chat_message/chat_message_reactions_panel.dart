@@ -21,7 +21,7 @@ class ChatMessageReactionsPanel extends StatelessWidget {
     final white = colors.blackAndWhite.shade100;
     final white15 = white.withOpacity(0.15);
     final black = colors.blackAndWhite.shade900;
-    final green = colors.green.shade500;
+    final blue = colors.blue.shade500;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class ChatMessageReactionsPanel extends StatelessWidget {
         final boxColor = isUserMessage
             ? (r.hasReacted ? white : white15)
             : r.hasReacted
-                ? green
+                ? blue
                 : white;
 
         final textColor = isUserMessage

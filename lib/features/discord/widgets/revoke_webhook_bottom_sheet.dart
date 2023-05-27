@@ -29,7 +29,7 @@ class RevokeWebhookBottomSheet extends StatelessWidget {
         children: [
           Text(
             appLocalizations.revokeIntegrationTitle,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           const Gap(20),
           Text(
@@ -42,7 +42,7 @@ class RevokeWebhookBottomSheet extends StatelessWidget {
               width: double.infinity,
               child: PicnicButton(
                 title: appLocalizations.revokeIntegrationConfirm,
-                titleStyle: styles.title20.copyWith(color: blackAndWhite.shade100),
+                titleStyle: styles.subtitle30.copyWith(color: blackAndWhite.shade100),
                 color: theme.colors.pink,
                 onTap: onTapRevoke,
               ),

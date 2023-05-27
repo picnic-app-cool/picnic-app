@@ -45,6 +45,7 @@ class PicnicPollChoice extends StatelessWidget {
       color: imagePosition == PicnicPollImagePosition.left ? theme.colors.cyan : theme.colors.teal,
     );
 
+    final blue = theme.colors.blue;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -101,7 +102,7 @@ class PicnicPollChoice extends StatelessWidget {
                   child: Column(
                     children: [
                       PicnicAvatar(
-                        backgroundColor: theme.colors.blue.shade100,
+                        backgroundColor: blue.shade100,
                         size: _userAvatarSize,
                         boxFit: PicnicAvatarChildBoxFit.cover,
                         imageSource: PicnicImageSource.url(
@@ -123,7 +124,7 @@ class PicnicPollChoice extends StatelessWidget {
               if (showResult)
                 Expanded(
                   child: PicnicPollChoiceBar(
-                    color: imagePosition == PicnicPollImagePosition.left ? theme.colors.green : theme.colors.red,
+                    color: imagePosition == PicnicPollImagePosition.left ? blue : theme.colors.red,
                     votesPercetage: votesPercentage,
                   ),
                 ),

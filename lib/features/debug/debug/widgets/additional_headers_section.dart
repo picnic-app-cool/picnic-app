@@ -36,7 +36,7 @@ class AdditionalHeadersSection extends StatelessWidget {
             Center(
               child: Text(
                 "Additional GraphQL Headers",
-                style: textStyles.title20,
+                style: textStyles.subtitle30,
               ),
             ),
             Text(
@@ -51,7 +51,7 @@ class AdditionalHeadersSection extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Key",
-                      style: textStyles.title10,
+                      style: textStyles.subtitle20,
                     ),
                   ),
                 ),
@@ -59,7 +59,7 @@ class AdditionalHeadersSection extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Value",
-                      style: textStyles.title10,
+                      style: textStyles.subtitle20,
                     ),
                   ),
                 ),

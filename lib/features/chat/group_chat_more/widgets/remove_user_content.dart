@@ -30,7 +30,7 @@ class RemoveUserContent extends StatelessWidget {
     return PicnicListItem(
       title: user.username,
       leading: _avatar,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
     );
   }
 }

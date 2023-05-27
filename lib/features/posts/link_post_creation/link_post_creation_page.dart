@@ -62,7 +62,7 @@ class _LinkPostCreationPageState extends State<LinkPostCreationPage>
                 : null,
             child: Text(
               appLocalizations.shareLinkTitle,
-              style: PicnicTheme.of(context).styles.title20,
+              style: PicnicTheme.of(context).styles.subtitle30,
             ),
           ),
           body: stateObserver(

@@ -57,7 +57,7 @@ class SeedListItem extends StatelessWidget {
         subTitle: subTitle,
         subtitleTextOverflow: TextOverflow.ellipsis,
         subTitleStyle: subTitle != null ? styles.caption20.copyWith(color: colors.blackAndWhite.shade500) : null,
-        titleStyle: styles.title30,
+        titleStyle: styles.subtitle40,
         onTap: onTapOpenCircle,
         trailingGap: _trailingGap,
         trailing: trailing,

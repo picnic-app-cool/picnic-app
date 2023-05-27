@@ -47,7 +47,7 @@ class _CircleElectionPageState extends State<CircleElectionPage>
       ),
     );
 
-    final bwTitle30 = theme.styles.title30.copyWith(color: blackAndWhite.shade900);
+    final bwSubtitle40 = theme.styles.subtitle40.copyWith(color: blackAndWhite.shade900);
     return Scaffold(
       appBar: appBar,
       body: Padding(
@@ -63,7 +63,7 @@ class _CircleElectionPageState extends State<CircleElectionPage>
             const Gap(18),
             Text(
               appLocalizations.circleElectionSelectSingleDirector,
-              style: bwTitle30,
+              style: bwSubtitle40,
             ),
             const Gap(12),
             stateObserver(

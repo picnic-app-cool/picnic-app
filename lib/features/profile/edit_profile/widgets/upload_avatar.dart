@@ -19,7 +19,7 @@ class UploadAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final lightBlue = theme.colors.lightBlue;
-    final green = theme.colors.green;
+    final blue = theme.colors.blue;
     final white = theme.colors.blackAndWhite.shade100;
 
     final avatar = PicnicAvatar(
@@ -38,7 +38,7 @@ class UploadAvatar extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: CircleAvatar(
               maxRadius: _maxRadius,
-              backgroundColor: green,
+              backgroundColor: blue,
               child: Image.asset(
                 Assets.images.edit.path,
                 scale: _scale,

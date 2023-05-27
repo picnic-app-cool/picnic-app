@@ -53,14 +53,14 @@ class PostingDisabledCard extends StatelessWidget {
           const Gap(20),
           Text(
             appLocalizations.postingDisabledTitle(postingType.value.toLowerCase()),
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           const Gap(8),
           Text.rich(
             TextSpan(
               children: [
                 TextSpan(text: "${appLocalizations.featureDisabledByMods} ", style: subtitleStyle),
-                TextSpan(text: circleName, style: caption20style.copyWith(color: colors.green.shade600)),
+                TextSpan(text: circleName, style: caption20style.copyWith(color: colors.blue.shade600)),
                 TextSpan(text: " ${appLocalizations.circle}", style: subtitleStyle),
               ],
             ),

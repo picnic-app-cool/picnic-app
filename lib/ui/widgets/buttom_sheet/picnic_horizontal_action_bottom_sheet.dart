@@ -50,7 +50,7 @@ class PicnicHorizontalActionBottomSheet extends StatelessWidget {
             padding: _titlePadding,
             child: Text(
               title ?? '',
-              style: theme.styles.title30,
+              style: theme.styles.subtitle40,
             ),
           ),
         ],

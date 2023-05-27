@@ -174,7 +174,7 @@ class CircleRoleFormSection extends StatelessWidget {
                 child: PicnicButton(
                   title: appLocalizations.confirmAction,
                   style: PicnicButtonStyle.outlined,
-                  color: theme.colors.green,
+                  color: theme.colors.blue,
                   onTap: onTapConfirm,
                 ),
               ),

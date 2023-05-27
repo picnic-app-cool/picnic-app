@@ -55,7 +55,7 @@ class PicnicGlitterBombAlert extends StatelessWidget {
       ),
       title: appLocalizations.glitterboombAlertTitle,
       titleSize: PicnicDialogTitleSize.custom,
-      titleTextStyle: theme.styles.title20,
+      titleTextStyle: theme.styles.subtitle30,
       description: appLocalizations.glitterboombAlertDescription(
         senderUsername.formattedUsername,
       ),

@@ -26,7 +26,7 @@ class NewMessageGroupInput extends StatelessWidget {
     final colors = theme.colors;
     final blackAndWhite = colors.blackAndWhite;
     final textStyleBody20 = theme.styles.body20;
-    final green = colors.green;
+    final blue = colors.blue;
     final userTyping = focusNode.hasPrimaryFocus && textEditingController.text.isNotEmpty;
 
     return Padding(
@@ -35,7 +35,7 @@ class NewMessageGroupInput extends StatelessWidget {
         focusNode: focusNode,
         onChanged: onChangedUpdateGroupName,
         inputFillColor: userTyping ? blackAndWhite.shade100 : blackAndWhite.shade200,
-        focusedBorderSide: BorderSide(color: green),
+        focusedBorderSide: BorderSide(color: blue),
         hintText: appLocalizations.chatNewMessageSearchInputHintGroup,
         inputTextStyle: textStyleBody20,
         textController: textEditingController,

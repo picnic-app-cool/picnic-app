@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 10
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     permissions:
       contents: write # to update pubspec.yaml and push tags
       pull-requests: write # to create PR -> develop
@@ -108,7 +108,7 @@ jobs:
     timeout-minutes: 2
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     if: ${{ failure() }}
     needs:
       - deploy-release-candidate

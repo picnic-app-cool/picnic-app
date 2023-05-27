@@ -67,7 +67,7 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
     final styles = theme.styles;
     final colors = theme.colors;
     final blackAndWhite = colors.blackAndWhite;
-    final showMoreStyle = styles.body20.copyWith(color: colors.green.shade600);
+    final showMoreStyle = styles.body20.copyWith(color: colors.blue.shade600);
     final body30 = styles.body30.copyWith(color: blackAndWhite.shade900);
     _bottomNavBarHeight ??= BottomNavigationSizeQuery.of(context).height;
 

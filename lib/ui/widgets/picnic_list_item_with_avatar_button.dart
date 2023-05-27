@@ -56,14 +56,14 @@ class _PicnicListItemWithAvatarButtonState extends State<PicnicListItemWithAvata
     final colors = theme.colors;
     final styles = theme.styles;
     final pink = colors.pink.shade500;
-    final green = colors.green.shade500;
+    final blue = colors.blue.shade500;
     final white = colors.blackAndWhite.shade100;
 
     return PicnicListItem(
       height: _height,
       onTap: widget.onTapView,
       title: widget.title,
-      titleStyle: styles.title10,
+      titleStyle: styles.subtitle20,
       leftGap: 0,
       leading: widget.picnicAvatar,
       trailingGap: 0,
@@ -74,8 +74,8 @@ class _PicnicListItemWithAvatarButtonState extends State<PicnicListItemWithAvata
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               titleColor: _isActive ? pink : white,
               borderWidth: _buttonBorderWith,
-              borderColor: _isActive ? pink : green,
-              color: _isActive ? white : green,
+              borderColor: _isActive ? pink : blue,
+              color: _isActive ? white : blue,
               style: PicnicButtonStyle.outlined,
             )
           : null,

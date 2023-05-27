@@ -45,7 +45,7 @@ class _CircleGovernancePageState extends State<CircleGovernancePage>
     final theme = PicnicTheme.of(context);
     final blackAndWhite = theme.colors.blackAndWhite;
     final styles = theme.styles;
-    final blackSubtitle = styles.title30.copyWith(color: blackAndWhite.shade900);
+    final blackSubtitle = styles.subtitle40.copyWith(color: blackAndWhite.shade900);
 
     final appBar = PicnicAppBar(
       actions: [
@@ -62,7 +62,7 @@ class _CircleGovernancePageState extends State<CircleGovernancePage>
             emojiSize: _emojiSize,
             emoji: state.circle.emoji,
             image: state.circle.imageFile,
-            bgColor: theme.colors.green.shade200,
+            bgColor: theme.colors.blue.shade200,
           ),
           const Gap(8),
           Expanded(

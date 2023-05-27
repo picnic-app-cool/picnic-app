@@ -23,7 +23,7 @@ class NotificationSettingsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
-    final itemTextStyle = theme.styles.title20;
+    final itemTextStyle = theme.styles.subtitle30;
 
     return Column(
       children: items
@@ -38,7 +38,7 @@ class NotificationSettingsListView extends StatelessWidget {
                   value: notificationSettings.settingForItem(it),
                   onChanged: (selected) => onTapToggle(it),
                   size: PicnicSwitchSize.regular,
-                  color: colors.green,
+                  color: colors.blue,
                 ),
               ),
             ),

@@ -74,7 +74,7 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleText != null
           ? Text(
               titleText!,
-              style: PicnicTheme.of(context).styles.title20,
+              style: PicnicTheme.of(context).styles.subtitle30,
             )
           : child,
       titleSpacing: titleSpacing,

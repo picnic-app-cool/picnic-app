@@ -35,7 +35,7 @@ class _RemoveReasonPageState extends State<RemoveReasonPage>
         iconPathLeft: Assets.images.close.path,
         child: Text(
           appLocalizations.removeReasonTitle,
-          style: PicnicTheme.of(context).styles.title20,
+          style: PicnicTheme.of(context).styles.subtitle30,
         ),
       ),
       body: Padding(

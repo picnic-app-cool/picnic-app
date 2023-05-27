@@ -58,7 +58,7 @@ class _ReportsListPageState extends State<ReportsListPage>
                 },
               ),
               const Gap(8),
-              Text(appLocalizations.reportsTabAction, style: theme.styles.title20),
+              Text(appLocalizations.reportsTabAction, style: theme.styles.subtitle30),
             ],
           ),
         ),

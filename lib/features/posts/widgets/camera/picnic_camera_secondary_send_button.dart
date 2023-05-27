@@ -16,7 +16,7 @@ class PicnicCameraSecondarySendButton extends StatelessWidget {
     return PicnicCameraSecondaryButton(
       onTap: onTap,
       icon: Assets.images.arrowRightThree.path,
-      color: PicnicTheme.of(context).colors.green.shade500,
+      color: PicnicTheme.of(context).colors.blue.shade500,
     );
   }
 }

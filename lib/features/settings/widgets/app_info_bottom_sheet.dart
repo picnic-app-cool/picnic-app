@@ -33,7 +33,7 @@ class AppInfoBottomSheet extends StatelessWidget {
               Expanded(
                 child: Text(
                   appLocalizations.buildInfoDescription,
-                  style: styles.title30,
+                  style: styles.subtitle40,
                   overflow: TextOverflow.clip,
                 ),
               ),

@@ -40,7 +40,7 @@ class _ShowMoreTextState extends State<ShowMoreText> {
     final showMore = appLocalizations.seeMore;
     final theme = PicnicTheme.of(context);
     final showMoreStyle = widget.style.copyWith(
-      color: theme.colors.green.shade600,
+      color: theme.colors.blue.shade600,
       fontWeight: FontWeight.w500,
     );
 

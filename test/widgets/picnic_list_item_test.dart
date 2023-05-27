@@ -20,8 +20,8 @@ void main() {
       final blackAndWhite = theme.colors.blackAndWhite;
       final picnicLogoPath = Assets.images.picnicLogo.path;
       final textStyleCaption10 = theme.styles.caption10;
-      final textStyleTitle10 = theme.styles.title10;
-      final textStyleTitle30 = theme.styles.title30;
+      final textStyleSubtitle20 = theme.styles.subtitle20;
+      final textStyleSubtitle40 = theme.styles.subtitle40;
       return GoldenTestGroup(
         columns: 1,
         children: [
@@ -61,7 +61,7 @@ void main() {
                 titleStyle: textStyleCaption10,
                 trailing: Text(
                   "director",
-                  style: textStyleTitle30.copyWith(
+                  style: textStyleSubtitle40.copyWith(
                     color: theme.colors.lightBlue,
                   ),
                 ),
@@ -89,7 +89,7 @@ void main() {
                   children: [
                     Text(
                       "director",
-                      style: textStyleTitle30.copyWith(color: theme.colors.lightBlue),
+                      style: textStyleSubtitle40.copyWith(color: theme.colors.lightBlue),
                     ),
                     Row(
                       children: [
@@ -100,7 +100,7 @@ void main() {
                         Text(
                           "link",
                           textAlign: TextAlign.end,
-                          style: textStyleTitle10.copyWith(color: theme.colors.blue.shade800),
+                          style: textStyleSubtitle20.copyWith(color: theme.colors.blue.shade800),
                         ),
                       ],
                     ),
@@ -130,7 +130,7 @@ void main() {
                   children: [
                     Text(
                       "director",
-                      style: textStyleTitle30.copyWith(color: theme.colors.lightBlue),
+                      style: textStyleSubtitle40.copyWith(color: theme.colors.lightBlue),
                     ),
                     Row(
                       children: [
@@ -141,7 +141,7 @@ void main() {
                         Text(
                           "link",
                           textAlign: TextAlign.end,
-                          style: textStyleTitle10.copyWith(color: theme.colors.blue.shade800),
+                          style: textStyleSubtitle20.copyWith(color: theme.colors.blue.shade800),
                         ),
                       ],
                     ),
@@ -165,7 +165,7 @@ void main() {
               child: PicnicListItem(
                 title: "payamdaliri",
                 subTitle: "started following you",
-                titleStyle: textStyleTitle10,
+                titleStyle: textStyleSubtitle20,
                 subTitleStyle: textStyleCaption10.copyWith(color: theme.colors.blackAndWhite.shade600),
                 trailing: PicnicButton(
                   title: "follow",
@@ -201,19 +201,19 @@ void main() {
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                   borderRadius: PicnicTagBorderRadius.large,
                 ),
-                titleStyle: textStyleTitle10,
+                titleStyle: textStyleSubtitle20,
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       "75%",
-                      style: textStyleTitle30.copyWith(color: theme.colors.lightBlue),
+                      style: textStyleSubtitle40.copyWith(color: theme.colors.lightBlue),
                     ),
                     Text(
                       "55 seeds",
                       textAlign: TextAlign.end,
-                      style: textStyleTitle10.copyWith(
+                      style: textStyleSubtitle20.copyWith(
                         color: theme.colors.blue.shade800,
                         fontSize: 12,
                         fontWeight: FontWeight.w300,

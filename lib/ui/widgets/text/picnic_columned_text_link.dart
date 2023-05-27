@@ -32,7 +32,7 @@ class PicnicColumnedTextLink extends StatelessWidget {
         children: [
           Text(
             text,
-            style: textTheme.title30.copyWith(
+            style: textTheme.subtitle40.copyWith(
               color: const Color(0xFF45BAEC),
             ),
           ),
@@ -46,7 +46,7 @@ class PicnicColumnedTextLink extends StatelessWidget {
               const Gap(4),
               Text(
                 appLocalizations.linkTabAction,
-                style: textTheme.title10.copyWith(
+                style: textTheme.subtitle20.copyWith(
                   color: darkBlueShade500,
                 ),
               ),

@@ -29,7 +29,7 @@ class UserAgreementBlocker extends StatelessWidget {
         children: [
           Text(
             appLocalizations.userAgreement,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           const Gap(12),
           TermsAndPoliciesDisclaimer(

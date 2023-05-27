@@ -45,7 +45,7 @@ class _CreateNewCollectionPageState extends State<CreateNewCollectionPage>
         children: [
           Text(
             appLocalizations.createANewCollection,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           const Gap(20),
           PicnicTextInput(

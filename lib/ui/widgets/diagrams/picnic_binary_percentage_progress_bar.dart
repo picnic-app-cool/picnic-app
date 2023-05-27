@@ -43,7 +43,7 @@ class PicnicBinaryPercentageProgressBar extends StatelessWidget {
             Expanded(
               flex: _percentOffset + leftPercent + (isAvatarOnLeftPart ? _percentOffset : 0),
               child: Container(
-                color: colors.green.shade500,
+                color: colors.blue.shade500,
                 height: _barHeight,
                 child: _PercentageText(
                   percent: '$leftPercent%',
@@ -90,7 +90,7 @@ class _PercentageText extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
 
-    final textTheme = theme.styles.title10.copyWith(
+    final textTheme = theme.styles.subtitle20.copyWith(
       color: colors.blackAndWhite.shade100,
     );
     return Row(

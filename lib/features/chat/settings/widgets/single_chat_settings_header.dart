@@ -36,7 +36,7 @@ class SingleChatSettingsHeader extends StatelessWidget {
           padding: _titlePadding,
           child: Text(
             appLocalizations.chatSettingsTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
         ),
         Padding(

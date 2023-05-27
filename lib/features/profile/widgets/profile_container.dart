@@ -84,7 +84,7 @@ class ProfileContainer extends StatelessWidget {
                         child: Text(
                           textAlign: TextAlign.center,
                           user.username.formattedUsername,
-                          style: styles.body30,
+                          style: styles.subtitle40,
                         ),
                       ),
                     ),
@@ -98,7 +98,7 @@ class ProfileContainer extends StatelessWidget {
             ],
           ),
         ),
-        const Gap(8),
+        const Gap(18),
         if (user.bio.isNotEmpty) ...[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -112,7 +112,7 @@ class ProfileContainer extends StatelessWidget {
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
           ),
-          const Gap(24),
+          const Gap(28),
         ],
         PicnicStats(
           onTap: onTap,
@@ -133,6 +133,7 @@ class ProfileContainer extends StatelessWidget {
           isLoading: isLoadingProfileStats,
           usage: PicnicStatUsage.profile,
         ),
+        const Gap(16),
       ],
     );
   }

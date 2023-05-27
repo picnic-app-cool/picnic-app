@@ -102,7 +102,7 @@ class _SeedsPageState extends State<SeedsPage> with PresenterStateMixin<SeedsVie
                     const Gap(4),
                     Text(
                       seed.amountTotal.formattingToStat(),
-                      style: styles.title30,
+                      style: styles.subtitle40,
                     ),
                   ],
                 );

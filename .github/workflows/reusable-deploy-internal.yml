@@ -84,7 +84,7 @@ jobs:
     timeout-minutes: 20
     runs-on:
       - self-hosted
-      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+      - macosx
     permissions:
       contents: write # to add and push tags
       pull-requests: write # to write comment

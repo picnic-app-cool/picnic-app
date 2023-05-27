@@ -34,7 +34,7 @@ class SelectEnvironmentSection extends StatelessWidget {
             Center(
               child: Text(
                 "Select backend environment",
-                style: textStyles.title20,
+                style: textStyles.subtitle30,
               ),
             ),
             ...environments.map(

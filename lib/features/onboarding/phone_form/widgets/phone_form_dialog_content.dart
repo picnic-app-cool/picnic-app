@@ -54,8 +54,8 @@ class PhoneFormDialogContent extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final styles = theme.styles;
     final colors = theme.colors;
-    final textButtonTheme = styles.title10.copyWith(
-      color: colors.green.shade600,
+    final textButtonTheme = styles.subtitle20.copyWith(
+      color: colors.blue.shade600,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -15,7 +15,7 @@ class ModSheetTitle extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Text(
         title,
-        style: PicnicTheme.of(context).styles.title30,
+        style: PicnicTheme.of(context).styles.subtitle40,
       ),
     );
   }

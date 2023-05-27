@@ -24,7 +24,7 @@ class PostCreationTabBar extends StatelessWidget {
     final normalStyle = theme.styles.body20.copyWith(
       color: (brightness == Brightness.light ? blackAndWhite.shade100 : blackAndWhite.shade900).withOpacity(0.6),
     );
-    final selectedStyle = theme.styles.title10.copyWith(
+    final selectedStyle = theme.styles.subtitle20.copyWith(
       color: brightness == Brightness.light ? blackAndWhite.shade100 : blackAndWhite.shade900,
     );
     return LayoutBuilder(

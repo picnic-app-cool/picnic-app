@@ -53,7 +53,7 @@ class _SoundAttachmentPageState extends State<SoundAttachmentPage>
           iconPathLeft: Assets.images.close.path,
           child: Text(
             appLocalizations.searchSoundTitle,
-            style: PicnicTheme.of(context).styles.title20,
+            style: PicnicTheme.of(context).styles.subtitle30,
           ),
         ),
         body: Column(

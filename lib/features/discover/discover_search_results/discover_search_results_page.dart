@@ -83,14 +83,14 @@ class _DiscoverSearchResultsPageState extends State<DiscoverSearchResultsPage>
                 slivers: [
                   const SliverGap(Constants.lowPadding),
                   if (state.circles.isNotEmpty) const SliverGap(Constants.lowPadding),
-                  SliverToBoxAdapter(child: Text(appLocalizations.discoveryCircleResults, style: theme.title30)),
+                  SliverToBoxAdapter(child: Text(appLocalizations.discoveryCircleResults, style: theme.subtitle40)),
                   CirclesSearchResult(
                     circles: state.circles,
                     onTapJoinButton: presenter.onTapJoinCircleButton,
                     onTapViewCircle: presenter.onTapViewCircle,
                   ),
                   if (state.users.isNotEmpty) const SliverGap(Constants.largePadding),
-                  SliverToBoxAdapter(child: Text(appLocalizations.discoveryUserResults, style: theme.title30)),
+                  SliverToBoxAdapter(child: Text(appLocalizations.discoveryUserResults, style: theme.subtitle40)),
                   UsersSearchResult(
                     onTapFollowButton: state.isLoadingToggleFollow ? null : presenter.onTapFollowButton,
                     onTapView: presenter.onTapViewProfile,

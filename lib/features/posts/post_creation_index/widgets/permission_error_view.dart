@@ -66,7 +66,7 @@ class PermissionErrorView extends StatelessWidget {
                 const Gap(20),
                 Text(
                   title,
-                  style: theme.styles.title30.copyWith(color: whiteColor),
+                  style: theme.styles.subtitle40.copyWith(color: whiteColor),
                 ),
                 const Gap(8),
                 Text(

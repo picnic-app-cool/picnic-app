@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/features/chat/chat_tabs/widgets/chat_button.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_tab_type.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
@@ -16,20 +15,20 @@ class ChatTabBar extends StatelessWidget {
   final ChatTabType selectedType;
 
   static const double kIconSize = 18;
-  static const double kColorOpacity = 0.4;
+  static const double kColorOpacity = 0.6;
 
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final titleStyle = theme.styles.body20;
+    final normalTitleStyle = theme.styles.body20;
+    final selectedTitleStyle = theme.styles.subtitle20;
     final colors = theme.colors;
     final normalColor = colors.darkBlue.withOpacity(kColorOpacity);
-    final selectedColor = colors.darkBlue;
-    final normalStyle = titleStyle.copyWith(color: normalColor);
-    final selectedStyle = titleStyle.copyWith(color: selectedColor);
+    final selectedColor = colors.darkBlue.shade800;
+    final normalStyle = normalTitleStyle.copyWith(color: normalColor);
+    final selectedStyle = selectedTitleStyle.copyWith(color: selectedColor);
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(left: Constants.mediumPadding),
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

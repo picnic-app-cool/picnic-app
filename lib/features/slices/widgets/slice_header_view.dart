@@ -28,14 +28,14 @@ class SliceHeaderView extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: styles.title30,
+              style: styles.subtitle40,
             ),
           ),
           if (onTapInvite != null)
             PicnicTextButton(
               label: buttonText,
-              labelStyle: styles.title20.copyWith(
-                color: theme.colors.green,
+              labelStyle: styles.subtitle30.copyWith(
+                color: theme.colors.blue,
               ),
               onTap: onTapInvite,
               alignment: AlignmentDirectional.centerEnd,

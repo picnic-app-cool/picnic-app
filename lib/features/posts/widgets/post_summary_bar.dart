@@ -64,13 +64,20 @@ class PostSummaryBar extends StatelessWidget {
     final overlayTheme = this.overlayTheme ?? post.overlayTheme;
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
-    final whiteColor = colors.blackAndWhite.shade100;
+    final whiteColor = colors.blackAndWhite.shade100.withOpacity(0.9);
     final blackColor = colors.blackAndWhite.shade900;
     final blueColor = colors.blue;
 
     final postDetailsColor = overlayTheme == PostOverlayTheme.dark ? colors.blackAndWhite.shade600 : whiteColor;
 
-    final textStyle = theme.styles.body0.copyWith(
+    final textStyle = theme.styles.subtitle10.copyWith(
+      color: postDetailsColor,
+      shadows: [
+        if (overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
+      ],
+    );
+
+    final postInfoTextStyle = theme.styles.body10.copyWith(
       color: postDetailsColor,
       shadows: [
         if (overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
@@ -152,7 +159,7 @@ class PostSummaryBar extends StatelessWidget {
                     const Gap(16),
                     Text(
                       dateToDisplay + appLocalizations.viewsCount(formatNumber(post.contentStats.impressions)),
-                      style: textStyle,
+                      style: postInfoTextStyle,
                     ),
                   ],
                 )

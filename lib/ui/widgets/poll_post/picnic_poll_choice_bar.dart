@@ -68,7 +68,7 @@ class _PicnicPollChoiceBarState extends State<PicnicPollChoiceBar> with SingleTi
           children: [
             Text(
               votesLabel,
-              style: theme.styles.title30.copyWith(
+              style: theme.styles.subtitle40.copyWith(
                 color: theme.colors.blackAndWhite.shade100,
               ),
             ),

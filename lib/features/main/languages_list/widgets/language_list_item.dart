@@ -24,7 +24,7 @@ class LanguageListItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(11),
         decoration: BoxDecoration(
-          color: isSelected ? theme.colors.green.shade300 : null,
+          color: isSelected ? theme.colors.blue.shade300 : null,
           borderRadius: BorderRadius.circular(_borderRadius),
         ),
         child: Text(

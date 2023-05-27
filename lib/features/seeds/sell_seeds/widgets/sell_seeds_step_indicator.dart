@@ -14,7 +14,7 @@ class SellSeedsStepIndicator extends StatelessWidget {
   Widget build(BuildContext context) => FractionallySizedBox(
         widthFactor: step == SellSeedsStep.first ? _halfSizeIndicator : 1,
         child: Container(
-          color: PicnicTheme.of(context).colors.green.shade400,
+          color: PicnicTheme.of(context).colors.blue.shade400,
           height: _indicatorHeight,
         ),
       );

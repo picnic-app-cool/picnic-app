@@ -48,7 +48,7 @@ class _ForceUpdatePageState extends State<ForceUpdatePage>
                     const Gap(16),
                     Text(
                       appLocalizations.newReleaseTitle,
-                      style: theme.styles.title30,
+                      style: theme.styles.subtitle40,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -62,7 +62,7 @@ class _ForceUpdatePageState extends State<ForceUpdatePage>
                     ),
                     const Gap(28),
                     PicnicButton(
-                      color: theme.colors.green,
+                      color: theme.colors.blue,
                       onTap: presenter.onTapUpdate,
                       size: PicnicButtonSize.large,
                       title: appLocalizations.newReleaseUpdateButtonLabel,

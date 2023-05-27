@@ -52,12 +52,12 @@ class _RolesListPageState extends State<RolesListPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(appLocalizations.rolesTitle, style: styles.title30),
+                    Text(appLocalizations.rolesTitle, style: styles.subtitle40),
                     if (state.hasPermissionToManageRoles)
                       PicnicTextButton(
                         label: appLocalizations.addAction,
                         onTap: presenter.onTapAddRole,
-                        labelStyle: theme.styles.title20.copyWith(color: colors.green),
+                        labelStyle: theme.styles.subtitle30.copyWith(color: colors.blue),
                       ),
                   ],
                 ),
@@ -86,7 +86,7 @@ class _RolesListPageState extends State<RolesListPage>
                       return RoleItem(
                         roleName: role.name,
                         roleEmoji: role.emoji,
-                        titleStyle: theme.styles.title10.copyWith(color: role.formattedColor.color),
+                        titleStyle: theme.styles.subtitle20.copyWith(color: role.formattedColor.color),
                         trailing: state.hasPermissionToManageRoles ? _trailingActions : null,
                       );
                     },

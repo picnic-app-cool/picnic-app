@@ -37,7 +37,7 @@ class _AboutElectionsPageState extends State<AboutElectionsPage>
     final colors = theme.colors;
     final blackAndWhite = colors.blackAndWhite;
     final styles = theme.styles;
-    final title20style = styles.title20.copyWith(
+    final subtitle30style = styles.subtitle30.copyWith(
       color: colors.blackAndWhite.shade900,
     );
     final crownIcon = Assets.images.crownKing.path;
@@ -56,7 +56,7 @@ class _AboutElectionsPageState extends State<AboutElectionsPage>
                 ),
                 const Gap(12),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,7 +81,7 @@ class _AboutElectionsPageState extends State<AboutElectionsPage>
                       const Gap(22),
                       Text(
                         appLocalizations.howItWorks,
-                        style: title20style,
+                        style: subtitle30style,
                       ),
                       const Gap(12),
                       Row(
@@ -124,7 +124,7 @@ class _AboutElectionsPageState extends State<AboutElectionsPage>
                       const Gap(22),
                       Text(
                         appLocalizations.howToGetSeeds,
-                        style: title20style,
+                        style: subtitle30style,
                       ),
                       const Gap(12),
                       HowToGetSeeds(

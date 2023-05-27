@@ -202,9 +202,9 @@ class _ChatInputBarState extends State<ChatInputBar> {
   }
 
   void _updateControllerMatcher() {
-    final greenColor = PicnicTheme.of(context).colors.green.shade600;
+    final blueColor = PicnicTheme.of(context).colors.blue.shade600;
     final matcher = {
-      for (final item in widget.usersToMention.items) item.name.formattedUsername: TextStyle(color: greenColor),
+      for (final item in widget.usersToMention.items) item.name.formattedUsername: TextStyle(color: blueColor),
     };
     _textEditingController.textStyleMatcher = matcher;
   }

@@ -36,7 +36,7 @@ class _BannedUsersPageState extends State<BannedUsersPage>
       appBar: PicnicAppBar(
         child: Text(
           appLocalizations.banAction,
-          style: styles.title20,
+          style: styles.subtitle30,
         ),
       ),
       body: Padding(
@@ -50,12 +50,12 @@ class _BannedUsersPageState extends State<BannedUsersPage>
                 children: [
                   Text(
                     appLocalizations.bannedUsersLabel,
-                    style: styles.title30,
+                    style: styles.subtitle40,
                   ),
                   PicnicTextButton(
                     label: appLocalizations.banAction,
                     onTap: presenter.onTapBan,
-                    labelStyle: styles.title20.copyWith(color: pinkColor),
+                    labelStyle: styles.subtitle30.copyWith(color: pinkColor),
                     padding: EdgeInsets.zero,
                     alignment: AlignmentDirectional.centerEnd,
                   ),

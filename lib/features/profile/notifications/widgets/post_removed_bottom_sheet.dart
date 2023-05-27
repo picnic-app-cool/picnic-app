@@ -33,7 +33,7 @@ class PostRemovedBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
                 appLocalizations.removedPostTitle,
-                style: styles.title30,
+                style: styles.subtitle40,
               ),
             ),
             const Gap(20),
@@ -50,7 +50,7 @@ class PostRemovedBottomSheet extends StatelessWidget {
               title: appLocalizations.postRemovedTitle('[circle]'),
               subTitle: appLocalizations.postRemovedSubtitle,
               subTitleStyle: styles.caption20.copyWith(color: colors.blackAndWhite.shade600),
-              titleStyle: styles.title10,
+              titleStyle: styles.subtitle20,
               trailing: ClipRRect(
                 borderRadius: BorderRadius.circular(_postRadius),
                 child: PicnicImage(
@@ -72,7 +72,7 @@ class PostRemovedBottomSheet extends StatelessWidget {
                   ),
                   TextSpan(
                     text: ' ${appLocalizations.terms} ',
-                    style: styles.body20.copyWith(color: colors.green),
+                    style: styles.body20.copyWith(color: colors.blue),
                   ),
                   TextSpan(
                     text: appLocalizations.forMoreDetails,

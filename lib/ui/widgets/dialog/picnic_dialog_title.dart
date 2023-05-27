@@ -22,7 +22,7 @@ class PicnicDialogTitle extends StatelessWidget {
       style: size == PicnicDialogTitleSize.custom
           ? textStyle
           : size == PicnicDialogTitleSize.normal
-              ? theme.styles.title30
+              ? theme.styles.subtitle40
               : theme.styles.display20,
     );
   }

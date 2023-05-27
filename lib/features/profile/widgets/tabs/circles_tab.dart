@@ -133,7 +133,7 @@ class _CirclesList extends StatelessWidget {
                       borderColor: circle.isRoyalty ? colors.yellow : null,
                       title: circle.name,
                       titleTextOverflow: TextOverflow.ellipsis,
-                      titleStyle: textTheme.title30.copyWith(
+                      titleStyle: textTheme.subtitle40.copyWith(
                         color: shade900,
                       ),
                       subTitle: appLocalizations.membersCount(circle.membersCount),
@@ -149,7 +149,7 @@ class _CirclesList extends StatelessWidget {
                       ),
                       trailing: Text(
                         circle.mainRole?.name ?? '',
-                        style: textTheme.title30.copyWith(
+                        style: textTheme.subtitle40.copyWith(
                           color: circle.formattedMainRoleColor.color,
                         ),
                       ),

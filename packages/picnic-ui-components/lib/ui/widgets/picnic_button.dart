@@ -16,7 +16,7 @@ class PicnicButton extends StatelessWidget {
     this.borderRadius,
     this.titleColor,
     this.titleStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
     this.minWidth,
     this.borderColor = Colors.transparent,
     this.originalIconColor = false,
@@ -59,7 +59,7 @@ class PicnicButton extends StatelessWidget {
     return Opacity(
       opacity: opacity ?? (onTap == null ? opacityDisabled : 1),
       child: Material(
-        color: color ?? (style == PicnicButtonStyle.outlined ? Colors.transparent : colors.green),
+        color: color ?? (style == PicnicButtonStyle.outlined ? Colors.transparent : colors.blue),
         borderRadius: borderRadius,
         child: Container(
           foregroundDecoration: BoxDecoration(
@@ -104,7 +104,7 @@ class PicnicButton extends StatelessWidget {
                     title,
                     overflow: TextOverflow.ellipsis,
                     style: titleStyle ??
-                        theme.styles.title20.copyWith(
+                        theme.styles.link15.copyWith(
                           color: titleColor ?? theme.colors.blackAndWhite.shade100,
                         ),
                   ),

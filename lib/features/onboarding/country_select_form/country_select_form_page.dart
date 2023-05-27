@@ -88,7 +88,7 @@ class _CountrySelectFormPageState extends State<CountrySelectFormPage>
                   ),
                   const Gap(20),
                   PicnicButton(
-                    color: theme.colors.pink,
+                    color: theme.colors.blue,
                     onTap: presenter.onTapContinue,
                     title: appLocalizations.continueAction,
                   ),

@@ -13,7 +13,7 @@ class SelectDirectorButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final votedColor = PicnicTheme.of(context).colors.green.shade500;
+    final votedColor = PicnicTheme.of(context).colors.blue.shade500;
     final buttonText = appLocalizations.circleElectionVote;
 
     return Padding(

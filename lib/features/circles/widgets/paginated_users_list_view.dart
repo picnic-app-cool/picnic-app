@@ -42,7 +42,7 @@ class PaginatedUsersListView extends StatelessWidget {
         itemBuilder: (context, mod) => PicnicListItem(
           height: null,
           title: mod.username,
-          titleStyle: theme.styles.title10,
+          titleStyle: theme.styles.subtitle20,
           leading: PicnicAvatar(
             size: _avatarSize,
             boxFit: PicnicAvatarChildBoxFit.cover,
@@ -55,7 +55,7 @@ class PaginatedUsersListView extends StatelessWidget {
           trailing: PicnicButton(
             title: buttonTitle,
             onTap: () => onTapAdd(mod),
-            color: buttonColor ?? theme.colors.green,
+            color: buttonColor ?? theme.colors.blue,
           ),
           onTap: () => onTapUser(mod),
         ),

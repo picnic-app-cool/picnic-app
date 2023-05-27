@@ -139,9 +139,12 @@ class PicnicDynamicAuthor extends StatelessWidget {
                 postDetails ??
                     Row(
                       children: [
-                        Text(
-                          dateToDisplay + appLocalizations.viewsCount(formatNumber(viewsCount)),
-                          style: subtitleStyle,
+                        Expanded(
+                          child: Text(
+                            dateToDisplay + appLocalizations.viewsCount(formatNumber(viewsCount)),
+                            style: subtitleStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

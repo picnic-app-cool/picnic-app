@@ -49,7 +49,7 @@ class MessageReportView extends StatelessWidget {
       subTitleSpan: appLocalizations.reportedMessage,
       subTitleSpanStyle: _getFontStyle(
         theme: theme,
-        color: colors.green.shade600,
+        color: colors.blue.shade600,
         isResolved: isResolved,
       ),
       trailing: isResolved ? infoIcon : arrowIcon,

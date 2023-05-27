@@ -42,7 +42,7 @@ class _AddBlackListWordPageState extends State<AddBlackListWordPage>
           children: [
             Text(
               appLocalizations.blacklistedWordsButtonConfirmationTitle,
-              style: theme.styles.title30,
+              style: theme.styles.subtitle40,
               textAlign: TextAlign.left,
             ),
             const Gap(8),

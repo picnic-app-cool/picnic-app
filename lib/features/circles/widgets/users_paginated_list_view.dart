@@ -37,7 +37,7 @@ class UsersPaginatedListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
 
-    final buttonColor = this.buttonColor ?? theme.colors.green;
+    final buttonColor = this.buttonColor ?? theme.colors.blue;
 
     return Expanded(
       child: PicnicPagingListView<Selectable<PublicProfile>>(
@@ -47,7 +47,7 @@ class UsersPaginatedListView extends StatelessWidget {
         itemBuilder: (context, user) => PicnicListItem(
           height: _height,
           title: user.item.username,
-          titleStyle: theme.styles.title10,
+          titleStyle: theme.styles.subtitle20,
           leading: PicnicAvatar(
             backgroundColor: theme.colors.lightBlue.shade100,
             isVerified: user.item.isVerified,

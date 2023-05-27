@@ -78,7 +78,7 @@ class _SliceDetailsPageState extends State<SliceDetailsPage>
                       Image.asset(
                         //TODO add correct icon https://picnic-app.atlassian.net/browse/GS-5225
                         Assets.images.star.path,
-                        color: colors.green,
+                        color: colors.blue,
                       ),
                   ],
                 ),
@@ -94,7 +94,7 @@ class _SliceDetailsPageState extends State<SliceDetailsPage>
                     PicnicSubtitle(
                       subtitle: state.parentCircleName,
                       subtitleStyle: styleBody10.copyWith(
-                        color: theme.colors.green.shade600,
+                        color: theme.colors.blue.shade600,
                       ),
                     ),
                   ],

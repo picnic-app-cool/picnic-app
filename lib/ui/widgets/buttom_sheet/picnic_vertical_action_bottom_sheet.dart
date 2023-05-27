@@ -37,7 +37,7 @@ class PicnicVerticalActionBottomSheet extends StatelessWidget {
             padding: _contentPadding,
             child: Text(
               title ?? '',
-              style: theme.styles.title30,
+              style: theme.styles.subtitle40,
             ),
           ),
         ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/features/profile/domain/model/public_profile_action.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
@@ -24,6 +23,7 @@ class PublicProfileButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
 
+    final darkBlue = theme.colors.darkBlue;
     return Row(
       children: [
         Flexible(
@@ -33,8 +33,8 @@ class PublicProfileButtons extends StatelessWidget {
               right: 4,
             ),
             child: PicnicButton(
-              icon: Assets.images.message.path,
-              titleColor: theme.colors.blackAndWhite.shade100,
+              titleColor: darkBlue.shade800,
+              color: darkBlue.shade300,
               title: appLocalizations.dmTitle,
               onTap: isBlocked ? null : onTapDM,
               minWidth: double.infinity,
@@ -77,7 +77,6 @@ class _ActionButton extends StatelessWidget {
 
     return PicnicButton(
       title: _getActionTitle(),
-      icon: _getIconPath(),
       titleColor: _getTitleColor(colors),
       color: _getButtonColor(colors),
       borderWidth: _getBorderWidth(),
@@ -102,18 +101,6 @@ class _ActionButton extends StatelessWidget {
     }
   }
 
-  String _getIconPath() {
-    switch (action) {
-      case PublicProfileAction.following:
-      case PublicProfileAction.follow:
-        return Assets.images.person.path;
-      case PublicProfileAction.glitterbomb:
-        return Assets.images.glitter.path;
-      case PublicProfileAction.blocked:
-        return Assets.images.closeSquare.path;
-    }
-  }
-
   Color _getTitleColor(PicnicColors colors) {
     switch (action) {
       case PublicProfileAction.follow:
@@ -121,7 +108,7 @@ class _ActionButton extends StatelessWidget {
         return colors.blackAndWhite.shade100;
       case PublicProfileAction.following:
       case PublicProfileAction.blocked:
-        return colors.pink.shade500;
+        return colors.blue.shade500;
     }
   }
 
@@ -129,7 +116,7 @@ class _ActionButton extends StatelessWidget {
     switch (action) {
       case PublicProfileAction.follow:
       case PublicProfileAction.glitterbomb:
-        return colors.pink.shade500;
+        return colors.blue.shade500;
       case PublicProfileAction.following:
       case PublicProfileAction.blocked:
         return colors.blackAndWhite.shade100;
@@ -165,7 +152,7 @@ class _ActionButton extends StatelessWidget {
         return Colors.transparent;
       case PublicProfileAction.following:
       case PublicProfileAction.blocked:
-        return colors.pink.shade500;
+        return colors.blue.shade500;
     }
   }
 
@@ -173,10 +160,10 @@ class _ActionButton extends StatelessWidget {
     switch (action) {
       case PublicProfileAction.follow:
       case PublicProfileAction.glitterbomb:
-        return const EdgeInsets.symmetric(vertical: 12);
+        return const EdgeInsets.symmetric(vertical: 16);
       case PublicProfileAction.following:
       case PublicProfileAction.blocked:
-        return const EdgeInsets.symmetric(vertical: 10);
+        return const EdgeInsets.symmetric(vertical: 16);
     }
   }
 }

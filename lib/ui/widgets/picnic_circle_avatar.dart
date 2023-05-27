@@ -33,7 +33,7 @@ class PicnicCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final avatarBgColor = bgColor ?? theme.colors.green.shade200;
+    final avatarBgColor = bgColor ?? theme.colors.blue.shade200;
     final avatarPlaceholder = placeholder ?? DefaultAvatar.circle();
     final verifiedBadge = Assets.images.verBadge.path;
     return image.isNotEmpty

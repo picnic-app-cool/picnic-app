@@ -30,7 +30,7 @@ class DiscoverabilitySettingSection extends StatelessWidget {
     final colors = theme.colors;
     final styles = theme.styles;
     final blackAndWhite = colors.blackAndWhite;
-    final green = colors.green;
+    final blue = colors.blue;
     final subTitleTextStyle = styles.caption10.copyWith(color: blackAndWhite.shade600);
     final isActive = value == groupValue;
 
@@ -42,10 +42,10 @@ class DiscoverabilitySettingSection extends StatelessWidget {
         foregroundDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_borderRadius),
           border: Border.all(
-            color: isActive ? green : blackAndWhite.shade300,
+            color: isActive ? blue : blackAndWhite.shade300,
             width: isActive ? _activeBorderWidth : _inactiveBorderWidth,
           ),
-          color: isActive ? green.withOpacity(_activeBackgroundColorOpacity) : null,
+          color: isActive ? blue.withOpacity(_activeBackgroundColorOpacity) : null,
         ),
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -53,7 +53,7 @@ class DiscoverabilitySettingSection extends StatelessWidget {
           children: [
             Text(
               label,
-              style: styles.title20,
+              style: styles.subtitle30,
             ),
             Text(
               description,

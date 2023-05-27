@@ -86,7 +86,7 @@ class PostBarButton extends StatelessWidget {
       if (params.text != null)
         Text(
           params.text ?? '',
-          style: theme.styles.title30.copyWith(
+          style: theme.styles.subtitle40.copyWith(
             color: textColor,
             fontSize: params.isVertical ? defaultFontSize : fontSize(context),
             shadows: [

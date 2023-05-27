@@ -45,7 +45,7 @@ class MultiSelectPostsConfirmation extends StatelessWidget {
             padding: _contentPadding,
             child: Text(
               title,
-              style: theme.styles.title30,
+              style: theme.styles.subtitle40,
             ),
           ),
           const Gap(22),

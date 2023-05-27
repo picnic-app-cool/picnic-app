@@ -81,7 +81,7 @@ class CommentPreviewItem extends StatelessWidget {
         ),
         leading: PicnicAvatar(
           size: topAvatarSize,
-          followButtonBackgroundColor: theme.colors.green,
+          followButtonBackgroundColor: theme.colors.blue,
           followButtonForegroundColor: blackAndWhite.shade100,
           backgroundColor: tealColor,
           borderColor: theme.colors.indigo,

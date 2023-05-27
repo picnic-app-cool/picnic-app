@@ -45,11 +45,11 @@ class ChatMoreSettingsTab extends StatelessWidget {
             children: [
               Text(
                 appLocalizations.muteGroupTitle,
-                style: theme.styles.title20,
+                style: theme.styles.subtitle30,
                 textAlign: TextAlign.center,
               ),
               PicnicSwitch(
-                color: colors.green,
+                color: colors.blue,
                 size: PicnicSwitchSize.regular,
                 onChanged: onTapSwitchNotifications,
                 value: isMuted,

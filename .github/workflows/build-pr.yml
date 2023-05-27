@@ -76,7 +76,7 @@ jobs:
     timeout-minutes: 20
     runs-on:
       - self-hosted
-      - linux # windows has bad pixels! https://github.com/picnic-app-cool/picnic-app-greenfield/actions/runs/4055819611/jobs/6979474402
+      - macosx # windows is not supported. macosx is required to make sure screenshots will not fail
     permissions:
       contents: read # to checkout
 
@@ -105,7 +105,7 @@ jobs:
     timeout-minutes: 20
     runs-on:
       - self-hosted
-      - linux # windows is not supported
+      - macosx # windows is not supported
     permissions:
       contents: read # to checkout
       checks: write # to report test results
@@ -140,7 +140,7 @@ jobs:
     timeout-minutes: 20
     runs-on:
       - self-hosted
-      - linux # windows is not supported
+      - macosx # windows is not supported
     permissions:
       contents: read # to checkout
       checks: write # to report test results
@@ -200,7 +200,7 @@ jobs:
     timeout-minutes: 20
     runs-on:
       - self-hosted
-      - linux # https://picnic-app.atlassian.net/browse/GS-6300
+      - linux # windows is not supported
     permissions:
       contents: read # to checkout
 

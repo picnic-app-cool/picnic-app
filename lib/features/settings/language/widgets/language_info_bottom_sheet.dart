@@ -28,7 +28,7 @@ class LanguageInfoBottomSheet extends StatelessWidget {
         children: [
           Text(
             appLocalizations.languageSelectionTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
             textAlign: TextAlign.left,
           ),
           const Gap(12),

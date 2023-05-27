@@ -41,7 +41,7 @@ class SendSeedsConfirmationColumn extends StatelessWidget {
           const Gap(16),
           Text(
             appLocalizations.sendSeeds,
-            style: themeData.styles.title30,
+            style: themeData.styles.subtitle40,
             textAlign: TextAlign.left,
           ),
           const Gap(4),
@@ -52,7 +52,7 @@ class SendSeedsConfirmationColumn extends StatelessWidget {
           ),
           PicnicListItem(
             title: recipient.username,
-            titleStyle: styles.title10,
+            titleStyle: styles.subtitle20,
             leading: PicnicAvatar(
               size: _avatarSize,
               boxFit: PicnicAvatarChildBoxFit.cover,
@@ -62,7 +62,7 @@ class SendSeedsConfirmationColumn extends StatelessWidget {
           PicnicButton(
             title: appLocalizations.sendSeedsConfirmation,
             onTap: onTapSendSeeds,
-            color: colors.green,
+            color: colors.blue,
           ),
           const Gap(16),
           Center(

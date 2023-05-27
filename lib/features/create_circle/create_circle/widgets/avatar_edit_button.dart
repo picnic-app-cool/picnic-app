@@ -21,7 +21,7 @@ class AvatarEditButton extends StatelessWidget {
       iconSize: _iconSize,
       size: _buttonSize,
       onTap: onTap,
-      color: PicnicTheme.of(context).colors.green,
+      color: PicnicTheme.of(context).colors.blue,
     );
   }
 }

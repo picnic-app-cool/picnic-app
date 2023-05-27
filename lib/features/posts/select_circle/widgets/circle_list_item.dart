@@ -32,7 +32,7 @@ class CircleListItem extends StatelessWidget {
       title: circle.name,
       onTap: onTap,
       height: null,
-      titleStyle: theme.styles.title10,
+      titleStyle: theme.styles.subtitle20,
       trailing: onTapEnabled
           ? PicnicButton(
               title: appLocalizations.chooseAction,
@@ -58,7 +58,7 @@ class CircleListItem extends StatelessWidget {
         image: circle.imageFile,
         emojiSize: _emojiSize,
         avatarSize: _avatarSize,
-        bgColor: theme.colors.green.shade200,
+        bgColor: theme.colors.blue.shade200,
       ),
     );
   }

@@ -53,7 +53,7 @@ class _EditCirclePageState extends State<EditCirclePage>
               onTapBack: state.isSaveLoading ? null : presenter.onTapBack,
               child: Text(
                 appLocalizations.editCircleInfo,
-                style: _styles.title20.copyWith(color: state.coverExists ? _whiteColor : null),
+                style: _styles.subtitle30.copyWith(color: state.coverExists ? _whiteColor : null),
               ),
             ),
             body: SafeArea(

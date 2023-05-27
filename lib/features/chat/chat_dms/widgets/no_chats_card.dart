@@ -43,7 +43,7 @@ class NoChatsCard extends StatelessWidget {
           const Gap(20),
           Text(
             appLocalizations.noChatsTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           const Gap(8),
           Text(

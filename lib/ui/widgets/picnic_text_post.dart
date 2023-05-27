@@ -31,7 +31,7 @@ class PicnicTextPost extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           text,
-          style: theme.styles.body30.copyWith(color: whiteColor),
+          style: theme.styles.body20.copyWith(color: whiteColor),
         ),
       ),
     );

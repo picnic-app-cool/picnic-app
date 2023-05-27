@@ -67,7 +67,7 @@ class _PhotoPostCreationPageState extends State<PhotoPostCreationPage>
                   iconPathLeft: Assets.images.arrowlefttwo.path,
                   child: Text(
                     appLocalizations.postImageTitle,
-                    style: theme.styles.title20,
+                    style: theme.styles.subtitle30,
                   ),
                 ),
                 body: Center(child: PostingDisabledCard(postingType: PostType.image, circleName: state.circleName)),

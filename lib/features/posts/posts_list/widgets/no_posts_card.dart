@@ -48,7 +48,7 @@ class NoPostsCard extends StatelessWidget {
           const Gap(20),
           Text(
             appLocalizations.noPostsTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           const Gap(8),
           Text(
@@ -61,6 +61,7 @@ class NoPostsCard extends StatelessWidget {
           PicnicButton(
             title: appLocalizations.postToCircleAction,
             onTap: onTapCreatePost,
+            color: theme.colors.blue,
           ),
         ],
       ),

@@ -55,7 +55,7 @@ class PostGridItem extends StatelessWidget {
           postSummaryBar: summaryBar,
           background: BoxDecoration(
             borderRadius: BorderRadius.circular(Constants.largePadding),
-            gradient: colorToColorOption(TextPostColor.green),
+            gradient: colorToColorOption(TextPostColor.blue),
           ),
           bodyText: (post.content as TextPostContent).text,
           post: post,

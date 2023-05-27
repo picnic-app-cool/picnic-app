@@ -55,7 +55,7 @@ class _AvatarSelectionPageState extends State<AvatarSelectionPage>
               child: stateObserver(
                 builder: (context, state) {
                   return PicnicAvatar(
-                    backgroundColor: colors.green.shade200,
+                    backgroundColor: colors.blue.shade200,
                     imageSource: PicnicImageSource.emoji(
                       state.selectedEmoji,
                       style: theme.styles.title40.copyWith(

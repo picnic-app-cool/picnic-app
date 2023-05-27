@@ -123,7 +123,7 @@ class MediaPickerPermissionDenied extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: theme.styles.title10,
+            style: theme.styles.subtitle20,
           ),
           const Gap(2),
           Padding(

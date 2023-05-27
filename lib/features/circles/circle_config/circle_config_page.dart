@@ -66,7 +66,7 @@ class _CircleConfigPageState extends State<CircleConfigPage>
                               null;
                       return PicnicListItem(
                         title: "${config.displayName} ${config.emoji}",
-                        titleStyle: theme.styles.title20,
+                        titleStyle: theme.styles.subtitle30,
                         subTitle: config.description,
                         subTitleStyle: theme.styles.caption10,
                         opacity: configCanBeChanged ? _enabledOpacity : _disabledOpacity,

@@ -35,7 +35,7 @@ class RulesBottomSheet extends StatelessWidget {
           children: [
             Text(
               appLocalizations.directorRulesTitle,
-              style: styles.title30,
+              style: styles.subtitle40,
             ),
             const Gap(20),
             Text(

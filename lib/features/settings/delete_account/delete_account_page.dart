@@ -50,7 +50,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
       iconPathLeft: Assets.images.backArrow.path,
       child: Text(
         appLocalizations.deleteAccountTitle,
-        style: theme.styles.title20,
+        style: theme.styles.subtitle30,
       ),
     );
 

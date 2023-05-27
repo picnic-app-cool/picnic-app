@@ -41,7 +41,7 @@ class PicnicRadioButton<T> extends StatelessWidget {
           groupValue: groupValue,
           onChanged: onChanged,
           autofocus: autoFocus,
-          activeColor: theme.colors.green,
+          activeColor: theme.colors.blue,
         ),
         Expanded(
           child: Padding(
@@ -73,7 +73,7 @@ class PicnicRadioButton<T> extends StatelessWidget {
     return onChanged == null
         ? blackAndWhite
         : selected
-            ? theme.colors.green
+            ? theme.colors.blue
             : blackAndWhite.shade600;
   }
 }

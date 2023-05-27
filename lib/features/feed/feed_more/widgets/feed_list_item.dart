@@ -31,7 +31,7 @@ class FeedListItem extends StatelessWidget {
       title: feed.name,
       onTap: onTap,
       height: null,
-      titleStyle: theme.styles.title20,
+      titleStyle: theme.styles.subtitle30,
       trailing: Text(
         subtitle,
         style: theme.styles.caption10.copyWith(color: blackAndWhite.shade600),

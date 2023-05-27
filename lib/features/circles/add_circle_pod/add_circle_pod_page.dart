@@ -58,7 +58,7 @@ class _AddCirclePodPageState extends State<AddCirclePodPage>
             const Gap(16),
             Text(
               appLocalizations.circleResultsTitle,
-              style: textStyles.title30,
+              style: textStyles.subtitle40,
             ),
             Expanded(
               child: stateObserver(

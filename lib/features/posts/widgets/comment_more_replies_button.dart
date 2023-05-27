@@ -19,7 +19,7 @@ class CommentMoreRepliesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final green = theme.colors.green.shade500;
+    final blue = theme.colors.blue.shade500;
 
     return Align(
       alignment: Alignment.centerLeft,
@@ -28,11 +28,11 @@ class CommentMoreRepliesButton extends StatelessWidget {
           Assets.images.reply.path,
           height: expandIconSize,
           width: expandIconSize,
-          color: green,
+          color: blue,
         ),
         label: appLocalizations.moreRepliesMessage(moreRepliesCount),
         labelStyle: theme.styles.body20.copyWith(
-          color: green,
+          color: blue,
         ),
         onTap: onTap,
       ),

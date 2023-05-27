@@ -60,7 +60,7 @@ class PicnicConfirmationAlert extends StatelessWidget {
                 ),
               ),
               descriptionTextStyle: theme.styles.caption10.copyWith(color: blackAndWhite.shade600),
-              titleTextStyle: theme.styles.title20,
+              titleTextStyle: theme.styles.subtitle30,
               titleSize: PicnicDialogTitleSize.custom,
               title: title,
               radius: _dialogRadius,

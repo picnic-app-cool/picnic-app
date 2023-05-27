@@ -28,8 +28,8 @@ class LanguageSelectButton extends StatelessWidget {
     return PicnicButton(
       borderRadius: const PicnicButtonRadius.semiRound(),
       emoji: language.flag,
-      color: isSelected ? colors.green.withOpacity(_lowOpacity) : Colors.transparent,
-      borderColor: isSelected ? colors.green : colors.blackAndWhite.shade400,
+      color: isSelected ? colors.blue.withOpacity(_lowOpacity) : Colors.transparent,
+      borderColor: isSelected ? colors.blue : colors.blackAndWhite.shade400,
       style: PicnicButtonStyle.outlined,
       padding: _languageSelectButtonPadding,
       titleStyle: theme.styles.body30,

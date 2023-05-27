@@ -48,7 +48,7 @@ class _BlacklistedWordsPageState extends State<BlacklistedWordsPage>
         ],
         child: Text(
           appLocalizations.blacklistedWords,
-          style: themeData.styles.title20,
+          style: themeData.styles.subtitle30,
         ),
       ),
       body: Column(

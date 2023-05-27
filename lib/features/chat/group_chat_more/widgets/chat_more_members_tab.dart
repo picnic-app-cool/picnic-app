@@ -37,13 +37,13 @@ class ChatMoreMembersTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final textStyleTitle10 = theme.styles.title10;
+    final textStyleSubtitle20 = theme.styles.subtitle20;
     final pinkColor = theme.colors.pink.shade500;
     const blueColor = PicnicColors.bluishCyan;
 
     final adminLabel = Text(
       appLocalizations.adminLabel,
-      style: theme.styles.title20.copyWith(color: blueColor),
+      style: theme.styles.subtitle30.copyWith(color: blueColor),
     );
 
     return PicnicPagingListView<ChatMember>(
@@ -72,7 +72,7 @@ class ChatMoreMembersTab extends StatelessWidget {
           height: _listItemHeight,
           onTap: () => onTapUser(item),
           title: title,
-          titleStyle: textStyleTitle10,
+          titleStyle: textStyleSubtitle20,
           leading: PicnicAvatar(
             size: _avatarSize,
             boxFit: PicnicAvatarChildBoxFit.cover,

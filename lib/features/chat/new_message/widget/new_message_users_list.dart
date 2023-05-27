@@ -32,7 +32,7 @@ class NewMessageUsersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
-    final textStyleTitle10 = theme.styles.title10;
+    final textStyleSubtitle20 = theme.styles.subtitle20;
 
     return Expanded(
       child: PicnicPagingListView<Selectable<User>>(
@@ -56,7 +56,7 @@ class NewMessageUsersList extends StatelessWidget {
             height: _listItemHeight,
             onTap: () => onTapAddRecipient(user),
             title: user.username,
-            titleStyle: textStyleTitle10,
+            titleStyle: textStyleSubtitle20,
             leading: _avatar,
             trailing: item.selected ? Image.asset(Assets.images.checkboxSquare.path) : null,
           );

@@ -71,7 +71,7 @@ class CommentActionsBottomSheet extends StatelessWidget {
           const Gap(_verticalSpacing),
           Text(
             appLocalizations.commentActionsTitle,
-            style: theme.styles.title30,
+            style: theme.styles.subtitle40,
           ),
           if (comment is CommentPreview)
             CommentPreviewItem(comment: comment as CommentPreview)

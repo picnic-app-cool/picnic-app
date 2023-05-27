@@ -26,7 +26,7 @@ class ModUserListTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: PicnicListItem(
         title: user.username,
-        titleStyle: styles.title10,
+        titleStyle: styles.subtitle20,
         leading: PicnicAvatar(
           size: _avatarSize,
           boxFit: PicnicAvatarChildBoxFit.cover,

@@ -31,7 +31,7 @@ class PrivateSlice extends StatelessWidget {
           const Gap(16),
           Text(
             appLocalizations.privateSlice,
-            style: styles.title30,
+            style: styles.subtitle40,
           ),
           Text(
             appLocalizations.privateSliceLabel,

@@ -60,7 +60,7 @@ class DirectorLedColumn extends StatelessWidget {
               children: [
                 Text(
                   appLocalizations.circleSuccessTitle(circleName),
-                  style: theme.styles.title30,
+                  style: theme.styles.subtitle40,
                 ),
                 const Gap(20),
                 const DirectorLedSuccessView(),

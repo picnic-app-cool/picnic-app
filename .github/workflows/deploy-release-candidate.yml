@@ -27,7 +27,7 @@ jobs:
     timeout-minutes: 5
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     permissions: {}
 
     steps:
@@ -62,7 +62,7 @@ jobs:
     timeout-minutes: 5
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     permissions:
       contents: read # to checkout
 
@@ -91,7 +91,7 @@ jobs:
     timeout-minutes: 5
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     permissions:
       contents: read # to checkout
 
@@ -122,7 +122,7 @@ jobs:
     timeout-minutes: 2
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     permissions:
       contents: write # to checkout and push tags
 
@@ -186,7 +186,7 @@ jobs:
     timeout-minutes: 2
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     if: ${{ failure() || cancelled() }}
     needs:
       - bump-version
@@ -222,7 +222,7 @@ jobs:
     timeout-minutes: 2
     runs-on:
       - self-hosted
-      - linux
+      - macosx
     needs:
       - generate-release-notes
       - deploy-release-candidate

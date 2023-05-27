@@ -17,11 +17,12 @@ class SplashDialogContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final styles = theme.styles;
+    final blue = theme.colors.blue;
     return Column(
       children: [
         PicnicButton(
           title: appLocalizations.getStartedAction,
-          color: theme.colors.pink,
+          color: blue,
           minWidth: double.infinity,
           onTap: onTapGetStarted,
         ),
@@ -37,7 +38,7 @@ class SplashDialogContent extends StatelessWidget {
               child: Text(
                 appLocalizations.logInAction,
                 style: styles.body20.copyWith(
-                  color: theme.colors.green,
+                  color: blue,
                 ),
               ),
             ),

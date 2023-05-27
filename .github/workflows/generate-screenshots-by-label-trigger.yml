@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 30
     runs-on:
       - self-hosted
-      - linux # windows has bad pixels! https://github.com/picnic-app-cool/picnic-app-greenfield/actions/runs/4055819611/jobs/6979474402
+      - macosx # windows has bad pixels!
     permissions: { }
 
     if: ${{ github.event.label.name == 'Generate Screenshots' }}
