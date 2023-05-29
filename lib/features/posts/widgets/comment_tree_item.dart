@@ -113,71 +113,75 @@ class CommentTreeItem extends StatelessWidget {
     final styleCaption = styleCaption10.copyWith(color: blackAndWhite.shade600);
     final commentActions = Row(
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            PicnicLikeButton(
-              isLiked: treeComment.isLiked,
-              onTap: () => onLikeUnlikeTap?.call(treeComment),
-              strokeColor: blackAndWhite.shade600,
-              size: 16,
-              image: Assets.images.likeOutlined,
-            ),
-            const Gap(2),
-            Text(
-              treeComment.likesCount.toString(),
-              style: styleCaption,
-            ),
-            const Gap(6),
-            Image.asset(
-              Assets.images.dislikeOutlined.path,
-              color: blackAndWhite.shade600,
-              width: chatIconSize,
-              height: chatIconSize,
-            ),
-          ],
+        GestureDetector(
+          onTap: () => onLikeUnlikeTap?.call(treeComment),
+          behavior: HitTestBehavior.opaque,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PicnicLikeButton(
+                isLiked: treeComment.isLiked,
+                onTap: () => onLikeUnlikeTap?.call(treeComment),
+                strokeColor: blackAndWhite.shade600,
+                size: 16,
+                image: Assets.images.likeOutlined,
+              ),
+              const Gap(2),
+              Text(
+                treeComment.likesCount.toString(),
+                style: styleCaption,
+              ),
+              const Gap(6),
+              Image.asset(
+                Assets.images.dislikeOutlined.path,
+                color: blackAndWhite.shade600,
+                width: chatIconSize,
+                height: chatIconSize,
+              ),
+            ],
+          ),
         ),
         const Gap(20),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(
-              onTap: () => onReply?.call(context, treeComment),
-              behavior: HitTestBehavior.opaque,
-              child: Image.asset(
+        GestureDetector(
+          onTap: () => onReply?.call(context, treeComment),
+          behavior: HitTestBehavior.opaque,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
                 Assets.images.chatStroked.path,
                 color: blackAndWhite.shade600,
                 width: chatIconSize,
                 height: chatIconSize,
               ),
-            ),
-            const Gap(2),
-            Text(
-              repliesCount.toString(),
-              style: styleCaption,
-            ),
-          ],
+              const Gap(2),
+              Text(
+                repliesCount.toString(),
+                style: styleCaption,
+              ),
+            ],
+          ),
         ),
         const Gap(20),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => onTapShareCommentItem(treeComment.text),
-              child: Image.asset(
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTapShareCommentItem(treeComment.text),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
                 Assets.images.sendOutlined.path,
                 color: blackAndWhite.shade600,
                 width: chatIconSize,
                 height: chatIconSize,
               ),
-            ),
-            const Gap(2),
-            Text(
-              appLocalizations.shareAction,
-              style: styleCaption,
-            ),
-          ],
+              const Gap(2),
+              Text(
+                appLocalizations.shareAction,
+                style: styleCaption,
+              ),
+            ],
+          ),
         ),
       ],
     );

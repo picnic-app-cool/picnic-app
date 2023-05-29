@@ -18,6 +18,7 @@ mixin InviteFriendsBottomSheetRoute {
   Future<void> showVerticalActionBottomSheet(InviteFriendsBottomSheetInitialParams initialParams) async {
     return showPicnicBottomSheet(
       getIt<InviteFriendsBottomSheetPage>(param1: initialParams),
+      useRootNavigator: true,
     );
   }
 
