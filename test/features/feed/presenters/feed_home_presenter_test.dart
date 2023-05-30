@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/features/feed/feed_home/feed_home_initial_params.dart';
 import 'package:picnic_app/features/feed/feed_home/feed_home_presentation_model.dart';
 import 'package:picnic_app/features/feed/feed_home/feed_home_presenter.dart';
+import 'package:picnic_app/features/profile/domain/model/unread_notifications_count.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
@@ -44,6 +45,7 @@ void main() {
     when(() => Mocks.userCirclesStore.userCircles).thenReturn(Stubs.basicCircles);
     when(() => FeedMocks.localFeedsStore.stream).thenAnswer((_) => Stubs.feedStream);
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
+
     model = FeedHomePresentationModel.initial(
       FeedHomeInitialParams(
         onPostChanged: (post) {},
@@ -54,6 +56,11 @@ void main() {
       Mocks.userStore,
     );
     navigator = MockFeedHomeNavigator();
+
+    when(() => ProfileMocks.getUnreadNotificationsCountUseCase.execute())
+        .thenAnswer((invocation) => successFuture(const UnreadNotificationsCount(count: 7)));
+    when(() => Mocks.updateAppBadgeCountUseCase.execute(any())).thenAnswer((_) => Future.value());
+
     presenter = FeedHomePresenter(
       model,
       navigator,

@@ -11,6 +11,7 @@ import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
 import 'package:picnic_app/features/analytics/domain/model/change/analytics_change_target.dart';
+import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_target.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/feed/domain/model/feed.dart';
 import 'package:picnic_app/features/feed/domain/model/get_feeds_list_failure.dart';
@@ -88,7 +89,15 @@ class FeedHomePresenter extends Cubit<FeedHomeViewModel> with SubscriptionsMixin
 
   void onTapProfile() => navigator.openPrivateProfile(const PrivateProfileInitialParams());
 
-  void onTapNotifications() => navigator.openNotifications(const NotificationsListInitialParams());
+  Future<void> onTapNotifications() async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.profileNotificationsButton,
+      ),
+    );
+    await navigator.openNotifications(const NotificationsListInitialParams());
+    _getUnreadNotificationsCount();
+  }
 
   void onTapCirclesSideMenu() => _model.onCirclesSideMenuToggled();
 
