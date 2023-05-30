@@ -47,6 +47,7 @@ class _CommentChatPageState extends State<CommentChatPage>
   static const double _buttonSize = 48;
 
   double? _keepVisibleOffset;
+  bool _isKeyboardOpened = false;
 
   @override
   void initState() {
@@ -168,6 +169,7 @@ class _CommentChatPageState extends State<CommentChatPage>
                   )
                 else
                   DisabledChatView(text: appLocalizations.disabledCommentsLabel),
+                if (_isKeyboardOpened) const Gap(20),
                 if (state.showReportAction) ...[
                   SizedBox(
                     width: double.infinity,
@@ -194,9 +196,15 @@ class _CommentChatPageState extends State<CommentChatPage>
   }
 
   void _onKeyboardStatusChanged(bool isOpened) {
-    if (!isOpened) {
-      setState(() => _keepVisibleOffset = null);
+    if (_isKeyboardOpened == isOpened) {
+      return;
     }
+    setState(() {
+      _isKeyboardOpened = isOpened;
+      if (!isOpened) {
+        _keepVisibleOffset = null;
+      }
+    });
   }
 
   void _onTapSend() {
