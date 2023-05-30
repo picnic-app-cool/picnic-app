@@ -110,6 +110,7 @@ class _MainPageState extends State<MainPage> with PresenterStateMixin<MainViewMo
                 if (state.isCirclesSideMenuOpen)
                   GestureDetector(
                     onTap: () => presenter.onCirclesSideMenuToggled(),
+                    onHorizontalDragEnd: handleHorizontalDragEnd,
                   ),
                 AnimatedPositioned(
                   duration: const Duration(milliseconds: 250),
