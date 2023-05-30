@@ -184,9 +184,11 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
       children: [
         Opacity(
           opacity: 0,
-          child: SizeReportingWidget(
-            onSizeChange: _onTopWidgetSizeChanged,
-            child: topWidget,
+          child: SingleChildScrollView(
+            child: SizeReportingWidget(
+              onSizeChange: _onTopWidgetSizeChanged,
+              child: topWidget,
+            ),
           ),
         ),
         Opacity(
@@ -206,12 +208,13 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
             // Without this param - `_scrollController.position.maxScrollExtent` gives incorrect value
             cacheExtent: double.maxFinite,
             slivers: [
-              if (widget.showPostSummary && _topWidgetHeight != 0) ...[
+              if (widget.showPostSummary && _topWidgetHeight != 0 && _actionsBarWidgetHeight != 0) ...[
                 SliverAppBar(
                   expandedHeight: _topWidgetHeight + _actionsBarWidgetHeight,
                   toolbarHeight: 0,
                   flexibleSpace: FlexibleSpaceBar(
                     background: topWidget,
+                    collapseMode: CollapseMode.pin,
                   ),
                   backgroundColor: Colors.white,
                   automaticallyImplyLeading: false,
