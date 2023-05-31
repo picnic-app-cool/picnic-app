@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picnic_app/core/domain/model/link_url.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
-import 'package:picnic_app/features/posts/widgets/comment_tree_item.dart';
+import 'package:picnic_app/features/posts/widgets/comment_tree_item/comment_tree_item.dart';
 import 'package:picnic_app/features/posts/widgets/comments_key_storage.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';

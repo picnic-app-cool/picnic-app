@@ -1,6 +1,6 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:picnic_app/features/posts/widgets/comment_tree_item.dart';
+import 'package:picnic_app/features/posts/widgets/comment_tree_item/comment_tree_item.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';

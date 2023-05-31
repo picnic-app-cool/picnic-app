@@ -176,6 +176,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/comment_action_unpin.webp
   AssetGenImage get commentActionUnpin => const AssetGenImage('assets/images/comment_action_unpin.webp');
 
+  /// File path: assets/images/comment_replies_minus.webp
+  AssetGenImage get commentRepliesMinus => const AssetGenImage('assets/images/comment_replies_minus.webp');
+
+  /// File path: assets/images/comment_replies_plus.webp
+  AssetGenImage get commentRepliesPlus => const AssetGenImage('assets/images/comment_replies_plus.webp');
+
   /// File path: assets/images/compress.webp
   AssetGenImage get compress => const AssetGenImage('assets/images/compress.webp');
 
@@ -686,6 +692,8 @@ class $AssetsImagesGen {
         closeSquare,
         commentActionPin,
         commentActionUnpin,
+        commentRepliesMinus,
+        commentRepliesPlus,
         compress,
         congrats,
         contact,

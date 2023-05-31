@@ -6,7 +6,7 @@ import 'package:picnic_app/features/posts/domain/model/basic_comment.dart';
 import 'package:picnic_app/features/posts/domain/model/comment_preview.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
 import 'package:picnic_app/features/posts/widgets/comment_preview_item.dart';
-import 'package:picnic_app/features/posts/widgets/comment_tree_item.dart';
+import 'package:picnic_app/features/posts/widgets/comment_tree_item/comment_tree_item.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
