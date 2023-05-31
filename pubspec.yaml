@@ -170,6 +170,9 @@ dependencies:
   uuid: 3.0.7
   flutter_dotenv: 5.0.2
 
+  #keyboard actions
+  keyboard_actions: 4.1.0
+
 dependency_overrides:
   custom_lint:
     path: packages/dart-custom-lint/packages/custom_lint

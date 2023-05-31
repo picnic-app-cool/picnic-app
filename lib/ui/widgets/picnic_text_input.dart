@@ -15,6 +15,7 @@ class PicnicTextInput extends StatelessWidget {
     this.hintText = "",
     this.errorText = "",
     this.textController,
+    this.scrollPhysics,
     this.onChanged,
     this.isLoading = false,
     this.keyboardType = TextInputType.text,
@@ -44,6 +45,7 @@ class PicnicTextInput extends StatelessWidget {
 
   final String hintText;
   final TextEditingController? textController;
+  final ScrollPhysics? scrollPhysics;
   final ValueChanged<String>? onChanged;
   final String errorText;
   final TextInputType? keyboardType;
@@ -110,6 +112,7 @@ class PicnicTextInput extends StatelessWidget {
             focusNode: focusNode,
             initialValue: initialValue,
             controller: textController,
+            scrollPhysics: scrollPhysics,
             readOnly: readOnly,
             onTap: onTap,
             maxLength: maxLength,

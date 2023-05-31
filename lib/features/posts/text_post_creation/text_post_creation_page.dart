@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/posts/domain/model/post_type.dart';
 import 'package:picnic_app/features/posts/posts_list/widgets/posting_disabled_card.dart';
@@ -8,7 +9,6 @@ import 'package:picnic_app/features/posts/text_post_creation/text_post_creation_
 import 'package:picnic_app/features/posts/text_post_creation/widgets/sound_attachment_item.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
-import 'package:picnic_app/ui/widgets/automatic_keyboard_hide.dart';
 import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_app/ui/widgets/picnic_text_input.dart';
 import 'package:picnic_app/ui/widgets/shake_widget.dart';
@@ -32,6 +32,7 @@ class _TextPostCreationPageState extends State<TextPostCreationPage>
     with PresenterStateMixin<TextPostCreationViewModel, TextPostCreationPresenter, TextPostCreationPage> {
   static const _maxLength = 10000;
   late final GlobalKey<ShakeWidgetState> _shakeWidgetKey;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -69,43 +70,70 @@ class _TextPostCreationPageState extends State<TextPostCreationPage>
             style: styles.subtitle30,
           ),
         ),
-        body: AutomaticKeyboardHide(
-          child: SizedBox.expand(
-            child: state.postingEnabled
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          if (state.showSelectedSoundBadge) const Gap(16),
-                          if (state.showSelectedSoundBadge)
-                            SoundAttachmentItem(
-                              sound: state.sound,
-                              onTapDeleteSoundAttachment: presenter.onTapDeleteSoundAttachment,
-                            ),
-                          if (state.showSelectedSoundBadge) const Gap(16),
-                          ShakeWidget(
-                            key: _shakeWidgetKey,
-                            child: PicnicTextInput(
-                              maxLines: null,
-                              hintText: appLocalizations.thoughtTextFieldHint,
-                              maxLength: _maxLength,
-                              showMaxLengthCounter: false,
-                              onChanged: presenter.onTextChanged,
-                              keyboardType: TextInputType.multiline,
-                              padding: 0,
-                              inputFillColor: Colors.transparent,
-                              inputTextStyle: inputTextStyle,
-                            ),
+        body: KeyboardActions(
+          autoScroll: false,
+          config: _buildConfig(context),
+          child: state.postingEnabled
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        if (state.showSelectedSoundBadge) const Gap(16),
+                        if (state.showSelectedSoundBadge)
+                          SoundAttachmentItem(
+                            sound: state.sound,
+                            onTapDeleteSoundAttachment: presenter.onTapDeleteSoundAttachment,
                           ),
-                        ],
-                      ),
+                        if (state.showSelectedSoundBadge) const Gap(16),
+                        PicnicTextInput(
+                          scrollPhysics: const NeverScrollableScrollPhysics(),
+                          maxLines: null,
+                          hintText: appLocalizations.thoughtTextFieldHint,
+                          maxLength: _maxLength,
+                          showMaxLengthCounter: false,
+                          onChanged: presenter.onTextChanged,
+                          keyboardType: TextInputType.multiline,
+                          padding: 0,
+                          inputFillColor: Colors.transparent,
+                          inputTextStyle: inputTextStyle,
+                          focusNode: _focusNode,
+                        ),
+                      ],
                     ),
-                  )
-                : Center(child: PostingDisabledCard(postingType: PostType.text, circleName: state.circleName)),
-          ),
+                  ),
+                )
+              : Center(child: PostingDisabledCard(postingType: PostType.text, circleName: state.circleName)),
         ),
       ),
+    );
+  }
+
+  KeyboardActionsConfig _buildConfig(BuildContext context) {
+    final theme = PicnicTheme.of(context);
+    final colors = theme.colors;
+    return KeyboardActionsConfig(
+      keyboardBarColor: Colors.grey[200],
+      actions: [
+        KeyboardActionsItem(
+          focusNode: _focusNode,
+          displayArrows: false,
+          toolbarButtons: [
+            (node) {
+              return GestureDetector(
+                onTap: () => node.unfocus(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.close,
+                    color: colors.blue.shade700,
+                  ),
+                ),
+              );
+            },
+          ],
+        ),
+      ],
     );
   }
 

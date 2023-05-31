@@ -1275,6 +1275,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
+  keyboard_actions:
+    dependency: "direct main"
+    description:
+      name: keyboard_actions
+      sha256: d621d15d7626303798e451008a223642a86978d06fc4adff7461d77859834aa9
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   linkify:
     dependency: "direct main"
     description:
