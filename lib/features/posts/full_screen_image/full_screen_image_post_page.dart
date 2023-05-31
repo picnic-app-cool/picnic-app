@@ -60,22 +60,25 @@ class _FullScreenImagePostPageState extends State<FullScreenImagePostPage>
                   onTap: presenter.onTapOptions,
                 ),
               ],
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PicnicCircleAvatar(
-                    emoji: state.circle.emoji,
-                    image: state.circle.imageFile,
-                    emojiSize: _emojiSize,
-                    avatarSize: _avatarSize,
-                    isVerified: state.circle.isVerified,
-                    bgColor: blackAndWhite.shade200,
-                  ),
-                  const Gap(6),
-                  Text(
-                    state.circle.name,
-                  ),
-                ],
+              child: InkWell(
+                onTap: presenter.onTapShowCircle,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    PicnicCircleAvatar(
+                      emoji: state.circle.emoji,
+                      image: state.circle.imageFile,
+                      emojiSize: _emojiSize,
+                      avatarSize: _avatarSize,
+                      isVerified: state.circle.isVerified,
+                      bgColor: blackAndWhite.shade200,
+                    ),
+                    const Gap(6),
+                    Text(
+                      state.circle.name,
+                    ),
+                  ],
+                ),
               ),
             ),
             extendBodyBehindAppBar: true,

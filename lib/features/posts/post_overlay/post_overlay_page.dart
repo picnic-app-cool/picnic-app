@@ -89,9 +89,7 @@ class _PostOverlayPageState extends State<PostOverlayPage>
           final displayOptions = state.displayOptions;
           final postType = state.post.type;
 
-          final postSummaryBar = displayOptions.detailsMode == PostDetailsMode.feed &&
-                  !displayOptions.showPostSummaryBarAbovePost &&
-                  displayOptions.showPostSummaryBar
+          final postSummaryBar = !displayOptions.showPostSummaryBarAbovePost && displayOptions.showPostSummaryBar
               ? PostSummaryBar(
                   author: state.author,
                   post: state.post,
