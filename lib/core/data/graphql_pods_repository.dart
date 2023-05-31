@@ -1,9 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/data/graphql/graphql_client.dart';
+import 'package:picnic_app/core/data/graphql/model/connection/gql_connection.dart';
+import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_app.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_generated_token.dart';
 import 'package:picnic_app/core/data/graphql/pods_queries.dart';
+import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/generated_token.dart';
+import 'package:picnic_app/core/domain/model/get_trending_pods_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_scoped_pod_token_failure.dart';
+import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/repositories/pods_repository.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
@@ -30,4 +37,25 @@ class GraphqlPodsRepository implements PodsRepository {
           )
           .mapFailure(GetUserScopedPodTokenFailure.unknown)
           .mapSuccess((response) => response.toDomain());
+
+  @override
+  Future<Either<GetTrendingPodsFailure, PaginatedList<PodApp>>> getTrendingPods({Cursor? cursor}) async {
+    return _gqlClient
+        .query(
+          document: getTrendingAppsQuery,
+          variables: {
+            if (cursor != null) 'cursor': cursor.toGqlCursorInput(),
+          },
+          parseData: (json) {
+            final data = json['getTrendingApps'] as Map<String, dynamic>;
+            return GqlConnection.fromJson(data);
+          },
+        )
+        .mapFailure(GetTrendingPodsFailure.unknown)
+        .mapSuccess(
+          (connection) => connection.toDomain(
+            nodeMapper: (node) => GqlApp.fromJson(node).toDomain(),
+          ),
+        );
+  }
 }

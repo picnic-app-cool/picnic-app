@@ -113,6 +113,7 @@ import 'package:picnic_app/core/domain/use_cases/get_runtime_permission_status_u
 import 'package:picnic_app/core/domain/use_cases/get_should_show_circles_selection_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_slice_members_by_role_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_slices_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_trending_pods_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_by_username_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
@@ -202,6 +203,7 @@ import 'package:picnic_app/features/slices/dependency_injection/feature_componen
 import 'package:picnic_app/features/user_agreement/dependency_injection/feature_component.dart' as user_agreement;
 import 'package:picnic_app/features/video_editor/dependency_injection/feature_component.dart' as video_editor;
 import 'package:picnic_app/firebase_options.dart';
+
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/utils/root_navigator_observer.dart';
@@ -815,6 +817,11 @@ void _configureUseCases() {
         )
         ..registerFactory<GetUserScopedPodTokenUseCase>(
           () => GetUserScopedPodTokenUseCase(
+            getIt(),
+          ),
+        )
+        ..registerFactory<GetTrendingPodsUseCase>(
+          () => GetTrendingPodsUseCase(
             getIt(),
           ),
         )

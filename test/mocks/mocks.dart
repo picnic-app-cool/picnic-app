@@ -241,6 +241,7 @@ class Mocks {
 
   static late MockGetUserScopedPodTokenFailure getUserScopedPodTokenFailure;
   static late MockGetUserScopedPodTokenUseCase getUserScopedPodTokenUseCase;
+  static late MockGetTrendingPodsUseCase getTrendingPodsUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
@@ -555,6 +556,7 @@ class Mocks {
 
     getUserScopedPodTokenFailure = MockGetUserScopedPodTokenFailure();
     getUserScopedPodTokenUseCase = MockGetUserScopedPodTokenUseCase();
+    getTrendingPodsUseCase = MockGetTrendingPodsUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 

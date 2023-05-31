@@ -123,6 +123,7 @@ import 'package:picnic_app/core/domain/use_cases/get_runtime_permission_status_u
 import 'package:picnic_app/core/domain/use_cases/get_should_show_circles_selection_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_slice_members_by_role_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_slices_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_trending_pods_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_by_username_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
@@ -450,6 +451,8 @@ class MockGetCircleByNameUseCase extends Mock implements GetCircleByNameUseCase 
 class MockGetUserScopedPodTokenFailure extends Mock implements GetUserScopedPodTokenFailure {}
 
 class MockGetUserScopedPodTokenUseCase extends Mock implements GetUserScopedPodTokenUseCase {}
+
+class MockGetTrendingPodsUseCase extends Mock implements GetTrendingPodsUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

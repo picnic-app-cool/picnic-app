@@ -1,4 +1,7 @@
-String get app => '''
+import 'package:picnic_app/core/data/graphql/templates/gql_template.dart';
+
+extension GqlTemplateApp on GqlTemplate {
+  String get app => '''
   id
   url
   name
@@ -20,12 +23,12 @@ String get app => '''
   score 
 ''';
 
-String get appTag => '''
+  String get appTag => '''
   id
   name
 ''';
 
-String get appPermission => '''
+  String get appPermission => '''
   id
   dxName
   uxName
@@ -33,12 +36,13 @@ String get appPermission => '''
   descriptors
 ''';
 
-String get appSubscription => '''
+  String get appSubscription => '''
   id
   descriptor
 ''';
 
-String get appOwner => '''
+  String get appOwner => '''
   id
   name
 ''';
+}

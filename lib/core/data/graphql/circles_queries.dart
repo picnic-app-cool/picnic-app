@@ -230,7 +230,7 @@ String get getCirclePods => '''
       nodeTemplate: '''
       circleId
         app {
-          $app
+          ${GqlTemplate().app}
         }
       ''',
     )}
