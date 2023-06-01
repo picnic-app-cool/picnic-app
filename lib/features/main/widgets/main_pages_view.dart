@@ -107,7 +107,7 @@ class _MainPagesViewState extends State<MainPagesView> {
     _ensurePageWidgets(widget.items);
     return PageView(
       // we want to disable bouncing scroll in horizontal navigation
-      physics: const ClampingScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       controller: _controller,
       children: widget.items.map(
         (it) {
