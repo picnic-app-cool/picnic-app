@@ -7,6 +7,7 @@ import 'package:picnic_app/core/domain/model/displayable_failure.dart';
 import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission_status.dart';
+import 'package:picnic_app/core/domain/model/search_pod_input.dart';
 import 'package:picnic_app/core/domain/model/secure_local_storage_key.dart';
 import 'package:picnic_app/core/domain/model/upload_attachment.dart';
 import 'package:picnic_app/core/utils/periodic_task_executor.dart';
@@ -242,6 +243,7 @@ class Mocks {
   static late MockGetUserScopedPodTokenFailure getUserScopedPodTokenFailure;
   static late MockGetUserScopedPodTokenUseCase getUserScopedPodTokenUseCase;
   static late MockGetTrendingPodsUseCase getTrendingPodsUseCase;
+  static late MockSearchPodsUseCase searchPodsUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
@@ -557,6 +559,7 @@ class Mocks {
     getUserScopedPodTokenFailure = MockGetUserScopedPodTokenFailure();
     getUserScopedPodTokenUseCase = MockGetUserScopedPodTokenUseCase();
     getTrendingPodsUseCase = MockGetTrendingPodsUseCase();
+    searchPodsUseCase = MockSearchPodsUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
@@ -876,5 +879,6 @@ class Mocks {
     registerFallbackValue(Duration.zero);
     registerFallbackValue(const CreateCollectionInput.empty());
     registerFallbackValue(const AuthToken.empty());
+    registerFallbackValue(const SearchPodInput.empty());
   }
 }

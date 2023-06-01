@@ -147,6 +147,7 @@ import 'package:picnic_app/core/domain/use_cases/request_runtime_permission_use_
 import "package:picnic_app/core/domain/use_cases/save_photo_to_gallery_use_case.dart";
 import 'package:picnic_app/core/domain/use_cases/save_post_to_collection_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_video_to_gallery_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/search_pods_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/search_users_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/set_app_info_use_case.dart';
 import "package:picnic_app/core/domain/use_cases/set_language_use_case.dart";
@@ -453,6 +454,8 @@ class MockGetUserScopedPodTokenFailure extends Mock implements GetUserScopedPodT
 class MockGetUserScopedPodTokenUseCase extends Mock implements GetUserScopedPodTokenUseCase {}
 
 class MockGetTrendingPodsUseCase extends Mock implements GetTrendingPodsUseCase {}
+
+class MockSearchPodsUseCase extends Mock implements SearchPodsUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

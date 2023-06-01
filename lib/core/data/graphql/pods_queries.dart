@@ -22,3 +22,16 @@ String getTrendingAppsQuery = '''
     }
   }
 ''';
+
+String searchAppsQuery = '''
+  query (\$cursor: CursorInput, \$nameStartsWith: String!, \$tagIds: [ID!], \$orderBy: AppOrder!) {
+    searchApps(search: {
+      cursor: \$cursor,
+      nameStartsWith: \$nameStartsWith,
+      tagIds: \$tagIds,
+      orderBy: \$orderBy
+    }) {
+      ${GqlTemplate().connection(nodeTemplate: GqlTemplate().app)}
+    }
+  }
+''';
