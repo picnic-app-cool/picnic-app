@@ -36,7 +36,7 @@ import '../feed_tests_utils.dart';
 import '../mocks/posts_mocks.dart';
 
 final getPostsUseCaseStub = PostsMocks.getPostsListUseCase.execute(
-  feedId: any(named: 'feedId'),
+  feed: any(named: 'feed'),
   searchQuery: any(named: 'searchQuery'),
   cursor: any(named: 'cursor'),
   cachePolicy: any(named: 'cachePolicy'),
@@ -111,7 +111,7 @@ Future<void> main() async {
       await _initMvp(gridView: true);
       when(
         () => PostsMocks.getPostsListUseCase.execute(
-          feedId: const Id.empty(),
+          feed: Stubs.feed,
           searchQuery: '',
           cursor: const Cursor.empty(),
           cachePolicy: any(named: "cachePolicy"),

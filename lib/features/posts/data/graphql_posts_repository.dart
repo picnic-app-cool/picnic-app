@@ -21,6 +21,7 @@ import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/data/model/gql_create_post_input.dart';
+import 'package:picnic_app/features/posts/data/model/gql_user_feed.dart';
 import 'package:picnic_app/features/posts/data/posts_queries.dart';
 import 'package:picnic_app/features/posts/domain/model/create_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/create_post_input.dart';
@@ -115,6 +116,29 @@ class GraphQlPostsRepository implements PostsRepository {
               _userStore,
             ),
           ),
+        );
+  }
+
+  @override
+  Stream<CacheableResult<GetPostsFailure, List<Post>>> getForYouPosts({
+    required int limit,
+    CachePolicy? cachePolicy,
+  }) {
+    return _gqlClient
+        .watchQuery(
+          document: getForYouPostsQuery,
+          variables: {"limit": limit},
+          parseData: (json) {
+            final data = json['getFeed'] as Map<String, dynamic>;
+            return GqlUserFeed.fromJson(data);
+          },
+          options: const WatchQueryOptions.defaultOptions().copyWith(
+            cachePolicy: cachePolicy,
+          ),
+        )
+        .mapFailure(GetPostsFailure.unknown)
+        .mapSuccess(
+          (userFeed) => userFeed.toDomain(userStore: _userStore),
         );
   }
 

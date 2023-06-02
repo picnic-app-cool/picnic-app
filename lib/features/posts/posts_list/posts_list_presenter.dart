@@ -159,7 +159,7 @@ class PostsListPresenter extends Cubit<PostsListViewModel> {
     CachePolicy? cachePolicy,
   }) {
     return _getPostsListUseCase.execute(
-      feedId: _model.feed.id,
+      feed: _model.feed,
       searchQuery: '',
       cursor: _model.cursor,
       cachePolicy: cachePolicy,

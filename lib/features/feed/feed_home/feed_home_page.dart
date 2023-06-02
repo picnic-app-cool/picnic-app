@@ -43,7 +43,7 @@ class _FeedHomePageState extends State<FeedHomePage>
           if (state.isLoading) {
             return const PicnicLoadingIndicator();
           }
-          if (state.feeds.isEmpty && state.userCircles.isEmptyNoMorePage) {
+          if (state.feeds.isEmpty) {
             return const EmptyFeedsView();
           }
 
@@ -78,9 +78,7 @@ class _FeedHomePageState extends State<FeedHomePage>
                         onTapNotifications: presenter.onTapNotifications,
                         tabs: state.feeds,
                         selectedTab: state.selectedFeed,
-                        onTapSeeMore: presenter.onTapSeeMore,
                         onTabChanged: presenter.onFeedChanged,
-                        showSeeMoreButton: state.showSeeMoreButton,
                         onTapCirclesSideMenu: presenter.onTapCirclesSideMenu,
                         unreadNotificationsCount: state.unreadNotificationsCount.count,
                       ),

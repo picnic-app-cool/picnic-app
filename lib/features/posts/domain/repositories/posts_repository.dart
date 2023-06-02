@@ -32,6 +32,11 @@ abstract class PostsRepository {
     CachePolicy? cachePolicy,
   });
 
+  Stream<CacheableResult<GetPostsFailure, List<Post>>> getForYouPosts({
+    required int limit,
+    CachePolicy? cachePolicy,
+  });
+
   Future<Either<GetSoundsFailure, PaginatedList<Sound>>> getSounds({
     required String searchQuery,
     required Cursor cursor,

@@ -72,15 +72,3 @@ class Feed extends Equatable {
     );
   }
 }
-
-extension FeedListExtension on List<Feed> {
-  bool hasTheSameIdsAs(List<Feed> list) {
-    final oldIdsList = map((e) => e.id).toList();
-    final newIdsList = list.map((e) => e.id).toList();
-
-    newIdsList.sort((a, b) => a.value.compareTo(b.value));
-    oldIdsList.sort((a, b) => a.value.compareTo(b.value));
-
-    return newIdsList != oldIdsList;
-  }
-}

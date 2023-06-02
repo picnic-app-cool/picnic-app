@@ -85,6 +85,18 @@ query feedPostsConnection(\$feedId: String!, \$cursor: CursorInput!){
 }
 """;
 
+String get getForYouPostsQuery => """
+query getFeed(\$limit: Int!) {
+  getFeed(limit: \$limit) {
+    edges {
+      node {
+        ${GqlTemplate().post}
+      }
+    }
+  }
+}
+""";
+
 String get soundsConnectionQuery => """
     query(\$searchQuery: String, \$cursor: CursorInput) {
         soundsConnection(searchQuery: \$searchQuery, cursor: \$cursor) {

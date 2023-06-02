@@ -1103,6 +1103,8 @@
   "skipAction": "skip for now",
   "permissionsDescription": "let’s make your experience awesome. you can edit these anytime in settings",
   "reachedListEnd": "you’ve reached end of the list",
+  "feedForYouName": "for you",
+  "feedMyCirclesName": "my circles",
   "feedSeeMoreButton": "see more",
   "feedSeeMoreBottomSheetTitle": "update circle carousel",
   "feedSeeMoreBottomSheetMessage": "choose which circle feeds you want to see \uD83D\uDC40",

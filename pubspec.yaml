@@ -173,6 +173,9 @@ dependencies:
   #keyboard actions
   keyboard_actions: 4.1.0
 
+  #custom_sliding_segmented_control
+  custom_sliding_segmented_control: 1.7.4
+
 dependency_overrides:
   custom_lint:
     path: packages/dart-custom-lint/packages/custom_lint

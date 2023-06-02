@@ -3,7 +3,8 @@ enum FeedType {
   circle('CIRCLE'),
   slice('SLICE'),
   explore('EXPLORE'),
-  custom('CUSTOM');
+  custom('CUSTOM'),
+  forYou('FOR_YOU');
 
   final String value;
 

@@ -1,14 +1,10 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/domain/model/image_url.dart';
-import 'package:picnic_app/features/chat/domain/model/id.dart';
-import 'package:picnic_app/features/feed/domain/model/feed.dart';
-import 'package:picnic_app/features/feed/domain/model/feed_type.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_app/ui/widgets/picnic_tag.dart';
-import 'package:picnic_app/ui/widgets/top_navigation/feed_items_bar.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_details.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_avatar_title.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_title_badge.dart';
@@ -80,33 +76,6 @@ void main() {
                 badgeBackgroundColor: colors.green,
                 iconTintColor: colors.lightBlue,
                 onTapFirst: () {},
-              ),
-            ),
-          ),
-          GoldenTestScenario(
-            name: "text bar",
-            child: TestWidgetContainer(
-              child: FeedItemsBar(
-                selectedFeed: const Feed.empty().copyWith(feedType: FeedType.custom),
-                onTabChanged: (feed) {},
-                titleColor: colors.blackAndWhite.shade900,
-                tabs: [
-                  const Feed.empty().copyWith(
-                    id: const Id("popular-id"),
-                    feedType: FeedType.custom,
-                    name: 'Popular',
-                  ),
-                  const Feed.empty().copyWith(
-                    id: const Id("roblox-id"),
-                    feedType: FeedType.circle,
-                    name: 'Roblox',
-                  ),
-                  const Feed.empty().copyWith(
-                    id: const Id("picnic-id"),
-                    feedType: FeedType.explore,
-                    name: 'Picnic',
-                  ),
-                ],
               ),
             ),
           ),

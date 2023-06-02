@@ -52,7 +52,6 @@ void main() {
         onCirclesSideMenuToggled: () {},
       ),
       Mocks.featureFlagsStore,
-      Mocks.userCirclesStore,
       Mocks.userStore,
     );
     navigator = MockFeedHomeNavigator();
@@ -64,13 +63,10 @@ void main() {
     presenter = FeedHomePresenter(
       model,
       navigator,
-      FeedMocks.getFeedsListUseCase,
       FeedMocks.getViewPostUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
-      FeedMocks.localFeedsStore,
       ProfileMocks.getUnreadNotificationsCountUseCase,
       Mocks.updateAppBadgeCountUseCase,
-      Mocks.userCirclesStore,
     );
   });
 }

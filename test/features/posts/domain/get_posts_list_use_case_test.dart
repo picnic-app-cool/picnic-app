@@ -4,9 +4,9 @@ import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
-import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_feed_posts_list_use_case.dart';
 
+import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../mocks/posts_mocks.dart';
 
@@ -17,7 +17,7 @@ void main() {
     useCase = GetFeedPostsListUseCase(PostsMocks.postsRepository);
     when(
       () => PostsMocks.postsRepository.getFeedPosts(
-        feedId: const Id.empty(),
+        feedId: any(named: 'feedId'),
         searchQuery: 'searchQuery',
         cursor: const Cursor.empty(),
         cachePolicy: any(named: 'cachePolicy'),
@@ -34,7 +34,7 @@ void main() {
       // WHEN
       final cacheable = await useCase
           .execute(
-            feedId: const Id.empty(),
+            feed: Stubs.feed,
             searchQuery: 'searchQuery',
             cursor: const Cursor.empty(),
           )

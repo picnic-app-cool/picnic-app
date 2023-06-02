@@ -17,66 +17,64 @@ class FeedTopNavBar extends StatelessWidget {
     required this.selectedTab,
     required this.tabs,
     required this.overlayTheme,
-    required this.onTapSeeMore,
-    required this.showSeeMoreButton,
     this.unreadNotificationsCount = 0,
   }) : super(key: key);
 
   final VoidCallback onTapNotifications;
   final VoidCallback onTapCirclesSideMenu;
   final Function(Feed) onTabChanged;
-  final VoidCallback onTapSeeMore;
   final Feed selectedTab;
   final List<Feed> tabs;
   final PostOverlayTheme overlayTheme;
-  final bool showSeeMoreButton;
   final int unreadNotificationsCount;
+
+  static const _backgroundOpacity = 0.12;
 
   @override
   Widget build(BuildContext context) {
-    const spacing16 = 16.0;
     final colors = PicnicTheme.of(context).colors;
     final Color iconColor;
     final Color tabsColor;
+    final Color tabsBackgroundColor;
     switch (overlayTheme) {
       case PostOverlayTheme.dark:
         tabsColor = colors.blackAndWhite.shade800;
+        tabsBackgroundColor = colors.darkBlue.shade300;
         iconColor = colors.darkBlue.shade600;
         break;
       case PostOverlayTheme.light:
         tabsColor = colors.blackAndWhite.shade100;
+        tabsBackgroundColor = colors.blackAndWhite.shade100.withOpacity(_backgroundOpacity);
         iconColor = colors.blackAndWhite.shade100;
         break;
     }
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 8),
-          child: PicnicIconButton(
-            icon: Assets.images.sideMenuIcon.path,
-            iconColor: iconColor,
-            style: PicnicIconButtonStyle.minimal,
-            onTap: onTapCirclesSideMenu,
-          ),
+        const Gap(16),
+        PicnicIconButton(
+          icon: Assets.images.sideMenuIcon.path,
+          iconColor: iconColor,
+          style: PicnicIconButtonStyle.minimal,
+          onTap: onTapCirclesSideMenu,
         ),
+        const Gap(8),
         Expanded(
           child: FeedItemsBar(
             tabs: tabs,
             selectedFeed: selectedTab,
             titleColor: tabsColor,
+            backgroundColor: tabsBackgroundColor,
             onTabChanged: onTabChanged,
-            onSeeMoreTap: onTapSeeMore,
-            showSeeMoreButton: showSeeMoreButton,
           ),
         ),
-        const Gap(spacing16),
+        const Gap(8),
         PicnicContainerIconButton(
           iconPath: Assets.images.notificationBell.path,
           badgeValue: unreadNotificationsCount,
           onTap: onTapNotifications,
           iconTintColor: iconColor,
         ),
-        const Gap(spacing16),
+        const Gap(16),
       ],
     );
   }

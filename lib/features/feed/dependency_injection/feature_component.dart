@@ -265,15 +265,11 @@ void _configureMvp() {
             params,
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
         ..registerFactoryParam<FeedHomePresenter, FeedHomeInitialParams, dynamic>(
           (initialParams, _) => FeedHomePresenter(
             getIt(param1: initialParams),
-            getIt(),
-            getIt(),
-            getIt(),
             getIt(),
             getIt(),
             getIt(),

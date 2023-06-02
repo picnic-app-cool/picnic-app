@@ -165,7 +165,7 @@ Stream<CacheableResult<GetFeedPostsListFailure, PaginatedList<Post>>> _postsList
   CachePolicy? cachePolicy,
 }) {
   return PostsMocks.getPostsListUseCase.execute(
-    feedId: any(named: 'feedId'),
+    feed: any(named: 'feed'),
     searchQuery: any(named: 'searchQuery'),
     cursor: any(named: 'cursor'),
     cachePolicy: cachePolicy ?? any(named: 'cachePolicy'),

@@ -67,7 +67,6 @@ Future<void> main() async {
     model = FeedHomePresentationModel.initial(
       initParams,
       Mocks.featureFlagsStore,
-      Mocks.userCirclesStore,
       Mocks.userStore,
     ).copyWith(
       currentPost: post,
@@ -83,13 +82,10 @@ Future<void> main() async {
     presenter = FeedHomePresenter(
       model,
       navigator,
-      FeedMocks.getFeedsListUseCase,
       FeedMocks.getViewPostUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
-      FeedMocks.localFeedsStore,
       ProfileMocks.getUnreadNotificationsCountUseCase,
       Mocks.updateAppBadgeCountUseCase,
-      Mocks.userCirclesStore,
     );
     page = FeedHomePage(presenter: presenter);
   }
@@ -103,20 +99,6 @@ Future<void> main() async {
       _initPostUploadingProgressMvp();
       getIt.registerFactory<PostsListPage>(() => const _TestPostsListPage());
       getIt.registerFactory<PostsListPresenter>(() => PostsMocks.postsListPresenter);
-      when(() => FeedMocks.getFeedsListUseCase.execute(nextPageCursor: any(named: 'nextPageCursor')))
-          .thenAnswer((_) => successCacheableResult(PaginatedList.singlePage([Stubs.feed])));
-    },
-    pageBuilder: () => page,
-  );
-
-  await screenshotTest(
-    "feed_home_page_empty_view",
-    setUp: () async {
-      _initMvp();
-      // just to be sure we don't accidentally use real pages and real backend calls inside the test
-      await getIt.reset();
-      when(() => FeedMocks.getFeedsListUseCase.execute(nextPageCursor: any(named: 'nextPageCursor')))
-          .thenAnswer((_) => successCacheableResult(const PaginatedList.singlePage([])));
     },
     pageBuilder: () => page,
   );

@@ -7,6 +7,7 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/vote_in_poll_input.dart';
 
+import '../../../mocks/stubs.dart';
 import 'posts_mock_definitions.dart';
 //DO-NOT-REMOVE IMPORTS_MOCKS
 
@@ -512,6 +513,7 @@ class PostsMocks {
     registerFallbackValue(MockGetCommentsQueryGenerator());
     //DO-NOT-REMOVE STORES_MOCK_FALLBACK_VALUE
 
+    registerFallbackValue(Stubs.feed);
     registerFallbackValue(const Id('1234'));
     registerFallbackValue(const Cursor.firstPage());
     registerFallbackValue('searchQuery');

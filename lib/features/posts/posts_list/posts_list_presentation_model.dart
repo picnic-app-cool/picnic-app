@@ -87,9 +87,9 @@ class PostsListPresentationModel implements PostsListViewModel {
 
   @override
   bool get showTimestamps {
-    // we want to hide timestamps for `for you` feed and there is no better way of finding it other
+    // we want to hide timestamps for `my circles` feed and there is no better way of finding it other
     // than looking at its name 🤡
-    return feed.feedType != FeedType.user || feed.name.toLowerCase() != 'for you';
+    return feed.feedType != FeedType.user;
   }
 
   PostsListPresentationModel byAppendingPostsList(PaginatedList<Post> newList) => copyWith(

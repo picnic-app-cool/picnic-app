@@ -1,13 +1,8 @@
-import 'dart:math';
-
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
-import 'package:picnic_app/core/utils/durations.dart';
-import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/features/feed/domain/model/feed.dart';
-import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/ui/widgets/top_navigation/tabs/text_tab_item.dart';
-
-const _spacing16 = 16.0;
+import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class FeedItemsBar extends StatefulWidget {
   const FeedItemsBar({
@@ -15,152 +10,73 @@ class FeedItemsBar extends StatefulWidget {
     required this.tabs,
     required this.onTabChanged,
     required this.selectedFeed,
-    this.onSeeMoreTap,
     this.initialIndex = 0,
     this.titleColor,
-    this.showSeeMoreButton = false,
+    this.backgroundColor,
   });
 
   final List<Feed> tabs;
 
   final int initialIndex;
   final Color? titleColor;
+  final Color? backgroundColor;
   final Function(Feed) onTabChanged;
-  final VoidCallback? onSeeMoreTap;
   final Feed selectedFeed;
-  final bool showSeeMoreButton;
 
   @override
   State<FeedItemsBar> createState() => _FeedItemsBarState();
 }
 
 class _FeedItemsBarState extends State<FeedItemsBar> {
-  final Map<Id, GlobalKey> _globalKeys = {};
-  static const _spacing16 = 16.0;
-  static const _alignment = 0.5;
-
-  GlobalKey<State>? get _selectedGlobalKey => _globalKeys[widget.selectedFeed.id];
-
-  @override
-  void initState() {
-    super.initState();
-    _ensureGlobalKeys();
-  }
-
-  @override
-  void didUpdateWidget(FeedItemsBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _ensureGlobalKeys();
-    if (oldWidget.selectedFeed != widget.selectedFeed) {
-      ///this makes sure we scroll to selected item when tab is changed
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _scrollToTab();
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _globalKeys.clear();
-    super.dispose();
-  }
+  static const _widgetHeight = 36.0;
+  static const _borderRadius = 100.0;
 
   @override
   Widget build(BuildContext context) {
     final feeds = widget.tabs;
-    //ignore: avoid-returning-widgets
-    final tabsWidgets = _prepareTabs(feeds);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.only(left: _spacing16),
-      child: Row(
-        children: [
-          ...tabsWidgets,
-        ],
+
+    final theme = PicnicTheme.of(context);
+    final titleStyle = theme.styles.body20.copyWith(color: widget.titleColor ?? theme.colors.blackAndWhite.shade100);
+
+    final children = Map.fromEntries(
+      feeds.map(
+        (feed) {
+          final isActive = feed == widget.selectedFeed;
+          return MapEntry(
+            feed,
+            Text(
+              feed.name,
+              style: titleStyle.copyWith(
+                fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
+                color: titleStyle.color?.withOpacity(
+                  isActive ? Constants.fullOpacityValue : Constants.lowOpacityValue,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
-  }
 
-  void _scrollToTab() {
-    final itemContext = _selectedGlobalKey?.currentContext;
-    if (itemContext != null) {
-      Scrollable.ensureVisible(
-        itemContext,
-        duration: const LongDuration(),
-        curve: Curves.easeOutCirc,
-        alignment: _alignment,
-        // alignmentPolicy: ScrollPositionAlignmentPolicy.explicit,
-      );
-    }
-  }
-
-  void _ensureGlobalKeys() {
-    for (final tab in widget.tabs) {
-      _globalKeys[tab.id] ??= GlobalKey(debugLabel: tab.name);
-    }
-  }
-
-  List<_FeedItemBarElement> _prepareTabs(List<Feed> feeds) {
-    final shouldShowMoreButton = widget.showSeeMoreButton;
-    final tabsWidgets = feeds.map((tab) {
-      final selected = widget.selectedFeed == tab;
-      return _FeedItemBarElement(
-        onTabChanged: () => widget.onTabChanged(tab),
-        title: tab.name,
-        isSelected: selected,
-        subtreeKey: ValueKey("${tab.id}${widget.titleColor}"),
-        titleColor: widget.titleColor,
-        selectedKey: _globalKeys[tab.id],
-      );
-    }).toList();
-
-    if (shouldShowMoreButton) {
-      final showMoreButton = _FeedItemBarElement(
-        onTabChanged: () => widget.onSeeMoreTap?.call(),
-        title: appLocalizations.feedSeeMoreButton,
-        isSelected: false,
-        titleColor: widget.titleColor,
-      );
-      tabsWidgets.insert(min(tabsWidgets.length, 1), showMoreButton);
-    }
-    return tabsWidgets;
-  }
-}
-
-class _FeedItemBarElement extends StatelessWidget {
-  const _FeedItemBarElement({
-    Key? key,
-    this.titleColor,
-    required this.onTabChanged,
-    this.subtreeKey,
-    this.selectedKey,
-    required this.title,
-    required this.isSelected,
-  }) : super(key: key);
-
-  final Color? titleColor;
-  final Function() onTabChanged;
-  final Key? subtreeKey;
-  final Key? selectedKey;
-  final String title;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: _spacing16),
-      child: AnimatedSwitcher(
-        duration: const MediumDuration(),
-        child: KeyedSubtree(
-          key: subtreeKey,
-          child: TextTabItem(
-            key: isSelected ? selectedKey : null,
-            onTap: onTabChanged,
-            title: title,
-            isActive: isSelected,
-            titleColor: titleColor,
+    return SizedBox(
+      height: _widgetHeight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomSlidingSegmentedControl<Feed>(
+            initialValue: widget.selectedFeed,
+            height: _widgetHeight,
+            children: children,
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+            ),
+            thumbDecoration: BoxDecoration(
+              color: widget.backgroundColor,
+              borderRadius: BorderRadius.circular(_borderRadius),
+            ),
+            onValueChanged: widget.onTabChanged,
           ),
-        ),
+        ],
       ),
     );
   }
