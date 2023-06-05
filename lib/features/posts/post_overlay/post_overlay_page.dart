@@ -79,6 +79,7 @@ class _PostOverlayPageState extends State<PostOverlayPage>
       bottom: false,
       child: stateObserver(
         buildWhen: (prev, current) =>
+            prev.post != current.post ||
             prev.displayOptions.detailsMode != current.displayOptions.detailsMode ||
             prev.displayOptions.overlaySize != current.displayOptions.overlaySize ||
             prev.comments != current.comments ||
