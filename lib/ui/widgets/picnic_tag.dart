@@ -34,6 +34,7 @@ class PicnicTag extends StatelessWidget {
     this.blurRadius = _tagBlurRadius,
     this.opacity,
     this.titleTextStyle,
+    this.titleHeight,
   }) : super(key: key);
 
   final String title;
@@ -56,6 +57,7 @@ class PicnicTag extends StatelessWidget {
   final EdgeInsets padding;
   final double borderRadius;
   final double? opacity;
+  final double? titleHeight;
 
   /// The blur radius is optional .
   final double? blurRadius;
@@ -84,6 +86,7 @@ class PicnicTag extends StatelessWidget {
       suffixIcon: suffixIcon,
       onTap: onTap,
       onSuffixTap: onSuffixTap,
+      titleHeight: titleHeight,
     );
     return blurRadius != null
 
@@ -119,6 +122,7 @@ class _Tag extends StatelessWidget {
     this.titleTextStyle,
     this.onTap,
     this.onSuffixTap,
+    this.titleHeight,
   }) : super(key: key);
 
   final EdgeInsets padding;
@@ -135,6 +139,7 @@ class _Tag extends StatelessWidget {
   final TextStyle? titleTextStyle;
   final VoidCallback? onTap;
   final VoidCallback? onSuffixTap;
+  final double? titleHeight;
 
   final Widget? suffixIcon;
 
@@ -189,7 +194,8 @@ class _Tag extends StatelessWidget {
               onTap: onTap,
               child: Text(
                 title.tight(),
-                style: tagTitleStyle,
+                style: tagTitleStyle.copyWith(height: titleHeight),
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

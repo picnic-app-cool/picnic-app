@@ -224,7 +224,7 @@ class PicnicVerticalPost extends StatelessWidget {
   final bool? isMultiSelectionEnabled;
   final EdgeInsetsGeometry? padding;
 
-  static const _borderRadius = 24.0;
+  static const _borderRadius = 16.0;
   static const _avatarSize = 32.0;
   static const _selectableDistance = 24.0;
   static const _selectableSize = 40.0;

@@ -36,6 +36,7 @@ import '../../analytics/mocks/analytics_mocks.dart';
 import '../../chat/mocks/chat_mocks.dart';
 import '../../feed/mocks/feed_mocks.dart';
 import '../../in_app_notifications/mocks/in_app_notifications_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../../profile/mocks/profile_mocks.dart';
 import '../../push_notifications/mocks/push_notifications_mocks.dart';
 
@@ -63,6 +64,19 @@ Future<void> main() async {
     when(
       () => ProfileMocks.getUnreadNotificationsCountUseCase.execute(),
     ).thenAnswer((_) => successFuture(const UnreadNotificationsCount.empty()));
+
+    when(
+      () => PodsMocks.getSavedPodsUseCase.execute(
+        nextPageCursor: any(named: 'nextPageCursor'),
+      ),
+    ).thenAnswer((_) => successFuture(const PaginatedList.empty()));
+
+    when(
+      () => Mocks.getCollectionsUseCase.execute(
+        nextPageCursor: any(named: 'nextPageCursor'),
+        userId: any(named: 'userId'),
+      ),
+    ).thenAnswer((_) => successFuture(const PaginatedList.empty()));
     when(
       () => Mocks.updateAppBadgeCountUseCase.execute(any()),
     ).thenAnswer((_) => Future.value());
@@ -134,6 +148,7 @@ Future<void> main() async {
         CirclesSideMenuInitialParams(
           onCircleSideMenuAction: () {},
         ),
+        Mocks.userStore,
       );
 
       getIt.registerFactory<CirclesSideMenuPresenter>(
@@ -141,6 +156,8 @@ Future<void> main() async {
           circlesSideMenuPresentationModel,
           FeedMocks.circlesSideMenuNavigator,
           Mocks.getUserCirclesUseCase,
+          Mocks.getCollectionsUseCase,
+          PodsMocks.getSavedPodsUseCase,
         ),
       );
     },

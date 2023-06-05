@@ -25,6 +25,7 @@ import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../../seeds/mocks/seeds_mocks.dart';
 import '../mocks/profile_mocks.dart';
 
@@ -155,6 +156,8 @@ Future<void> main() async {
       SeedsMocks.getUserSeedsTotalUseCase,
       Mocks.leaveCircleUseCase,
       Mocks.clipboardManager,
+      PodsMocks.getSavedPodsUseCase,
+      SeedsMocks.getSeedsUseCase,
     );
     when(
       () => SeedsMocks.getUserSeedsTotalUseCase.execute(),

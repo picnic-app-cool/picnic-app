@@ -11,7 +11,7 @@ class SeedListItem extends StatelessWidget {
     required this.seed,
     this.trailing,
     this.subTitle,
-    this.padding = _padding,
+    this.padding = EdgeInsets.zero,
     this.onTapOpenCircle,
     required this.title,
   }) : super(key: key);
@@ -29,13 +29,12 @@ class SeedListItem extends StatelessWidget {
 
   static const double _circleBorderRadius = 16.0;
 
-  static const _padding = EdgeInsets.symmetric(horizontal: 24, vertical: 8.0);
-
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final styles = theme.styles;
     final colors = theme.colors;
+    const borderWidth = 1.5;
 
     final _picnicAvatar = PicnicCircleAvatar(
       emoji: seed.circleEmoji,
@@ -50,14 +49,14 @@ class SeedListItem extends StatelessWidget {
       padding: padding,
       child: PicnicListItem(
         borderRadius: _circleBorderRadius,
-        setBoxShadow: true,
-        fillColor: colors.blackAndWhite.shade100,
         leading: _picnicAvatar,
         title: title,
         subTitle: subTitle,
+        borderColor: colors.darkBlue.shade300,
+        borderWidth: borderWidth,
         subtitleTextOverflow: TextOverflow.ellipsis,
-        subTitleStyle: subTitle != null ? styles.caption20.copyWith(color: colors.blackAndWhite.shade500) : null,
-        titleStyle: styles.subtitle40,
+        subTitleStyle: subTitle != null ? styles.body20.copyWith(color: colors.darkBlue.shade600) : null,
+        titleStyle: styles.link40,
         onTap: onTapOpenCircle,
         trailingGap: _trailingGap,
         trailing: trailing,

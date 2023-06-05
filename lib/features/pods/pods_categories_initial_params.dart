@@ -1,0 +1,3 @@
+class PodsCategoriesInitialParams {
+  const PodsCategoriesInitialParams();
+}

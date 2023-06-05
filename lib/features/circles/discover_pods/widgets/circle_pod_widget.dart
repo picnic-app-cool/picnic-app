@@ -7,8 +7,8 @@ import 'package:picnic_app/ui/widgets/picnic_image.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
-class PodWidget extends StatelessWidget {
-  const PodWidget({
+class CirclePodWidget extends StatelessWidget {
+  const CirclePodWidget({
     Key? key,
     required this.pod,
     required this.onTap,

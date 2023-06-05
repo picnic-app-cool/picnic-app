@@ -94,6 +94,10 @@ class _FeaturesIndexPageState extends State<FeaturesIndexPage>
                     onPressed: presenter.onTapDiscordIntegration,
                     child: const Text("Link Discord"),
                   ),
+                  ElevatedButton(
+                    onPressed: presenter.onTapPodsCategories,
+                    child: const Text("Pods Categories"),
+                  ),
                 ],
               ),
             ),

@@ -1112,7 +1112,7 @@
   "mentionEveryoneText": "everyone",
   "mentionEveryoneCaption": "mention everyone in the chat",
   "chatLabel": "chat",
-  "createNewCircle": "create new circle",
+  "createNewCircle": "create circle",
   "byContinuingYouAgreeTo": "by continuing you agree to ",
   "appTerms": "terms ",
   "and": "and ",
@@ -1121,7 +1121,7 @@
   "agreeToPicnic": "by using Picnic, you already agree to Picnic App ",
   "stopUsingAppIfYouDoNotAgree": "if you don’t agree to the terms, please stop using the app",
   "acceptTermsButton": "okay",
-  "discoverNewCircle": "discover new circles",
+  "discoverNewCircle": "discover circles",
   "sendSeedsAction": "send seeds",
   "sendSeeds": "send seeds to",
   "amount": "amount",
@@ -1370,5 +1370,28 @@
     "placeholders": {
       "margin": {}
     }
-  }
+  },
+  "addCircle": "add to circle",
+  "trendingPods": "trending pods",
+  "newLabel": "new",
+  "viewAllAction": "view all",
+  "circles": "circles",
+  "findYourCategory": "find your category",
+  "exploreCircles": "explore new circles 🤩",
+  "trendingCircles": "trending circles 🔥",
+  "launchAction": "launch",
+  "podsCategories": "pods categories",
+  "view": "view",
+  "featuredPods": "featured pods",
+  "explorePods": "explore new pods",
+  "votePodsLabel": "vote ({votes})}",
+  "@votePodsLabel": {
+    "placeholders": {
+      "votes": {}
+    }
+  },
+  "mySeeds": "my seeds",
+  "totalSeeds": "total seeds",
+  "emptyUserPodsMessage": "you haven''t saved any pods yet",
+  "noPods": "no pods"
 }

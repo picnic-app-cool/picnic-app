@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
-import 'package:picnic_app/features/profile/widgets/circle_action.dart';
+import 'package:picnic_app/features/profile/private_profile/widgets/profile_horizontal_item.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/paging_list/load_more_scroll_notification.dart';
@@ -32,13 +32,15 @@ class CirclesTab extends StatelessWidget {
   final VoidCallback? onCreateNewCircleTap;
   final VoidCallback onDiscoverNewCircleTap;
   final void Function(Circle circle)? onLongPress;
-
   final bool isMe;
 
-  static const _searchIconWidth = 18.0;
+  static const _plusIconSize = 18.0;
+  static const _searchIconSize = 18.0;
 
   @override
   Widget build(BuildContext context) {
+    final theme = PicnicTheme.of(context);
+    final darkBlue = theme.colors.darkBlue;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: LoadMoreScrollNotification(
@@ -48,20 +50,40 @@ class CirclesTab extends StatelessWidget {
         builder: (context) {
           return CustomScrollView(
             slivers: [
-              if (isMe)
-                SliverToBoxAdapter(
-                  child: CircleAction(
-                    onTap: onCreateNewCircleTap,
-                    title: appLocalizations.createNewCircle,
-                    trailing: Assets.images.add.image(),
-                  ),
-                ),
               SliverToBoxAdapter(
-                child: CircleAction(
-                  onTap: onDiscoverNewCircleTap,
-                  title: appLocalizations.discoverNewCircle,
-                  trailing: Assets.images.searchChat.image(width: _searchIconWidth),
+                child: Row(
+                  children: [
+                    if (isMe)
+                      Expanded(
+                        child: ProfileHorizontalItem(
+                          onTap: onCreateNewCircleTap,
+                          title: appLocalizations.createNewCircle,
+                          trailing: Image.asset(
+                            Assets.images.add.path,
+                            color: darkBlue.shade800,
+                            height: _plusIconSize,
+                            width: _plusIconSize,
+                          ),
+                        ),
+                      ),
+                    const Gap(8),
+                    Expanded(
+                      child: ProfileHorizontalItem(
+                        onTap: onDiscoverNewCircleTap,
+                        title: appLocalizations.discoverNewCircle,
+                        trailing: Image.asset(
+                          Assets.images.search.path,
+                          color: darkBlue.shade800,
+                          height: _searchIconSize,
+                          width: _searchIconSize,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              const SliverToBoxAdapter(
+                child: Gap(12),
               ),
               _CirclesList(
                 onTapEnterCircle: onTapEnterCircle,
@@ -100,7 +122,6 @@ class _CirclesList extends StatelessWidget {
   final Function(Id) onTapEnterCircle;
   final void Function(Circle circle)? onLongPress;
 
-  static const double _subtitleOpacity = 0.4;
   static const double _userCircleIconSize = 42;
   static const double _circleBorderRadius = 16.0;
   static const _emojiSize = 22.0;
@@ -133,12 +154,12 @@ class _CirclesList extends StatelessWidget {
                       borderColor: circle.isRoyalty ? colors.yellow : null,
                       title: circle.name,
                       titleTextOverflow: TextOverflow.ellipsis,
-                      titleStyle: textTheme.subtitle40.copyWith(
+                      titleStyle: textTheme.link40.copyWith(
                         color: shade900,
                       ),
                       subTitle: appLocalizations.membersCount(circle.membersCount),
-                      subTitleStyle: textTheme.caption20.copyWith(
-                        color: shade900.withOpacity(_subtitleOpacity),
+                      subTitleStyle: textTheme.subtitle10.copyWith(
+                        color: colors.darkBlue.shade600,
                       ),
                       leading: PicnicCircleAvatar(
                         emoji: circle.emoji,

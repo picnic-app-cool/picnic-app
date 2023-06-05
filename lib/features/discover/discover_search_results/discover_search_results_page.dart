@@ -10,7 +10,6 @@ import 'package:picnic_app/features/discover/discover_search_results/widgets/cir
 import 'package:picnic_app/features/discover/discover_search_results/widgets/discover_search_initial_placeholder.dart';
 import 'package:picnic_app/features/discover/discover_search_results/widgets/users_search_result.dart';
 import 'package:picnic_app/features/discover/widgets/picnic_discovery_navigation_bar.dart';
-import 'package:picnic_app/features/discover/widgets/picnic_discovery_search_bar.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
@@ -56,14 +55,10 @@ class _DiscoverSearchResultsPageState extends State<DiscoverSearchResultsPage>
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, isScrolled) => [
-          const SliverToBoxAdapter(child: PicnicDiscoveryNavigationBar()),
-          stateObserver(
-            buildWhen: (previous, current) => previous != current,
-            builder: (context, state) => SliverToBoxAdapter(
-              child: PicnicDiscoverySearchBar(
-                focusNode: focusNode,
-                controller: controller,
-              ),
+          SliverToBoxAdapter(
+            child: PicnicDiscoveryNavigationBar(
+              controller: controller,
+              focusNode: focusNode,
             ),
           ),
         ],

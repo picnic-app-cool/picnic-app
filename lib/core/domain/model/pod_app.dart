@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:picnic_app/core/domain/model/app_counters.dart';
 import 'package:picnic_app/core/domain/model/app_owner.dart';
 import 'package:picnic_app/core/domain/model/app_permission.dart';
 import 'package:picnic_app/core/domain/model/app_subscription.dart';
@@ -18,6 +19,9 @@ class PodApp extends Equatable {
     required this.owner,
     required this.createdAt,
     required this.score,
+    required this.counters,
+    required this.iSaved,
+    required this.iUpvoted,
   });
 
   const PodApp.empty()
@@ -31,7 +35,10 @@ class PodApp extends Equatable {
         appSubscriptions = const [],
         owner = const AppOwner.empty(),
         createdAt = '',
-        score = 0;
+        score = 0,
+        counters = const AppCounters.empty(),
+        iSaved = false,
+        iUpvoted = false;
 
   final Id id;
   final String url;
@@ -44,6 +51,9 @@ class PodApp extends Equatable {
   final AppOwner owner;
   final String createdAt;
   final int score;
+  final AppCounters counters;
+  final bool iSaved;
+  final bool iUpvoted;
 
   @override
   List<Object> get props => [
@@ -58,6 +68,9 @@ class PodApp extends Equatable {
         owner,
         createdAt,
         score,
+        counters,
+        iSaved,
+        iUpvoted,
       ];
 
   PodApp copyWith({
@@ -72,6 +85,9 @@ class PodApp extends Equatable {
     AppOwner? owner,
     String? createdAt,
     int? score,
+    AppCounters? counters,
+    bool? iSaved,
+    bool? iUpvoted,
   }) {
     return PodApp(
       id: id ?? this.id,
@@ -85,6 +101,9 @@ class PodApp extends Equatable {
       owner: owner ?? this.owner,
       createdAt: createdAt ?? this.createdAt,
       score: score ?? this.score,
+      counters: counters ?? this.counters,
+      iSaved: iSaved ?? this.iSaved,
+      iUpvoted: iUpvoted ?? this.iUpvoted,
     );
   }
 }

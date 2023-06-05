@@ -106,6 +106,7 @@ import 'package:picnic_app/core/domain/use_cases/get_circles_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_collections_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_contacts_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_feature_flags_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_featured_pods_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_phone_contacts_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_phone_gallery_assets_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_post_creation_circles_use_case.dart';
@@ -185,6 +186,7 @@ import 'package:picnic_app/features/main/dependency_injection/feature_component.
 import 'package:picnic_app/features/media_picker/dependency_injection/feature_component.dart' as media_picker;
 import 'package:picnic_app/features/onboarding/dependency_injection/feature_component.dart' as onboarding;
 import 'package:picnic_app/features/photo_editor/dependency_injection/feature_component.dart' as photo_editor;
+import 'package:picnic_app/features/pods/dependency_injection/feature_component.dart' as pods;
 import 'package:picnic_app/features/posts/dependency_injection/feature_component.dart' as post_creation;
 import 'package:picnic_app/features/profile/achievements/achievements_initial_params.dart';
 import 'package:picnic_app/features/profile/achievements/achievements_navigator.dart';
@@ -254,6 +256,7 @@ void configureDependencies(
   user_agreement.configureDependencies();
   connection_status.configureDependencies();
   discord.configureDependencies();
+  pods.configureDependencies();
 //DO-NOT-REMOVE FEATURE_COMPONENT_INIT
 
   _configureGeneralDependencies(initParams);
@@ -828,6 +831,11 @@ void _configureUseCases() {
         )
         ..registerFactory<SearchPodsUseCase>(
           () => SearchPodsUseCase(
+            getIt(),
+          ),
+        )
+        ..registerFactory<GetFeaturedPodsUseCase>(
+          () => GetFeaturedPodsUseCase(
             getIt(),
           ),
         )

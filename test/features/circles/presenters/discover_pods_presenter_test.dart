@@ -6,6 +6,7 @@ import 'package:picnic_app/features/circles/discover_pods/discover_pods_presente
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../mocks/circles_mock_definitions.dart';
 import '../mocks/circles_mocks.dart';
 
@@ -30,6 +31,7 @@ void main() {
       CirclesMocks.getPodsUseCase,
       Mocks.getUserScopedPodTokenUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
+      PodsMocks.savePodUseCase,
     );
   });
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/features/profile/domain/public_profile_tab.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_tab.dart';
-import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class PublicProfileTabs extends StatelessWidget {
@@ -22,43 +20,42 @@ class PublicProfileTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
-
+    const tabPaddingToIndicator = 12.0;
     return Container(
-      margin: const EdgeInsets.only(top: 24),
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: PicnicColors.lightGrey,
-          ),
-        ),
-      ),
+      margin: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.symmetric(vertical: 18),
       child: Center(
         child: TabBar(
           isScrollable: true,
           controller: tabController,
           labelPadding: const EdgeInsets.symmetric(horizontal: 24),
-          indicator: const BoxDecoration(),
           labelColor: colors.activeTabColor,
+          indicatorColor: colors.darkBlue.shade900,
           tabs: tabs.map((it) {
             switch (it) {
               case PublicProfileTab.posts:
                 return PicnicTab(
-                  iconPath: Assets.images.image.path,
                   title: appLocalizations.postsTabTitle,
                   isActive: selectedTab == PublicProfileTab.posts,
+                  bottomPadding: tabPaddingToIndicator,
                 );
               case PublicProfileTab.circles:
                 return PicnicTab(
-                  iconPath: Assets.images.tusers.path,
                   title: appLocalizations.cirlcesTabTitle,
                   isActive: selectedTab == PublicProfileTab.circles,
+                  bottomPadding: tabPaddingToIndicator,
                 );
               case PublicProfileTab.collections:
                 return PicnicTab(
-                  iconPath: Assets.images.folder.path,
                   title: appLocalizations.collectionsTabTitle,
                   isActive: selectedTab == PublicProfileTab.collections,
+                  bottomPadding: tabPaddingToIndicator,
+                );
+              case PublicProfileTab.pods:
+                return PicnicTab(
+                  title: appLocalizations.pods,
+                  isActive: selectedTab == PublicProfileTab.pods,
+                  bottomPadding: tabPaddingToIndicator,
                 );
             }
           }).toList(),

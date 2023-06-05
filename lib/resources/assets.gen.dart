@@ -51,6 +51,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/arrow_right_two_big.webp
   AssetGenImage get arrowRightTwoBig => const AssetGenImage('assets/images/arrow_right_two_big.webp');
 
+  /// File path: assets/images/arrow_up.webp
+  AssetGenImage get arrowUp => const AssetGenImage('assets/images/arrow_up.webp');
+
   /// File path: assets/images/arrowlefttwo.webp
   AssetGenImage get arrowlefttwo => const AssetGenImage('assets/images/arrowlefttwo.webp');
 
@@ -155,6 +158,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/checkbox_square_empty.webp
   AssetGenImage get checkboxSquareEmpty => const AssetGenImage('assets/images/checkbox_square_empty.webp');
 
+  /// File path: assets/images/circle_back.webp
+  AssetGenImage get circleBack => const AssetGenImage('assets/images/circle_back.webp');
+
   /// File path: assets/images/clock.webp
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.webp');
 
@@ -181,6 +187,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/comment_replies_plus.webp
   AssetGenImage get commentRepliesPlus => const AssetGenImage('assets/images/comment_replies_plus.webp');
+
+  /// File path: assets/images/community.webp
+  AssetGenImage get community => const AssetGenImage('assets/images/community.webp');
 
   /// File path: assets/images/compress.webp
   AssetGenImage get compress => const AssetGenImage('assets/images/compress.webp');
@@ -248,6 +257,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/edit_stroked.webp
   AssetGenImage get editStroked => const AssetGenImage('assets/images/edit_stroked.webp');
 
+  /// File path: assets/images/edit_underlined.webp
+  AssetGenImage get editUnderlined => const AssetGenImage('assets/images/edit_underlined.webp');
+
   /// File path: assets/images/election.webp
   AssetGenImage get election => const AssetGenImage('assets/images/election.webp');
 
@@ -259,6 +271,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/expand.webp
   AssetGenImage get expand => const AssetGenImage('assets/images/expand.webp');
+
+  /// File path: assets/images/eye.webp
+  AssetGenImage get eye => const AssetGenImage('assets/images/eye.webp');
 
   /// File path: assets/images/favorite.webp
   AssetGenImage get favorite => const AssetGenImage('assets/images/favorite.webp');
@@ -286,6 +301,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/green_checkmark.webp
   AssetGenImage get greenCheckmark => const AssetGenImage('assets/images/green_checkmark.webp');
+
+  /// File path: assets/images/group_people.webp
+  AssetGenImage get groupPeople => const AssetGenImage('assets/images/group_people.webp');
 
   /// File path: assets/images/heart.webp
   AssetGenImage get heart => const AssetGenImage('assets/images/heart.webp');
@@ -428,8 +446,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/plus_post_grey.webp
   AssetGenImage get plusPostGrey => const AssetGenImage('assets/images/plus_post_grey.webp');
 
+  /// File path: assets/images/pod_back.webp
+  AssetGenImage get podBack => const AssetGenImage('assets/images/pod_back.webp');
+
   /// File path: assets/images/pod_placeholder_img.webp
   AssetGenImage get podPlaceholderImg => const AssetGenImage('assets/images/pod_placeholder_img.webp');
+
+  /// File path: assets/images/pod_robot.webp
+  AssetGenImage get podRobot => const AssetGenImage('assets/images/pod_robot.webp');
+
+  /// File path: assets/images/pods_back.webp
+  AssetGenImage get podsBack => const AssetGenImage('assets/images/pods_back.webp');
 
   /// File path: assets/images/pointing_arrow.webp
   AssetGenImage get pointingArrow => const AssetGenImage('assets/images/pointing_arrow.webp');
@@ -439,6 +466,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/post.webp
   AssetGenImage get post => const AssetGenImage('assets/images/post.webp');
+
+  /// File path: assets/images/post_icon.webp
+  AssetGenImage get postIcon => const AssetGenImage('assets/images/post_icon.webp');
 
   /// File path: assets/images/profile.webp
   AssetGenImage get profile => const AssetGenImage('assets/images/profile.webp');
@@ -475,6 +505,12 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/save_attachments.webp
   AssetGenImage get saveAttachments => const AssetGenImage('assets/images/save_attachments.webp');
+
+  /// File path: assets/images/save_filled.webp
+  AssetGenImage get saveFilled => const AssetGenImage('assets/images/save_filled.webp');
+
+  /// File path: assets/images/save_outlined.webp
+  AssetGenImage get saveOutlined => const AssetGenImage('assets/images/save_outlined.webp');
 
   /// File path: assets/images/search.webp
   AssetGenImage get search => const AssetGenImage('assets/images/search.webp');
@@ -564,6 +600,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/trash_icon.webp
   AssetGenImage get trashIcon => const AssetGenImage('assets/images/trash_icon.webp');
 
+  /// File path: assets/images/trending_circles.webp
+  AssetGenImage get trendingCircles => const AssetGenImage('assets/images/trending_circles.webp');
+
   /// File path: assets/images/tusers.webp
   AssetGenImage get tusers => const AssetGenImage('assets/images/tusers.webp');
 
@@ -651,6 +690,7 @@ class $AssetsImagesGen {
         arrowRightThree,
         arrowRightTwo,
         arrowRightTwoBig,
+        arrowUp,
         arrowlefttwo,
         avatar,
         backArrow,
@@ -685,6 +725,7 @@ class $AssetsImagesGen {
         checkboxCircle,
         checkboxSquare,
         checkboxSquareEmpty,
+        circleBack,
         clock,
         close,
         closeCircleTransparent,
@@ -694,6 +735,7 @@ class $AssetsImagesGen {
         commentActionUnpin,
         commentRepliesMinus,
         commentRepliesPlus,
+        community,
         compress,
         congrats,
         contact,
@@ -716,10 +758,12 @@ class $AssetsImagesGen {
         downRightArrow,
         edit,
         editStroked,
+        editUnderlined,
         election,
         electric,
         exitIcon,
         expand,
+        eye,
         favorite,
         feedFilled,
         feedStroked,
@@ -729,6 +773,7 @@ class $AssetsImagesGen {
         glitter,
         glitterOutline,
         greenCheckmark,
+        groupPeople,
         heart,
         heartBold,
         heartOutlined,
@@ -776,10 +821,14 @@ class $AssetsImagesGen {
         plus,
         plusPost,
         plusPostGrey,
+        podBack,
         podPlaceholderImg,
+        podRobot,
+        podsBack,
         pointingArrow,
         pollPostPlaceholder,
         post,
+        postIcon,
         profile,
         profileFilled,
         read,
@@ -792,6 +841,8 @@ class $AssetsImagesGen {
         ruleBook,
         save,
         saveAttachments,
+        saveFilled,
+        saveOutlined,
         search,
         searchChat,
         searchGlass,
@@ -821,6 +872,7 @@ class $AssetsImagesGen {
         takeVideo,
         textOrLinkPostPlaceholder,
         trashIcon,
+        trendingCircles,
         tusers,
         undo,
         unfollow,

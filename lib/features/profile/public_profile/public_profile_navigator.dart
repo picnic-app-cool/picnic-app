@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picnic_app/core/fx_effect_overlay/fx_effect_route.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/chat/single_chat/single_chat_navigator.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_navigator.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_navigator.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_navigator.dart';
@@ -37,7 +38,8 @@ class PublicProfileNavigator
         CloseWithResultRoute<bool>,
         DiscoverExploreRoute,
         ConfirmationBottomSheetRoute,
-        SnackBarRoute {
+        SnackBarRoute,
+        AddCirclePodRoute {
   PublicProfileNavigator(this.appNavigator);
 
   @override

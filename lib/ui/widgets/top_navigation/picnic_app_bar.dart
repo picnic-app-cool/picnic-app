@@ -24,6 +24,8 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onTapBack,
     this.titleSpacing,
     this.titleText,
+    this.centerTitle = true,
+    this.titleTextStyle,
   }) : assert(child == null || titleText == null, "You can't use both child and titleText at the same time");
 
   final String? iconPathLeft;
@@ -39,6 +41,8 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onTapBack;
   final double? titleSpacing;
   final String? titleText;
+  final bool centerTitle;
+  final TextStyle? titleTextStyle;
 
   static const double _leadingWidth = 72.0;
   static const _contentHeight = Constants.toolbarHeight;
@@ -48,6 +52,7 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleStyle = titleTextStyle ?? PicnicTheme.of(context).styles.subtitle30;
     return AppBar(
       // Let's show the back button for unit tests always, unless it was
       // explicitly hidden with `showBackButton = false`
@@ -74,7 +79,7 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleText != null
           ? Text(
               titleText!,
-              style: PicnicTheme.of(context).styles.subtitle30,
+              style: titleStyle,
             )
           : child,
       titleSpacing: titleSpacing,
@@ -96,7 +101,7 @@ class PicnicAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
       shadowColor: Colors.transparent,
       backgroundColor: backgroundColor,
-      centerTitle: true,
+      centerTitle: centerTitle,
       leadingWidth: _leadingWidth,
       toolbarHeight: _contentHeight,
       elevation: 0,

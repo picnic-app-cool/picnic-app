@@ -211,6 +211,12 @@ class CirclesMocks {
   static late MockGetPodsFailure getPodsFailure;
   static late MockGetPodsUseCase getPodsUseCase;
 
+  static late MockVotePodsFailure votePodsFailure;
+  static late MockVotePodsUseCase votePodsUseCase;
+
+  static late MockUnVotePodsFailure unVotePodsFailure;
+  static late MockUnVotePodsUseCase unVotePodsUseCase;
+
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
@@ -446,6 +452,12 @@ class CirclesMocks {
     getPodsFailure = MockGetPodsFailure();
     getPodsUseCase = MockGetPodsUseCase();
 
+    votePodsFailure = MockVotePodsFailure();
+    votePodsUseCase = MockVotePodsUseCase();
+
+    unVotePodsFailure = MockUnVotePodsFailure();
+    unVotePodsUseCase = MockUnVotePodsUseCase();
+
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
     // REPOSITORIES
@@ -668,6 +680,12 @@ class CirclesMocks {
 
     registerFallbackValue(MockGetPodsFailure());
     registerFallbackValue(MockGetPodsUseCase());
+
+    registerFallbackValue(MockVotePodsFailure());
+    registerFallbackValue(MockVotePodsUseCase());
+
+    registerFallbackValue(MockUnVotePodsFailure());
+    registerFallbackValue(MockUnVotePodsUseCase());
 
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 

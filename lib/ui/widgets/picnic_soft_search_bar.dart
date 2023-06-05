@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/helpers.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_delete_suffix.dart';
 import 'package:picnic_app/ui/widgets/picnic_text_input.dart';
 
@@ -61,14 +60,13 @@ class _PicnicSoftSearchBarState extends State<PicnicSoftSearchBar> {
     final userTyping = focusNode.hasPrimaryFocus && controller.text.isNotEmpty;
     return PicnicTextInput(
       textController: controller,
-      prefix: Image.asset(Assets.images.searchGlass.path),
       hintText: widget.hintText,
       focusNode: focusNode,
       onChanged: widget.onChanged,
       padding: 0,
       contentPadding: widget.contentPadding,
-      suffix: userTyping ? PicnicDeleteSuffix(controller: controller) : null,
       autocorrect: false,
+      suffix: userTyping ? PicnicDeleteSuffix(controller: controller) : null,
     );
   }
 }

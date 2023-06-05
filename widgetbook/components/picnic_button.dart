@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
-import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -63,9 +62,9 @@ class PicnicButtonUseCases extends WidgetbookComponent {
                     label: "Black",
                     value: colors.blackAndWhite.shade900,
                   ),
-                  const Option(
+                  Option(
                     label: "Primary Blue",
-                    value: PicnicColors.primaryTabBlue,
+                    value: colors.darkBlue,
                   ),
                   Option(
                     label: "Light grey",

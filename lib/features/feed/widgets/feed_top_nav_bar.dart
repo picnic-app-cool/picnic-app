@@ -29,6 +29,8 @@ class FeedTopNavBar extends StatelessWidget {
   final int unreadNotificationsCount;
 
   static const _backgroundOpacity = 0.12;
+  static const _iconSize = 28.0;
+  static const _iconContainerSize = 100.0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,8 @@ class FeedTopNavBar extends StatelessWidget {
       children: [
         const Gap(16),
         PicnicIconButton(
+          size: _iconContainerSize,
+          iconSize: _iconSize,
           icon: Assets.images.sideMenuIcon.path,
           iconColor: iconColor,
           style: PicnicIconButtonStyle.minimal,

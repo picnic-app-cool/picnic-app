@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class PicnicColors {
   static const Color primaryButtonBlue = Color(0xFFF1F7FC);
-  static const Color primaryTabBlue = Color(0xFF39487C);
   static const Color lightGrey = Color(0xFFEEEEEE);
   static const Color bluishCyan = Color(0xFF45BAEC);
   static const Color grey = Color(0xFF777777);
@@ -276,7 +275,7 @@ class PicnicColors {
   static const int _primaryDarkBlue = 0xFFA0AABD;
   static const int _primaryBlackWhite = 0xFFB3B3B3;
 
-  Color get activeTabColor => primaryTabBlue;
+  Color get activeTabColor => darkBlue;
 
   //ignore: no-magic-number
   Color get shadow50 => blackAndWhite.shade900.withOpacity(0.5);

@@ -7,6 +7,7 @@ import 'package:picnic_app/core/domain/model/feature_flags/feature_flags.dart';
 import 'package:picnic_app/core/domain/model/get_collections_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_circles_failure.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/model/profile_stats.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission_status.dart';
@@ -22,6 +23,7 @@ import 'package:picnic_app/features/profile/domain/model/unread_notifications_co
 import 'package:picnic_app/features/profile/domain/private_profile_tab.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 import 'package:picnic_app/features/seeds/domain/model/get_user_seeds_total_failure.dart';
+import 'package:picnic_app/features/seeds/domain/model/seed.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class PrivateProfilePresentationModel implements PrivateProfileViewModel {
@@ -49,7 +51,10 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
         featureFlags = featureFlagsStore.featureFlags,
         unreadNotificationsCount = const UnreadNotificationsCount.empty(),
         contactsPermission = RuntimePermissionStatus.unknown,
-        circle = const Circle.empty();
+        circle = const Circle.empty(),
+        savedPods = const PaginatedList.empty(),
+        seedsList = const PaginatedList.empty(),
+        isBlurred = false;
 
   /// Used for the copyWith method
   PrivateProfilePresentationModel._({
@@ -72,6 +77,9 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
     required this.circle,
     required this.seedCount,
     required this.seedsCountResult,
+    required this.savedPods,
+    required this.seedsList,
+    required this.isBlurred,
   });
 
   final FutureResult<Either<GetUserCirclesFailure, PaginatedList<Circle>>> userCirclesResult;
@@ -102,6 +110,9 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
   @override
   final PaginatedList<Collection> collections;
 
+  @override
+  final PaginatedList<PodApp> savedPods;
+
   final FeatureFlags featureFlags;
 
   @override
@@ -112,6 +123,12 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
 
   @override
   final RuntimePermissionStatus contactsPermission;
+
+  @override
+  final PaginatedList<Seed> seedsList;
+
+  @override
+  final bool isBlurred;
 
   @override
   final Circle circle;
@@ -144,6 +161,8 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
 
   Cursor get userCirclesCursor => userCircles.nextPageCursor();
 
+  Cursor get savedPodsCursor => savedPods.nextPageCursor();
+
   @override
   bool get shouldSeedsBeVisible => featureFlags[FeatureFlagType.seedsProfileCircleEnabled];
 
@@ -157,8 +176,10 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
   List<PrivateProfileTab> get tabs {
     return [
       PrivateProfileTab.posts,
-      PrivateProfileTab.circles,
       if (featureFlags[FeatureFlagType.collectionsEnabled]) PrivateProfileTab.collections,
+      PrivateProfileTab.pods,
+      PrivateProfileTab.circles,
+      PrivateProfileTab.seeds,
     ];
   }
 
@@ -205,6 +226,9 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
     FutureResult<Either<GetSavedPostsFailure, PaginatedList<Post>>>? savedPostsResult,
     Circle? circle,
     int? seedCount,
+    PaginatedList<PodApp>? savedPods,
+    PaginatedList<Seed>? seedsList,
+    bool? isBlurred,
   }) {
     return PrivateProfilePresentationModel._(
       profileStatsResult: profileStatsResult ?? this.profileStatsResult,
@@ -226,6 +250,9 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
       circle: circle ?? this.circle,
       seedCount: seedCount ?? this.seedCount,
       seedsCountResult: seedsCountResult ?? this.seedsCountResult,
+      savedPods: savedPods ?? this.savedPods,
+      seedsList: seedsList ?? this.seedsList,
+      isBlurred: isBlurred ?? this.isBlurred,
     );
   }
 }
@@ -241,6 +268,8 @@ abstract class PrivateProfileViewModel {
   PaginatedList<Circle> get userCircles;
 
   PaginatedList<Collection> get collections;
+
+  PaginatedList<PodApp> get savedPods;
 
   bool get isLoadingCollections;
 
@@ -279,4 +308,8 @@ abstract class PrivateProfileViewModel {
   bool get isDirector;
 
   String get seeds;
+
+  PaginatedList<Seed> get seedsList;
+
+  bool get isBlurred;
 }

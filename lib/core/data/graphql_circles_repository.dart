@@ -56,7 +56,9 @@ import 'package:picnic_app/features/circles/domain/model/get_onboarding_circles_
 import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_user_roles_in_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/invite_user_to_circle_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/create_circle/data/model/gql_create_circle_input.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
@@ -455,6 +457,34 @@ class GraphqlCirclesRepository implements CirclesRepository {
         )
         .mapFailure((fail) => GetCircleStatsFailure.unknown(fail))
         .mapSuccess((result) => result.toDomain());
+  }
+
+  @override
+  Future<Either<VotePodFailure, Unit>> votePod({required Id podId}) {
+    return _gqlClient
+        .mutate(
+          document: upvotePod,
+          parseData: (json) => GqlSuccessPayload.fromJson(json['upvoteApp'] as Map<String, dynamic>),
+          variables: {
+            'appID': podId.value,
+          },
+        )
+        .mapFailure(VotePodFailure.unknown)
+        .mapSuccessPayload(onFailureReturn: const VotePodFailure.unknown());
+  }
+
+  @override
+  Future<Either<UnVotePodFailure, Unit>> unVotePod({required Id podId}) {
+    return _gqlClient
+        .mutate(
+          document: unupvoteApp,
+          parseData: (json) => GqlSuccessPayload.fromJson(json['unupvoteApp'] as Map<String, dynamic>),
+          variables: {
+            'appID': podId.value,
+          },
+        )
+        .mapFailure(UnVotePodFailure.unknown)
+        .mapSuccessPayload(onFailureReturn: const UnVotePodFailure.unknown());
   }
 
   @override

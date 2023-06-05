@@ -15,6 +15,8 @@ class PicnicListItemWithAvatarButton extends StatefulWidget {
     required this.onTapView,
     required this.showFollowButton,
     required this.picnicAvatar,
+    this.subtitle,
+    this.subtitleStyle,
   }) : super(key: key);
 
   final bool isActive;
@@ -26,6 +28,10 @@ class PicnicListItemWithAvatarButton extends StatefulWidget {
   final String passiveText;
 
   final String title;
+
+  final String? subtitle;
+
+  final TextStyle? subtitleStyle;
 
   final VoidCallback onTapView;
 
@@ -64,6 +70,8 @@ class _PicnicListItemWithAvatarButtonState extends State<PicnicListItemWithAvata
       onTap: widget.onTapView,
       title: widget.title,
       titleStyle: styles.subtitle20,
+      subTitleStyle: widget.subtitleStyle ?? styles.caption10,
+      subTitle: widget.subtitle,
       leftGap: 0,
       leading: widget.picnicAvatar,
       trailingGap: 0,
@@ -71,7 +79,7 @@ class _PicnicListItemWithAvatarButtonState extends State<PicnicListItemWithAvata
           ? PicnicButton(
               title: _isActive ? widget.activeText : widget.passiveText,
               onTap: _onTapButton,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               titleColor: _isActive ? pink : white,
               borderWidth: _buttonBorderWith,
               borderColor: _isActive ? pink : blue,

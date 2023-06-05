@@ -20,6 +20,7 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../../seeds/mocks/seeds_mocks.dart';
 import '../mocks/profile_mock_definitions.dart';
 import '../mocks/profile_mocks.dart';
@@ -37,20 +38,6 @@ void main() {
 
       // THEN
       verify(() => navigator.openFollowers(any()));
-    },
-  );
-
-  test(
-    'tapping on share circle link should open share dialog',
-    () {
-      // GIVEN
-      const link = Stubs.linkUrl;
-
-      // WHEN
-      presenter.onTapShareCircleLink(link);
-
-      // THEN
-      verify(() => navigator.shareText(text: link));
     },
   );
 
@@ -114,17 +101,6 @@ void main() {
   );
 
   test(
-    'tapping on seeds should open SeedsPage',
-    () {
-      // WHEN
-      presenter.onTapSeeds();
-
-      // THEN
-      verify(() => navigator.openSeeds(any()));
-    },
-  );
-
-  test(
     'tapping on circle details should open CircleDetailsPage',
     () {
       // WHEN
@@ -162,7 +138,7 @@ void main() {
       const selectedTab = 2;
 
       presenter.onTabChanged(selectedTab);
-      expect(presenter.state.selectedTab, PrivateProfileTab.collections);
+      expect(presenter.state.selectedTab, PrivateProfileTab.pods);
     },
   );
 
@@ -290,6 +266,8 @@ void main() {
       SeedsMocks.getUserSeedsTotalUseCase,
       Mocks.leaveCircleUseCase,
       Mocks.clipboardManager,
+      PodsMocks.getSavedPodsUseCase,
+      SeedsMocks.getSeedsUseCase,
     );
   });
 }

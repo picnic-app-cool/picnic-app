@@ -8,6 +8,7 @@ import 'package:picnic_app/core/domain/model/get_collections_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_circles_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_failure.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/model/profile_stats.dart';
 import 'package:picnic_app/core/domain/model/public_profile.dart';
@@ -45,7 +46,8 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
         userId = initialParams.userId,
         featureFlags = featureFlagsStore.featureFlags,
         privateProfile = userStore.privateProfile,
-        followResult = const FutureResult.empty();
+        followResult = const FutureResult.empty(),
+        savedPods = const PaginatedList.empty();
 
   /// Used for the copyWith method
   PublicProfilePresentationModel._({
@@ -65,6 +67,7 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
     required this.followResult,
     required this.profileStatsResult,
     required this.profileStats,
+    required this.savedPods,
   });
 
   final FutureResult<Either<GetUserFailure, PublicProfile>> userResult;
@@ -100,6 +103,9 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
   @override
   final PaginatedList<Collection> collections;
 
+  @override
+  final PaginatedList<PodApp> savedPods;
+
   final FeatureFlags featureFlags;
 
   @override
@@ -132,12 +138,15 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
 
   Cursor get userCirclesCursor => userCircles.nextPageCursor();
 
+  Cursor get savedPodsCursor => savedPods.nextPageCursor();
+
   @override
   List<PublicProfileTab> get tabs {
     return [
       PublicProfileTab.posts,
-      PublicProfileTab.circles,
       if (featureFlags[FeatureFlagType.collectionsEnabled]) PublicProfileTab.collections,
+      PublicProfileTab.pods,
+      PublicProfileTab.circles,
     ];
   }
 
@@ -168,6 +177,7 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
     PublicProfile? publicProfile,
     FeatureFlags? featureFlags,
     FutureResult<void>? followResult,
+    PaginatedList<PodApp>? savedPods,
   }) {
     return PublicProfilePresentationModel._(
       userResult: userResult ?? this.userResult,
@@ -186,6 +196,7 @@ class PublicProfilePresentationModel implements PublicProfileViewModel {
       userCircles: userCircles ?? this.userCircles,
       collections: collections ?? this.collections,
       featureFlags: featureFlags ?? this.featureFlags,
+      savedPods: savedPods ?? this.savedPods,
     );
   }
 
@@ -210,6 +221,8 @@ abstract class PublicProfileViewModel {
   PaginatedList<Circle> get userCircles;
 
   PaginatedList<Collection> get collections;
+
+  PaginatedList<PodApp> get savedPods;
 
   bool get isLoadingCollections;
 

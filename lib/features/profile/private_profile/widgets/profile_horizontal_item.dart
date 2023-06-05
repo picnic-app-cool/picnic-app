@@ -6,48 +6,39 @@ class ProfileHorizontalItem extends StatelessWidget {
   const ProfileHorizontalItem({
     Key? key,
     required this.onTap,
-    required this.trailingText,
-    this.leading,
     required this.title,
+    this.trailing,
+    this.leading,
     this.onTapTrailing,
   }) : super(key: key);
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final VoidCallback? onTapTrailing;
 
-  final String trailingText;
+  final Widget? trailing;
   final String title;
 
   final Widget? leading;
 
   static const double _itemHeight = 48;
-  static const double _itemRadius = 12;
+  static const double _itemRadius = 100;
 
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final styles = theme.styles;
     final colors = theme.colors;
-    final blackAndWhite = colors.blackAndWhite;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-      ),
-      child: PicnicListItem(
-        title: title,
-        titleStyle: styles.subtitle20,
-        onTapDetails: onTapTrailing,
-        onTap: onTap,
-        height: _itemHeight,
-        trailing: Text(
-          trailingText,
-          style: styles.body30.copyWith(color: colors.blue),
-        ),
-        fillColor: blackAndWhite.shade200,
-        borderRadius: _itemRadius,
-        leading: leading,
-      ),
+    return PicnicListItem(
+      title: title,
+      titleStyle: styles.link15.copyWith(color: colors.darkBlue.shade800),
+      onTapDetails: onTapTrailing,
+      onTap: onTap,
+      height: _itemHeight,
+      trailing: trailing,
+      fillColor: colors.darkBlue.shade300,
+      borderRadius: _itemRadius,
+      leading: leading,
     );
   }
 }

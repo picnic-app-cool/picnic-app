@@ -6,10 +6,12 @@ import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
 import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_target.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
+import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_navigator.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_presentation_model.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/circles/pods/pod_web_view_initial_params.dart';
+import 'package:picnic_app/features/pods/domain/use_cases/save_pod_use_case.dart';
 
 class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
   DiscoverPodsPresenter(
@@ -18,12 +20,14 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
     this._getPodsUseCase,
     this._getUserScopedPodTokenUseCase,
     this._logAnalyticsEventUseCase,
+    this._savePodUseCase,
   );
 
   final DiscoverPodsNavigator _navigator;
   final GetPodsUseCase _getPodsUseCase;
   final GetUserScopedPodTokenUseCase _getUserScopedPodTokenUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
+  final SavePodUseCase _savePodUseCase;
 
   // ignore: unused_element
   DiscoverPodsPresentationModel get _model => state as DiscoverPodsPresentationModel;
@@ -34,6 +38,17 @@ class DiscoverPodsPresenter extends Cubit<DiscoverPodsViewModel> {
             _openPodWebPage(accessToken: generatedToken.jwtToken, pod: pod);
           },
           fail: (fail) => _navigator.showError(fail.displayableFailure()),
+        );
+  }
+
+  Future<void> onTapSavePod(Id podId) async {
+    await _savePodUseCase
+        .execute(
+          podId: podId,
+        )
+        .doOn(
+          success: (result) =>
+              tryEmit(_model.copyWith(pods: _model.pods.copyWith(items: _model.bySavingPod(podId: podId)))),
         );
   }
 

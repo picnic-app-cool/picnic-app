@@ -11,7 +11,6 @@ import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_app/ui/widgets/picnic_stats.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
-import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class ProfileContainer extends StatelessWidget {
@@ -54,38 +53,22 @@ class ProfileContainer extends StatelessWidget {
           ),
           placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
         ),
-        const Gap(10),
+        const Gap(16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                textAlign: TextAlign.center,
-                user.fullName,
-                style: styles.title40,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: ShaderMask(
-                      blendMode: BlendMode.srcIn,
-                      shaderCallback: (bounds) => PicnicColors.rainbowGradient.createShader(
-                        Rect.fromLTWH(
-                          0,
-                          0,
-                          bounds.width,
-                          bounds.height,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: onTapCopy,
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          user.username.formattedUsername,
-                          style: styles.subtitle40,
-                        ),
+                    child: InkWell(
+                      onTap: onTapCopy,
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        user.username.formattedUsername,
+                        style: styles.subtitle40.copyWith(color: colors.darkBlue.shade800),
                       ),
                     ),
                   ),
@@ -112,8 +95,9 @@ class ProfileContainer extends StatelessWidget {
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
           ),
-          const Gap(28),
+          const Gap(18),
         ],
+        const Gap(10),
         PicnicStats(
           onTap: onTap,
           stats: [
@@ -133,7 +117,7 @@ class ProfileContainer extends StatelessWidget {
           isLoading: isLoadingProfileStats,
           usage: PicnicStatUsage.profile,
         ),
-        const Gap(16),
+        const Gap(28),
       ],
     );
   }

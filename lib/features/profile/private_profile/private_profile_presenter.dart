@@ -5,6 +5,7 @@ import 'package:picnic_app/core/domain/model/circle_role.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/model/profile_stats.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission.dart';
@@ -26,9 +27,11 @@ import 'package:picnic_app/features/analytics/domain/model/change/analytics_chan
 import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_target.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/create_circle/create_circle/create_circle_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
+import 'package:picnic_app/features/pods/domain/use_cases/get_saved_pods_use_case.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/post_creation_index/post_creation_index_initial_params.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params.dart';
@@ -42,15 +45,15 @@ import 'package:picnic_app/features/profile/domain/use_cases/get_unread_notifica
 import 'package:picnic_app/features/profile/domain/use_cases/get_user_posts_use_case.dart';
 import 'package:picnic_app/features/profile/edit_profile/edit_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/followers/followers_initial_params.dart';
-import 'package:picnic_app/features/profile/invite_friends/invite_friends_bottom_sheet_initial_params.dart';
 import 'package:picnic_app/features/profile/notifications/notifications_list_initial_params.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_presentation_model.dart';
 import 'package:picnic_app/features/profile/saved_posts/saved_posts_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
+import 'package:picnic_app/features/seeds/domain/use_cases/get_seeds_use_case.dart';
 import 'package:picnic_app/features/seeds/domain/use_cases/get_user_seeds_total_use_case.dart';
-import 'package:picnic_app/features/seeds/seeds/seeds_initial_params.dart';
+import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_initial_params.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_initial_params.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/navigation/confirmation_bottom_sheet_route.dart';
@@ -77,6 +80,8 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
     this._getUserSeedsTotalUseCase,
     this._leaveCircleUseCase,
     this._clipboardManager,
+    this._getSavedPodsUseCase,
+    this._getSeedsUseCase,
   ) {
     listenTo<PrivateProfile>(
       stream: _userStore.stream,
@@ -101,6 +106,8 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
   final GetUserSeedsTotalUseCase _getUserSeedsTotalUseCase;
   final LeaveCircleUseCase _leaveCircleUseCase;
   final ClipboardManager _clipboardManager;
+  final GetSavedPodsUseCase _getSavedPodsUseCase;
+  final GetSeedsUseCase _getSeedsUseCase;
 
   final UserStore _userStore;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
@@ -170,27 +177,6 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
     }
   }
 
-  void onTapShareCircleLink(String circleInviteLink) => navigator.shareText(text: circleInviteLink);
-
-  void onTapShareProfileLink() {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.profileAddFriendsTap,
-        targetValue: _model.user.user.shareLink,
-      ),
-    );
-
-    navigator.shareText(
-      text: _model.user.user.shareLink,
-    );
-  }
-
-  void onTapInviteFriends() => navigator.showVerticalActionBottomSheet(
-        InviteFriendsBottomSheetInitialParams(
-          shareLink: _model.user.user.shareLink,
-        ),
-      );
-
   Future<void> onTapEditProfile() async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
@@ -236,16 +222,6 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
 
   void onTapSearchCircles() => navigator.openDiscoverExplore(const DiscoverExploreInitialParams());
 
-  void onTapSeeds() {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.profileViewSeedsTap,
-      ),
-    );
-
-    navigator.openSeeds(const SeedsInitialParams());
-  }
-
   Future<void> onTapEnterCircle(Id circleId) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
@@ -285,6 +261,29 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
     _getProfileStats();
 
     await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
+  }
+
+  void onTapShowInfo() => navigator.openInfoSeeds();
+
+  Future<void> loadSeeds({
+    bool fromScratch = false,
+  }) {
+    final cursor = fromScratch ? const Cursor.firstPage() : _model.seedsList.nextPageCursor();
+    return _getSeedsUseCase.execute(nextPageCursor: cursor).doOn(
+          success: (seeds) {
+            final newList = fromScratch ? seeds : _model.seedsList + seeds;
+            tryEmit(_model.copyWith(seedsList: newList));
+          },
+          fail: (fail) => navigator.showError(fail.displayableFailure()),
+        );
+  }
+
+  void onTapSendSeeds() {
+    navigator.openSellSeeds(
+      SellSeedsInitialParams(
+        onTransferSeedsCallback: () => loadSeeds(fromScratch: true),
+      ),
+    );
   }
 
   //TODO(GS-282): https://picnic-app.atlassian.net/browse/GS-282
@@ -330,6 +329,18 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
         fail.displayableFailure(),
       ),
     );
+  }
+
+  Future<void> loadSavedPods() {
+    return _getSavedPodsUseCase
+        .execute(
+          nextPageCursor: _model.savedPods.nextPageCursor(),
+        )
+        .doOn(
+          success: (pods) => tryEmit(
+            _model.copyWith(savedPods: _model.savedPods + pods),
+          ),
+        );
   }
 
   Future<void> loadSavedPosts({bool fromScratch = false}) => _getSavedPosts(fromScratch: fromScratch).doOn(
@@ -388,6 +399,16 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       ],
       onTapClose: navigator.close,
     );
+  }
+
+  void onTapPod(PodApp pod) {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.circlePod,
+        targetValue: pod.id.value,
+      ),
+    );
+    navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
   }
 
   void _onCircleUpdated() {

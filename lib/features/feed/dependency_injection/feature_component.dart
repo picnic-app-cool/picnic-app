@@ -359,11 +359,14 @@ void _configureMvp() {
         ..registerFactoryParam<CirclesSideMenuViewModel, CirclesSideMenuInitialParams, dynamic>(
           (params, _) => CirclesSideMenuPresentationModel.initial(
             params,
+            getIt(),
           ),
         )
         ..registerFactoryParam<CirclesSideMenuPresenter, CirclesSideMenuInitialParams, dynamic>(
           (params, _) => CirclesSideMenuPresenter(
             getIt(param1: params),
+            getIt(),
+            getIt(),
             getIt(),
             getIt(),
           ),

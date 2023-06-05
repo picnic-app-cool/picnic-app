@@ -339,3 +339,17 @@ mutation(\$circleId: String!, \$roleId: String!, \$userId: String!) {
   }
 }
 """;
+
+String get upvotePod => '''
+ mutation(\$appID: ID!,) {
+       upvoteApp(appID: \$appID){
+      ${GqlTemplate().successPayload}
+       }
+   }''';
+
+String get unupvoteApp => '''
+ mutation(\$appID: ID!,) {
+       unupvoteApp(appID: \$appID){
+      ${GqlTemplate().successPayload}
+       }
+   }''';

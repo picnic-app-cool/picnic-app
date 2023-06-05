@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_navigator.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/create_circle/create_circle/create_circle_navigator.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_navigator.dart';
@@ -15,7 +16,9 @@ import 'package:picnic_app/features/profile/private_profile/private_profile_page
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/profile/saved_posts/saved_posts_navigator.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
+import 'package:picnic_app/features/seeds/info_seeds/info_seed_route.dart';
 import 'package:picnic_app/features/seeds/seeds/seeds_navigator.dart';
+import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_navigator.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
@@ -51,7 +54,11 @@ class PrivateProfileNavigator
         CloseWithResultRoute<bool>,
         ReportFormRoute,
         SnackBarRoute,
-        ConfirmationBottomSheetRoute {
+        ConfirmationBottomSheetRoute,
+        AddCirclePodRoute,
+        InfoSeedRoute,
+        SellSeedsRoute,
+        CircleDetailsRoute {
   PrivateProfileNavigator(
     this.appNavigator,
   );

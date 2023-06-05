@@ -225,6 +225,8 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<PrivateProfilePage, PrivateProfileInitialParams, dynamic>(
@@ -341,6 +343,7 @@ void _configureMvp() {
         ..registerFactoryParam<PublicProfilePresenter, PublicProfileInitialParams, dynamic>(
           (initialParams, _) => PublicProfilePresenter(
             getIt(param1: initialParams),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

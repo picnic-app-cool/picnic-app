@@ -1,7 +1,9 @@
 enum PrivateProfileTab {
   posts('posts'),
   circles('circles'),
-  collections('collections');
+  collections('collections'),
+  pods('pods'),
+  seeds('seeds');
 
   final String value;
 

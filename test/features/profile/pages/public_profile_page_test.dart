@@ -24,6 +24,7 @@ import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../../chat/mocks/chat_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../mocks/profile_mocks.dart';
 
 Future<void> main() async {
@@ -120,6 +121,7 @@ Future<void> main() async {
       getProfileStatsUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.clipboardManager,
+      PodsMocks.getSavedPodsUseCase,
     );
     page = PublicProfilePage(presenter: presenter);
   }

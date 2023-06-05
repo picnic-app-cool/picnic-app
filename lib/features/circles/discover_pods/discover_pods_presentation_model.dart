@@ -24,6 +24,15 @@ class DiscoverPodsPresentationModel implements DiscoverPodsViewModel {
   @override
   final Id circleId;
 
+  List<CirclePodApp> bySavingPod({
+    required Id podId,
+  }) =>
+      pods.items
+          .map(
+            (pod) => pod.app.id == podId ? pod.copyWith(app: pod.app.copyWith(iSaved: true)) : pod,
+          )
+          .toList();
+
   DiscoverPodsPresentationModel copyWith({
     PaginatedList<CirclePodApp>? pods,
     Id? circleId,

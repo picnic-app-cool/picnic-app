@@ -46,6 +46,7 @@ class PicnicListItem extends StatelessWidget {
     this.subtitleTextOverflow,
     this.subTitleSpanStyle = const TextStyle(),
     this.opacity = _defaultOpacity,
+    this.borderWidth = _borderWidth,
   }) : super(key: key);
 
   final String title;
@@ -80,6 +81,7 @@ class PicnicListItem extends StatelessWidget {
   final double trailingGap;
 
   final double opacity;
+  final double borderWidth;
 
   static const _leftGap = 16.0;
   static const _trailingGap = 16.0;
@@ -128,7 +130,7 @@ class PicnicListItem extends StatelessWidget {
                 : null,
             color: fillColor ?? Colors.transparent,
             borderRadius: BorderRadius.circular(borderRadius),
-            border: borderColor != null ? Border.all(width: _borderWidth, color: borderColor!) : null,
+            border: borderColor != null ? Border.all(width: borderWidth, color: borderColor!) : null,
           ),
           child: Row(
             children: [

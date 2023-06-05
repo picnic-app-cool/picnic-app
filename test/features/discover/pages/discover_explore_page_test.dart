@@ -14,10 +14,11 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
-import '../../analytics/mocks/analytics_mocks.dart';
+import '../../chat/mocks/chat_mocks.dart';
 import '../../circles/mocks/circles_mocks.dart';
 import '../../feed/mocks/feed_mock_definitions.dart';
 import '../../feed/mocks/feed_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../mocks/discover_mock_definitions.dart';
 import '../mocks/discover_mocks.dart';
 
@@ -69,7 +70,9 @@ Future<void> main() async {
       useCase,
       popularFeedUseCase,
       CirclesMocks.getPodsUseCase,
-      AnalyticsMocks.logAnalyticsEventUseCase,
+      ChatMocks.getChatUseCase,
+      PodsMocks.savePodUseCase,
+      CirclesMocks.votePodsUseCase,
     );
     page = DiscoverExplorePage(presenter: presenter);
   }

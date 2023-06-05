@@ -4,6 +4,7 @@ import 'package:picnic_app/core/domain/model/circle_role.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/profile_stats.dart';
 import 'package:picnic_app/core/domain/model/public_profile.dart';
 import 'package:picnic_app/core/domain/model/stat_type.dart';
@@ -25,8 +26,10 @@ import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/chat/domain/use_cases/create_single_chat_use_case.dart';
 import 'package:picnic_app/features/chat/single_chat/single_chat_initial_params.dart';
+import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
+import 'package:picnic_app/features/pods/domain/use_cases/get_saved_pods_use_case.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params.dart';
 import 'package:picnic_app/features/profile/collection/collection_initial_params.dart';
@@ -63,6 +66,7 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
     this._getProfileStatsUseCase,
     this._logAnalyticsEventUseCase,
     this._clipboardManager,
+    this._getSavedPodsUseCase,
   ) : super(model);
 
   final PublicProfileNavigator navigator;
@@ -81,6 +85,7 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
   final GetProfileStatsUseCase _getProfileStatsUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final ClipboardManager _clipboardManager;
+  final GetSavedPodsUseCase _getSavedPodsUseCase;
 
   PublicProfilePresentationModel get _model => state as PublicProfilePresentationModel;
 
@@ -181,6 +186,28 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
             fail.displayableFailure(),
           ),
         );
+  }
+
+  Future<void> loadSavedPods() {
+    return _getSavedPodsUseCase
+        .execute(
+          nextPageCursor: _model.savedPods.nextPageCursor(),
+        )
+        .doOn(
+          success: (pods) => tryEmit(
+            _model.copyWith(savedPods: _model.savedPods + pods),
+          ),
+        );
+  }
+
+  void onTapPod(PodApp pod) {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.circlePod,
+        targetValue: pod.id.value,
+      ),
+    );
+    navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
   }
 
   void onTapUnBlock() {

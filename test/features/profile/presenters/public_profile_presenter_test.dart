@@ -17,6 +17,7 @@ import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../../chat/mocks/chat_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../mocks/profile_mock_definitions.dart';
 import '../mocks/profile_mocks.dart';
 
@@ -227,7 +228,7 @@ void main() {
       presenter.onTabChanged(selectedTab);
 
       // THEN
-      expect(presenter.state.selectedTab, PublicProfileTab.circles);
+      expect(presenter.state.selectedTab, PublicProfileTab.collections);
     },
   );
 
@@ -331,6 +332,7 @@ void main() {
       ProfileMocks.getProfileStatsUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.clipboardManager,
+      PodsMocks.getSavedPodsUseCase,
     );
 
     when(() => navigator.openFollowers(any())).thenAnswer((invocation) {

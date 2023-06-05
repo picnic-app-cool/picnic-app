@@ -1,0 +1,3 @@
+class DiscoverPodsInitialParams {
+  const DiscoverPodsInitialParams();
+}

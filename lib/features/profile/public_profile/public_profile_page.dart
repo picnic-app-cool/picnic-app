@@ -1,8 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/profile/domain/public_profile_tab.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_presentation_model.dart';
@@ -13,6 +11,7 @@ import 'package:picnic_app/features/profile/widgets/profile_container.dart';
 import 'package:picnic_app/features/profile/widgets/public_profile_tabs.dart';
 import 'package:picnic_app/features/profile/widgets/tabs/circles_tab.dart';
 import 'package:picnic_app/features/profile/widgets/tabs/collections_tab.dart';
+import 'package:picnic_app/features/profile/widgets/tabs/pods_tab.dart';
 import 'package:picnic_app/features/profile/widgets/tabs/preview_tab.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
@@ -66,7 +65,7 @@ class _PublicProfilePageState extends State<PublicProfilePage>
               appBar: PicnicAppBar(
                 onTapBack: presenter.onTapBack,
                 backgroundColor: themeData.colors.blackAndWhite.shade100,
-                titleText: state.publicProfile.username,
+                titleText: state.publicProfile.user.fullName,
                 actions: [
                   PicnicContainerIconButton(
                     iconPath: Assets.images.moreCircle.path,
@@ -88,7 +87,6 @@ class _PublicProfilePageState extends State<PublicProfilePage>
                             onTapCopy: presenter.onTapCopyUserName,
                           ),
                   ),
-                  const SliverGap(Constants.largePadding),
                   SliverToBoxAdapter(
                     child: stateObserver(
                       builder: (context, state) => state.isLoadingUser
@@ -119,47 +117,62 @@ class _PublicProfilePageState extends State<PublicProfilePage>
                     ? const PublicProfileBlockedView()
                     : state.isLoadingUser
                         ? const Center(child: PicnicLoadingIndicator())
-                        : TabBarView(
-                            controller: _tabController,
-                            children: state.tabs.map((tab) {
-                              switch (tab) {
-                                case PublicProfileTab.posts:
-                                  return stateObserver(
-                                    buildWhen: (previous, current) => previous.posts != current.posts,
-                                    builder: (context, state) => PreviewTab(
-                                      isLoading: state.isPostsLoading,
-                                      onTapView: presenter.onTapViewPost,
-                                      posts: state.posts,
-                                      onLoadMore: presenter.loadPosts,
-                                      hideAuthorAvatar: true,
-                                      postsTabType: PostsTabType.profile,
-                                    ),
-                                  );
-                                case PublicProfileTab.circles:
-                                  return stateObserver(
-                                    builder: (context, state) => CirclesTab(
-                                      userCircles: state.userCircles,
-                                      loadMore: presenter.onLoadMore,
-                                      isLoading: state.isCirclesLoading,
-                                      onTapEnterCircle: presenter.onTapEnterCircle,
-                                      onDiscoverNewCircleTap: presenter.onTapSearchCircles,
-                                    ),
-                                  );
-                                case PublicProfileTab.collections:
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                                    child: stateObserver(
-                                      buildWhen: (previous, current) => previous.collections != current.collections,
-                                      builder: (context, state) => CollectionsTab(
-                                        collections: state.collections,
-                                        onLoadMore: presenter.loadCollection,
-                                        isLoading: state.isLoadingCollections,
-                                        onTapCollection: presenter.onTapCollection,
+                        : Padding(
+                            padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: state.tabs.map((tab) {
+                                switch (tab) {
+                                  case PublicProfileTab.posts:
+                                    return stateObserver(
+                                      buildWhen: (previous, current) => previous.posts != current.posts,
+                                      builder: (context, state) => PreviewTab(
+                                        isLoading: state.isPostsLoading,
+                                        onTapView: presenter.onTapViewPost,
+                                        posts: state.posts,
+                                        onLoadMore: presenter.loadPosts,
+                                        hideAuthorAvatar: true,
+                                        postsTabType: PostsTabType.profile,
                                       ),
-                                    ),
-                                  );
-                              }
-                            }).toList(),
+                                    );
+                                  case PublicProfileTab.circles:
+                                    return stateObserver(
+                                      builder: (context, state) => CirclesTab(
+                                        userCircles: state.userCircles,
+                                        loadMore: presenter.onLoadMore,
+                                        isLoading: state.isCirclesLoading,
+                                        onTapEnterCircle: presenter.onTapEnterCircle,
+                                        onDiscoverNewCircleTap: presenter.onTapSearchCircles,
+                                      ),
+                                    );
+                                  case PublicProfileTab.collections:
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                                      child: stateObserver(
+                                        buildWhen: (previous, current) => previous.collections != current.collections,
+                                        builder: (context, state) => CollectionsTab(
+                                          collections: state.collections,
+                                          onLoadMore: presenter.loadCollection,
+                                          isLoading: state.isLoadingCollections,
+                                          onTapCollection: presenter.onTapCollection,
+                                        ),
+                                      ),
+                                    );
+                                  case PublicProfileTab.pods:
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                                      child: stateObserver(
+                                        buildWhen: (previous, current) => previous.savedPods != current.savedPods,
+                                        builder: (context, state) => PodsTab(
+                                          pods: state.savedPods,
+                                          onLoadMore: presenter.loadSavedPods,
+                                          onTapPod: presenter.onTapPod,
+                                        ),
+                                      ),
+                                    );
+                                }
+                              }).toList(),
+                            ),
                           ),
               ),
             ),

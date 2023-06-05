@@ -93,9 +93,11 @@ import 'package:picnic_app/features/circles/domain/use_cases/remove_blacklisted_
 import 'package:picnic_app/features/circles/domain/use_cases/resolve_report_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/search_non_member_users_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/un_assign_user_role_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/un_vote_pod_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/unban_user_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_circle_role_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_rules_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/vote_pod_use_case.dart';
 import "package:picnic_app/features/circles/edit_circle/edit_circle_initial_params.dart";
 import "package:picnic_app/features/circles/edit_circle/edit_circle_navigator.dart";
 import "package:picnic_app/features/circles/edit_circle/edit_circle_page.dart";
@@ -316,6 +318,12 @@ void _configureUseCases() {
         )
         ..registerFactory<GetPodsUseCase>(
           () => GetPodsUseCase(getIt()),
+        )
+        ..registerFactory<VotePodUseCase>(
+          () => VotePodUseCase(getIt()),
+        )
+        ..registerFactory<UnVotePodUseCase>(
+          () => UnVotePodUseCase(getIt()),
         )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
@@ -804,6 +812,7 @@ void _configureMvp() {
         ..registerFactoryParam<DiscoverPodsPresenter, DiscoverPodsInitialParams, dynamic>(
           (params, _) => DiscoverPodsPresenter(
             getIt(param1: params),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

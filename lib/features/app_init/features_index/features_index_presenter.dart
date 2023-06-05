@@ -25,6 +25,7 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_initial_params.dart';
+import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/seeds/about_elections/about_elections_initial_params.dart';
@@ -157,4 +158,8 @@ class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with Subscrip
       );
 
   void onTapDiscordIntegration() => navigator.openLinkDiscord(const LinkDiscordInitialParams(circleId: Id.empty()));
+
+  void onTapPodsCategories() => navigator.openPodsCategories(
+        const PodsCategoriesInitialParams(),
+      );
 }

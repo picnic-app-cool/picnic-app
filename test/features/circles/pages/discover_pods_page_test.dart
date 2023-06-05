@@ -14,6 +14,7 @@ import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../pods/mocks/pods_mocks.dart';
 import '../mocks/circles_mocks.dart';
 
 Future<void> main() async {
@@ -47,6 +48,7 @@ Future<void> main() async {
       CirclesMocks.getPodsUseCase,
       Mocks.getUserScopedPodTokenUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
+      PodsMocks.savePodUseCase,
     );
 
     getIt.registerFactoryParam<DiscoverPodsPresenter, DiscoverPodsInitialParams, dynamic>(

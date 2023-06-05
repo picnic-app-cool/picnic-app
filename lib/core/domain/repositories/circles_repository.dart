@@ -32,7 +32,9 @@ import 'package:picnic_app/features/circles/domain/model/get_onboarding_circles_
 import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_user_roles_in_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/invite_user_to_circle_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
 
@@ -126,5 +128,13 @@ abstract class CirclesRepository {
   Future<Either<GetPodsFailure, PaginatedList<CirclePodApp>>> getPods({
     required Id circleId,
     required Cursor cursor,
+  });
+
+  Future<Either<VotePodFailure, Unit>> votePod({
+    required Id podId,
+  });
+
+  Future<Either<UnVotePodFailure, Unit>> unVotePod({
+    required Id podId,
   });
 }

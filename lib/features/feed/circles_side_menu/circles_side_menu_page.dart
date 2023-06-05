@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presentation_model.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presenter.dart';
-import 'package:picnic_app/features/profile/widgets/tabs/circles_tab.dart';
+import 'package:picnic_app/features/feed/circles_side_menu/widgets/circle_action.dart';
+import 'package:picnic_app/features/feed/circles_side_menu/widgets/circles_list.dart';
+import 'package:picnic_app/features/feed/circles_side_menu/widgets/pod_list.dart';
+import 'package:picnic_app/features/profile/widgets/tabs/collections_tab.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
+import 'package:picnic_app/ui/widgets/default_avatar.dart';
+import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
+import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/ui/widgets/picnic_tag.dart';
 import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
+import 'package:picnic_app/utils/extensions/string_formatting.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class CirclesSideMenuPage extends StatefulWidget with HasInitialParams {
   const CirclesSideMenuPage({
@@ -23,40 +34,188 @@ class CirclesSideMenuPage extends StatefulWidget with HasInitialParams {
 
 class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
     with PresenterStateMixinAuto<CirclesSideMenuViewModel, CirclesSideMenuPresenter, CirclesSideMenuPage> {
+  static const _tagRadius = 100.0;
+  static const double _badgeSize = 20.0;
+  static const double _avatarSize = 48;
+
   @override
   Widget build(BuildContext context) {
+    final colors = PicnicTheme.of(context).colors;
+    const linearGradientNewTag = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      stops: [
+        0.0,
+        0.4319,
+        1.0312,
+      ],
+      colors: [
+        Color(0xFFBE86F5),
+        Color(0xFFA76AF5),
+        Color(0xFFA497F5),
+      ],
+    );
+    final styles = PicnicTheme.of(context).styles;
+    final title40 = styles.title40;
+    final link15BlueStyle = styles.link15.copyWith(color: colors.blue);
+
+    final user = state.privateProfile.user;
     return DarkStatusBar(
       child: Drawer(
         elevation: 0,
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  bottom: 16,
-                  top: 16,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Gap(12),
+                Row(
+                  children: [
+                    PicnicAvatar(
+                      size: _avatarSize,
+                      boxFit: PicnicAvatarChildBoxFit.cover,
+                      imageSource: PicnicImageSource.url(
+                        state.privateProfile.profileImageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                      placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
+                    ),
+                    const Gap(4),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          textAlign: TextAlign.center,
+                          user.fullName.isEmpty ? user.username : user.fullName,
+                          style: styles.title30,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              user.username.formattedUsername,
+                              style: styles.body15.copyWith(color: colors.darkBlue.shade600),
+                            ),
+                            if (state.privateProfile.isVerified) ...[
+                              const Gap(2),
+                              Assets.images.verificationBadgePink.image(width: _badgeSize),
+                            ],
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                child: Text(
-                  appLocalizations.yourCircles,
-                  style: PicnicTheme.of(context).styles.subtitle30,
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      appLocalizations.collectionsTabTitle,
+                      style: title40,
+                    ),
+                    PicnicTextButton(
+                      label: appLocalizations.viewAllAction,
+                      labelStyle: link15BlueStyle,
+                      onTap: presenter.onTapViewCollections,
+                    ),
+                  ],
                 ),
-              ),
-              Flexible(
-                child: stateObserver(
-                  builder: (context, state) => CirclesTab(
-                    onTapEnterCircle: presenter.onTapEnterCircle,
-                    userCircles: state.userCircles,
-                    loadMore: presenter.onLoadMoreCircles,
-                    isLoading: state.isCirclesLoading,
-                    onCreateNewCircleTap: presenter.onCreateNewCircleTap,
-                    isMe: true,
-                    onDiscoverNewCircleTap: presenter.onTapSearchCircles,
+                Flexible(
+                  child: stateObserver(
+                    builder: (context, state) => CollectionsTab(
+                      collections: state.collections,
+                      onLoadMore: presenter.loadCollection,
+                      isLoading: state.isLoadingCollections,
+                      onTapCollection: presenter.onTapCollection,
+                    ),
                   ),
                 ),
-              ),
-            ],
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          appLocalizations.circles,
+                          style: title40,
+                        ),
+                      ],
+                    ),
+                    PicnicTextButton(
+                      label: appLocalizations.viewAllAction,
+                      labelStyle: link15BlueStyle,
+                      onTap: presenter.onTapViewCircles,
+                    ),
+                  ],
+                ),
+                Flexible(
+                  child: stateObserver(
+                    builder: (context, state) => CirclesList(
+                      onTapEnterCircle: presenter.onTapEnterCircle,
+                      userCircles: state.userCircles,
+                      loadMore: presenter.onLoadMoreCircles,
+                      isLoading: state.isCirclesLoading,
+                    ),
+                  ),
+                ),
+                const Divider(),
+                const Gap(4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          appLocalizations.pods,
+                          style: title40,
+                        ),
+                        const Gap(6),
+                        PicnicTag(
+                          borderRadius: _tagRadius,
+                          title: appLocalizations.newLabel,
+                          gradient: linearGradientNewTag,
+                          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          titleTextStyle: styles.body20.copyWith(
+                            color: colors.blackAndWhite.shade100,
+                          ),
+                        ),
+                      ],
+                    ),
+                    PicnicTextButton(
+                      label: appLocalizations.viewAllAction,
+                      labelStyle: link15BlueStyle,
+                      onTap: presenter.onTapViewPods,
+                    ),
+                  ],
+                ),
+                Flexible(
+                  child: stateObserver(
+                    builder: (context, state) => PodList(
+                      pods: state.savedPods,
+                      loadMore: presenter.loadSavedPods,
+                      isLoading: state.isLoadingPods,
+                    ),
+                  ),
+                ),
+                const Divider(),
+                const Gap(4),
+                CircleAction(
+                  title: appLocalizations.createCircleButtonLabel,
+                  onTap: presenter.onCreateNewCircleTap,
+                  icon: Assets.images.add.image(),
+                ),
+                const Gap(12),
+                CircleAction(
+                  title: appLocalizations.discoveryDiscover,
+                  onTap: presenter.onTapSearchCircles,
+                  icon: Assets.images.discoverOutlinedBlack.image(),
+                ),
+                const Gap(4),
+              ],
+            ),
           ),
         ),
       ),

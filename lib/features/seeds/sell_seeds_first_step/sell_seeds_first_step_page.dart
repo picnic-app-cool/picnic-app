@@ -49,28 +49,32 @@ class _SellSeedsFirstStepPageState extends State<SellSeedsFirstStepPage>
         const Gap(8),
         Expanded(
           child: stateObserver(
-            builder: (context, state) => PicnicPagingListView<Seed>(
-              paginatedList: state.seeds,
-              loadMore: presenter.getSeeds,
-              loadingBuilder: (_) => const PicnicLoadingIndicator(),
-              itemBuilder: (context, seed) {
-                final trailing = PicnicButton(
-                  title: appLocalizations.chooseAction,
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-                  onTap: seed.amountAvailable > 0
-                      ? () => presenter.onTapChoose(
-                            seed,
-                          )
-                      : null,
-                );
+            builder: (context, state) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: PicnicPagingListView<Seed>(
+                paginatedList: state.seeds,
+                loadMore: presenter.getSeeds,
+                loadingBuilder: (_) => const PicnicLoadingIndicator(),
+                separatorBuilder: (_, __) => const Gap(8),
+                itemBuilder: (context, seed) {
+                  final trailing = PicnicButton(
+                    title: appLocalizations.chooseAction,
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    onTap: seed.amountAvailable > 0
+                        ? () => presenter.onTapChoose(
+                              seed,
+                            )
+                        : null,
+                  );
 
-                return SeedListItem(
-                  seed: seed,
-                  title: seed.amountAvailable.formattingToStat(),
-                  trailing: trailing,
-                  subTitle: seed.circleName,
-                );
-              },
+                  return SeedListItem(
+                    seed: seed,
+                    title: seed.amountAvailable.formattingToStat(),
+                    trailing: trailing,
+                    subTitle: seed.circleName,
+                  );
+                },
+              ),
             ),
           ),
         ),

@@ -5,8 +5,8 @@ import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_initial_params.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_presentation_model.dart';
 import 'package:picnic_app/features/circles/discover_pods/discover_pods_presenter.dart';
+import 'package:picnic_app/features/circles/discover_pods/widgets/circle_pod_widget.dart';
 import 'package:picnic_app/features/circles/discover_pods/widgets/pod_tag.dart';
-import 'package:picnic_app/features/circles/discover_pods/widgets/pod_widget.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/ui/widgets/paging_list/paging_grid_view.dart';
 import 'package:picnic_app/ui/widgets/picnic_tag.dart';
@@ -124,7 +124,7 @@ class _DiscoverPodsPageState extends State<DiscoverPodsPage>
                       mainAxisSpacing: _spacing,
                       itemBuilder: (context, index) {
                         final pod = state.pods.items[index];
-                        return PodWidget(
+                        return CirclePodWidget(
                           width: podWidth,
                           height: podWidth * _invertedAspectRatio,
                           pod: pod.app,

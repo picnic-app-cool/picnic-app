@@ -39,6 +39,7 @@ import '../features/media_picker/mocks/media_picker_mocks.dart';
 import '../features/onboarding/mocks/onboarding_mocks.dart';
 import '../features/package_info/mocks/store_mocks.dart';
 import '../features/photo_editor/mocks/photo_editor_mocks.dart';
+import '../features/pods/mocks/pods_mocks.dart';
 import '../features/posts/mocks/posts_mock_definitions.dart';
 import '../features/posts/mocks/posts_mocks.dart';
 import '../features/profile/mocks/profile_mocks.dart';
@@ -369,6 +370,7 @@ class Mocks {
     UserAgreementMocks.init();
     ConnectionStatusMocks.init();
     DiscordMocks.init();
+    PodsMocks.init();
 //DO-NOT-REMOVE FEATURE_MOCKS_INIT
 
     _initMocks();

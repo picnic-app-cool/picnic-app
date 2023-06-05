@@ -1,0 +1,3 @@
+class DiscoverCirclesInitialParams {
+  const DiscoverCirclesInitialParams();
+}
