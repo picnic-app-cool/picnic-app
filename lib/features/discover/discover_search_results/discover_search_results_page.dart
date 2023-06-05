@@ -75,7 +75,6 @@ class _DiscoverSearchResultsPageState extends State<DiscoverSearchResultsPage>
             if (state.isLoading) {
               return const PicnicLoadingIndicator();
             }
-            focusNode.unfocus();
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.largePadding),

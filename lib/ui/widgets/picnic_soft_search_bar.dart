@@ -68,6 +68,7 @@ class _PicnicSoftSearchBarState extends State<PicnicSoftSearchBar> {
       padding: 0,
       contentPadding: widget.contentPadding,
       suffix: userTyping ? PicnicDeleteSuffix(controller: controller) : null,
+      autocorrect: false,
     );
   }
 }
