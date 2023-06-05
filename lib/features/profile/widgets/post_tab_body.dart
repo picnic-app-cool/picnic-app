@@ -42,7 +42,6 @@ class PostTabBody extends StatelessWidget {
   final bool showPostSummaryBarAbovePost;
 
   static const double _aspectRatio = 0.7;
-  static const double _height = 460;
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +87,7 @@ class PostTabBody extends StatelessWidget {
                 child: postListItem,
               )
             else
-              SizedBox(
-                height: _height,
-                child: postListItem,
-              ),
+              postListItem,
             Positioned.fill(
               child: InkWell(
                 onTap: () => onTapView(post),

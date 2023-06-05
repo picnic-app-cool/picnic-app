@@ -89,6 +89,7 @@ class PostListItemState extends State<PostListItem> {
 
   @override
   Widget build(BuildContext context) {
+    final height = widget.post.type != PostType.text ? MediaQuery.of(context).size.height : null;
     return PostActionDetector(
       post: widget.post,
       onReport: (post) => widget.onReport(post),
@@ -96,7 +97,7 @@ class PostListItemState extends State<PostListItem> {
         //this makes sure, that if the page is of the same type (i.e: video page, but the post did change underneath,
         // the whole widget is rebuilt from scratch
         key: ValueKey(widget.post.id),
-        height: MediaQuery.of(context).size.height,
+        height: height,
         child: page,
       ),
     );

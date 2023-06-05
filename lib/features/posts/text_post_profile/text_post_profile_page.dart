@@ -45,42 +45,38 @@ class _TextPostProfilePageState extends State<TextPostProfilePage>
           child: stateObserver(
             builder: (context, state) => SafeArea(
               bottom: false,
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (!state.showPostSummaryBarAbovePost) ...[
-                      const Gap(12),
-                      PostSummaryBar(
-                        author: state.post.author,
-                        post: state.post,
-                        onToggleFollow: presenter.postOverlayPresenter.onTapFollow,
-                        onTapTag: presenter.postOverlayPresenter.onTapShowCircle,
-                        onTapJoinCircle: presenter.postOverlayPresenter.onJoinCircle,
-                        onTapAuthor: presenter.postOverlayPresenter.onTapProfile,
-                        showTagBackground: true,
-                        padding: EdgeInsets.zero,
-                        showTimestamp: state.showTimestamp,
-                      ),
-                    ],
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (!state.showPostSummaryBarAbovePost) ...[
                     const Gap(12),
-                    Expanded(
-                      child: LayoutBuilder(
-                        builder: (BuildContext context, BoxConstraints size) {
-                          return ShowMoreText(
-                            text: state.postContent.text,
-                            style: body30,
-                            maxWidth: size.maxWidth,
-                            maxHeight: size.maxHeight,
-                            onTapShowMore: presenter.onTapShowMore,
-                          );
-                        },
-                      ),
+                    PostSummaryBar(
+                      author: state.post.author,
+                      post: state.post,
+                      onToggleFollow: presenter.postOverlayPresenter.onTapFollow,
+                      onTapTag: presenter.postOverlayPresenter.onTapShowCircle,
+                      onTapJoinCircle: presenter.postOverlayPresenter.onJoinCircle,
+                      onTapAuthor: presenter.postOverlayPresenter.onTapProfile,
+                      showTagBackground: true,
+                      padding: EdgeInsets.zero,
+                      showTimestamp: state.showTimestamp,
                     ),
-                    const Gap(12),
                   ],
-                ),
+                  const Gap(12),
+                  LayoutBuilder(
+                    builder: (BuildContext context, BoxConstraints size) {
+                      return ShowMoreText(
+                        text: state.postContent.text,
+                        style: body30,
+                        maxWidth: size.maxWidth,
+                        maxHeight: size.maxHeight,
+                        onTapShowMore: presenter.onTapShowMore,
+                      );
+                    },
+                  ),
+                  const Gap(12),
+                ],
               ),
             ),
           ),
