@@ -67,7 +67,7 @@ class DeeplinkHandlerPresenter {
   void _handleCircleDeepLink(DeepLinkCircle deepLink) {
     if (deepLink.circleName.isNotEmpty) {
       _circleByNameUseCase.execute(name: deepLink.circleName).doOn(
-            success: (circle) => _openCircleDetails(circle.first.id),
+            success: (circle) => _openCircleDetails(circle.id),
           );
     } else {
       _openCircleDetails(deepLink.circleId);

@@ -44,8 +44,8 @@ abstract class CirclesRepository {
     Cursor? nextPageCursor,
   });
 
-  Future<Either<GetCircleByNameFailure, PaginatedList<Circle>>> getCircle({
-    String? searchQuery,
+  Future<Either<GetCircleByNameFailure, Circle>> getCircleByName({
+    required String name,
   });
 
   /// Get circles by user

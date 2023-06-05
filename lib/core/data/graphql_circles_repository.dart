@@ -176,23 +176,22 @@ class GraphqlCirclesRepository implements CirclesRepository {
           );
 
   @override
-  Future<Either<GetCircleByNameFailure, PaginatedList<Circle>>> getCircle({String? searchQuery}) {
+  Future<Either<GetCircleByNameFailure, Circle>> getCircleByName({
+    required String name,
+  }) {
     return _gqlClient
         .query(
-          document: getCircleNameByIdQuery,
+          document: getCircleByNameQuery,
           variables: {
-            'searchQuery': searchQuery,
-            'isStrict': true,
+            'name': name,
           },
           parseData: (json) {
-            final data = json['circlesConnection'] as Map<String, dynamic>;
-            return GqlConnection.fromJson(data);
+            final data = json['getCircleByName'] as Map<String, dynamic>;
+            return GqlCircle.fromJson(data);
           },
         )
         .mapFailure(GetCircleByNameFailure.unknown)
-        .mapSuccess(
-          (connection) => connection.toDomain(nodeMapper: (node) => GqlCircle.fromJson(node).toDomain()),
-        );
+        .mapSuccess((circle) => circle.toDomain());
   }
 
   @override

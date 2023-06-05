@@ -16,15 +16,15 @@ String get getCirclesQuery => '''
     }
 ''';
 
-String get getCircleNameByIdQuery => '''
-    query(\$searchQuery: String, \$isStrict: Boolean!) {
-      circlesConnection(searchQuery: \$searchQuery, isStrict: \$isStrict) {
-        edges {
-          node { 
-            id, name
+String get getCircleByNameQuery => '''
+    query(\$name: String!) {
+        getCircleByName(
+          getCircleByNameInput: {
+            name: \$name
           }
+        ) {
+          ${GqlTemplate().circleWithChat}
         }
-      }
     }
 ''';
 
