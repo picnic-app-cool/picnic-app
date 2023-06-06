@@ -41,6 +41,14 @@ class PodsCategoriesPresenter extends Cubit<PodsCategoriesViewModel> {
     await _getPods(fromScratch: true);
   }
 
+  Future<void> onTapSort() async {
+    final sortingOption = await _openSortScreen();
+
+    if (sortingOption != null) {
+      await _getPods(fromScratch: true);
+    }
+  }
+
   Future<void> loadMore() => _getPods();
 
   void onTapViewPod(PodApp pod) {
@@ -66,7 +74,7 @@ class PodsCategoriesPresenter extends Cubit<PodsCategoriesViewModel> {
             cursor: fromScratch ? const Cursor.firstPage() : _model.cursor,
             nameStartsWith: '',
             tagIds: _model.getSelectedTagsIds(),
-            orderBy: AppOrder.byCreatedAt,
+            orderBy: _model.podSortOption,
           ),
         )
         .doOn(
@@ -77,5 +85,22 @@ class PodsCategoriesPresenter extends Cubit<PodsCategoriesViewModel> {
           },
           fail: (fail) => navigator.showError(fail.displayableFailure()),
         );
+  }
+
+  Future<AppOrder?> _openSortScreen() async {
+    final sortingOption = _model.podSortOption;
+    await navigator.openSortPodsBottomSheet(
+      onTapSort: (podSortOption) {
+        navigator.close();
+        tryEmit(_model.copyWith(podSortOption: podSortOption));
+      },
+      sortOptions: AppOrder.allSorts,
+      selectedSortOption: _model.podSortOption,
+    );
+
+    if (sortingOption != _model.podSortOption) {
+      return _model.podSortOption;
+    }
+    return null;
   }
 }

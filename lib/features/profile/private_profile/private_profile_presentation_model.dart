@@ -33,7 +33,7 @@ class PrivateProfilePresentationModel implements PrivateProfileViewModel {
     PrivateProfileInitialParams initialParams,
     FeatureFlagsStore featureFlagsStore,
     UserStore userStore,
-  )   : selectedTab = PrivateProfileTab.posts,
+  )   : selectedTab = initialParams.initialTab,
         posts = const PaginatedList.empty(),
         savedPosts = const PaginatedList.empty(),
         seedsCountResult = const FutureResult.empty(),

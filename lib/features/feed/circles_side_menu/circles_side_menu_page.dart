@@ -37,6 +37,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
   static const _tagRadius = 100.0;
   static const double _badgeSize = 20.0;
   static const double _avatarSize = 48;
+  static const _flex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -70,42 +71,46 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Gap(12),
-                Row(
-                  children: [
-                    PicnicAvatar(
-                      size: _avatarSize,
-                      boxFit: PicnicAvatarChildBoxFit.cover,
-                      imageSource: PicnicImageSource.url(
-                        state.privateProfile.profileImageUrl,
-                        fit: BoxFit.cover,
+                InkWell(
+                  onTap: presenter.onTapProfile,
+                  child: Row(
+                    children: [
+                      PicnicAvatar(
+                        onTap: presenter.onTapProfile,
+                        size: _avatarSize,
+                        boxFit: PicnicAvatarChildBoxFit.cover,
+                        imageSource: PicnicImageSource.url(
+                          state.privateProfile.profileImageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                        placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
                       ),
-                      placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
-                    ),
-                    const Gap(4),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          textAlign: TextAlign.center,
-                          user.fullName.isEmpty ? user.username : user.fullName,
-                          style: styles.title30,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              user.username.formattedUsername,
-                              style: styles.body15.copyWith(color: colors.darkBlue.shade600),
-                            ),
-                            if (state.privateProfile.isVerified) ...[
-                              const Gap(2),
-                              Assets.images.verificationBadgePink.image(width: _badgeSize),
+                      const Gap(4),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            textAlign: TextAlign.center,
+                            user.fullName.isEmpty ? user.username : user.fullName,
+                            style: styles.title30,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                user.username.formattedUsername,
+                                style: styles.body15.copyWith(color: colors.darkBlue.shade600),
+                              ),
+                              if (state.privateProfile.isVerified) ...[
+                                const Gap(2),
+                                Assets.images.verificationBadgePink.image(width: _badgeSize),
+                              ],
                             ],
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const Divider(),
                 Row(
@@ -123,6 +128,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   ],
                 ),
                 Flexible(
+                  flex: _flex,
                   child: stateObserver(
                     builder: (context, state) => CollectionsTab(
                       collections: state.collections,

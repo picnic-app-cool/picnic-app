@@ -153,17 +153,6 @@ class _DiscoverPodsPageState extends State<DiscoverPodsPage>
                             tagsRow,
                             const Gap(16.0),
                             Text(
-                              appLocalizations.featuredPods,
-                              style: title30,
-                            ),
-                            const Gap(8.0),
-                            PodList(
-                              circlePodApps: state.featuredPods,
-                              onTapPod: presenter.onTapViewPod,
-                              loadMore: presenter.loadMoreFeaturedPods,
-                              onTapSave: presenter.onTapSavePod,
-                            ),
-                            Text(
                               appLocalizations.explorePods,
                               style: title30,
                             ),

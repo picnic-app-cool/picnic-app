@@ -45,13 +45,28 @@ class SearchPodInput extends Equatable {
 }
 
 enum AppOrder {
-  byScore("ByScore"),
-  byCreatedAt("ByCreatedAt"),
-  unknown("Unknown");
+  byScore(value: "ByScore"),
+  byCreatedAt(value: "ByCreatedAt"),
+  unknown(value: "Unknown");
 
+  const AppOrder({required this.value});
+
+  String get valueToDisplay {
+    switch (this) {
+      case AppOrder.byScore:
+        return '🔥 ${"score"}';
+      case AppOrder.byCreatedAt:
+        return '🗓 ${"created at"}';
+      case AppOrder.unknown:
+        return '';
+    }
+  }
+
+  static List<AppOrder> get allSorts => [
+        byScore,
+        byCreatedAt,
+      ];
   final String value;
-
-  const AppOrder(this.value);
 
   static AppOrder fromString(String value) => AppOrder.values.firstWhere(
         (it) => it.value.toLowerCase() == value.trim().toLowerCase(),

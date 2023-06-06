@@ -4,6 +4,7 @@ import 'package:picnic_app/core/domain/model/circle_pod_app.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/circles/circle_details/widgets/sort_button.dart';
 import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
 import 'package:picnic_app/features/pods/pods_categories_presentation_model.dart';
 import 'package:picnic_app/features/pods/pods_categories_presenter.dart';
@@ -84,6 +85,7 @@ class _PodsCategoriesPageState extends State<PodsCategoriesPage>
                         backgroundColor: bgColor,
                         borderColor: borderColor,
                         borderWidth: tagBorderWidth,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         opacity: 1.0,
                         titleHeight: tagTextHeight,
                         style: PicnicTagStyle.outlined,
@@ -94,6 +96,12 @@ class _PodsCategoriesPageState extends State<PodsCategoriesPage>
                   ),
                 ),
                 const Gap(20),
+                SortButton(
+                  onTap: presenter.onTapSort,
+                  title: state.podSortOption.valueToDisplay,
+                ),
+                const Gap(20),
+
                 //TODO REVIEW THIS, we should not use CirclePodApp
                 Expanded(
                   child: Padding(

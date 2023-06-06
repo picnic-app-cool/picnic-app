@@ -11,6 +11,7 @@ import 'package:picnic_app/features/discover/discover_explore/widgets/trending_c
 import 'package:picnic_app/features/discover/widgets/picnic_discovery_navigation_bar.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 
 //ignore_for_file: maximum-nesting-level
 class DiscoverCirclesPage extends StatefulWidget with HasPresenter<DiscoverCirclesPresenter> {
@@ -72,77 +73,79 @@ class _DiscoverCirclesPageState extends State<DiscoverCirclesPage>
         body: stateObserver(
           builder: (context, state) {
             final title30 = theme.styles.title30;
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 24.0,
-                          right: 24.0,
-                          top: 24.0,
-                        ),
-                        child: Text(
-                          appLocalizations.trendingCircles,
-                          style: title30,
+            return state.isLoading
+                ? const PicnicLoadingIndicator()
+                : CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 24.0,
+                                right: 24.0,
+                                top: 24.0,
+                              ),
+                              child: Text(
+                                appLocalizations.trendingCircles,
+                                style: title30,
+                              ),
+                            ),
+                            const Gap(20.0),
+                            stateObserver(
+                              buildWhen: (previous, current) => previous.trendingCircles != current.trendingCircles,
+                              builder: (context, state) => Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 24.0,
+                                  right: 24.0,
+                                ),
+                                child: TrendingCircles(
+                                  circles: state.trendingCircles,
+                                  onTapJoin: presenter.onTapViewCircle,
+                                  onTapShareCircle: presenter.onTapShareCircle,
+                                  onTapCircleChat: presenter.onTapCircleChat,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 24.0,
+                                right: 24.0,
+                              ),
+                              child: Text(
+                                appLocalizations.exploreCircles,
+                                style: title30,
+                              ),
+                            ),
+                            PicnicCircleListView(
+                              items: state.trendingCircles,
+                              onTapViewCircle: presenter.onTapViewCircle,
+                            ),
+                          ],
                         ),
                       ),
-                      const Gap(20.0),
-                      stateObserver(
-                        buildWhen: (previous, current) => previous.trendingCircles != current.trendingCircles,
-                        builder: (context, state) => Padding(
-                          padding: const EdgeInsets.only(
-                            left: 24.0,
-                            right: 24.0,
+                      ...state.feedGroups.map((element) {
+                        return SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Gap(4),
+                              PicnicTitleTextWithPadding(
+                                text: appLocalizations.circleWithTopic(element.name),
+                                topPadding: 0,
+                                bottomPadding: 0,
+                              ),
+                              PicnicCircleListView(
+                                items: element.topCircles,
+                                onTapViewCircle: presenter.onTapViewCircle,
+                              ),
+                            ],
                           ),
-                          child: TrendingCircles(
-                            circles: state.trendingCircles,
-                            onTapJoin: presenter.onTapViewCircle,
-                            onTapShareCircle: presenter.onTapShareCircle,
-                            onTapCircleChat: presenter.onTapCircleChat,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 24.0,
-                          right: 24.0,
-                        ),
-                        child: Text(
-                          appLocalizations.exploreCircles,
-                          style: title30,
-                        ),
-                      ),
-                      PicnicCircleListView(
-                        items: state.trendingCircles,
-                        onTapViewCircle: presenter.onTapViewCircle,
-                      ),
+                        );
+                      }).toList(growable: false),
                     ],
-                  ),
-                ),
-                ...state.feedGroups.map((element) {
-                  return SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Gap(4),
-                        PicnicTitleTextWithPadding(
-                          text: appLocalizations.circleWithTopic(element.name),
-                          topPadding: 0,
-                          bottomPadding: 0,
-                        ),
-                        PicnicCircleListView(
-                          items: element.topCircles,
-                          onTapViewCircle: presenter.onTapViewCircle,
-                        ),
-                      ],
-                    ),
                   );
-                }).toList(growable: false),
-              ],
-            );
           },
         ),
       ),

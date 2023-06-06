@@ -86,6 +86,7 @@ class _CirclesList extends StatelessWidget {
           if (index < userCircles.items.length) {
             final circle = userCircles.items[index];
             return PicnicListItem(
+              onTap: () => onTapEnterCircle(circle.id),
               height: _height,
               leftGap: 0,
               title: circle.name,

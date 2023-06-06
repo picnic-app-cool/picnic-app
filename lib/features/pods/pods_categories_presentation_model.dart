@@ -2,6 +2,7 @@ import 'package:picnic_app/core/domain/model/app_tag.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/model/pod_app.dart';
+import 'package:picnic_app/core/domain/model/search_pod_input.dart';
 import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
@@ -13,16 +14,21 @@ class PodsCategoriesPresentationModel implements PodsCategoriesViewModel {
     // ignore: avoid_unused_constructor_parameters
     PodsCategoriesInitialParams initialParams,
   )   : tagsList = [],
+        podSortOption = AppOrder.byCreatedAt,
         podsList = const PaginatedList.empty();
 
   /// Used for the copyWith method
   PodsCategoriesPresentationModel._({
     required this.tagsList,
     required this.podsList,
+    required this.podSortOption,
   });
 
   @override
   final List<Selectable<AppTag>> tagsList;
+
+  @override
+  final AppOrder podSortOption;
 
   @override
   final PaginatedList<PodApp> podsList;
@@ -40,10 +46,12 @@ class PodsCategoriesPresentationModel implements PodsCategoriesViewModel {
   PodsCategoriesPresentationModel copyWith({
     List<Selectable<AppTag>>? tagsList,
     PaginatedList<PodApp>? podsList,
+    AppOrder? podSortOption,
   }) {
     return PodsCategoriesPresentationModel._(
       tagsList: tagsList ?? this.tagsList,
       podsList: podsList ?? this.podsList,
+      podSortOption: podSortOption ?? this.podSortOption,
     );
   }
 }
@@ -53,4 +61,6 @@ abstract class PodsCategoriesViewModel {
   List<Selectable<AppTag>> get tagsList;
 
   PaginatedList<PodApp> get podsList;
+
+  AppOrder get podSortOption;
 }

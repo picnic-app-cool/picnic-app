@@ -16,6 +16,7 @@ import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_nav
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presentation_model.dart';
 import 'package:picnic_app/features/pods/domain/use_cases/get_saved_pods_use_case.dart';
 import 'package:picnic_app/features/profile/collection/collection_initial_params.dart';
+import 'package:picnic_app/features/profile/domain/private_profile_tab.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 
 class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
@@ -36,8 +37,6 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   CirclesSideMenuPresentationModel get _model => state as CirclesSideMenuPresentationModel;
 
   void onTapEnterCircle(Id circleId) {
-    _model.onCircleSideMenuAction();
-
     navigator.openCircleDetails(
       CircleDetailsInitialParams(
         circleId: circleId,
@@ -77,7 +76,7 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   void onTapViewCircles() => navigator.openDiscoverCircles(const DiscoverCirclesInitialParams());
 
   void onTapViewCollections() => navigator.openPrivateProfile(
-        const PrivateProfileInitialParams(),
+        const PrivateProfileInitialParams(initialTab: PrivateProfileTab.collections),
       );
 
   Future<void> loadCollection({bool fromScratch = false}) => _getCollectionsUseCase
@@ -100,15 +99,7 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
       );
 
   void onTapSearchCircles() {
-    _model.onCircleSideMenuAction();
-
     navigator.openDiscoverExplore(const DiscoverExploreInitialParams());
-  }
-
-  void onTapShareCircleLink(String circleInviteLink) {
-    _model.onCircleSideMenuAction();
-
-    navigator.shareText(text: circleInviteLink);
   }
 
   Future<void> onLoadMoreCircles({bool fromScratch = false}) async {
@@ -120,13 +111,17 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   }
 
   void onCreateNewCircleTap() {
-    _model.onCircleSideMenuAction();
-
     navigator.openCreateCircle(
       CreateCircleInitialParams(
         createCircleWithoutPost: true,
       ),
       useRoot: true,
+    );
+  }
+
+  void onTapProfile() {
+    navigator.openPrivateProfile(
+      const PrivateProfileInitialParams(),
     );
   }
 
