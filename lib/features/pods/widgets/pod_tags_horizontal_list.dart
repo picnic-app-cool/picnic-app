@@ -28,7 +28,7 @@ class PodTagsHorizontalList extends StatelessWidget {
           final tag = tags[index];
           return PicnicTag(
             opacity: 1.0,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             titleHeight: 1.0,
             title: tag.name,
             borderRadius: _tagsBorderRadius,
