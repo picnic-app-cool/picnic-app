@@ -26,7 +26,7 @@ class PostsTab extends StatelessWidget {
     required this.onTapAuthor,
     this.isLoading = false,
     required this.onTapView,
-    required this.onReport,
+    required this.onLongPress,
     required this.onPostUpdated,
     this.onTapAvatar,
     this.hideAuthorAvatar = false,
@@ -43,7 +43,7 @@ class PostsTab extends StatelessWidget {
   final ValueChanged<Post> onTapView;
   final ValueChanged<Id>? onTapAvatar;
   final bool hideAuthorAvatar;
-  final ValueChanged<Post>? onReport;
+  final ValueChanged<Post>? onLongPress;
   final ValueChanged<Post>? onPostUpdated;
   final PostsTabType postsTabType;
   final bool? isMultiSelectionEnabled;
@@ -78,7 +78,7 @@ class PostsTab extends StatelessWidget {
           post: post,
           onTapView: onTapView,
           onPostUpdated: onPostUpdated,
-          onReport: onReport,
+          onLongPress: onLongPress,
           likeButtonParams: PostBarLikeButtonParams(
             isLiked: post.iLiked,
             likes: post.contentStats.likes.toString(),

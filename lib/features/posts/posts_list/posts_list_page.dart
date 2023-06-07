@@ -89,7 +89,7 @@ class _PostsListPageState extends State<PostsListPage>
                     onTapCreatePost: presenter.onTapCreatePost,
                     loadMore: presenter.loadMore,
                     onPostUpdated: presenter.onPostUpdated,
-                    onReport: presenter.onTapReport,
+                    onLongPress: presenter.onLongPress,
                     postDidAppear: presenter.postDidAppear,
                     onRefresh: presenter.onRefresh,
                     refreshIndicatorKey: _refreshIndicatorKey,

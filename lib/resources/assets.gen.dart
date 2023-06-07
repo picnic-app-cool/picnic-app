@@ -96,6 +96,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/bottom_navigation_active.webp
   AssetGenImage get bottomNavigationActive => const AssetGenImage('assets/images/bottom_navigation_active.webp');
 
+  /// File path: assets/images/bottom_sheet_handler.webp
+  AssetGenImage get bottomSheetHandler => const AssetGenImage('assets/images/bottom_sheet_handler.webp');
+
   /// File path: assets/images/briefcase.webp
   AssetGenImage get briefcase => const AssetGenImage('assets/images/briefcase.webp');
 
@@ -548,6 +551,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/share.webp
   AssetGenImage get share => const AssetGenImage('assets/images/share.webp');
 
+  /// File path: assets/images/share_action_download.webp
+  AssetGenImage get shareActionDownload => const AssetGenImage('assets/images/share_action_download.webp');
+
+  /// File path: assets/images/share_action_report.webp
+  AssetGenImage get shareActionReport => const AssetGenImage('assets/images/share_action_report.webp');
+
+  /// File path: assets/images/share_instagram.webp
+  AssetGenImage get shareInstagram => const AssetGenImage('assets/images/share_instagram.webp');
+
+  /// File path: assets/images/share_messenger.webp
+  AssetGenImage get shareMessenger => const AssetGenImage('assets/images/share_messenger.webp');
+
+  /// File path: assets/images/share_sms.webp
+  AssetGenImage get shareSms => const AssetGenImage('assets/images/share_sms.webp');
+
+  /// File path: assets/images/share_snapchat.webp
+  AssetGenImage get shareSnapchat => const AssetGenImage('assets/images/share_snapchat.webp');
+
+  /// File path: assets/images/share_stories.webp
+  AssetGenImage get shareStories => const AssetGenImage('assets/images/share_stories.webp');
+
+  /// File path: assets/images/share_telegram.webp
+  AssetGenImage get shareTelegram => const AssetGenImage('assets/images/share_telegram.webp');
+
   /// File path: assets/images/show.webp
   AssetGenImage get show => const AssetGenImage('assets/images/show.webp');
 
@@ -705,6 +732,7 @@ class $AssetsImagesGen {
         bookmarkOutlinedMedium,
         bookmarkStroked,
         bottomNavigationActive,
+        bottomSheetHandler,
         briefcase,
         calendar,
         camera,
@@ -855,6 +883,14 @@ class $AssetsImagesGen {
         settingSolid,
         settingsWithShadow,
         share,
+        shareActionDownload,
+        shareActionReport,
+        shareInstagram,
+        shareMessenger,
+        shareSms,
+        shareSnapchat,
+        shareStories,
+        shareTelegram,
         show,
         sideMenuIcon,
         signInAppleLogo,

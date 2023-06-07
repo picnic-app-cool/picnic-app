@@ -21,7 +21,7 @@ class PostTabBody extends StatelessWidget {
     required this.bookmarkEnabled,
     required this.onToggleFollow,
     required this.onTapAuthor,
-    this.onReport,
+    this.onLongPress,
     this.onPostUpdated,
     this.showPostSummaryBarAbovePost = false,
     super.key,
@@ -29,7 +29,7 @@ class PostTabBody extends StatelessWidget {
 
   final Post post;
   final ValueChanged<Post> onTapView;
-  final ValueChanged<Post>? onReport;
+  final ValueChanged<Post>? onLongPress;
   final ValueChanged<Post>? onPostUpdated;
   final PostBarLikeButtonParams likeButtonParams;
   final PostBarButtonParams commentsButtonParams;
@@ -49,7 +49,7 @@ class PostTabBody extends StatelessWidget {
       padding: post.type != PostType.text ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 16.0),
       child: PostListItem(
         onPostUpdated: (post) => onPostUpdated?.call(post),
-        onReport: (post) => onReport?.call(post),
+        onLongPress: (post) => onLongPress?.call(post),
         post: post,
         showPostCommentBar: false,
         initiallyMuted: true,

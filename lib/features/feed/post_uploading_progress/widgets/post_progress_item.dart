@@ -108,7 +108,7 @@ class PostProgressItem extends StatelessWidget {
                   children: [
                     RenderScaleWidget(
                       child: PostListItem(
-                        onReport: (_) => doNothing(),
+                        onLongPress: (_) => doNothing(),
                         post: model.entity,
                         postDetailsMode: PostDetailsMode.preview,
                         onPostUpdated: (_) => doNothing(),

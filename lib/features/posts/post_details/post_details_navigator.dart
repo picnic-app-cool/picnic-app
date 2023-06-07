@@ -3,7 +3,7 @@ import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/posts/domain/model/post_route_result.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_initial_params.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_page.dart';
-import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_navigator.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
@@ -17,7 +17,7 @@ class PostDetailsNavigator
     with
         HorizontalActionBottomSheetRoute,
         CloseRoute,
-        ReportFormRoute,
+        PostShareRoute,
         ErrorBottomSheetRoute,
         ConfirmationBottomSheetRoute,
         CloseWithResultRoute<PostRouteResult> {

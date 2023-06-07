@@ -75,7 +75,7 @@ class _PostDetailsPageState extends State<PostDetailsPage>
               return const Center(child: PicnicLoadingIndicator());
             }
             return PostListItem(
-              onReport: (_) => presenter.onTapReportPost(),
+              onLongPress: (_) => presenter.onLongPressPost(),
               post: state.post,
               reportId: state.reportId,
               postDetailsMode: state.mode,

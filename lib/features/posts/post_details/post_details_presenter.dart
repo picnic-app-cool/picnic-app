@@ -12,8 +12,7 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_navigator.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_presentation_model.dart';
-import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
-import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_initial_params.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/navigation/confirmation_bottom_sheet_route.dart';
 
@@ -75,14 +74,7 @@ class PostDetailsPresenter extends Cubit<PostDetailsViewModel> with Subscription
     );
   }
 
-  void onTapReportPost() => navigator.openReportForm(
-        ReportFormInitialParams(
-          entityId: _model.postId,
-          circleId: _model.post.circle.id,
-          reportEntityType: ReportEntityType.post,
-          contentAuthorId: _model.post.author.id,
-        ),
-      );
+  void onLongPressPost() => navigator.openPostShare(PostShareInitialParams(post: _model.post));
 
   void onPostUpdated(Post post) {
     tryEmit(_model.copyWith(post: post));
@@ -95,11 +87,11 @@ class PostDetailsPresenter extends Cubit<PostDetailsViewModel> with Subscription
 
   void _onTapMoreAuthorModOrDirector() => navigator.onTapMore(
         onTapDeletePost: onTapDeletePost,
-        onTapReport: _model.isModOrDirector ? onTapReportPost : null,
+        onTapReport: _model.isModOrDirector ? onLongPressPost : null,
       );
 
   void _onTapMorePublic() => navigator.onTapMore(
-        onTapReport: onTapReportPost,
+        onTapReport: onLongPressPost,
       );
 
   //intentionally not showing error if viewPost fails

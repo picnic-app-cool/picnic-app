@@ -72,6 +72,10 @@ import 'package:picnic_app/features/posts/post_overlay/post_overlay_navigator.da
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_page.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presenter.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_initial_params.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_navigator.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_presentation_model.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_presenter.dart';
 import "package:picnic_app/features/posts/posts_list/posts_list_initial_params.dart";
 import "package:picnic_app/features/posts/posts_list/posts_list_navigator.dart";
 import "package:picnic_app/features/posts/posts_list/posts_list_presentation_model.dart";
@@ -413,7 +417,6 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
         ..registerFactory<SoundAttachmentNavigator>(
@@ -575,6 +578,19 @@ void _configureMvp() {
         )
         ..registerFactoryParam<SavePostToCollectionPage, SavePostToCollectionInitialParams, dynamic>(
           (params, _) => SavePostToCollectionPage(presenter: getIt(param1: params)),
+        )
+        ..registerFactory<PostShareNavigator>(
+          () => PostShareNavigator(getIt()),
+        )
+        ..registerFactoryParam<PostShareViewModel, PostShareInitialParams, dynamic>(
+          (params, _) => PostSharePresentationModel.initial(params),
+        )
+        ..registerFactoryParam<PostSharePresenter, PostShareInitialParams, dynamic>(
+          (initialParams, _) => PostSharePresenter(
+            getIt(param1: initialParams),
+            getIt(),
+            getIt(),
+          ),
         )
         ..registerFactory<CreateNewCollectionNavigator>(
           () => CreateNewCollectionNavigator(getIt()),

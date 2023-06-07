@@ -23,7 +23,7 @@ class PostsListPageContent extends StatelessWidget {
     required this.onTapCreatePost,
     required this.loadMore,
     required this.onPostUpdated,
-    required this.onReport,
+    required this.onLongPress,
     required this.postDidAppear,
     required this.scrollController,
     required this.onRefresh,
@@ -41,7 +41,7 @@ class PostsListPageContent extends StatelessWidget {
   final void Function() onTapCreatePost;
   final Future<void> Function() loadMore;
   final void Function(Post) onPostUpdated;
-  final void Function(Post) onReport;
+  final void Function(Post) onLongPress;
   final void Function(Post) postDidAppear;
   final ScrollController scrollController;
   final Future<void> Function() onRefresh;
@@ -98,7 +98,7 @@ class PostsListPageContent extends StatelessWidget {
           posts: posts,
           loadMore: loadMore,
           onPostUpdated: onPostUpdated,
-          onReport: onReport,
+          onLongPress: onLongPress,
           postDidAppear: postDidAppear,
           showTimestamps: showTimestamps,
         ),

@@ -90,6 +90,7 @@ import 'package:picnic_app/features/posts/post_overlay/post_overlay_initial_para
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_navigator.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presenter.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_navigator.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_info_provider.dart';
 import "package:picnic_app/features/posts/posts_list/posts_list_initial_params.dart";
 import "package:picnic_app/features/posts/posts_list/posts_list_navigator.dart";
@@ -238,6 +239,8 @@ class MockPostsListPresentationModel extends Mock implements PostsListPresentati
 class MockPostsListInitialParams extends Mock implements PostsListInitialParams {}
 
 class MockPostsListNavigator extends Mock implements PostsListNavigator {}
+
+class MockPostShareNavigator extends Mock implements PostShareNavigator {}
 
 class MockVideoPostPresenter extends MockCubit<VideoPostViewModel> implements VideoPostPresenter {}
 

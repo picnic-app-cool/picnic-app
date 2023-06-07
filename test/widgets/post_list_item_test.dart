@@ -30,7 +30,7 @@ Widget _buildPostListItem(Post post) {
     child: PostListItem(
       post: post,
       onPostUpdated: (_) {},
-      onReport: (_) {},
+      onLongPress: (_) {},
       showTimestamp: true,
     ),
   );

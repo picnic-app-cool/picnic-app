@@ -437,7 +437,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     tryEmit(_model.byUpdatingPost(updatedPost));
   }
 
-  void onReportPost(Post post) => _openReportPostForm(post);
+  void onLongPress(Post post) => _openReportPostForm(post);
 
   Future<void> onScrollReachedBottom() async => onTapViewPost(_model.posts.first);
 

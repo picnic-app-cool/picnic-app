@@ -69,7 +69,7 @@ class _SingleFeedPageState extends State<SingleFeedPage>
             child: PostsListVerticalPageView(
               posts: state.posts,
               onPostUpdated: presenter.onPostUpdated,
-              onReport: (_) => presenter.onReport(),
+              onLongPress: (_) => presenter.onLongPress(),
               postDidAppear: presenter.postDidAppear,
               loadMore: presenter.loadMore,
               scrollController: _controller,

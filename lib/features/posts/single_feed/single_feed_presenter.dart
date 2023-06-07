@@ -5,6 +5,7 @@ import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/core/utils/throttler.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_initial_params.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_navigator.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_presentation_model.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
@@ -79,8 +80,8 @@ class SingleFeedPresenter extends Cubit<SingleFeedViewModel> {
     );
   }
 
-  void onReport() {
-    _openReportPostForm();
+  void onLongPress() {
+    navigator.openPostShare(PostShareInitialParams(post: _model.currentPost));
   }
 
   void onTapMoreOptions() => navigator.onTapMore(

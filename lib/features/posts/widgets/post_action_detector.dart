@@ -5,17 +5,17 @@ class PostActionDetector extends StatelessWidget {
   const PostActionDetector({
     Key? key,
     required this.post,
-    required this.onReport,
+    required this.onLongPress,
     required this.child,
   }) : super(key: key);
 
   final Post post;
   final Widget child;
-  final Function(Post) onReport;
+  final Function(Post) onLongPress;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onLongPress: () => onReport(post),
+        onLongPress: () => onLongPress(post),
         child: child,
       );
 }

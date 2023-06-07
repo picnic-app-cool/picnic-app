@@ -83,7 +83,6 @@ Future<void> main() async {
       model,
       navigator,
       PostsMocks.getPostsListUseCase,
-      AnalyticsMocks.logAnalyticsEventUseCase,
       CirclesMocks.getCircleDetailsUseCase,
     );
     getIt.registerFactoryParam<PostsListPresenter, PostsListInitialParams, dynamic>(

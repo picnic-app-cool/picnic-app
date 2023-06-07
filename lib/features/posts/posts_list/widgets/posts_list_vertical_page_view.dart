@@ -16,7 +16,7 @@ class PostsListVerticalPageView extends StatefulWidget {
     required this.posts,
     required this.loadMore,
     required this.onPostUpdated,
-    required this.onReport,
+    required this.onLongPress,
     required this.postDidAppear,
     required this.scrollController,
     this.postDetailsMode = PostDetailsMode.feed,
@@ -26,7 +26,7 @@ class PostsListVerticalPageView extends StatefulWidget {
   /// determines how many posts before reaching end of list should we start loading next page
   static const loadMorePageOffset = 4.0;
   final Future<void> Function() loadMore;
-  final void Function(Post) onReport;
+  final void Function(Post) onLongPress;
   final PaginatedList<Post> posts;
   final void Function(Post) onPostUpdated;
   final void Function(Post) postDidAppear;
@@ -82,7 +82,7 @@ class _PostsListVerticalPageViewState extends State<PostsListVerticalPageView> i
             loadMore: widget.loadMore,
             itemBuilder: (context, post) {
               return PostListItem(
-                onReport: widget.onReport,
+                onLongPress: widget.onLongPress,
                 post: post,
                 postsListInfoProvider: postsListInfoProvider,
                 onPostUpdated: widget.onPostUpdated,

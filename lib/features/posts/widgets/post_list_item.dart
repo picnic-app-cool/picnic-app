@@ -32,7 +32,7 @@ class PostListItem extends StatefulWidget {
     this.postDetailsMode = PostDetailsMode.details,
     this.reportId = const Id.empty(),
     this.overlaySize = PostOverlaySize.fullscreen,
-    required this.onReport,
+    required this.onLongPress,
     this.postsListInfoProvider,
     this.showPostCommentBar = true,
     this.backgroundColor,
@@ -48,7 +48,7 @@ class PostListItem extends StatefulWidget {
   final Id reportId;
   final PostOverlaySize overlaySize;
   final Function(Post) onPostUpdated;
-  final Function(Post) onReport;
+  final Function(Post) onLongPress;
   final PostsListInfoProvider? postsListInfoProvider;
   final bool showPostCommentBar;
   final Color? backgroundColor;
@@ -92,7 +92,7 @@ class PostListItemState extends State<PostListItem> {
     final height = widget.post.type != PostType.text ? MediaQuery.of(context).size.height : null;
     return PostActionDetector(
       post: widget.post,
-      onReport: (post) => widget.onReport(post),
+      onLongPress: (post) => widget.onLongPress(post),
       child: SizedBox(
         //this makes sure, that if the page is of the same type (i.e: video page, but the post did change underneath,
         // the whole widget is rebuilt from scratch

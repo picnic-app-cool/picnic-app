@@ -212,7 +212,7 @@ class _CircleDetailsPageState extends State<CircleDetailsPage>
                                             onTapView: presenter.onTapViewPost,
                                             onTapAvatar: presenter.onTapViewPublicProfile,
                                             onPostUpdated: presenter.onPostUpdated,
-                                            onReport: presenter.onReportPost,
+                                            onLongPress: presenter.onLongPress,
                                             postsTabType: PostsTabType.circle,
                                             onTapLike: presenter.onTapLike,
                                             onTapDislike: presenter.onTapDislike,

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:picnic_app/core/utils/utils.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_navigator.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_page.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
@@ -18,6 +19,7 @@ class SingleFeedNavigator
         HorizontalActionBottomSheetRoute,
         ConfirmationBottomSheetRoute,
         ReportFormRoute,
+        PostShareRoute,
         CloseRoute,
         ReachedListEndRoute,
         ErrorBottomSheetRoute {

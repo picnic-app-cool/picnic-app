@@ -19,7 +19,6 @@ import 'package:picnic_app/features/posts/posts_list/posts_list_presenter.dart';
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
-import '../../analytics/mocks/analytics_mocks.dart';
 import '../../circles/mocks/circles_mocks.dart';
 import '../mocks/posts_mock_definitions.dart';
 import '../mocks/posts_mocks.dart';
@@ -46,7 +45,6 @@ void main() {
       model,
       navigator,
       PostsMocks.getPostsListUseCase,
-      AnalyticsMocks.logAnalyticsEventUseCase,
       CirclesMocks.getCircleDetailsUseCase,
     );
   }

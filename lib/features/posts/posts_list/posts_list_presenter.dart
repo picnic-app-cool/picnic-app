@@ -3,33 +3,27 @@ import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
-import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
-import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_target.dart';
-import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_details_use_case.dart';
 import 'package:picnic_app/features/posts/domain/model/get_feed_posts_list_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_feed_posts_list_use_case.dart';
 import 'package:picnic_app/features/posts/post_creation_index/post_creation_index_initial_params.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_initial_params.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_initial_params.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_navigator.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_presentation_model.dart';
-import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
-import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
 
 class PostsListPresenter extends Cubit<PostsListViewModel> {
   PostsListPresenter(
     PostsListPresentationModel model,
     this.navigator,
     this._getPostsListUseCase,
-    this._logAnalyticsEventUseCase,
     this._getCircleDetailsUseCase,
   ) : super(model);
 
   final PostsListNavigator navigator;
   final GetFeedPostsListUseCase _getPostsListUseCase;
-  final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final GetCircleDetailsUseCase _getCircleDetailsUseCase;
 
   // ignore: unused_element
@@ -103,20 +97,8 @@ class PostsListPresenter extends Cubit<PostsListViewModel> {
     navigator.openProfile(userId: userId);
   }
 
-  void onTapReport(Post post) {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.postReportLongTap,
-      ),
-    );
-    navigator.openReportForm(
-      ReportFormInitialParams(
-        circleId: post.circle.id,
-        entityId: post.id,
-        reportEntityType: ReportEntityType.post,
-        contentAuthorId: post.author.id,
-      ),
-    );
+  void onLongPress(Post post) {
+    navigator.openPostShare(PostShareInitialParams(post: post));
   }
 
   void onTapCreatePost() {
