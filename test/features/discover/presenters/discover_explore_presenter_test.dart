@@ -56,7 +56,6 @@ void main() {
       CirclesMocks.getPodsUseCase,
       ChatMocks.getChatUseCase,
       PodsMocks.savePodUseCase,
-      CirclesMocks.votePodsUseCase,
     );
   });
 }

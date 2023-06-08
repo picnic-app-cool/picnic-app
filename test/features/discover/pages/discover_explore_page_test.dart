@@ -72,7 +72,6 @@ Future<void> main() async {
       CirclesMocks.getPodsUseCase,
       ChatMocks.getChatUseCase,
       PodsMocks.savePodUseCase,
-      CirclesMocks.votePodsUseCase,
     );
     page = DiscoverExplorePage(presenter: presenter);
   }

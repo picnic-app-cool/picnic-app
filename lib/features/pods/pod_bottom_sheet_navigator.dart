@@ -22,6 +22,7 @@ mixin PodBottomSheetRoute {
     return showPicnicBottomSheet(
       getIt<PodBottomSheetPage>(param1: initialParams),
       useRootNavigator: true,
+      isDismissible: false,
     );
   }
 

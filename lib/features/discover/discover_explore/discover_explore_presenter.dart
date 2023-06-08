@@ -11,9 +11,7 @@ import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/chat/domain/use_cases/get_chat_use_case.dart';
 import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
-import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
-import 'package:picnic_app/features/circles/domain/use_cases/vote_pod_use_case.dart';
 import 'package:picnic_app/features/discover/discover_circles/discover_circles_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_navigator.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_presentation_model.dart';
@@ -37,7 +35,6 @@ class DiscoverExplorePresenter extends Cubit<DiscoverExploreViewModel> {
     this._getPodsUseCase,
     this._getChatUseCase,
     this._savePodUseCase,
-    this._votePodUseCase,
   ) : super(model);
 
   final DiscoverExploreNavigator navigator;
@@ -46,7 +43,6 @@ class DiscoverExplorePresenter extends Cubit<DiscoverExploreViewModel> {
   final GetPodsUseCase _getPodsUseCase;
   final GetChatUseCase _getChatUseCase;
   final SavePodUseCase _savePodUseCase;
-  final VotePodUseCase _votePodUseCase;
 
   DiscoverExplorePresentationModel get _model => state as DiscoverExplorePresentationModel;
 
@@ -60,14 +56,6 @@ class DiscoverExplorePresenter extends Cubit<DiscoverExploreViewModel> {
       ],
     );
   }
-
-  Future<Either<VotePodFailure, Unit>> onVote({required PodApp pod}) => _votePodUseCase
-      .execute(
-        podId: pod.id,
-      ) //
-      .doOn(
-        fail: (fail) => navigator.showError(fail.displayableFailure()),
-      );
 
   Future<void> onTapViewPod(PodApp podApp) async {
     var pod = await navigator.openPodBottomSheet(PodBottomSheetInitialParams(pod: podApp));

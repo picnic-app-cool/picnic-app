@@ -12,6 +12,7 @@ import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_app/ui/widgets/picnic_tag.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class PodBottomSheetPage extends StatefulWidget with HasPresenter<PodBottomSheetPresenter> {
   const PodBottomSheetPage({
@@ -31,7 +32,7 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
   static const avatarSize = 48.0;
 
   static const double tagHeight = 22.0;
-  static const _heightFactor = 0.36;
+  static const _heightFactor = 0.44;
   static const _borderWidth = 2.0;
 
   static const double _tagsBorderRadius = 8.0;
@@ -75,11 +76,12 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
         return FractionallySizedBox(
           heightFactor: _heightFactor,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
+                const Gap(12),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -169,8 +171,9 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
                     const Gap(8),
                     Expanded(
                       child: PicnicButton(
-                        title:
-                            iUpvoted ? "unvote" : appLocalizations.votePodsLabel(counters.upvotes.formattingToStat()),
+                        title: iUpvoted
+                            ? appLocalizations.unVote
+                            : appLocalizations.votePodsLabel(counters.upvotes.formattingToStat()),
                         titleColor: iUpvoted ? pink : Colors.white,
                         icon: iUpvoted ? Assets.images.arrowDown.path : Assets.images.arrowUp.path,
                         color: iUpvoted ? Colors.white : pink,
@@ -185,6 +188,8 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
                     ),
                   ],
                 ),
+                const Gap(8),
+                PicnicTextButton(label: appLocalizations.closeAction, onTap: presenter.onTapClose),
               ],
             ),
           ),

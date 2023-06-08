@@ -1400,5 +1400,6 @@
   "mySeeds": "my seeds",
   "totalSeeds": "total seeds",
   "emptyUserPodsMessage": "you haven''t saved any pods yet",
-  "noPods": "no pods"
+  "noPods": "no pods",
+  "unVote": "unvote"
 }

@@ -3,7 +3,6 @@ import 'package:picnic_app/core/domain/repositories/circles_repository.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dart';
 
-// ignore: unused_element
 class UnVotePodUseCase {
   const UnVotePodUseCase(this._circlesRepository);
 

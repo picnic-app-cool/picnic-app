@@ -52,10 +52,11 @@ class PodBottomSheetPresenter extends Cubit<PodBottomSheetViewModel> {
                 ),
               ),
             );
-            navigator.closeWithResult(_model.pod);
           },
         );
   }
+
+  void onTapClose() => navigator.closeWithResult(_model.pod);
 
   Future<Either<UnVotePodFailure, Unit>> onUnVote({required PodApp pod}) {
     final upvotes = _model.pod.counters.upvotes;
@@ -77,7 +78,6 @@ class PodBottomSheetPresenter extends Cubit<PodBottomSheetViewModel> {
                 ),
               ),
             );
-            navigator.closeWithResult(_model.pod);
           },
         );
   }

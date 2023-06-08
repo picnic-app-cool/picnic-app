@@ -127,7 +127,6 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
         ..registerFactoryParam<DiscoverExplorePage, DiscoverExploreInitialParams, dynamic>(
@@ -149,8 +148,6 @@ void _configureMvp() {
         ..registerFactoryParam<DiscoverPodsPresenter, DiscoverPodsInitialParams, dynamic>(
           (initialParams, _) => DiscoverPodsPresenter(
             getIt(param1: initialParams),
-            getIt(),
-            getIt(),
             getIt(),
             getIt(),
             getIt(),
