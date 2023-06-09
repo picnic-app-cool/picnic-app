@@ -38,9 +38,9 @@ class TrendingCircles extends StatelessWidget {
 
   static const double _avatarSize = 40;
 
-  static const double _coverHeight = 80;
+  static const double _coverHeight = 70;
 
-  static const double _emojiSize = 24;
+  static const double _emojiSize = 18;
 
   static const double _borderWidth = 0.5;
 
