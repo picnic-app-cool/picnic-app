@@ -18,11 +18,13 @@ class DetailedPodWidget extends StatelessWidget {
     required this.pod,
     required this.onTapShare,
     required this.onTapView,
+    required this.onTapAddToCircle,
   }) : super(key: key);
 
   final PodApp pod;
   final VoidCallback onTapShare;
   final VoidCallback onTapView;
+  final VoidCallback onTapAddToCircle;
 
   static const radius = 16.0;
   static const double _avatarSize = 40;
@@ -127,9 +129,19 @@ class DetailedPodWidget extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             title: appLocalizations.view,
                             onTap: onTapView,
-                            titleStyle: link15style.copyWith(color: darkBlue.shade100),
-                            color: theme.colors.blue.shade500,
+                            titleStyle: link15style.copyWith(color: darkBlue.shade800),
+                            color: darkBlueShade300,
                           ),
+                        ),
+                      ),
+                      const Gap(6),
+                      Expanded(
+                        child: PicnicButton(
+                          title: appLocalizations.addToCircle,
+                          titleColor: Colors.white,
+                          onTap: onTapAddToCircle,
+                          color: theme.colors.blue.shade500,
+                          minWidth: double.infinity,
                         ),
                       ),
                       const Gap(6),

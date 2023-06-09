@@ -98,6 +98,14 @@ class _FeaturesIndexPageState extends State<FeaturesIndexPage>
                     onPressed: presenter.onTapPodsCategories,
                     child: const Text("Pods Categories"),
                   ),
+                  ElevatedButton(
+                    onPressed: presenter.onTapPreviewPodPage,
+                    child: const Text("Preview pod"),
+                  ),
+                  ElevatedButton(
+                    onPressed: presenter.onTapEnablePodSuccessBottomSheet,
+                    child: const Text("Pod enabled successfully"),
+                  ),
                 ],
               ),
             ),

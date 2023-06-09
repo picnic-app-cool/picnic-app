@@ -2,6 +2,7 @@ import 'package:picnic_app/core/domain/model/search_pod_input.dart';
 import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_navigator.dart';
 import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
 import 'package:picnic_app/features/pods/pods_categories_page.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
@@ -10,7 +11,7 @@ import 'package:picnic_app/ui/widgets/picnic_bottom_sheet.dart';
 import 'package:picnic_app/ui/widgets/sort_bottom_sheet.dart';
 
 class PodsCategoriesNavigator
-    with AddCirclePodRoute, ErrorBottomSheetRoute, ShareRoute, SortPodsBottomSheetRoute, CloseRoute {
+    with AddCirclePodRoute, ErrorBottomSheetRoute, ShareRoute, SortPodsBottomSheetRoute, CloseRoute, PreviewPodRoute {
   PodsCategoriesNavigator(this.appNavigator);
 
   @override

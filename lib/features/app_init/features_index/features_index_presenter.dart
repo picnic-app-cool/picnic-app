@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/circle_role.dart';
+import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/model/slice.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
@@ -25,7 +26,9 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_initial_params.dart';
+import 'package:picnic_app/features/pods/domain/model/preview_pod_tab.dart';
 import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_initial_params.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/seeds/about_elections/about_elections_initial_params.dart';
@@ -161,5 +164,16 @@ class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with Subscrip
 
   void onTapPodsCategories() => navigator.openPodsCategories(
         const PodsCategoriesInitialParams(),
+      );
+
+  void onTapPreviewPodPage() => navigator.openPreviewPod(
+        const PreviewPodInitialParams(pod: PodApp.empty(), initialTab: PreviewPodTab.launch),
+      );
+
+  void onTapEnablePodSuccessBottomSheet() => navigator.showPodEnabledSuccessfullyBottomSheet(
+        circle: const Circle.empty().copyWith(name: 'Roblox'),
+        pod: const PodApp.empty().copyWith(name: 'AI Image Generator'),
+        // ignore: no-empty-block
+        onTapLaunch: () {},
       );
 }

@@ -1,15 +1,18 @@
 import 'package:dartz/dartz.dart';
+import 'package:picnic_app/core/data/gql_get_recommended_circles_input.dart';
 import 'package:picnic_app/core/data/graphql/graphql_client.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_connection.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.dart';
 import 'package:picnic_app/core/data/graphql/model/get_saved_apps_input.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_app.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_app_tag.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_circle.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_generated_token.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_success_payload.dart';
 import 'package:picnic_app/core/data/graphql/pods_queries.dart';
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
 import 'package:picnic_app/core/domain/model/app_tag.dart';
+import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/featured_pods_failure.dart';
 import 'package:picnic_app/core/domain/model/generated_token.dart';
@@ -22,7 +25,10 @@ import 'package:picnic_app/core/domain/model/search_pods_failure.dart';
 import 'package:picnic_app/core/domain/repositories/pods_repository.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/pods/domain/model/enable_pod_in_circle_failure.dart';
 import 'package:picnic_app/features/pods/domain/model/get_pods_tags_failure.dart';
+import 'package:picnic_app/features/pods/domain/model/get_recommended_circles_failure.dart';
+import 'package:picnic_app/features/pods/domain/model/get_recommended_circles_input.dart';
 import 'package:picnic_app/features/pods/domain/model/get_saved_pods_failure.dart';
 import 'package:picnic_app/features/pods/domain/model/save_pod_failure.dart';
 
@@ -170,4 +176,38 @@ class GraphqlPodsRepository implements PodsRepository {
           ),
         );
   }
+
+  @override
+  Future<Either<EnablePodInCircleFailure, Unit>> enablePodInCircle({required Id podId, required Id circleId}) =>
+      _gqlClient
+          .mutate(
+            document: enablePodMutation,
+            variables: {
+              'podId': podId.value,
+              'circleId': circleId.value,
+            },
+            parseData: (json) => GqlSuccessPayload.fromJson(json['enableApp'] as Map<String, dynamic>),
+          )
+          .mapFailure(EnablePodInCircleFailure.unknown)
+          .mapSuccessPayload(onFailureReturn: const EnablePodInCircleFailure.unknown());
+
+  @override
+  Future<Either<GetRecommendedCirclesFailure, PaginatedList<Circle>>> getRecommendedCircles(
+    GetRecommendedCirclesInput input,
+  ) =>
+      _gqlClient
+          .query(
+            document: getRecommendedCirclesQuery,
+            variables: {
+              'input': input.toJson(),
+            },
+            parseData: (json) {
+              final data = json['getRecommendedCircles'] as Map<String, dynamic>;
+              return GqlConnection.fromJson(data);
+            },
+          )
+          .mapFailure(GetRecommendedCirclesFailure.unknown)
+          .mapSuccess(
+            (connection) => connection.toDomain(nodeMapper: (node) => GqlCircle.fromJson(node).toDomain()),
+          );
 }

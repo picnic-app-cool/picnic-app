@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/domain/model/app_tag.dart';
+import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/featured_pods_failure.dart';
 import 'package:picnic_app/core/domain/model/generated_token.dart';
@@ -10,7 +11,10 @@ import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/search_pod_input.dart';
 import 'package:picnic_app/core/domain/model/search_pods_failure.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/pods/domain/model/enable_pod_in_circle_failure.dart';
 import 'package:picnic_app/features/pods/domain/model/get_pods_tags_failure.dart';
+import 'package:picnic_app/features/pods/domain/model/get_recommended_circles_failure.dart';
+import 'package:picnic_app/features/pods/domain/model/get_recommended_circles_input.dart';
 import 'package:picnic_app/features/pods/domain/model/get_saved_pods_failure.dart';
 import 'package:picnic_app/features/pods/domain/model/save_pod_failure.dart';
 
@@ -28,4 +32,13 @@ abstract class PodsRepository {
   Future<Either<SearchPodsFailure, PaginatedList<PodApp>>> searchPods({required SearchPodInput input});
 
   Future<Either<FeaturedPodsFailure, PaginatedList<PodApp>>> getFeaturedPods({required Cursor nextPageCursor});
+
+  Future<Either<EnablePodInCircleFailure, Unit>> enablePodInCircle({
+    required Id podId,
+    required Id circleId,
+  });
+
+  Future<Either<GetRecommendedCirclesFailure, PaginatedList<Circle>>> getRecommendedCircles(
+    GetRecommendedCirclesInput input,
+  );
 }

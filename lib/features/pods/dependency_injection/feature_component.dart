@@ -1,5 +1,7 @@
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/pods/domain/use_cases/enable_pod_in_circle_use_case.dart';
 import 'package:picnic_app/features/pods/domain/use_cases/get_pods_tags_use_case.dart';
+import 'package:picnic_app/features/pods/domain/use_cases/get_recommended_circles_use_case.dart';
 import 'package:picnic_app/features/pods/domain/use_cases/get_saved_pods_use_case.dart';
 import 'package:picnic_app/features/pods/domain/use_cases/save_pod_use_case.dart';
 import 'package:picnic_app/features/pods/pod_bottom_sheet_initial_params.dart';
@@ -11,7 +13,10 @@ import 'package:picnic_app/features/pods/pods_categories_initial_params.dart';
 import 'package:picnic_app/features/pods/pods_categories_navigator.dart';
 import 'package:picnic_app/features/pods/pods_categories_presentation_model.dart';
 import 'package:picnic_app/features/pods/pods_categories_presenter.dart';
-
+import 'package:picnic_app/features/pods/previewPod/preview_pod_initial_params.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_navigator.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_presentation_model.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_presenter.dart';
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
@@ -67,6 +72,16 @@ void _configureUseCases() {
             getIt(),
           ),
         )
+        ..registerFactory<EnablePodInCircleUseCase>(
+          () => EnablePodInCircleUseCase(
+            getIt(),
+          ),
+        )
+        ..registerFactory<GetRecommendedCirclesUseCase>(
+          () => GetRecommendedCirclesUseCase(
+            getIt(),
+          ),
+        )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
       ;
@@ -111,6 +126,23 @@ void _configureMvp() {
         ..registerFactoryParam<PodBottomSheetPresenter, PodBottomSheetInitialParams, dynamic>(
           (initialParams, _) => PodBottomSheetPresenter(
             getIt(param1: initialParams),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactory<PreviewPodNavigator>(
+          () => PreviewPodNavigator(getIt()),
+        )
+        ..registerFactoryParam<PreviewPodViewModel, PreviewPodInitialParams, dynamic>(
+          (params, _) => PreviewPodPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<PreviewPodPresenter, PreviewPodInitialParams, dynamic>(
+          (params, _) => PreviewPodPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

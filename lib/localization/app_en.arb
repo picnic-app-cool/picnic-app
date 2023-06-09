@@ -1401,5 +1401,29 @@
   "totalSeeds": "total seeds",
   "emptyUserPodsMessage": "you haven''t saved any pods yet",
   "noPods": "no pods",
+  "congratulations": "congratulations",
+  "podAddedToCircle": "you added {podName} to {circleName} successfully, now members can use the pod via your circle easily",
+  "@podAddedToCircle": {
+    "placeholders": {
+      "podName": {},
+      "circleName": {}
+    }
+  },
+  "addToCircles": "add to circles",
+  "launchPodDescription": "choose a circle that has this pod installed to launch the pod",
+  "launchPodTitle": "launch {podName}",
+  "@launchPodTitle": {
+    "placeholders": {
+      "podName": {}
+    }
+  },
+  "addPodToCircleTitle": "add {podName} to circle",
+  "@addPodToCircleTitle": {
+    "placeholders": {
+      "podName": {}
+    }
+  },
+  "addPodToCircleDescription": "add the pod to a circle you have admin permissions in",
+  "addToCircle": "add to circle",
   "unVote": "unvote"
 }

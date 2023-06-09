@@ -9,7 +9,6 @@ import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/circle_chat/circle_chat_initial_params.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/chat/domain/use_cases/get_chat_use_case.dart';
-import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/discover/discover_circles/discover_circles_initial_params.dart';
@@ -64,10 +63,6 @@ class DiscoverExplorePresenter extends Cubit<DiscoverExploreViewModel> {
       return;
     }
     tryEmit(_model.copyWith(pods: _model.pods.copyWith(items: _model.byVotingPod(podApp: pod))));
-  }
-
-  void onTapAddToCircle(PodApp pod) {
-    navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
   }
 
   Future<void> loadMore({bool fromScratch = false}) async {

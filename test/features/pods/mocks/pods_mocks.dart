@@ -16,6 +16,11 @@ class PodsMocks {
   static late MockPodBottomSheetInitialParams podBottomSheetInitialParams;
   static late MockPodBottomSheetNavigator podBottomSheetNavigator;
 
+  static late MockPreviewPodPresenter previewPodPresenter;
+  static late MockPreviewPodPresentationModel previewPodPresentationModel;
+  static late MockPreviewPodInitialParams previewPodInitialParams;
+  static late MockPreviewPodNavigator previewPodNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -28,6 +33,12 @@ class PodsMocks {
 
   static late MockGetSavedPodsFailure getSavedPodsFailure;
   static late MockGetSavedPodsUseCase getSavedPodsUseCase;
+
+  static late MockEnablePodInCircleFailure enablePodInCircleFailure;
+  static late MockEnablePodInCircleUseCase enablePodInCircleUseCase;
+
+  static late MockGetRecommendedCirclesFailure getRecommendedCirclesFailure;
+  static late MockGetRecommendedCirclesUseCase getRecommendedCirclesUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
@@ -56,6 +67,11 @@ class PodsMocks {
     podBottomSheetInitialParams = MockPodBottomSheetInitialParams();
     podBottomSheetNavigator = MockPodBottomSheetNavigator();
 
+    previewPodPresenter = MockPreviewPodPresenter();
+    previewPodPresentationModel = MockPreviewPodPresentationModel();
+    previewPodInitialParams = MockPreviewPodInitialParams();
+    previewPodNavigator = MockPreviewPodNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -67,6 +83,12 @@ class PodsMocks {
 
     getSavedPodsFailure = MockGetSavedPodsFailure();
     getSavedPodsUseCase = MockGetSavedPodsUseCase();
+
+    enablePodInCircleFailure = MockEnablePodInCircleFailure();
+    enablePodInCircleUseCase = MockEnablePodInCircleUseCase();
+
+    getRecommendedCirclesFailure = MockGetRecommendedCirclesFailure();
+    getRecommendedCirclesUseCase = MockGetRecommendedCirclesUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
@@ -90,6 +112,11 @@ class PodsMocks {
     registerFallbackValue(MockPodBottomSheetInitialParams());
     registerFallbackValue(MockPodBottomSheetNavigator());
 
+    registerFallbackValue(MockPreviewPodPresenter());
+    registerFallbackValue(MockPreviewPodPresentationModel());
+    registerFallbackValue(MockPreviewPodInitialParams());
+    registerFallbackValue(MockPreviewPodNavigator());
+
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES
@@ -101,6 +128,12 @@ class PodsMocks {
 
     registerFallbackValue(MockGetSavedPodsFailure());
     registerFallbackValue(MockGetSavedPodsUseCase());
+
+    registerFallbackValue(MockEnablePodInCircleFailure());
+    registerFallbackValue(MockEnablePodInCircleUseCase());
+
+    registerFallbackValue(MockGetRecommendedCirclesFailure());
+    registerFallbackValue(MockGetRecommendedCirclesUseCase());
 
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 

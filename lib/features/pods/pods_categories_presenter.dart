@@ -9,11 +9,12 @@ import 'package:picnic_app/core/domain/use_cases/search_pods_use_case.dart';
 import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
-import 'package:picnic_app/features/circles/add_circle_pod/add_circle_pod_initial_params.dart';
 import 'package:picnic_app/features/pods/domain/model/get_pods_tags_failure.dart';
+import 'package:picnic_app/features/pods/domain/model/preview_pod_tab.dart';
 import 'package:picnic_app/features/pods/domain/use_cases/get_pods_tags_use_case.dart';
 import 'package:picnic_app/features/pods/pods_categories_navigator.dart';
 import 'package:picnic_app/features/pods/pods_categories_presentation_model.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_initial_params.dart';
 
 class PodsCategoriesPresenter extends Cubit<PodsCategoriesViewModel> {
   PodsCategoriesPresenter(
@@ -51,12 +52,22 @@ class PodsCategoriesPresenter extends Cubit<PodsCategoriesViewModel> {
 
   Future<void> loadMore() => _getPods();
 
-  void onTapViewPod(PodApp pod) {
-    navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
+  Future<void> onTapViewPod(PodApp pod) async {
+    await navigator.openPreviewPod(
+      PreviewPodInitialParams(
+        pod: pod,
+        initialTab: PreviewPodTab.launch,
+      ),
+    );
   }
 
-  void onTapAddToCircle(PodApp pod) {
-    navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
+  Future<void> onTapAddToCircle(PodApp pod) async {
+    await navigator.openPreviewPod(
+      PreviewPodInitialParams(
+        pod: pod,
+        initialTab: PreviewPodTab.addToCircles,
+      ),
+    );
   }
 
   void onTapSharePod(PodApp pod) => navigator.shareText(text: pod.url);

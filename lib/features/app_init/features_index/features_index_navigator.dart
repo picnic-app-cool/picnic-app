@@ -14,7 +14,9 @@ import 'package:picnic_app/features/main/main_navigator.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_navigator.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_navigator.dart';
+import 'package:picnic_app/features/pods/enable_pod_success_bottom_sheet_route.dart';
 import 'package:picnic_app/features/pods/pods_categories_navigator.dart';
+import 'package:picnic_app/features/pods/previewPod/preview_pod_navigator.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/push_notifications/send_push_notification/send_push_notification_navigator.dart';
@@ -54,7 +56,9 @@ class FeaturesIndexNavigator
         OnBoardingCirclesPickerRoute,
         AboutElectionsRoute,
         LinkDiscordRoute,
-        PodsCategoriesRoute {
+        PodsCategoriesRoute,
+        PreviewPodRoute,
+        EnablePodSuccessBottomSheetRoute {
   FeaturesIndexNavigator(this.appNavigator);
 
   @override

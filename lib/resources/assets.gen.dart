@@ -338,6 +338,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/info_square_outlined.webp
   AssetGenImage get infoSquareOutlined => const AssetGenImage('assets/images/info_square_outlined.webp');
 
+  /// File path: assets/images/interrupted_line.webp
+  AssetGenImage get interruptedLine => const AssetGenImage('assets/images/interrupted_line.webp');
+
   /// File path: assets/images/lightning.webp
   AssetGenImage get lightning => const AssetGenImage('assets/images/lightning.webp');
 
@@ -496,6 +499,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/rocket.webp
   AssetGenImage get rocket => const AssetGenImage('assets/images/rocket.webp');
+
+  /// File path: assets/images/rounded_green_check.webp
+  AssetGenImage get roundedGreenCheck => const AssetGenImage('assets/images/rounded_green_check.webp');
 
   /// File path: assets/images/rounded_placeholder_image.webp
   AssetGenImage get roundedPlaceholderImage => const AssetGenImage('assets/images/rounded_placeholder_image.webp');
@@ -812,6 +818,7 @@ class $AssetsImagesGen {
         info,
         infoOutlined,
         infoSquareOutlined,
+        interruptedLine,
         lightning,
         lightningOff,
         likeFilled,
@@ -865,6 +872,7 @@ class $AssetsImagesGen {
         report,
         reports,
         rocket,
+        roundedGreenCheck,
         roundedPlaceholderImage,
         ruleBook,
         save,

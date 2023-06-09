@@ -123,6 +123,7 @@ class _PodsCategoriesPageState extends State<PodsCategoriesPage>
                             pod: pod.app,
                             onTapShare: () => presenter.onTapSharePod(pod.app),
                             onTapView: () => presenter.onTapViewPod(pod.app),
+                            onTapAddToCircle: () => presenter.onTapAddToCircle(pod.app),
                           ),
                         );
                       },
