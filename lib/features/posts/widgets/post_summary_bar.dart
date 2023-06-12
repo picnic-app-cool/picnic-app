@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:picnic_app/core/domain/model/basic_public_profile.dart';
-import 'package:picnic_app/core/domain/model/image_url.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_page.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/achievement_badge.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/model/achievement_badge_type.dart';
-import 'package:picnic_app/ui/widgets/default_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_circle_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/ui/widgets/picnic_circle_rectangle_avatar.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_details.dart';
 import 'package:picnic_app/utils/defer_pointer/defer_pointer.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
 import 'package:picnic_app/utils/extensions/time_ago_formatting.dart';
 import 'package:picnic_app/utils/number_formatter.dart';
+import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class PostSummaryBar extends StatelessWidget {
@@ -28,6 +23,7 @@ class PostSummaryBar extends StatelessWidget {
     required this.onToggleFollow,
     required this.onTapTag,
     required this.onTapAuthor,
+    this.onTapCircle,
     this.onTapJoinCircle,
     this.displayTag = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
@@ -36,6 +32,7 @@ class PostSummaryBar extends StatelessWidget {
     this.isDense = false,
     this.overlayTheme,
     this.showTimestamp = false,
+    this.showFollowButton = false,
   }) : super(key: key);
 
   final BasicPublicProfile author;
@@ -44,6 +41,7 @@ class PostSummaryBar extends StatelessWidget {
   final VoidCallback? onTapTag;
   final VoidCallback? onTapAuthor;
   final VoidCallback? onTapJoinCircle;
+  final VoidCallback? onTapCircle;
   final bool displayTag;
   final EdgeInsets padding;
   final bool showTagPrefixIcon;
@@ -51,13 +49,16 @@ class PostSummaryBar extends StatelessWidget {
   final bool isDense;
   final PostOverlayTheme? overlayTheme;
   final bool showTimestamp;
+  final bool showFollowButton;
 
-  static const _avatarSize = 50.0;
-  static const _avatarSizeDense = 40.0;
-  static const _emojiSize = 12.0;
-  static const _circleAvatarSize = 24.0;
+  static const _avatarSize = 38.0;
+  static const _avatarSizeDense = 38.0;
+  static const _emojiSize = 18.0;
+  static const _emojiSizeDense = 18.0;
 
   double get avatarSize => isDense ? _avatarSizeDense : _avatarSize;
+
+  double get emojiSize => isDense ? _emojiSizeDense : _emojiSize;
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +67,8 @@ class PostSummaryBar extends StatelessWidget {
     final colors = theme.colors;
     final whiteColor = colors.blackAndWhite.shade100.withOpacity(0.9);
     final blackColor = colors.blackAndWhite.shade900;
-    final blueColor = colors.blue;
 
     final postDetailsColor = overlayTheme == PostOverlayTheme.dark ? colors.blackAndWhite.shade600 : whiteColor;
-
-    final textStyle = theme.styles.subtitle10.copyWith(
-      color: postDetailsColor,
-      shadows: [
-        if (overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
-      ],
-    );
 
     final postInfoTextStyle = theme.styles.body10.copyWith(
       color: postDetailsColor,
@@ -85,10 +78,8 @@ class PostSummaryBar extends StatelessWidget {
     );
 
     final titleBadge = author.isVerified
-        ? AchievementBadge(
-            type: overlayTheme == PostOverlayTheme.dark
-                ? AchievementBadgeType.verifiedRed
-                : AchievementBadgeType.verifiedWhite,
+        ? const AchievementBadge(
+            type: AchievementBadgeType.verifiedRed,
           )
         : null;
 
@@ -104,74 +95,36 @@ class PostSummaryBar extends StatelessWidget {
       child: DeferredPointerHandler(
         link: deferredLink,
         child: PicnicBarWithAuthorDetails(
-          avatarPadding: const EdgeInsets.only(right: 8.0),
+          avatarPadding: const EdgeInsets.only(right: 4.0),
           showShadowForLightColor: true,
-          avatar: PicnicAvatar(
-            deferredLink: deferredLink,
-            size: avatarSize,
-            backgroundColor: colors.blue.shade100,
-            borderColor: Colors.white,
-            iFollow: author.iFollow,
-            onToggleFollow: onToggleFollow,
-            onTap: onTapAuthor,
-            placeholder: () => DefaultAvatar.user(),
-            imageSource: PicnicImageSource.url(
-              ImageUrl(author.profileImageUrl.url),
-              fit: BoxFit.cover,
-            ),
-            boxFit: PicnicAvatarChildBoxFit.cover,
-            followButtonBackgroundColor: overlayTheme == PostOverlayTheme.dark ? blueColor : whiteColor,
-            followButtonForegroundColor: overlayTheme == PostOverlayTheme.dark ? whiteColor : blueColor,
+          avatar: PicnicCircleRectangleAvatar(
+            bgColor: PicnicColors.ultraPaleGrey,
+            borderColor: overlayTheme == PostOverlayTheme.light ? null : colors.darkBlue.shade300,
+            onTap: onTapCircle,
+            avatarSize: avatarSize,
+            emojiSize: emojiSize,
+            image: circleImage,
+            emoji: circleEmoji,
+            isVerified: circle.isVerified,
           ),
           postDetails: displayTag
-              ? Row(
-                  children: [
-                    const Gap(2),
-                    Image.asset(
-                      Assets.images.downRightArrow.path,
-                      color: postDetailsColor,
-                    ),
-                    const Gap(4),
-                    if (circleImage.isNotEmpty)
-                      PicnicCircleAvatar(
-                        emoji: circleEmoji,
-                        image: circleImage,
-                        avatarSize: _circleAvatarSize,
-                        emojiSize: _emojiSize,
-                      )
-                    else
-                      Text(
-                        circleEmoji,
-                        style: textStyle,
-                      ),
-                    const Gap(4),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: onTapTag,
-                        child: Text(
-                          post.circle.name,
-                          style: textStyle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                    const Gap(16),
-                    Text(
-                      dateToDisplay + appLocalizations.viewsCount(formatNumber(post.contentStats.impressions)),
-                      style: postInfoTextStyle,
-                    ),
-                  ],
+              ? Text(
+                  dateToDisplay + appLocalizations.viewsCount(formatNumber(post.contentStats.impressions)),
+                  style: postInfoTextStyle,
                 )
               : null,
           titleColor: overlayTheme == PostOverlayTheme.dark ? blackColor : whiteColor,
-          title: author.username.formattedUsername,
+          circleName: post.circle.name,
+          authorUsername: appLocalizations.usernameWithBullet(author.username.formattedUsername),
           date: showTimestamp ? postTimeCreationDate : null,
-          titleBadge: titleBadge,
           titlePadding: const EdgeInsets.only(bottom: 4.0),
-          onTitleTap: onTapAuthor,
+          authorVerifiedBadge: titleBadge,
+          onAuthorUsernameTap: onTapAuthor,
           viewsCount: post.contentStats.impressions,
           subtitleColor: postDetailsColor,
+          iFollow: post.author.iFollow,
+          onTapFollow: showFollowButton ? onToggleFollow : null,
+          onCircleNameTap: onTapCircle,
         ),
       ),
     );

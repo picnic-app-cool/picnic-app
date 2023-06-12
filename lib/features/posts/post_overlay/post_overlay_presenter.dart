@@ -285,6 +285,15 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     await _refreshPostDetails();
   }
 
+  Future<void> onTapCircleAvatar() async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postCircleTap,
+      ),
+    );
+    await navigator.openCircleDetails(CircleDetailsInitialParams(circleId: _model.post.circle.id));
+  }
+
   void didUpdateDependencies({
     required Post post,
     required PostDetailsMode mode,

@@ -78,6 +78,8 @@ class _PollPostPageState extends State<PollPostPage>
                           onTapJoinCircle: () => _overlayPresenter?.onJoinCircle(),
                           onTapAuthor: () => _overlayPresenter?.onTapProfile(),
                           showTagBackground: true,
+                          onTapCircle: () => _overlayPresenter?.onTapCircleAvatar(),
+                          showFollowButton: true,
                         ),
                       const Gap(12),
                       Padding(

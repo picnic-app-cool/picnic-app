@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_dynamic_author.dart';
 
 class PicnicBarWithAuthorDetails extends StatelessWidget {
@@ -8,25 +7,33 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
     required this.avatar,
     required this.viewsCount,
     required this.postDetails,
-    required this.title,
+    required this.circleName,
+    required this.authorUsername,
+    required this.iFollow,
+    required this.onAuthorUsernameTap,
+    required this.onCircleNameTap,
     this.date,
-    this.titleBadge,
-    required this.onTitleTap,
+    this.authorVerifiedBadge,
     this.titleColor,
     this.subtitleColor,
     this.showShadowForLightColor = false,
     this.avatarPadding = const EdgeInsets.symmetric(horizontal: 8.0),
     this.titlePadding = EdgeInsets.zero,
+    this.onTapFollow,
   }) : super(key: key);
 
-  final PicnicAvatar avatar;
+  final Widget avatar;
   final Widget? postDetails;
 
-  final String title;
+  final String circleName;
+  final String authorUsername;
   final String? date;
-  final Widget? titleBadge;
-  final VoidCallback? onTitleTap;
+  final Widget? authorVerifiedBadge;
+  final VoidCallback? onAuthorUsernameTap;
+  final VoidCallback? onCircleNameTap;
   final EdgeInsets titlePadding;
+  final VoidCallback? onTapFollow;
+  final bool iFollow;
 
   /// whether to show shadow behind text for light color fonts
   final bool showShadowForLightColor;
@@ -45,16 +52,20 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
             Expanded(
               child: PicnicDynamicAuthor(
                 avatar: avatar,
-                username: title,
+                authorUsername: authorUsername,
+                circleName: circleName,
                 date: date,
-                usernameBadge: titleBadge,
+                authorVerifiedBadge: authorVerifiedBadge,
                 usernamePadding: titlePadding,
-                onUsernameTap: onTitleTap,
+                onAuthorUsernameTap: onAuthorUsernameTap,
                 viewsCount: viewsCount,
-                titleColor: titleColor,
+                circleNameColor: titleColor,
                 avatarPadding: avatarPadding,
                 postDetails: postDetails,
                 subtitleColor: subtitleColor,
+                iFollow: iFollow,
+                onTapFollow: onTapFollow,
+                onCircleTap: onCircleNameTap,
               ),
             ),
           ],

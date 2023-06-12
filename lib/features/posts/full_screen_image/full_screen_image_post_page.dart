@@ -7,9 +7,9 @@ import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_po
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_presenter.dart';
 import 'package:picnic_app/features/posts/post_overlay/widgets/post_caption.dart';
 import 'package:picnic_app/features/posts/widgets/horizontal_post_bar_buttons.dart';
-import 'package:picnic_app/features/posts/widgets/post_author_bar.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
+import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_circle_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
@@ -108,7 +108,7 @@ class _FullScreenImagePostPageState extends State<FullScreenImagePostPage>
                               const Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
-                                child: PostAuthorBar(
+                                child: PostSummaryBar(
                                   author: state.post.author,
                                   post: state.post,
                                   overlayTheme: state.post.overlayTheme,

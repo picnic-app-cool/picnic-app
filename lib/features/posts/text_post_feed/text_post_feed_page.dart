@@ -114,6 +114,8 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                       showTagBackground: true,
                                       padding: EdgeInsets.zero,
                                       showTimestamp: state.showTimestamp,
+                                      onTapCircle: presenter.postOverlayPresenter.onTapCircleAvatar,
+                                      showFollowButton: true,
                                     ),
                                   ),
                                   const Gap(12),

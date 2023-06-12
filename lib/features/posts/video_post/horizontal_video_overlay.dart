@@ -89,6 +89,7 @@ class _HorizontalVideoOverlayState extends State<HorizontalVideoOverlay>
                                 onTapAuthor: presenter.onTapProfile,
                                 onTapJoinCircle: presenter.onJoinCircle,
                                 showTagBackground: true,
+                                onTapCircle: () => presenter.onTapCircleAvatar,
                               ),
                             ),
                           ],

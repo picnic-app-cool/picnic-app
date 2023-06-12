@@ -79,6 +79,7 @@ class _TextPostPageState extends State<TextPostPage>
                               onTapCommentAuthor: (id) => _overlayPresenter?.onTapProfile(id: id),
                               padding: !displayOptions.showPostCommentBar ? EdgeInsets.zero : null,
                               shouldExpand: shouldExpand,
+                              onTapCircle: () => _overlayPresenter?.onTapCircleAvatar(),
                             )
                           : FullTextView(
                               post: state.post,

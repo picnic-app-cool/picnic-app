@@ -42,12 +42,12 @@ class FeedTopNavBar extends StatelessWidget {
       case PostOverlayTheme.dark:
         tabsColor = colors.blackAndWhite.shade800;
         tabsBackgroundColor = colors.darkBlue.shade300;
-        iconColor = colors.red.shade600;
+        iconColor = colors.darkBlue.shade600;
         break;
       case PostOverlayTheme.light:
         tabsColor = colors.blackAndWhite.shade100;
         tabsBackgroundColor = colors.blackAndWhite.shade100.withOpacity(_backgroundOpacity);
-        iconColor = colors.red.shade100;
+        iconColor = colors.darkBlue.shade100;
         break;
     }
     return Row(

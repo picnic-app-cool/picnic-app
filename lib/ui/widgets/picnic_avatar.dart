@@ -37,12 +37,11 @@ class PicnicAvatar extends StatefulWidget {
     this.isCrowned = false,
     this.isVerified = false,
     this.showShadow = false,
-    this.followButtonBackgroundColor,
-    this.followButtonForegroundColor,
     this.placeholder,
     this.boxFit = PicnicAvatarChildBoxFit.fit,
     this.borderPercentage = defaultBorderPercentage,
     this.deferredLink,
+    this.shouldShowFollowButton = false,
   })  : _imageSource = imageSource,
         super(key: key != null ? ValueKey(imageSource.hashCode) : null);
 
@@ -50,12 +49,11 @@ class PicnicAvatar extends StatefulWidget {
   final bool iFollow;
   final bool isCrowned;
   final bool isVerified;
+  final bool shouldShowFollowButton;
 
   final Color? borderColor;
   final double borderPercentage;
   final Color? backgroundColor;
-  final Color? followButtonBackgroundColor;
-  final Color? followButtonForegroundColor;
   final Widget Function()? placeholder;
 
   final ImageUrl borderImage;
@@ -89,16 +87,16 @@ class _PicnicAvatarState extends State<PicnicAvatar> {
   @override
   void initState() {
     super.initState();
-    _showFollowButton = !widget.iFollow;
+    _showFollowButton = !widget.iFollow || widget.shouldShowFollowButton;
   }
 
   @override
   void didUpdateWidget(covariant PicnicAvatar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.iFollow == oldWidget.iFollow) {
+    if (widget.iFollow == oldWidget.iFollow && widget.shouldShowFollowButton == oldWidget.shouldShowFollowButton) {
       return;
     }
-    if (!widget.iFollow) {
+    if (!widget.iFollow || widget.shouldShowFollowButton) {
       setState(() {
         _showFollowButton = true;
       });
@@ -137,8 +135,6 @@ class _PicnicAvatarState extends State<PicnicAvatar> {
                 size: widget.size,
                 onToggleFollow: widget.onToggleFollow,
                 iFollow: widget.iFollow,
-                followButtonForegroundColor: widget.followButtonForegroundColor,
-                followButtonBackgroundColor: widget.followButtonBackgroundColor,
                 deferredLink: widget.deferredLink,
               ),
             if (widget.isVerified)
@@ -248,16 +244,12 @@ class _FollowButton extends StatefulWidget {
     required this.size,
     required this.onToggleFollow,
     required this.iFollow,
-    this.followButtonForegroundColor,
-    this.followButtonBackgroundColor,
     this.deferredLink,
   });
 
   final double size;
   final VoidCallback? onToggleFollow;
   final bool iFollow;
-  final Color? followButtonBackgroundColor;
-  final Color? followButtonForegroundColor;
   final DeferredPointerHandlerLink? deferredLink;
 
   @override
@@ -265,6 +257,8 @@ class _FollowButton extends StatefulWidget {
 }
 
 class _FollowButtonState extends State<_FollowButton> with TickerProviderStateMixin {
+  late Color? bgIconColor;
+  late Color? foregroundIconColor;
   late final AnimationController _controller;
 
   @override
@@ -274,15 +268,24 @@ class _FollowButtonState extends State<_FollowButton> with TickerProviderStateMi
       return;
     }
     if (widget.iFollow) {
-      _controller.forward();
+      _controller.forward().whenComplete(() {
+        _onForwardAnimationCompleted();
+      });
     } else {
-      _controller.reverse();
+      _controller.reverse().whenComplete(() {
+        _onReverseAnimationCompleted();
+      });
     }
   }
 
   @override
   void initState() {
     super.initState();
+    final colors = PicnicTheme.of(context).colors;
+    final white = colors.blackAndWhite.shade100;
+    final blue = colors.blue;
+    bgIconColor = widget.iFollow ? white : blue;
+    foregroundIconColor = widget.iFollow ? blue : white;
     _controller = AnimationController(vsync: this);
   }
 
@@ -309,9 +312,8 @@ class _FollowButtonState extends State<_FollowButton> with TickerProviderStateMi
               child: CircleAvatar(
                 maxRadius: widget.size * PicnicAvatar._addIconRadiusRatio,
                 minRadius: widget.size * PicnicAvatar._addIconRadiusRatio,
-                backgroundColor:
-                    widget.followButtonBackgroundColor ?? PicnicTheme.of(context).colors.blackAndWhite.shade100,
-                foregroundColor: widget.followButtonForegroundColor,
+                backgroundColor: bgIconColor,
+                foregroundColor: foregroundIconColor,
                 child: Padding(
                   // ignore: no-magic-number
                   padding: EdgeInsets.all(widget.size * 0.025),
@@ -323,11 +325,10 @@ class _FollowButtonState extends State<_FollowButton> with TickerProviderStateMi
                     onLoaded: _moveAnimationToState,
                     delegates: LottieDelegates(
                       values: [
-                        if (widget.followButtonForegroundColor != null)
-                          ValueDelegate.colorFilter(
-                            ['Add_Added', '**'],
-                            value: ColorFilter.mode(widget.followButtonForegroundColor!, BlendMode.src),
-                          ),
+                        ValueDelegate.colorFilter(
+                          ['Add_Added', '**'],
+                          value: ColorFilter.mode(foregroundIconColor!, BlendMode.src),
+                        ),
                       ],
                     ),
                   ),
@@ -349,6 +350,26 @@ class _FollowButtonState extends State<_FollowButton> with TickerProviderStateMi
         duration: Duration.zero,
       );
     }
+  }
+
+  void _onForwardAnimationCompleted() {
+    final colors = PicnicTheme.of(context).colors;
+    final white = colors.blackAndWhite.shade100;
+    final blue = colors.blue;
+    setState(() {
+      foregroundIconColor = blue;
+      bgIconColor = white;
+    });
+  }
+
+  void _onReverseAnimationCompleted() {
+    final colors = PicnicTheme.of(context).colors;
+    final white = colors.blackAndWhite.shade100;
+    final blue = colors.blue;
+    setState(() {
+      foregroundIconColor = white;
+      bgIconColor = blue;
+    });
   }
 }
 

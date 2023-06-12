@@ -22,7 +22,9 @@ class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
                     color: colors.indigo,
                     child: PicnicBarWithAuthorDetails(
                       avatar: _getAvatar(context),
-                      title: context.knobs.text(label: 'title', initialValue: 'startups'),
+                      iFollow: false,
+                      circleName: context.knobs.text(label: 'title', initialValue: 'startups'),
+                      authorUsername: context.knobs.text(label: 'username', initialValue: 'username'),
                       viewsCount: context.knobs.options(
                         label: 'Number of Views',
                         options: [
@@ -42,7 +44,8 @@ class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
                         suffixIcon: Image.asset(Assets.images.add.path),
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       ),
-                      onTitleTap: () {},
+                      onAuthorUsernameTap: () {},
+                      onCircleNameTap: () {},
                     ),
                   ),
                 );

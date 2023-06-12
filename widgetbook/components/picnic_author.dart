@@ -17,8 +17,8 @@ class PicnicAuthorUseCase extends WidgetbookComponent {
               builder: (context) => Container(
                 color: Colors.teal,
                 child: PicnicDynamicAuthor(
-                  onUsernameTap: () {},
-                  username: context.knobs.text(
+                  onAuthorUsernameTap: () {},
+                  authorUsername: context.knobs.text(
                     label: 'User ID',
                     initialValue: 'payamdiliri',
                   ),
@@ -53,6 +53,7 @@ class PicnicAuthorUseCase extends WidgetbookComponent {
                       ),
                     ],
                   ),
+                  circleName: '',
                 ),
               ),
             ),

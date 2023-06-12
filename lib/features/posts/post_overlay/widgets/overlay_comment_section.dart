@@ -69,10 +69,11 @@ class OverlayCommentSection extends StatelessWidget {
                             boxFit: PicnicAvatarChildBoxFit.cover,
                             onTap: () => onTapCommentAuthor(it.author.id),
                           ),
-                          onUsernameTap: () => onTapCommentAuthor(it.author.id),
-                          username: it.author.username.formattedUsername,
-                          titleColor: whiteWithOpacity,
-                          usernameBadge: it.author.isVerified
+                          onAuthorUsernameTap: () => onTapCommentAuthor(it.author.id),
+                          circleName: '',
+                          authorUsername: it.author.username.formattedUsername,
+                          circleNameColor: whiteWithOpacity,
+                          authorVerifiedBadge: it.author.isVerified
                               ? const AchievementBadge(type: AchievementBadgeType.verifiedRed)
                               : null,
                           commentColor: whiteColor,

@@ -29,6 +29,7 @@ class TextPostView extends StatelessWidget {
     required this.onLongTapComment,
     required this.onDoubleTapComment,
     required this.onTapCommentAuthor,
+    required this.onTapCircle,
     this.onDoubleTap,
     this.padding,
     this.shouldExpand = false,
@@ -50,6 +51,7 @@ class TextPostView extends StatelessWidget {
   final VoidCallback onTapAuthor;
   final VoidCallback onTapJoinCircle;
   final VoidCallback? onDoubleTap;
+  final VoidCallback onTapCircle;
   final EdgeInsetsGeometry? padding;
   final bool shouldExpand;
   final bool showPostSummaryBarAbovePost;
@@ -104,6 +106,8 @@ class TextPostView extends StatelessWidget {
                                 onToggleFollow: onTapFollow,
                                 onTapAuthor: onTapAuthor,
                                 onTapJoinCircle: onTapJoinCircle,
+                                onTapCircle: onTapCircle,
+                                showFollowButton: true,
                               ),
                         onTapExpand: () => onTapExpand(content.text),
                         onDoubleTap: onDoubleTap,

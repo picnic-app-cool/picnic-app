@@ -72,6 +72,8 @@ class _LinkPostPageState extends State<LinkPostPage>
                         onTapJoinCircle: () => _overlayPresenter?.onJoinCircle(),
                         onTapAuthor: () => _overlayPresenter?.onTapProfile(),
                         showTagBackground: true,
+                        onTapCircle: () => _overlayPresenter?.onTapCircleAvatar(),
+                        showFollowButton: true,
                       ),
                     Expanded(
                       child: LayoutBuilder(

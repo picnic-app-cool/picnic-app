@@ -4,6 +4,8 @@ import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_butto
 import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_user_avatar_button/post_bar_user_avatar_button.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_user_avatar_button/post_bar_user_avatar_button_params.dart';
 
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
@@ -16,6 +18,7 @@ class VerticalPostBarButtons extends StatelessWidget {
     required this.bookmarkButtonParams,
     required this.bookmarkEnabled,
     required this.dislikeButtonParams,
+    required this.userAvatarParams,
     this.padding,
     super.key,
   });
@@ -25,6 +28,7 @@ class VerticalPostBarButtons extends StatelessWidget {
   final PostBarButtonParams shareButtonParams;
   final PostBarButtonParams bookmarkButtonParams;
   final PostBarButtonParams dislikeButtonParams;
+  final PostBarUserAvatarButtonParams userAvatarParams;
   final bool bookmarkEnabled;
   final EdgeInsetsGeometry? padding;
 
@@ -45,6 +49,10 @@ class VerticalPostBarButtons extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       child: Column(
         children: [
+          PostBarUserAvatarButton(
+            params: userAvatarParams,
+          ),
+          const Gap(20),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [

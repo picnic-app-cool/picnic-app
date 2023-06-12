@@ -46,13 +46,14 @@ void main() {
             name: "bar with tag avatar",
             child: TestWidgetContainer(
               child: PicnicBarWithAuthorDetails(
+                iFollow: false,
                 viewsCount: 1234,
                 postDetails: PicnicTag(
                   title: 'startups',
                   backgroundColor: colors.blackAndWhite.shade900.withOpacity(0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 ),
-                title: title.formattedUsername,
+                circleName: title.formattedUsername,
                 titleColor: colors.blackAndWhite.shade900,
                 avatar: PicnicAvatar(
                   size: 32.0,
@@ -61,7 +62,9 @@ void main() {
                     ImageUrl(Assets.images.picnicLogo.path),
                   ),
                 ),
-                onTitleTap: () {},
+                onAuthorUsernameTap: () {},
+                onCircleNameTap: () {},
+                authorUsername: 'username',
               ),
             ),
           ),

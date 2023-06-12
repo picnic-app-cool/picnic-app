@@ -6,6 +6,7 @@ import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/features/posts/widgets/horizontal_post_bar_buttons.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_user_avatar_button/post_bar_user_avatar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/vertical_post_bar_buttons.dart';
 
 class PostCommentBar extends StatefulWidget {
@@ -18,6 +19,7 @@ class PostCommentBar extends StatefulWidget {
     required this.bookmarkEnabled,
     required this.hasActionsBelow,
     required this.overlayTheme,
+    this.userAvatarParams,
     this.focusNode,
     this.replyingComment = const CommentPreview.empty(),
     this.onTapCancelReply,
@@ -36,6 +38,7 @@ class PostCommentBar extends StatefulWidget {
   final PostBarButtonParams shareButtonParams;
   final PostBarButtonParams bookmarkButtonParams;
   final PostBarButtonParams dislikeButtonParams;
+  final PostBarUserAvatarButtonParams? userAvatarParams;
   final bool bookmarkEnabled;
   final bool buttonsAreVertical;
 
@@ -79,6 +82,7 @@ class _PostCommentBarState extends State<PostCommentBar> {
                   bookmarkButtonParams: widget.bookmarkButtonParams,
                   bookmarkEnabled: widget.bookmarkEnabled,
                   dislikeButtonParams: widget.dislikeButtonParams,
+                  userAvatarParams: widget.userAvatarParams!,
                 ),
               ],
             )

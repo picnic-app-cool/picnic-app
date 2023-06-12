@@ -1425,5 +1425,11 @@
   },
   "addPodToCircleDescription": "add the pod to a circle you have admin permissions in",
   "addToCircle": "add to circle",
-  "unVote": "unvote"
+  "unVote": "unvote",
+  "usernameWithBullet": " • {username}",
+  "@usernameWithBullet": {
+    "placeholders": {
+      "username": {}
+    }
+  }
 }

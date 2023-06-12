@@ -61,6 +61,8 @@ class _TextPostProfilePageState extends State<TextPostProfilePage>
                       showTagBackground: true,
                       padding: EdgeInsets.zero,
                       showTimestamp: state.showTimestamp,
+                      onTapCircle: presenter.postOverlayPresenter.onTapCircleAvatar,
+                      showFollowButton: true,
                     ),
                   ],
                   const Gap(12),

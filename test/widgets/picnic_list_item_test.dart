@@ -41,8 +41,6 @@ void main() {
                 ),
                 leading: PicnicAvatar(
                   size: 40.0,
-                  followButtonBackgroundColor: theme.colors.green,
-                  followButtonForegroundColor: blackAndWhite.shade100,
                   backgroundColor: theme.colors.teal,
                   borderColor: Colors.white,
                   imageSource: PicnicImageSource.asset(

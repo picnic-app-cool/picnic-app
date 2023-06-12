@@ -16,6 +16,7 @@ import 'package:picnic_app/features/posts/post_visibility_tracker.dart';
 import 'package:picnic_app/features/posts/widgets/comment_list.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_button/post_bar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_bar_like_button/post_bar_like_button_params.dart';
+import 'package:picnic_app/features/posts/widgets/post_bar_user_avatar_button/post_bar_user_avatar_button_params.dart';
 import 'package:picnic_app/features/posts/widgets/post_comment_bar.dart';
 import 'package:picnic_app/features/posts/widgets/post_in_feed_nav_bar_gap.dart';
 import 'package:picnic_app/features/posts/widgets/post_summary_bar.dart';
@@ -101,6 +102,8 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                   onTapJoinCircle: presenter.onJoinCircle,
                   showTagBackground: true,
                   showTimestamp: displayOptions.showTimestamp,
+                  onTapCircle: presenter.onTapCircleAvatar,
+                  showFollowButton: postType == PostType.text || postType == PostType.link || postType == PostType.poll,
                 )
               : const SizedBox.shrink();
 
@@ -210,6 +213,7 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                                           builder: (context, state) {
                                             final overlayTheme = state.post.overlayTheme;
                                             final contentStats = state.post.contentStats;
+                                            final postAuthor = state.post.author;
                                             final reactButtonsVertical = state.post.reactButtonsVertical;
                                             return stateListener(
                                               child: PostCommentBar(
@@ -247,6 +251,13 @@ class _PostOverlayPageState extends State<PostOverlayPage>
                                                   text: contentStats.saves.toString(),
                                                   selected: state.post.context.saved,
                                                   isVertical: reactButtonsVertical,
+                                                ),
+                                                userAvatarParams: PostBarUserAvatarButtonParams(
+                                                  onTapFollow: presenter.onTapFollow,
+                                                  overlayTheme: overlayTheme,
+                                                  onTapAvatar: presenter.onTapProfile,
+                                                  userAvatar: postAuthor.profileImageUrl.url,
+                                                  iFollow: postAuthor.iFollow,
                                                 ),
                                                 overlayTheme: overlayTheme,
                                                 replyingComment: state.replyingComment,
