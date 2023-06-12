@@ -492,6 +492,12 @@ void main() {
         follow: true,
       ),
     ).thenAnswer((_) => successFuture(unit));
+
+    when(
+      () => CirclesMocks.viewCircleUseCase.execute(
+        circleId: any(named: 'circleId'),
+      ),
+    ).thenAnswer((_) => successFuture(unit));
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
     model = CircleDetailsPresentationModel.initial(
@@ -526,6 +532,7 @@ void main() {
       Mocks.followUserUseCase,
       CirclesMocks.getCircleMembersByRoleUseCase,
       PostsMocks.unreactToPostUseCase,
+      CirclesMocks.viewCircleUseCase,
     );
   });
 }

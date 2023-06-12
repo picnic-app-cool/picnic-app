@@ -1439,5 +1439,6 @@
   "enterUsernameDescription": "your unique name to be discovered",
   "interests": "interests",
   "interestsDescription": "pick some communities to join",
-  "unVote": "unvote"
+  "unVote": "unvote",
+  "recentCircles": "recent circles"
 }

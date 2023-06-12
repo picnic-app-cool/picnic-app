@@ -5,9 +5,11 @@ class CircleDetailsInitialParams {
   const CircleDetailsInitialParams({
     required this.circleId,
     this.onCircleMembershipChange,
+    this.onCircleViewed,
   });
 
   final Id circleId;
 
   final VoidCallback? onCircleMembershipChange;
+  final VoidCallback? onCircleViewed;
 }

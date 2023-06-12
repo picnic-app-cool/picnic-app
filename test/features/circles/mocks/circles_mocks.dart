@@ -217,6 +217,12 @@ class CirclesMocks {
   static late MockUnVotePodsFailure unVotePodsFailure;
   static late MockUnVotePodsUseCase unVotePodsUseCase;
 
+  static late MockViewCircleFailure viewCircleFailure;
+  static late MockViewCircleUseCase viewCircleUseCase;
+
+  static late MockGetLastUsedCirclesFailure getLastUsedCirclesFailure;
+  static late MockGetLastUsedCirclesUseCase getLastUsedCirclesUseCase;
+
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
@@ -457,6 +463,13 @@ class CirclesMocks {
 
     unVotePodsFailure = MockUnVotePodsFailure();
     unVotePodsUseCase = MockUnVotePodsUseCase();
+
+    viewCircleFailure = MockViewCircleFailure();
+    viewCircleUseCase = MockViewCircleUseCase();
+
+    getLastUsedCirclesFailure = MockGetLastUsedCirclesFailure();
+
+    getLastUsedCirclesUseCase = MockGetLastUsedCirclesUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 

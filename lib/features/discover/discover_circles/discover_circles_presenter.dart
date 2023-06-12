@@ -56,7 +56,9 @@ class DiscoverCirclesPresenter extends Cubit<DiscoverCirclesViewModel> {
         ),
       );
 
-  void onTapViewCircle(Id circleId) => navigator.openCircleDetails(CircleDetailsInitialParams(circleId: circleId));
+  void onTapViewCircle(Id circleId) => navigator.openCircleDetails(
+        CircleDetailsInitialParams(circleId: circleId, onCircleViewed: () => _model.viewCircleCallBack?.call()),
+      );
 
   void onTapShareCircle(Circle circle) => navigator.shareText(text: circle.shareLink);
 

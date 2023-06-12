@@ -66,6 +66,7 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_members_fail
 import 'package:picnic_app/features/circles/domain/model/get_circle_roles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_circle_sorted_posts_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_default_circle_config_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/get_last_used_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_last_used_sorting_option_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_reports_failure.dart';
@@ -80,6 +81,7 @@ import 'package:picnic_app/features/circles/domain/model/unban_user_failure.dart
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_role_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_rules_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/view_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/repositories/circle_moderator_actions_repository.dart';
 import 'package:picnic_app/features/circles/domain/repositories/circle_posts_repository.dart';
@@ -97,6 +99,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/get_circle_members_
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_roles_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_sorted_posts_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_default_circle_config_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_circles_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_sorting_option_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_chat_messages_feed_use_case.dart';
@@ -112,6 +115,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/un_vote_pod_use_cas
 import 'package:picnic_app/features/circles/domain/use_cases/unban_user_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_circle_role_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_rules_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/view_circle_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/vote_pod_use_case.dart';
 import "package:picnic_app/features/circles/edit_circle/edit_circle_initial_params.dart";
 import "package:picnic_app/features/circles/edit_circle/edit_circle_navigator.dart";
@@ -497,6 +501,14 @@ class MockVotePodsUseCase extends Mock implements VotePodUseCase {}
 class MockUnVotePodsFailure extends Mock implements UnVotePodFailure {}
 
 class MockUnVotePodsUseCase extends Mock implements UnVotePodUseCase {}
+
+class MockViewCircleFailure extends Mock implements ViewCircleFailure {}
+
+class MockViewCircleUseCase extends Mock implements ViewCircleUseCase {}
+
+class MockGetLastUsedCirclesUseCase extends Mock implements GetLastUsedCirclesUseCase {}
+
+class MockGetLastUsedCirclesFailure extends Mock implements GetLastUsedCirclesFailure {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

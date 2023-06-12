@@ -43,6 +43,11 @@ void main() {
       ),
     ).thenAnswer((_) => successFuture(Stubs.trendingThisWeekPostsSortingType));
 
+    when(
+      () => CirclesMocks.viewCircleUseCase.execute(
+        circleId: any(named: 'circleId'),
+      ),
+    ).thenAnswer((_) => successFuture(unit));
     initParams = CircleDetailsInitialParams(
       circleId: Stubs.id,
     );
@@ -89,6 +94,7 @@ void main() {
       Mocks.followUserUseCase,
       CirclesMocks.getCircleMembersByRoleUseCase,
       PostsMocks.unreactToPostUseCase,
+      CirclesMocks.viewCircleUseCase,
     );
 
     when(

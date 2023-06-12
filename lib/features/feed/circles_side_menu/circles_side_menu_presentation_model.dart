@@ -3,13 +3,13 @@ import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/get_collections_failure.dart';
-import 'package:picnic_app/core/domain/model/get_user_circles_failure.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/utils.dart';
+import 'package:picnic_app/features/circles/domain/model/get_last_used_circles_failure.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
 import 'package:picnic_app/features/pods/domain/model/get_saved_pods_failure.dart';
 
@@ -20,20 +20,20 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
     // ignore: avoid_unused_constructor_parameters
     CirclesSideMenuInitialParams initialParams,
     UserStore userStore,
-  )   : userCirclesResult = const FutureResult.empty(),
+  )   : lastUsedCirclesResult = const FutureResult.empty(),
         onCircleSideMenuAction = initialParams.onCircleSideMenuAction,
         collections = const PaginatedList.empty(),
         privateProfile = userStore.privateProfile,
         collectionsResult = const FutureResult.empty(),
         savedPods = const PaginatedList.empty(),
         savedPodsResult = const FutureResult.empty(),
-        userCircles = const PaginatedList.empty();
+        lastUsedCircles = const PaginatedList.empty();
 
   /// Used for the copyWith method
   CirclesSideMenuPresentationModel._({
-    required this.userCirclesResult,
+    required this.lastUsedCirclesResult,
     required this.onCircleSideMenuAction,
-    required this.userCircles,
+    required this.lastUsedCircles,
     required this.collectionsResult,
     required this.collections,
     required this.privateProfile,
@@ -41,7 +41,7 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
     required this.savedPodsResult,
   });
 
-  final FutureResult<Either<GetUserCirclesFailure, PaginatedList<Circle>>> userCirclesResult;
+  final FutureResult<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>> lastUsedCirclesResult;
   final FutureResult<Either<GetCollectionsFailure, PaginatedList<Collection>>> collectionsResult;
   final FutureResult<Either<GetSavedPodsFailure, PaginatedList<PodApp>>> savedPodsResult;
 
@@ -57,10 +57,10 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
   final VoidCallback onCircleSideMenuAction;
 
   @override
-  final PaginatedList<Circle> userCircles;
+  final PaginatedList<Circle> lastUsedCircles;
 
   @override
-  bool get isCirclesLoading => userCirclesResult.isPending();
+  bool get isCirclesLoading => lastUsedCirclesResult.isPending();
 
   @override
   bool get isLoadingPods => savedPodsResult.isPending();
@@ -68,13 +68,13 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
   @override
   bool get isLoadingCollections => collectionsResult.isPending();
 
-  Cursor get userCirclesCursor => userCircles.nextPageCursor();
+  Cursor get lastUsedCirclesCursor => lastUsedCircles.nextPageCursor();
 
   Cursor get collectionCursor => collections.nextPageCursor();
 
   CirclesSideMenuPresentationModel copyWith({
-    FutureResult<Either<GetUserCirclesFailure, PaginatedList<Circle>>>? userCirclesResult,
-    PaginatedList<Circle>? userCircles,
+    FutureResult<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>>? lastUsedCirclesResult,
+    PaginatedList<Circle>? lastUsedCircles,
     VoidCallback? onCircleSideMenuAction,
     FutureResult<Either<GetCollectionsFailure, PaginatedList<Collection>>>? collectionsResult,
     PaginatedList<Collection>? collections,
@@ -83,8 +83,8 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
     PaginatedList<PodApp>? savedPods,
   }) {
     return CirclesSideMenuPresentationModel._(
-      userCirclesResult: userCirclesResult ?? this.userCirclesResult,
-      userCircles: userCircles ?? this.userCircles,
+      lastUsedCirclesResult: lastUsedCirclesResult ?? this.lastUsedCirclesResult,
+      lastUsedCircles: lastUsedCircles ?? this.lastUsedCircles,
       collectionsResult: collectionsResult ?? this.collectionsResult,
       privateProfile: privateProfile ?? this.privateProfile,
       collections: collections ?? this.collections,
@@ -99,7 +99,7 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
 abstract class CirclesSideMenuViewModel {
   bool get isCirclesLoading;
 
-  PaginatedList<Circle> get userCircles;
+  PaginatedList<Circle> get lastUsedCircles;
 
   bool get isLoadingCollections;
 

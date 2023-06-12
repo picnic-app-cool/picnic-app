@@ -52,12 +52,14 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_members_by_r
 import 'package:picnic_app/features/circles/domain/model/get_circle_members_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_circle_roles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_groups_of_circles_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/get_last_used_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_onboarding_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_user_roles_in_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/invite_user_to_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/view_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/create_circle/data/model/gql_create_circle_input.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
@@ -171,6 +173,26 @@ class GraphqlCirclesRepository implements CirclesRepository {
             },
           )
           .mapFailure(GetCirclesFailure.unknown)
+          .mapSuccess(
+            (connection) => connection.toDomain(nodeMapper: (node) => GqlCircle.fromJson(node).toDomain()),
+          );
+
+  @override
+  Future<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>> getLastUsedCircles({
+    Cursor? nextPageCursor,
+  }) =>
+      _gqlClient
+          .query(
+            document: getLastViewedCirclesQuery,
+            variables: {
+              'cursor': nextPageCursor?.toGqlCursorInput(),
+            },
+            parseData: (json) {
+              final data = json['getLastViewedCircles'] as Map<String, dynamic>;
+              return GqlConnection.fromJson(data);
+            },
+          )
+          .mapFailure(GetLastUsedCirclesFailure.unknown)
           .mapSuccess(
             (connection) => connection.toDomain(nodeMapper: (node) => GqlCircle.fromJson(node).toDomain()),
           );
@@ -470,6 +492,20 @@ class GraphqlCirclesRepository implements CirclesRepository {
         )
         .mapFailure(VotePodFailure.unknown)
         .mapSuccessPayload(onFailureReturn: const VotePodFailure.unknown());
+  }
+
+  @override
+  Future<Either<ViewCircleFailure, Unit>> viewCircle({required Id circleId}) {
+    return _gqlClient
+        .mutate(
+          document: viewCircleMutation,
+          parseData: (json) => GqlSuccessPayload.fromJson(json['viewCircle'] as Map<String, dynamic>),
+          variables: {
+            'circleId': circleId.value,
+          },
+        )
+        .mapFailure(ViewCircleFailure.unknown)
+        .mapSuccessPayload(onFailureReturn: const ViewCircleFailure.unknown());
   }
 
   @override

@@ -1,13 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:picnic_app/core/domain/model/circle_role.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/use_cases/get_collections_use_case.dart';
-import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_circles_use_case.dart';
 import 'package:picnic_app/features/create_circle/create_circle/create_circle_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_circles/discover_circles_initial_params.dart';
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_initial_params.dart';
@@ -23,13 +22,13 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   CirclesSideMenuPresenter(
     super.model,
     this.navigator,
-    this._getUserCirclesUseCase,
+    this._getLastUsedCirclesUseCase,
     this._getCollectionsUseCase,
     this._getSavedPodsUseCase,
   );
 
   final CirclesSideMenuNavigator navigator;
-  final GetUserCirclesUseCase _getUserCirclesUseCase;
+  final GetLastUsedCirclesUseCase _getLastUsedCirclesUseCase;
   final GetCollectionsUseCase _getCollectionsUseCase;
   final GetSavedPodsUseCase _getSavedPodsUseCase;
 
@@ -73,7 +72,8 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
     );
   }
 
-  void onTapViewCircles() => navigator.openDiscoverCircles(const DiscoverCirclesInitialParams());
+  void onTapViewCircles() =>
+      navigator.openDiscoverCircles(DiscoverCirclesInitialParams(onCircleViewed: _onCircleUpdated));
 
   void onTapViewCollections() => navigator.openPrivateProfile(
         const PrivateProfileInitialParams(initialTab: PrivateProfileTab.collections),
@@ -104,9 +104,9 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
 
   Future<void> onLoadMoreCircles({bool fromScratch = false}) async {
     if (fromScratch) {
-      await _loadUserCircles(fromScratch: true);
-    } else if (state.userCircles.hasNextPage) {
-      await _loadUserCircles();
+      await _loadLastUsedCircles(fromScratch: true);
+    } else if (state.lastUsedCircles.hasNextPage) {
+      await _loadLastUsedCircles();
     }
   }
 
@@ -125,23 +125,20 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
     );
   }
 
-  Future<void> _loadUserCircles({bool fromScratch = false}) async {
-    await _getUserCirclesUseCase.execute(
-      nextPageCursor: fromScratch ? const Cursor.empty() : _model.userCirclesCursor,
-      roles: [
-        CircleRole.director,
-        CircleRole.moderator,
-        CircleRole.member,
-      ],
-    ).observeStatusChanges(
+  Future<void> _loadLastUsedCircles({bool fromScratch = false}) async {
+    await _getLastUsedCirclesUseCase
+        .execute(
+      cursor: fromScratch ? const Cursor.empty() : _model.lastUsedCirclesCursor,
+    )
+        .observeStatusChanges(
       (userCirclesResult) {
-        tryEmit(_model.copyWith(userCirclesResult: userCirclesResult));
+        tryEmit(_model.copyWith(lastUsedCirclesResult: userCirclesResult));
       },
     ).doOn(
       success: (list) {
         tryEmit(
           _model.copyWith(
-            userCircles: fromScratch ? list : _model.userCircles.byAppending(list),
+            lastUsedCircles: fromScratch ? list : _model.lastUsedCircles.byAppending(list),
           ),
         );
       },

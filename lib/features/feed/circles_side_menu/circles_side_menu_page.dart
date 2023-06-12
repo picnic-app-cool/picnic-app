@@ -145,7 +145,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                     Row(
                       children: [
                         Text(
-                          appLocalizations.circles,
+                          appLocalizations.recentCircles,
                           style: title40,
                         ),
                       ],
@@ -161,7 +161,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   child: stateObserver(
                     builder: (context, state) => CirclesList(
                       onTapEnterCircle: presenter.onTapEnterCircle,
-                      userCircles: state.userCircles,
+                      userCircles: state.lastUsedCircles,
                       loadMore: presenter.onLoadMoreCircles,
                       isLoading: state.isCirclesLoading,
                     ),

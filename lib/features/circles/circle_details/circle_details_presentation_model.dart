@@ -47,6 +47,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
         slices = const PaginatedList.empty(),
         id = initialParams.circleId,
         onCircleMembershipChangeCallback = initialParams.onCircleMembershipChange,
+        onCircleViewedCallback = initialParams.onCircleViewed,
         royals = const PaginatedList.empty(),
         circleStats = const CircleStats.empty(),
         directors = const PaginatedList.empty(),
@@ -81,6 +82,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
     required this.id,
     required this.directors,
     required this.onCircleMembershipChangeCallback,
+    required this.onCircleViewedCallback,
     required this.currentTimeProvider,
     required this.circleStats,
     required this.slices,
@@ -99,6 +101,8 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
   });
 
   final VoidCallback? onCircleMembershipChangeCallback;
+
+  final VoidCallback? onCircleViewedCallback;
 
   final FutureResult<Either<GetCircleDetailsFailure, Circle>> circleDetailsResult;
   final FutureResult<Either<GetCircleStatsFailure, CircleStats>> circleStatsResult;
@@ -334,12 +338,14 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
     return copyWith(posts: posts.copyWith(items: newPostsList));
   }
 
+  // ignore: long-method
   CircleDetailsPresentationModel copyWith({
     FutureResult<Either<GetCircleDetailsFailure, Circle>>? circleDetailsResult,
     FutureResult<Either<GetCircleStatsFailure, CircleStats>>? circleStatsResult,
     FutureResult<Either<GetLastUsedSortingOptionFailure, PostsSortingType>>? lastUsedSortingOptionResult,
     CircleTab? selectedTab,
     VoidCallback? onCircleMembershipChangeCallback,
+    VoidCallback? onCircleViewedCallback,
     Circle? circle,
     PaginatedList<Post>? posts,
     PaginatedList<Slice>? slices,
@@ -371,6 +377,7 @@ class CircleDetailsPresentationModel implements CircleDetailsViewModel {
       lastUsedSortingOptionResult: lastUsedSortingOptionResult ?? this.lastUsedSortingOptionResult,
       selectedTab: selectedTab ?? this.selectedTab,
       onCircleMembershipChangeCallback: onCircleMembershipChangeCallback ?? this.onCircleMembershipChangeCallback,
+      onCircleViewedCallback: onCircleViewedCallback ?? this.onCircleViewedCallback,
       circle: circle ?? this.circle,
       posts: posts ?? this.posts,
       currentTimeProvider: currentTimeProvider ?? this.currentTimeProvider,

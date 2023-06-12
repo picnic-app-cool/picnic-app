@@ -81,6 +81,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/get_circle_members_
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_roles_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_sorted_posts_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_default_circle_config_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_circles_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_sorting_option_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_pods_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_related_chat_messages_feed_use_case.dart';
@@ -97,6 +98,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/un_vote_pod_use_cas
 import 'package:picnic_app/features/circles/domain/use_cases/unban_user_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_circle_role_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/update_rules_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/view_circle_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/vote_pod_use_case.dart';
 import "package:picnic_app/features/circles/edit_circle/edit_circle_initial_params.dart";
 import "package:picnic_app/features/circles/edit_circle/edit_circle_navigator.dart";
@@ -325,6 +327,12 @@ void _configureUseCases() {
         ..registerFactory<UnVotePodUseCase>(
           () => UnVotePodUseCase(getIt()),
         )
+        ..registerFactory<ViewCircleUseCase>(
+          () => ViewCircleUseCase(getIt()),
+        )
+        ..registerFactory<GetLastUsedCirclesUseCase>(
+          () => GetLastUsedCirclesUseCase(getIt()),
+        )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
       ;
@@ -531,6 +539,7 @@ void _configureMvp() {
         ..registerFactoryParam<CircleDetailsPresenter, CircleDetailsInitialParams, dynamic>(
           (params, _) => CircleDetailsPresenter(
             getIt(param1: params),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

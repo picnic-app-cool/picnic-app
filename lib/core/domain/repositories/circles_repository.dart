@@ -28,12 +28,14 @@ import 'package:picnic_app/features/circles/domain/model/get_circle_members_by_r
 import 'package:picnic_app/features/circles/domain/model/get_circle_members_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_circle_roles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_groups_of_circles_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/get_last_used_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_onboarding_circles_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_pods_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/get_user_roles_in_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/invite_user_to_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
+import 'package:picnic_app/features/circles/domain/model/view_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
@@ -41,6 +43,10 @@ import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
 abstract class CirclesRepository {
   Future<Either<GetCirclesFailure, PaginatedList<Circle>>> getCircles({
     String? searchQuery,
+    Cursor? nextPageCursor,
+  });
+
+  Future<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>> getLastUsedCircles({
     Cursor? nextPageCursor,
   });
 
@@ -136,5 +142,9 @@ abstract class CirclesRepository {
 
   Future<Either<UnVotePodFailure, Unit>> unVotePod({
     required Id podId,
+  });
+
+  Future<Either<ViewCircleFailure, Unit>> viewCircle({
+    required Id circleId,
   });
 }

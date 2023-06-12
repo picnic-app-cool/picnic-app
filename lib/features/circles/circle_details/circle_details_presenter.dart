@@ -45,6 +45,7 @@ import 'package:picnic_app/features/circles/domain/use_cases/get_circle_members_
 import 'package:picnic_app/features/circles/domain/use_cases/get_circle_sorted_posts_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_last_used_sorting_option_use_case.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_royalty_use_case.dart';
+import 'package:picnic_app/features/circles/domain/use_cases/view_circle_use_case.dart';
 import 'package:picnic_app/features/circles/edit_rules/edit_rules_initial_params.dart';
 import 'package:picnic_app/features/circles/invite_user_list/invite_user_list_initial_params.dart';
 import 'package:picnic_app/features/circles/members/members_initial_params.dart';
@@ -102,6 +103,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
     this._followUnfollowUseCase,
     this._getMembersByRoleUseCase,
     this._unReactToPostUseCase,
+    this._viewCircleUseCase,
   ) : super(model);
 
   final CircleDetailsNavigator navigator;
@@ -127,6 +129,7 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
   final GetCircleMembersByRoleUseCase _getMembersByRoleUseCase;
   final UnreactToPostUseCase _unReactToPostUseCase;
+  final ViewCircleUseCase _viewCircleUseCase;
 
   // ignore: unused_element
   CircleDetailsPresentationModel get _model => state as CircleDetailsPresentationModel;
@@ -893,7 +896,10 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
       )
       .doOn(
         fail: (failure) => navigator.showError(failure.displayableFailure()),
-        success: (circle) => tryEmit(_model.copyWith(circle: circle)),
+        success: (circle) {
+          tryEmit(_model.copyWith(circle: circle));
+          _increaseCircleViews();
+        },
       );
 
   void _getCircleStats() => _getCircleStatsUseCase
@@ -968,6 +974,12 @@ class CircleDetailsPresenter extends Cubit<CircleDetailsViewModel> {
           contentAuthorId: post.author.id,
         ),
       );
+
+  void _increaseCircleViews() {
+    _viewCircleUseCase.execute(circleId: _model.circle.id).doOn(
+          success: (_) => _model.onCircleViewedCallback?.call(),
+        );
+  }
 
   void _getLastUsedSortingOption() {
     _getLastUsedSortingOptionUseCase

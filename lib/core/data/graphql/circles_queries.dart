@@ -353,3 +353,21 @@ String get unupvoteApp => '''
       ${GqlTemplate().successPayload}
        }
    }''';
+
+String get viewCircleMutation => """
+mutation viewCircle(\$circleId: ID!) {
+    viewCircle(circleId: \$circleId){
+        ${GqlTemplate().successPayload}
+    }
+}
+""";
+
+String get getLastViewedCirclesQuery => '''
+    query(\$cursor: CursorInput!) {
+        getLastViewedCircles(
+          cursor: \$cursor,
+        ) {
+            ${GqlTemplate().connection(nodeTemplate: GqlTemplate().circleWithChat)}
+        }
+    }
+''';

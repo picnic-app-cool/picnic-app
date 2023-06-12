@@ -34,6 +34,7 @@ import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../../chat/mocks/chat_mocks.dart';
+import '../../circles/mocks/circles_mocks.dart';
 import '../../feed/mocks/feed_mocks.dart';
 import '../../in_app_notifications/mocks/in_app_notifications_mocks.dart';
 import '../../pods/mocks/pods_mocks.dart';
@@ -82,12 +83,11 @@ Future<void> main() async {
     ).thenAnswer((_) => Future.value());
     when(() => Mocks.unreadCountersStore.unreadChats).thenReturn([Stubs.unreadChat]);
     when(
-      () => Mocks.getUserCirclesUseCase.execute(
-        nextPageCursor: any(named: 'nextPageCursor'),
-        userId: any(named: 'userId'),
-        roles: any(named: 'roles'),
+      () => CirclesMocks.getLastUsedCirclesUseCase.execute(
+        cursor: any(named: 'cursor'),
       ),
     ).thenAnswer((invocation) => successFuture(const PaginatedList.empty()));
+
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
     initParams = const MainInitialParams();
@@ -155,7 +155,7 @@ Future<void> main() async {
         () => CirclesSideMenuPresenter(
           circlesSideMenuPresentationModel,
           FeedMocks.circlesSideMenuNavigator,
-          Mocks.getUserCirclesUseCase,
+          CirclesMocks.getLastUsedCirclesUseCase,
           Mocks.getCollectionsUseCase,
           PodsMocks.getSavedPodsUseCase,
         ),
