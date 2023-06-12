@@ -2,7 +2,7 @@
   "@@locale": "en",
   "appTitle": "Picnic",
   "invalidInputError": "invalid input",
-  "appSubtitle": "dive into communities ✌️",
+  "appSubtitle": "dive into communities for everything you love",
   "username": "Username",
   "likes": "likes",
   "followers": "followers",
@@ -11,7 +11,7 @@
   "commonErrorMessage": "Something went wrong, please try again",
   "resendOTPButton": "resend",
   "okAction": "ok",
-  "getStartedAction": "get started",
+  "getStartedAction": "let''s get started",
   "alreadyHaveAnAccountMessage": "already have an account?",
   "logInAction": "login",
   "yourUsernameTitle": "your username",
@@ -25,7 +25,7 @@
   "usernameEmptyErrorMessage": "your username cannot be empty",
   "fullNameEmptyErrorMessage": "your name cannot be empty",
   "loginPhoneFormTitle": "login to picnic",
-  "loginPhoneFormDescription": "enter your phone number or sign in using the option below",
+  "loginPhoneFormDescription": "enter your phone number",
   "registerPhoneFormTitle": "make an account",
   "registerPhoneFormDescription": "enter your phone number or sign up using one of the options below",
   "orLabel": "or",
@@ -86,7 +86,7 @@
   "profilePhotoFormBeforePhotoSelectionDescription": "choose a profile pic",
   "profilePhotoFormAddPhotoAction": "add profile photo",
   "profilePhotoFormSkipAction": "skip for now 🥲",
-  "congratsFormTitle": "welcome to picnic",
+  "congratsFormTitle": "welcome \nto picnic ✌️",
   "congratsFormDescription": "Congrats! you’re in. Let’s find some awesome circles for you to join.",
   "offerStateSellLabel": "change price",
   "offerStateBuyLabel": "buy with {price} melons",
@@ -1101,7 +1101,7 @@
   "inviteFriend": "invite friend",
   "addFriend": "add friend",
   "inviteChat": "invite to chat",
-  "skipAction": "skip for now",
+  "skipAction": "skip",
   "permissionsDescription": "let’s make your experience awesome. you can edit these anytime in settings",
   "reachedListEnd": "you’ve reached end of the list",
   "feedForYouName": "for you",
@@ -1425,11 +1425,19 @@
   },
   "addPodToCircleDescription": "add the pod to a circle you have admin permissions in",
   "addToCircle": "add to circle",
-  "unVote": "unvote",
   "usernameWithBullet": " • {username}",
   "@usernameWithBullet": {
     "placeholders": {
       "username": {}
     }
-  }
+  },
+  "picnic": "picnic",
+  "yourPhoneNumber": "your phone number",
+  "aboutYou": "about you",
+  "aboutYouDescription": "tell us about yourself to improve your \nrecommendations",
+  "enterUsername": "enter username",
+  "enterUsernameDescription": "your unique name to be discovered",
+  "interests": "interests",
+  "interestsDescription": "pick some communities to join",
+  "unVote": "unvote"
 }

@@ -1,19 +1,18 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
-import 'package:picnic_app/constants/constants.dart';
+import 'package:gap/gap.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
-import 'package:picnic_app/features/onboarding/onboarding_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/phone_form/widgets/phone_form_dialog_content.dart';
-import 'package:picnic_app/features/onboarding/widgets/onboarding_page_container.dart';
+import 'package:picnic_app/features/onboarding/widgets/onboarding_text_input.dart';
+import 'package:picnic_app/features/user_agreement/widgets/terms_and_policies_disclaimer.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/ui/widgets/dialog/picnic_dialog.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 
 class PhoneFormPage extends StatefulWidget with HasPresenter<PhoneFormPresenter> {
   const PhoneFormPage({
@@ -29,102 +28,94 @@ class PhoneFormPage extends StatefulWidget with HasPresenter<PhoneFormPresenter>
 }
 
 class _PhoneFormPageState extends State<PhoneFormPage>
-    with PresenterStateMixin<PhoneFormViewModel, PhoneFormPresenter, PhoneFormPage> {
+    with PresenterStateMixin<CongratsFormViewModel, PhoneFormPresenter, PhoneFormPage> {
   late FocusNode phoneFocusNode;
-  late FocusNode usernameFocusNode;
 
   @override
   void initState() {
     super.initState();
     phoneFocusNode = FocusNode();
-    usernameFocusNode = FocusNode();
-    presenter.onInit();
-
-    if (state.isFirebasePhoneAuthEnabled) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => phoneFocusNode.requestFocus());
-    } else {
-      WidgetsBinding.instance.addPostFrameCallback((_) => usernameFocusNode.requestFocus());
-    }
   }
 
   @override
   void dispose() {
     phoneFocusNode.dispose();
-    usernameFocusNode.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          stateObserver(
-            builder: (context, state) {
-              return OnboardingPageContainer(
-                dialog: PicnicDialog(
-                  image: PicnicAvatar(
-                    backgroundColor: PicnicTheme.of(context)
-                        .colors
-                        .blackAndWhite
-                        .shade900
-                        .withOpacity(Constants.onboardingImageBgOpacity),
-                    imageSource: PicnicImageSource.emoji(
-                      '📱',
-                      style: const TextStyle(
-                        fontSize: Constants.onboardingEmojiSize,
+  Widget build(BuildContext context) => stateObserver(
+        builder: (context, state) {
+          final themeData = PicnicTheme.of(context);
+          final blackAndWhite = themeData.colors.blackAndWhite;
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                appLocalizations.yourPhoneNumber,
+                                style: themeData.styles.title60,
+                              ),
+                              const Gap(8),
+                              Text(
+                                appLocalizations.loginPhoneFormDescription,
+                                style: themeData.styles.body20.copyWith(color: blackAndWhite.shade600),
+                              ),
+                            ],
+                          ),
+                          // ignore: no-magic-number
+                          Expanded(child: Assets.images.phone.image(scale: 0.5)),
+                        ],
                       ),
-                    ),
+                      OnBoardingTextInput(
+                        key: const Key('phoneInput'),
+                        focusNode: phoneFocusNode,
+                        initialValue: state.phoneNumber,
+                        initialCountry: state.dialCode,
+                        inputType: PicnicOnBoardingTextInputType.phoneInput,
+                        onChanged: presenter.onChangedPhone,
+                        onChangedCountryCode: (CountryCode value) => presenter.onChangedDialCode(value.dialCode),
+                      ),
+                    ],
                   ),
-                  title: _dialogTitle(state),
-                  description: _dialogDescription(state),
-                  content: stateObserver(
-                    builder: (context, state) => PhoneFormDialogContent(
-                      onChangedPhone: presenter.onChangedPhone,
-                      onChangedUsername: presenter.onChangeUsername,
-                      phoneFocusNode: phoneFocusNode,
-                      usernameFocusNode: usernameFocusNode,
-                      onTapContinue: presenter.onTapContinue,
-                      state: state,
-                      onTapDiscordSignIn: presenter.onTapDiscordLogIn,
-                      onTapGoogleSignIn: presenter.onTapGoogleLogIn,
-                      onTapAppleSignIn: presenter.onTapAppleLogIn,
-                      onChangedCountryCode: (CountryCode value) => presenter.onChangedDialCode(value.dialCode),
-                      onEnableUsernameLogin: (isEnabled) => presenter.onEnableUsernameLogin(isEnabled: isEnabled),
-                      onTapTerms: presenter.onTapTerms,
-                      onTapPolicies: presenter.onTapPolicies,
-                    ),
+                  Column(
+                    children: [
+                      TermsAndPoliciesDisclaimer(
+                        onTapTerms: presenter.onTapTerms,
+                        onTapPolicies: presenter.onTapPolicies,
+                        textColor: blackAndWhite.shade700,
+                        userAgreementText: appLocalizations.byContinuingYouAgreeTo,
+                        showWarningIcon: true,
+                      ),
+                      const Gap(12),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          PicnicButton(
+                            onTap: state.continueEnabled ? presenter.onTapContinue : null,
+                            title: appLocalizations.continueAction,
+                            minWidth: double.infinity,
+                          ),
+                          PicnicLoadingIndicator(isLoading: state.isLoading),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                ],
+              ),
+            ),
+          );
+        },
       );
-
-  String _dialogTitle(PhoneFormViewModel state) {
-    switch (state.formType) {
-      case OnboardingFlowType.signUp:
-        return appLocalizations.registerPhoneFormTitle;
-      case OnboardingFlowType.signIn:
-      case OnboardingFlowType.discord:
-        return appLocalizations.loginPhoneFormTitle;
-      case OnboardingFlowType.none:
-        return '';
-    }
-  }
-
-  String _dialogDescription(PhoneFormViewModel state) {
-    switch (state.formType) {
-      case OnboardingFlowType.signUp:
-        return state.isFirebasePhoneAuthEnabled
-            ? appLocalizations.registerPhoneFormDescription
-            : appLocalizations.registerOnlyOAuthFormDescription;
-      case OnboardingFlowType.signIn:
-      case OnboardingFlowType.discord:
-        return state.isFirebasePhoneAuthEnabled
-            ? appLocalizations.loginPhoneFormDescription
-            : appLocalizations.loginOnlyOAuthFormDescription;
-      case OnboardingFlowType.none:
-        return '';
-    }
-  }
 }

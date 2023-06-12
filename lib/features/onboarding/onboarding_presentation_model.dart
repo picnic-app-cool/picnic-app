@@ -41,16 +41,19 @@ class OnboardingPresentationModel implements OnboardingViewModel {
   final RuntimePermissionStatus contactsPermissionStatus;
 
   static const _signUpScreensOrder = [
+    OnboardingScreen.methods,
     OnboardingScreen.phone,
     OnboardingScreen.codeVerification,
     OnboardingScreen.age,
     OnboardingScreen.language,
     OnboardingScreen.username,
     OnboardingScreen.permissions,
+    OnboardingScreen.gender,
     OnboardingScreen.circleGroupings,
   ];
 
   static const _signInScreensOrder = [
+    OnboardingScreen.methods,
     OnboardingScreen.phone,
     OnboardingScreen.codeVerification,
     OnboardingScreen.permissions,
@@ -58,6 +61,7 @@ class OnboardingPresentationModel implements OnboardingViewModel {
 
   static const _signInScreensOrderDiscord = [
     OnboardingScreen.age,
+    OnboardingScreen.gender,
     OnboardingScreen.circleGroupings,
     OnboardingScreen.permissions,
   ];
@@ -182,11 +186,13 @@ enum OnboardingFlowType {
 }
 
 enum OnboardingScreen {
+  methods,
   phone,
   language,
   age,
   codeVerification,
   username,
   permissions,
+  gender,
   circleGroupings;
 }

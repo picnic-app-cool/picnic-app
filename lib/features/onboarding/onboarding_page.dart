@@ -10,7 +10,7 @@ import 'package:picnic_app/features/onboarding/onboarding_presenter.dart';
 import 'package:picnic_app/features/onboarding/widgets/centered_picnic_logo.dart';
 import 'package:picnic_app/features/onboarding/widgets/onboarding_back_button.dart';
 import 'package:picnic_app/ui/widgets/nested_navigator.dart';
-import 'package:picnic_app/ui/widgets/onboarding_background.dart';
+import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
 
 class OnboardingPage extends StatefulWidget with HasPresenter<OnboardingPresenter> {
   const OnboardingPage({
@@ -43,30 +43,33 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const OnboardingBackground(),
-        NestedNavigator(
-          navigatorKey: widget.navigatorKey,
-          initialRoute: const CenteredPicnicLogo(),
-          onDidPop: _onPageRemoved,
-          onDidPush: _onPageAdded,
-          onDidRemove: _onPageRemoved,
-          onDidReplace: _onPageAdded,
-        ),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: _backButtonLeft,
-              top: _backButtonTop,
+    return DarkStatusBar(
+      child: Material(
+        child: Stack(
+          children: [
+            NestedNavigator(
+              navigatorKey: widget.navigatorKey,
+              initialRoute: const CenteredPicnicLogo(),
+              onDidPop: _onPageRemoved,
+              onDidPush: _onPageAdded,
+              onDidRemove: _onPageRemoved,
+              onDidReplace: _onPageAdded,
             ),
-            child: OnboardingBackButton(
-              onTap: () => widget.navigatorKey.currentState?.maybePop(),
-              canPop: _canPop,
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: _backButtonLeft,
+                  top: _backButtonTop,
+                ),
+                child: OnboardingBackButton(
+                  onTap: () => widget.navigatorKey.currentState?.maybePop(),
+                  canPop: _canPop,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

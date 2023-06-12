@@ -2,19 +2,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:picnic_app/constants/constants.dart';
-import 'package:picnic_app/core/domain/model/sign_in_method.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/widgets/onboarding_page_container.dart';
 import 'package:picnic_app/features/onboarding/widgets/onboarding_text_input.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/ui/widgets/dialog/picnic_dialog.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 
 class CodeVerificationFormPage extends StatefulWidget with HasPresenter<CodeVerificationFormPresenter> {
   const CodeVerificationFormPage({
@@ -47,50 +43,68 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
   }
 
   @override
-  Widget build(BuildContext context) => OnboardingPageContainer(
-        dialog: PicnicDialog(
-          image: PicnicAvatar(
-            backgroundColor:
-                PicnicTheme.of(context).colors.blackAndWhite.shade900.withOpacity(Constants.onboardingImageBgOpacity),
-            imageSource: PicnicImageSource.emoji(
-              '🔑',
-              style: const TextStyle(
-                fontSize: Constants.onboardingEmojiSize,
-              ),
-            ),
-          ),
-          title: appLocalizations.codeVerificationTitle,
-          description: state.isUsernameLogin
-              ? state.signInMethod == SignInMethod.phone
-                  ? appLocalizations.usernameCodeVerificationDescriptionPhone(state.maskedIdentifier)
-                  : appLocalizations.usernameCodeVerificationDescriptionEmail(state.maskedIdentifier)
-              : appLocalizations.codeVerificationDescription,
-          content: stateObserver(
-            builder: (context, state) => SingleChildScrollView(
+  Widget build(BuildContext context) => stateObserver(
+        builder: (context, state) {
+          final themeData = PicnicTheme.of(context);
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  OnBoardingTextInput(
-                    focusNode: codeFocusNode,
-                    initialValue: state.code,
-                    hintText: appLocalizations.codeVerificationHint,
-                    onChanged: presenter.onChangedCode,
-                    errorText: state.errorMessage,
-                    isLoading: state.isLoading,
-                    inputType: PicnicOnBoardingTextInputType.oneTimePassInput,
-                    onPressedResendCode: presenter.onTapResendCode,
-                    codeExpiryTime: state.codeExpiryTime,
-                    currentTimeProvider: state.currentTimeProvider,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                appLocalizations.codeVerificationTitle,
+                                style: themeData.styles.title60,
+                              ),
+                              const Gap(8),
+                              Text(
+                                appLocalizations.codeVerificationDescription,
+                                style: themeData.styles.body20.copyWith(color: themeData.colors.blackAndWhite.shade600),
+                              ),
+                            ],
+                          ),
+                          // ignore: no-magic-number
+                          Expanded(child: Assets.images.key.image(scale: 0.7)),
+                        ],
+                      ),
+                      OnBoardingTextInput(
+                        focusNode: codeFocusNode,
+                        initialValue: state.code,
+                        hintText: appLocalizations.codeVerificationHint,
+                        onChanged: presenter.onChangedCode,
+                        errorText: state.errorMessage,
+                        isLoading: state.isLoading,
+                        inputType: PicnicOnBoardingTextInputType.oneTimePassInput,
+                        onPressedResendCode: presenter.onTapResendCode,
+                        codeExpiryTime: state.codeExpiryTime,
+                        currentTimeProvider: state.currentTimeProvider,
+                      ),
+                    ],
                   ),
-                  const Gap(12),
-                  PicnicButton(
-                    onTap: state.continueEnabled ? presenter.onTapContinue : null,
-                    title: appLocalizations.continueAction,
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      PicnicButton(
+                        onTap: state.continueEnabled ? presenter.onTapContinue : null,
+                        title: appLocalizations.continueAction,
+                        minWidth: double.infinity,
+                      ),
+                      PicnicLoadingIndicator(isLoading: state.isLoading),
+                    ],
                   ),
                 ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
 }

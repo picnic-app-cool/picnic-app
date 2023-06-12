@@ -29,10 +29,10 @@ class OnboardingMocks {
   static late MockAgeFormInitialParams ageFormInitialParams;
   static late MockAgeFormNavigator ageFormNavigator;
 
-  static late MockPhoneFormPresenter phoneFormPresenter;
-  static late MockPhoneFormPresentationModel phoneFormPresentationModel;
-  static late MockPhoneFormInitialParams phoneFormInitialParams;
-  static late MockPhoneFormNavigator phoneFormNavigator;
+  static late MockMethodFormPresenter methodFormPresenter;
+  static late MockMethodFormPresentationModel methodFormPresentationModel;
+  static late MockMethodFormInitialParams methodFormInitialParams;
+  static late MockMethodFormNavigator methodFormNavigator;
   static late MockCodeVerificationFormPresenter codeVerificationFormPresenter;
   static late MockCodeVerificationFormPresentationModel codeVerificationFormPresentationModel;
   static late MockCodeVerificationFormInitialParams codeVerificationFormInitialParams;
@@ -46,10 +46,10 @@ class OnboardingMocks {
   static late MockPermissionsFormPresentationModel permissionsFormPresentationModel;
   static late MockPermissionsFormInitialParams permissionsFormInitialParams;
   static late MockPermissionsFormNavigator permissionsFormNavigator;
-  static late MockCongratsFormPresenter congratsFormPresenter;
-  static late MockCongratsFormPresentationModel congratsFormPresentationModel;
-  static late MockCongratsFormInitialParams congratsFormInitialParams;
-  static late MockCongratsFormNavigator congratsFormNavigator;
+  static late MockPhoneFormPresenter phoneFormPresenter;
+  static late MockPhoneFormPresentationModel phoneFormPresentationModel;
+  static late MockPhoneFormInitialParams phoneFormInitialParams;
+  static late MockPhoneFormNavigator phoneFormNavigator;
   static late MockOnBoardingCirclesPickerPresenter circleGroupingsFormPresenter;
   static late MockOnBoardingCirclesPickerPresentationModel circleGroupingsFormPresentationModel;
   static late MockOnBoardingCirclesPickerInitialParams circleGroupingsFormInitialParams;
@@ -64,6 +64,12 @@ class OnboardingMocks {
   static late MockLanguageSelectFormPresentationModel languageSelectFormPresentationModel;
   static late MockLanguageSelectFormInitialParams languageSelectFormInitialParams;
   static late MockLanguageSelectFormNavigator languageSelectFormNavigator;
+
+  static late MockGenderSelectFormPresenter genderSelectFormPresenter;
+  static late MockGenderSelectFormPresentationModel genderSelectFormPresentationModel;
+  static late MockGenderSelectFormInitialParams genderSelectFormInitialParams;
+  static late MockGenderSelectFormNavigator genderSelectFormNavigator;
+
   //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -126,10 +132,16 @@ class OnboardingMocks {
     languageSelectFormPresentationModel = MockLanguageSelectFormPresentationModel();
     languageSelectFormInitialParams = MockLanguageSelectFormInitialParams();
     languageSelectFormNavigator = MockLanguageSelectFormNavigator();
-    phoneFormPresenter = MockPhoneFormPresenter();
-    phoneFormPresentationModel = MockPhoneFormPresentationModel();
-    phoneFormInitialParams = MockPhoneFormInitialParams();
-    phoneFormNavigator = MockPhoneFormNavigator();
+
+    genderSelectFormPresenter = MockGenderSelectFormPresenter();
+    genderSelectFormPresentationModel = MockGenderSelectFormPresentationModel();
+    genderSelectFormInitialParams = MockGenderSelectFormInitialParams();
+    genderSelectFormNavigator = MockGenderSelectFormNavigator();
+
+    methodFormPresenter = MockMethodFormPresenter();
+    methodFormPresentationModel = MockMethodFormPresentationModel();
+    methodFormInitialParams = MockMethodFormInitialParams();
+    methodFormNavigator = MockMethodFormNavigator();
     codeVerificationFormPresenter = MockCodeVerificationFormPresenter();
     codeVerificationFormPresentationModel = MockCodeVerificationFormPresentationModel();
     codeVerificationFormInitialParams = MockCodeVerificationFormInitialParams();
@@ -142,10 +154,10 @@ class OnboardingMocks {
     permissionsFormPresentationModel = MockPermissionsFormPresentationModel();
     permissionsFormInitialParams = MockPermissionsFormInitialParams();
     permissionsFormNavigator = MockPermissionsFormNavigator();
-    congratsFormPresenter = MockCongratsFormPresenter();
-    congratsFormPresentationModel = MockCongratsFormPresentationModel();
-    congratsFormInitialParams = MockCongratsFormInitialParams();
-    congratsFormNavigator = MockCongratsFormNavigator();
+    phoneFormPresenter = MockPhoneFormPresenter();
+    phoneFormPresentationModel = MockPhoneFormPresentationModel();
+    phoneFormInitialParams = MockPhoneFormInitialParams();
+    phoneFormNavigator = MockPhoneFormNavigator();
     circleGroupingsFormPresenter = MockOnBoardingCirclesPickerPresenter();
     circleGroupingsFormPresentationModel = MockOnBoardingCirclesPickerPresentationModel();
     circleGroupingsFormInitialParams = MockOnBoardingCirclesPickerInitialParams();
@@ -203,10 +215,10 @@ class OnboardingMocks {
     registerFallbackValue(MockOnboardingPresentationModel());
     registerFallbackValue(MockOnboardingInitialParams());
     registerFallbackValue(MockOnboardingNavigator());
-    registerFallbackValue(MockPhoneFormPresenter());
-    registerFallbackValue(MockPhoneFormPresentationModel());
-    registerFallbackValue(MockPhoneFormInitialParams());
-    registerFallbackValue(MockPhoneFormNavigator());
+    registerFallbackValue(MockMethodFormPresenter());
+    registerFallbackValue(MockMethodFormPresentationModel());
+    registerFallbackValue(MockMethodFormInitialParams());
+    registerFallbackValue(MockMethodFormNavigator());
     registerFallbackValue(MockCodeVerificationFormPresenter());
     registerFallbackValue(MockCodeVerificationFormPresentationModel());
     registerFallbackValue(MockCodeVerificationFormInitialParams());
@@ -219,10 +231,10 @@ class OnboardingMocks {
     registerFallbackValue(MockPermissionsFormPresentationModel());
     registerFallbackValue(MockPermissionsFormInitialParams());
     registerFallbackValue(MockPermissionsFormNavigator());
-    registerFallbackValue(MockCongratsFormPresenter());
-    registerFallbackValue(MockCongratsFormPresentationModel());
-    registerFallbackValue(MockCongratsFormInitialParams());
-    registerFallbackValue(MockCongratsFormNavigator());
+    registerFallbackValue(MockPhoneFormPresenter());
+    registerFallbackValue(MockPhoneFormPresentationModel());
+    registerFallbackValue(MockPhoneFormInitialParams());
+    registerFallbackValue(MockPhoneFormNavigator());
     registerFallbackValue(MockOnBoardingCirclesPickerPresenter());
     registerFallbackValue(MockOnBoardingCirclesPickerPresentationModel());
     registerFallbackValue(MockOnBoardingCirclesPickerInitialParams());
@@ -235,6 +247,11 @@ class OnboardingMocks {
     registerFallbackValue(MockLanguageSelectFormPresentationModel());
     registerFallbackValue(MockLanguageSelectFormInitialParams());
     registerFallbackValue(MockLanguageSelectFormNavigator());
+
+    registerFallbackValue(MockGenderSelectFormPresenter());
+    registerFallbackValue(MockGenderSelectFormPresentationModel());
+    registerFallbackValue(MockGenderSelectFormInitialParams());
+    registerFallbackValue(MockGenderSelectFormNavigator());
     //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES

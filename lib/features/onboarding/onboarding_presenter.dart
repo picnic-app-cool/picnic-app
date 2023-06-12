@@ -18,7 +18,9 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/register_use_case.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/permissions_form/permissions_form_initial_params.dart';
@@ -86,8 +88,8 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
 
   Future<void> _performRouting(OnboardingScreen? screen) async {
     switch (screen) {
-      case OnboardingScreen.phone:
-        return _openPhone();
+      case OnboardingScreen.methods:
+        return _openMethods();
       case OnboardingScreen.age:
         return _openAge();
       case OnboardingScreen.codeVerification:
@@ -102,6 +104,10 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
         return _openLanguage();
       case null:
         return navigator.openMain(const MainInitialParams());
+      case OnboardingScreen.phone:
+        return _openPhone();
+      case OnboardingScreen.gender:
+        return _openGender();
     }
   }
 
@@ -129,6 +135,47 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
       ),
     );
     return _handleBackAction(OnboardingScreen.language);
+  }
+
+  Future<void> _openGender() async {
+    await navigator.openGenderSelectForm(
+      GenderSelectFormInitialParams(
+        formData: _model.formData,
+        onGenderSelected: (value) {
+          _updateFormData((data) => data.copyWith(gender: value));
+          _openNextScreen();
+        },
+      ),
+    );
+    return _handleBackAction(OnboardingScreen.gender);
+  }
+
+  Future<void> _openPhone() async {
+    await navigator.openPhoneForm(
+      PhoneFormInitialParams(
+        formData: _model.formData,
+        onChangedPhone: (data) {
+          _updateFormData(
+            (form) => form.copyWith(
+              phoneVerificationData: data.phoneVerificationData ?? const PhoneVerificationData.empty(),
+              authResult: data.authResult ?? const AuthResult.empty(),
+              usernameVerificationData: data.usernameVerificationData ?? const UsernameVerificationData.empty(),
+            ),
+          );
+
+          if (data.phoneVerificationData == null && data.usernameVerificationData == null) {
+            //Social login. Remove code verification screen
+            tryEmit(_model.byRemovingScreen(OnboardingScreen.phone));
+            tryEmit(_model.byRemovingScreen(OnboardingScreen.codeVerification));
+
+            _fixFlowAccordingAuthResult(_model.formData.authResult);
+          }
+
+          _checkRuntimePermissions();
+        },
+      ),
+    );
+    return _handleBackAction(OnboardingScreen.phone);
   }
 
   Future<void> _openCirclesPickerPage() async {
@@ -193,6 +240,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
       _model.bySelectingFlow(
         OnboardingFlowType.signIn,
         removeScreens: [
+          OnboardingScreen.methods,
           OnboardingScreen.phone,
           OnboardingScreen.codeVerification,
         ],
@@ -207,6 +255,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
         removeScreens: [
           if (!_model.user.agePending) OnboardingScreen.age,
           OnboardingScreen.language,
+          OnboardingScreen.methods,
           OnboardingScreen.phone,
           OnboardingScreen.codeVerification,
           OnboardingScreen.username,
@@ -222,6 +271,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
       _model.bySelectingFlow(
         OnboardingFlowType.signUp,
         removeScreens: [
+          OnboardingScreen.methods,
           OnboardingScreen.phone,
           OnboardingScreen.codeVerification,
         ],
@@ -256,12 +306,13 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
     return _handleBackAction(OnboardingScreen.age);
   }
 
-  Future<void> _openPhone() async {
-    await navigator.openPhoneForm(
-      PhoneFormInitialParams(
+  Future<void> _openMethods() async {
+    await navigator.openMethodForm(
+      MethodFormInitialParams(
         formType: _model.flowType,
         formData: _model.formData,
         onTapDiscord: () => _switchToDiscord(),
+        onTapPhone: () => _openNextScreen(),
         onChangedPhone: (data) {
           _updateFormData(
             (form) => form.copyWith(
@@ -273,15 +324,18 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
 
           if (data.phoneVerificationData == null && data.usernameVerificationData == null) {
             //Social login. Remove code verification screen
+            tryEmit(_model.byRemovingScreen(OnboardingScreen.phone));
+
             tryEmit(_model.byRemovingScreen(OnboardingScreen.codeVerification));
             _fixFlowAccordingAuthResult(_model.formData.authResult);
           }
 
           _checkRuntimePermissions();
         },
+        onTapLogin: () => _switchToSignIn(),
       ),
     );
-    return _handleBackAction(OnboardingScreen.phone);
+    return _handleBackAction(OnboardingScreen.methods);
   }
 
   void _updateFormData(

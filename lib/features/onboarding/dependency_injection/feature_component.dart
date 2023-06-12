@@ -18,11 +18,6 @@ import 'package:picnic_app/features/onboarding/code_verification_form/code_verif
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_page.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_initial_params.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_page.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_presentation_model.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_page.dart';
@@ -37,11 +32,21 @@ import 'package:picnic_app/features/onboarding/domain/use_cases/request_code_for
 import 'package:picnic_app/features/onboarding/domain/use_cases/request_phone_code_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/sign_in_with_username_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/validators/onboarding_form_validator.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_page.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presentation_model.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_page.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presenter.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_page.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_presentation_model.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_page.dart';
@@ -281,29 +286,27 @@ void _configureMvp() {
             presenter: getIt(param1: initialParams),
           ),
         )
-        ..registerFactory<PhoneFormNavigator>(
-          () => PhoneFormNavigator(getIt()),
+        ..registerFactory<MethodFormNavigator>(
+          () => MethodFormNavigator(getIt()),
         )
-        ..registerFactoryParam<PhoneFormPresentationModel, PhoneFormInitialParams, dynamic>(
-          (params, _) => PhoneFormPresentationModel.initial(
+        ..registerFactoryParam<MethodFormPresentationModel, MethodFormInitialParams, dynamic>(
+          (params, _) => MethodFormPresentationModel.initial(
             params,
             getIt(),
             getIt(),
             getIt(),
           ),
         )
-        ..registerFactoryParam<PhoneFormPresenter, PhoneFormInitialParams, dynamic>(
-          (initialParams, _) => PhoneFormPresenter(
+        ..registerFactoryParam<MethodFormPresenter, MethodFormInitialParams, dynamic>(
+          (initialParams, _) => MethodFormPresenter(
             getIt(param1: initialParams),
-            getIt(),
-            getIt(),
             getIt(),
             getIt(),
             getIt(),
           ),
         )
-        ..registerFactoryParam<PhoneFormPage, PhoneFormInitialParams, dynamic>(
-          (initialParams, _) => PhoneFormPage(
+        ..registerFactoryParam<MethodFormPage, MethodFormInitialParams, dynamic>(
+          (initialParams, _) => MethodFormPage(
             presenter: getIt(param1: initialParams),
           ),
         )
@@ -352,6 +355,24 @@ void _configureMvp() {
             presenter: getIt(param1: initialParams),
           ),
         )
+        ..registerFactory<GenderSelectFormNavigator>(
+          () => GenderSelectFormNavigator(getIt()),
+        )
+        ..registerFactoryParam<GenderSelectFormPresentationModel, GenderSelectFormInitialParams, dynamic>(
+          (params, _) => GenderSelectFormPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<GenderSelectFormPresenter, GenderSelectFormInitialParams, dynamic>(
+          (initialParams, _) => GenderSelectFormPresenter(
+            getIt(param1: initialParams),
+            getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactoryParam<GenderSelectFormPage, GenderSelectFormInitialParams, dynamic>(
+          (initialParams, _) => GenderSelectFormPage(
+            presenter: getIt(param1: initialParams),
+          ),
+        )
         ..registerFactory<ProfilePhotoFormNavigator>(
           () => ProfilePhotoFormNavigator(getIt()),
         )
@@ -393,21 +414,25 @@ void _configureMvp() {
             presenter: getIt(param1: initialParams),
           ),
         )
-        ..registerFactory<CongratsFormNavigator>(
-          () => CongratsFormNavigator(getIt()),
+        ..registerFactory<PhoneFormNavigator>(
+          () => PhoneFormNavigator(getIt()),
         )
-        ..registerFactoryParam<CongratsFormPresentationModel, CongratsFormInitialParams, dynamic>(
-          (params, _) => CongratsFormPresentationModel.initial(params),
+        ..registerFactoryParam<PhoneFormPresentationModel, PhoneFormInitialParams, dynamic>(
+          (params, _) => PhoneFormPresentationModel.initial(
+            params,
+            getIt(),
+          ),
         )
-        ..registerFactoryParam<CongratsFormPresenter, CongratsFormInitialParams, dynamic>(
-          (initialParams, _) => CongratsFormPresenter(
+        ..registerFactoryParam<PhoneFormPresenter, PhoneFormInitialParams, dynamic>(
+          (initialParams, _) => PhoneFormPresenter(
             getIt(param1: initialParams),
+            getIt(),
             getIt(),
             getIt(),
           ),
         )
-        ..registerFactoryParam<CongratsFormPage, CongratsFormInitialParams, dynamic>(
-          (initialParams, _) => CongratsFormPage(
+        ..registerFactoryParam<PhoneFormPage, PhoneFormInitialParams, dynamic>(
+          (initialParams, _) => PhoneFormPage(
             presenter: getIt(param1: initialParams),
           ),
         )

@@ -40,7 +40,7 @@ class LanguageSelectFormDialogContent extends StatelessWidget {
             final language = state.languages[index];
             return _LanguageSelectButton(
               theme: theme,
-              isSelected: language == state.selectedLanguage,
+              isSelected: language.code == state.selectedLanguage.code,
               language: language,
               onTapSelectLanguage: onTapSelectLanguage,
             );

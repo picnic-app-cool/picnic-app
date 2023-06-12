@@ -8,7 +8,6 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presenter.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/widgets/circles_picker_top_section.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/widgets/group_of_selectable_circles.dart';
-import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_app_bar.dart';
@@ -50,12 +49,12 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
             ),
           ),
         ],
-        titleText: appLocalizations.circlesGroupingsAppBarTitle,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: stateObserver(
             builder: (context, state) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CirclesPickerTopSection(
                   selectionsLeftCount: state.selectionsLeftCount,

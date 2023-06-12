@@ -9,6 +9,7 @@ import 'package:picnic_app/core/domain/model/username_verification_data.dart';
 class OnboardingFormData extends Equatable {
   const OnboardingFormData({
     required this.age,
+    required this.gender,
     required this.phoneVerificationData,
     required this.profilePhotoPath,
     required this.username,
@@ -22,17 +23,20 @@ class OnboardingFormData extends Equatable {
 
   const OnboardingFormData.empty()
       : age = '',
+        gender = '',
         phoneVerificationData = const PhoneVerificationData.empty(),
         usernameVerificationData = const UsernameVerificationData.empty(),
         username = '',
         profilePhotoPath = '',
         country = '',
-        language = const Language.empty(),
+        language = const Language.english(),
         notificationsStatus = RuntimePermissionStatus.denied,
         authResult = const AuthResult.empty(),
         circles = const [];
 
   final String age;
+  final String gender;
+
   final PhoneVerificationData phoneVerificationData;
   final UsernameVerificationData usernameVerificationData;
   final String username;
@@ -46,6 +50,7 @@ class OnboardingFormData extends Equatable {
   @override
   List<Object?> get props => [
         age,
+        gender,
         phoneVerificationData,
         username,
         country,
@@ -59,6 +64,7 @@ class OnboardingFormData extends Equatable {
 
   OnboardingFormData copyWith({
     String? age,
+    String? gender,
     PhoneVerificationData? phoneVerificationData,
     String? username,
     String? country,
@@ -71,6 +77,7 @@ class OnboardingFormData extends Equatable {
   }) {
     return OnboardingFormData(
       age: age ?? this.age,
+      gender: gender ?? this.gender,
       phoneVerificationData: phoneVerificationData ?? this.phoneVerificationData,
       username: username ?? this.username,
       country: country ?? this.country,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/utils/durations.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
-import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class OnboardingBackButton extends StatelessWidget {
   const OnboardingBackButton({
@@ -24,7 +23,7 @@ class OnboardingBackButton extends StatelessWidget {
       duration: const ShortDuration(),
       child: Material(
         borderRadius: radius,
-        color: PicnicTheme.of(context).colors.blackAndWhite.shade100,
+        color: Colors.transparent,
         child: InkWell(
           radius: _borderRadius,
           onTap: canPop ? onTap : null,

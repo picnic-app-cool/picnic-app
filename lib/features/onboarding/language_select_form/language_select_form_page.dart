@@ -1,17 +1,14 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:picnic_app/constants/constants.dart';
+import 'package:gap/gap.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/widgets/language_select_form_dialog_content.dart';
-import 'package:picnic_app/features/onboarding/widgets/onboarding_page_container.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/picnic_app.dart';
-import 'package:picnic_app/ui/widgets/dialog/picnic_dialog.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class LanguageSelectFormPage extends StatefulWidget with HasPresenter<LanguageSelectFormPresenter> {
@@ -45,25 +42,34 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
       listener: (context, state) {
         PicnicApp.of(context)?.setLocale(Locale(state.selectedLanguage.code));
       },
-      child: Stack(
-        children: [
-          OnboardingPageContainer(
-            dialog: PicnicDialog(
-              image: PicnicAvatar(
-                borderColor: Colors.transparent,
-                backgroundColor: theme.colors.blackAndWhite.shade900.withOpacity(
-                  Constants.onboardingImageBgOpacity,
-                ),
-                imageSource: PicnicImageSource.emoji(
-                  Constants.speechEmoji,
-                  style: const TextStyle(
-                    fontSize: Constants.onboardingEmojiSize,
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        appLocalizations.languageSelectFormTitle,
+                        style: theme.styles.title60,
+                      ),
+                      const Gap(8),
+                      Text(
+                        appLocalizations.languageSelectFormDescription,
+                        style: theme.styles.body20.copyWith(color: theme.colors.blackAndWhite.shade600),
+                      ),
+                    ],
                   ),
-                ),
+                  // ignore: no-magic-number
+                  Expanded(child: Assets.images.languageIcon.image(scale: 0.7)),
+                ],
               ),
-              title: appLocalizations.languageSelectFormTitle,
-              description: appLocalizations.languageSelectFormDescription,
-              content: stateObserver(
+              stateObserver(
                 builder: (context, state) {
                   return LanguageSelectFormDialogContent(
                     theme: theme,
@@ -73,9 +79,9 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
                   );
                 },
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

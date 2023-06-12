@@ -36,6 +36,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/add_user.webp
   AssetGenImage get addUser => const AssetGenImage('assets/images/add_user.webp');
 
+  /// File path: assets/images/apple_white.webp
+  AssetGenImage get appleWhite => const AssetGenImage('assets/images/apple_white.webp');
+
   /// File path: assets/images/arrow_down.webp
   AssetGenImage get arrowDown => const AssetGenImage('assets/images/arrow_down.webp');
 
@@ -102,6 +105,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/briefcase.webp
   AssetGenImage get briefcase => const AssetGenImage('assets/images/briefcase.webp');
 
+  /// File path: assets/images/cake.webp
+  AssetGenImage get cake => const AssetGenImage('assets/images/cake.webp');
+
   /// File path: assets/images/calendar.webp
   AssetGenImage get calendar => const AssetGenImage('assets/images/calendar.webp');
 
@@ -163,6 +169,18 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/circle_back.webp
   AssetGenImage get circleBack => const AssetGenImage('assets/images/circle_back.webp');
+
+  /// File path: assets/images/circle_example_1.webp
+  AssetGenImage get circleExample1 => const AssetGenImage('assets/images/circle_example_1.webp');
+
+  /// File path: assets/images/circle_example_2.webp
+  AssetGenImage get circleExample2 => const AssetGenImage('assets/images/circle_example_2.webp');
+
+  /// File path: assets/images/circle_example_3.webp
+  AssetGenImage get circleExample3 => const AssetGenImage('assets/images/circle_example_3.webp');
+
+  /// File path: assets/images/circle_example_4.webp
+  AssetGenImage get circleExample4 => const AssetGenImage('assets/images/circle_example_4.webp');
 
   /// File path: assets/images/clock.webp
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.webp');
@@ -229,6 +247,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/discord.webp
   AssetGenImage get discord => const AssetGenImage('assets/images/discord.webp');
+
+  /// File path: assets/images/discord_white.webp
+  AssetGenImage get discordWhite => const AssetGenImage('assets/images/discord_white.webp');
 
   /// File path: assets/images/discover_filled.webp
   AssetGenImage get discoverFilled => const AssetGenImage('assets/images/discover_filled.webp');
@@ -341,6 +362,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/interrupted_line.webp
   AssetGenImage get interruptedLine => const AssetGenImage('assets/images/interrupted_line.webp');
 
+  /// File path: assets/images/key.webp
+  AssetGenImage get key => const AssetGenImage('assets/images/key.webp');
+
+  /// File path: assets/images/language_icon.webp
+  AssetGenImage get languageIcon => const AssetGenImage('assets/images/language_icon.webp');
+
   /// File path: assets/images/lightning.webp
   AssetGenImage get lightning => const AssetGenImage('assets/images/lightning.webp');
 
@@ -424,6 +451,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/person_outline.webp
   AssetGenImage get personOutline => const AssetGenImage('assets/images/person_outline.webp');
+
+  /// File path: assets/images/phone.webp
+  AssetGenImage get phone => const AssetGenImage('assets/images/phone.webp');
 
   /// File path: assets/images/picnic_logo.webp
   AssetGenImage get picnicLogo => const AssetGenImage('assets/images/picnic_logo.webp');
@@ -669,6 +699,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/upload_video.webp
   AssetGenImage get uploadVideo => const AssetGenImage('assets/images/upload_video.webp');
 
+  /// File path: assets/images/username_icon.webp
+  AssetGenImage get usernameIcon => const AssetGenImage('assets/images/username_icon.webp');
+
   /// File path: assets/images/users_bold.webp
   AssetGenImage get usersBold => const AssetGenImage('assets/images/users_bold.webp');
 
@@ -718,6 +751,7 @@ class $AssetsImagesGen {
         acorn,
         add,
         addUser,
+        appleWhite,
         arrowDown,
         arrowRight,
         arrowRightThree,
@@ -740,6 +774,7 @@ class $AssetsImagesGen {
         bottomNavigationActive,
         bottomSheetHandler,
         briefcase,
+        cake,
         calendar,
         camera,
         cameraSolid,
@@ -760,6 +795,10 @@ class $AssetsImagesGen {
         checkboxSquare,
         checkboxSquareEmpty,
         circleBack,
+        circleExample1,
+        circleExample2,
+        circleExample3,
+        circleExample4,
         clock,
         close,
         closeCircleTransparent,
@@ -782,6 +821,7 @@ class $AssetsImagesGen {
         deleteSolid,
         democracy,
         discord,
+        discordWhite,
         discoverFilled,
         discoverOutlinedBlack,
         discoverOutlinedWhite,
@@ -819,6 +859,8 @@ class $AssetsImagesGen {
         infoOutlined,
         infoSquareOutlined,
         interruptedLine,
+        key,
+        languageIcon,
         lightning,
         lightningOff,
         likeFilled,
@@ -847,6 +889,7 @@ class $AssetsImagesGen {
         people,
         person,
         personOutline,
+        phone,
         picnicLogo,
         picnicLogoWithText,
         pieChart,
@@ -928,6 +971,7 @@ class $AssetsImagesGen {
         uploadPhoto,
         uploadSuccess,
         uploadVideo,
+        usernameIcon,
         usersBold,
         verBadge,
         verificationBadgePink,

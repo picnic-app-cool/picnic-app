@@ -103,7 +103,8 @@ class OnBoardingTextInput extends StatelessWidget {
             ),
         ],
       ),
-      prefix: inputType == PicnicOnBoardingTextInputType.countryCodePickerTextInput
+      prefix: inputType == PicnicOnBoardingTextInputType.countryCodePickerTextInput ||
+              inputType == PicnicOnBoardingTextInputType.phoneInput
           ? _InternationalMobileCodePicker(
               textStyle: hintTextStyle,
               onChanged: onChangedCountryCode,
@@ -229,6 +230,7 @@ class _InternationalMobileCodePicker extends StatelessWidget {
 enum PicnicOnBoardingTextInputType {
   countryCodePickerTextInput,
   countryPickerTextInput,
+  phoneInput,
   oneTimePassInput,
   textInput;
 
@@ -242,6 +244,8 @@ enum PicnicOnBoardingTextInputType {
         return TextInputType.number;
       case PicnicOnBoardingTextInputType.textInput:
         return TextInputType.text;
+      case PicnicOnBoardingTextInputType.phoneInput:
+        return TextInputType.number;
     }
   }
 }

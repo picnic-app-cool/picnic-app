@@ -4,9 +4,10 @@ import 'package:picnic_app/features/main/main_navigator.dart';
 import 'package:picnic_app/features/onboarding/age_form/age_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_page.dart';
 import 'package:picnic_app/features/onboarding/permissions_form/permissions_form_navigator.dart';
@@ -23,15 +24,16 @@ class OnboardingNavigator
         UsernameFormRoute,
         CountrySelectFormRoute,
         AgeFormRoute,
-        PhoneFormRoute,
+        MethodFormRoute,
         CodeVerificationFormRoute,
         LanguageSelectFormRoute,
         ProfilePhotoFormRoute,
         PermissionsFormRoute,
-        CongratsFormRoute,
+        PhoneFormRoute,
         OnBoardingCirclesPickerRoute,
         MainRoute,
-        ErrorBottomSheetRoute {
+        ErrorBottomSheetRoute,
+        GenderSelectFormRoute {
   const OnboardingNavigator(
     this.appNavigator,
     this.navigatorKey,

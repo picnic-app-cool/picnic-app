@@ -15,10 +15,6 @@ import 'package:picnic_app/features/onboarding/code_verification_form/code_verif
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_initial_params.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_presentation_model.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presentation_model.dart';
@@ -37,10 +33,18 @@ import 'package:picnic_app/features/onboarding/domain/use_cases/register_use_cas
 import 'package:picnic_app/features/onboarding/domain/use_cases/request_code_for_username_login_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/request_phone_code_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/sign_in_with_username_use_case.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presentation_model.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presenter.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_navigator.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_presentation_model.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_presentation_model.dart';
@@ -102,13 +106,13 @@ class MockUsernameFormInitialParams extends Mock implements UsernameFormInitialP
 
 class MockUsernameFormNavigator extends Mock implements UsernameFormNavigator {}
 
-class MockPhoneFormPresenter extends MockCubit<PhoneFormViewModel> implements PhoneFormPresenter {}
+class MockMethodFormPresenter extends MockCubit<MethodFormViewModel> implements MethodFormPresenter {}
 
-class MockPhoneFormPresentationModel extends Mock implements PhoneFormPresentationModel {}
+class MockMethodFormPresentationModel extends Mock implements MethodFormPresentationModel {}
 
-class MockPhoneFormInitialParams extends Mock implements PhoneFormInitialParams {}
+class MockMethodFormInitialParams extends Mock implements MethodFormInitialParams {}
 
-class MockPhoneFormNavigator extends Mock implements PhoneFormNavigator {}
+class MockMethodFormNavigator extends Mock implements MethodFormNavigator {}
 
 class MockCodeVerificationFormPresenter extends MockCubit<CodeVerificationFormViewModel>
     implements CodeVerificationFormPresenter {}
@@ -135,13 +139,13 @@ class MockPermissionsFormInitialParams extends Mock implements PermissionsFormIn
 
 class MockPermissionsFormNavigator extends Mock implements PermissionsFormNavigator {}
 
-class MockCongratsFormPresenter extends MockCubit<CongratsFormViewModel> implements CongratsFormPresenter {}
+class MockPhoneFormPresenter extends MockCubit<CongratsFormViewModel> implements PhoneFormPresenter {}
 
-class MockCongratsFormPresentationModel extends Mock implements CongratsFormPresentationModel {}
+class MockPhoneFormPresentationModel extends Mock implements PhoneFormPresentationModel {}
 
-class MockCongratsFormInitialParams extends Mock implements CongratsFormInitialParams {}
+class MockPhoneFormInitialParams extends Mock implements PhoneFormInitialParams {}
 
-class MockCongratsFormNavigator extends Mock implements CongratsFormNavigator {}
+class MockPhoneFormNavigator extends Mock implements PhoneFormNavigator {}
 
 class MockOnBoardingCirclesPickerPresenter extends MockCubit<OnBoardingCirclesPickerViewModel>
     implements OnBoardingCirclesPickerPresenter {}
@@ -169,6 +173,14 @@ class MockLanguageSelectFormPresentationModel extends Mock implements LanguageSe
 class MockLanguageSelectFormInitialParams extends Mock implements LanguageSelectFormInitialParams {}
 
 class MockLanguageSelectFormNavigator extends Mock implements LanguageSelectFormNavigator {}
+
+class MockGenderSelectFormPresenter extends MockCubit<GenderSelectFormViewModel> implements GenderSelectFormPresenter {}
+
+class MockGenderSelectFormPresentationModel extends Mock implements GenderSelectFormPresentationModel {}
+
+class MockGenderSelectFormInitialParams extends Mock implements GenderSelectFormInitialParams {}
+
+class MockGenderSelectFormNavigator extends Mock implements GenderSelectFormNavigator {}
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 
 // USE CASES

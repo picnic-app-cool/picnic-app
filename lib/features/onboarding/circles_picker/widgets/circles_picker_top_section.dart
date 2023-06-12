@@ -19,34 +19,24 @@ class CirclesPickerTopSection extends StatelessWidget {
     final blackAndWhite = theme.colors.blackAndWhite;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Text(
-            appLocalizations.circlesGroupingsDescription,
-            textAlign: TextAlign.center,
+            appLocalizations.interests,
+            style: theme.styles.title60,
+          ),
+        ),
+        const Gap(12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Text(
+            appLocalizations.interestsDescription,
             style: theme.styles.body10.copyWith(color: blackAndWhite.shade600),
           ),
         ),
         const Gap(12),
-        if (selectionsLeftCount > 0) ...[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              anythingSelected
-                  ? appLocalizations.circlesGroupingsSelectMoreCirclesHint(selectionsLeftCount)
-                  : appLocalizations.circlesGroupingsSelectCirclesHint(selectionsLeftCount),
-              textAlign: TextAlign.center,
-              style: theme.styles.body30.copyWith(color: blackAndWhite.shade500),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Divider(
-              color: blackAndWhite.shade500,
-            ),
-          ),
-        ],
       ],
     );
   }

@@ -14,11 +14,12 @@ import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/onboarding/age_form/age_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_initial_params.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_initial_params.dart';
-import 'package:picnic_app/features/onboarding/congrats_form/congrats_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/domain/model/register_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/validators/onboarding_form_validator.dart';
+import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/method_form/method_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/onboarding/onboarding_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/onboarding_presenter.dart';
@@ -80,6 +81,7 @@ void main() {
       async.flushMicrotasks();
       verifyInOrder([
         () => navigator.openSplash(any()),
+        () => navigator.openMethodForm(any()),
         () => navigator.openPhoneForm(any()),
         () => navigator.openCodeVerificationForm(any()),
         () => navigator.openPermissionsForm(any()),
@@ -99,6 +101,7 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
+          () => navigator.openMethodForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
           () => navigator.openAgeForm(any()),
@@ -107,6 +110,7 @@ void main() {
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
           () => navigator.closeAllOnboardingSteps(),
           () => navigator.openPermissionsForm(any()),
+          () => navigator.openGenderSelectForm(any()),
           () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openMain(any()),
         ]);
@@ -124,6 +128,7 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
+          () => navigator.openMethodForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
           () => navigator.openAgeForm(any()),
@@ -132,6 +137,7 @@ void main() {
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
           () => navigator.closeAllOnboardingSteps(),
           () => navigator.openPermissionsForm(any()),
+          () => navigator.openGenderSelectForm(any()),
           () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openMain(any()),
         ]);
@@ -155,6 +161,7 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
+          () => navigator.openMethodForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
           () => navigator.openAgeForm(any()),
@@ -213,6 +220,7 @@ void main() {
             (presenter.state as OnboardingPresentationModel).screensList,
             [
               OnboardingScreen.permissions,
+              OnboardingScreen.gender,
               OnboardingScreen.circleGroupings,
             ],
           );
@@ -240,6 +248,20 @@ void main() {
     });
     when(() => navigator.openLanguageSelectForm(any())).thenAnswer((invocation) {
       invocation.initParams<LanguageSelectFormInitialParams>().onLanguageSelected(const Language.empty());
+      return navigationCompleter.future;
+    });
+
+    when(() => navigator.openGenderSelectForm(any())).thenAnswer((invocation) {
+      invocation.initParams<GenderSelectFormInitialParams>().onGenderSelected("");
+      return navigationCompleter.future;
+    });
+
+    when(() => navigator.openMethodForm(any())).thenAnswer((invocation) {
+      invocation.initParams<MethodFormInitialParams>().onChangedPhone(
+            const PhonePageResult(
+              phoneVerificationData: PhoneVerificationData.empty(),
+            ),
+          );
       return navigationCompleter.future;
     });
     _mockRegisterFlow(navigator);
@@ -270,10 +292,7 @@ void main() {
       invocation.initParams<PermissionsFormInitialParams>().onContinue(RuntimePermissionStatus.granted);
       return navigationCompleter.future;
     });
-    when(() => navigator.openCongratsForm(any())).thenAnswer((invocation) {
-      invocation.initParams<CongratsFormInitialParams>().onTapContinue();
-      return navigationCompleter.future;
-    });
+
     when(() => navigator.openOnBoardingCirclesPickerPage(any())).thenAnswer((invocation) {
       invocation.initParams<OnBoardingCirclesPickerInitialParams>().onCirclesSelected([]);
       return navigationCompleter.future;
