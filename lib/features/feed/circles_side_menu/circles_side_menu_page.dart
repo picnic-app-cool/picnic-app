@@ -4,9 +4,9 @@ import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presentation_model.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presenter.dart';
-import 'package:picnic_app/features/feed/circles_side_menu/widgets/circle_action.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/widgets/circles_list.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/widgets/pod_list.dart';
+import 'package:picnic_app/features/profile/private_profile/widgets/profile_horizontal_item.dart';
 import 'package:picnic_app/features/profile/widgets/tabs/collections_tab.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
@@ -17,7 +17,6 @@ import 'package:picnic_app/ui/widgets/picnic_tag.dart';
 import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
-import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class CirclesSideMenuPage extends StatefulWidget with HasInitialParams {
   const CirclesSideMenuPage({
@@ -37,7 +36,8 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
   static const _tagRadius = 100.0;
   static const double _badgeSize = 20.0;
   static const double _avatarSize = 48;
-  static const _flex = 2;
+  static const _plusIconSize = 18.0;
+  static const _searchIconSize = 18.0;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
     final styles = PicnicTheme.of(context).styles;
     final title40 = styles.title40;
     final link15BlueStyle = styles.link15.copyWith(color: colors.blue);
+    final darkBlue = colors.darkBlue;
 
     final user = state.privateProfile.user;
     return DarkStatusBar(
@@ -66,11 +67,11 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
         elevation: 0,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Gap(12),
+                const Gap(6),
                 InkWell(
                   onTap: presenter.onTapProfile,
                   child: Row(
@@ -115,20 +116,19 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                 const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       appLocalizations.collectionsTabTitle,
                       style: title40,
                     ),
-                    PicnicTextButton(
-                      label: appLocalizations.viewAllAction,
-                      labelStyle: link15BlueStyle,
+                    InkWell(
                       onTap: presenter.onTapViewCollections,
+                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
                     ),
                   ],
                 ),
                 Flexible(
-                  flex: _flex,
                   child: stateObserver(
                     builder: (context, state) => CollectionsTab(
                       collections: state.collections,
@@ -141,19 +141,15 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                 const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          appLocalizations.recentCircles,
-                          style: title40,
-                        ),
-                      ],
+                    Text(
+                      appLocalizations.recentCircles,
+                      style: title40,
                     ),
-                    PicnicTextButton(
-                      label: appLocalizations.viewAllAction,
-                      labelStyle: link15BlueStyle,
+                    InkWell(
                       onTap: presenter.onTapViewCircles,
+                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
                     ),
                   ],
                 ),
@@ -168,11 +164,12 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   ),
                 ),
                 const Divider(),
-                const Gap(4),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           appLocalizations.pods,
@@ -190,10 +187,9 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                         ),
                       ],
                     ),
-                    PicnicTextButton(
-                      label: appLocalizations.viewAllAction,
-                      labelStyle: link15BlueStyle,
+                    InkWell(
                       onTap: presenter.onTapViewPods,
+                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
                     ),
                   ],
                 ),
@@ -207,19 +203,35 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   ),
                 ),
                 const Divider(),
-                const Gap(4),
-                CircleAction(
-                  title: appLocalizations.createCircleButtonLabel,
-                  onTap: presenter.onCreateNewCircleTap,
-                  icon: Assets.images.add.image(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ProfileHorizontalItem(
+                        onTap: presenter.onTapCreateNewCircle,
+                        title: appLocalizations.createNewCircle,
+                        trailing: Image.asset(
+                          Assets.images.add.path,
+                          color: darkBlue.shade800,
+                          height: _plusIconSize,
+                          width: _plusIconSize,
+                        ),
+                      ),
+                    ),
+                    const Gap(8),
+                    Expanded(
+                      child: ProfileHorizontalItem(
+                        onTap: presenter.onTapSearchCircles,
+                        title: appLocalizations.discoverNewCircle,
+                        trailing: Image.asset(
+                          Assets.images.search.path,
+                          color: darkBlue.shade800,
+                          height: _searchIconSize,
+                          width: _searchIconSize,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const Gap(12),
-                CircleAction(
-                  title: appLocalizations.discoveryDiscover,
-                  onTap: presenter.onTapSearchCircles,
-                  icon: Assets.images.discoverOutlinedBlack.image(),
-                ),
-                const Gap(4),
               ],
             ),
           ),

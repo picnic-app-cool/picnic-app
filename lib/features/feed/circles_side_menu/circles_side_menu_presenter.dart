@@ -110,7 +110,7 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
     }
   }
 
-  void onCreateNewCircleTap() {
+  void onTapCreateNewCircle() {
     navigator.openCreateCircle(
       CreateCircleInitialParams(
         createCircleWithoutPost: true,

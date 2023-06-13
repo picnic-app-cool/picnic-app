@@ -62,7 +62,7 @@ class _PodsList extends StatelessWidget {
   final PaginatedList<PodApp> pods;
 
   static const double _userCircleIconSize = 42;
-  static const _height = 55.0;
+  static const _height = 48.0;
   static const _emojiSize = 22.0;
 
   @override
