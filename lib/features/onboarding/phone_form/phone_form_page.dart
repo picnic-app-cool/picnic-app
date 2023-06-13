@@ -52,13 +52,14 @@ class _PhoneFormPageState extends State<PhoneFormPage>
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,12 +76,14 @@ class _PhoneFormPageState extends State<PhoneFormPage>
                             ],
                           ),
                           // ignore: no-magic-number
-                          Expanded(child: Assets.images.phone.image(scale: 0.5)),
+                          Assets.images.phone.image(scale: 0.5),
                         ],
                       ),
+                      const Gap(12),
                       OnBoardingTextInput(
                         key: const Key('phoneInput'),
                         focusNode: phoneFocusNode,
+                        showFlag: true,
                         initialValue: state.phoneNumber,
                         initialCountry: state.dialCode,
                         inputType: PicnicOnBoardingTextInputType.phoneInput,

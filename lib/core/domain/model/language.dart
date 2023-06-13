@@ -14,7 +14,7 @@ class Language extends Equatable {
 
   const Language.english()
       : title = 'english',
-        code = 'eng',
+        code = 'en',
         flag = '🇺🇸';
 
   final String title;

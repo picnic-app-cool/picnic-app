@@ -6,6 +6,7 @@ import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme_data.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class LanguageSelectFormDialogContent extends StatelessWidget {
   const LanguageSelectFormDialogContent({
@@ -57,6 +58,12 @@ class LanguageSelectFormDialogContent extends StatelessWidget {
           onTap: onTapContinue,
           color: theme.colors.blue,
           title: appLocalizations.continueAction,
+        ),
+        const Gap(6),
+        PicnicTextButton(
+          onTap: onTapContinue,
+          label: appLocalizations.skipAction,
+          labelStyle: theme.styles.body20.copyWith(color: theme.colors.blackAndWhite.shade600),
         ),
       ],
     );

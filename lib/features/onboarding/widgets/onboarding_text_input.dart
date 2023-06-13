@@ -27,6 +27,7 @@ class OnBoardingTextInput extends StatelessWidget {
     this.initialCountry = "US",
     this.initialValue,
     this.maxLines = 1,
+    this.showFlag = false,
     this.focusNode,
   })  : assert(
           !(codeExpiryTime == null && inputType == PicnicOnBoardingTextInputType.oneTimePassInput),
@@ -57,6 +58,7 @@ class OnBoardingTextInput extends StatelessWidget {
   final String? initialValue;
   final FocusNode? focusNode;
   final int maxLines;
+  final bool showFlag;
 
   /// whether to show a loading indicator at the end of the input
   final bool isLoading;
@@ -66,13 +68,14 @@ class OnBoardingTextInput extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final themeColors = theme.colors;
     final themeStyles = theme.styles;
+    final blackAndWhite = themeColors.blackAndWhite;
     final hintTextStyle = themeStyles.body20.copyWith(
-      color: themeColors.blackAndWhite.shade600,
+      color: blackAndWhite.shade600,
     );
 
     var defaultInputTextStyle = inputTextStyle;
     defaultInputTextStyle ??= themeStyles.caption20.copyWith(
-      color: themeColors.blackAndWhite.shade900,
+      color: blackAndWhite.shade900,
       fontWeight: FontWeight.bold,
     );
 
@@ -81,8 +84,13 @@ class OnBoardingTextInput extends StatelessWidget {
       hintText: hintText,
       errorText: errorText!,
       isLoading: isLoading,
+      focusedBorderSide: BorderSide(
+        color: blackAndWhite.shade900,
+        // ignore: no-magic-number
+        width: 2,
+      ),
       readOnly: inputType == PicnicOnBoardingTextInputType.countryPickerTextInput,
-      inputFillColor: themeColors.blackAndWhite.shade200,
+      inputFillColor: blackAndWhite.shade200,
       onChanged: onChanged,
       textController: textController,
       focusNode: focusNode,
@@ -107,6 +115,7 @@ class OnBoardingTextInput extends StatelessWidget {
               inputType == PicnicOnBoardingTextInputType.phoneInput
           ? _InternationalMobileCodePicker(
               textStyle: hintTextStyle,
+              showFlagDialog: showFlag,
               onChanged: onChangedCountryCode,
               initialCountry: initialCountry,
             )
@@ -205,11 +214,14 @@ class _InternationalMobileCodePicker extends StatelessWidget {
     required this.onChanged,
     required this.initialCountry,
     this.showCountryOnly = false,
+    this.showFlagDialog = false,
   }) : super(key: key);
 
   final TextStyle textStyle;
   final ValueChanged<CountryCode>? onChanged;
   final bool showCountryOnly;
+  final bool showFlagDialog;
+
   final String initialCountry;
 
   @override
@@ -218,7 +230,7 @@ class _InternationalMobileCodePicker extends StatelessWidget {
       onChanged: onChanged,
       initialSelection: initialCountry,
       favorite: [initialCountry],
-      showFlag: false,
+      showFlag: showFlagDialog,
       showCountryOnly: showCountryOnly,
       textStyle: textStyle,
       showFlagDialog: true,

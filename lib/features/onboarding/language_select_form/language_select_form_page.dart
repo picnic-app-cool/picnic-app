@@ -49,7 +49,9 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Gap(24),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +68,7 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
                     ],
                   ),
                   // ignore: no-magic-number
-                  Expanded(child: Assets.images.languageIcon.image(scale: 0.7)),
+                  Assets.images.languageIcon.image(scale: 0.7),
                 ],
               ),
               stateObserver(

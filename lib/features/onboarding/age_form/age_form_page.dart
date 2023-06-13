@@ -41,6 +41,7 @@ class _AgeFormPageState extends State<AgeFormPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,9 +58,10 @@ class _AgeFormPageState extends State<AgeFormPage>
                             ],
                           ),
                           // ignore: no-magic-number
-                          Expanded(child: Assets.images.cake.image(scale: 0.7)),
+                          Assets.images.cake.image(scale: 0.7),
                         ],
                       ),
+                      const Gap(12),
                       OnBoardingTextInput(
                         initialValue: state.ageText,
                         hintText: appLocalizations.ageHint,

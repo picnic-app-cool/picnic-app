@@ -9,6 +9,7 @@ import 'package:picnic_app/features/analytics/domain/model/tap/analytics_tap_tar
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presentation_model.dart';
+import 'package:picnic_app/localization/app_localizations_utils.dart';
 
 class LanguageSelectFormPresenter extends Cubit<LanguageSelectFormViewModel> {
   LanguageSelectFormPresenter(
@@ -25,7 +26,9 @@ class LanguageSelectFormPresenter extends Cubit<LanguageSelectFormViewModel> {
   // ignore: unused_element
   LanguageSelectFormPresentationModel get _model => state as LanguageSelectFormPresentationModel;
 
-  Future<void> onInit() async => getLanguages();
+  Future<void> onInit() async {
+    getLanguages();
+  }
 
   void onTapSelectLanguage(Language language) {
     _logAnalyticsEventUseCase.execute(
@@ -56,7 +59,7 @@ class LanguageSelectFormPresenter extends Cubit<LanguageSelectFormViewModel> {
         success: (languages) => tryEmit(
           _model.copyWith(
             selectedLanguage: languages.firstWhereOrNull(
-              (it) => it.code == _model.selectedCountryCode,
+              (it) => it.code == appLocalizations.localeName,
             ),
           ),
         ),

@@ -29,7 +29,7 @@ class OnboardingFormData extends Equatable {
         username = '',
         profilePhotoPath = '',
         country = '',
-        language = const Language.english(),
+        language = const Language.empty(),
         notificationsStatus = RuntimePermissionStatus.denied,
         authResult = const AuthResult.empty(),
         circles = const [];

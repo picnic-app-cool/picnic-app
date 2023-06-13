@@ -56,7 +56,7 @@ class Spiral extends StatelessWidget {
             ),
             Positioned(
               right: 150,
-              top: 4,
+              top: -1,
               child: Text(
                 "😊",
                 style: display10,
@@ -72,7 +72,7 @@ class Spiral extends StatelessWidget {
             ),
             Positioned(
               bottom: 50,
-              left: 50,
+              left: 40,
               child: Text(
                 "🥰",
                 style: display10,

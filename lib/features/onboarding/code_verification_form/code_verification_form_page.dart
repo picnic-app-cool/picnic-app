@@ -57,6 +57,7 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,9 +74,10 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
                             ],
                           ),
                           // ignore: no-magic-number
-                          Expanded(child: Assets.images.key.image(scale: 0.7)),
+                          Assets.images.key.image(scale: 0.7),
                         ],
                       ),
+                      const Gap(12),
                       OnBoardingTextInput(
                         focusNode: codeFocusNode,
                         initialValue: state.code,

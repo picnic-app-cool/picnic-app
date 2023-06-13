@@ -76,7 +76,7 @@ class _ChatMyCirclesPageState extends State<ChatMyCirclesPage>
                       controller: controller,
                       hintText: appLocalizations.chatSearch,
                       focusNode: focusNode,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     ),
                     Expanded(
                       // Replaced AutomaticKeyboardHide with GestureDetector,

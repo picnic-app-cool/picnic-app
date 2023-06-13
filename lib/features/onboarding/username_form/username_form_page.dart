@@ -39,14 +39,14 @@ class _UsernameFormPageState extends State<UsernameFormPage>
             children: [
               Column(
                 children: [
-                  const Gap(24),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            appLocalizations.enterUsername,
+                            appLocalizations.yourUsernameTitle,
                             style: themeData.styles.title60,
                           ),
                           const Gap(8),
@@ -57,7 +57,7 @@ class _UsernameFormPageState extends State<UsernameFormPage>
                         ],
                       ),
                       // ignore: no-magic-number
-                      Expanded(child: Assets.images.usernameIcon.image(scale: 0.7)),
+                      Assets.images.usernameIcon.image(scale: 0.9),
                     ],
                   ),
                   const Gap(8),
