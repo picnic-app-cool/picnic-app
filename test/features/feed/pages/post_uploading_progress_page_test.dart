@@ -3,6 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/data/graphql/model/create_post_graphql_background_call.dart';
 import 'package:picnic_app/core/utils/background_call.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/feed/post_uploading_progress/post_uploading_progress_initial_params.dart';
 import 'package:picnic_app/features/feed/post_uploading_progress/post_uploading_progress_navigator.dart';
@@ -15,6 +16,8 @@ import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../../../test_utils/test_utils.dart';
+import '../../analytics/mocks/analytics_mocks.dart';
 
 Future<void> main() async {
   late PostUploadingProgressPage page;
@@ -24,6 +27,7 @@ Future<void> main() async {
   late PostUploadingProgressNavigator navigator;
 
   void initMvp() {
+    reRegister<LogAnalyticsEventUseCase>(AnalyticsMocks.logAnalyticsEventUseCase);
     initParams = PostUploadingProgressInitialParams(
       onPostToBeShown: (_) {},
     );

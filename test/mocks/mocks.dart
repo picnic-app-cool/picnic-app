@@ -118,6 +118,8 @@ class Mocks {
   static late MockViewPostFailure viewPostFailure;
   static late MockViewPostUseCase viewPostUseCase;
 
+  static late MockSavePostScreenTimeUseCase savePostScreenTimeUseCase;
+
   static late MockAcceptSeedsOfferFailure acceptSeedsOfferFailure;
   static late MockAcceptSeedsOfferUseCase acceptSeedsOfferUseCase;
 
@@ -430,6 +432,8 @@ class Mocks {
 
     viewPostUseCase = MockViewPostUseCase();
     viewPostFailure = MockViewPostFailure();
+
+    savePostScreenTimeUseCase = MockSavePostScreenTimeUseCase();
 
     joinCircleFailure = MockJoinCircleFailure();
     joinCircleUseCase = MockJoinCircleUseCase();

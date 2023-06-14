@@ -11,6 +11,7 @@ import 'package:picnic_app/features/posts/link_post/link_post_initial_params.dar
 import 'package:picnic_app/features/posts/link_post/link_post_page.dart';
 import 'package:picnic_app/features/posts/poll_post/poll_post_initial_params.dart';
 import 'package:picnic_app/features/posts/poll_post/poll_post_page.dart';
+import 'package:picnic_app/features/posts/post_visibility_tracker.dart';
 import 'package:picnic_app/features/posts/posts_list/posts_list_info_provider.dart';
 import 'package:picnic_app/features/posts/text_post/text_post_initial_params.dart';
 import 'package:picnic_app/features/posts/text_post/text_post_page.dart';
@@ -90,15 +91,18 @@ class PostListItemState extends State<PostListItem> {
   @override
   Widget build(BuildContext context) {
     final height = widget.post.type != PostType.text ? MediaQuery.of(context).size.height : null;
-    return PostActionDetector(
-      post: widget.post,
-      onLongPress: (post) => widget.onLongPress(post),
-      child: SizedBox(
-        //this makes sure, that if the page is of the same type (i.e: video page, but the post did change underneath,
-        // the whole widget is rebuilt from scratch
-        key: ValueKey(widget.post.id),
-        height: height,
-        child: page,
+    return PostVisibilityTracker(
+      postId: widget.post.id,
+      child: PostActionDetector(
+        post: widget.post,
+        onLongPress: (post) => widget.onLongPress(post),
+        child: SizedBox(
+          //this makes sure, that if the page is of the same type (i.e: video page, but the post did change underneath,
+          // the whole widget is rebuilt from scratch
+          key: ValueKey(widget.post.id),
+          height: height,
+          child: page,
+        ),
       ),
     );
   }

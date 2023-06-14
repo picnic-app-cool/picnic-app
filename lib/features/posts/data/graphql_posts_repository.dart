@@ -34,6 +34,7 @@ import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.
 import 'package:picnic_app/features/posts/domain/model/link_metadata.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
+import 'package:picnic_app/features/posts/domain/model/save_post_screen_time_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/sound.dart';
 import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/view_post_failure.dart';
@@ -255,6 +256,24 @@ class GraphQlPostsRepository implements PostsRepository {
       )
       .mapFailure(ViewPostFailure.unknown)
       .mapSuccessPayload(onFailureReturn: const ViewPostFailure.unknown());
+
+  @override
+  Future<Either<SavePostScreenTimeFailure, Unit>> savePostScreenTime({
+    required Id postId,
+    required int duration,
+  }) {
+    return _gqlClient
+        .mutate(
+          document: savePostScreenTimeMutation,
+          variables: {
+            'postID': postId.value,
+            'duration': duration,
+          },
+          parseData: (json) => GqlSuccessPayload.fromJson(json['savePostScreenTime'] as Map<String, dynamic>),
+        )
+        .mapFailure(SavePostScreenTimeFailure.unknown)
+        .mapSuccessPayload(onFailureReturn: const SavePostScreenTimeFailure.unknown());
+  }
 
   @override
   Future<Either<SharePostFailure, Unit>> sharePost({required Id postId}) => _gqlClient

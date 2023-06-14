@@ -113,6 +113,14 @@ mutation viewPost(\$postId: ID!) {
 }
 """;
 
+String get savePostScreenTimeMutation => """
+mutation savePostScreenTime(\$postID: ID!, \$duration: Int!) {
+    savePostScreenTime(postID: \$postID, duration: \$duration) {
+        ${GqlTemplate().successPayload}
+    }
+}
+""";
+
 String get sharePostMutation => """
 mutation sharePost(\$postId: ID!) {
     sharePost(postId: \$postId){

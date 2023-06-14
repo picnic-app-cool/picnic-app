@@ -8,6 +8,7 @@ import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/circles/circle_details/models/posts_sorting_type.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/get_comments_preview_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_comments_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/get_pinned_comments_use_case.dart';
 import 'package:picnic_app/features/posts/single_feed/single_feed_initial_params.dart';
@@ -32,11 +33,18 @@ Future<void> main() async {
   late SingleFeedNavigator navigator;
 
   setUpAll(() {
+    getIt.registerFactory<GetCommentsPreviewUseCase>(() => PostsMocks.getCommentsPreviewUseCase);
     getIt.registerFactory<GetCommentsUseCase>(() => PostsMocks.getCommentsUseCase);
     getIt.registerFactory<GetPinnedCommentsUseCase>(() => PostsMocks.getPinnedCommentsUseCase);
     when(() => Mocks.currentTimeProvider.currentTime).thenReturn(DateTime(2023, 3, 26));
     when(() => PostsMocks.getCommentsUseCase.execute(post: any(named: "post")))
         .thenAnswer((_) => successFuture(Stubs.comments));
+    when(
+      () => PostsMocks.getCommentsPreviewUseCase.execute(
+        postId: any(named: 'postId'),
+        count: any(named: 'count'),
+      ),
+    ).thenAnswer((_) => successFuture(Stubs.commentsPreview));
     when(() => PostsMocks.getPinnedCommentsUseCase.execute(post: any(named: "post")))
         .thenAnswer((_) => successFuture([]));
   });

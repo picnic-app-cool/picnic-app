@@ -18,6 +18,7 @@ import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.
 import 'package:picnic_app/features/posts/domain/model/link_metadata.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
+import 'package:picnic_app/features/posts/domain/model/save_post_screen_time_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/sound.dart';
 import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/view_post_failure.dart';
@@ -68,6 +69,11 @@ abstract class PostsRepository {
   ///
   Future<Either<ViewPostFailure, Unit>> viewPost({
     required Id postId,
+  });
+
+  Future<Either<SavePostScreenTimeFailure, Unit>> savePostScreenTime({
+    required Id postId,
+    required int duration,
   });
 
   /// Since [Post] now has `isLiked` variable, we don't need to pass a separate parameter stating whether the user

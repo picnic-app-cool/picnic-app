@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
+import 'package:picnic_app/core/domain/use_cases/save_post_screen_time_use_case.dart';
 import 'package:picnic_app/core/utils/logging.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
@@ -24,12 +25,14 @@ class PostVisibilityTracker extends StatefulWidget {
 class _PostVisibilityTrackerState extends State<PostVisibilityTracker> {
   late Stopwatch _stopwatch;
   late LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
+  late SavePostScreenTimeUseCase _savePostScreenTimeUseCase;
   late UserStore _userStore;
 
   @override
   void initState() {
     super.initState();
     _logAnalyticsEventUseCase = getIt();
+    _savePostScreenTimeUseCase = getIt();
     _userStore = getIt();
     _stopwatch = Stopwatch();
   }
@@ -63,6 +66,10 @@ class _PostVisibilityTrackerState extends State<PostVisibilityTracker> {
     _stopwatch.stop();
     final duration = _stopwatch.elapsedMilliseconds;
     debugLog("post with id: ${widget.postId} seen for $duration ms.");
+    _savePostScreenTimeUseCase.execute(
+      postId: widget.postId,
+      duration: duration,
+    );
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.postViewingTime(
         postId: widget.postId,

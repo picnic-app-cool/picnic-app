@@ -6,6 +6,7 @@ import 'package:picnic_app/core/domain/model/feature_flags/feature_flag_type.dar
 import 'package:picnic_app/core/domain/model/page_info.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
+import 'package:picnic_app/core/domain/use_cases/save_post_screen_time_use_case.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
@@ -14,6 +15,7 @@ import 'package:picnic_app/features/circles/circle_details/circle_details_page.d
 import 'package:picnic_app/features/circles/circle_details/circle_details_presentation_model.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_presenter.dart';
 import 'package:picnic_app/features/circles/domain/model/circle_visibility.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/get_comments_preview_use_case.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
@@ -158,6 +160,20 @@ void main() {
     ).thenAnswer(
       (invocation) => successFuture(Stubs.trendingThisWeekPostsSortingType),
     );
+    getIt.registerFactory<GetCommentsPreviewUseCase>(() => PostsMocks.getCommentsPreviewUseCase);
+    when(
+      () => PostsMocks.getCommentsPreviewUseCase.execute(
+        postId: any(named: 'postId'),
+        count: any(named: 'count'),
+      ),
+    ).thenAnswer((_) => successFuture(Stubs.commentsPreview));
+    reRegister<SavePostScreenTimeUseCase>(Mocks.savePostScreenTimeUseCase);
+    when(
+      () => Mocks.savePostScreenTimeUseCase.execute(
+        postId: any(named: 'postId'),
+        duration: any(named: 'duration'),
+      ),
+    ).thenAnswer((_) => successFuture(unit));
     page = CircleDetailsPage(presenter: presenter);
   }
 

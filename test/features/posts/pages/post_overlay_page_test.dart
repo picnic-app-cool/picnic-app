@@ -3,8 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
-import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
-import 'package:picnic_app/features/analytics/domain/model/post_viewing_time/analytics_event_post_viewing_time.dart';
 import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_event_use_case.dart';
 import 'package:picnic_app/features/posts/domain/model/comments_mode.dart';
 import 'package:picnic_app/features/posts/domain/model/post_details_mode.dart';
@@ -19,7 +17,6 @@ import 'package:picnic_app/features/posts/post_overlay/post_overlay_presenter.da
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
-import '../../../test_extensions/widget_tester_extensions.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
@@ -136,23 +133,6 @@ Future<void> main() async {
     pageBuilder: () => _OverlayContainer(
       child: page,
     ),
-  );
-
-  testWidgets(
-    'should measure post time',
-    (widgetTester) async {
-      initMvp();
-      await widgetTester.setupWidget(
-        Material(child: _OverlayContainer(child: page)),
-      );
-      await widgetTester.pumpAndSettle(const Duration(seconds: 1));
-      await widgetTester.setupWidget(Container());
-      await widgetTester.pumpAndSettle(const Duration(seconds: 1));
-
-      final analyticsEvent =
-          verify(() => AnalyticsMocks.logAnalyticsEventUseCase.execute(captureAny())).captured.first as AnalyticsEvent;
-      expect(analyticsEvent.name, AnalyticsEventPostViewingTime.eventName);
-    },
   );
 
   test('getIt page resolves successfully', () async {

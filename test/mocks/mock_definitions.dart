@@ -145,6 +145,7 @@ import "package:picnic_app/core/domain/use_cases/reject_seeds_offer_use_case.dar
 import "package:picnic_app/core/domain/use_cases/remove_session_expired_listener_use_case.dart";
 import 'package:picnic_app/core/domain/use_cases/request_runtime_permission_use_case.dart';
 import "package:picnic_app/core/domain/use_cases/save_photo_to_gallery_use_case.dart";
+import 'package:picnic_app/core/domain/use_cases/save_post_screen_time_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_post_to_collection_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_video_to_gallery_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/search_pods_use_case.dart';
@@ -282,6 +283,8 @@ class MockSetLanguageFailure extends Mock implements SetLanguageFailure {}
 class MockSetLanguageUseCase extends Mock implements SetLanguageUseCase {}
 
 class MockViewPostUseCase extends Mock implements ViewPostUseCase {}
+
+class MockSavePostScreenTimeUseCase extends Mock implements SavePostScreenTimeUseCase {}
 
 class MockViewPostFailure extends Mock implements ViewPostFailure {}
 
