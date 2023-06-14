@@ -38,6 +38,8 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
   static const double _avatarSize = 48;
   static const _plusIconSize = 18.0;
   static const _searchIconSize = 18.0;
+  static const _collectionRadius = 8.0;
+  static const _collectionHeight = 200.0;
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +130,12 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                     ),
                   ],
                 ),
-                Flexible(
+                SizedBox(
+                  height: _collectionHeight,
                   child: stateObserver(
                     builder: (context, state) => CollectionsTab(
                       collections: state.collections,
+                      borderRadius: _collectionRadius,
                       onLoadMore: presenter.loadCollection,
                       isLoading: state.isLoadingCollections,
                       onTapCollection: presenter.onTapCollection,

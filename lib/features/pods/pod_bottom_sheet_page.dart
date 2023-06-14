@@ -31,7 +31,7 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
   static const avatarSize = 48.0;
 
   static const double tagHeight = 22.0;
-  static const _heightFactor = 0.46;
+  static const _heightFactor = 0.5;
   static const _borderWidth = 2.0;
 
   static const double _tagsBorderRadius = 8.0;
@@ -172,7 +172,7 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
                         Expanded(
                           child: PicnicButton(
                             title: iUpvoted
-                                ? "unvote"
+                                ? appLocalizations.unVote
                                 : appLocalizations.votePodsLabel(counters.upvotes.formattingToStat()),
                             titleColor: iUpvoted ? pink : Colors.white,
                             icon: iUpvoted ? Assets.images.arrowDown.path : Assets.images.arrowUp.path,
@@ -196,6 +196,14 @@ class _PodBottomSheetPageState extends State<PodBottomSheetPage>
                       color: colors.blue,
                       icon: Assets.images.add.path,
                       minWidth: double.infinity,
+                    ),
+                    const Gap(12),
+                    InkWell(
+                      onTap: presenter.onTapClose,
+                      child: Text(
+                        appLocalizations.closeAction,
+                        style: styles.body20.copyWith(color: darkBlueShade700),
+                      ),
                     ),
                   ],
                 ),

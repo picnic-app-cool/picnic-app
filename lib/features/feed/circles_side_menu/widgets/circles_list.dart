@@ -68,7 +68,7 @@ class _CirclesList extends StatelessWidget {
   final Function(Id) onTapEnterCircle;
 
   static const double _userCircleIconSize = 42;
-  static const _height = 48.0;
+  static const _height = 50.0;
   static const _emojiSize = 22.0;
 
   @override

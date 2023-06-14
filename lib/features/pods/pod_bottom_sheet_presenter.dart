@@ -99,6 +99,8 @@ class PodBottomSheetPresenter extends Cubit<PodBottomSheetViewModel> {
     );
   }
 
+  void onTapClose() => navigator.closeWithResult(_model.pod);
+
   Future<void> onTapSavePod(Id podId) async {
     await _savePodUseCase
         .execute(

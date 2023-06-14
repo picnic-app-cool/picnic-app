@@ -14,16 +14,19 @@ class CollectionsTab extends StatelessWidget {
     required this.onLoadMore,
     required this.isLoading,
     required this.onTapCollection,
+    this.borderRadius = _defaultBorderRadius,
   }) : super(key: key);
 
   final PaginatedList<Collection> collections;
   final Future<void> Function() onLoadMore;
   final bool isLoading;
   final OnTapCollection onTapCollection;
+  final double borderRadius;
 
   static const int _columns = 2;
   static const double _aspectRatio = 0.66;
   static const double _spacing = 8;
+  static const _defaultBorderRadius = 24.0;
 
   @override
   Widget build(BuildContext context) => PagingGridView<Collection>(
@@ -39,6 +42,7 @@ class CollectionsTab extends StatelessWidget {
           return PicnicCollectionCard(
             images: collection.thumbnails,
             collection: collection,
+            borderRadius: borderRadius,
             postCount: collection.counters.posts,
             onTap: () => onTapCollection(collection),
           );
