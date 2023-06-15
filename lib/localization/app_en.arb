@@ -854,7 +854,7 @@
   "leaveCircleConfirmation": "are you sure you want to leave this circle?",
   "tapLeftOrRightHint": "tap left or right",
   "languageSelectionTitle": "language selection",
-  "languageSelectionInfo": "choose what language you want to prioritize content in. The app language will be the same as your phone language.",
+  "languageSelectionInfo": "choose what language you want to prioritize content in. The app language will be the same.",
   "reportedMessage": "this message",
   "reportedComment": "this comment",
   "reportedLabel": "reported",

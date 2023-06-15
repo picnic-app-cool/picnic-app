@@ -39,7 +39,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
   static const _plusIconSize = 18.0;
   static const _searchIconSize = 18.0;
   static const _collectionRadius = 8.0;
-  static const _collectionHeight = 200.0;
+  static const _collectionHeight = 195.0;
 
   @override
   Widget build(BuildContext context) {

@@ -23,7 +23,7 @@ class PodList extends StatelessWidget {
 
   static const radius = 16.0;
   static const width = 280.0;
-  static const height = 260.0;
+  static const height = 240.0;
 
   @override
   Widget build(BuildContext context) {

@@ -31,7 +31,7 @@ class TrendingCircles extends StatelessWidget {
 
   static const radius = 16.0;
   static const width = 280.0;
-  static const height = 280.0;
+  static const height = 240.0;
   static const fontSize = 10.0;
   static const iconSize = 12.0;
   static const _buttonBorderWith = 2.0;
@@ -63,6 +63,7 @@ class TrendingCircles extends StatelessWidget {
                 final body0 = theme.styles.body0.copyWith(color: themeColors.darkBlue.shade700);
                 final pink = theme.colors.pink;
                 final blue = theme.colors.blue.shade500;
+                final title10 = theme.styles.title10;
                 return GestureDetector(
                   onTap: () => onTapJoin(circle.id),
                   child: Padding(
@@ -167,9 +168,12 @@ class TrendingCircles extends StatelessWidget {
                                       titleColor: circle.iJoined ? pink : blue,
                                       borderWidth: _buttonBorderWith,
                                       borderColor: circle.iJoined ? pink : blue,
+                                      style: PicnicButtonStyle.outlined,
                                       color: circle.iJoined ? Colors.white : blue,
                                       onTap: () => onTapJoin(circle.id),
-                                      titleStyle: theme.styles.title10.copyWith(color: blackAndWhite.shade100),
+                                      titleStyle: circle.iJoined
+                                          ? title10.copyWith(color: pink)
+                                          : title10.copyWith(color: blackAndWhite.shade100),
                                       minWidth: double.infinity,
                                     ),
                                   ),
