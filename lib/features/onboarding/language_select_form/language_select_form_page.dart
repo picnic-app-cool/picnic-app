@@ -63,7 +63,7 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
                       const Gap(8),
                       Text(
                         appLocalizations.languageSelectFormDescription,
-                        style: theme.styles.body20.copyWith(color: theme.colors.blackAndWhite.shade600),
+                        style: theme.styles.body30.copyWith(color: theme.colors.blackAndWhite.shade600),
                       ),
                     ],
                   ),

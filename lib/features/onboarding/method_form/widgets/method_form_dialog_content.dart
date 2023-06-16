@@ -61,6 +61,12 @@ class MethodFormDialogContent extends StatelessWidget {
               const Gap(6),
               if (state.signInWithGoogleEnabled)
                 _SignInButton(
+                  color: const Color.fromRGBO(
+                    239,
+                    241,
+                    246,
+                    1,
+                  ),
                   formType: state.formType,
                   image: Assets.images.signInGoogleLogo.path,
                   onTap: state.isLoading ? null : onTapGoogleSignIn,

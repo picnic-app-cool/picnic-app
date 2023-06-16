@@ -41,14 +41,14 @@ class OnboardingPresentationModel implements OnboardingViewModel {
   final RuntimePermissionStatus contactsPermissionStatus;
 
   static const _signUpScreensOrder = [
+    OnboardingScreen.age,
     OnboardingScreen.methods,
     OnboardingScreen.phone,
     OnboardingScreen.codeVerification,
-    OnboardingScreen.age,
+    OnboardingScreen.gender,
     OnboardingScreen.language,
     OnboardingScreen.username,
     OnboardingScreen.permissions,
-    OnboardingScreen.gender,
     OnboardingScreen.circleGroupings,
   ];
 

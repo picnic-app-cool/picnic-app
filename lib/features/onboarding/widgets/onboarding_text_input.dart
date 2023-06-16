@@ -63,18 +63,19 @@ class OnBoardingTextInput extends StatelessWidget {
   /// whether to show a loading indicator at the end of the input
   final bool isLoading;
 
+  static const height = 20.0;
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final themeColors = theme.colors;
     final themeStyles = theme.styles;
     final blackAndWhite = themeColors.blackAndWhite;
-    final hintTextStyle = themeStyles.body20.copyWith(
+    final hintTextStyle = themeStyles.subtitle15.copyWith(
       color: blackAndWhite.shade600,
     );
 
     var defaultInputTextStyle = inputTextStyle;
-    defaultInputTextStyle ??= themeStyles.caption20.copyWith(
+    defaultInputTextStyle ??= themeStyles.body20.copyWith(
       color: blackAndWhite.shade900,
       fontWeight: FontWeight.bold,
     );
@@ -90,7 +91,12 @@ class OnBoardingTextInput extends StatelessWidget {
         width: 2,
       ),
       readOnly: inputType == PicnicOnBoardingTextInputType.countryPickerTextInput,
-      inputFillColor: blackAndWhite.shade200,
+      inputFillColor: const Color.fromRGBO(
+        247,
+        247,
+        252,
+        1,
+      ),
       onChanged: onChanged,
       textController: textController,
       focusNode: focusNode,
@@ -108,6 +114,18 @@ class OnBoardingTextInput extends StatelessWidget {
               initialCountry: initialCountry,
               hintTextStyle: hintTextStyle,
               onChangedCountryCode: onChangedCountryCode,
+            ),
+          if (inputType == PicnicOnBoardingTextInputType.phoneInput)
+            InkWell(
+              onTap: textController!.clear,
+              child: SizedBox(
+                height: height,
+                width: height,
+                child: Image.asset(
+                  Assets.images.close.path,
+                  color: blackAndWhite.shade600,
+                ),
+              ),
             ),
         ],
       ),
@@ -231,7 +249,14 @@ class _InternationalMobileCodePicker extends StatelessWidget {
       initialSelection: initialCountry,
       favorite: [initialCountry],
       showFlag: showFlagDialog,
+      showDropDownButton: true,
       showCountryOnly: showCountryOnly,
+      dialogSize: const Size(360, 550),
+      // ignore: no-magic-number
+      flagWidth: 16.0,
+      padding: const EdgeInsets.only(
+        left: 8.0,
+      ),
       textStyle: textStyle,
       showFlagDialog: true,
       countriesFilter: const PicnicCountriesFilter(),

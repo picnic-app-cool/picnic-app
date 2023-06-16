@@ -9,7 +9,6 @@ import 'package:picnic_app/features/onboarding/phone_form/phone_form_presenter.d
 import 'package:picnic_app/features/onboarding/widgets/onboarding_text_input.dart';
 import 'package:picnic_app/features/user_agreement/widgets/terms_and_policies_disclaimer.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
@@ -30,15 +29,21 @@ class PhoneFormPage extends StatefulWidget with HasPresenter<PhoneFormPresenter>
 class _PhoneFormPageState extends State<PhoneFormPage>
     with PresenterStateMixin<CongratsFormViewModel, PhoneFormPresenter, PhoneFormPage> {
   late FocusNode phoneFocusNode;
+  late final TextEditingController phoneController;
 
   @override
   void initState() {
     super.initState();
+    phoneController = TextEditingController(text: state.phoneNumber);
+    phoneController.addListener(() => presenter.onChangedPhone(phoneController.text));
+
     phoneFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
+    phoneController.dispose();
+
     phoneFocusNode.dispose();
     super.dispose();
   }
@@ -50,7 +55,7 @@ class _PhoneFormPageState extends State<PhoneFormPage>
           final blackAndWhite = themeData.colors.blackAndWhite;
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -61,30 +66,33 @@ class _PhoneFormPageState extends State<PhoneFormPage>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                appLocalizations.yourPhoneNumber,
-                                style: themeData.styles.title60,
-                              ),
-                              const Gap(8),
-                              Text(
-                                appLocalizations.loginPhoneFormDescription,
-                                style: themeData.styles.body20.copyWith(color: blackAndWhite.shade600),
-                              ),
-                            ],
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  appLocalizations.yourPhoneNumber,
+                                  style: themeData.styles.title60,
+                                ),
+                                const Gap(8),
+                                Text(
+                                  appLocalizations.loginPhoneFormDescription,
+                                  style: themeData.styles.body30.copyWith(color: blackAndWhite.shade600),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ),
-                          // ignore: no-magic-number
-                          Assets.images.phone.image(scale: 0.5),
                         ],
                       ),
-                      const Gap(12),
+                      const Gap(24),
                       OnBoardingTextInput(
                         key: const Key('phoneInput'),
                         focusNode: phoneFocusNode,
+                        textController: phoneController,
                         showFlag: true,
-                        initialValue: state.phoneNumber,
+                        keyboardType: TextInputType.phone,
+                        hintText: "phone number",
                         initialCountry: state.dialCode,
                         inputType: PicnicOnBoardingTextInputType.phoneInput,
                         onChanged: presenter.onChangedPhone,

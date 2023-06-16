@@ -45,7 +45,7 @@ class _GenderSelectFormPageState extends State<GenderSelectFormPage>
                 const Gap(8),
                 Text(
                   appLocalizations.aboutYouDescription,
-                  style: theme.styles.body20.copyWith(color: theme.colors.blackAndWhite.shade600),
+                  style: theme.styles.body30.copyWith(color: theme.colors.blackAndWhite.shade600),
                 ),
               ],
             ),

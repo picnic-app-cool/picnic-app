@@ -69,7 +69,7 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
                               const Gap(8),
                               Text(
                                 appLocalizations.codeVerificationDescription,
-                                style: themeData.styles.body20.copyWith(color: themeData.colors.blackAndWhite.shade600),
+                                style: themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
                               ),
                             ],
                           ),

@@ -32,7 +32,7 @@ class _AgeFormPageState extends State<AgeFormPage>
           final themeData = PicnicTheme.of(context);
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,7 +53,7 @@ class _AgeFormPageState extends State<AgeFormPage>
                               const Gap(8.0),
                               Text(
                                 appLocalizations.yourAgeDescription,
-                                style: themeData.styles.body20.copyWith(color: themeData.colors.blackAndWhite.shade600),
+                                style: themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
                               ),
                             ],
                           ),
@@ -61,7 +61,7 @@ class _AgeFormPageState extends State<AgeFormPage>
                           Assets.images.cake.image(scale: 0.7),
                         ],
                       ),
-                      const Gap(12),
+                      const Gap(24),
                       OnBoardingTextInput(
                         initialValue: state.ageText,
                         hintText: appLocalizations.ageHint,
