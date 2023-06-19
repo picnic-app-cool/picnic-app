@@ -29,6 +29,7 @@ import "package:picnic_app/features/posts/domain/model/get_post_collections_fail
 import 'package:picnic_app/features/posts/domain/model/get_sounds_list_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_comment_failure.dart';
 import "package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart";
+import 'package:picnic_app/features/posts/domain/model/unreact_to_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/unreact_to_post_failure.dart';
 import "package:picnic_app/features/posts/domain/model/vote_in_poll_failure.dart";
 import 'package:picnic_app/features/posts/domain/repositories/comments_repository.dart';
@@ -48,6 +49,7 @@ import "package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import "package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart";
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_initial_params.dart';
@@ -415,6 +417,10 @@ class MockGetPostCollectionsFailure extends Mock implements GetPostCollectionsFa
 class MockUnreactToPostFailure extends Mock implements UnreactToPostFailure {}
 
 class MockUnreactToPostUseCase extends Mock implements UnreactToPostUseCase {}
+
+class MockUnreactToCommentFailure extends Mock implements UnreactToCommentFailure {}
+
+class MockUnreactToCommentUseCase extends Mock implements UnreactToCommentUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

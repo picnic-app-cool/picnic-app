@@ -34,6 +34,8 @@ class ContentStatsForContent extends Equatable {
 
   int get dislikes => reactions[LikeDislikeReaction.dislike] ?? 0;
 
+  int get score => likes - dislikes;
+
   @override
   List<Object?> get props => [
         saves,

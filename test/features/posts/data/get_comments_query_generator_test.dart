@@ -36,11 +36,14 @@ fragment CommentFields on Comment {
     isVerified
   }
   repliesCount
-  likesCount
+  reactions
   iReacted
   postId
   createdAt
   deletedAt
+  context {
+    reaction
+  }
 }
 
 fragment PageFields on PageInfo {
@@ -82,11 +85,14 @@ fragment CommentFields on Comment {
     isVerified
   }
   repliesCount
-  likesCount
+  reactions
   iReacted
   postId
   createdAt
   deletedAt
+  context {
+    reaction
+  }
 }
 
 fragment PageFields on PageInfo {

@@ -329,6 +329,7 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactoryParam<CommentChatPage, CommentChatInitialParams, dynamic>(

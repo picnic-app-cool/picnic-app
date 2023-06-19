@@ -7,7 +7,8 @@ import 'package:picnic_app/features/posts/widgets/comments_key_storage.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-typedef CommentsOnLikeUnlikeTapCallback = void Function(TreeComment);
+typedef CommentsOnLikeReactUnreactTapCallback = void Function(TreeComment);
+typedef CommentsOnDislikeReactUnreactTapCallback = void Function(TreeComment);
 typedef CommentsOnLoadMoreCallback = Future<void> Function(TreeComment);
 typedef CommentsOnReplyTapCallback = void Function(BuildContext, TreeComment);
 typedef CommentsOnProfileTapCallback = void Function(Id);
@@ -26,6 +27,7 @@ class CommentTree extends StatelessWidget {
     required this.onDoubleTap,
     required this.onLongPress,
     required this.onTapLike,
+    required this.onTapDislike,
     required this.onReply,
     required this.onLoadMore,
     required this.onProfileTap,
@@ -40,7 +42,8 @@ class CommentTree extends StatelessWidget {
 
   final TreeComment commentsRoot;
   final CommentsKeyStorage? keyStorage;
-  final CommentsOnLikeUnlikeTapCallback onTapLike;
+  final CommentsOnLikeReactUnreactTapCallback onTapLike;
+  final CommentsOnDislikeReactUnreactTapCallback onTapDislike;
 
   final CommentsOnTapMoreCallback onTapMore;
 
@@ -80,7 +83,8 @@ class CommentTree extends StatelessWidget {
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
                 onLongPress: onLongPress,
-                onLikeUnlikeTap: onTapLike,
+                onTapLike: onTapLike,
+                onTapDislike: onTapDislike,
                 onReply: onReply,
                 onLoadMore: onLoadMore,
                 onProfileTap: onProfileTap,

@@ -64,6 +64,7 @@ Future<void> main() async {
       PostsMocks.unreactToPostUseCase,
       Mocks.sharePostUseCase,
       PostsMocks.likeUnlikeCommentUseCase,
+      PostsMocks.unreactToCommentUseCase,
       PostsMocks.getCommentsUseCase,
       PostsMocks.createCommentUseCase,
       PostsMocks.deleteCommentUseCase,

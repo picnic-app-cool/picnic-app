@@ -31,6 +31,7 @@ import 'package:picnic_app/features/posts/domain/use_cases/get_comments_preview_
 import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_navigator.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
@@ -44,7 +45,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     super.model,
     this.navigator,
     this._likeDislikePostUseCase,
-    this._likeUnlikeCommentUseCase,
+    this._likeDislikeCommentUseCase,
     this._savePostToCollectionUseCase,
     this._followUnfollowUseCase,
     this._joinCircleUseCase,
@@ -55,11 +56,12 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     this._currentTimeProvider,
     this._sharePostUseCase,
     this._unReactToPostUseCase,
+    this._unReactToCommentUseCase,
   );
 
   final PostOverlayNavigator navigator;
   final LikeDislikePostUseCase _likeDislikePostUseCase;
-  final LikeUnlikeCommentUseCase _likeUnlikeCommentUseCase;
+  final LikeUnlikeCommentUseCase _likeDislikeCommentUseCase;
   final SavePostToCollectionUseCase _savePostToCollectionUseCase;
   final FollowUnfollowUserUseCase _followUnfollowUseCase;
   final JoinCircleUseCase _joinCircleUseCase;
@@ -70,6 +72,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final CurrentTimeProvider _currentTimeProvider;
   final UnreactToPostUseCase _unReactToPostUseCase;
+  final UnreactToCommentUseCase _unReactToCommentUseCase;
 
   PostOverlayPresentationModel get _model => state as PostOverlayPresentationModel;
 
@@ -79,31 +82,41 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     }
   }
 
-  void onTapLikeUnlikeComment(CommentPreview comment) {
-    final previousState = comment.isLiked;
+  Future<void> onTapLikeReactUnReactComment(CommentPreview comment) async {
+    final initialReaction = comment.myReaction;
+    final iLikedPreviously = comment.iLiked;
 
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.postCommentsLikeButton,
-        targetValue: (!previousState).toString(),
+        targetValue: (!iLikedPreviously).toString(),
       ),
     );
 
-    // this updates the UI immediately
-    emitAndNotify(_model.byUpdatingCommentWithId(comment.id, (old) => old.byUpdatingLike(isLiked: !previousState)));
+    //this updates the UI immediately on tap
+    late CommentPreview newComment;
+    newComment = iLikedPreviously ? comment.byUnReactingToComment() : comment.byLikingComment();
+    emitAndNotify(_model.byUpdatingCommentWithId(comment.id, (old) => newComment));
     _model.messenger.onUpdatedComments?.call(_model.comments);
 
-    _likeUnlikeCommentUseCase
-        .execute(commentId: comment.id, like: !previousState) //
-        .doOn(
-          success: (_) => unit, // already updated
-          fail: (_) {
-            // Undo (un)like due to fail
-            emitAndNotify(
-              _model.byUpdatingCommentWithId(comment.id, (old) => old.byUpdatingLike(isLiked: previousState)),
-            );
-          },
-        );
+    if (iLikedPreviously) {
+      await _unReactToCommentUseCase.execute(comment.id).doOn(
+        fail: (fail) {
+          _reEmitInitialCommentReaction(comment: comment, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikeCommentUseCase
+          .execute(
+        commentId: comment.id,
+        likeDislikeReaction: LikeDislikeReaction.like,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialCommentReaction(comment: comment, initialReaction: initialReaction);
+        },
+      );
+    }
   }
 
   void onTapReply(CommentPreview comment) {
@@ -145,7 +158,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     );
     if (!_model.post.iLiked) {
       emitAndNotify(_model.copyWith(heartLastAnimatedAt: _currentTimeProvider.currentTime));
-      await _executeLikeReactUnReactUseCase();
+      await _executeLikeReactUnReactPostUseCase();
     }
   }
 
@@ -156,7 +169,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         targetValue: (!_model.post.iLiked).toString(),
       ),
     );
-    await _executeLikeReactUnReactUseCase();
+    await _executeLikeReactUnReactPostUseCase();
   }
 
   Future<void> onTapDislikePost() async {
@@ -166,7 +179,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         targetValue: (!_model.post.iDisliked).toString(),
       ),
     );
-    await _executeDislikeReactUnReactUseCase();
+    await _executeDislikeReactUnReactPostUseCase();
   }
 
   Future<void> onTapChat() async {
@@ -342,7 +355,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       },
       onTapLike: () {
         navigator.close();
-        onTapLikeUnlikeComment(comment);
+        onTapLikeReactUnReactComment(comment);
       },
       onTapDelete: _model.post.circle.permissions.canManageComments || comment.author.id == _model.privateProfile.id
           ? () {
@@ -363,8 +376,8 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   }
 
   void onDoubleTapComment(CommentPreview comment) {
-    if (!comment.isLiked) {
-      onTapLikeUnlikeComment(comment);
+    if (!comment.iLiked) {
+      onTapLikeReactUnReactComment(comment);
     }
   }
 
@@ -411,7 +424,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         );
   }
 
-  Future<void> _executeLikeReactUnReactUseCase() async {
+  Future<void> _executeLikeReactUnReactPostUseCase() async {
     final initialReaction = _model.post.context.reaction;
     final iLikedPreviously = _model.post.iLiked;
 
@@ -423,7 +436,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     if (iLikedPreviously) {
       await _unReactToPostUseCase.execute(postId: _model.post.id).doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.post, initialReaction: initialReaction);
         },
       );
     } else {
@@ -434,13 +447,13 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       )
           .doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.post, initialReaction: initialReaction);
         },
       );
     }
   }
 
-  Future<void> _executeDislikeReactUnReactUseCase() async {
+  Future<void> _executeDislikeReactUnReactPostUseCase() async {
     final initialReaction = _model.post.context.reaction;
     final iDislikedPreviously = _model.post.iDisliked;
 
@@ -452,7 +465,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
     if (iDislikedPreviously) {
       await _unReactToPostUseCase.execute(postId: _model.post.id).doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.post, initialReaction: initialReaction);
         },
       );
     } else {
@@ -463,13 +476,13 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       )
           .doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.post, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.post, initialReaction: initialReaction);
         },
       );
     }
   }
 
-  void _reEmitInitialReaction({
+  void _reEmitInitialPostReaction({
     required Post post,
     required LikeDislikeReaction initialReaction,
   }) {
@@ -486,6 +499,25 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         break;
     }
     emitAndNotify(_model.copyWith(post: newPost));
+  }
+
+  void _reEmitInitialCommentReaction({
+    required CommentPreview comment,
+    required LikeDislikeReaction initialReaction,
+  }) {
+    late CommentPreview newComment;
+    switch (initialReaction) {
+      case LikeDislikeReaction.like:
+        newComment = comment.byLikingComment();
+        break;
+      case LikeDislikeReaction.dislike:
+        newComment = comment.byDislikingComment();
+        break;
+      case LikeDislikeReaction.noReaction:
+        newComment = comment.byUnReactingToComment();
+        break;
+    }
+    emitAndNotify(_model.byUpdatingCommentWithId(comment.id, (old) => newComment));
   }
 
   Future<Either<SavePostToCollectionFailure, Post>> _executeBookmarkUseCase() {

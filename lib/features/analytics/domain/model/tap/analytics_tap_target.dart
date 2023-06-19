@@ -35,6 +35,7 @@ enum AnalyticsTapTarget {
   postCommentsSendCommentButton('post_comments_send_comment_button'),
   postCommentsReplyButton('post_comments_reply_button'),
   postCommentsLikeButton('post_comments_like_button'),
+  postCommentsDislikeButton('post_comments_dislike_button'),
 
   chatDmsListTap('chat_dms_list_tap'),
   chatDmsNewMassageTap('chat_dms_new_message_tap'),

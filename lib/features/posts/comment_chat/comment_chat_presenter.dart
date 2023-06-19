@@ -39,6 +39,7 @@ import 'package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
@@ -55,7 +56,8 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     this._likeDislikePostUseCase,
     this._unReactToPostUseCase,
     this._sharePostUseCase,
-    this._likeUnlikeCommentUseCase,
+    this._likeDislikeCommentUseCase,
+    this._unReactToCommentUseCase,
     this._getCommentsUseCase,
     this._createCommentUseCase,
     this._deleteCommentUseCase,
@@ -89,7 +91,9 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
 
   final SharePostUseCase _sharePostUseCase;
 
-  final LikeUnlikeCommentUseCase _likeUnlikeCommentUseCase;
+  final LikeUnlikeCommentUseCase _likeDislikeCommentUseCase;
+
+  final UnreactToCommentUseCase _unReactToCommentUseCase;
 
   final GetCommentsUseCase _getCommentsUseCase;
 
@@ -237,28 +241,24 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         ),
       );
 
-  void onTapLikeUnlike(TreeComment comment) {
+  Future<void> onTapLikeComment(TreeComment comment) async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(
         target: AnalyticsTapTarget.postCommentsLikeButton,
-        targetValue: !comment.isLiked,
+        targetValue: (!comment.iLiked).toString(),
       ),
     );
+    await _executeLikeReactUnReactCommentUseCase(comment);
+  }
 
-    final previousState = comment.isLiked;
-
-    // this updates the UI immediately
-    _handleLikeEvent(comment);
-
-    _likeUnlikeCommentUseCase
-        .execute(commentId: comment.id, like: !previousState) //
-        .doOn(
-          success: (_) => unit, // already updated
-          fail: (_) {
-            // Undo (un)like due to fail
-            _handleLikeEvent(comment.copyWith(isLiked: previousState));
-          },
-        );
+  Future<void> onTapDislikeComment(TreeComment comment) async {
+    _logAnalyticsEventUseCase.execute(
+      AnalyticsEvent.tap(
+        target: AnalyticsTapTarget.postCommentsDislikeButton,
+        targetValue: (!comment.iDisliked).toString(),
+      ),
+    );
+    await _executeDislikeReactUnReactCommentUseCase(comment);
   }
 
   void onTapReply(TreeComment comment) {
@@ -330,8 +330,8 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
   }
 
   void onDoubleTap(TreeComment comment) {
-    if (!comment.isLiked) {
-      onTapLikeUnlike(comment);
+    if (!comment.iLiked) {
+      onTapLikeComment(comment);
     }
   }
 
@@ -349,7 +349,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
       },
       onTapLike: () {
         navigator.close();
-        onTapLikeUnlike(comment);
+        onTapLikeComment(comment);
       },
       onTapDelete: !comment.isDeleted &&
               (_model.feedPost.circle.permissions.canManageComments || comment.author.id == _model.user.id)
@@ -510,7 +510,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         targetValue: (!_model.feedPost.iLiked).toString(),
       ),
     );
-    await _executeLikeReactUnReactUseCase();
+    await _executeLikeReactUnReactPostUseCase();
   }
 
   Future<void> onTapDislikePost() async {
@@ -520,10 +520,10 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         targetValue: (!_model.feedPost.iDisliked).toString(),
       ),
     );
-    await _executeDislikeReactUnReactUseCase();
+    await _executeDislikeReactUnReactPostUseCase();
   }
 
-  Future<void> _executeLikeReactUnReactUseCase() async {
+  Future<void> _executeLikeReactUnReactPostUseCase() async {
     final initialReaction = _model.feedPost.context.reaction;
     final iLikedPreviously = _model.feedPost.iLiked;
 
@@ -535,7 +535,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     if (iLikedPreviously) {
       await _unReactToPostUseCase.execute(postId: _model.feedPost.id).doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.feedPost, initialReaction: initialReaction);
         },
       );
     } else {
@@ -546,13 +546,13 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
       )
           .doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.feedPost, initialReaction: initialReaction);
         },
       );
     }
   }
 
-  Future<void> _executeDislikeReactUnReactUseCase() async {
+  Future<void> _executeDislikeReactUnReactPostUseCase() async {
     final initialReaction = _model.feedPost.context.reaction;
     final iDislikedPreviously = _model.feedPost.iDisliked;
 
@@ -564,7 +564,7 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
     if (iDislikedPreviously) {
       await _unReactToPostUseCase.execute(postId: _model.feedPost.id).doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.feedPost, initialReaction: initialReaction);
         },
       );
     } else {
@@ -575,13 +575,92 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
       )
           .doOn(
         fail: (fail) {
-          _reEmitInitialReaction(post: _model.feedPost, initialReaction: initialReaction);
+          _reEmitInitialPostReaction(post: _model.feedPost, initialReaction: initialReaction);
         },
       );
     }
   }
 
-  void _reEmitInitialReaction({
+  //ignore: long-method
+  Future<void> _executeLikeReactUnReactCommentUseCase(TreeComment comment) async {
+    final initialReaction = comment.myReaction;
+    final iLikedPreviously = comment.iLiked;
+
+    //this updates the UI immediately on tap
+    late TreeComment newComment;
+    newComment = iLikedPreviously ? comment.byUnReactingToComment() : comment.byLikingComment();
+
+    final updatedCommentsTree = _model.commentsRoot.replaceNode(
+      comment,
+      newComment,
+    );
+
+    tryEmit(
+      _model.copyWith(
+        commentsRoot: updatedCommentsTree,
+      ),
+    );
+
+    if (iLikedPreviously) {
+      await _unReactToCommentUseCase.execute(comment.id).doOn(
+        fail: (fail) {
+          _reEmitInitialCommentReaction(comment: comment, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikeCommentUseCase
+          .execute(
+        commentId: comment.id,
+        likeDislikeReaction: LikeDislikeReaction.like,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialCommentReaction(comment: comment, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  //ignore: long-method
+  Future<void> _executeDislikeReactUnReactCommentUseCase(TreeComment comment) async {
+    final initialReaction = comment.myReaction;
+    final iDislikedPreviously = comment.iDisliked;
+
+    //this updates the UI immediately on tap
+    late TreeComment newComment;
+    newComment = iDislikedPreviously ? comment.byUnReactingToComment() : comment.byDislikingComment();
+    final updatedCommentsTree = _model.commentsRoot.replaceNode(
+      comment,
+      newComment,
+    );
+
+    tryEmit(
+      _model.copyWith(
+        commentsRoot: updatedCommentsTree,
+      ),
+    );
+
+    if (iDislikedPreviously) {
+      await _unReactToCommentUseCase.execute(comment.id).doOn(
+        fail: (fail) {
+          _reEmitInitialCommentReaction(comment: comment, initialReaction: initialReaction);
+        },
+      );
+    } else {
+      await _likeDislikeCommentUseCase
+          .execute(
+        commentId: comment.id,
+        likeDislikeReaction: LikeDislikeReaction.dislike,
+      )
+          .doOn(
+        fail: (fail) {
+          _reEmitInitialPostReaction(post: _model.feedPost, initialReaction: initialReaction);
+        },
+      );
+    }
+  }
+
+  void _reEmitInitialPostReaction({
     required Post post,
     required LikeDislikeReaction initialReaction,
   }) {
@@ -598,6 +677,34 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         break;
     }
     _emitAndNotify(_model.copyWith(feedPost: newPost));
+  }
+
+  void _reEmitInitialCommentReaction({
+    required TreeComment comment,
+    required LikeDislikeReaction initialReaction,
+  }) {
+    late TreeComment newComment;
+    switch (initialReaction) {
+      case LikeDislikeReaction.like:
+        newComment = comment.byLikingComment();
+        break;
+      case LikeDislikeReaction.dislike:
+        newComment = comment.byDislikingComment();
+        break;
+      case LikeDislikeReaction.noReaction:
+        newComment = comment.byUnReactingToComment();
+        break;
+    }
+    final updatedCommentsTree = _model.commentsRoot.replaceNode(
+      comment,
+      newComment,
+    );
+
+    tryEmit(
+      _model.copyWith(
+        commentsRoot: updatedCommentsTree,
+      ),
+    );
   }
 
   void _emitAndNotify(CommentChatPresentationModel state) {
@@ -655,24 +762,6 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
           }
         },
       );
-
-  void _handleLikeEvent(TreeComment comment) {
-    final newLikeState = !comment.isLiked;
-    final newLikeCount = comment.likesCount + (newLikeState ? 1 : -1);
-    final updatedCommentsTree = _model.commentsRoot.replaceNode(
-      comment,
-      comment.copyWith(
-        isLiked: newLikeState,
-        likesCount: newLikeCount,
-      ),
-    );
-
-    tryEmit(
-      _model.copyWith(
-        commentsRoot: updatedCommentsTree,
-      ),
-    );
-  }
 
   // ignore: long-method
   Future<void> _handleCreateCommentEvent(TreeComment comment) async {

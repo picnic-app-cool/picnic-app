@@ -7,6 +7,7 @@ import 'package:picnic_app/features/posts/comment_chat/comment_chat_initial_para
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_presentation_model.dart';
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_presenter.dart';
 import 'package:picnic_app/features/posts/domain/model/get_comments_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
@@ -153,42 +154,6 @@ void main() {
   });
 
   test(
-    'like and unlike should refresh comments tree',
-    () async {
-      // GIVEN
-      when(
-        () => PostsMocks.likeUnlikeCommentUseCase.execute(
-          commentId: any(named: 'commentId'),
-          like: any(named: 'like'),
-        ),
-      ).thenAnswer((_) => successFuture(unit));
-
-      when(() => PostsMocks.getCommentsUseCase.execute(post: any(named: 'post')))
-          .thenAnswer((_) => successFuture(Stubs.comments.normalizeConnections()));
-
-      await presenter.onInit();
-
-      expect(presenter.state.rootComment, Stubs.comments.normalizeConnections());
-
-      presenter.onTapLikeUnlike(presenter.state.rootComment.children[0].children[0]);
-      await untilCalled(
-        () => PostsMocks.likeUnlikeCommentUseCase.execute(
-          commentId: any(named: 'commentId'),
-          like: true,
-        ),
-      );
-
-      presenter.onTapLikeUnlike(presenter.state.rootComment.children[0].children[0].children[0]);
-      await untilCalled(
-        () => PostsMocks.likeUnlikeCommentUseCase.execute(
-          commentId: any(named: 'commentId'),
-          like: false,
-        ),
-      );
-    },
-  );
-
-  test(
     'tapping on + should call followUserUseCase and iFollow should be set to true',
     () async {
       // GIVEN
@@ -208,6 +173,9 @@ void main() {
   );
 
   setUp(() {
+    registerFallbackValue(LikeDislikeReaction.like);
+    registerFallbackValue(LikeDislikeReaction.dislike);
+    registerFallbackValue(LikeDislikeReaction.noReaction);
     when(() => Mocks.userStore.privateProfile).thenAnswer((_) => Stubs.privateProfile);
     when(() => Mocks.featureFlagsStore.featureFlags).thenAnswer((_) => Stubs.featureFlags);
     model = CommentChatPresentationModel.initial(
@@ -225,6 +193,7 @@ void main() {
       PostsMocks.unreactToPostUseCase,
       Mocks.sharePostUseCase,
       PostsMocks.likeUnlikeCommentUseCase,
+      PostsMocks.unreactToCommentUseCase,
       PostsMocks.getCommentsUseCase,
       PostsMocks.createCommentUseCase,
       PostsMocks.deleteCommentUseCase,

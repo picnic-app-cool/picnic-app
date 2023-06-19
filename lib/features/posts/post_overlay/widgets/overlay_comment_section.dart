@@ -92,10 +92,10 @@ class OverlayCommentSection extends StatelessWidget {
                           ),
                           const Gap(16),
                           PicnicCommentAction(
-                            count: it.likesCount,
+                            count: it.score,
                             onTap: () => onTapLikeUnlike(it),
-                            iconPath: it.isLiked ? Assets.images.heartBold.path : Assets.images.favorite.path,
-                            iconColor: it.isLiked ? null : whiteColor,
+                            iconPath: it.iLiked ? Assets.images.heartBold.path : Assets.images.favorite.path,
+                            iconColor: it.iLiked ? null : whiteColor,
                             overlay: true,
                           ),
                         ],

@@ -215,6 +215,7 @@ void main() {
       Mocks.currentTimeProvider,
       Mocks.sharePostUseCase,
       PostsMocks.unreactToPostUseCase,
+      PostsMocks.unreactToCommentUseCase,
     );
   });
 }

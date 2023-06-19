@@ -128,7 +128,7 @@ class _FullScreenImagePostPageState extends State<FullScreenImagePostPage>
                                 child: HorizontalPostBarButtons(
                                   likeButtonParams: PostBarLikeButtonParams(
                                     isLiked: state.post.iLiked,
-                                    likes: contentStats.likes.toString(),
+                                    likes: contentStats.score.toString(),
                                     onTap: presenter.onTapLikePost,
                                     overlayTheme: overlayTheme,
                                     isVertical: false,

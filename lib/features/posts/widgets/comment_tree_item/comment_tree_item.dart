@@ -29,7 +29,8 @@ class CommentTreeItem extends StatefulWidget {
     this.onTap,
     this.onDoubleTap,
     this.onLongPress,
-    this.onLikeUnlikeTap,
+    this.onTapLike,
+    this.onTapDislike,
     this.onReply,
     this.onLoadMore,
     this.onProfileTap,
@@ -50,7 +51,8 @@ class CommentTreeItem extends StatefulWidget {
   final CommentsOnTapCallback? onTap;
   final CommentsOnDoubleTapLikeCallback? onDoubleTap;
   final CommentsOnLongPressCallback? onLongPress;
-  final CommentsOnLikeUnlikeTapCallback? onLikeUnlikeTap;
+  final CommentsOnLikeReactUnreactTapCallback? onTapLike;
+  final CommentsOnDislikeReactUnreactTapCallback? onTapDislike;
   final CommentsOnReplyTapCallback? onReply;
   final CommentsKeyStorage? keyStorage;
   final CommentsOnLoadMoreCallback? onLoadMore;
@@ -125,36 +127,38 @@ class _CommentTreeItemState extends State<CommentTreeItem> {
 
     const maxLines = 3;
 
+    final dislikeIconPath =
+        widget.treeComment.iDisliked ? Assets.images.dislikeFilled.path : Assets.images.dislikeOutlined.path;
+
     final styleCaption = styleCaption10.copyWith(color: blackAndWhite.shade600);
     final commentActions = Row(
       children: [
-        GestureDetector(
-          onTap: () => widget.onLikeUnlikeTap?.call(widget.treeComment),
-          behavior: HitTestBehavior.opaque,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              PicnicLikeButton(
-                isLiked: widget.treeComment.isLiked,
-                onTap: () => widget.onLikeUnlikeTap?.call(widget.treeComment),
-                strokeColor: blackAndWhite.shade600,
-                size: 16,
-                image: Assets.images.likeOutlined,
-              ),
-              const Gap(2),
-              Text(
-                widget.treeComment.likesCount.toString(),
-                style: styleCaption,
-              ),
-              const Gap(6),
-              Image.asset(
-                Assets.images.dislikeOutlined.path,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PicnicLikeButton(
+              isLiked: widget.treeComment.iLiked,
+              onTap: () => widget.onTapLike?.call(widget.treeComment),
+              strokeColor: blackAndWhite.shade600,
+              size: 16,
+              image: Assets.images.likeOutlined,
+            ),
+            const Gap(2),
+            Text(
+              widget.treeComment.score.toString(),
+              style: styleCaption,
+            ),
+            const Gap(6),
+            GestureDetector(
+              onTap: () => widget.onTapDislike?.call(widget.treeComment),
+              child: Image.asset(
+                dislikeIconPath,
                 color: blackAndWhite.shade600,
-                width: chatIconSize,
                 height: chatIconSize,
+                width: chatIconSize,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         const Gap(20),
         GestureDetector(
@@ -205,7 +209,8 @@ class _CommentTreeItemState extends State<CommentTreeItem> {
       return CommentTreeItem(
         keyStorage: widget.keyStorage,
         treeComment: child,
-        onLikeUnlikeTap: widget.onLikeUnlikeTap,
+        onTapLike: widget.onTapLike,
+        onTapDislike: widget.onTapDislike,
         onLoadMore: widget.onLoadMore,
         onReply: widget.onReply,
         onProfileTap: widget.onProfileTap,

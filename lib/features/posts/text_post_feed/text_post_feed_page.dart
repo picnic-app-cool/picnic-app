@@ -147,7 +147,7 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                       bookmarkEnabled: postOverlayViewModel.savedPostsEnabled,
                                       likeButtonParams: PostBarLikeButtonParams(
                                         isLiked: post.iLiked,
-                                        likes: post.contentStats.likes.toString(),
+                                        likes: post.contentStats.score.toString(),
                                         onTap: presenter.postOverlayPresenter.onTapLikePost,
                                         overlayTheme: post.overlayTheme,
                                         isVertical: post.reactButtonsVertical,
@@ -199,7 +199,8 @@ class _TextPostFeedPageState extends State<TextPostFeedPage>
                                               onTap: presenter.postOverlayPresenter.onTapComment,
                                               onDoubleTap: presenter.commentChatPresenter.onDoubleTap,
                                               onLongPress: presenter.commentChatPresenter.onLongPress,
-                                              onTapLike: presenter.commentChatPresenter.onTapLikeUnlike,
+                                              onTapLike: presenter.commentChatPresenter.onTapLikeComment,
+                                              onTapDislike: presenter.commentChatPresenter.onTapDislikeComment,
                                               onReply: _onTapReply,
                                               onLoadMore: presenter.commentChatPresenter.onLoadMore,
                                               onProfileTap: presenter.commentChatPresenter.onTapProfile,

@@ -79,6 +79,7 @@ import 'package:picnic_app/features/onboarding/domain/model/auth_token.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/posts/domain/model/comment_preview.dart';
 import 'package:picnic_app/features/posts/domain/model/create_post_input.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/link_metadata.dart';
 import 'package:picnic_app/features/posts/domain/model/poll_answer.dart';
 import 'package:picnic_app/features/posts/domain/model/post_contents/image_post_content.dart';
@@ -599,13 +600,16 @@ class Stubs {
 
   static TreeComment get pinnedComment => TreeComment(
         id: const Id('pinnedComment'),
-        isLiked: false,
+        myReaction: LikeDislikeReaction.noReaction,
         isDeleted: false,
         isPinned: true,
         author: user,
         text: 'Yes, this comment is pinned',
         // ignore: no-magic-number
-        likesCount: 143,
+        reactions: <LikeDislikeReaction, int>{
+          LikeDislikeReaction.like: 143,
+          LikeDislikeReaction.dislike: 0,
+        },
         repliesCount: 0,
         parent: const TreeComment.none(),
         postId: Stubs.id,
@@ -619,7 +623,7 @@ class Stubs {
           items: [
             TreeComment(
               id: const Id('1'),
-              isLiked: false,
+              myReaction: LikeDislikeReaction.noReaction,
               isDeleted: false,
               isPinned: false,
               author: const User.empty().copyWith(
@@ -628,7 +632,10 @@ class Stubs {
               ),
               text: 'I think this video deserves more likes and appreciation',
               // ignore: no-magic-number
-              likesCount: 321,
+              reactions: <LikeDislikeReaction, int>{
+                LikeDislikeReaction.like: 322,
+                LikeDislikeReaction.dislike: 1,
+              },
               repliesCount: 3,
               parent: const TreeComment.none(),
               postId: Stubs.id,
@@ -638,13 +645,16 @@ class Stubs {
                 items: [
                   TreeComment(
                     id: const Id('2'),
-                    isLiked: false,
+                    myReaction: LikeDislikeReaction.noReaction,
                     isDeleted: false,
                     isPinned: false,
                     author: user,
                     text: 'Yes, I do think that too',
                     // ignore: no-magic-number
-                    likesCount: 153,
+                    reactions: <LikeDislikeReaction, int>{
+                      LikeDislikeReaction.like: 253,
+                      LikeDislikeReaction.dislike: 100,
+                    },
                     repliesCount: 1,
                     parent: const TreeComment.none(),
                     postId: Stubs.id,
@@ -654,13 +664,16 @@ class Stubs {
                       items: [
                         TreeComment(
                           id: const Id('3'),
-                          isLiked: true,
+                          myReaction: LikeDislikeReaction.like,
                           isDeleted: false,
                           isPinned: false,
                           author: user,
                           text: 'you guys are crazy tbh...',
                           // ignore: no-magic-number
-                          likesCount: 2000,
+                          reactions: <LikeDislikeReaction, int>{
+                            LikeDislikeReaction.like: 2053,
+                            LikeDislikeReaction.dislike: 53,
+                          },
                           repliesCount: 1,
                           parent: const TreeComment.none(),
                           children: const PaginatedList.singlePage(),
@@ -669,13 +682,16 @@ class Stubs {
                         ),
                         TreeComment(
                           id: const Id('4'),
-                          isLiked: false,
+                          myReaction: LikeDislikeReaction.noReaction,
                           isDeleted: false,
                           isPinned: false,
                           author: user,
                           text: "dumbest thing I've heard 😄",
                           // ignore: no-magic-number
-                          likesCount: 51,
+                          reactions: <LikeDislikeReaction, int>{
+                            LikeDislikeReaction.like: 51,
+                            LikeDislikeReaction.dislike: 0,
+                          },
                           repliesCount: 11,
                           parent: const TreeComment.none(),
                           children: const PaginatedList.singlePage(),
@@ -687,13 +703,16 @@ class Stubs {
                   ),
                   TreeComment(
                     id: const Id('5'),
-                    isLiked: false,
+                    myReaction: LikeDislikeReaction.noReaction,
                     isDeleted: false,
                     isPinned: false,
                     author: user,
                     text: "bro you serious?",
                     // ignore: no-magic-number
-                    likesCount: 115,
+                    reactions: <LikeDislikeReaction, int>{
+                      LikeDislikeReaction.like: 115,
+                      LikeDislikeReaction.dislike: 0,
+                    },
                     repliesCount: 12,
                     parent: const TreeComment.none(),
                     children: const PaginatedList.singlePage(),
@@ -702,13 +721,16 @@ class Stubs {
                   ),
                   TreeComment(
                     id: const Id('6'),
-                    isLiked: false,
+                    myReaction: LikeDislikeReaction.noReaction,
                     isDeleted: false,
                     isPinned: false,
                     author: user,
                     text: "come on man, it’s awesome!",
                     // ignore: no-magic-number
-                    likesCount: 8,
+                    reactions: <LikeDislikeReaction, int>{
+                      LikeDislikeReaction.like: 0,
+                      LikeDislikeReaction.dislike: 8,
+                    },
                     repliesCount: 10,
                     parent: const TreeComment.none(),
                     children: const PaginatedList.singlePage(),
@@ -720,14 +742,17 @@ class Stubs {
             ),
             TreeComment(
               id: const Id('7'),
-              isLiked: false,
+              myReaction: LikeDislikeReaction.noReaction,
               isDeleted: false,
               isPinned: false,
               author: user,
               text:
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat viverra sem id pretium. Nam eget est mauris. Fusce sit amet turpis a nisi consectetur tincidunt at vitae diam',
               // ignore: no-magic-number
-              likesCount: 123,
+              reactions: <LikeDislikeReaction, int>{
+                LikeDislikeReaction.like: 123,
+                LikeDislikeReaction.dislike: 0,
+              },
               repliesCount: 1,
               parent: const TreeComment.none(),
               children: const PaginatedList.singlePage(),
@@ -741,20 +766,26 @@ class Stubs {
   static List<CommentPreview> get commentsPreview => [
         CommentPreview(
           id: const Id('1'),
-          isLiked: false,
+          myReaction: LikeDislikeReaction.noReaction,
           author: user,
           text: "bro you serious?",
-          likesCount: 115,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 115,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('2'),
-          isLiked: false,
+          myReaction: LikeDislikeReaction.dislike,
           author: user,
           text: "come on man, it’s awesome!",
-          likesCount: 8,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 10,
+            LikeDislikeReaction.dislike: 2,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
@@ -765,40 +796,52 @@ class Stubs {
         ...commentsPreview,
         CommentPreview(
           id: const Id('3'),
-          isLiked: false,
+          myReaction: LikeDislikeReaction.noReaction,
           author: user,
           text: "saved & shared it 😍",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('4'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "awesome",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('5'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "perfect",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 5,
+            LikeDislikeReaction.dislike: 2,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('6'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "keep it up",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
@@ -809,40 +852,52 @@ class Stubs {
         ...sixCommentsPreview,
         CommentPreview(
           id: const Id('7'),
-          isLiked: false,
+          myReaction: LikeDislikeReaction.noReaction,
           author: user,
           text: "saved & shared it 😍",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('8'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "awesome",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('9'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "perfect",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 3,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",
         ),
         CommentPreview(
           id: const Id('10'),
-          isLiked: true,
+          myReaction: LikeDislikeReaction.like,
           author: user,
           text: "keep it up",
-          likesCount: 3,
+          reactions: <LikeDislikeReaction, int>{
+            LikeDislikeReaction.like: 143,
+            LikeDislikeReaction.dislike: 0,
+          },
           repliesCount: 0,
           postId: Stubs.id,
           createdAtString: "2023-02-07T03:47:52Z",

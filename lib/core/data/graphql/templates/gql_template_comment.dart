@@ -11,10 +11,13 @@ extension GqlTemplateComment on GqlTemplate {
     isVerified
   }
   repliesCount
-  likesCount
+  reactions
   iReacted
   postId
   createdAt
   deletedAt
+  context {
+    reaction
+  }
 ''';
 }

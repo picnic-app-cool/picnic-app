@@ -114,7 +114,7 @@ class _HorizontalVideoOverlayState extends State<HorizontalVideoOverlay>
                                       LikeDislikeButtonWithCounter(
                                         isLiked: state.post.iLiked,
                                         isDisliked: state.post.iDisliked,
-                                        likes: contentStats.likes.toString(),
+                                        likes: contentStats.score.toString(),
                                         onTapLike: presenter.onTapLikePost,
                                         onTapDislike: presenter.onTapDislikePost,
                                       ),

@@ -35,6 +35,7 @@ import "package:picnic_app/features/posts/domain/use_cases/like_dislike_post_use
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/pin_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unpin_comment_use_case.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_comment_use_case.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_case.dart';
 import "package:picnic_app/features/posts/domain/use_cases/vote_in_poll_use_case.dart";
 import 'package:picnic_app/features/posts/full_screen_image/full_screen_image_post_initial_params.dart';
@@ -248,6 +249,12 @@ void _configureUseCases() {
             getIt(),
           ),
         )
+        ..registerFactory<UnreactToCommentUseCase>(
+          () => UnreactToCommentUseCase(
+            getIt(),
+            getIt(),
+          ),
+        )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
       ;
@@ -450,6 +457,7 @@ void _configureMvp() {
         ..registerFactoryParam<PostOverlayPresenter, PostOverlayInitialParams, dynamic>(
           (params, _) => PostOverlayPresenter(
             getIt(param1: params),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

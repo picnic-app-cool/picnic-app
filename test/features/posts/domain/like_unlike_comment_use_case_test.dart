@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/like_unlike_comment_use_case.dart';
 
 import '../../../mocks/mocks.dart';
@@ -30,16 +31,16 @@ void main() {
     () async {
       // GIVEN
       when(
-        () => PostsMocks.commentsRepository.likeUnlikeComment(
+        () => PostsMocks.commentsRepository.likeDislikeComment(
           commentId: const Id.empty(),
-          like: true,
+          likeDislikeReaction: LikeDislikeReaction.like,
         ),
       ).thenAnswer((_) => successFuture(unit));
 
       // WHEN
       final result = await useCase.execute(
         commentId: const Id.empty(),
-        like: true,
+        likeDislikeReaction: LikeDislikeReaction.like,
       );
 
       // THEN
@@ -49,20 +50,20 @@ void main() {
   );
 
   test(
-    'use case executes normally with unlike',
+    'use case executes normally with dislike',
     () async {
       // GIVEN
       when(
-        () => PostsMocks.commentsRepository.likeUnlikeComment(
+        () => PostsMocks.commentsRepository.likeDislikeComment(
           commentId: const Id.empty(),
-          like: false,
+          likeDislikeReaction: LikeDislikeReaction.dislike,
         ),
       ).thenAnswer((_) => successFuture(unit));
 
       // WHEN
       final result = await useCase.execute(
         commentId: const Id.empty(),
-        like: false,
+        likeDislikeReaction: LikeDislikeReaction.dislike,
       );
 
       // THEN

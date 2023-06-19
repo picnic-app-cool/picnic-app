@@ -4,6 +4,7 @@ import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/features/main/widgets/bottom_navigation_size_query.dart';
 import 'package:picnic_app/features/posts/domain/model/basic_comment.dart';
 import 'package:picnic_app/features/posts/domain/model/comment_preview.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
 import 'package:picnic_app/features/posts/widgets/comment_preview_item.dart';
 import 'package:picnic_app/features/posts/widgets/comment_tree_item/comment_tree_item.dart';
@@ -155,12 +156,16 @@ class CommentActionsBottomSheet extends StatelessWidget {
               Expanded(
                 child: PicnicActionButton(
                   icon: Image.asset(
-                    comment.isLiked ? Assets.images.heartBold.path : Assets.images.heart.path,
+                    comment.myReaction == LikeDislikeReaction.like
+                        ? Assets.images.heartBold.path
+                        : Assets.images.heart.path,
                     color: iconColor,
                     fit: BoxFit.contain,
                     width: _iconWidth,
                   ),
-                  label: comment.isLiked ? appLocalizations.unlikeLabel : appLocalizations.likeLabel,
+                  label: comment.myReaction == LikeDislikeReaction.like
+                      ? appLocalizations.unlikeLabel
+                      : appLocalizations.likeLabel,
                   onTap: onTapLike,
                 ),
               ),

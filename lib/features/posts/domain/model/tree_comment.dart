@@ -5,6 +5,7 @@ import 'package:picnic_app/core/domain/model/user.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/posts/domain/model/basic_comment.dart';
 import 'package:picnic_app/features/posts/domain/model/comment_tag.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 
 //ignore_for_file:nullable_field_in_domain_entity
 class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements BasicComment {
@@ -12,65 +13,68 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
     required this.id,
     required this.author,
     required this.text,
-    required this.isLiked,
     required this.isDeleted,
     required this.isPinned,
-    required this.likesCount,
     required this.repliesCount,
     required TreeComment parent,
     required this.children,
     required this.postId,
     required this.createdAtString,
+    required this.reactions,
+    required this.myReaction,
     this.tag,
   }) : _parent = parent;
 
   const TreeComment.empty()
       : id = const Id.empty(),
-        isLiked = false,
         isDeleted = false,
         isPinned = false,
         author = const User.empty(),
+        myReaction = LikeDislikeReaction.noReaction,
         text = '',
-        likesCount = 0,
         repliesCount = 0,
         _parent = null,
         children = const PaginatedList.empty(),
         postId = const Id.empty(),
         createdAtString = '',
-        tag = null;
+        tag = null,
+        reactions = const <LikeDislikeReaction, int>{
+          LikeDislikeReaction.like: 0,
+          LikeDislikeReaction.dislike: 0,
+        };
 
   const TreeComment.none() : this.empty();
 
   const TreeComment.root({
     required this.children,
   })  : id = const Id.empty(),
-        isLiked = false,
+        myReaction = LikeDislikeReaction.noReaction,
         isDeleted = false,
         isPinned = false,
         author = const User.empty(),
         text = '',
-        likesCount = 0,
         repliesCount = 0,
         _parent = null,
         postId = const Id.empty(),
         createdAtString = '',
-        tag = null;
+        tag = null,
+        reactions = const <LikeDislikeReaction, int>{
+          LikeDislikeReaction.like: 0,
+          LikeDislikeReaction.dislike: 0,
+        };
 
   @override
   final User author;
   @override
   final String text;
+  @override
+  final LikeDislikeReaction myReaction;
 
   final Id id;
-
-  @override
-  final bool isLiked;
 
   final bool isDeleted;
 
   final bool isPinned;
-
-  final int likesCount;
 
   final int repliesCount;
 
@@ -79,6 +83,8 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
   final String createdAtString;
 
   final CommentTag? tag;
+
+  final Map<LikeDislikeReaction, int> reactions;
 
   @override
   final PaginatedList<TreeComment> children;
@@ -99,19 +105,30 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
 
   int get parentsCount => parents.length;
 
+  int get likes => reactions[LikeDislikeReaction.like] ?? 0;
+
+  int get dislikes => reactions[LikeDislikeReaction.dislike] ?? 0;
+
+  int get score => likes - dislikes;
+
+  bool get iLiked => myReaction == LikeDislikeReaction.like;
+
+  bool get iDisliked => myReaction == LikeDislikeReaction.dislike;
+
   @override
   List<Object?> get props => [
         id,
         author,
         text,
-        isLiked,
         isDeleted,
         isPinned,
-        likesCount,
+        reactions,
         repliesCount,
         children,
         postId,
         createdAtString,
+        myReaction,
+        tag,
         _parent?.id, // we don't put whole [parent] here to avoid stackoverflow error when calculating hashCode
       ];
 
@@ -119,10 +136,8 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
     Id? id,
     User? author,
     String? text,
-    bool? isLiked,
     bool? isDeleted,
     bool? isPinned,
-    int? likesCount,
     int? repliesCount,
     TreeComment? parent,
     PaginatedList<TreeComment>? children,
@@ -130,21 +145,23 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
     Id? postId,
     String? createdAtString,
     CommentTag? tag,
+    Map<LikeDislikeReaction, int>? reactions,
+    LikeDislikeReaction? myReaction,
   }) {
     return TreeComment(
       id: id ?? this.id,
       author: author ?? this.author,
       text: text ?? this.text,
-      isLiked: isLiked ?? this.isLiked,
       isDeleted: isDeleted ?? this.isDeleted,
       isPinned: isPinned ?? this.isPinned,
-      likesCount: likesCount ?? this.likesCount,
+      reactions: reactions ?? this.reactions,
       repliesCount: repliesCount ?? this.repliesCount,
       parent: parent ?? this.parent,
       children: children ?? this.children,
       postId: postId ?? this.postId,
       createdAtString: createdAtString ?? this.createdAtString,
       tag: tag ?? this.tag,
+      myReaction: myReaction ?? this.myReaction,
     );
   }
 
@@ -160,5 +177,75 @@ class TreeComment extends TreeNode<TreeComment> with EquatableMixin implements B
         : copyWith(
             children: this.children.copyWith(items: children),
           );
+  }
+
+  //ignore: maximum-nesting
+  TreeComment byLikingComment() {
+    if (iLiked) {
+      return this;
+    } else {
+      var updatedReactions = Map.of(reactions);
+      updatedReactions[LikeDislikeReaction.dislike] = _getUpdateDislikesCount();
+      final likesCount = reactions[LikeDislikeReaction.like] ?? 0;
+      updatedReactions[LikeDislikeReaction.like] = likesCount + 1;
+      return copyWith(
+        reactions: updatedReactions,
+        myReaction: LikeDislikeReaction.like,
+      );
+    }
+  }
+
+  //ignore: maximum-nesting-level
+  TreeComment byDislikingComment() {
+    if (iDisliked) {
+      return this;
+    } else {
+      var updatedReactions = Map.of(reactions);
+      updatedReactions[LikeDislikeReaction.like] = _getUpdateLikeCount();
+      final dislikeCount = reactions[LikeDislikeReaction.dislike] ?? 0;
+      updatedReactions[LikeDislikeReaction.dislike] = dislikeCount + 1;
+      return copyWith(
+        reactions: updatedReactions,
+        myReaction: LikeDislikeReaction.dislike,
+      );
+    }
+  }
+
+  TreeComment byUnReactingToComment() {
+    final previouslyLiked = myReaction == LikeDislikeReaction.like;
+    final previouslyDisliked = myReaction == LikeDislikeReaction.dislike;
+    var updatedReactions = Map.of(reactions);
+    if (previouslyLiked) {
+      final likesCount = reactions[LikeDislikeReaction.like] ?? 0;
+      if (likesCount != 0) {
+        updatedReactions[LikeDislikeReaction.like] = likesCount - 1;
+      }
+    }
+    if (previouslyDisliked) {
+      final dislikeCount = reactions[LikeDislikeReaction.dislike] ?? 0;
+      if (dislikeCount != 0) {
+        updatedReactions[LikeDislikeReaction.dislike] = dislikeCount - 1;
+      }
+    }
+    return copyWith(
+      reactions: updatedReactions,
+      myReaction: LikeDislikeReaction.noReaction,
+    );
+  }
+
+  int _getUpdateDislikesCount() {
+    final dislikeCount = reactions[LikeDislikeReaction.dislike] ?? 0;
+    if (iDisliked && dislikeCount != 0) {
+      return dislikeCount - 1;
+    }
+    return dislikeCount;
+  }
+
+  int _getUpdateLikeCount() {
+    final likesCount = reactions[LikeDislikeReaction.like] ?? 0;
+    if (iLiked && likesCount != 0) {
+      return likesCount - 1;
+    }
+    return likesCount;
   }
 }

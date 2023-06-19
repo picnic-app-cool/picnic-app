@@ -81,7 +81,7 @@ class PostsTab extends StatelessWidget {
           onLongPress: onLongPress,
           likeButtonParams: PostBarLikeButtonParams(
             isLiked: post.iLiked,
-            likes: post.contentStats.likes.toString(),
+            likes: post.contentStats.score.toString(),
             onTap: () => onTapLike(post),
             overlayTheme: overlayTheme,
             isVertical: false,

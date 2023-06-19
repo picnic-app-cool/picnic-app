@@ -92,34 +92,6 @@ void main() {
   );
 
   test(
-    'signIn flow becomes signUp flow if user did not pass onboarding',
-    () => fakeAsync(
-      (async) {
-        _mockLogInFlow(navigator);
-        _mockCodeVerification(navigator, passedOnboarding: false);
-        unawaited(presenter.onInit());
-        async.flushMicrotasks();
-        verifyInOrder([
-          () => navigator.openSplash(any()),
-          () => navigator.openMethodForm(any()),
-          () => navigator.openPhoneForm(any()),
-          () => navigator.openCodeVerificationForm(any()),
-          () => navigator.openAgeForm(any()),
-          () => navigator.openLanguageSelectForm(any()),
-          () => navigator.openUsernameForm(any()),
-          () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
-          () => navigator.closeAllOnboardingSteps(),
-          () => navigator.openPermissionsForm(any()),
-          () => navigator.openGenderSelectForm(any()),
-          () => navigator.openOnBoardingCirclesPickerPage(any()),
-          () => navigator.openMain(any()),
-        ]);
-        verifyNoMoreInteractions(navigator);
-      },
-    ),
-  );
-
-  test(
     'signUp flow should show screens in order',
     () => fakeAsync(
       (async) {
@@ -128,16 +100,16 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
+          () => navigator.openAgeForm(any()),
           () => navigator.openMethodForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
-          () => navigator.openAgeForm(any()),
+          () => navigator.openGenderSelectForm(any()),
           () => navigator.openLanguageSelectForm(any()),
           () => navigator.openUsernameForm(any()),
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
           () => navigator.closeAllOnboardingSteps(),
           () => navigator.openPermissionsForm(any()),
-          () => navigator.openGenderSelectForm(any()),
           () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openMain(any()),
         ]);
@@ -161,10 +133,11 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
+          () => navigator.openAgeForm(any()),
           () => navigator.openMethodForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
-          () => navigator.openAgeForm(any()),
+          () => navigator.openGenderSelectForm(any()),
           () => navigator.openLanguageSelectForm(any()),
           () => navigator.openUsernameForm(any()),
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
@@ -220,7 +193,6 @@ void main() {
             (presenter.state as OnboardingPresentationModel).screensList,
             [
               OnboardingScreen.permissions,
-              OnboardingScreen.gender,
               OnboardingScreen.circleGroupings,
             ],
           );

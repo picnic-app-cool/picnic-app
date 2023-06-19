@@ -20,11 +20,13 @@ import 'package:picnic_app/features/posts/domain/model/get_comment_by_id_failure
 import 'package:picnic_app/features/posts/domain/model/get_comments_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_comments_preview_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_pinned_comments_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/pin_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
 import 'package:picnic_app/features/posts/domain/model/unpin_comment_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/unreact_to_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/repositories/comments_repository.dart';
 import 'package:picnic_app/utils/extensions/tree_extension.dart';
 
@@ -41,20 +43,35 @@ class GraphQlCommentsRepository implements CommentsRepository {
   final GetCommentsQueryGenerator _getCommentsQueryGenerator;
 
   @override
-  Future<Either<LikeUnlikeCommentFailure, Unit>> likeUnlikeComment({
+  Future<Either<LikeUnlikeCommentFailure, Unit>> likeDislikeComment({
     required Id commentId,
-    required bool like,
+    required LikeDislikeReaction likeDislikeReaction,
   }) =>
       _gqlClient
           .mutate(
-            document: reactCommentMutation,
+            document: reactToCommentMutation,
             variables: {
-              'id': commentId.value,
-              'react': like,
+              'commentId': commentId.value,
+              'reaction': likeDislikeReaction.value,
             },
             parseData: (_) => unit,
           )
           .mapFailure(LikeUnlikeCommentFailure.unknown)
+          .mapSuccess((_) => unit);
+
+  @override
+  Future<Either<UnreactToCommentFailure, Unit>> unReactToComment({
+    required Id commentId,
+  }) =>
+      _gqlClient
+          .mutate(
+            document: unToReactCommentMutation,
+            variables: {
+              'commentId': commentId.value,
+            },
+            parseData: (_) => unit,
+          )
+          .mapFailure(UnreactToCommentFailure.unknown)
           .mapSuccess((_) => unit);
 
   @override

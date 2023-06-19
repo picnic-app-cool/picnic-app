@@ -37,6 +37,7 @@ class CommentsListCustomScrollView extends StatefulWidget {
     required this.onTapLink,
     required this.onVoted,
     required this.onTapLike,
+    required this.onTapDislike,
     required this.onTapReply,
     required this.onTapProfile,
     required this.onLoadMore,
@@ -76,7 +77,8 @@ class CommentsListCustomScrollView extends StatefulWidget {
   final PostPreviewOnLinkTapCallback onTapLink;
   final PostPreviewOnVotedCallback onVoted;
   final CommentsOnTapMoreCallback onTapMore;
-  final CommentsOnLikeUnlikeTapCallback onTapLike;
+  final CommentsOnLikeReactUnreactTapCallback onTapLike;
+  final CommentsOnDislikeReactUnreactTapCallback onTapDislike;
   final CommentsOnReplyTapCallback onTapReply;
   final CommentsOnProfileTapCallback onTapProfile;
   final CommentsOnLoadMoreCallback onLoadMore;
@@ -123,7 +125,7 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
       child: HorizontalPostBarButtons(
         likeButtonParams: PostBarLikeButtonParams(
           isLiked: post.iLiked,
-          likes: post.contentStats.likes.toString(),
+          likes: post.contentStats.score.toString(),
           onTap: widget.onTapLikePost,
           overlayTheme: overlayTheme,
           isVertical: false,
@@ -258,6 +260,7 @@ class _CommentsListCustomScrollViewState extends State<CommentsListCustomScrollV
                   onDoubleTap: widget.onDoubleTap,
                   onLongPress: widget.onLongPress,
                   onTapLike: widget.onTapLike,
+                  onTapDislike: widget.onTapDislike,
                   onReply: widget.onTapReply,
                   onLoadMore: widget.onLoadMore,
                   onProfileTap: widget.onTapProfile,

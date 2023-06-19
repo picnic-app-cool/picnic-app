@@ -153,18 +153,6 @@ class PostOverlayPresentationModel implements PostOverlayViewModel {
     );
   }
 
-  PostOverlayViewModel byUpdatingCommentStatus({
-    required Id id,
-    required bool isLiked,
-  }) {
-    return copyWith(
-      comments: comments.byUpdatingItem(
-        update: (update) => update.copyWith(isLiked: isLiked),
-        itemFinder: (finder) => id == finder.id,
-      ),
-    );
-  }
-
   PostOverlayViewModel byRemovingComment(CommentPreview comment) {
     return copyWith(
       comments: comments.where((e) => e != comment).toList(),

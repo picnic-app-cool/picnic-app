@@ -8,16 +8,22 @@ import 'package:picnic_app/features/posts/domain/model/get_comment_by_id_failure
 import 'package:picnic_app/features/posts/domain/model/get_comments_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_comments_preview_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/get_pinned_comments_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dart';
 import 'package:picnic_app/features/posts/domain/model/like_unlike_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/pin_comment_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/tree_comment.dart';
 import 'package:picnic_app/features/posts/domain/model/unpin_comment_failure.dart';
+import 'package:picnic_app/features/posts/domain/model/unreact_to_comment_failure.dart';
 
 abstract class CommentsRepository {
-  Future<Either<LikeUnlikeCommentFailure, Unit>> likeUnlikeComment({
+  Future<Either<LikeUnlikeCommentFailure, Unit>> likeDislikeComment({
     required Id commentId,
-    required bool like,
+    required LikeDislikeReaction likeDislikeReaction,
+  });
+
+  Future<Either<UnreactToCommentFailure, Unit>> unReactToComment({
+    required Id commentId,
   });
 
   Future<Either<GetCommentsFailure, TreeComment>> getComments({

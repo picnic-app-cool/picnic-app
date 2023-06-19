@@ -73,9 +73,9 @@ class CommentPreviewItem extends StatelessWidget {
             ),
             const Gap(Constants.defaultPadding),
             PicnicLikeHeartColumn(
-              likesCount: comment.likesCount,
+              likesCount: comment.score,
               onTapLikeHeart: onTapLikeUnlike,
-              liked: comment.isLiked,
+              liked: comment.iLiked,
             ),
           ],
         ),

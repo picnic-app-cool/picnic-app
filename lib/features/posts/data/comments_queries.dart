@@ -38,14 +38,23 @@ mutation unpinComment(\$commentId: ID!) {
 }
 ''';
 
-const String reactCommentMutation = r'''
-mutation ($id: String!, $react: Boolean!) {
-    setReactComment(data: {
-        id: $id
-        react: $react
-        reaction: ":heart:"
-    }){
-        success
+String reactToCommentMutation = '''
+mutation (\$commentId: ID!, \$reaction: String!) {
+    reactToComment(
+        commentId: \$commentId
+        reaction: \$reaction
+    ){
+      ${GqlTemplate().successPayload}
+    }
+}
+''';
+
+String unToReactCommentMutation = '''
+mutation (\$commentId: ID!) {
+    reactToComment(
+        commentId: \$commentId
+    ){
+      ${GqlTemplate().successPayload}
     }
 }
 ''';

@@ -85,6 +85,7 @@ Future<void> main() async {
       Mocks.currentTimeProvider,
       Mocks.sharePostUseCase,
       PostsMocks.unreactToPostUseCase,
+      PostsMocks.unreactToCommentUseCase,
     );
     page = PostOverlayPage(presenter: presenter);
   }

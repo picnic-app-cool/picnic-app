@@ -174,6 +174,9 @@ class PostsMocks {
   static late MockUnreactToPostFailure unreactToPostFailure;
   static late MockUnreactToPostUseCase unreactToPostUseCase;
 
+  static late MockUnreactToCommentFailure unreactToCommentFailure;
+  static late MockUnreactToCommentUseCase unreactToCommentUseCase;
+
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
@@ -349,6 +352,9 @@ class PostsMocks {
     unreactToPostFailure = MockUnreactToPostFailure();
     unreactToPostUseCase = MockUnreactToPostUseCase();
 
+    unreactToCommentFailure = MockUnreactToCommentFailure();
+    unreactToCommentUseCase = MockUnreactToCommentUseCase();
+
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
     // REPOSITORIES
@@ -501,6 +507,9 @@ class PostsMocks {
 
     registerFallbackValue(MockUnreactToPostFailure());
     registerFallbackValue(MockUnreactToPostUseCase());
+
+    registerFallbackValue(MockUnreactToCommentFailure());
+    registerFallbackValue(MockUnreactToCommentUseCase());
 
 //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 
