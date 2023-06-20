@@ -9,6 +9,7 @@ import 'package:picnic_app/features/onboarding/phone_form/phone_form_presenter.d
 import 'package:picnic_app/features/onboarding/widgets/onboarding_text_input.dart';
 import 'package:picnic_app/features/user_agreement/widgets/terms_and_policies_disclaimer.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
@@ -82,6 +83,14 @@ class _PhoneFormPageState extends State<PhoneFormPage>
                                 ),
                               ],
                             ),
+                          ),
+                          // ignore: no-magic-number
+                          Assets.images.phone.image(
+                            // ignore: no-magic-number
+                            width: 40,
+                            // ignore: no-magic-number
+                            height: 40,
+                            fit: BoxFit.contain,
                           ),
                         ],
                       ),

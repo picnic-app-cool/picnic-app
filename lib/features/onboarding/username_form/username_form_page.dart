@@ -32,7 +32,7 @@ class _UsernameFormPageState extends State<UsernameFormPage>
     return stateObserver(
       builder: (context, state) => Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,10 +57,16 @@ class _UsernameFormPageState extends State<UsernameFormPage>
                         ],
                       ),
                       // ignore: no-magic-number
-                      Assets.images.usernameIcon.image(scale: 0.9),
+                      Assets.images.usernameIcon.image(
+                        // ignore: no-magic-number
+                        width: 40,
+                        // ignore: no-magic-number
+                        height: 40,
+                        fit: BoxFit.contain,
+                      ),
                     ],
                   ),
-                  const Gap(8),
+                  const Gap(24),
                   OnBoardingTextInput(
                     initialValue: state.username,
                     hintText: appLocalizations.usernameHint,

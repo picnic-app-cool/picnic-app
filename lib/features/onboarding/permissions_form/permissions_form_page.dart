@@ -2,17 +2,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/permissions_form/permissions_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/permissions_form/permissions_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/widgets/onboarding_page_container.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/ui/widgets/dialog/picnic_dialog.dart';
-import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
-import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class PermissionsFormPage extends StatefulWidget with HasPresenter<PermissionsFormPresenter> {
   const PermissionsFormPage({
@@ -41,25 +38,54 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
     final themeBlue = theme.colors.blue;
     final blue = themeBlue;
     final darkBlue = themeBlue.shade600;
-    return OnboardingPageContainer(
-      dialog: PicnicDialog(
-        image: PicnicAvatar(
-          backgroundColor: theme.colors.blackAndWhite.shade900.withOpacity(Constants.onboardingImageBgOpacity),
-          imageSource: PicnicImageSource.emoji(
-            '🔥',
-            style: const TextStyle(
-              fontSize: Constants.onboardingEmojiSize,
-            ),
-          ),
-        ),
-        title: appLocalizations.permissionLabel,
-        description: appLocalizations.permissionsDescription,
-        content: stateObserver(
-          builder: (context, state) => SizedBox(
-            width: double.infinity,
+    return stateObserver(
+      builder: (context, state) {
+        final themeData = PicnicTheme.of(context);
+        final blackAndWhite = themeData.colors.blackAndWhite;
+        return FractionallySizedBox(
+          // ignore: no-magic-number
+          heightFactor: 0.6,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "permissions",
+                            style: themeData.styles.title60,
+                          ),
+                          const Gap(8),
+                          Text(
+                            "enhancing your experience",
+                            style: themeData.styles.body30.copyWith(color: blackAndWhite.shade600),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Assets.images.notificationBell.image(
+                      // ignore: no-magic-number
+                      width: 40,
+                      // ignore: no-magic-number
+                      height: 40,
+                      fit: BoxFit.contain,
+                      color: const Color.fromRGBO(
+                        160,
+                        170,
+                        189,
+                        1,
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(24),
                 if (state.notificationsPermissionShouldBeRequested)
                   PicnicButton(
                     onTap: state.notificationsPermissionAlreadyRequested ? null : presenter.onTapEnableNotifications,
@@ -72,11 +98,25 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
                   title: appLocalizations.contacts,
                   color: state.contactsPermissionGranted ? darkBlue : blue,
                 ),
+                const Gap(8),
+                // ignore: no-magic-number
+                PicnicTextButton(
+                  label: "skip for now",
+                  labelStyle: theme.styles.link30.copyWith(
+                    color: const Color.fromRGBO(
+                      110,
+                      126,
+                      145,
+                      1,
+                    ),
+                  ),
+                  onTap: presenter.onTapSkip,
+                ),
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

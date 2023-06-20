@@ -68,7 +68,13 @@ class _LanguageSelectFormPageState extends State<LanguageSelectFormPage>
                     ],
                   ),
                   // ignore: no-magic-number
-                  Assets.images.languageIcon.image(scale: 0.7),
+                  Assets.images.languageIcon.image(
+                    // ignore: no-magic-number
+                    width: 40,
+                    // ignore: no-magic-number
+                    height: 40,
+                    fit: BoxFit.contain,
+                  ),
                 ],
               ),
               stateObserver(

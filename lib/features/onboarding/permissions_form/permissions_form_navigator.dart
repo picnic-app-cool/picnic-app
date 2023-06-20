@@ -5,7 +5,7 @@ import 'package:picnic_app/features/onboarding/permissions_form/permissions_form
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
-import 'package:picnic_app/navigation/transitions/sliding_page_transition.dart';
+import 'package:picnic_app/ui/widgets/picnic_bottom_sheet.dart';
 
 class PermissionsFormNavigator with CloseRoute, ErrorBottomSheetRoute {
   PermissionsFormNavigator(this.appNavigator);
@@ -16,9 +16,9 @@ class PermissionsFormNavigator with CloseRoute, ErrorBottomSheetRoute {
 
 mixin PermissionsFormRoute {
   Future<void> openPermissionsForm(PermissionsFormInitialParams initialParams) async {
-    return appNavigator.push(
-      SlidingPageTransition(getIt<PermissionsFormPage>(param1: initialParams)),
-      context: context,
+    return showPicnicBottomSheet(
+      getIt<PermissionsFormPage>(param1: initialParams),
+      useRootNavigator: true,
     );
   }
 

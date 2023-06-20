@@ -58,7 +58,7 @@ class _AgeFormPageState extends State<AgeFormPage>
                             ],
                           ),
                           // ignore: no-magic-number
-                          Assets.images.cake.image(scale: 0.7),
+                          Assets.images.cake.image(),
                         ],
                       ),
                       const Gap(24),

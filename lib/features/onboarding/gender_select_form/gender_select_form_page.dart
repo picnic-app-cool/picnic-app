@@ -7,6 +7,7 @@ import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/widgets/gender_select_form_dialog_content.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class GenderSelectFormPage extends StatefulWidget with HasPresenter<GenderSelectFormPresenter> {
@@ -30,7 +31,7 @@ class _GenderSelectFormPageState extends State<GenderSelectFormPage>
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,15 +39,37 @@ class _GenderSelectFormPageState extends State<GenderSelectFormPage>
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  appLocalizations.aboutYou,
-                  style: theme.styles.title60,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            appLocalizations.aboutYou,
+                            style: theme.styles.title60,
+                          ),
+                          const Gap(8),
+                          Text(
+                            appLocalizations.aboutYouDescription,
+                            style: theme.styles.body30.copyWith(color: theme.colors.blackAndWhite.shade600),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // ignore: no-magic-number
+                    Assets.images.personOutline.image(
+                      // ignore: no-magic-number
+                      width: 40,
+                      // ignore: no-magic-number
+                      height: 40,
+                      fit: BoxFit.contain,
+                    ),
+                  ],
                 ),
-                const Gap(8),
-                Text(
-                  appLocalizations.aboutYouDescription,
-                  style: theme.styles.body30.copyWith(color: theme.colors.blackAndWhite.shade600),
-                ),
+                const Gap(24),
               ],
             ),
             stateObserver(

@@ -48,7 +48,7 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
           final themeData = PicnicTheme.of(context);
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,25 +59,37 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                appLocalizations.codeVerificationTitle,
-                                style: themeData.styles.title60,
-                              ),
-                              const Gap(8),
-                              Text(
-                                appLocalizations.codeVerificationDescription,
-                                style: themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
-                              ),
-                            ],
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  appLocalizations.codeVerificationTitle,
+                                  style: themeData.styles.title60,
+                                ),
+                                const Gap(8),
+                                Text(
+                                  appLocalizations.codeVerificationDescription,
+                                  style:
+                                      themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ),
                           // ignore: no-magic-number
-                          Assets.images.key.image(scale: 0.7),
+                          Assets.images.key.image(
+                            // ignore: no-magic-number
+                            width: 40,
+                            // ignore: no-magic-number
+                            height: 40,
+                            // ignore: no-magic-number
+
+                            fit: BoxFit.contain,
+                          ),
                         ],
                       ),
-                      const Gap(12),
+                      const Gap(24),
                       OnBoardingTextInput(
                         focusNode: codeFocusNode,
                         initialValue: state.code,
