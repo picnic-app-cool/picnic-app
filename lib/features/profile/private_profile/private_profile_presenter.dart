@@ -258,7 +258,12 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       ),
       useRoot: true,
     );
-    _getProfileStats();
+
+    tryEmit(
+      _model.byUpdatingProfileStats(
+        profileStats: _model.profileStats.copyWith(views: _model.profileStats.views + 1),
+      ),
+    );
 
     await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
   }

@@ -383,9 +383,11 @@ class PublicProfilePresenter extends Cubit<PublicProfileViewModel> {
         refresh: () => _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure()),
       ),
     );
-    _getProfileStats();
-
-    await _loadPosts(fromScratch: true).mapFailure((f) => f.displayableFailure());
+    tryEmit(
+      _model.byUpdatingProfileStats(
+        profileStats: _model.profileStats.copyWith(views: _model.profileStats.views + 1),
+      ),
+    );
   }
 
   void onTabChanged(int index) {
