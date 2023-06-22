@@ -20,6 +20,7 @@ import 'package:picnic_app/features/seeds/info_seeds/info_seed_route.dart';
 import 'package:picnic_app/features/seeds/seeds/seeds_navigator.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_navigator.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_navigator.dart';
+import 'package:picnic_app/features/social_accounts/connect_accounts_bottom_sheet_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
 import 'package:picnic_app/navigation/close_with_result_route.dart';
@@ -58,7 +59,8 @@ class PrivateProfileNavigator
         AddCirclePodRoute,
         InfoSeedRoute,
         SellSeedsRoute,
-        CircleDetailsRoute {
+        CircleDetailsRoute,
+        ConnectAccountsBottomSheetRoute {
   PrivateProfileNavigator(
     this.appNavigator,
   );

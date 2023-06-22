@@ -49,6 +49,7 @@ import '../features/reports/mocks/reports_mocks.dart';
 import '../features/seeds/mocks/seeds_mocks.dart';
 import '../features/settings/mocks/settings_mocks.dart';
 import '../features/slices/mocks/slices_mocks.dart';
+import '../features/social_accounts/mocks/social_accounts_mocks.dart';
 import '../features/user_agreement/mocks/user_agreement_mocks.dart';
 import '../features/video_editor/mocks/video_editor_mocks.dart';
 //DO-NOT-REMOVE IMPORTS_MOCKS
@@ -303,6 +304,7 @@ class Mocks {
   static late MockAuthTokenRepository authTokenRepository;
 
   static late MockPodsRepository podsRepository;
+  static late MockSocialAccountsRepository socialAccountsRepository;
 //DO-NOT-REMOVE REPOSITORIES_MOCKS_STATIC_FIELD
 
   // STORES
@@ -373,6 +375,7 @@ class Mocks {
     ConnectionStatusMocks.init();
     DiscordMocks.init();
     PodsMocks.init();
+    SocialAccountsMocks.init();
 //DO-NOT-REMOVE FEATURE_MOCKS_INIT
 
     _initMocks();
@@ -605,6 +608,7 @@ class Mocks {
     postsRepository = MockPostsRepository();
     authTokenRepository = MockAuthTokenRepository();
     podsRepository = MockPodsRepository();
+    socialAccountsRepository = MockSocialAccountsRepository();
 //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS
 
     // STORES
@@ -840,6 +844,7 @@ class Mocks {
     registerFallbackValue(MockCacheManagementRepository());
     registerFallbackValue(MockAuthTokenRepository());
     registerFallbackValue(MockPodsRepository());
+    registerFallbackValue(MockSocialAccountsRepository());
 //DO-NOT-REMOVE REPOSITORIES_MOCK_FALLBACK_VALUE
 
     // STORES

@@ -10,12 +10,15 @@ class PrivateProfileButtons extends StatelessWidget {
     Key? key,
     required this.onTapEditProfile,
     required this.onTapCreatePosts,
+    required this.onTapLinkSocialAccounts,
   }) : super(key: key);
 
   final VoidCallback onTapEditProfile;
   final VoidCallback onTapCreatePosts;
+  final VoidCallback onTapLinkSocialAccounts;
 
   static const _buttonsHeight = 56.0;
+  static const _iconSize = 40.0;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,24 @@ class PrivateProfileButtons extends StatelessWidget {
               child: Image.asset(
                 Assets.images.editUnderlined.path,
                 color: darkBlue.shade800,
+              ),
+            ),
+          ),
+          const Gap(8),
+          InkWell(
+            onTap: onTapLinkSocialAccounts,
+            child: Container(
+              width: _buttonsHeight,
+              height: _buttonsHeight,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: darkBlue.shade300,
+              ),
+              child: Image.asset(
+                Assets.images.linkIcon.path,
+                color: darkBlue.shade800,
+                width: _iconSize,
+                height: _iconSize,
               ),
             ),
           ),

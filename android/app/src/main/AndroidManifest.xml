@@ -24,6 +24,15 @@
                 <data android:scheme="https"
                         android:host="picnic.zone"
                         android:path="/login" />
+                <data android:scheme="https"
+                        android:host="stg.picnic.zone"
+                        android:path="/login" />
+                <data android:scheme="https"
+                        android:host="picnic.zone"
+                        android:path="/robloxAuthSuccess" />
+                <data android:scheme="https"
+                        android:host="stg.picnic.zone"
+                        android:path="/robloxAuthSuccess" />
             </intent-filter>
         </activity>
 

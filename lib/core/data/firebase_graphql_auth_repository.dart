@@ -156,20 +156,20 @@ class FirebaseGraphqlAuthRepository implements AuthRepository {
 
   Future<Either<LogInFailure, AuthResult>> _discordLogIn({
     required String code,
-    String redirectUri = "https://picnic.zone/login",
-  }) async =>
-      _gqlClient
-          .mutate(
-            document: signInWithDiscordMutation,
-            variables: {
-              'credentials': {'code': code, "redirectUri": redirectUri},
-            },
-            parseData: (json) {
-              final authResult = GqlAuthResult.fromJson((json['signInWithDiscord'] as Map).cast());
-              return authResult.toDomain(userId: authResult.user!.toDomain().id);
-            },
-          )
-          .mapFailure(LogInFailure.unknown);
+  }) async {
+    return _gqlClient
+        .mutate(
+          document: signInWithDiscordMutation,
+          variables: {
+            'credentials': {'code': code},
+          },
+          parseData: (json) {
+            final authResult = GqlAuthResult.fromJson((json['signInWithDiscord'] as Map).cast());
+            return authResult.toDomain(userId: authResult.user!.toDomain().id);
+          },
+        )
+        .mapFailure(LogInFailure.unknown);
+  }
 
   Future<Either<LogInFailure, AuthResult>> _firebaseLogIn({
     required LogInCredentials credentials,

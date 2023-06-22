@@ -26,6 +26,8 @@ import 'package:picnic_app/features/seeds/info_seeds/info_seed_route.dart';
 import 'package:picnic_app/features/seeds/new_seeds/new_seed_route.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_navigator.dart';
 import 'package:picnic_app/features/slices/slice_details/slice_details_navigator.dart';
+import 'package:picnic_app/features/social_accounts/connect_accounts_navigator.dart';
+import 'package:picnic_app/features/social_accounts/link_social_account_bottom_sheet_route.dart';
 import 'package:picnic_app/features/video_editor/video_editor_navigator.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 
@@ -58,7 +60,9 @@ class FeaturesIndexNavigator
         LinkDiscordRoute,
         PodsCategoriesRoute,
         PreviewPodRoute,
-        EnablePodSuccessBottomSheetRoute {
+        EnablePodSuccessBottomSheetRoute,
+        ConnectAccountsRoute,
+        LinkSocialAccountBottomSheetRoute {
   FeaturesIndexNavigator(this.appNavigator);
 
   @override

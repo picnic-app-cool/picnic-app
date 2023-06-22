@@ -1,0 +1,3 @@
+class ConnectAccountsBottomSheetInitialParams {
+  const ConnectAccountsBottomSheetInitialParams();
+}

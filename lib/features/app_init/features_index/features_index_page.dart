@@ -106,6 +106,14 @@ class _FeaturesIndexPageState extends State<FeaturesIndexPage>
                     onPressed: presenter.onTapEnablePodSuccessBottomSheet,
                     child: const Text("Pod enabled successfully"),
                   ),
+                  ElevatedButton(
+                    onPressed: presenter.onTapConnectAccounts,
+                    child: const Text("Connect accounts"),
+                  ),
+                  ElevatedButton(
+                    onPressed: presenter.onTapLinkSocialAccountSuccess,
+                    child: const Text("Social account linked successfully"),
+                  ),
                 ],
               ),
             ),

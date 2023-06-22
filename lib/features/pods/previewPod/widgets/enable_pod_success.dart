@@ -5,6 +5,7 @@ import 'package:picnic_app/core/domain/model/image_url.dart';
 import 'package:picnic_app/core/domain/model/pod_app.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
+import 'package:picnic_app/ui/widgets/bottom_sheet_top_indicator.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_circle_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
@@ -23,9 +24,6 @@ class EnablePodSuccess extends StatelessWidget {
   final VoidCallback onTapLaunch;
 
   static const circlePodImageSize = 80.0;
-  static const bottomSheetTopDividerHeight = 6.0;
-  static const bottomSheetTopDividerWidth = 40.0;
-  static const bottomSheetTopDividerRadius = 100.0;
   static const circleEmojiSize = 40.0;
   static const _heightFactor = 0.45;
 
@@ -42,14 +40,7 @@ class EnablePodSuccess extends StatelessWidget {
           children: [
             const Gap(20),
             Center(
-              child: Container(
-                height: bottomSheetTopDividerHeight,
-                width: bottomSheetTopDividerWidth,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(bottomSheetTopDividerRadius)),
-                  color: colors.darkBlue.shade300,
-                ),
-              ),
+              child: BottomSheetTopIndicator(),
             ),
             const Gap(16),
             Row(

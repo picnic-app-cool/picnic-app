@@ -1,0 +1,3 @@
+class ConnectAccountsInitialParams {
+  const ConnectAccountsInitialParams();
+}

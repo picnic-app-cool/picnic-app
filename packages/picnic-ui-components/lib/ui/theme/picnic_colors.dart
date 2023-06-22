@@ -7,6 +7,7 @@ class PicnicColors {
   static const Color grey = Color(0xFF777777);
   static const Color paleGrey = Color(0x0D2B3F6C);
   static const Color ultraPaleGrey = Color(0xFFF7F7FC);
+  static const Color liteGrey = Color(0xFFF7F7FE);
 
   static const borderBlue = Color(0xFF84C4FF);
 

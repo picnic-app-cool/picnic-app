@@ -6,7 +6,7 @@ import 'connection_status_mock_definitions.dart';
 class ConnectionStatusMocks {
   // MVP
 
-  //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
+//DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
 
@@ -30,7 +30,8 @@ class ConnectionStatusMocks {
   static void _initMocks() {
     //DO-NOT-REMOVE FEATURES_MOCKS
     // MVP
-    //DO-NOT-REMOVE MVP_INIT_MOCKS
+
+//DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
     getConnectionStatusUseCase = MockGetConnectionStatusUseCase();
@@ -48,7 +49,8 @@ class ConnectionStatusMocks {
   static void _initFallbacks() {
     //DO-NOT-REMOVE FEATURES_FALLBACKS
     // MVP
-    //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
+
+//DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES
     registerFallbackValue(MockGetConnectionStatusUseCase());

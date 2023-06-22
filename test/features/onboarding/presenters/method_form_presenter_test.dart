@@ -77,6 +77,7 @@ void main() {
       navigator,
       OnboardingMocks.logInUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
+      Mocks.environmentConfigProvider,
     );
   });
 }

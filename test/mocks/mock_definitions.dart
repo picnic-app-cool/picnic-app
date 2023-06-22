@@ -89,6 +89,7 @@ import 'package:picnic_app/core/domain/repositories/secure_local_storage_reposit
 import 'package:picnic_app/core/domain/repositories/seeds_repository.dart';
 import 'package:picnic_app/core/domain/repositories/session_expired_repository.dart';
 import 'package:picnic_app/core/domain/repositories/slices_repository.dart';
+import 'package:picnic_app/core/domain/repositories/social_accounts_repository.dart';
 import 'package:picnic_app/core/domain/repositories/user_preferences_repository.dart';
 import 'package:picnic_app/core/domain/repositories/users_repository.dart';
 import 'package:picnic_app/core/domain/stores/app_info_store.dart';
@@ -518,6 +519,8 @@ class MockConnectionStatusRepository extends Mock implements ConnectionStatusRep
 class MockCacheManagementRepository extends Mock implements CacheManagementRepository {}
 
 class MockAuthTokenRepository extends Mock implements AuthTokenRepository {}
+
+class MockSocialAccountsRepository extends Mock implements SocialAccountsRepository {}
 //DO-NOT-REMOVE REPOSITORIES_MOCK_DEFINITION
 
 // STORES

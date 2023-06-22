@@ -21,6 +21,10 @@ class TestEnvironmentConfigProvider extends EnvironmentConfigProvider {
         baseChatUri: 'wss://non.existing.address/connection/websocket',
         baseInAppNotificationsUri: 'wss://non.existing.address/connection/websocket',
         baseGraphQLUrl: 'https://non.existing.address',
+        discordRedirectUrl: 'https://non-existing-redirect-url',
+        robloxRedirectUrl: 'https://another-non-existing-redirect-url',
+        discordClientId: 'non-existing-client-id',
+        robloxClientId: 'another-non-existing-client-id',
       );
 
   @override

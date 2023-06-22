@@ -5,6 +5,7 @@ import 'package:picnic_app/features/connection_status/connection_status_handler_
 import 'package:picnic_app/features/connection_status/data/flutter_connection_status_repository.dart';
 import 'package:picnic_app/features/connection_status/domain/repositories/connection_status_repository.dart';
 import 'package:picnic_app/features/connection_status/domain/use_cases/get_connection_status_use_case.dart';
+
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package

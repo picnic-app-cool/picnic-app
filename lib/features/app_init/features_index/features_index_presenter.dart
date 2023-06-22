@@ -35,6 +35,8 @@ import 'package:picnic_app/features/seeds/about_elections/about_elections_initia
 import 'package:picnic_app/features/seeds/circle_governance/circle_governance_initial_params.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_initial_params.dart';
 import 'package:picnic_app/features/slices/slice_details/slice_details_initial_params.dart';
+import 'package:picnic_app/features/social_accounts/connect_accounts_initial_params.dart';
+import 'package:picnic_app/features/social_accounts/domain/social_network_type.dart';
 import 'package:picnic_app/features/video_editor/video_editor_initial_params.dart';
 
 class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with SubscriptionsMixin {
@@ -175,5 +177,16 @@ class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with Subscrip
         pod: const PodApp.empty().copyWith(name: 'AI Image Generator'),
         // ignore: no-empty-block
         onTapLaunch: () {},
+      );
+
+  void onTapConnectAccounts() => navigator.openConnectAccounts(const ConnectAccountsInitialParams());
+
+  void onTapLinkSocialAccountSuccess() => navigator.showLinkSocialAccountSuccessBottomSheet(
+        username: 'roblox_username',
+        picnicUserImageUrl: '',
+        socialNetworkType: SocialNetworkType.roblox,
+        linkedDate: '14.06.2023',
+        // ignore: no-empty-block
+        onTapOpenExternalUrl: () {},
       );
 }

@@ -104,6 +104,7 @@ class _PrivateProfilePageState extends State<PrivateProfilePage>
                 child: PrivateProfileButtons(
                   onTapEditProfile: presenter.onTapEditProfile,
                   onTapCreatePosts: presenter.onTapCreatePost,
+                  onTapLinkSocialAccounts: presenter.onTapLinkSocialAccounts,
                 ),
               ),
               if (!state.isLoadingUser)

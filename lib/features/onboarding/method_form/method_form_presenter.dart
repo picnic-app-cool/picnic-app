@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:picnic_app/constants/constants.dart';
+import 'package:picnic_app/core/environment_config/environment_config_provider.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
@@ -26,11 +27,13 @@ class MethodFormPresenter extends Cubit<MethodFormViewModel> {
     this.navigator,
     this._logInUseCase,
     this._logAnalyticsEventUseCase,
+    this._envConfigProvider,
   ) : super(model);
 
   final MethodFormNavigator navigator;
   final LogInUseCase _logInUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
+  final EnvironmentConfigProvider _envConfigProvider;
 
   // ignore: unused_element
   MethodFormPresentationModel get _model => state as MethodFormPresentationModel;
@@ -80,13 +83,15 @@ class MethodFormPresenter extends Cubit<MethodFormViewModel> {
 
     const _customUriScheme = "https";
 
+    final env = await _envConfigProvider.getConfig();
+
     //TODO: remove from here and put in env variables
     final url = Uri.https(
       'discord.com',
       '/api/oauth2/authorize',
       {
-        'client_id': '1100738037777956954',
-        'redirect_uri': 'https://picnic.zone/login',
+        'client_id': env.discordClientId,
+        'redirect_uri': env.discordRedirectUrl,
         'strictDiscoveryDocumentValidation': 'false',
         'grant_type': 'authorization_code',
         'oidc': 'false',

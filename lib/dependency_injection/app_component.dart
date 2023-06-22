@@ -36,6 +36,7 @@ import 'package:picnic_app/core/data/graphql_pods_repository.dart';
 import 'package:picnic_app/core/data/graphql_post_creation_circles_repository.dart';
 import 'package:picnic_app/core/data/graphql_seeds_repository.dart';
 import 'package:picnic_app/core/data/graphql_slices_repository.dart';
+import 'package:picnic_app/core/data/graphql_social_accounts_repository.dart';
 import 'package:picnic_app/core/data/graphql_users_repository.dart';
 import 'package:picnic_app/core/data/hive/hive_client_factory.dart';
 import 'package:picnic_app/core/data/hive/hive_client_primitive_factory.dart';
@@ -83,6 +84,7 @@ import 'package:picnic_app/core/domain/repositories/secure_local_storage_reposit
 import 'package:picnic_app/core/domain/repositories/seeds_repository.dart';
 import 'package:picnic_app/core/domain/repositories/session_expired_repository.dart';
 import 'package:picnic_app/core/domain/repositories/slices_repository.dart';
+import 'package:picnic_app/core/domain/repositories/social_accounts_repository.dart';
 import 'package:picnic_app/core/domain/repositories/user_preferences_repository.dart';
 import 'package:picnic_app/core/domain/repositories/users_repository.dart';
 import 'package:picnic_app/core/domain/stores/app_info_store.dart';
@@ -204,10 +206,10 @@ import 'package:picnic_app/features/reports/dependency_injection/feature_compone
 import 'package:picnic_app/features/seeds/dependency_injection/feature_component.dart' as seeds;
 import 'package:picnic_app/features/settings/dependency_injection/feature_component.dart' as settings;
 import 'package:picnic_app/features/slices/dependency_injection/feature_component.dart' as slices;
+import 'package:picnic_app/features/social_accounts/dependency_injection/feature_component.dart' as social_accounts;
 import 'package:picnic_app/features/user_agreement/dependency_injection/feature_component.dart' as user_agreement;
 import 'package:picnic_app/features/video_editor/dependency_injection/feature_component.dart' as video_editor;
 import 'package:picnic_app/firebase_options.dart';
-
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/utils/root_navigator_observer.dart';
@@ -258,6 +260,7 @@ void configureDependencies(
   connection_status.configureDependencies();
   discord.configureDependencies();
   pods.configureDependencies();
+  social_accounts.configureDependencies();
 //DO-NOT-REMOVE FEATURE_COMPONENT_INIT
 
   _configureGeneralDependencies(initParams);
@@ -525,6 +528,11 @@ void _configureRepositories() {
         )
         ..registerFactory<PodsRepository>(
           () => GraphqlPodsRepository(
+            getIt(),
+          ),
+        )
+        ..registerFactory<SocialAccountsRepository>(
+          () => GraphqlSocialAccountsRepository(
             getIt(),
           ),
         )

@@ -1443,5 +1443,24 @@
   "recentCircles": "recent circles",
   "message": "message",
   "viewProfile": "view profile",
-  "viewCircle": "view circle"
+  "viewCircle": "view circle",
+  "connectAccounts": "connect accounts",
+  "addAccountsToProfile": "add accounts to your profile",
+  "thisInfoWillNotBeShared": "this information will not be shared outside of Picnic without your permission, and is used in accordance with Picnic’s ",
+  "nothingYet": "nothing yet!",
+  "noSocialAccountsYet": "you haven’t added any social accounts yet, \nuse the link below to connect",
+  "connectSocialAccounts": "connect social accounts",
+  "linkedAccountSuccessfully": "you have successfully connected your {socialNetworkName} to Picnic",
+  "@linkedAccountSuccessfully": {
+    "placeholders": {
+      "socialNetworkName": {}
+    }
+  },
+  "connectedAt": "Connected at {date}",
+  "@connectedAt": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "connectedAccounts": "connected accounts"
 }

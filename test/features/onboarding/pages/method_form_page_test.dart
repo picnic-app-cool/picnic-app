@@ -46,6 +46,7 @@ Future<void> main() async {
       navigator,
       OnboardingMocks.logInUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
+      Mocks.environmentConfigProvider,
     );
     page = MethodFormPage(presenter: presenter);
   }

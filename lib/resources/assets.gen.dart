@@ -248,6 +248,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/discord.webp
   AssetGenImage get discord => const AssetGenImage('assets/images/discord.webp');
 
+  /// File path: assets/images/discord_social_network.webp
+  AssetGenImage get discordSocialNetwork => const AssetGenImage('assets/images/discord_social_network.webp');
+
   /// File path: assets/images/discord_white.webp
   AssetGenImage get discordWhite => const AssetGenImage('assets/images/discord_white.webp');
 
@@ -383,6 +386,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/link.webp
   AssetGenImage get link => const AssetGenImage('assets/images/link.webp');
 
+  /// File path: assets/images/linkIcon.webp
+  AssetGenImage get linkIcon => const AssetGenImage('assets/images/linkIcon.webp');
+
   /// File path: assets/images/lock.webp
   AssetGenImage get lock => const AssetGenImage('assets/images/lock.webp');
 
@@ -412,6 +418,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/mute.webp
   AssetGenImage get mute => const AssetGenImage('assets/images/mute.webp');
+
+  /// File path: assets/images/navigate_out.webp
+  AssetGenImage get navigateOut => const AssetGenImage('assets/images/navigate_out.webp');
 
   /// File path: assets/images/noAccessToGallery.webp
   AssetGenImage get noAccessToGallery => const AssetGenImage('assets/images/noAccessToGallery.webp');
@@ -527,6 +536,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/reports.webp
   AssetGenImage get reports => const AssetGenImage('assets/images/reports.webp');
 
+  /// File path: assets/images/roblox.webp
+  AssetGenImage get roblox => const AssetGenImage('assets/images/roblox.webp');
+
   /// File path: assets/images/rocket.webp
   AssetGenImage get rocket => const AssetGenImage('assets/images/rocket.webp');
 
@@ -538,6 +550,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/rule_book.webp
   AssetGenImage get ruleBook => const AssetGenImage('assets/images/rule_book.webp');
+
+  /// File path: assets/images/sad_face.webp
+  AssetGenImage get sadFace => const AssetGenImage('assets/images/sad_face.webp');
 
   /// File path: assets/images/save.webp
   AssetGenImage get save => const AssetGenImage('assets/images/save.webp');
@@ -708,6 +723,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/ver_badge.webp
   AssetGenImage get verBadge => const AssetGenImage('assets/images/ver_badge.webp');
 
+  /// File path: assets/images/verification_badge_grey.webp
+  AssetGenImage get verificationBadgeGrey => const AssetGenImage('assets/images/verification_badge_grey.webp');
+
   /// File path: assets/images/verification_badge_pink.webp
   AssetGenImage get verificationBadgePink => const AssetGenImage('assets/images/verification_badge_pink.webp');
 
@@ -821,6 +839,7 @@ class $AssetsImagesGen {
         deleteSolid,
         democracy,
         discord,
+        discordSocialNetwork,
         discordWhite,
         discoverFilled,
         discoverOutlinedBlack,
@@ -866,6 +885,7 @@ class $AssetsImagesGen {
         likeFilled,
         likeOutlined,
         link,
+        linkIcon,
         lock,
         login,
         logout,
@@ -876,6 +896,7 @@ class $AssetsImagesGen {
         moreCircle,
         music,
         mute,
+        navigateOut,
         noAccessToGallery,
         notification,
         notificationBell,
@@ -914,10 +935,12 @@ class $AssetsImagesGen {
         reply,
         report,
         reports,
+        roblox,
         rocket,
         roundedGreenCheck,
         roundedPlaceholderImage,
         ruleBook,
+        sadFace,
         save,
         saveAttachments,
         saveFilled,
@@ -974,6 +997,7 @@ class $AssetsImagesGen {
         usernameIcon,
         usersBold,
         verBadge,
+        verificationBadgeGrey,
         verificationBadgePink,
         volume2,
         volumeX,

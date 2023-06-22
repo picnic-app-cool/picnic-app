@@ -55,6 +55,7 @@ import 'package:picnic_app/features/seeds/domain/use_cases/get_seeds_use_case.da
 import 'package:picnic_app/features/seeds/domain/use_cases/get_user_seeds_total_use_case.dart';
 import 'package:picnic_app/features/seeds/sell_seeds/sell_seeds_initial_params.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_initial_params.dart';
+import 'package:picnic_app/features/social_accounts/connect_accounts_bottom_sheet_initial_params.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/navigation/confirmation_bottom_sheet_route.dart';
 import 'package:picnic_app/navigation/horizontal_action_bottom_sheet_route.dart';
@@ -414,6 +415,10 @@ class PrivateProfilePresenter extends Cubit<PrivateProfileViewModel> with Subscr
       ),
     );
     navigator.openAddCirclePod(AddCirclePodInitialParams(podId: pod.id));
+  }
+
+  Future<void> onTapLinkSocialAccounts() async {
+    await navigator.openConnectAccountsBottomSheet(const ConnectAccountsBottomSheetInitialParams());
   }
 
   void _onCircleUpdated() {
