@@ -132,6 +132,11 @@ class CirclesMocks {
   static late MockAddCirclePodInitialParams addCirclePodInitialParams;
   static late MockAddCirclePodNavigator addCirclePodNavigator;
 
+  static late MockCircleBottomSheetPresenter circleBottomSheetPresenter;
+  static late MockCircleBottomSheetPresentationModel circleBottomSheetPresentationModel;
+  static late MockCircleBottomSheetInitialParams circleBottomSheetInitialParams;
+  static late MockCircleBottomSheetNavigator circleBottomSheetNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -376,6 +381,11 @@ class CirclesMocks {
     addCirclePodInitialParams = MockAddCirclePodInitialParams();
     addCirclePodNavigator = MockAddCirclePodNavigator();
 
+    circleBottomSheetPresenter = MockCircleBottomSheetPresenter();
+    circleBottomSheetPresentationModel = MockCircleBottomSheetPresentationModel();
+    circleBottomSheetInitialParams = MockCircleBottomSheetInitialParams();
+    circleBottomSheetNavigator = MockCircleBottomSheetNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -617,6 +627,11 @@ class CirclesMocks {
     registerFallbackValue(MockAddCirclePodPresentationModel());
     registerFallbackValue(MockAddCirclePodInitialParams());
     registerFallbackValue(MockAddCirclePodNavigator());
+
+    registerFallbackValue(MockCircleBottomSheetPresenter());
+    registerFallbackValue(MockCircleBottomSheetPresentationModel());
+    registerFallbackValue(MockCircleBottomSheetInitialParams());
+    registerFallbackValue(MockCircleBottomSheetNavigator());
 
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 

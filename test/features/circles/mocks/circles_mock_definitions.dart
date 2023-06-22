@@ -30,6 +30,10 @@ import 'package:picnic_app/features/circles/circle_config/circle_config_initial_
 import 'package:picnic_app/features/circles/circle_config/circle_config_navigator.dart';
 import 'package:picnic_app/features/circles/circle_config/circle_config_presentation_model.dart';
 import 'package:picnic_app/features/circles/circle_config/circle_config_presenter.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_initial_params.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_navigator.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_presentation_model.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_presenter.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_presentation_model.dart';
@@ -386,6 +390,15 @@ class MockAddCirclePodPresentationModel extends Mock implements AddCirclePodPres
 class MockAddCirclePodInitialParams extends Mock implements AddCirclePodInitialParams {}
 
 class MockAddCirclePodNavigator extends Mock implements AddCirclePodNavigator {}
+
+class MockCircleBottomSheetPresenter extends MockCubit<CircleBottomSheetViewModel>
+    implements CircleBottomSheetPresenter {}
+
+class MockCircleBottomSheetPresentationModel extends Mock implements CircleBottomSheetPresentationModel {}
+
+class MockCircleBottomSheetInitialParams extends Mock implements CircleBottomSheetInitialParams {}
+
+class MockCircleBottomSheetNavigator extends Mock implements CircleBottomSheetNavigator {}
 
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 

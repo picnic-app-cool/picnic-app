@@ -41,6 +41,11 @@ class ProfileMocks {
   static late MockInviteFriendsBottomSheetInitialParams shareFriendsSheetInitialParams;
   static late MockInviteFriendsBottomSheetNavigator shareFriendsSheetNavigator;
 
+  static late MockProfileBottomSheetPresenter profileBottomSheetPresenter;
+  static late MockProfileBottomSheetPresentationModel profileBottomSheetPresentationModel;
+  static late MockProfileBottomSheetInitialParams profileBottomSheetInitialParams;
+  static late MockProfileBottomSheetNavigator profileBottomSheetNavigator;
+
 //DO-NOT-REMOVE MVP_MOCKS_STATIC_FIELD
 
   // USE CASES
@@ -139,6 +144,11 @@ class ProfileMocks {
     shareFriendsSheetInitialParams = MockInviteFriendsBottomSheetInitialParams();
     shareFriendsSheetNavigator = MockInviteFriendsBottomSheetNavigator();
 
+    profileBottomSheetPresenter = MockProfileBottomSheetPresenter();
+    profileBottomSheetPresentationModel = MockProfileBottomSheetPresentationModel();
+    profileBottomSheetInitialParams = MockProfileBottomSheetInitialParams();
+    profileBottomSheetNavigator = MockProfileBottomSheetNavigator();
+
 //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -229,6 +239,11 @@ class ProfileMocks {
     registerFallbackValue(MockInviteFriendsBottomSheetPresentationModel());
     registerFallbackValue(MockInviteFriendsBottomSheetInitialParams());
     registerFallbackValue(MockInviteFriendsBottomSheetNavigator());
+
+    registerFallbackValue(MockProfileBottomSheetPresenter());
+    registerFallbackValue(MockProfileBottomSheetPresentationModel());
+    registerFallbackValue(MockProfileBottomSheetInitialParams());
+    registerFallbackValue(MockProfileBottomSheetNavigator());
 
 //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 

@@ -33,6 +33,11 @@ import 'package:picnic_app/features/circles/circle_config/circle_config_navigato
 import 'package:picnic_app/features/circles/circle_config/circle_config_page.dart';
 import 'package:picnic_app/features/circles/circle_config/circle_config_presentation_model.dart';
 import 'package:picnic_app/features/circles/circle_config/circle_config_presenter.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_initial_params.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_navigator.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_page.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_presentation_model.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_bottom_sheet_presenter.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_page.dart';
@@ -846,6 +851,28 @@ void _configureMvp() {
         ..registerFactoryParam<AddCirclePodPresenter, AddCirclePodInitialParams, dynamic>(
           (params, _) => AddCirclePodPresenter(
             getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactoryParam<CircleBottomSheetPage, CircleBottomSheetInitialParams, dynamic>(
+          (initialParams, _) => CircleBottomSheetPage(
+            presenter: getIt(param1: initialParams),
+          ),
+        )
+        ..registerFactory<CircleBottomSheetNavigator>(
+          () => CircleBottomSheetNavigator(getIt()),
+        )
+        ..registerFactoryParam<CircleBottomSheetViewModel, CircleBottomSheetInitialParams, dynamic>(
+          (params, _) => CircleBottomSheetPresentationModel.initial(params),
+        )
+        ..registerFactoryParam<CircleBottomSheetPresenter, CircleBottomSheetInitialParams, dynamic>(
+          (params, _) => CircleBottomSheetPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

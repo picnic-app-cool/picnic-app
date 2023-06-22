@@ -54,6 +54,10 @@ import 'package:picnic_app/features/profile/private_profile/private_profile_init
 import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_presentation_model.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_presenter.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_initial_params.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_navigator.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_presentation_model.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_presenter.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_presentation_model.dart';
@@ -131,6 +135,15 @@ class MockInviteFriendsBottomSheetPresentationModel extends Mock implements Invi
 class MockInviteFriendsBottomSheetInitialParams extends Mock implements InviteFriendsBottomSheetInitialParams {}
 
 class MockInviteFriendsBottomSheetNavigator extends Mock implements InviteFriendsBottomSheetNavigator {}
+
+class MockProfileBottomSheetPresenter extends MockCubit<ProfileBottomSheetViewModel>
+    implements ProfileBottomSheetPresenter {}
+
+class MockProfileBottomSheetPresentationModel extends Mock implements ProfileBottomSheetPresentationModel {}
+
+class MockProfileBottomSheetInitialParams extends Mock implements ProfileBottomSheetInitialParams {}
+
+class MockProfileBottomSheetNavigator extends Mock implements ProfileBottomSheetNavigator {}
 
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 

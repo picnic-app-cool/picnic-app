@@ -1440,5 +1440,8 @@
   "interests": "interests",
   "interestsDescription": "pick some communities to join",
   "unVote": "unvote",
-  "recentCircles": "recent circles"
+  "recentCircles": "recent circles",
+  "message": "message",
+  "viewProfile": "view profile",
+  "viewCircle": "view circle"
 }

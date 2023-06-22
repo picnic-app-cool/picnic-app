@@ -49,6 +49,11 @@ import 'package:picnic_app/features/profile/private_profile/private_profile_navi
 import 'package:picnic_app/features/profile/private_profile/private_profile_page.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_presentation_model.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_presenter.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_initial_params.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_navigator.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_page.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_presentation_model.dart';
+import 'package:picnic_app/features/profile/public_profile/profile_bottom_sheet_presenter.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_page.dart';
@@ -59,6 +64,7 @@ import 'package:picnic_app/features/profile/saved_posts/saved_posts_navigator.da
 import 'package:picnic_app/features/profile/saved_posts/saved_posts_page.dart';
 import 'package:picnic_app/features/profile/saved_posts/saved_posts_presentation_model.dart';
 import 'package:picnic_app/features/profile/saved_posts/saved_posts_presenter.dart';
+
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
@@ -403,6 +409,34 @@ void _configureMvp() {
         )
         ..registerFactoryParam<InviteFriendsBottomSheetPage, InviteFriendsBottomSheetInitialParams, dynamic>(
           (params, _) => InviteFriendsBottomSheetPage(presenter: getIt(param1: params)),
+        )
+        ..registerFactoryParam<ProfileBottomSheetPage, ProfileBottomSheetInitialParams, dynamic>(
+          (initialParams, _) => ProfileBottomSheetPage(
+            presenter: getIt(param1: initialParams),
+          ),
+        )
+        ..registerFactory<ProfileBottomSheetNavigator>(
+          () => ProfileBottomSheetNavigator(getIt()),
+        )
+        ..registerFactoryParam<ProfileBottomSheetViewModel, ProfileBottomSheetInitialParams, dynamic>(
+          (params, _) => ProfileBottomSheetPresentationModel.initial(
+            params,
+            getIt(),
+          ),
+        )
+        ..registerFactoryParam<ProfileBottomSheetPresenter, ProfileBottomSheetInitialParams, dynamic>(
+          (params, _) => ProfileBottomSheetPresenter(
+            getIt(param1: params),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE MVP_GET_IT_CONFIG
