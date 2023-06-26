@@ -46,6 +46,7 @@ class PicnicBarWithTagAvatarUseCase extends WidgetbookComponent {
                       ),
                       onAuthorUsernameTap: () {},
                       onCircleNameTap: () {},
+                      iJoined: false,
                     ),
                   ),
                 );

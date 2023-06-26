@@ -274,6 +274,7 @@ class PicnicVerticalPost extends StatelessWidget {
                     subtitleColor: white,
                     onAuthorUsernameTap: onTapAvatar,
                     circleName: '',
+                    showDateViews: false,
                   ),
                 ],
               ),

@@ -50,7 +50,7 @@ class PostBarLikeButton extends StatelessWidget {
         strokeColor: foregroundColor,
         decoration: decoration,
       ),
-      if (params.isVertical) const Gap(4) else const Gap(2),
+      const Gap(2),
       Flexible(
         child: Container(
           constraints: const BoxConstraints(minWidth: 24),

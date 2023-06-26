@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:picnic_app/core/domain/model/basic_public_profile.dart';
 import 'package:picnic_app/features/posts/domain/model/post_overlay_theme.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
-import 'package:picnic_app/features/posts/post_overlay/post_overlay_page.dart';
-import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/achievement_badge.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/model/achievement_badge_type.dart';
 import 'package:picnic_app/ui/widgets/picnic_circle_rectangle_avatar.dart';
@@ -11,7 +9,6 @@ import 'package:picnic_app/ui/widgets/top_navigation/picnic_bar_with_author_deta
 import 'package:picnic_app/utils/defer_pointer/defer_pointer.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
 import 'package:picnic_app/utils/extensions/time_ago_formatting.dart';
-import 'package:picnic_app/utils/number_formatter.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
@@ -70,13 +67,6 @@ class PostSummaryBar extends StatelessWidget {
 
     final postDetailsColor = overlayTheme == PostOverlayTheme.dark ? colors.blackAndWhite.shade600 : whiteColor;
 
-    final postInfoTextStyle = theme.styles.body10.copyWith(
-      color: postDetailsColor,
-      shadows: [
-        if (overlayTheme == PostOverlayTheme.light) PostOverlayPage.textShadow(context),
-      ],
-    );
-
     final titleBadge = author.isVerified
         ? const AchievementBadge(
             type: AchievementBadgeType.verifiedRed,
@@ -88,7 +78,6 @@ class PostSummaryBar extends StatelessWidget {
     final circleImage = circle.imageFile;
     final deferredLink = DeferredPointerHandlerLink();
     final postTimeCreationDate = post.createdAt?.timeElapsed();
-    final dateToDisplay = showTimestamp && post.createdAt != null ? '$postTimeCreationDate • ' : '';
 
     return Padding(
       padding: padding,
@@ -107,15 +96,10 @@ class PostSummaryBar extends StatelessWidget {
             emoji: circleEmoji,
             isVerified: circle.isVerified,
           ),
-          postDetails: displayTag
-              ? Text(
-                  dateToDisplay + appLocalizations.viewsCount(formatNumber(post.contentStats.impressions)),
-                  style: postInfoTextStyle,
-                )
-              : null,
+          postDetails: null,
           titleColor: overlayTheme == PostOverlayTheme.dark ? blackColor : whiteColor,
           circleName: post.circle.name,
-          authorUsername: appLocalizations.usernameWithBullet(author.username.formattedUsername),
+          authorUsername: author.username.formattedUsername,
           date: showTimestamp ? postTimeCreationDate : null,
           titlePadding: const EdgeInsets.only(bottom: 4.0),
           authorVerifiedBadge: titleBadge,
@@ -123,7 +107,10 @@ class PostSummaryBar extends StatelessWidget {
           viewsCount: post.contentStats.impressions,
           subtitleColor: postDetailsColor,
           iFollow: post.author.iFollow,
+          iJoined: post.circle.iJoined,
+          joinTextColor: overlayTheme == PostOverlayTheme.dark ? colors.darkBlue.shade700 : whiteColor,
           onTapFollow: showFollowButton ? onToggleFollow : null,
+          onTapJoinCircle: onTapJoinCircle,
           onCircleNameTap: onTapCircle,
         ),
       ),

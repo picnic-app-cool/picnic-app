@@ -173,6 +173,16 @@ class PostOverlayPresentationModel implements PostOverlayViewModel {
     );
   }
 
+  PostOverlayViewModel byUpdatingCircleJoinStatus({required bool iJoined}) {
+    return copyWith(
+      post: post.copyWith(
+        circle: post.circle.copyWith(
+          iJoined: iJoined,
+        ),
+      ),
+    );
+  }
+
   PostOverlayPresentationModel copyWith({
     FutureResult<Either<SavePostToCollectionFailure, Post>>? savePostResult,
     PostOverlayMediator? messenger,

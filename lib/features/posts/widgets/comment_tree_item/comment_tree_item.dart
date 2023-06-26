@@ -143,12 +143,12 @@ class _CommentTreeItemState extends State<CommentTreeItem> {
               size: 16,
               image: Assets.images.likeOutlined,
             ),
-            const Gap(2),
+            const Gap(4),
             Text(
               widget.treeComment.score.toString(),
               style: styleCaption,
             ),
-            const Gap(6),
+            const Gap(4),
             GestureDetector(
               onTap: () => widget.onTapDislike?.call(widget.treeComment),
               child: Image.asset(

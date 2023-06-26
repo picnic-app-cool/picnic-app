@@ -12,15 +12,16 @@ import '../mocks/stubs.dart';
 import '../test_utils/golden_tests_utils.dart';
 
 void main() {
+  final author = Stubs.postAuthor.copyWith(username: 'paul');
   final post = const Post.empty().copyWith(
     circle: const BasicCircle.empty().copyWith(
       name: '🚀 startups',
     ),
-    contentStats: const ContentStatsForContent.empty().copyWith(impressions: 3581),
-    author: Stubs.postAuthor,
+    contentStats: const ContentStatsForContent.empty().copyWith(impressions: 12),
+    author: author,
   );
   final postSummaryBarWithTag = PostSummaryBar(
-    author: Stubs.postAuthor,
+    author: author,
     overlayTheme: PostOverlayTheme.light,
     post: post,
     onTapTag: () {},
@@ -32,7 +33,7 @@ void main() {
     onTapAuthor: () {},
   );
   final postSummaryBar = PostSummaryBar(
-    author: Stubs.postAuthor,
+    author: author,
     post: post,
     overlayTheme: PostOverlayTheme.light,
     onTapTag: () {},

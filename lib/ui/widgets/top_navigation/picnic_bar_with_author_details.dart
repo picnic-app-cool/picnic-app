@@ -10,16 +10,19 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
     required this.circleName,
     required this.authorUsername,
     required this.iFollow,
+    required this.iJoined,
     required this.onAuthorUsernameTap,
     required this.onCircleNameTap,
     this.date,
     this.authorVerifiedBadge,
     this.titleColor,
     this.subtitleColor,
+    this.joinTextColor,
     this.showShadowForLightColor = false,
     this.avatarPadding = const EdgeInsets.symmetric(horizontal: 8.0),
     this.titlePadding = EdgeInsets.zero,
     this.onTapFollow,
+    this.onTapJoinCircle,
   }) : super(key: key);
 
   final Widget avatar;
@@ -33,7 +36,9 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
   final VoidCallback? onCircleNameTap;
   final EdgeInsets titlePadding;
   final VoidCallback? onTapFollow;
+  final VoidCallback? onTapJoinCircle;
   final bool iFollow;
+  final bool iJoined;
 
   /// whether to show shadow behind text for light color fonts
   final bool showShadowForLightColor;
@@ -41,6 +46,7 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
   final int viewsCount;
   final Color? subtitleColor;
   final Color? titleColor;
+  final Color? joinTextColor;
   final EdgeInsets avatarPadding;
 
   @override
@@ -63,9 +69,12 @@ class PicnicBarWithAuthorDetails extends StatelessWidget {
                 avatarPadding: avatarPadding,
                 postDetails: postDetails,
                 subtitleColor: subtitleColor,
+                joinTextColor: joinTextColor,
                 iFollow: iFollow,
+                iJoined: iJoined,
                 onTapFollow: onTapFollow,
                 onCircleTap: onCircleNameTap,
+                onTapJoinCircle: onTapJoinCircle,
               ),
             ),
           ],

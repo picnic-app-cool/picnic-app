@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/model/cacheable_result.dart';
-import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/page_info.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/stores/feature_flags_store.dart';
@@ -99,33 +96,6 @@ Future<void> main() async {
     setUp: () async {
       await _initMvp();
       when(() => getPostsUseCaseStub).thenAnswer((_) => successCacheableResult(Stubs.posts));
-    },
-    pageBuilder: () => page,
-  );
-
-  await screenshotTest(
-    "posts_list_page",
-    variantName: 'grid',
-    setUp: () async {
-      await _initMvp(gridView: true);
-      when(
-        () => PostsMocks.getPostsListUseCase.execute(
-          feed: Stubs.feed,
-          searchQuery: '',
-          cursor: const Cursor.empty(),
-          cachePolicy: any(named: "cachePolicy"),
-        ),
-      ).thenAnswer(
-        (_) => successCacheableResult(
-          Stubs.posts.copyWith(
-            pageInfo: const PageInfo.singlePage().copyWith(
-              nextPageId: Id(
-                Random().nextDouble().toString(),
-              ),
-            ),
-          ),
-        ),
-      );
     },
     pageBuilder: () => page,
   );

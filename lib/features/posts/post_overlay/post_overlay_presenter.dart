@@ -411,17 +411,21 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
   }
 
   Future<Either<JoinCircleFailure, Unit>> _executeJoinCircleUseCase() {
-    void emitStatus({required bool joined}) {
-      emitAndNotify(_model.byUpdatingJoinedStatus(iJoined: joined));
-      _model.messenger.postUpdated(_model.post);
-    }
+    final circle = _model.post.circle;
+    if (!circle.iJoined) {
+      void emitStatus({required bool joined}) {
+        emitAndNotify(_model.byUpdatingJoinedStatus(iJoined: joined));
+        _model.messenger.postUpdated(_model.post);
+      }
 
-    //this updates the UI immediately on tap
-    emitStatus(joined: true);
-    return _joinCircleUseCase.execute(circle: _model.post.circle).doOn(
-          success: (_) => emitStatus(joined: true),
-          fail: (_) => emitStatus(joined: false),
-        );
+      //this updates the UI immediately on tap
+      emitStatus(joined: true);
+      return _joinCircleUseCase.execute(circle: circle).doOn(
+            success: (_) => emitStatus(joined: true),
+            fail: (_) => emitStatus(joined: false),
+          );
+    }
+    return Future.value(success(unit));
   }
 
   Future<void> _executeLikeReactUnReactPostUseCase() async {

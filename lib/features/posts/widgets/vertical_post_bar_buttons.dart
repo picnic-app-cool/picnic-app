@@ -66,6 +66,7 @@ class VerticalPostBarButtons extends StatelessWidget {
                   isVertical: likeButtonParams.isVertical,
                 ),
               ),
+              const Gap(2),
               PostBarButton(
                 decoration: buttonsDropShadow,
                 params: PostBarButtonParams(

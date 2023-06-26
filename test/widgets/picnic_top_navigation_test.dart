@@ -47,6 +47,7 @@ void main() {
             child: TestWidgetContainer(
               child: PicnicBarWithAuthorDetails(
                 iFollow: false,
+                iJoined: false,
                 viewsCount: 1234,
                 postDetails: PicnicTag(
                   title: 'startups',
