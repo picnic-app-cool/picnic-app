@@ -22,6 +22,14 @@ extension DoubleStringFormatting on double {
 }
 
 extension DurationStringFormatting on Duration {
+  String get formatteds => DateFormat("s") //
+          .format(
+        //ignore: prefer-trailing-comma
+        DateTime(2020, 12, 12) //
+            .add(this)
+            .add(const Duration(milliseconds: 500)),
+      );
+
   String get formattedMMss => DateFormat("mm:ss") //
           .format(
         //ignore: prefer-trailing-comma

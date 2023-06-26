@@ -1,3 +1,4 @@
+//ignore_for_file: prefer-single-widget-per-file
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
@@ -64,6 +65,7 @@ class OnBoardingTextInput extends StatelessWidget {
   final bool isLoading;
 
   static const height = 20.0;
+
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
@@ -104,7 +106,7 @@ class OnBoardingTextInput extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (inputType == PicnicOnBoardingTextInputType.oneTimePassInput)
-            _OneTimePassTimer(
+            OneTimePassTimer(
               onTapResendOTP: onPressedResendCode!,
               currentTimeProvider: currentTimeProvider!,
               codeExpiryTime: codeExpiryTime!,
@@ -174,16 +176,18 @@ class _CountrySelectPopup extends StatelessWidget {
   }
 }
 
-class _OneTimePassTimer extends StatelessWidget {
-  const _OneTimePassTimer({
+class OneTimePassTimer extends StatelessWidget {
+  const OneTimePassTimer({
     required this.onTapResendOTP,
     required this.currentTimeProvider,
     required this.codeExpiryTime,
+    this.padding,
   });
 
   final VoidCallback onTapResendOTP;
   final CurrentTimeProvider currentTimeProvider;
   final DateTime codeExpiryTime;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -195,28 +199,26 @@ class _OneTimePassTimer extends StatelessWidget {
       key: Key(codeExpiryTime.millisecond.toString()),
       deadline: codeExpiryTime,
       builder: (context, timeRemaining) => Padding(
-        padding: const EdgeInsets.only(
-          top: 12.0,
-          right: 12.0,
-          bottom: 12.0,
-        ),
+        padding: padding ??
+            const EdgeInsets.only(
+              top: 12.0,
+              right: 12.0,
+              bottom: 12.0,
+            ),
         child: Text(
-          (timeRemaining.isNegative ? Duration.zero : timeRemaining).formattedMMss,
-          style: theme.styles.body20.copyWith(
+          "${appLocalizations.resendOTPButton} ${(timeRemaining.isNegative ? Duration.zero : timeRemaining).formatteds}s",
+          style: theme.styles.link20.copyWith(
             color: theme.colors.blackAndWhite.shade500,
           ),
         ),
       ),
-      timerCompleteBuilder: (context) => TextButton(
-        onPressed: onTapResendOTP,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 12.0),
-          child: Text(
-            appLocalizations.resendOTPButton,
-            style: styles.caption20.copyWith(
-              color: colors.blue.shade500,
-              fontWeight: FontWeight.bold,
-            ),
+      timerCompleteBuilder: (context) => InkWell(
+        onTap: onTapResendOTP,
+        child: Text(
+          appLocalizations.resendOTPButton,
+          style: styles.caption20.copyWith(
+            color: colors.blue.shade500,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

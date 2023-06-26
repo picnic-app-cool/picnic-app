@@ -7,13 +7,15 @@ class PhoneVerificationData extends Equatable {
     required this.smsCode,
     required this.phoneNumber,
     required this.dialCode,
+    required this.countryCode,
   });
 
   const PhoneVerificationData.empty()
       : verificationId = '',
         smsCode = '',
         phoneNumber = '',
-        dialCode = '+1';
+        dialCode = '+1',
+        countryCode = 'US';
 
   /// verification id returned by backend, it needs to be sent along with sms code to authenticate user
   final String verificationId;
@@ -27,12 +29,15 @@ class PhoneVerificationData extends Equatable {
   /// country dial code, i.e: +1 for US
   final String dialCode;
 
+  final String countryCode;
+
   @override
   List<Object> get props => [
         verificationId,
         smsCode,
         phoneNumber,
         dialCode,
+        countryCode,
       ];
 
   String get phoneNumberWithDialCode => "$dialCode$phoneNumber";
@@ -42,12 +47,14 @@ class PhoneVerificationData extends Equatable {
     String? smsCode,
     String? phoneNumber,
     String? dialCode,
+    String? countryCode,
   }) {
     return PhoneVerificationData(
       verificationId: verificationId ?? this.verificationId,
       smsCode: smsCode ?? this.smsCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       dialCode: dialCode ?? this.dialCode,
+      countryCode: countryCode ?? this.countryCode,
     );
   }
 }

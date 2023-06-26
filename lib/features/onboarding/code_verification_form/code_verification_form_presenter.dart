@@ -62,6 +62,9 @@ class CodeVerificationFormPresenter extends Cubit<CodeVerificationFormViewModel>
         ),
       );
     }
+    if (!_model.isLoading) {
+      tryEmit(_model.copyWith(codeVerificationResult: const FutureResult.empty()));
+    }
     if (_model.isCodeLengthValid) {
       await _validateCode();
     }

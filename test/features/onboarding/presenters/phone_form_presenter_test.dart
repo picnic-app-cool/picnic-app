@@ -20,7 +20,7 @@ void main() {
   test(
     'should enable continue button when valid phone number entered',
     () {
-      presenter.onChangedDialCode("+48");
+      presenter.onChangedCountryCode("CY", "+347");
       presenter.onChangedPhone("712772813");
       expect(presenter.state.continueEnabled, isTrue);
     },
@@ -34,7 +34,7 @@ void main() {
           .thenAnswer((invocation) => successFuture(const PhoneVerificationData.empty()));
 
       // WHEN
-      presenter.onChangedDialCode("+48");
+      presenter.onChangedCountryCode("CY", "+347");
       presenter.onChangedPhone("712772813");
       presenter.onTapContinue();
 
@@ -44,7 +44,7 @@ void main() {
       ).captured;
 
       final data = captured[0] as PhoneVerificationData;
-      expect(data.dialCode, "+48");
+      expect(data.dialCode, "+347");
       expect(data.phoneNumber, "712772813");
     },
   );

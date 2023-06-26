@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:picnic_app/core/domain/model/language.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_presentation_model.dart';
-import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme_data.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
-import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class LanguageSelectFormDialogContent extends StatelessWidget {
   const LanguageSelectFormDialogContent({
     Key? key,
     required this.theme,
     required this.state,
-    required this.onTapContinue,
     required this.onTapSelectLanguage,
   }) : super(key: key);
 
   final PicnicThemeData theme;
   final LanguageSelectFormViewModel state;
-  final VoidCallback? onTapContinue;
   final void Function(Language) onTapSelectLanguage;
 
   @override
@@ -52,18 +47,6 @@ class LanguageSelectFormDialogContent extends StatelessWidget {
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
           ),
-        ),
-        const Gap(12),
-        PicnicButton(
-          onTap: onTapContinue,
-          color: theme.colors.blue,
-          title: appLocalizations.continueAction,
-        ),
-        const Gap(6),
-        PicnicTextButton(
-          onTap: onTapContinue,
-          label: appLocalizations.skipAction,
-          labelStyle: theme.styles.body20.copyWith(color: theme.colors.blackAndWhite.shade600),
         ),
       ],
     );

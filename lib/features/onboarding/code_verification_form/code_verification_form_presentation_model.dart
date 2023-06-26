@@ -78,6 +78,12 @@ class CodeVerificationFormPresentationModel implements CodeVerificationFormViewM
   bool get isCodeLengthValid => verificationCodeValidator.validate(code).isSuccess;
 
   @override
+  int get codeLength => VerificationCodeValidator.codeLength;
+
+  @override
+  bool get isError => codeVerificationResult.result?.isFailure ?? false;
+
+  @override
   DateTime get codeExpiryTime => sendCodeTime.add(const Duration(seconds: 30));
 
   @override
@@ -135,6 +141,10 @@ class CodeVerificationFormPresentationModel implements CodeVerificationFormViewM
 
 /// Interface to expose fields used by the view (page).
 abstract class CodeVerificationFormViewModel {
+  int get codeLength;
+
+  bool get isError;
+
   String get errorMessage;
 
   bool get continueEnabled;

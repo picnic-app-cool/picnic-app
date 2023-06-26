@@ -98,7 +98,7 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
                   title: appLocalizations.contacts,
                   color: state.contactsPermissionGranted ? darkBlue : blue,
                 ),
-                const Gap(8),
+                const Spacer(),
                 // ignore: no-magic-number
                 PicnicTextButton(
                   label: "skip for now",

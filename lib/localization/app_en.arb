@@ -9,7 +9,7 @@
   "views": "views",
   "commonErrorTitle": "oops!",
   "commonErrorMessage": "Something went wrong, please try again",
-  "resendOTPButton": "resend",
+  "resendOTPButton": "resend code",
   "okAction": "ok",
   "getStartedAction": "let''s get started",
   "alreadyHaveAnAccountMessage": "already have an account?",

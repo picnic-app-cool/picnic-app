@@ -42,7 +42,7 @@ class PhoneFormPresentationModel implements CongratsFormViewModel {
   String get fullPhone => verificationData.phoneNumberWithDialCode;
 
   @override
-  String get dialCode => verificationData.dialCode;
+  String get countryCode => verificationData.countryCode;
 
   @override
   bool get continueEnabled => isPhoneValid && !isLoading;
@@ -78,7 +78,7 @@ abstract class CongratsFormViewModel {
 
   bool get continueEnabled;
 
-  String get dialCode;
+  String get countryCode;
 
   bool get isPhoneValid;
 

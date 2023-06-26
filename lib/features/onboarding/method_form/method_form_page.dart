@@ -1,5 +1,3 @@
-// ignore: unused_import
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/method_form/method_form_presentation_model.dart';
@@ -36,7 +34,6 @@ class _MethodFormPageState extends State<MethodFormPage>
           final blue = theme.colors.blue;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
               const Spiral(),
@@ -69,7 +66,6 @@ class _MethodFormPageState extends State<MethodFormPage>
                     ),
                   ],
                 ),
-                const Spacer(),
               ],
             ],
           );

@@ -1,7 +1,6 @@
-// ignore: unused_import
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/age_form/age_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/age_form/age_form_presenter.dart';
@@ -26,56 +25,66 @@ class AgeFormPage extends StatefulWidget with HasPresenter<AgeFormPresenter> {
 
 class _AgeFormPageState extends State<AgeFormPage>
     with PresenterStateMixin<AgeFormViewModel, AgeFormPresenter, AgeFormPage> {
+  static const _contentPadding = EdgeInsets.only(
+    left: 24.0,
+    right: 24.0,
+    top: Constants.toolbarHeight + 24.0,
+    bottom: 16.0,
+  );
+
   @override
   Widget build(BuildContext context) => stateObserver(
         builder: (context, state) {
           final themeData = PicnicTheme.of(context);
           return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                appLocalizations.yourAgeTitle,
-                                style: themeData.styles.title60,
-                              ),
-                              const Gap(8.0),
-                              Text(
-                                appLocalizations.yourAgeDescription,
-                                style: themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
-                              ),
-                            ],
-                          ),
-                          // ignore: no-magic-number
-                          Assets.images.cake.image(),
-                        ],
-                      ),
-                      const Gap(24),
-                      OnBoardingTextInput(
-                        initialValue: state.ageText,
-                        hintText: appLocalizations.ageHint,
-                        errorText: state.ageErrorText,
-                        onChanged: presenter.onChangedAge,
-                        keyboardType: TextInputType.number,
-                      ),
-                    ],
-                  ),
-                  PicnicButton(
-                    onTap: state.continueEnabled ? presenter.onTapContinue : null,
-                    title: appLocalizations.continueAction,
-                  ),
-                ],
+            body: SafeArea(
+              child: Padding(
+                padding: _contentPadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  appLocalizations.yourAgeTitle,
+                                  style: themeData.styles.title60,
+                                ),
+                                const Gap(8.0),
+                                Text(
+                                  appLocalizations.yourAgeDescription,
+                                  style:
+                                      themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
+                                ),
+                              ],
+                            ),
+                            // ignore: no-magic-number
+                            Assets.images.cake.image(),
+                          ],
+                        ),
+                        const Gap(24),
+                        OnBoardingTextInput(
+                          initialValue: state.ageText,
+                          hintText: appLocalizations.ageHint,
+                          errorText: state.ageErrorText,
+                          onChanged: presenter.onChangedAge,
+                          keyboardType: TextInputType.number,
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    PicnicButton(
+                      onTap: state.continueEnabled ? presenter.onTapContinue : null,
+                      title: appLocalizations.continueAction,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

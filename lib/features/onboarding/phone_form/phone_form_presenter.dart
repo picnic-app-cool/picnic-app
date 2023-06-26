@@ -34,9 +34,12 @@ class PhoneFormPresenter extends Cubit<CongratsFormViewModel> {
     _requestPhoneCode();
   }
 
-  void onChangedDialCode(String? dialCode) => tryEmit(
+  void onChangedCountryCode(String? countryCode, String? dialCode) => tryEmit(
         _model.byUpdatingVerificationData(
-          (data) => data.copyWith(dialCode: dialCode),
+          (data) => data.copyWith(
+            dialCode: dialCode,
+            countryCode: countryCode,
+          ),
         ),
       );
 
@@ -45,6 +48,7 @@ class PhoneFormPresenter extends Cubit<CongratsFormViewModel> {
           (data) => data.copyWith(phoneNumber: value),
         ),
       );
+
   void onTapTerms() => navigator.openUrl(Constants.termsUrl);
 
   void onTapPolicies() => navigator.openUrl(Constants.policiesUrl);

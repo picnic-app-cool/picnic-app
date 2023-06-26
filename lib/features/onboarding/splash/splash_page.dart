@@ -5,11 +5,11 @@ import 'package:gap/gap.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/splash/splash_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/splash/splash_presenter.dart';
-import 'package:picnic_app/features/onboarding/splash/widgets/splash_dialog_content.dart';
 import 'package:picnic_app/features/onboarding/widgets/spiral.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 
 class SplashPage extends StatefulWidget with HasPresenter<SplashPresenter> {
   const SplashPage({
@@ -28,6 +28,13 @@ class _SplashPageState extends State<SplashPage>
     with PresenterStateMixin<SplashViewModel, SplashPresenter, SplashPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = PicnicTheme.of(context);
+    final styles = theme.styles;
+    final colors = theme.colors;
+
+    final blue = theme.colors.blue;
+    final body20Blue = styles.body20.copyWith(color: colors.darkBlue.shade600);
+
     const edgeInsets = EdgeInsets.symmetric(horizontal: 24.0);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,11 +52,49 @@ class _SplashPageState extends State<SplashPage>
           ),
         ),
         const Spiral(),
-        SplashDialogContent(
-          onTapLogin: presenter.onTapLogin,
-          onTapGetStarted: presenter.onTapGetStarted,
+        Padding(
+          padding: edgeInsets,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(appLocalizations.congratsFormTitle, style: styles.display50),
+              const Gap(6.0),
+              Text(appLocalizations.appSubtitle, style: body20Blue),
+            ],
+          ),
         ),
         const Spacer(),
+        Padding(
+          padding: edgeInsets,
+          child: PicnicButton(
+            title: appLocalizations.getStartedAction,
+            color: blue,
+            minWidth: double.infinity,
+            onTap: presenter.onTapGetStarted,
+          ),
+        ),
+        Padding(
+          padding: edgeInsets,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                appLocalizations.alreadyHaveAnAccountMessage,
+                style: body20Blue,
+              ),
+              TextButton(
+                onPressed: presenter.onTapLogin,
+                child: Text(
+                  appLocalizations.logInAction,
+                  style: styles.body20.copyWith(
+                    color: blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

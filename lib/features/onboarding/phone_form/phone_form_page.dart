@@ -1,8 +1,7 @@
-// ignore: unused_import
-import 'package:bloc/bloc.dart';
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presenter.dart';
@@ -32,6 +31,13 @@ class _PhoneFormPageState extends State<PhoneFormPage>
   late FocusNode phoneFocusNode;
   late final TextEditingController phoneController;
 
+  static const _contentPadding = EdgeInsets.only(
+    left: 24.0,
+    right: 24.0,
+    top: Constants.toolbarHeight + 24.0,
+    bottom: 16.0,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -55,84 +61,89 @@ class _PhoneFormPageState extends State<PhoneFormPage>
           final themeData = PicnicTheme.of(context);
           final blackAndWhite = themeData.colors.blackAndWhite;
           return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  appLocalizations.yourPhoneNumber,
-                                  style: themeData.styles.title60,
-                                ),
-                                const Gap(8),
-                                Text(
-                                  appLocalizations.loginPhoneFormDescription,
-                                  style: themeData.styles.body30.copyWith(color: blackAndWhite.shade600),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+            body: SafeArea(
+              child: Padding(
+                padding: _contentPadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    appLocalizations.yourPhoneNumber,
+                                    style: themeData.styles.title60,
+                                  ),
+                                  const Gap(8),
+                                  Text(
+                                    appLocalizations.loginPhoneFormDescription,
+                                    style: themeData.styles.body30.copyWith(color: blackAndWhite.shade600),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          // ignore: no-magic-number
-                          Assets.images.phone.image(
                             // ignore: no-magic-number
-                            width: 40,
-                            // ignore: no-magic-number
-                            height: 40,
-                            fit: BoxFit.contain,
+                            Assets.images.phone.image(
+                              // ignore: no-magic-number
+                              width: 40,
+                              // ignore: no-magic-number
+                              height: 40,
+                              fit: BoxFit.contain,
+                            ),
+                          ],
+                        ),
+                        const Gap(24),
+                        OnBoardingTextInput(
+                          key: const Key('phoneInput'),
+                          focusNode: phoneFocusNode,
+                          textController: phoneController,
+                          showFlag: true,
+                          keyboardType: TextInputType.phone,
+                          hintText: "phone number",
+                          initialCountry: state.countryCode,
+                          inputType: PicnicOnBoardingTextInputType.phoneInput,
+                          onChanged: presenter.onChangedPhone,
+                          onChangedCountryCode: (CountryCode value) => presenter.onChangedCountryCode(
+                            value.code,
+                            value.dialCode,
                           ),
-                        ],
-                      ),
-                      const Gap(24),
-                      OnBoardingTextInput(
-                        key: const Key('phoneInput'),
-                        focusNode: phoneFocusNode,
-                        textController: phoneController,
-                        showFlag: true,
-                        keyboardType: TextInputType.phone,
-                        hintText: "phone number",
-                        initialCountry: state.dialCode,
-                        inputType: PicnicOnBoardingTextInputType.phoneInput,
-                        onChanged: presenter.onChangedPhone,
-                        onChangedCountryCode: (CountryCode value) => presenter.onChangedDialCode(value.dialCode),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      TermsAndPoliciesDisclaimer(
-                        onTapTerms: presenter.onTapTerms,
-                        onTapPolicies: presenter.onTapPolicies,
-                        textColor: blackAndWhite.shade700,
-                        userAgreementText: appLocalizations.byContinuingYouAgreeTo,
-                        showWarningIcon: true,
-                      ),
-                      const Gap(12),
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          PicnicButton(
-                            onTap: state.continueEnabled ? presenter.onTapContinue : null,
-                            title: appLocalizations.continueAction,
-                            minWidth: double.infinity,
-                          ),
-                          PicnicLoadingIndicator(isLoading: state.isLoading),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Column(
+                      children: [
+                        TermsAndPoliciesDisclaimer(
+                          onTapTerms: presenter.onTapTerms,
+                          onTapPolicies: presenter.onTapPolicies,
+                          textColor: blackAndWhite.shade700,
+                          userAgreementText: appLocalizations.byContinuingYouAgreeTo,
+                          showWarningIcon: true,
+                        ),
+                        const Gap(12),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            PicnicButton(
+                              onTap: state.continueEnabled ? presenter.onTapContinue : null,
+                              title: appLocalizations.continueAction,
+                              minWidth: double.infinity,
+                            ),
+                            PicnicLoadingIndicator(isLoading: state.isLoading),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
