@@ -128,6 +128,7 @@ import 'package:picnic_app/core/domain/use_cases/get_trending_pods_use_case.dart
 import 'package:picnic_app/core/domain/use_cases/get_user_by_username_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_circles_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_scoped_pod_token_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_stats_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_use_case.dart';
 import "package:picnic_app/core/domain/use_cases/haptic_feedback_use_case.dart";
 import 'package:picnic_app/core/domain/use_cases/image_watermark_use_case.dart';
@@ -250,6 +251,8 @@ class MockSearchUsersUseCase extends Mock implements SearchUsersUseCase {}
 class MockGetCollectionsFailure extends Mock implements GetCollectionsFailure {}
 
 class MockGetCollectionsUseCase extends Mock implements GetCollectionsUseCase {}
+
+class MockGetUserStatsUseCase extends Mock implements GetUserStatsUseCase {}
 
 class MockGetCirclesFailure extends Mock implements GetCirclesFailure {}
 

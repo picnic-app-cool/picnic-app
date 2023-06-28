@@ -163,6 +163,15 @@ class PicnicStyles {
         fontStyle: FontStyle.normal,
         color: Colors.black,
       ),
+      link0: baseTextStyle.copyWith(
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        fontWeight: FontWeight.w600,
+        fontSize: _resolveSize(size, s: 12, m: 12, l: 14),
+        height: 1.2,
+        fontStyle: FontStyle.normal,
+        color: Colors.black,
+      ),
       subtitle40: baseTextStyle.copyWith(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
@@ -328,6 +337,7 @@ class PicnicStyles {
     required this.link20,
     required this.link15,
     required this.link10,
+    required this.link0,
     required this.subtitle40,
     required this.subtitle30,
     required this.subtitle20,
@@ -371,6 +381,7 @@ class PicnicStyles {
   final TextStyle link20;
   final TextStyle link15;
   final TextStyle link10;
+  final TextStyle link0;
 
   final TextStyle subtitle40;
   final TextStyle subtitle30;

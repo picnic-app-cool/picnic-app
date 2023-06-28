@@ -27,7 +27,9 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
         collectionsResult = const FutureResult.empty(),
         savedPods = const PaginatedList.empty(),
         savedPodsResult = const FutureResult.empty(),
-        lastUsedCircles = const PaginatedList.empty();
+        lastUsedCircles = const PaginatedList.empty(),
+        followersCount = 0,
+        followingCount = 0;
 
   /// Used for the copyWith method
   CirclesSideMenuPresentationModel._({
@@ -39,6 +41,8 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
     required this.privateProfile,
     required this.savedPods,
     required this.savedPodsResult,
+    required this.followersCount,
+    required this.followingCount,
   });
 
   final FutureResult<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>> lastUsedCirclesResult;
@@ -58,6 +62,12 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
 
   @override
   final PaginatedList<Circle> lastUsedCircles;
+
+  @override
+  final int followersCount;
+
+  @override
+  final int followingCount;
 
   @override
   bool get isCirclesLoading => lastUsedCirclesResult.isPending();
@@ -81,6 +91,8 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
     PrivateProfile? privateProfile,
     FutureResult<Either<GetSavedPodsFailure, PaginatedList<PodApp>>>? savedPodsResult,
     PaginatedList<PodApp>? savedPods,
+    int? followersCount,
+    int? followingCount,
   }) {
     return CirclesSideMenuPresentationModel._(
       lastUsedCirclesResult: lastUsedCirclesResult ?? this.lastUsedCirclesResult,
@@ -91,6 +103,8 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
       onCircleSideMenuAction: onCircleSideMenuAction ?? this.onCircleSideMenuAction,
       savedPodsResult: savedPodsResult ?? this.savedPodsResult,
       savedPods: savedPods ?? this.savedPods,
+      followersCount: followersCount ?? this.followersCount,
+      followingCount: followingCount ?? this.followingCount,
     );
   }
 }
@@ -110,4 +124,8 @@ abstract class CirclesSideMenuViewModel {
   PaginatedList<PodApp> get savedPods;
 
   bool get isLoadingPods;
+
+  int get followersCount;
+
+  int get followingCount;
 }

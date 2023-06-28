@@ -6,6 +6,7 @@ import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.d
 import 'package:picnic_app/core/data/graphql/model/gql_follower_user.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_profile_stats.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_public_profile.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_user_stats.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_username_check_result.dart';
 import 'package:picnic_app/core/data/graphql/users_queries.dart';
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
@@ -15,11 +16,13 @@ import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/follow_unfollow_user_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_by_username_failure.dart';
 import 'package:picnic_app/core/domain/model/get_user_failure.dart';
+import 'package:picnic_app/core/domain/model/get_user_stats_failure.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/domain/model/profile_stats.dart';
 import 'package:picnic_app/core/domain/model/public_profile.dart';
 import 'package:picnic_app/core/domain/model/search_users_failure.dart';
 import 'package:picnic_app/core/domain/model/unblock_user_failure.dart';
+import 'package:picnic_app/core/domain/model/user_stats.dart';
 import 'package:picnic_app/core/domain/model/username_check_result.dart';
 import 'package:picnic_app/core/domain/repositories/users_repository.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
@@ -73,6 +76,22 @@ class GraphqlUsersRepository with FutureRetarder implements UsersRepository {
           (response) => response.toDomain(
             _userStore,
           ),
+        );
+  }
+
+  @override
+  Future<Either<GetUserStatsFailure, UserStats>> getUserStats({
+    required Id userId,
+  }) async {
+    return _gqlClient
+        .mutate(
+          document: getUserStatsQuery,
+          variables: {"userID": userId.value},
+          parseData: (json) => GqlUserStats.fromJson(asT(json, 'getUserStats')),
+        )
+        .mapFailure(GetUserStatsFailure.unknown)
+        .mapSuccess(
+          (response) => response.toDomain(),
         );
   }
 

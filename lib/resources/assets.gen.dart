@@ -638,6 +638,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/side_menu_icon.webp
   AssetGenImage get sideMenuIcon => const AssetGenImage('assets/images/side_menu_icon.webp');
 
+  /// File path: assets/images/sidebar_circles_list.webp
+  AssetGenImage get sidebarCirclesList => const AssetGenImage('assets/images/sidebar_circles_list.webp');
+
+  /// File path: assets/images/sidebar_discover.webp
+  AssetGenImage get sidebarDiscover => const AssetGenImage('assets/images/sidebar_discover.webp');
+
+  /// File path: assets/images/sidebar_menu_close.webp
+  AssetGenImage get sidebarMenuClose => const AssetGenImage('assets/images/sidebar_menu_close.webp');
+
+  /// File path: assets/images/sidebar_new_circle.webp
+  AssetGenImage get sidebarNewCircle => const AssetGenImage('assets/images/sidebar_new_circle.webp');
+
   /// File path: assets/images/sign_in_apple_logo.webp
   AssetGenImage get signInAppleLogo => const AssetGenImage('assets/images/sign_in_apple_logo.webp');
 
@@ -975,6 +987,10 @@ class $AssetsImagesGen {
         shareTelegram,
         show,
         sideMenuIcon,
+        sidebarCirclesList,
+        sidebarDiscover,
+        sidebarMenuClose,
+        sidebarNewCircle,
         signInAppleLogo,
         signInGoogleLogo,
         socialInstagram,

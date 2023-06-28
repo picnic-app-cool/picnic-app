@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/use_cases/get_collections_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_stats_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
@@ -25,15 +26,21 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
     this._getLastUsedCirclesUseCase,
     this._getCollectionsUseCase,
     this._getSavedPodsUseCase,
+    this._getUserStatsUseCase,
   );
 
   final CirclesSideMenuNavigator navigator;
   final GetLastUsedCirclesUseCase _getLastUsedCirclesUseCase;
   final GetCollectionsUseCase _getCollectionsUseCase;
   final GetSavedPodsUseCase _getSavedPodsUseCase;
+  final GetUserStatsUseCase _getUserStatsUseCase;
 
   // ignore: unused_element
   CirclesSideMenuPresentationModel get _model => state as CirclesSideMenuPresentationModel;
+
+  Future<void> onInit() async {
+    await _loadUserStats();
+  }
 
   void onTapEnterCircle(Id circleId) {
     navigator.openCircleDetails(
@@ -150,5 +157,18 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
 
   void _onCircleUpdated() {
     onLoadMoreCircles(fromScratch: true);
+  }
+
+  Future<void> _loadUserStats() async {
+    await _getUserStatsUseCase //
+        .execute(userId: _model.privateProfile.id)
+        .doOn(
+          success: (stats) => tryEmit(
+            _model.copyWith(
+              followersCount: stats.followers,
+              followingCount: stats.following,
+            ),
+          ),
+        );
   }
 }

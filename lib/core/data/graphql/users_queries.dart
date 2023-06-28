@@ -32,6 +32,15 @@ query(\$id: ID!) {
 $fullUserFragment
 """;
 
+const String getUserStatsQuery = """
+mutation(\$userID: String!) {
+  getUserStats(userID: \$userID) {
+    followers
+    following
+  }
+}
+""";
+
 const String getUserByUsernameQuery = """
 query(\$userName: String!) {
   profileGetUserIDByName(userName: \$userName) {

@@ -94,6 +94,7 @@ class Mocks {
 
   static late MockGetCollectionsFailure getCollectionsFailure;
   static late MockGetCollectionsUseCase getCollectionsUseCase;
+  static late MockGetUserStatsUseCase getUserStatsUseCase;
   static late MockGetCirclesFailure getCirclesFailure;
   static late MockGetCirclesUseCase getCirclesUseCase;
   static late MockGetUserCirclesFailure getUserCirclesFailure;
@@ -411,6 +412,7 @@ class Mocks {
     getLanguagesListUseCase = MockGetLanguageUseCase();
     getCollectionsFailure = MockGetCollectionsFailure();
     getCollectionsUseCase = MockGetCollectionsUseCase();
+    getUserStatsUseCase = MockGetUserStatsUseCase();
     getCirclesFailure = MockGetCirclesFailure();
     getCirclesUseCase = MockGetCirclesUseCase();
     getUserCirclesFailure = MockGetUserCirclesFailure();

@@ -274,6 +274,8 @@
   "chatAlertButtonTitle": "follow",
   "chatSettingsTitle": "chat settings",
   "followAction": "follow",
+  "sideBarFollowing": "Following",
+  "sideBarFollowers": "Followers",
   "chatAlertBarTitle": "message request",
   "chatAlertBarDescription": "not in your following",
   "muteAction": "mute",

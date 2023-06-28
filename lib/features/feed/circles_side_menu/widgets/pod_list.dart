@@ -1,3 +1,4 @@
+//ignore_for_file: unused-code, unused-files
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';

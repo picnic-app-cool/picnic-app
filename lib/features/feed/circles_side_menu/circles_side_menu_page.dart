@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
+import 'package:picnic_app/core/utils/stat_extensions.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presentation_model.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_presenter.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/widgets/circles_list.dart';
-import 'package:picnic_app/features/feed/circles_side_menu/widgets/pod_list.dart';
-import 'package:picnic_app/features/profile/private_profile/widgets/profile_horizontal_item.dart';
-import 'package:picnic_app/features/profile/widgets/tabs/collections_tab.dart';
+import 'package:picnic_app/features/feed/circles_side_menu/widgets/circles_side_menu_button.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/default_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
-import 'package:picnic_app/ui/widgets/picnic_tag.dart';
 import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
@@ -33,133 +31,154 @@ class CirclesSideMenuPage extends StatefulWidget with HasInitialParams {
 
 class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
     with PresenterStateMixinAuto<CirclesSideMenuViewModel, CirclesSideMenuPresenter, CirclesSideMenuPage> {
-  static const _tagRadius = 100.0;
+  static const _contentPadding = EdgeInsets.symmetric(horizontal: 26.0);
+  static const _dividerPadding = EdgeInsets.symmetric(horizontal: 9.0);
   static const double _badgeSize = 20.0;
-  static const double _avatarSize = 48;
-  static const _plusIconSize = 18.0;
-  static const _searchIconSize = 18.0;
-  static const _collectionRadius = 8.0;
-  static const _collectionHeight = 195.0;
+  static const double _avatarSize = 38;
+  static const _circlesIconSize = 24.0;
+
+  @override
+  void initState() {
+    super.initState();
+    presenter.onInit();
+  }
 
   @override
   Widget build(BuildContext context) {
     final colors = PicnicTheme.of(context).colors;
-    const linearGradientNewTag = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      stops: [
-        0.0,
-        0.4319,
-        1.0312,
-      ],
-      colors: [
-        Color(0xFFBE86F5),
-        Color(0xFFA76AF5),
-        Color(0xFFA497F5),
-      ],
-    );
     final styles = PicnicTheme.of(context).styles;
-    final title40 = styles.title40;
-    final link15BlueStyle = styles.link15.copyWith(color: colors.blue);
+    final link40 = styles.link40;
     final darkBlue = colors.darkBlue;
+    final body15 = styles.body15;
+    final viewAllStyle = body15.copyWith(color: darkBlue.shade500);
+    final followersStyle = body15.copyWith(color: colors.darkBlue.shade600);
 
     final user = state.privateProfile.user;
     return DarkStatusBar(
       child: Drawer(
         elevation: 0,
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Gap(6),
-                InkWell(
+          bottom: false,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Gap(6),
+              Padding(
+                padding: _contentPadding,
+                child: InkWell(
                   onTap: presenter.onTapProfile,
-                  child: Row(
-                    children: [
-                      PicnicAvatar(
-                        onTap: presenter.onTapProfile,
-                        size: _avatarSize,
-                        boxFit: PicnicAvatarChildBoxFit.cover,
-                        imageSource: PicnicImageSource.url(
-                          state.privateProfile.profileImageUrl,
-                          fit: BoxFit.cover,
+                  child: stateObserver(
+                    builder: (context, state) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            PicnicAvatar(
+                              onTap: presenter.onTapProfile,
+                              size: _avatarSize,
+                              boxFit: PicnicAvatarChildBoxFit.cover,
+                              imageSource: PicnicImageSource.url(
+                                state.privateProfile.profileImageUrl,
+                                fit: BoxFit.cover,
+                              ),
+                              placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
+                            ),
+                            const Gap(8),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      user.fullName.isEmpty ? user.username : user.fullName,
+                                      style: styles.title30,
+                                    ),
+                                    if (state.privateProfile.isVerified) ...[
+                                      const Gap(4),
+                                      Assets.images.verificationBadgePink.image(width: _badgeSize),
+                                    ],
+                                  ],
+                                ),
+                                Text(
+                                  user.username.formattedUsername,
+                                  style: followersStyle,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        placeholder: () => DefaultAvatar.user(avatarSize: _avatarSize),
-                      ),
-                      const Gap(4),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            textAlign: TextAlign.center,
-                            user.fullName.isEmpty ? user.username : user.fullName,
-                            style: styles.title30,
-                          ),
+                        if (state.followingCount > 0 || state.followersCount > 0) ...[
+                          const Gap(16),
                           Row(
                             children: [
-                              Text(
-                                user.username.formattedUsername,
-                                style: styles.body15.copyWith(color: colors.darkBlue.shade600),
-                              ),
-                              if (state.privateProfile.isVerified) ...[
-                                const Gap(2),
-                                Assets.images.verificationBadgePink.image(width: _badgeSize),
+                              if (state.followingCount > 0) ...[
+                                Text(
+                                  state.followingCount.formattingToStat(),
+                                  style: styles.body15,
+                                ),
+                                const Gap(4),
+                                Text(
+                                  appLocalizations.sideBarFollowing,
+                                  style: followersStyle,
+                                ),
+                                const Gap(16),
+                              ],
+                              if (state.followersCount > 0) ...[
+                                Text(
+                                  state.followersCount.formattingToStat(),
+                                  style: styles.body15,
+                                ),
+                                const Gap(4),
+                                Text(
+                                  appLocalizations.sideBarFollowers,
+                                  style: followersStyle,
+                                ),
                               ],
                             ],
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      appLocalizations.collectionsTabTitle,
-                      style: title40,
-                    ),
-                    InkWell(
-                      onTap: presenter.onTapViewCollections,
-                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: _collectionHeight,
-                  child: stateObserver(
-                    builder: (context, state) => CollectionsTab(
-                      collections: state.collections,
-                      borderRadius: _collectionRadius,
-                      onLoadMore: presenter.loadCollection,
-                      isLoading: state.isLoadingCollections,
-                      onTapCollection: presenter.onTapCollection,
+                        const Gap(20),
+                      ],
                     ),
                   ),
                 ),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              ),
+              const Padding(
+                padding: _dividerPadding,
+                child: Divider(),
+              ),
+              Padding(
+                padding: _contentPadding,
+                child: Row(
                   children: [
+                    Image.asset(
+                      Assets.images.sidebarCirclesList.path,
+                      height: _circlesIconSize,
+                      width: _circlesIconSize,
+                    ),
+                    const Gap(10),
                     Text(
                       appLocalizations.recentCircles,
-                      style: title40,
+                      style: link40,
                     ),
+                    const Spacer(),
                     InkWell(
                       onTap: presenter.onTapViewCircles,
-                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
+                      child: Text(
+                        appLocalizations.viewAllAction,
+                        style: viewAllStyle,
+                      ),
                     ),
                   ],
                 ),
-                Flexible(
-                  child: stateObserver(
-                    builder: (context, state) => CirclesList(
+              ),
+              Expanded(
+                child: stateObserver(
+                  builder: (context, state) => Padding(
+                    padding: _contentPadding,
+                    child: CirclesList(
                       onTapEnterCircle: presenter.onTapEnterCircle,
                       userCircles: state.lastUsedCircles,
                       loadMore: presenter.onLoadMoreCircles,
@@ -167,77 +186,32 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                     ),
                   ),
                 ),
-                const Divider(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          appLocalizations.pods,
-                          style: title40,
-                        ),
-                        const Gap(6),
-                        PicnicTag(
-                          borderRadius: _tagRadius,
-                          title: appLocalizations.newLabel,
-                          gradient: linearGradientNewTag,
-                          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                          titleTextStyle: styles.body20.copyWith(
-                            color: colors.blackAndWhite.shade100,
-                          ),
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: presenter.onTapViewPods,
-                      child: Text(appLocalizations.viewAllAction, style: link15BlueStyle),
-                    ),
-                  ],
-                ),
-                Flexible(
-                  child: stateObserver(
-                    builder: (context, state) => PodList(
-                      pods: state.savedPods,
-                      loadMore: presenter.loadSavedPods,
-                      isLoading: state.isLoadingPods,
-                    ),
-                  ),
-                ),
-                const Divider(),
-                Row(
+              ),
+              const Gap(8),
+              Padding(
+                padding: _contentPadding,
+                child: Row(
                   children: [
                     Expanded(
-                      child: ProfileHorizontalItem(
+                      child: CirclesSideMenuButton(
                         onTap: presenter.onTapCreateNewCircle,
-                        title: appLocalizations.createNewCircle,
-                        trailing: Image.asset(
-                          Assets.images.add.path,
-                          color: darkBlue.shade800,
-                          height: _plusIconSize,
-                          width: _plusIconSize,
-                        ),
+                        title: appLocalizations.newCircleAction,
+                        assetPath: Assets.images.sidebarNewCircle.path,
                       ),
                     ),
                     const Gap(8),
                     Expanded(
-                      child: ProfileHorizontalItem(
+                      child: CirclesSideMenuButton(
                         onTap: presenter.onTapSearchCircles,
-                        title: appLocalizations.discoverNewCircle,
-                        trailing: Image.asset(
-                          Assets.images.search.path,
-                          color: darkBlue.shade800,
-                          height: _searchIconSize,
-                          width: _searchIconSize,
-                        ),
+                        title: appLocalizations.discoveryDiscover,
+                        assetPath: Assets.images.sidebarDiscover.path,
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              const Gap(40),
+            ],
           ),
         ),
       ),

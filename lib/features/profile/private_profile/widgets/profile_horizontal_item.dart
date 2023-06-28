@@ -7,6 +7,7 @@ class ProfileHorizontalItem extends StatelessWidget {
     Key? key,
     required this.onTap,
     required this.title,
+    this.titleStyle,
     this.trailing,
     this.leading,
     this.onTapTrailing,
@@ -17,6 +18,7 @@ class ProfileHorizontalItem extends StatelessWidget {
 
   final Widget? trailing;
   final String title;
+  final TextStyle? titleStyle;
 
   final Widget? leading;
 
@@ -31,7 +33,7 @@ class ProfileHorizontalItem extends StatelessWidget {
 
     return PicnicListItem(
       title: title,
-      titleStyle: styles.link15.copyWith(color: colors.darkBlue.shade800),
+      titleStyle: titleStyle ?? styles.link15.copyWith(color: colors.darkBlue.shade800),
       onTapDetails: onTapTrailing,
       onTap: onTap,
       height: _itemHeight,

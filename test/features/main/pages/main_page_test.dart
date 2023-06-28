@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/user_stats.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/analytics/analytics_observer.dart';
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_page.dart';
@@ -88,6 +89,12 @@ Future<void> main() async {
       ),
     ).thenAnswer((invocation) => successFuture(const PaginatedList.empty()));
 
+    when(
+      () => Mocks.getUserStatsUseCase.execute(
+        userId: any(named: 'userId'),
+      ),
+    ).thenAnswer((_) => successFuture(const UserStats.empty()));
+
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
     initParams = const MainInitialParams();
@@ -158,6 +165,7 @@ Future<void> main() async {
           CirclesMocks.getLastUsedCirclesUseCase,
           Mocks.getCollectionsUseCase,
           PodsMocks.getSavedPodsUseCase,
+          Mocks.getUserStatsUseCase,
         ),
       );
     },

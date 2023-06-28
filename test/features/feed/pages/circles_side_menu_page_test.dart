@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
+import 'package:picnic_app/core/domain/model/user_stats.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_initial_params.dart';
@@ -56,12 +57,19 @@ Future<void> main() async {
       ),
     ).thenAnswer((invocation) => successFuture(const PaginatedList.empty()));
 
+    when(
+      () => Mocks.getUserStatsUseCase.execute(
+        userId: any(named: 'userId'),
+      ),
+    ).thenAnswer((_) => successFuture(const UserStats.empty()));
+
     presenter = CirclesSideMenuPresenter(
       model,
       navigator,
       CirclesMocks.getLastUsedCirclesUseCase,
       Mocks.getCollectionsUseCase,
       PodsMocks.getSavedPodsUseCase,
+      Mocks.getUserStatsUseCase,
     );
 
     getIt.registerFactoryParam<CirclesSideMenuPresenter, CirclesSideMenuInitialParams, dynamic>(
