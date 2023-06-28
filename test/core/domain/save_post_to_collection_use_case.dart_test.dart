@@ -13,7 +13,10 @@ void main() {
   late SavePostToCollectionUseCase useCase;
 
   setUp(() {
-    useCase = SavePostToCollectionUseCase(PostsMocks.postsRepository);
+    useCase = SavePostToCollectionUseCase(
+      PostsMocks.postsRepository,
+      PostsMocks.getPostUseCase,
+    );
   });
 
   test(
@@ -32,8 +35,8 @@ void main() {
       );
 
       when(
-        () => PostsMocks.postsRepository.getPostById(
-          id: any(named: 'id'),
+        () => PostsMocks.getPostUseCase.execute(
+          postId: any(named: 'postId'),
         ),
       ).thenAnswer(
         (_) => successFuture(Stubs.imagePost),

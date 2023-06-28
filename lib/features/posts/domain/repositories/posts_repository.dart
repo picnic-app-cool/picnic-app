@@ -92,7 +92,8 @@ abstract class PostsRepository {
   });
 
   Future<Either<GetPostByIdFailure, Post>> getPostById({
-    required Id id,
+    Id? postId,
+    Id? shortId,
   });
 
   Future<Either<SharePostFailure, Unit>> sharePost({required Id postId});

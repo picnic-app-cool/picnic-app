@@ -288,11 +288,17 @@ class GraphQlPostsRepository implements PostsRepository {
       .mapSuccessPayload(onFailureReturn: const SharePostFailure.unknown());
 
   @override
-  Future<Either<GetPostByIdFailure, Post>> getPostById({required Id id}) {
+  Future<Either<GetPostByIdFailure, Post>> getPostById({
+    Id? postId,
+    Id? shortId,
+  }) {
     return _gqlClient
         .query(
           document: getPostByIdQuery,
-          variables: {'postId': id.value},
+          variables: {
+            if (postId != null) 'postId': postId.value,
+            if (shortId != null) 'shortId': shortId.value,
+          },
           parseData: (data) {
             return GqlPost.fromJson(data['getPost'] as Map<String, dynamic>);
           },

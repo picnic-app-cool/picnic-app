@@ -6,15 +6,18 @@ import 'package:picnic_app/features/posts/domain/model/like_dislike_reaction.dar
 import 'package:picnic_app/features/posts/domain/model/like_unlike_post_failure.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/repositories/posts_repository.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 
 class LikeDislikePostUseCase {
   const LikeDislikePostUseCase(
     this._postsRepository,
     this._hapticFeedbackUseCase,
+    this._getPostUseCase,
   );
 
   final PostsRepository _postsRepository;
   final HapticFeedbackUseCase _hapticFeedbackUseCase;
+  final GetPostUseCase _getPostUseCase;
 
   Future<Either<LikeUnlikePostFailure, Post>> execute({
     required Id id,
@@ -23,7 +26,7 @@ class LikeDislikePostUseCase {
       _postsRepository
           .likeUnlikePost(id: id, likeDislikeReaction: likeDislikeReaction)
           .flatMap(
-            (_) => _postsRepository.getPostById(id: id).mapFailure(
+            (_) => _getPostUseCase.execute(postId: id).mapFailure(
                   LikeUnlikePostFailure.unknown,
                 ),
           )

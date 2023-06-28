@@ -15,7 +15,7 @@ void main() {
     useCase = GetPostUseCase(PostsMocks.postsRepository);
 
     when(
-      () => PostsMocks.postsRepository.getPostById(id: Stubs.posts.items.first.id),
+      () => PostsMocks.postsRepository.getPostById(shortId: Stubs.posts.items.first.id),
     ).thenAnswer(
       (invocation) => successFuture(Stubs.posts.items.first),
     );

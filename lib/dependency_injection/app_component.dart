@@ -643,6 +643,7 @@ void _configureUseCases() {
         ..registerFactory<SavePostToCollectionUseCase>(
           () => SavePostToCollectionUseCase(
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactory<SetLanguageUseCase>(

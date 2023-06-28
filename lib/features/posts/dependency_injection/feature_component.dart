@@ -188,6 +188,7 @@ void _configureUseCases() {
           () => LikeDislikePostUseCase(
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactory<GetSoundsListUseCase>(
@@ -226,7 +227,10 @@ void _configureUseCases() {
           ),
         )
         ..registerFactory<VoteInPollUseCase>(
-          () => VoteInPollUseCase(getIt()),
+          () => VoteInPollUseCase(
+            getIt(),
+            getIt(),
+          ),
         )
         ..registerFactory<GetPostUseCase>(
           () => GetPostUseCase(getIt()),
@@ -245,6 +249,7 @@ void _configureUseCases() {
         )
         ..registerFactory<UnreactToPostUseCase>(
           () => UnreactToPostUseCase(
+            getIt(),
             getIt(),
             getIt(),
           ),

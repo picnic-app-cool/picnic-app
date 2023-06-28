@@ -8,10 +8,13 @@ class GetPostUseCase {
   const GetPostUseCase(this._postsRepository);
 
   final PostsRepository _postsRepository;
+  static const _shortPrefixMaxLength = 12;
 
   Future<Either<GetPostByIdFailure, Post>> execute({
     required Id postId,
   }) {
-    return _postsRepository.getPostById(id: postId);
+    return postId.value.length > _shortPrefixMaxLength
+        ? _postsRepository.getPostById(postId: postId)
+        : _postsRepository.getPostById(shortId: postId);
   }
 }

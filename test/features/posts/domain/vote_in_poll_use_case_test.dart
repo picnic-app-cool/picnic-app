@@ -14,7 +14,10 @@ void main() {
   late VoteInPollUseCase useCase;
 
   setUp(() {
-    useCase = VoteInPollUseCase(PostsMocks.postsRepository);
+    useCase = VoteInPollUseCase(
+      PostsMocks.postsRepository,
+      PostsMocks.getPostUseCase,
+    );
     when(
       () => PostsMocks.postsRepository.voteInPoll(
         voteInPollInput: const VoteInPollInput.empty(),
@@ -22,7 +25,7 @@ void main() {
     ).thenAnswer((_) => successFuture(const Id.empty()));
 
     when(
-      () => PostsMocks.postsRepository.getPostById(id: const Id.empty()),
+      () => PostsMocks.getPostUseCase.execute(postId: const Id.empty()),
     ).thenAnswer((_) => successFuture(Stubs.pollPost));
   });
 

@@ -18,6 +18,7 @@ void main() {
     useCase = LikeDislikePostUseCase(
       PostsMocks.postsRepository,
       Mocks.hapticFeedbackUseCase,
+      PostsMocks.getPostUseCase,
     );
     when(
       () => PostsMocks.postsRepository.likeUnlikePost(
@@ -26,8 +27,8 @@ void main() {
       ),
     ).thenAnswer((_) => successFuture(unit));
     when(
-      () => PostsMocks.postsRepository.getPostById(
-        id: Stubs.imagePost.id,
+      () => PostsMocks.getPostUseCase.execute(
+        postId: Stubs.imagePost.id,
       ),
     ).thenAnswer((_) => successFuture(Stubs.imagePost));
     when(

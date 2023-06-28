@@ -138,8 +138,8 @@ mutation voteInPoll(\$variantId: ID!, \$postId: ID!) {
 """;
 
 String get getPostByIdQuery => """
-query(\$postId: String!){
-        getPost(postId: \$postId){   
+query(\$postId: String, \$shortId: String){
+        getPost(postId: \$postId, shortId: \$shortId){   
             ${GqlTemplate().post}
         }
     }

@@ -4,13 +4,16 @@ import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/domain/model/save_post_input.dart';
 import 'package:picnic_app/features/posts/domain/repositories/posts_repository.dart';
+import 'package:picnic_app/features/posts/domain/use_cases/get_post_use_case.dart';
 
 class SavePostToCollectionUseCase {
   const SavePostToCollectionUseCase(
     this._postsRepository,
+    this._getPostUseCase,
   );
 
   final PostsRepository _postsRepository;
+  final GetPostUseCase _getPostUseCase;
 
   Future<Either<SavePostToCollectionFailure, Post>> execute({
     required SavePostInput input,
@@ -21,7 +24,7 @@ class SavePostToCollectionUseCase {
           SavePostToCollectionFailure.unknown,
         )
         .flatMap(
-          (_) => _postsRepository.getPostById(id: input.postId).mapFailure(
+          (_) => _getPostUseCase.execute(postId: input.postId).mapFailure(
                 SavePostToCollectionFailure.unknown,
               ),
         );
