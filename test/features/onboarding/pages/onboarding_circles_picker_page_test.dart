@@ -6,6 +6,7 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_page.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presenter.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 
 import '../../../mocks/mocks.dart';
@@ -26,7 +27,7 @@ Future<void> main() async {
   void _initMvp() {
     initParams = OnBoardingCirclesPickerInitialParams(
       onCirclesSelected: (_) {},
-      formData: const OnboardingFormData.empty(),
+      formData: const OnboardingFormData.empty().copyWith(gender: Gender.female),
     );
     model = OnBoardingCirclesPickerPresentationModel.initial(
       initParams,
@@ -35,16 +36,17 @@ Future<void> main() async {
     presenter = OnBoardingCirclesPickerPresenter(
       model,
       navigator,
-      OnboardingMocks.getOnBoardingCirclesUseCase,
+      OnboardingMocks.getOnBoardingInterestsUseCase,
       CirclesMocks.joinCirclesUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.setShouldShowCirclesSelectionUseCase,
+      OnboardingMocks.getCirclesForInterestsUseCase,
     );
 
     page = OnboardingCirclesPickerPage(presenter: presenter);
-    when(() => OnboardingMocks.getOnBoardingCirclesUseCase.execute()).thenAnswer(
+    when(() => OnboardingMocks.getOnBoardingInterestsUseCase.execute(any())).thenAnswer(
       (_) => successFuture(
-        Stubs.onBoardingCircles,
+        Stubs.onBoardingInterests,
       ),
     );
     when(() => Mocks.setShouldShowCirclesSelectionUseCase.execute(shouldShow: true)).thenAnswer(

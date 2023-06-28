@@ -3,6 +3,7 @@ import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/features/onboarding/domain/model/credentials/apple_log_in_credentials.dart';
 import 'package:picnic_app/features/onboarding/domain/model/credentials/google_log_in_credentials.dart';
 import 'package:picnic_app/features/onboarding/domain/model/credentials/phone_log_in_credentials.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 
 import '../../../mocks/mock_definitions.dart';
@@ -77,6 +78,8 @@ class OnboardingMocks {
   static late MockGetGroupsOfCirclesFailure getCircleGroupingsFailure;
   static late MockGetCircleGroupingsUseCase getCircleGroupingsUseCase;
   static late MockGetOnBoardingCirclesUseCase getOnBoardingCirclesUseCase;
+  static late MockGetOnBoardingInterestsUseCase getOnBoardingInterestsUseCase;
+  static late MockGetCirclesForInterestsUseCase getCirclesForInterestsUseCase;
   static late MockRequestPhoneCodeFailure requestPhoneCodeFailure;
   static late MockRequestPhoneCodeUseCase requestPhoneCodeUseCase;
 
@@ -96,6 +99,8 @@ class OnboardingMocks {
 
   static late MockRequestCodeForUsernameLoginFailure requestCodeForUsernameLoginFailure;
   static late MockRequestCodeForUsernameLoginUseCase requestCodeForUsernameLoginUseCase;
+
+  static late MockGetCirclesForInterestsFailure getCirclesForInterestsFailure;
 
   // REPOSITORIES
   //DO-NOT-REMOVE REPOSITORIES_MOCKS_STATIC_FIELD
@@ -172,6 +177,8 @@ class OnboardingMocks {
     getCircleGroupingsFailure = MockGetGroupsOfCirclesFailure();
     getCircleGroupingsUseCase = MockGetCircleGroupingsUseCase();
     getOnBoardingCirclesUseCase = MockGetOnBoardingCirclesUseCase();
+    getOnBoardingInterestsUseCase = MockGetOnBoardingInterestsUseCase();
+    getCirclesForInterestsUseCase = MockGetCirclesForInterestsUseCase();
     requestPhoneCodeFailure = MockRequestPhoneCodeFailure();
     requestPhoneCodeUseCase = MockRequestPhoneCodeUseCase();
     logInFailure = MockLogInFailure();
@@ -188,6 +195,8 @@ class OnboardingMocks {
 
     requestCodeForUsernameLoginFailure = MockRequestCodeForUsernameLoginFailure();
     requestCodeForUsernameLoginUseCase = MockRequestCodeForUsernameLoginUseCase();
+
+    getCirclesForInterestsFailure = MockGetCirclesForInterestsFailure();
 
     // REPOSITORIES
     //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS
@@ -258,6 +267,8 @@ class OnboardingMocks {
     registerFallbackValue(MockGetGroupsOfCirclesFailure());
     registerFallbackValue(MockGetCircleGroupingsUseCase());
     registerFallbackValue(MockGetOnBoardingCirclesUseCase());
+    registerFallbackValue(MockGetOnBoardingInterestsUseCase());
+    registerFallbackValue(MockGetCirclesForInterestsUseCase());
     registerFallbackValue(MockRequestPhoneCodeFailure());
     registerFallbackValue(MockRequestPhoneCodeUseCase());
     registerFallbackValue(MockLogInFailure());
@@ -278,6 +289,8 @@ class OnboardingMocks {
     registerFallbackValue(MockRequestCodeForUsernameLoginFailure());
     registerFallbackValue(MockRequestCodeForUsernameLoginUseCase());
 
+    registerFallbackValue(MockGetCirclesForInterestsFailure());
+
     // REPOSITORIES
     //DO-NOT-REMOVE REPOSITORIES_MOCK_FALLBACK_VALUE
 
@@ -287,5 +300,6 @@ class OnboardingMocks {
     registerFallbackValue(const GoogleLogInCredentials());
     registerFallbackValue(const AppleLogInCredentials());
     registerFallbackValue(const PhoneLogInCredentials(PhoneVerificationData.empty()));
+    registerFallbackValue(Gender.female);
   }
 }

@@ -98,7 +98,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
         return _openUsername();
       case OnboardingScreen.permissions:
         return _openPermissions();
-      case OnboardingScreen.circleGroupings:
+      case OnboardingScreen.interests:
         return _openCirclesPickerPage();
       case OnboardingScreen.language:
         return _openLanguage();
@@ -188,7 +188,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
         },
       ),
     );
-    return _handleBackAction(OnboardingScreen.circleGroupings);
+    return _handleBackAction(OnboardingScreen.interests);
   }
 
   Future<void> _openUsername() async {
@@ -260,7 +260,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
           OnboardingScreen.codeVerification,
           OnboardingScreen.username,
           OnboardingScreen.permissions,
-          if (!_model.user.circlesPending) OnboardingScreen.circleGroupings,
+          if (!_model.user.circlesPending) OnboardingScreen.interests,
         ],
       ),
     );

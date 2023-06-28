@@ -24,8 +24,10 @@ import 'package:picnic_app/features/onboarding/country_select_form/country_selec
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_captcha_params_use_case.dart';
+import 'package:picnic_app/features/onboarding/domain/use_cases/get_circles_for_interests_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_groups_with_circles_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_onboarding_circles_use_case.dart';
+import 'package:picnic_app/features/onboarding/domain/use_cases/get_onboarding_interests_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/log_in_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/register_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/request_code_for_username_login_use_case.dart';
@@ -188,6 +190,16 @@ void _configureUseCases() {
           () => RequestCodeForUsernameLoginUseCase(
             getIt(),
             getIt(),
+            getIt(),
+          ),
+        )
+        ..registerFactory<GetOnBoardingInterestsUseCase>(
+          () => GetOnBoardingInterestsUseCase(
+            getIt(),
+          ),
+        )
+        ..registerFactory<GetCirclesForInterestsUseCase>(
+          () => GetCirclesForInterestsUseCase(
             getIt(),
           ),
         )
@@ -446,6 +458,7 @@ void _configureMvp() {
         ..registerFactoryParam<OnBoardingCirclesPickerPresenter, OnBoardingCirclesPickerInitialParams, dynamic>(
           (initialParams, _) => OnBoardingCirclesPickerPresenter(
             getIt(param1: initialParams),
+            getIt(),
             getIt(),
             getIt(),
             getIt(),

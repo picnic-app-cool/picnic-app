@@ -96,7 +96,9 @@ void _configureMvp() {
           ),
         )
         ..registerFactory<FeaturesIndexNavigator>(
-          () => FeaturesIndexNavigator(getIt()),
+          () => FeaturesIndexNavigator(
+            getIt(),
+          ),
         )
         ..registerFactoryParam<FeaturesIndexPresentationModel, FeaturesIndexInitialParams, dynamic>(
           (params, _) => FeaturesIndexPresentationModel.initial(

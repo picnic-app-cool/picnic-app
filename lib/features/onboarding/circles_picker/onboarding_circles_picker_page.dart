@@ -6,11 +6,12 @@ import 'package:picnic_app/core/utils/durations.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presenter.dart';
-import 'package:picnic_app/features/onboarding/circles_picker/widgets/circles_picker_top_section.dart';
-import 'package:picnic_app/features/onboarding/circles_picker/widgets/group_of_selectable_circles.dart';
+import 'package:picnic_app/features/onboarding/circles_picker/widgets/interests_selection_section.dart';
+import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
-import 'package:picnic_app/ui/widgets/picnic_container_icon_button.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_app_bar.dart';
+import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
+import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 
 class OnboardingCirclesPickerPage extends StatefulWidget with HasPresenter<OnBoardingCirclesPickerPresenter> {
@@ -30,6 +31,10 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
     with
         PresenterStateMixin<OnBoardingCirclesPickerViewModel, OnBoardingCirclesPickerPresenter,
             OnboardingCirclesPickerPage> {
+  static const _personIconSize = 40.0;
+  static const _enabledButtonOpacity = 1.0;
+  static const _disabledButtonOpacity = 0.5;
+
   @override
   void initState() {
     super.initState();
@@ -38,47 +43,60 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
 
   @override
   Widget build(BuildContext context) {
+    final theme = PicnicTheme.of(context);
+    final colors = theme.colors;
+    final darkBlue = colors.darkBlue;
+    final blackAndWhite600 = colors.blackAndWhite.shade600;
     return Scaffold(
-      appBar: PicnicAppBar(
-        showBackButton: false,
-        actions: [
-          stateObserver(
-            builder: (context, state) => PicnicContainerIconButton(
-              onTap: state.isAcceptButtonEnabled ? presenter.onTapAccept : null,
-              iconPath: Assets.images.check.path,
-            ),
-          ),
-        ],
-      ),
+      appBar: const PicnicAppBar(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: stateObserver(
-            builder: (context, state) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: stateObserver(
+          builder: (context, state) => Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                CirclesPickerTopSection(
-                  selectionsLeftCount: state.selectionsLeftCount,
-                  anythingSelected: state.anythingSelected,
+                Assets.images.profileIconPlaceholder.image(
+                  width: _personIconSize,
+                  height: _personIconSize,
+                  fit: BoxFit.contain,
+                  color: darkBlue,
                 ),
+                const Gap(8),
+                Text(
+                  textAlign: TextAlign.center,
+                  appLocalizations.pickInterestsTitle,
+                  style: theme.styles.title60,
+                ),
+                const Gap(8),
+                Text(
+                  appLocalizations.pickInterestsDescription,
+                  style: theme.styles.body30.copyWith(color: blackAndWhite600),
+                  textAlign: TextAlign.center,
+                ),
+                const Gap(24),
                 AnimatedSwitcher(
                   duration: const ShortDuration(),
                   child: state.isLoading
                       ? const PicnicLoadingIndicator()
-                      : ListView.separated(
-                          padding: const EdgeInsets.all(24),
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.selectableCirclesSectionsList.length,
-                          separatorBuilder: (BuildContext context, int index) => const Gap(24),
-                          itemBuilder: (BuildContext context, int index) {
-                            final groupedCircles = state.selectableCirclesSectionsList[index];
-                            return GroupOfSelectableCircles(
-                              selectableGroupedCircles: groupedCircles,
-                              onTapCircle: presenter.onTapCircle,
-                              groupIndex: index,
-                            );
-                          },
+                      : InterestsSelectionSection(
+                          selectableInterests: state.selectableInterests,
+                          onTapInterest: presenter.onTapInterest,
                         ),
+                ),
+                const Spacer(),
+                stateObserver(
+                  builder: (context, state) => PicnicButton(
+                    opacity: state.isAcceptButtonEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
+                    onTap: state.isAcceptButtonEnabled ? presenter.onTapContinue : null,
+                    color: colors.blue,
+                    title: state.isAcceptButtonEnabled
+                        ? appLocalizations.continueAction
+                        : appLocalizations.youSelectedSome(
+                            state.currentSelectionsCount,
+                            OnBoardingCirclesPickerPresentationModel.requiredNumberOfInterestsInOnBoarding,
+                          ),
+                  ),
                 ),
               ],
             ),

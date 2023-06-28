@@ -15,6 +15,7 @@ import 'package:picnic_app/features/onboarding/age_form/age_form_initial_params.
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_initial_params.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/register_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/validators/onboarding_form_validator.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
@@ -193,7 +194,7 @@ void main() {
             (presenter.state as OnboardingPresentationModel).screensList,
             [
               OnboardingScreen.permissions,
-              OnboardingScreen.circleGroupings,
+              OnboardingScreen.interests,
             ],
           );
         },
@@ -224,7 +225,7 @@ void main() {
     });
 
     when(() => navigator.openGenderSelectForm(any())).thenAnswer((invocation) {
-      invocation.initParams<GenderSelectFormInitialParams>().onGenderSelected("");
+      invocation.initParams<GenderSelectFormInitialParams>().onGenderSelected(Gender.female);
       return navigationCompleter.future;
     });
 

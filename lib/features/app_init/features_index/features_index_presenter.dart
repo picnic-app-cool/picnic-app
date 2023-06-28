@@ -23,6 +23,7 @@ import 'package:picnic_app/features/discover/discover_explore/discover_explore_i
 import 'package:picnic_app/features/force_update/force_update_initial_params.dart';
 import 'package:picnic_app/features/main/main_initial_params.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_initial_params.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/onboarding_initial_params.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_initial_params.dart';
@@ -141,13 +142,15 @@ class FeaturesIndexPresenter extends Cubit<FeaturesIndexViewModel> with Subscrip
         ),
       );
 
-  void onTapOnBoardingCirclesPicker() => navigator.openOnBoardingCirclesPickerPage(
-        OnBoardingCirclesPickerInitialParams(
-          // ignore: no-empty-block
-          onCirclesSelected: (_) {},
-          formData: const OnboardingFormData.empty(),
-        ),
-      );
+  void onTapOnBoardingCirclesPicker() {
+    navigator.openOnBoardingCirclesPickerPage(
+      OnBoardingCirclesPickerInitialParams(
+        // ignore: no-empty-block
+        onCirclesSelected: (_) {},
+        formData: const OnboardingFormData.empty().copyWith(gender: Gender.female),
+      ),
+    );
+  }
 
   void onTapForceUpdate() => navigator.openForceUpdate(
         const ForceUpdateInitialParams(),

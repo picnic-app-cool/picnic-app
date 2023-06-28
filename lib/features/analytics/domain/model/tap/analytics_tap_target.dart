@@ -3,6 +3,7 @@ enum AnalyticsTapTarget {
   onboardingLoginButton('onboarding_login_button'),
   onboardingCountryContinueButton('onboarding_country_continue_button'),
   onboardingLanguageContinueButton('onboarding_language_continue_button'),
+  onboardingLanguageSkipButton('onboarding_language_skip_button'),
   onboardingLanguageSelectButton('onboarding_language_select_button'),
   onboardingAgeContinueButton('onboarding_age_continue_button'),
   onboardingPhoneContinueButton('onboarding_phone_continue_button'),

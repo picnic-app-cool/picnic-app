@@ -1,4 +1,5 @@
 import 'package:picnic_app/core/utils/utils.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
@@ -17,23 +18,23 @@ class GenderSelectFormPresentationModel implements GenderSelectFormViewModel {
   });
 
   @override
-  final String selectedGender;
-  final ValueChanged<String> onGenderSelectedCallback;
+  final Gender selectedGender;
+  final ValueChanged<Gender> onGenderSelectedCallback;
 
   @override
-  bool get isContinueEnabled => selectedGender.isNotEmpty;
+  bool get isContinueEnabled => selectedGender != Gender.unknown;
 
   @override
-  List<String> get genders => [
-        "female",
-        "male",
-        "non-binary",
-        "prefer not to say",
+  List<Gender> get genders => [
+        Gender.female,
+        Gender.male,
+        Gender.nonBinary,
+        Gender.preferNotToSay,
       ];
 
   GenderSelectFormPresentationModel copyWith({
-    String? selectedGender,
-    ValueChanged<String>? onGenderSelectedCallback,
+    Gender? selectedGender,
+    ValueChanged<Gender>? onGenderSelectedCallback,
   }) {
     return GenderSelectFormPresentationModel._(
       selectedGender: selectedGender ?? this.selectedGender,
@@ -46,7 +47,7 @@ class GenderSelectFormPresentationModel implements GenderSelectFormViewModel {
 abstract class GenderSelectFormViewModel {
   bool get isContinueEnabled;
 
-  List<String> get genders;
+  List<Gender> get genders;
 
-  String get selectedGender;
+  Gender get selectedGender;
 }

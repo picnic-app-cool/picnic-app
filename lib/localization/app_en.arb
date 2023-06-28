@@ -1433,8 +1433,8 @@
   },
   "picnic": "picnic",
   "yourPhoneNumber": "your phone number",
-  "aboutYou": "about you",
-  "aboutYouDescription": "tell us about yourself to improve your \nrecommendations",
+  "aboutYou": "About you",
+  "aboutYouDescription": "Tell us about yourself to improve your \nrecommendations",
   "enterUsername": "enter username",
   "enterUsernameDescription": "your unique name to be discovered",
   "interests": "interests",
@@ -1467,6 +1467,21 @@
   "@byUsername": {
     "placeholders": {
       "username": {}
+    }
+  },
+  "unknown": "unknown",
+  "male": "male",
+  "female": "female",
+  "nonBinary": "non binary",
+  "preferNotToSay": "prefer not to say",
+  "iAm": "I am...",
+  "pickInterestsTitle": "Interests",
+  "pickInterestsDescription": "Pick some items you''d like to see",
+  "youSelectedSome": "You selected {interestsSelected} of {interestsMinimum}",
+  "@youSelectedSome": {
+    "placeholders": {
+      "interestsSelected": {},
+      "interestsMinimum": {}
     }
   }
 }

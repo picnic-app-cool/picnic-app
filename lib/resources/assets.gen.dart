@@ -413,6 +413,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/more_circle.webp
   AssetGenImage get moreCircle => const AssetGenImage('assets/images/more_circle.webp');
 
+  /// File path: assets/images/multiple_persons.webp
+  AssetGenImage get multiplePersons => const AssetGenImage('assets/images/multiple_persons.webp');
+
   /// File path: assets/images/music.webp
   AssetGenImage get music => const AssetGenImage('assets/images/music.webp');
 
@@ -520,6 +523,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/profile_filled.webp
   AssetGenImage get profileFilled => const AssetGenImage('assets/images/profile_filled.webp');
+
+  /// File path: assets/images/profile_icon_placeholder.webp
+  AssetGenImage get profileIconPlaceholder => const AssetGenImage('assets/images/profile_icon_placeholder.webp');
 
   /// File path: assets/images/read.webp
   AssetGenImage get read => const AssetGenImage('assets/images/read.webp');
@@ -894,6 +900,7 @@ class $AssetsImagesGen {
         microphone,
         monkey,
         moreCircle,
+        multiplePersons,
         music,
         mute,
         navigateOut,
@@ -930,6 +937,7 @@ class $AssetsImagesGen {
         postIcon,
         profile,
         profileFilled,
+        profileIconPlaceholder,
         read,
         repeat,
         reply,

@@ -142,4 +142,10 @@ circles {
   String get pods => '''
 apps
 ''';
+
+  String get interest => '''
+id
+name
+emoji
+''';
 }

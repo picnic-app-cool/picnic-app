@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:picnic_app/core/domain/model/basic_circle.dart';
+import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 
 class OnBoardingCirclesPickerInitialParams {
@@ -9,5 +9,5 @@ class OnBoardingCirclesPickerInitialParams {
   });
 
   final OnboardingFormData formData;
-  final ValueChanged<List<BasicCircle>> onCirclesSelected;
+  final ValueChanged<List<Id>> onCirclesSelected;
 }

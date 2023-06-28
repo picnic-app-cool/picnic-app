@@ -37,6 +37,10 @@ import 'package:picnic_app/features/circles/domain/model/un_vote_pod_failure.dar
 import 'package:picnic_app/features/circles/domain/model/update_circle_member_role_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/view_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
+import 'package:picnic_app/features/onboarding/domain/model/get_circles_for_interests_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/get_interests_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/interest.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
 
@@ -110,6 +114,10 @@ abstract class CirclesRepository {
   });
 
   Future<Either<GetOnBoardingCirclesFailure, List<OnboardingCirclesSection>>> getOnBoardingCircles();
+
+  Future<Either<GetInterestsFailure, List<Interest>>> getOnBoardingInterests(Gender gender);
+
+  Future<Either<GetCirclesForInterestsFailure, List<Id>>> getCirclesForInterests(List<Id> interestsId);
 
   Future<Either<GetCircleStatsFailure, CircleStats>> getCircleStats({
     required Id circleId,

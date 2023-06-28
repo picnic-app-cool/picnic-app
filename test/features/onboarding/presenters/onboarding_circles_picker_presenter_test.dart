@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:picnic_app/core/domain/model/basic_circle.dart';
+import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_initial_params.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presentation_model.dart';
@@ -8,6 +8,7 @@ import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 
 import '../../../mocks/mocks.dart';
+import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../../circles/mocks/circles_mocks.dart';
@@ -24,8 +25,10 @@ void main() {
       (_) => successFuture(true),
     );
 
-    when(() => OnboardingMocks.getOnBoardingCirclesUseCase.execute()).thenAnswer(
-      (_) => successFuture([]),
+    when(() => OnboardingMocks.getOnBoardingInterestsUseCase.execute(any())).thenAnswer(
+      (_) => successFuture(
+        Stubs.onBoardingInterests,
+      ),
     );
 
     await presenter.onInit();
@@ -36,7 +39,7 @@ void main() {
   setUp(() {
     model = OnBoardingCirclesPickerPresentationModel.initial(
       OnBoardingCirclesPickerInitialParams(
-        onCirclesSelected: (List<BasicCircle> value) {},
+        onCirclesSelected: (List<Id> value) {},
         formData: const OnboardingFormData.empty(),
       ),
     );
@@ -44,10 +47,11 @@ void main() {
     presenter = OnBoardingCirclesPickerPresenter(
       model,
       navigator,
-      OnboardingMocks.getOnBoardingCirclesUseCase,
+      OnboardingMocks.getOnBoardingInterestsUseCase,
       CirclesMocks.joinCirclesUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.setShouldShowCirclesSelectionUseCase,
+      OnboardingMocks.getCirclesForInterestsUseCase,
     );
   });
 }

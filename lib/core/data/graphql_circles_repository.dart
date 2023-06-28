@@ -13,6 +13,7 @@ import 'package:picnic_app/core/data/graphql/model/gql_circle_stats.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_election_candidate.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_get_user_circles_request.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_group.dart';
+import 'package:picnic_app/core/data/graphql/model/gql_interest.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_onboarding_circles_section.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_success_payload.dart';
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
@@ -62,6 +63,10 @@ import 'package:picnic_app/features/circles/domain/model/update_circle_member_ro
 import 'package:picnic_app/features/circles/domain/model/view_circle_failure.dart';
 import 'package:picnic_app/features/circles/domain/model/vote_pod_failure.dart';
 import 'package:picnic_app/features/create_circle/data/model/gql_create_circle_input.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
+import 'package:picnic_app/features/onboarding/domain/model/get_circles_for_interests_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/get_interests_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/interest.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/seeds/domain/model/election_candidate.dart';
 
@@ -539,6 +544,46 @@ class GraphqlCirclesRepository implements CirclesRepository {
           )
           .mapFailure((fail) => const GetCircleDetailsFailure.unknown())
           .mapSuccess((circle) => circle.toDomain());
+
+  @override
+  Future<Either<GetInterestsFailure, List<Interest>>> getOnBoardingInterests(Gender gender) => _gqlClient
+      .query(
+        document: getOnBoardingInterestsQuery,
+        variables: {
+          'gender': gender.value,
+        },
+        parseData: (json) {
+          return asList(
+            json,
+            'getTags',
+            GqlInterest.fromJson,
+          );
+        },
+      )
+      .mapFailure(GetInterestsFailure.unknown)
+      .mapSuccess(
+        (data) => data.map((e) => e.toDomain()).toList(growable: false),
+      );
+
+  @override
+  Future<Either<GetCirclesForInterestsFailure, List<Id>>> getCirclesForInterests(List<Id> interestsIdsList) =>
+      _gqlClient
+          .query(
+            document: getCirclesForInterestsQuery,
+            variables: {
+              'tagIDs': interestsIdsList.map((ids) => ids.value).toList(),
+            },
+            parseData: (json) {
+              return asListPrimitive<String>(
+                json,
+                'getCirclesForTags',
+              );
+            },
+          )
+          .mapFailure(GetCirclesForInterestsFailure.unknown)
+          .mapSuccess(
+            (data) => data.map((id) => Id(id)).toList(growable: false),
+          );
 
   Future<Either<JoinCircleFailure, Unit>> _joinCircles({
     required List<Id> circleIds,

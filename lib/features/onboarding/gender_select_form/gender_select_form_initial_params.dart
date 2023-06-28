@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 
 class GenderSelectFormInitialParams {
@@ -8,5 +9,5 @@ class GenderSelectFormInitialParams {
   });
 
   final OnboardingFormData formData;
-  final ValueChanged<String> onGenderSelected;
+  final ValueChanged<Gender> onGenderSelected;
 }

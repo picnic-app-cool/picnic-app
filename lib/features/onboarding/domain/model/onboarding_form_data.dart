@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:picnic_app/core/domain/model/auth_result.dart';
-import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/core/domain/model/language.dart';
 import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission_status.dart';
 import 'package:picnic_app/core/domain/model/username_verification_data.dart';
+import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 
 class OnboardingFormData extends Equatable {
   const OnboardingFormData({
@@ -23,7 +24,7 @@ class OnboardingFormData extends Equatable {
 
   const OnboardingFormData.empty()
       : age = '',
-        gender = '',
+        gender = Gender.unknown,
         phoneVerificationData = const PhoneVerificationData.empty(),
         usernameVerificationData = const UsernameVerificationData.empty(),
         username = '',
@@ -35,15 +36,14 @@ class OnboardingFormData extends Equatable {
         circles = const [];
 
   final String age;
-  final String gender;
-
+  final Gender gender;
   final PhoneVerificationData phoneVerificationData;
   final UsernameVerificationData usernameVerificationData;
   final String username;
   final String country;
   final Language language;
   final String profilePhotoPath;
-  final List<BasicCircle> circles;
+  final List<Id> circles;
   final RuntimePermissionStatus notificationsStatus;
   final AuthResult authResult;
 
@@ -64,13 +64,13 @@ class OnboardingFormData extends Equatable {
 
   OnboardingFormData copyWith({
     String? age,
-    String? gender,
+    Gender? gender,
     PhoneVerificationData? phoneVerificationData,
     String? username,
     String? country,
     Language? language,
     String? profilePhotoPath,
-    List<BasicCircle>? circles,
+    List<Id>? circles,
     RuntimePermissionStatus? notificationsStatus,
     AuthResult? authResult,
     UsernameVerificationData? usernameVerificationData,

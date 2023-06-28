@@ -20,14 +20,17 @@ import 'package:picnic_app/features/onboarding/country_select_form/country_selec
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/domain/model/get_captcha_params_failure.dart';
+import 'package:picnic_app/features/onboarding/domain/model/get_circles_for_interests_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/log_in_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/register_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/request_code_for_username_login_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/request_phone_code_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/sign_in_with_username_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_captcha_params_use_case.dart';
+import 'package:picnic_app/features/onboarding/domain/use_cases/get_circles_for_interests_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_groups_with_circles_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_onboarding_circles_use_case.dart';
+import 'package:picnic_app/features/onboarding/domain/use_cases/get_onboarding_interests_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/log_in_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/register_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/request_code_for_username_login_use_case.dart';
@@ -190,6 +193,8 @@ class MockGetCircleGroupingsUseCase extends Mock implements GetGroupsWithCircles
 
 class MockGetOnBoardingCirclesUseCase extends Mock implements GetOnBoardingCirclesUseCase {}
 
+class MockGetOnBoardingInterestsUseCase extends Mock implements GetOnBoardingInterestsUseCase {}
+
 class MockRequestPhoneCodeFailure extends Mock implements RequestPhoneCodeFailure {}
 
 class MockRequestPhoneCodeUseCase extends Mock implements RequestPhoneCodeUseCase {}
@@ -217,6 +222,10 @@ class MockSignInWithUsernameUseCase extends Mock implements SignInWithUsernameUs
 class MockRequestCodeForUsernameLoginFailure extends Mock implements RequestCodeForUsernameLoginFailure {}
 
 class MockRequestCodeForUsernameLoginUseCase extends Mock implements RequestCodeForUsernameLoginUseCase {}
+
+class MockGetCirclesForInterestsFailure extends Mock implements GetCirclesForInterestsFailure {}
+
+class MockGetCirclesForInterestsUseCase extends Mock implements GetCirclesForInterestsUseCase {}
 
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 

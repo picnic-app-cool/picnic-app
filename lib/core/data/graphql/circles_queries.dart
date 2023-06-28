@@ -371,3 +371,21 @@ String get getLastViewedCirclesQuery => '''
         }
     }
 ''';
+
+String get getOnBoardingInterestsQuery => '''
+    query(\$gender: String!) {
+        getTags(
+          gender: \$gender,
+        ) {
+            ${GqlTemplate().interest}
+           }
+    }
+''';
+
+String get getCirclesForInterestsQuery => '''
+    query(\$tagIDs: [ID!]!) {
+        getCirclesForTags(
+          tagIDs: \$tagIDs,
+        ) 
+    }
+''';

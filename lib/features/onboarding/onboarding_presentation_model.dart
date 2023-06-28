@@ -49,7 +49,7 @@ class OnboardingPresentationModel implements OnboardingViewModel {
     OnboardingScreen.language,
     OnboardingScreen.username,
     OnboardingScreen.permissions,
-    OnboardingScreen.circleGroupings,
+    OnboardingScreen.interests,
   ];
 
   static const _signInScreensOrder = [
@@ -62,7 +62,7 @@ class OnboardingPresentationModel implements OnboardingViewModel {
   static const _signInScreensOrderDiscord = [
     OnboardingScreen.age,
     OnboardingScreen.gender,
-    OnboardingScreen.circleGroupings,
+    OnboardingScreen.interests,
     OnboardingScreen.permissions,
   ];
 
@@ -194,5 +194,5 @@ enum OnboardingScreen {
   username,
   permissions,
   gender,
-  circleGroupings;
+  interests;
 }

@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/core/domain/model/auth_result.dart';
-import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/core/domain/model/private_profile.dart';
 import 'package:picnic_app/core/domain/model/save_auth_token_failure.dart';
 import 'package:picnic_app/core/domain/model/user.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/domain/model/register_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/register_use_case.dart';
@@ -33,7 +33,7 @@ void main() {
       dialCode: "+48",
       phoneNumber: "712712712",
     ),
-    circles: List.generate(5, (index) => const BasicCircle.empty()),
+    circles: List.generate(5, (index) => const Id.empty()),
   );
 
   setUp(() {

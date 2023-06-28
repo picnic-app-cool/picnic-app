@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:picnic_app/features/onboarding/domain/model/gender.dart';
 import 'package:picnic_app/features/onboarding/domain/model/onboarding_form_data.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_initial_params.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_presentation_model.dart';
@@ -17,7 +18,7 @@ void main() {
       GenderSelectFormInitialParams(
         onGenderSelected: (_) {},
         formData: const OnboardingFormData.empty().copyWith(
-          gender: genderSelected ? "male" : "",
+          gender: genderSelected ? Gender.male : Gender.unknown,
         ),
       ),
     );
@@ -50,7 +51,7 @@ void main() {
   test(
     'selected gender should be changed when user tapped on other gender',
     () {
-      const otherGender = "other";
+      const otherGender = Gender.female;
       _initMvp();
 
       presenter.onTapSelectGender(otherGender);

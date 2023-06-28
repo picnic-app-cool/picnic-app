@@ -76,6 +76,7 @@ import 'package:picnic_app/features/circles/domain/model/temporary_banned_user.d
 import 'package:picnic_app/features/create_circle/domain/model/create_circle_form.dart';
 import 'package:picnic_app/features/feed/domain/model/feed.dart';
 import 'package:picnic_app/features/onboarding/domain/model/auth_token.dart';
+import 'package:picnic_app/features/onboarding/domain/model/interest.dart';
 import 'package:picnic_app/features/onboarding/domain/model/list_groups_input.dart';
 import 'package:picnic_app/features/posts/domain/model/comment_preview.dart';
 import 'package:picnic_app/features/posts/domain/model/create_post_input.dart';
@@ -1483,6 +1484,54 @@ class Stubs {
   static Circle get circleWithDisabledTextPosting => Stubs.circle.copyWith(configs: [disabledTextConfig]);
 
   static Circle get circleWithDisabledChat => Stubs.circle.copyWith(configs: [getChatConfig(enabled: false)]);
+
+  static List<Interest> get onBoardingInterests => [
+        const Interest(
+          id: Id('id1'),
+          name: 'funny',
+          emoji: '😀',
+        ),
+        const Interest(
+          id: Id('id2'),
+          name: 'gacha',
+          emoji: '🥰',
+        ),
+        const Interest(
+          id: Id('id3'),
+          name: 'roblox',
+          emoji: '🤖',
+        ),
+        const Interest(
+          id: Id('id4'),
+          name: 'clowns',
+          emoji: '🤡',
+        ),
+        const Interest(
+          id: Id('id5'),
+          name: 'shitposting',
+          emoji: '💩',
+        ),
+        const Interest(
+          id: Id('id6'),
+          name: 'ghosts',
+          emoji: '👻',
+        ),
+        const Interest(
+          id: Id('id7'),
+          name: 'dark',
+          emoji: '💀',
+        ),
+        const Interest(
+          id: Id('id8'),
+          name: 'animals',
+          emoji: '😼',
+        ),
+        const Interest(
+          id: Id('id9'),
+          name: 'aliens',
+          emoji: '👽',
+        ),
+      ];
 
   //to disable possibility of creating an instance of this class
   Stubs._();
