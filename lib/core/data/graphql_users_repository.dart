@@ -82,7 +82,7 @@ class GraphqlUsersRepository with FutureRetarder implements UsersRepository {
         .query(
           document: getUserByUsernameQuery,
           variables: {"userName": username},
-          parseData: (json) => asT<String>(json, 'userId'),
+          parseData: (json) => asT<String>(json['profileGetUserIDByName'] as Map<String, dynamic>, 'userId'),
         )
         .mapFailure((fail) => GetUserByUsernameFailure.unknown(fail))
         .mapSuccess((response) => Id(response));
