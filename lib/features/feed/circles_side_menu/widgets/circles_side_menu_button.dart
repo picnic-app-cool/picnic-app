@@ -25,29 +25,32 @@ class CirclesSideMenuButton extends StatelessWidget {
     final darkBlue = colors.darkBlue.shade800;
     final titleStyle = styles.link0.copyWith(color: darkBlue);
 
-    return Container(
-      height: _itemHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(_itemRadius),
-        //ignore: no-magic-number
-        color: Colors.black.withOpacity(0.07),
-      ),
-      child: Padding(
-        padding: _contentPadding,
-        child: Row(
-          children: [
-            Text(
-              title,
-              style: titleStyle,
-            ),
-            const Spacer(),
-            Image.asset(
-              assetPath,
-              color: darkBlue,
-              height: _iconSize,
-              width: _iconSize,
-            ),
-          ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: _itemHeight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(_itemRadius),
+          //ignore: no-magic-number
+          color: Colors.black.withOpacity(0.07),
+        ),
+        child: Padding(
+          padding: _contentPadding,
+          child: Row(
+            children: [
+              Text(
+                title,
+                style: titleStyle,
+              ),
+              const Spacer(),
+              Image.asset(
+                assetPath,
+                color: darkBlue,
+                height: _iconSize,
+                width: _iconSize,
+              ),
+            ],
+          ),
         ),
       ),
     );
