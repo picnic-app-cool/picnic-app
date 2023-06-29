@@ -3,6 +3,7 @@ import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/use_cases/get_collections_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_user_stats_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_user_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
@@ -27,6 +28,7 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
     this._getCollectionsUseCase,
     this._getSavedPodsUseCase,
     this._getUserStatsUseCase,
+    this._getUserUseCase,
   );
 
   final CirclesSideMenuNavigator navigator;
@@ -34,6 +36,7 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   final GetCollectionsUseCase _getCollectionsUseCase;
   final GetSavedPodsUseCase _getSavedPodsUseCase;
   final GetUserStatsUseCase _getUserStatsUseCase;
+  final GetUserUseCase _getUserUseCase;
 
   // ignore: unused_element
   CirclesSideMenuPresentationModel get _model => state as CirclesSideMenuPresentationModel;
@@ -160,13 +163,20 @@ class CirclesSideMenuPresenter extends Cubit<CirclesSideMenuViewModel> {
   }
 
   Future<void> _loadUserStats() async {
+    final userId = _model.privateProfile.id;
     await _getUserStatsUseCase //
-        .execute(userId: _model.privateProfile.id)
+        .execute(userId: userId)
         .doOn(
           success: (stats) => tryEmit(
             _model.copyWith(
-              followersCount: stats.followers,
               followingCount: stats.following,
+            ),
+          ),
+        );
+    await _getUserUseCase.execute(userId: userId).doOn(
+          success: (user) => tryEmit(
+            _model.copyWith(
+              followersCount: user.followers,
             ),
           ),
         );

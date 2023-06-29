@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
@@ -82,6 +84,9 @@ class CirclesSideMenuPresentationModel implements CirclesSideMenuViewModel {
 
   Cursor get collectionCursor => collections.nextPageCursor();
 
+  @override
+  bool get isAndroid => Platform.isAndroid;
+
   CirclesSideMenuPresentationModel copyWith({
     FutureResult<Either<GetLastUsedCirclesFailure, PaginatedList<Circle>>>? lastUsedCirclesResult,
     PaginatedList<Circle>? lastUsedCircles,
@@ -128,4 +133,6 @@ abstract class CirclesSideMenuViewModel {
   int get followersCount;
 
   int get followingCount;
+
+  bool get isAndroid;
 }

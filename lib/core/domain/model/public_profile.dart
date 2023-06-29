@@ -10,19 +10,22 @@ class PublicProfile extends Equatable implements MinimalPublicProfile {
     required this.isBlocked,
     required this.iFollow,
     required this.followsMe,
+    required this.followers,
   });
 
   const PublicProfile.empty()
       : user = const User.empty(),
         isBlocked = false,
         iFollow = false,
-        followsMe = false;
+        followsMe = false,
+        followers = 0;
 
   final User user;
   final bool isBlocked;
   @override
   final bool iFollow;
   final bool followsMe;
+  final int followers;
 
   bool get isMutualFollowing => followsMe && iFollow;
 
@@ -44,6 +47,7 @@ class PublicProfile extends Equatable implements MinimalPublicProfile {
         isBlocked,
         iFollow,
         followsMe,
+        followers,
       ];
 
   PublicProfile copyWith({
@@ -51,12 +55,14 @@ class PublicProfile extends Equatable implements MinimalPublicProfile {
     bool? isBlocked,
     bool? iFollow,
     bool? followsMe,
+    int? followers,
   }) {
     return PublicProfile(
       user: user ?? this.user,
       isBlocked: isBlocked ?? this.isBlocked,
       iFollow: iFollow ?? this.iFollow,
       followsMe: followsMe ?? this.followsMe,
+      followers: followers ?? this.followers,
     );
   }
 }

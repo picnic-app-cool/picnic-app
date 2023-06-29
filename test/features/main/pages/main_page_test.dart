@@ -95,6 +95,12 @@ Future<void> main() async {
       ),
     ).thenAnswer((_) => successFuture(const UserStats.empty()));
 
+    when(
+      () => Mocks.getUserUseCase.execute(
+        userId: any(named: 'userId'),
+      ),
+    ).thenAnswer((_) => successFuture(Stubs.publicProfile));
+
     when(() => Mocks.userStore.privateProfile).thenReturn(Stubs.privateProfile);
 
     initParams = const MainInitialParams();
@@ -166,6 +172,7 @@ Future<void> main() async {
           Mocks.getCollectionsUseCase,
           PodsMocks.getSavedPodsUseCase,
           Mocks.getUserStatsUseCase,
+          Mocks.getUserUseCase,
         ),
       );
     },

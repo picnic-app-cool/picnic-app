@@ -9,6 +9,7 @@ class GqlPublicProfile {
     required this.isBlocked,
     required this.iFollow,
     required this.followsMe,
+    required this.followers,
   });
 
   factory GqlPublicProfile.fromJson(
@@ -19,6 +20,7 @@ class GqlPublicProfile {
       isBlocked: asT<bool>(json, 'isBlocked'),
       iFollow: asT<bool>(json, 'isFollowing'),
       followsMe: asT<bool>(json, 'followsMe'),
+      followers: asT<int>(json, 'followers'),
     );
   }
 
@@ -26,6 +28,7 @@ class GqlPublicProfile {
   final bool isBlocked;
   final bool iFollow;
   final bool followsMe;
+  final int followers;
 
   PublicProfile toDomain(UserStore userStore) {
     final domainUser = user.toDomain();
@@ -34,6 +37,7 @@ class GqlPublicProfile {
       isBlocked: isBlocked,
       iFollow: userStore.isMe(domainUser.id) || iFollow,
       followsMe: followsMe,
+      followers: followers,
     );
   }
 }

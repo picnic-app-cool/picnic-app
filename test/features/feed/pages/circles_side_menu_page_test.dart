@@ -63,6 +63,12 @@ Future<void> main() async {
       ),
     ).thenAnswer((_) => successFuture(const UserStats.empty()));
 
+    when(
+      () => Mocks.getUserUseCase.execute(
+        userId: any(named: 'userId'),
+      ),
+    ).thenAnswer((_) => successFuture(Stubs.publicProfile));
+
     presenter = CirclesSideMenuPresenter(
       model,
       navigator,
@@ -70,6 +76,7 @@ Future<void> main() async {
       Mocks.getCollectionsUseCase,
       PodsMocks.getSavedPodsUseCase,
       Mocks.getUserStatsUseCase,
+      Mocks.getUserUseCase,
     );
 
     getIt.registerFactoryParam<CirclesSideMenuPresenter, CirclesSideMenuInitialParams, dynamic>(

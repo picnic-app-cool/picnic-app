@@ -49,20 +49,21 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
     final styles = PicnicTheme.of(context).styles;
     final link40 = styles.link40;
     final darkBlue = colors.darkBlue;
-    final body15 = styles.body15;
-    final viewAllStyle = body15.copyWith(color: darkBlue.shade500);
-    final followersStyle = body15.copyWith(color: colors.darkBlue.shade600);
+    final body10 = styles.body10;
+    final viewAllStyle = body10.copyWith(color: darkBlue.shade500);
+    final followersStyle = body10.copyWith(color: colors.darkBlue.shade600);
 
     final user = state.privateProfile.user;
     return DarkStatusBar(
       child: Drawer(
         elevation: 0,
         child: SafeArea(
-          bottom: false,
+          bottom: !state.isAndroid,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Gap(6),
+              if (state.isAndroid) const Gap(16),
               Padding(
                 padding: _contentPadding,
                 child: InkWell(
@@ -93,7 +94,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                                     Text(
                                       textAlign: TextAlign.center,
                                       user.fullName.isEmpty ? user.username : user.fullName,
-                                      style: styles.title30,
+                                      style: styles.title20,
                                     ),
                                     if (state.privateProfile.isVerified) ...[
                                       const Gap(4),
@@ -116,7 +117,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                               if (state.followingCount > 0) ...[
                                 Text(
                                   state.followingCount.formattingToStat(),
-                                  style: styles.body15,
+                                  style: body10,
                                 ),
                                 const Gap(4),
                                 Text(
@@ -128,7 +129,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                               if (state.followersCount > 0) ...[
                                 Text(
                                   state.followersCount.formattingToStat(),
-                                  style: styles.body15,
+                                  style: body10,
                                 ),
                                 const Gap(4),
                                 Text(
@@ -147,8 +148,12 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
               ),
               const Padding(
                 padding: _dividerPadding,
-                child: Divider(),
+                child: Divider(
+                  height: 1,
+                  thickness: 1,
+                ),
               ),
+              const Gap(20),
               Padding(
                 padding: _contentPadding,
                 child: Row(
@@ -174,6 +179,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   ],
                 ),
               ),
+              const Gap(10),
               Expanded(
                 child: stateObserver(
                   builder: (context, state) => Padding(
@@ -210,7 +216,7 @@ class _CirclesSideMenuPageState extends State<CirclesSideMenuPage>
                   ],
                 ),
               ),
-              const Gap(40),
+              if (state.isAndroid) const Gap(25),
             ],
           ),
         ),

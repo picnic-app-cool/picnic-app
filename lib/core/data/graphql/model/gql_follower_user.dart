@@ -29,5 +29,6 @@ class GqlFollowerUser {
         isBlocked: false,
         iFollow: following,
         followsMe: followedBy,
+        followers: 0,
       );
 }
