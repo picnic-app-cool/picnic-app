@@ -1,7 +1,6 @@
 import 'package:picnic_app/features/discover/discover_explore/discover_explore_navigator.dart';
 import 'package:picnic_app/features/feed/circles_side_menu/circles_side_menu_navigator.dart';
 import 'package:picnic_app/features/feed/feed_more/feed_more_navigator.dart';
-import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/posts/image_post/image_post_navigator.dart';
 import 'package:picnic_app/features/posts/link_post/link_post_navigator.dart';
 import 'package:picnic_app/features/posts/poll_post/poll_post_navigator.dart';
@@ -22,7 +21,6 @@ class FeedHomeNavigator
         PrivateProfileRoute,
         DiscoverExploreRoute,
         FeedMoreRoute,
-        OnBoardingCirclesPickerRoute,
         CloseRoute,
         CirclesSideMenuRoute,
         NotificationsListRoute {

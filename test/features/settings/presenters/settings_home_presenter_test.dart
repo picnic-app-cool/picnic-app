@@ -4,7 +4,6 @@ import 'package:picnic_app/core/domain/model/feature_flags/feature_flag_type.dar
 import 'package:picnic_app/features/settings/blocked_list/blocked_list_initial_params.dart';
 import 'package:picnic_app/features/settings/community_guidelines/community_guidelines_initial_params.dart';
 import 'package:picnic_app/features/settings/get_verified/get_verified_initial_params.dart';
-import 'package:picnic_app/features/settings/language/language_initial_params.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_initial_params.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_presentation_model.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_presenter.dart';
@@ -24,14 +23,6 @@ void main() {
     'sample test',
     () {
       expect(presenter, isNotNull); // TODO implement this
-    },
-  );
-
-  test(
-    'onTapLanguage calls navigation openLanguage method',
-    () {
-      presenter.onTapLanguage();
-      verify(() async => navigator.openLanguage(const LanguageInitialParams()));
     },
   );
 

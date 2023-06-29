@@ -5,7 +5,6 @@ import 'package:picnic_app/features/settings/blocked_list/blocked_list_navigator
 import 'package:picnic_app/features/settings/community_guidelines/community_guidelines_navigator.dart';
 import 'package:picnic_app/features/settings/get_verified/get_verified_navigator.dart';
 import 'package:picnic_app/features/settings/invite_friends/invite_friends_navigator.dart';
-import 'package:picnic_app/features/settings/language/language_navigator.dart';
 import 'package:picnic_app/features/settings/notification_settings/notification_settings_navigator.dart';
 import 'package:picnic_app/features/settings/privacy_settings/privacy_settings_navigator.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_initial_params.dart';
@@ -21,7 +20,6 @@ import 'package:picnic_app/navigation/url_route.dart';
 class SettingsHomeNavigator
     with
         CloseRoute,
-        LanguageRoute,
         BlockedListRoute,
         CommunityGuidelinesRoute,
         GetVerifiedRoute,

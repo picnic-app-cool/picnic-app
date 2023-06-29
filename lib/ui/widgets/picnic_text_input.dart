@@ -81,6 +81,7 @@ class PicnicTextInput extends StatelessWidget {
 
   static const _defaultRadius = 16.0;
   static const _errorTextLineHeight = 2.0;
+  static const _borderWidth = 2.0;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,7 @@ class PicnicTextInput extends StatelessWidget {
               enabledBorder: _setInputBorder(BorderSide.none, themeColors),
               focusedBorder: _setInputBorder(focusedBorderSide, themeColors),
               filled: true,
-              fillColor: inputFillColor,
+              fillColor: errorText.isEmpty ? inputFillColor : themeColors.pink.shade100,
               contentPadding: contentPadding ?? _defaultContentPadding,
               prefixIcon: prefix,
               suffixIcon: isLoading
@@ -145,9 +146,9 @@ class PicnicTextInput extends StatelessWidget {
           if (errorText.isNotEmpty)
             Text(
               errorText,
-              style: themeStyles.body10.copyWith(
+              style: themeStyles.subtitle10.copyWith(
                 height: _errorTextLineHeight,
-                color: themeColors.pink.shade600,
+                color: themeColors.pink,
               ),
             ),
         ],
@@ -164,7 +165,8 @@ class PicnicTextInput extends StatelessWidget {
       borderSide: errorText.isEmpty
           ? borderSide
           : BorderSide(
-              color: colors.pink.shade600,
+              width: _borderWidth,
+              color: colors.pink.shade400,
             ),
     );
   }

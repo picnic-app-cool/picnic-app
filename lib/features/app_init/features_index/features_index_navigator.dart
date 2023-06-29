@@ -11,7 +11,6 @@ import 'package:picnic_app/features/discover/discover_explore/discover_explore_n
 import 'package:picnic_app/features/force_update/force_update_navigator.dart';
 import 'package:picnic_app/features/in_app_events/notifications/notifications_navigator.dart';
 import 'package:picnic_app/features/main/main_navigator.dart';
-import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/onboarding/onboarding_navigator.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_navigator.dart';
 import 'package:picnic_app/features/pods/enable_pod_success_bottom_sheet_route.dart';
@@ -55,7 +54,6 @@ class FeaturesIndexNavigator
         SliceDetailsRoute,
         ForceUpdateRoute,
         CircleRoleRoute,
-        OnBoardingCirclesPickerRoute,
         AboutElectionsRoute,
         LinkDiscordRoute,
         PodsCategoriesRoute,

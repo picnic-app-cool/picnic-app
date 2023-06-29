@@ -101,17 +101,16 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
-          () => navigator.openAgeForm(any()),
           () => navigator.openMethodForm(any()),
+          () => navigator.openAgeForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
           () => navigator.openGenderSelectForm(any()),
-          () => navigator.openLanguageSelectForm(any()),
+          () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openUsernameForm(any()),
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
           () => navigator.closeAllOnboardingSteps(),
           () => navigator.openPermissionsForm(any()),
-          () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openMain(any()),
         ]);
         verifyNoMoreInteractions(navigator);
@@ -134,12 +133,12 @@ void main() {
         async.flushMicrotasks();
         verifyInOrder([
           () => navigator.openSplash(any()),
-          () => navigator.openAgeForm(any()),
           () => navigator.openMethodForm(any()),
+          () => navigator.openAgeForm(any()),
           () => navigator.openPhoneForm(any()),
           () => navigator.openCodeVerificationForm(any()),
           () => navigator.openGenderSelectForm(any()),
-          () => navigator.openLanguageSelectForm(any()),
+          () => navigator.openOnBoardingCirclesPickerPage(any()),
           () => navigator.openUsernameForm(any()),
           () => OnboardingMocks.registerUseCase.execute(formData: any(named: "formData")),
           () => navigator.showError(any()),
@@ -194,7 +193,6 @@ void main() {
             (presenter.state as OnboardingPresentationModel).screensList,
             [
               OnboardingScreen.permissions,
-              OnboardingScreen.interests,
             ],
           );
         },

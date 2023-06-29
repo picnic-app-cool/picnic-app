@@ -208,38 +208,6 @@ void main() {
     },
   );
 
-  test(
-    'should show circles selection if getShouldShowCirclesSelectionUseCase returns true',
-    () async {
-      fakeAsync((async) {
-        // GIVEN
-        when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
-        when(() => navigator.openMain(any())).thenAnswer((_) => Future.value());
-        when(() => navigator.openOnBoardingCirclesPickerPage(any())).thenAnswer((_) => Future.value());
-        when(() => ForceUpdateMocks.shouldShowForceUpdateUseCase.execute()).thenAnswer((_) => Future.value(false));
-        when(() => Mocks.getShouldShowCirclesSelectionUseCase.execute()).thenAnswer((_) => successFuture(true));
-        when(() => UserAgreementMocks.hasUserAgreedToAppsTermsUseCase.execute()).thenSuccess((_) => true);
-
-        // WHEN
-        presenter.emit(
-          model.copyWith(
-            user: const PrivateProfile.empty().copyWith(
-              user: const User.empty().copyWith(id: const Id('userId')),
-            ),
-          ),
-        );
-        presenter.onInit();
-        async.flushMicrotasks();
-        presenter.onLogoAnimationEnd();
-        async.flushMicrotasks();
-
-        // THEN
-        verify(() => navigator.openOnBoardingCirclesPickerPage(any()));
-        verifyNever(() => navigator.openMain(any()));
-      });
-    },
-  );
-
   setUp(() {
     model = AppInitPresentationModel.initial(const AppInitInitialParams());
     navigator = AppInitMocks.appInitNavigator;
@@ -250,7 +218,6 @@ void main() {
       ForceUpdateMocks.shouldShowForceUpdateUseCase,
       UserAgreementMocks.hasUserAgreedToAppsTermsUseCase,
       UserAgreementMocks.acceptAppsTermsUseCase,
-      Mocks.getShouldShowCirclesSelectionUseCase,
       Mocks.userStore,
     );
 

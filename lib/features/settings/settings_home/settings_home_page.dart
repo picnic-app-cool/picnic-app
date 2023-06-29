@@ -60,13 +60,6 @@ class _SettingsHomePageState extends State<SettingsHomePage>
         body: ListView(
           children: [
             const Gap(4),
-            if (state.isLanguageSettingsEnabled)
-              PicnicChevronButton(
-                emoji: '🌎',
-                label: appLocalizations.settingsLanguage,
-                padding: _listItemPadding,
-                onTap: presenter.onTapLanguage,
-              ),
             PicnicChevronButton(
               emoji: '⛔️',
               label: appLocalizations.settingsBlockedList,

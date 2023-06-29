@@ -37,7 +37,6 @@ Future<void> main() async {
       ForceUpdateMocks.shouldShowForceUpdateUseCase,
       UserAgreementMocks.hasUserAgreedToAppsTermsUseCase,
       UserAgreementMocks.acceptAppsTermsUseCase,
-      Mocks.getShouldShowCirclesSelectionUseCase,
       UserStore(),
     );
     page = AppInitPage(presenter: presenter);

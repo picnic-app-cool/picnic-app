@@ -39,7 +39,7 @@ class UsernameFormPresentationModel implements UsernameFormViewModel {
   final FutureResult<void> usernameSelectedResult;
 
   @override
-  bool get continueEnabled => !isLoading && !_isTaken && usernameValidator.validate(username).isSuccess;
+  bool get continueEnabled => !isLoading && !isTaken && usernameValidator.validate(username).isSuccess;
 
   @override
   bool get isLoading => usernameCheckResult.isPending() || usernameSelectedResult.isPending();
@@ -49,7 +49,7 @@ class UsernameFormPresentationModel implements UsernameFormViewModel {
     if (usernameCheckResult.isNotStarted) {
       return '';
     }
-    if (_isTaken) {
+    if (isTaken) {
       return appLocalizations.usernameTakenErrorMessage;
     }
     return usernameValidator.validate(username).getFailure()?.errorText ?? '';
@@ -62,8 +62,6 @@ class UsernameFormPresentationModel implements UsernameFormViewModel {
       usernameValidator.validate(username).getFailure()?.type == UsernameValidationErrorType.containsSpaces;
 
   UsernameCheckResult? get _usernameCheckResult => usernameCheckResult.result?.getSuccess();
-
-  bool get _isTaken => _usernameCheckResult?.isTaken ?? false;
 
   UsernameFormPresentationModel copyWith({
     UsernameValidator? usernameValidator,

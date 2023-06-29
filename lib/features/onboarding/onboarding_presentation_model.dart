@@ -41,15 +41,14 @@ class OnboardingPresentationModel implements OnboardingViewModel {
   final RuntimePermissionStatus contactsPermissionStatus;
 
   static const _signUpScreensOrder = [
-    OnboardingScreen.age,
     OnboardingScreen.methods,
+    OnboardingScreen.age,
     OnboardingScreen.phone,
     OnboardingScreen.codeVerification,
     OnboardingScreen.gender,
-    OnboardingScreen.language,
+    OnboardingScreen.interests,
     OnboardingScreen.username,
     OnboardingScreen.permissions,
-    OnboardingScreen.interests,
   ];
 
   static const _signInScreensOrder = [
@@ -62,7 +61,6 @@ class OnboardingPresentationModel implements OnboardingViewModel {
   static const _signInScreensOrderDiscord = [
     OnboardingScreen.age,
     OnboardingScreen.gender,
-    OnboardingScreen.interests,
     OnboardingScreen.permissions,
   ];
 

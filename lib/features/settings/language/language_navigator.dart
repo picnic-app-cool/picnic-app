@@ -13,6 +13,7 @@ class LanguageNavigator with ErrorBottomSheetRoute, LanguageInfoRoute {
   final AppNavigator appNavigator;
 }
 
+//ignore: unused-code
 mixin LanguageRoute {
   void openLanguage(LanguageInitialParams initialParams) {
     appNavigator.push(

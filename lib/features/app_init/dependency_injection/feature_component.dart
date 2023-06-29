@@ -87,7 +87,6 @@ void _configureMvp() {
             getIt(),
             getIt(),
             getIt(),
-            getIt(),
           ),
         )
         ..registerFactoryParam<AppInitPage, AppInitInitialParams, dynamic>(

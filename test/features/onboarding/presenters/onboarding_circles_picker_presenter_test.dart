@@ -11,7 +11,6 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
-import '../../circles/mocks/circles_mocks.dart';
 import '../mocks/onboarding_mock_definitions.dart';
 import '../mocks/onboarding_mocks.dart';
 
@@ -48,7 +47,6 @@ void main() {
       model,
       navigator,
       OnboardingMocks.getOnBoardingInterestsUseCase,
-      CirclesMocks.joinCirclesUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.setShouldShowCirclesSelectionUseCase,
       OnboardingMocks.getCirclesForInterestsUseCase,

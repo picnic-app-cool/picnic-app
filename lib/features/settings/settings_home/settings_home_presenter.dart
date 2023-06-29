@@ -14,7 +14,6 @@ import 'package:picnic_app/features/settings/blocked_list/blocked_list_initial_p
 import 'package:picnic_app/features/settings/community_guidelines/community_guidelines_initial_params.dart';
 import 'package:picnic_app/features/settings/get_verified/get_verified_initial_params.dart';
 import 'package:picnic_app/features/settings/invite_friends/invite_friends_initial_params.dart';
-import 'package:picnic_app/features/settings/language/language_initial_params.dart';
 import 'package:picnic_app/features/settings/notification_settings/notification_settings_initial_params.dart';
 import 'package:picnic_app/features/settings/privacy_settings/privacy_settings_initial_params.dart';
 import 'package:picnic_app/features/settings/settings_home/settings_home_navigator.dart';
@@ -42,15 +41,6 @@ class SettingsHomePresenter extends Cubit<SettingsHomeViewModel> {
   SettingsHomePresentationModel get _model => state as SettingsHomePresentationModel;
 
   void onInit() => tryEmit(_model.copyWith(appInfo: _appInfoStore.appInfo));
-
-  void onTapLanguage() {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(
-        target: AnalyticsTapTarget.settingsLanguageTap,
-      ),
-    );
-    navigator.openLanguage(const LanguageInitialParams());
-  }
 
   void onTapBlockedList() {
     _logAnalyticsEventUseCase.execute(

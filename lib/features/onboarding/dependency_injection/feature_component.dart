@@ -166,6 +166,7 @@ void _configureUseCases() {
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerFactory<SaveAuthTokenUseCase>(
@@ -450,7 +451,9 @@ void _configureMvp() {
           ),
         )
         ..registerFactory<OnBoardingCirclesPickerNavigator>(
-          () => OnBoardingCirclesPickerNavigator(),
+          () => OnBoardingCirclesPickerNavigator(
+            getIt(),
+          ),
         )
         ..registerFactoryParam<OnBoardingCirclesPickerPresentationModel, OnBoardingCirclesPickerInitialParams, dynamic>(
           (params, _) => OnBoardingCirclesPickerPresentationModel.initial(params),
@@ -458,7 +461,6 @@ void _configureMvp() {
         ..registerFactoryParam<OnBoardingCirclesPickerPresenter, OnBoardingCirclesPickerInitialParams, dynamic>(
           (initialParams, _) => OnBoardingCirclesPickerPresenter(
             getIt(param1: initialParams),
-            getIt(),
             getIt(),
             getIt(),
             getIt(),

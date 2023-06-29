@@ -14,7 +14,6 @@ import '../../../mocks/stubs.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
-import '../../circles/mocks/circles_mocks.dart';
 import '../mocks/onboarding_mocks.dart';
 
 Future<void> main() async {
@@ -32,12 +31,11 @@ Future<void> main() async {
     model = OnBoardingCirclesPickerPresentationModel.initial(
       initParams,
     );
-    navigator = OnBoardingCirclesPickerNavigator();
+    navigator = OnBoardingCirclesPickerNavigator(Mocks.appNavigator);
     presenter = OnBoardingCirclesPickerPresenter(
       model,
       navigator,
       OnboardingMocks.getOnBoardingInterestsUseCase,
-      CirclesMocks.joinCirclesUseCase,
       AnalyticsMocks.logAnalyticsEventUseCase,
       Mocks.setShouldShowCirclesSelectionUseCase,
       OnboardingMocks.getCirclesForInterestsUseCase,

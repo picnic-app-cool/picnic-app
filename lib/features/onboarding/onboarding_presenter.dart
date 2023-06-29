@@ -53,7 +53,6 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
 
   final RegisterUseCase _registerUseCase;
   final EditProfileUseCase _editProfileUseCase;
-
   final GetRuntimePermissionStatusUseCase _getRuntimePermissionStatusUseCase;
 
   // ignore: unused_element
@@ -243,6 +242,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
           OnboardingScreen.methods,
           OnboardingScreen.phone,
           OnboardingScreen.codeVerification,
+          OnboardingScreen.permissions,
         ],
       ),
     );
@@ -253,12 +253,13 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
       _model.bySelectingFlow(
         OnboardingFlowType.discord,
         removeScreens: [
+          OnboardingScreen.methods,
           if (!_model.user.agePending) OnboardingScreen.age,
           OnboardingScreen.language,
-          OnboardingScreen.methods,
           OnboardingScreen.phone,
           OnboardingScreen.codeVerification,
           OnboardingScreen.username,
+          OnboardingScreen.gender,
           OnboardingScreen.permissions,
           if (!_model.user.circlesPending) OnboardingScreen.interests,
         ],

@@ -79,10 +79,6 @@ class _FeaturesIndexPageState extends State<FeaturesIndexPage>
                     child: const Text("Force Update Popup"),
                   ),
                   ElevatedButton(
-                    onPressed: presenter.onTapOnBoardingCirclesPicker,
-                    child: const Text("OnBoarding Circles Selection"),
-                  ),
-                  ElevatedButton(
                     onPressed: presenter.onTapAboutElections,
                     child: const Text("About Elections"),
                   ),

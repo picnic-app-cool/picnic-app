@@ -18,6 +18,7 @@ import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../circles/mocks/circles_mocks.dart';
 import '../mocks/onboarding_mocks.dart';
 
 void main() {
@@ -44,10 +45,13 @@ void main() {
       Mocks.localStoreRepository,
       OnboardingMocks.saveAuthTokenUseCase,
       AnalyticsMocks.analyticsRepository,
+      CirclesMocks.joinCirclesUseCase,
     );
     when(() => OnboardingMocks.saveAuthTokenUseCase.execute(authToken: any(named: 'authToken')))
         .thenSuccess((_) => unit);
     when(() => Mocks.localStoreRepository.saveCurrentUser(user: any(named: 'user')))
+        .thenAnswer((_) => successFuture(unit));
+    when(() => CirclesMocks.joinCirclesUseCase.execute(circleIds: any(named: 'circleIds')))
         .thenAnswer((_) => successFuture(unit));
   });
 

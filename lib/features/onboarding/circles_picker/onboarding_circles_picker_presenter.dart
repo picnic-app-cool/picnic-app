@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:picnic_app/core/domain/use_cases/join_circles_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/set_should_show_circles_selection_use_case.dart';
 import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
@@ -19,7 +18,6 @@ class OnBoardingCirclesPickerPresenter extends Cubit<OnBoardingCirclesPickerView
     OnBoardingCirclesPickerPresentationModel model,
     this.navigator,
     this._getInterestsUseCase,
-    this._joinCirclesUseCase,
     this._logAnalyticsEventUseCase,
     this._setShouldShowCirclesSelectionUseCase,
     this._getCirclesForInterestsUseCase,
@@ -27,7 +25,6 @@ class OnBoardingCirclesPickerPresenter extends Cubit<OnBoardingCirclesPickerView
 
   final OnBoardingCirclesPickerNavigator navigator;
   final GetOnBoardingInterestsUseCase _getInterestsUseCase;
-  final JoinCirclesUseCase _joinCirclesUseCase;
   final LogAnalyticsEventUseCase _logAnalyticsEventUseCase;
   final SetShouldShowCirclesSelectionUseCase _setShouldShowCirclesSelectionUseCase;
   final GetCirclesForInterestsUseCase _getCirclesForInterestsUseCase;
@@ -47,16 +44,10 @@ class OnBoardingCirclesPickerPresenter extends Cubit<OnBoardingCirclesPickerView
 
     final selectedInterests = _model.selectedInterests;
     await _getCirclesForInterestsUseCase.execute(selectedInterests).doOn(
-          success: (circlesList) async =>
-              _joinCirclesUseCase.execute(circleIds: circlesList).observeStatusChanges((result) {
-            tryEmit(
-              _model.copyWith(
-                joinCirclesResult: result,
-              ),
-            );
-            _model.onCirclesSelectedCallback!(circlesList);
-          }),
-        );
+      success: (circlesList) {
+        _model.onCirclesSelectedCallback!(circlesList);
+      },
+    );
   }
 
   void onTapInterest(Selectable<Interest> interest) {
