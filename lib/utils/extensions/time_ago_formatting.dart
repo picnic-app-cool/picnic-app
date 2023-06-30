@@ -34,3 +34,38 @@ extension TimeAgoFormatting on DateTime {
     return result;
   }
 }
+
+extension TimeFormatting on DateTime {
+  String timeElapsedWithoutAgo() {
+    final currentTimeProvider = getIt<CurrentTimeProvider>();
+    var elapsed = currentTimeProvider.currentTime.millisecondsSinceEpoch - millisecondsSinceEpoch;
+    final seconds = elapsed / 1000;
+    final minutes = seconds / 60;
+    final hours = minutes / 60;
+    final days = hours / 24;
+    final weeks = days / 7;
+    final months = days / 30;
+    final years = days / 365;
+
+    String result;
+    if (seconds <= 0) {
+      result = appLocalizations.secondsTime(0);
+    } else if (seconds < 60) {
+      result = appLocalizations.secondsTime(seconds.floor());
+    } else if (minutes < 60) {
+      result = appLocalizations.minutesTime(minutes.floor());
+    } else if (hours < 24) {
+      result = appLocalizations.hoursTime(hours.floor());
+    } else if (days < 7) {
+      result = appLocalizations.daysTime(days.floor());
+    } else if (weeks < 4) {
+      result = appLocalizations.weeksTime(weeks.floor());
+    } else if (months <= 12) {
+      result = appLocalizations.monthsTime(months.floor());
+    } else {
+      result = appLocalizations.yearsTime(years.floor());
+    }
+
+    return result;
+  }
+}

@@ -1485,5 +1485,47 @@
       "interestsSelected": {},
       "interestsMinimum": {}
     }
+  },
+  "secondsTime": "{seconds}s",
+  "@secondsTime": {
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "minutesTime": "{minutes}m",
+  "@minutesTime": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "hoursTime": "{hours}h",
+  "@hoursTime": {
+    "placeholders": {
+      "hours": {}
+    }
+  },
+  "daysTime": "{days}d",
+  "@daysTime": {
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "weeksTime": "{weeks}d",
+  "@weeksTime": {
+    "placeholders": {
+      "weeks": {}
+    }
+  },
+  "monthsTime": "{months}d",
+  "@monthsTime": {
+    "placeholders": {
+      "months": {}
+    }
+  },
+  "yearsTime": "{years}d",
+  "@yearsTime": {
+    "placeholders": {
+      "years": {}
+    }
   }
 }

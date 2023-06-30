@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:picnic_app/core/utils/stat_extensions.dart';
+import 'package:picnic_app/core/utils/string_overflower.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_page.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
+import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/utils/extensions/color_extensions.dart';
-import 'package:picnic_app/utils/number_formatter.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
 
@@ -66,6 +68,9 @@ class PicnicDynamicAuthor extends StatelessWidget {
   static const double _opacityValueWhite = 0.7;
   static const double _followButtonHeight = 26.0;
   static const double _joinButtonRadius = 100.0;
+
+  static const double _iconSize = 16.0;
+  static const int _maxOverflowLength = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +170,8 @@ class PicnicDynamicAuthor extends StatelessWidget {
                               onTap: onAuthorUsernameTap,
                               child: RichText(
                                 text: TextSpan(
-                                  text: appLocalizations.byUsername(authorUsername),
+                                  text:
+                                      customOverflover(appLocalizations.byUsername(authorUsername), _maxOverflowLength),
                                   style: subtitleStyle,
                                   children: [
                                     if (authorVerifiedBadge != null) ...[
@@ -193,12 +199,32 @@ class PicnicDynamicAuthor extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (showDateViews)
-                            Text(
-                              ' • $dateToDisplay • ${appLocalizations.viewsCount(formatNumber(viewsCount))}',
-                              style: subtitleStyle,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          if (showDateViews && dateToDisplay.isNotEmpty)
+                            Row(
+                              children: [
+                                Text(
+                                  ' • $dateToDisplay •',
+                                  style: subtitleStyle,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      Assets.images.play.path,
+                                      height: _iconSize,
+                                      width: _iconSize,
+                                    ),
+                                    const Gap(2),
+                                    Text(
+                                      viewsCount.formattingToStat(),
+                                      style: subtitleStyle,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                         ],
                       ),

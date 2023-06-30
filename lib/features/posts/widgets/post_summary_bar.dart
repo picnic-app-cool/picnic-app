@@ -77,7 +77,7 @@ class PostSummaryBar extends StatelessWidget {
     final circleEmoji = circle.emoji;
     final circleImage = circle.imageFile;
     final deferredLink = DeferredPointerHandlerLink();
-    final postTimeCreationDate = post.createdAt?.timeElapsed();
+    final postTimeCreationDate = post.createdAt?.timeElapsedWithoutAgo();
 
     return Padding(
       padding: padding,
