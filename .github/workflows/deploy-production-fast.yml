@@ -1,0 +1,13 @@
+name: ▶️ Promote release candidate to production Google Play, GCS bucket
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false # we don't want to abort releases
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/reusable-deploy-production-fast.yml
+    secrets: inherit

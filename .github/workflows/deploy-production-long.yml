@@ -1,4 +1,4 @@
-name: ▶️ Promote release candidate to production AppStore, Google Play, GCS bucket
+name: ▶️ Promote release candidate to production AppStore
 
 on:
   workflow_dispatch:
@@ -9,5 +9,5 @@ concurrency:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/reusable-deploy-production.yml
+    uses: ./.github/workflows/reusable-deploy-production-long.yml
     secrets: inherit
