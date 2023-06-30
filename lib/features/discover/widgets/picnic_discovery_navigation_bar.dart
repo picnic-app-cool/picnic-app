@@ -7,14 +7,17 @@ class PicnicDiscoveryNavigationBar extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.focusNode,
+    this.showBackButton,
   }) : super(key: key);
 
   final TextEditingController controller;
   final FocusNode focusNode;
+  final bool? showBackButton;
 
   @override
   Widget build(BuildContext context) {
     return PicnicAppBar(
+      showBackButton: showBackButton,
       child: PicnicDiscoverySearchBar(
         controller: controller,
         focusNode: focusNode,

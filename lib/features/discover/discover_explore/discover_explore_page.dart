@@ -92,6 +92,7 @@ class _DiscoverExplorePageState extends State<DiscoverExplorePage>
             child: PicnicDiscoveryNavigationBar(
               controller: controller,
               focusNode: focusNode,
+              showBackButton: false,
             ),
           ),
         ],
