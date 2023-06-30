@@ -4,7 +4,6 @@ import 'package:picnic_app/features/main/main_navigator.dart';
 import 'package:picnic_app/features/onboarding/age_form/age_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_navigator.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/gender_select_form/gender_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/language_select_form/language_select_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/method_form/method_form_navigator.dart';
@@ -22,7 +21,6 @@ class OnboardingNavigator
     with
         SplashRoute,
         UsernameFormRoute,
-        CountrySelectFormRoute,
         AgeFormRoute,
         MethodFormRoute,
         CodeVerificationFormRoute,

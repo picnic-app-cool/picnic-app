@@ -18,11 +18,6 @@ import 'package:picnic_app/features/onboarding/code_verification_form/code_verif
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_page.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_page.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presentation_model.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_captcha_params_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_circles_for_interests_use_case.dart';
 import 'package:picnic_app/features/onboarding/domain/use_cases/get_groups_with_circles_use_case.dart';
@@ -470,24 +465,6 @@ void _configureMvp() {
         )
         ..registerFactoryParam<OnboardingCirclesPickerPage, OnBoardingCirclesPickerInitialParams, dynamic>(
           (initialParams, _) => OnboardingCirclesPickerPage(
-            presenter: getIt(param1: initialParams),
-          ),
-        )
-        ..registerFactory<CountrySelectFormNavigator>(
-          () => CountrySelectFormNavigator(getIt()),
-        )
-        ..registerFactoryParam<CountrySelectFormPresentationModel, CountrySelectFormInitialParams, dynamic>(
-          (params, _) => CountrySelectFormPresentationModel.initial(params),
-        )
-        ..registerFactoryParam<CountrySelectFormPresenter, CountrySelectFormInitialParams, dynamic>(
-          (initialParams, _) => CountrySelectFormPresenter(
-            getIt(param1: initialParams),
-            getIt(),
-            getIt(),
-          ),
-        )
-        ..registerFactoryParam<CountrySelectFormPage, CountrySelectFormInitialParams, dynamic>(
-          (initialParams, _) => CountrySelectFormPage(
             presenter: getIt(param1: initialParams),
           ),
         )

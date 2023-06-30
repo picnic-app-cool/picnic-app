@@ -1,10 +1,9 @@
 //ignore_for_file: prefer-single-widget-per-file
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:picnic_app/core/domain/model/country_with_dial_code.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
-import 'package:picnic_app/features/onboarding/widgets/picnic_countries_filter.dart';
+import 'package:picnic_app/features/onboarding/widgets/country_code_prefix.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
-import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/countdown_timer_builder.dart';
 import 'package:picnic_app/ui/widgets/picnic_text_input.dart';
 import 'package:picnic_app/utils/extensions/string_formatting.dart';
@@ -25,11 +24,19 @@ class OnBoardingTextInput extends StatelessWidget {
     this.codeExpiryTime,
     this.keyboardType,
     this.inputTextStyle,
-    this.initialCountry = "US",
+    this.selectedCountry = const CountryWithDialCode(
+      code: '+1',
+      name: 'US',
+      flag: '🇺🇸',
+    ),
     this.initialValue,
     this.maxLines = 1,
     this.showFlag = false,
     this.focusNode,
+    this.innerLabel,
+    this.suffixIconConstraints,
+    this.suffix,
+    this.onTapCountryCode,
   })  : assert(
           !(codeExpiryTime == null && inputType == PicnicOnBoardingTextInputType.oneTimePassInput),
           "you have to provide codeExpiryTime only if inputType is oneTimePassInput",
@@ -49,22 +56,27 @@ class OnBoardingTextInput extends StatelessWidget {
   final PicnicOnBoardingTextInputType inputType;
   final TextEditingController? textController;
   final ValueChanged<String>? onChanged;
-  final ValueChanged<CountryCode>? onChangedCountryCode;
+  final ValueChanged<CountryWithDialCode>? onChangedCountryCode;
   final CurrentTimeProvider? currentTimeProvider;
   final DateTime? codeExpiryTime;
   final String? errorText;
   final TextInputType? keyboardType;
   final TextStyle? inputTextStyle;
-  final String initialCountry;
+  final CountryWithDialCode selectedCountry;
   final String? initialValue;
   final FocusNode? focusNode;
   final int maxLines;
   final bool showFlag;
+  final Text? innerLabel;
+  final Widget? suffix;
+  final BoxConstraints? suffixIconConstraints;
+  final void Function()? onTapCountryCode;
 
   /// whether to show a loading indicator at the end of the input
   final bool isLoading;
 
   static const height = 20.0;
+  static const closeIconSize = 24.0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +84,6 @@ class OnBoardingTextInput extends StatelessWidget {
     final themeColors = theme.colors;
     final themeStyles = theme.styles;
     final blackAndWhite = themeColors.blackAndWhite;
-    final hintTextStyle = themeStyles.subtitle15.copyWith(
-      color: blackAndWhite.shade600,
-    );
 
     var defaultInputTextStyle = inputTextStyle;
     defaultInputTextStyle ??= themeStyles.body20.copyWith(
@@ -85,14 +94,16 @@ class OnBoardingTextInput extends StatelessWidget {
     return PicnicTextInput(
       initialValue: initialValue,
       hintText: hintText,
+      hintTextStyle: themeStyles.body20.copyWith(color: themeColors.darkBlue),
       errorText: errorText!,
       isLoading: isLoading,
+      innerLabel: innerLabel,
       focusedBorderSide: BorderSide(
         color: blackAndWhite.shade900,
         // ignore: no-magic-number
         width: 2,
       ),
-      readOnly: inputType == PicnicOnBoardingTextInputType.countryPickerTextInput,
+      readOnly: inputType == PicnicOnBoardingTextInputType.ageSelectionInput,
       inputFillColor: const Color.fromRGBO(
         247,
         247,
@@ -102,6 +113,7 @@ class OnBoardingTextInput extends StatelessWidget {
       onChanged: onChanged,
       textController: textController,
       focusNode: focusNode,
+      suffixIconConstraints: suffixIconConstraints,
       suffix: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -111,67 +123,19 @@ class OnBoardingTextInput extends StatelessWidget {
               currentTimeProvider: currentTimeProvider!,
               codeExpiryTime: codeExpiryTime!,
             ),
-          if (inputType == PicnicOnBoardingTextInputType.countryPickerTextInput)
-            _CountrySelectPopup(
-              initialCountry: initialCountry,
-              hintTextStyle: hintTextStyle,
-              onChangedCountryCode: onChangedCountryCode,
-            ),
-          if (inputType == PicnicOnBoardingTextInputType.phoneInput)
-            InkWell(
-              onTap: textController!.clear,
-              child: SizedBox(
-                height: height,
-                width: height,
-                child: Image.asset(
-                  Assets.images.close.path,
-                  color: blackAndWhite.shade600,
-                ),
-              ),
-            ),
+          if (suffix != null) suffix!,
         ],
       ),
-      prefix: inputType == PicnicOnBoardingTextInputType.countryCodePickerTextInput ||
-              inputType == PicnicOnBoardingTextInputType.phoneInput
-          ? _InternationalMobileCodePicker(
-              textStyle: hintTextStyle,
-              showFlagDialog: showFlag,
-              onChanged: onChangedCountryCode,
-              initialCountry: initialCountry,
+      prefix: inputType == PicnicOnBoardingTextInputType.phoneInput
+          ? CountryCodePrefix(
+              flag: selectedCountry.flag,
+              code: selectedCountry.code,
+              onTapCountryCode: onTapCountryCode!,
             )
           : null,
       keyboardType: keyboardType ?? inputType.defaultKeyboardType,
       inputTextStyle: defaultInputTextStyle,
       padding: 0,
-    );
-  }
-}
-
-class _CountrySelectPopup extends StatelessWidget {
-  const _CountrySelectPopup({
-    Key? key,
-    required this.hintTextStyle,
-    required this.onChangedCountryCode,
-    required this.initialCountry,
-  }) : super(key: key);
-
-  final TextStyle hintTextStyle;
-  final ValueChanged<CountryCode>? onChangedCountryCode;
-  final String initialCountry;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset(Assets.images.arrowDown.path),
-        _InternationalMobileCodePicker(
-          initialCountry: initialCountry,
-          textStyle: hintTextStyle.copyWith(color: Colors.transparent),
-          onChanged: onChangedCountryCode,
-          showCountryOnly: true,
-        ),
-      ],
     );
   }
 }
@@ -227,63 +191,21 @@ class OneTimePassTimer extends StatelessWidget {
   }
 }
 
-class _InternationalMobileCodePicker extends StatelessWidget {
-  const _InternationalMobileCodePicker({
-    Key? key,
-    required this.textStyle,
-    required this.onChanged,
-    required this.initialCountry,
-    this.showCountryOnly = false,
-    this.showFlagDialog = false,
-  }) : super(key: key);
-
-  final TextStyle textStyle;
-  final ValueChanged<CountryCode>? onChanged;
-  final bool showCountryOnly;
-  final bool showFlagDialog;
-
-  final String initialCountry;
-
-  @override
-  Widget build(BuildContext context) {
-    return CountryCodePicker(
-      onChanged: onChanged,
-      initialSelection: initialCountry,
-      favorite: [initialCountry],
-      showFlag: showFlagDialog,
-      showDropDownButton: true,
-      showCountryOnly: showCountryOnly,
-      dialogSize: const Size(360, 550),
-      // ignore: no-magic-number
-      flagWidth: 16.0,
-      padding: const EdgeInsets.only(
-        left: 8.0,
-      ),
-      textStyle: textStyle,
-      showFlagDialog: true,
-      countriesFilter: const PicnicCountriesFilter(),
-    );
-  }
-}
-
 enum PicnicOnBoardingTextInputType {
-  countryCodePickerTextInput,
-  countryPickerTextInput,
   phoneInput,
   oneTimePassInput,
+  ageSelectionInput,
   textInput;
 
   TextInputType? get defaultKeyboardType {
     switch (this) {
-      case PicnicOnBoardingTextInputType.countryCodePickerTextInput:
-        return TextInputType.phone;
-      case PicnicOnBoardingTextInputType.countryPickerTextInput:
-        return TextInputType.text;
       case PicnicOnBoardingTextInputType.oneTimePassInput:
         return TextInputType.number;
       case PicnicOnBoardingTextInputType.textInput:
         return TextInputType.text;
       case PicnicOnBoardingTextInputType.phoneInput:
+        return TextInputType.number;
+      case PicnicOnBoardingTextInputType.ageSelectionInput:
         return TextInputType.number;
     }
   }

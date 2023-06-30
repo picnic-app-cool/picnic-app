@@ -16,6 +16,7 @@ import 'package:picnic_app/core/domain/model/circle_stats.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/collection_counter.dart';
 import 'package:picnic_app/core/domain/model/contact_phone_number.dart';
+import 'package:picnic_app/core/domain/model/country_with_dial_code.dart';
 import 'package:picnic_app/core/domain/model/device_system_info.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flag_type.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flags.dart';
@@ -1532,6 +1533,12 @@ class Stubs {
           emoji: '👽',
         ),
       ];
+
+  static CountryWithDialCode get countryUS => const CountryWithDialCode(
+        code: '+1',
+        name: 'US',
+        flag: '🇺🇸',
+      );
 
   //to disable possibility of creating an instance of this class
   Stubs._();

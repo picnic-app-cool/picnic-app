@@ -12,13 +12,15 @@ class AgeFormPresentationModel implements AgeFormViewModel {
     AgeFormInitialParams initialParams,
     this.ageValidator,
   )   : onAgeSelectedCallback = initialParams.onAgeSelected,
-        ageText = initialParams.formData.age;
+        ageText = initialParams.formData.age,
+        isAgeFieldFocused = false;
 
   /// Used for the copyWith method
   AgeFormPresentationModel._({
     required this.onAgeSelectedCallback,
     required this.ageText,
     required this.ageValidator,
+    required this.isAgeFieldFocused,
   });
 
   final AgeValidator ageValidator;
@@ -26,6 +28,9 @@ class AgeFormPresentationModel implements AgeFormViewModel {
   final ValueChanged<String> onAgeSelectedCallback;
   @override
   final String ageText;
+
+  @override
+  final bool isAgeFieldFocused;
 
   @override
   bool get continueEnabled => ageValidator.validate(ageText).isSuccess;
@@ -50,11 +55,13 @@ class AgeFormPresentationModel implements AgeFormViewModel {
     AgeValidator? ageValidator,
     ValueChanged<String>? onTapContinueCallback,
     String? ageText,
+    bool? isAgeFieldFocused,
   }) {
     return AgeFormPresentationModel._(
       ageValidator: ageValidator ?? this.ageValidator,
       onAgeSelectedCallback: onTapContinueCallback ?? onAgeSelectedCallback,
       ageText: ageText ?? this.ageText,
+      isAgeFieldFocused: isAgeFieldFocused ?? this.isAgeFieldFocused,
     );
   }
 }
@@ -66,4 +73,6 @@ abstract class AgeFormViewModel {
   String get ageErrorText;
 
   String get ageText;
+
+  bool get isAgeFieldFocused;
 }

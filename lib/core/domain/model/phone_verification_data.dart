@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:picnic_app/core/domain/model/country_with_dial_code.dart';
 
 /// Holds data returned from phone verification request
 class PhoneVerificationData extends Equatable {
@@ -6,16 +7,18 @@ class PhoneVerificationData extends Equatable {
     required this.verificationId,
     required this.smsCode,
     required this.phoneNumber,
-    required this.dialCode,
-    required this.countryCode,
+    required this.country,
   });
 
   const PhoneVerificationData.empty()
       : verificationId = '',
         smsCode = '',
         phoneNumber = '',
-        dialCode = '+1',
-        countryCode = 'US';
+        country = const CountryWithDialCode(
+          code: '+1',
+          name: 'US',
+          flag: '🇺🇸',
+        );
 
   /// verification id returned by backend, it needs to be sent along with sms code to authenticate user
   final String verificationId;
@@ -26,35 +29,31 @@ class PhoneVerificationData extends Equatable {
   /// phone number portion, without dial code
   final String phoneNumber;
 
-  /// country dial code, i.e: +1 for US
-  final String dialCode;
-
-  final String countryCode;
+  /// country with dial code
+  final CountryWithDialCode country;
 
   @override
   List<Object> get props => [
         verificationId,
         smsCode,
         phoneNumber,
-        dialCode,
-        countryCode,
+        country,
+        country,
       ];
 
-  String get phoneNumberWithDialCode => "$dialCode$phoneNumber";
+  String get phoneNumberWithDialCode => "${country.code}$phoneNumber";
 
   PhoneVerificationData copyWith({
     String? verificationId,
     String? smsCode,
     String? phoneNumber,
-    String? dialCode,
-    String? countryCode,
+    CountryWithDialCode? country,
   }) {
     return PhoneVerificationData(
       verificationId: verificationId ?? this.verificationId,
       smsCode: smsCode ?? this.smsCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      dialCode: dialCode ?? this.dialCode,
-      countryCode: countryCode ?? this.countryCode,
+      country: country ?? this.country,
     );
   }
 }

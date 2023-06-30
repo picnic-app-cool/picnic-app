@@ -21,10 +21,19 @@ class AgeFormPresenter extends Cubit<AgeFormViewModel> {
 
   void onChangedAge(String value) => tryEmit(_model.copyWith(ageText: value));
 
-  void onTapContinue() {
+  void onTapContinue(String ageText) {
+    tryEmit(_model.copyWith(ageText: ageText));
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(target: AnalyticsTapTarget.onboardingAgeContinueButton),
     );
     _model.onAgeSelectedCallback(_model.ageText);
+  }
+
+  void onTapClear() {
+    tryEmit(_model.copyWith(isAgeFieldFocused: false));
+  }
+
+  void onTapAgeInputField() {
+    tryEmit(_model.copyWith(isAgeFieldFocused: true));
   }
 }

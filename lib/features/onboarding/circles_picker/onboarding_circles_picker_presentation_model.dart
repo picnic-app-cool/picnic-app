@@ -19,8 +19,10 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
   )   : onCirclesSelectedCallback = initialParams.onCirclesSelected,
         gender = initialParams.formData.gender,
         selectableInterests = [],
+        moreInterests = [],
         getInterestsResult = const FutureResult.empty(),
-        joinCirclesResult = const FutureResult.empty();
+        joinCirclesResult = const FutureResult.empty(),
+        isMoreInterestsExpanded = false;
 
   /// Used for the copyWith method
   OnBoardingCirclesPickerPresentationModel._({
@@ -29,6 +31,8 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
     required this.selectableInterests,
     required this.joinCirclesResult,
     required this.gender,
+    required this.moreInterests,
+    required this.isMoreInterestsExpanded,
   });
 
   final ValueChanged<List<Id>>? onCirclesSelectedCallback;
@@ -44,25 +48,44 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
   final List<Selectable<Interest>> selectableInterests;
 
   @override
+  final List<Selectable<Interest>> moreInterests;
+
+  @override
+  final bool isMoreInterestsExpanded;
+
+  @override
   bool get isLoading => getInterestsResult.isPending() || joinCirclesResult.isPending();
 
   @override
-  bool get anythingSelected => selectableInterests.any((selectableInterest) => selectableInterest.selected);
+  bool get hasMoreInterests => moreInterests.isNotEmpty;
 
   @override
-  int get currentSelectionsCount => selectableInterests.where((it) => it.selected).length;
+  bool get anythingSelected =>
+      selectableInterests.any((selectableInterest) => selectableInterest.selected) ||
+      moreInterests.any((selectableInterest) => selectableInterest.selected);
+
+  @override
+  int get currentSelectionsCount =>
+      selectableInterests.where((it) => it.selected).length + moreInterests.where((it) => it.selected).length;
 
   @override
   bool get isAcceptButtonEnabled => selectionsLeftCount == 0 && !joinCirclesResult.isPending();
 
-  List<Id> get selectedInterests =>
-      selectableInterests.where((interest) => interest.selected).map((interest) => interest.item.id).toList();
+  List<Id> get selectedInterests => [
+        ...selectableInterests.where((interest) => interest.selected).map((interest) => interest.item.id).toList(),
+        ...moreInterests.where((interest) => interest.selected).map((interest) => interest.item.id).toList(),
+      ];
 
   int get selectionsLeftCount =>
       (requiredNumberOfInterestsInOnBoarding - currentSelectionsCount).clamp(0, requiredNumberOfInterestsInOnBoarding);
 
   OnBoardingCirclesPickerPresentationModel byTogglingInterest(Selectable<Interest> interest) => copyWith(
         selectableInterests: selectableInterests.map(
+          (it) {
+            return it.item.id == interest.item.id ? it.copyWith(selected: !it.selected) : it;
+          },
+        ).toList(),
+        moreInterests: moreInterests.map(
           (it) {
             return it.item.id == interest.item.id ? it.copyWith(selected: !it.selected) : it;
           },
@@ -75,6 +98,8 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
     FutureResult<Either<JoinCircleFailure, Unit>>? joinCirclesResult,
     FutureResult<Either<GetInterestsFailure, List<Interest>>>? getInterestsResult,
     Gender? gender,
+    List<Selectable<Interest>>? moreInterests,
+    bool? isMoreInterestsExpanded,
   }) {
     return OnBoardingCirclesPickerPresentationModel._(
       onCirclesSelectedCallback: onCirclesSelectedCallback ?? this.onCirclesSelectedCallback,
@@ -82,6 +107,8 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
       joinCirclesResult: joinCirclesResult ?? this.joinCirclesResult,
       getInterestsResult: getInterestsResult ?? this.getInterestsResult,
       gender: gender ?? this.gender,
+      moreInterests: moreInterests ?? this.moreInterests,
+      isMoreInterestsExpanded: isMoreInterestsExpanded ?? this.isMoreInterestsExpanded,
     );
   }
 }
@@ -90,6 +117,8 @@ class OnBoardingCirclesPickerPresentationModel implements OnBoardingCirclesPicke
 abstract class OnBoardingCirclesPickerViewModel {
   List<Selectable<Interest>> get selectableInterests;
 
+  List<Selectable<Interest>> get moreInterests;
+
   bool get isLoading;
 
   bool get anythingSelected;
@@ -97,4 +126,8 @@ abstract class OnBoardingCirclesPickerViewModel {
   int get currentSelectionsCount;
 
   bool get isAcceptButtonEnabled;
+
+  bool get hasMoreInterests;
+
+  bool get isMoreInterestsExpanded;
 }

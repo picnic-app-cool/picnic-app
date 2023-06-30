@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/constants/constants.dart';
@@ -28,7 +27,7 @@ class PhoneFormPage extends StatefulWidget with HasPresenter<PhoneFormPresenter>
 
 class _PhoneFormPageState extends State<PhoneFormPage>
     with PresenterStateMixin<CongratsFormViewModel, PhoneFormPresenter, PhoneFormPage> {
-  late FocusNode phoneFocusNode;
+  final phoneFocusNode = FocusNode();
   late final TextEditingController phoneController;
 
   static const _contentPadding = EdgeInsets.only(
@@ -38,19 +37,19 @@ class _PhoneFormPageState extends State<PhoneFormPage>
     bottom: 16.0,
   );
 
+  static const _closeIconHeight = 24.0;
+  static const _suffixMinWidthConstraint = 36.0;
+  static const _phoneIconSize = 40.0;
+
   @override
   void initState() {
     super.initState();
     phoneController = TextEditingController(text: state.phoneNumber);
-    phoneController.addListener(() => presenter.onChangedPhone(phoneController.text));
-
-    phoneFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     phoneController.dispose();
-
     phoneFocusNode.dispose();
     super.dispose();
   }
@@ -59,6 +58,8 @@ class _PhoneFormPageState extends State<PhoneFormPage>
   Widget build(BuildContext context) => stateObserver(
         builder: (context, state) {
           final themeData = PicnicTheme.of(context);
+          final colors = themeData.colors;
+          final darkBlue = colors.darkBlue;
           final blackAndWhite = themeData.colors.blackAndWhite;
           return Scaffold(
             body: SafeArea(
@@ -92,29 +93,39 @@ class _PhoneFormPageState extends State<PhoneFormPage>
                             ),
                             // ignore: no-magic-number
                             Assets.images.phone.image(
-                              // ignore: no-magic-number
-                              width: 40,
-                              // ignore: no-magic-number
-                              height: 40,
+                              width: _phoneIconSize,
+                              height: _phoneIconSize,
+                              color: darkBlue,
                               fit: BoxFit.contain,
                             ),
                           ],
                         ),
                         const Gap(24),
                         OnBoardingTextInput(
-                          key: const Key('phoneInput'),
                           focusNode: phoneFocusNode,
                           textController: phoneController,
-                          showFlag: true,
                           keyboardType: TextInputType.phone,
-                          hintText: "phone number",
-                          initialCountry: state.countryCode,
+                          hintText: appLocalizations.phoneNumberLabel,
+                          suffixIconConstraints: const BoxConstraints(
+                            minWidth: _suffixMinWidthConstraint,
+                          ),
+                          suffix: phoneFocusNode.hasFocus
+                              ? InkWell(
+                                  onTap: _onTapClose,
+                                  child: SizedBox(
+                                    height: _closeIconHeight,
+                                    width: _closeIconHeight,
+                                    child: Image.asset(
+                                      Assets.images.close.path,
+                                      color: themeData.colors.darkBlue,
+                                    ),
+                                  ),
+                                )
+                              : null,
+                          selectedCountry: state.country,
                           inputType: PicnicOnBoardingTextInputType.phoneInput,
                           onChanged: presenter.onChangedPhone,
-                          onChangedCountryCode: (CountryCode value) => presenter.onChangedCountryCode(
-                            value.code,
-                            value.dialCode,
-                          ),
+                          onTapCountryCode: presenter.onTapCountryCode,
                         ),
                       ],
                     ),
@@ -149,4 +160,11 @@ class _PhoneFormPageState extends State<PhoneFormPage>
           );
         },
       );
+
+  void _onTapClose() {
+    phoneController.clear();
+    setState(() {
+      phoneFocusNode.unfocus();
+    });
+  }
 }

@@ -56,11 +56,6 @@ class OnboardingMocks {
   static late MockOnBoardingCirclesPickerInitialParams circleGroupingsFormInitialParams;
   static late MockOnBoardingCirclesPickerNavigator circleGroupingsFormNavigator;
 
-  static late MockCountrySelectFormPresenter countrySelectFormPresenter;
-  static late MockCountrySelectFormPresentationModel countrySelectFormPresentationModel;
-  static late MockCountrySelectFormInitialParams countrySelectFormInitialParams;
-  static late MockCountrySelectFormNavigator countrySelectFormNavigator;
-
   static late MockLanguageSelectFormPresenter languageSelectFormPresenter;
   static late MockLanguageSelectFormPresentationModel languageSelectFormPresentationModel;
   static late MockLanguageSelectFormInitialParams languageSelectFormInitialParams;
@@ -167,10 +162,6 @@ class OnboardingMocks {
     circleGroupingsFormPresentationModel = MockOnBoardingCirclesPickerPresentationModel();
     circleGroupingsFormInitialParams = MockOnBoardingCirclesPickerInitialParams();
     circleGroupingsFormNavigator = MockOnBoardingCirclesPickerNavigator();
-    countrySelectFormPresenter = MockCountrySelectFormPresenter();
-    countrySelectFormPresentationModel = MockCountrySelectFormPresentationModel();
-    countrySelectFormInitialParams = MockCountrySelectFormInitialParams();
-    countrySelectFormNavigator = MockCountrySelectFormNavigator();
     //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
@@ -248,10 +239,6 @@ class OnboardingMocks {
     registerFallbackValue(MockOnBoardingCirclesPickerPresentationModel());
     registerFallbackValue(MockOnBoardingCirclesPickerInitialParams());
     registerFallbackValue(MockOnBoardingCirclesPickerNavigator());
-    registerFallbackValue(MockCountrySelectFormPresenter());
-    registerFallbackValue(MockCountrySelectFormPresentationModel());
-    registerFallbackValue(MockCountrySelectFormInitialParams());
-    registerFallbackValue(MockCountrySelectFormNavigator());
     registerFallbackValue(MockLanguageSelectFormPresenter());
     registerFallbackValue(MockLanguageSelectFormPresentationModel());
     registerFallbackValue(MockLanguageSelectFormInitialParams());

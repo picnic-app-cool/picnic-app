@@ -37,6 +37,8 @@ class PicnicTextInput extends StatelessWidget {
     this.padding = _defaultPadding,
     this.contentPadding,
     this.hintTextStyle,
+    this.innerLabelStyle,
+    this.suffixIconConstraints,
   })  : assert(
           initialValue == null || textController == null,
           "you can provide either textController or initialValue, not both",
@@ -51,6 +53,7 @@ class PicnicTextInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextStyle? inputTextStyle;
   final TextStyle? hintTextStyle;
+  final TextStyle? innerLabelStyle;
   final String? initialValue;
   final FocusNode? focusNode;
   final bool isLoading;
@@ -64,6 +67,7 @@ class PicnicTextInput extends StatelessWidget {
   final Text? outerLabel;
   final Text? innerLabel;
   final bool autocorrect;
+  final BoxConstraints? suffixIconConstraints;
 
   final Color? inputFillColor;
   final BorderSide focusedBorderSide;
@@ -79,7 +83,7 @@ class PicnicTextInput extends StatelessWidget {
 
   static const _defaultPadding = 8.0;
 
-  static const _defaultRadius = 16.0;
+  static const _defaultRadius = 8.0;
   static const _errorTextLineHeight = 2.0;
   static const _borderWidth = 2.0;
 
@@ -88,16 +92,22 @@ class PicnicTextInput extends StatelessWidget {
     final theme = PicnicTheme.of(context);
     final themeColors = theme.colors;
     final themeStyles = theme.styles;
+    final darkBlue = themeColors.darkBlue;
+    final darkBlueShade600 = darkBlue.shade600;
 
     var defaultHintTextStyle = hintTextStyle;
     defaultHintTextStyle ??= themeStyles.body20.copyWith(
-      color: themeColors.blackAndWhite.shade600,
+      color: darkBlueShade600,
     );
 
     var defaultInputTextStyle = inputTextStyle;
-    defaultInputTextStyle ??= themeStyles.caption20.copyWith(
-      color: themeColors.blackAndWhite.shade900,
-      fontWeight: FontWeight.bold,
+    defaultInputTextStyle ??= themeStyles.body20.copyWith(
+      color: darkBlue.shade900,
+    );
+
+    var defaultInnerLabelStyle = innerLabelStyle;
+    defaultInnerLabelStyle ??= themeStyles.link15.copyWith(
+      color: darkBlueShade600,
     );
 
     return Padding(
@@ -123,6 +133,7 @@ class PicnicTextInput extends StatelessWidget {
             buildCounter: maxLength != null && showMaxLengthCounter ? _buildCounter : null,
             decoration: InputDecoration(
               label: innerLabel,
+              labelStyle: defaultInnerLabelStyle,
               alignLabelWithHint: true,
               isDense: true,
               hintText: hintText,
@@ -133,6 +144,7 @@ class PicnicTextInput extends StatelessWidget {
               fillColor: errorText.isEmpty ? inputFillColor : themeColors.pink.shade100,
               contentPadding: contentPadding ?? _defaultContentPadding,
               prefixIcon: prefix,
+              suffixIconConstraints: suffixIconConstraints,
               suffixIcon: isLoading
                   ? PicnicLoadingIndicator(
                       isLoading: isLoading,

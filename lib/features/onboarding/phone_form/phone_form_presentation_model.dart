@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:picnic_app/core/domain/model/country_with_dial_code.dart';
 import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/core/utils/future_result.dart';
 import 'package:picnic_app/core/utils/utils.dart';
 import 'package:picnic_app/core/validators/phone_validator.dart';
+import 'package:picnic_app/features/onboarding/countries_constants.dart';
 import 'package:picnic_app/features/onboarding/domain/model/request_phone_code_failure.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_initial_params.dart';
 
@@ -28,9 +30,7 @@ class PhoneFormPresentationModel implements CongratsFormViewModel {
 
   final PhoneValidator phoneValidator;
   final FutureResult<Either<RequestPhoneCodeFailure, PhoneVerificationData>> phoneCodeFutureResult;
-
   final PhoneVerificationData verificationData;
-
   final ValueChanged<PhonePageResult> onChangedPhoneCallback;
 
   @override
@@ -42,13 +42,15 @@ class PhoneFormPresentationModel implements CongratsFormViewModel {
   String get fullPhone => verificationData.phoneNumberWithDialCode;
 
   @override
-  String get countryCode => verificationData.countryCode;
-
-  @override
   bool get continueEnabled => isPhoneValid && !isLoading;
 
   @override
   bool get isLoading => phoneCodeFutureResult.isPending();
+
+  @override
+  CountryWithDialCode get country => verificationData.country;
+
+  List<CountryWithDialCode> get countriesList => countriesWithDialCodes;
 
   PhoneFormPresentationModel byUpdatingVerificationData(
     PhoneVerificationData Function(PhoneVerificationData) mapper,
@@ -78,9 +80,9 @@ abstract class CongratsFormViewModel {
 
   bool get continueEnabled;
 
-  String get countryCode;
-
   bool get isPhoneValid;
 
   bool get isLoading;
+
+  CountryWithDialCode get country;
 }

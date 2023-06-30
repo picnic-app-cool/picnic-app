@@ -31,7 +31,7 @@ void main() {
       privateProfile: Stubs.privateProfile,
     ),
     phoneVerificationData: const PhoneVerificationData.empty().copyWith(
-      dialCode: "+48",
+      country: Stubs.countryUS,
       phoneNumber: "712712712",
     ),
     circles: List.generate(5, (index) => const Id.empty()),

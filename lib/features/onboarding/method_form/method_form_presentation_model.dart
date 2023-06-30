@@ -108,7 +108,7 @@ class MethodFormPresentationModel implements MethodFormViewModel {
   String get phoneNumber => verificationData.phoneNumber;
 
   @override
-  String get dialCode => verificationData.dialCode;
+  String get dialCode => verificationData.country.code;
 
   @override
   bool get signInWithGoogleEnabled => featureFlags[FeatureFlagType.signInWithGoogleEnabled];

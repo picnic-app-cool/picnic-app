@@ -7,6 +7,7 @@ import 'package:picnic_app/features/onboarding/phone_form/phone_form_initial_par
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/phone_form/phone_form_presenter.dart';
 
+import '../../../mocks/stubs.dart';
 import '../../../test_utils/test_utils.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
 import '../mocks/onboarding_mock_definitions.dart';
@@ -20,7 +21,7 @@ void main() {
   test(
     'should enable continue button when valid phone number entered',
     () {
-      presenter.onChangedCountryCode("CY", "+347");
+      presenter.onChangedCountry(Stubs.countryUS);
       presenter.onChangedPhone("712772813");
       expect(presenter.state.continueEnabled, isTrue);
     },
@@ -34,7 +35,7 @@ void main() {
           .thenAnswer((invocation) => successFuture(const PhoneVerificationData.empty()));
 
       // WHEN
-      presenter.onChangedCountryCode("CY", "+347");
+      presenter.onChangedCountry(Stubs.countryUS);
       presenter.onChangedPhone("712772813");
       presenter.onTapContinue();
 
@@ -44,7 +45,7 @@ void main() {
       ).captured;
 
       final data = captured[0] as PhoneVerificationData;
-      expect(data.dialCode, "+347");
+      expect(data.country, Stubs.countryUS);
       expect(data.phoneNumber, "712772813");
     },
   );

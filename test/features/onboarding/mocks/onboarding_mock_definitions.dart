@@ -15,10 +15,6 @@ import 'package:picnic_app/features/onboarding/code_verification_form/code_verif
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_navigator.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_initial_params.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_navigator.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presentation_model.dart';
-import 'package:picnic_app/features/onboarding/country_select_form/country_select_form_presenter.dart';
 import 'package:picnic_app/features/onboarding/domain/model/get_captcha_params_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/get_circles_for_interests_failure.dart';
 import 'package:picnic_app/features/onboarding/domain/model/log_in_failure.dart';
@@ -158,15 +154,6 @@ class MockOnBoardingCirclesPickerPresentationModel extends Mock implements OnBoa
 class MockOnBoardingCirclesPickerInitialParams extends Mock implements OnBoardingCirclesPickerInitialParams {}
 
 class MockOnBoardingCirclesPickerNavigator extends Mock implements OnBoardingCirclesPickerNavigator {}
-
-class MockCountrySelectFormPresenter extends MockCubit<CountrySelectFormViewModel>
-    implements CountrySelectFormPresenter {}
-
-class MockCountrySelectFormPresentationModel extends Mock implements CountrySelectFormPresentationModel {}
-
-class MockCountrySelectFormInitialParams extends Mock implements CountrySelectFormInitialParams {}
-
-class MockCountrySelectFormNavigator extends Mock implements CountrySelectFormNavigator {}
 
 class MockLanguageSelectFormPresenter extends MockCubit<LanguageSelectFormViewModel>
     implements LanguageSelectFormPresenter {}

@@ -4,16 +4,12 @@ import 'package:picnic_app/core/validators/validator.dart';
 
 class AgeValidator implements Validator<String, AgeValidationError> {
   static const minimumAge = 13;
-  static const maximumAge = 99;
+  static const maximumAge = 100;
 
   @override
   Either<AgeValidationError, Unit> validate(String input) {
     final sanitizedInput = input.trim();
-    if (sanitizedInput.startsWith('0')) {
-      return failure(const AgeValidationError.invalidInput());
-    }
     final intVal = int.tryParse(sanitizedInput);
-
     if (intVal == null) {
       return failure(const AgeValidationError.invalidInput());
     }

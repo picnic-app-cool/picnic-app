@@ -56,9 +56,9 @@
   "languageSelectFormTitle": "select language",
   "languageSelectFormDescription": "what language do you speak?",
   "languageSelectError": "please select a language",
-  "yourAgeTitle": "your age",
-  "yourAgeDescription": "please enter your age",
-  "ageHint": "your age",
+  "yourAgeTitle": "Your age",
+  "yourAgeDescription": "please enter your current age",
+  "ageHint": "years old",
   "ageTooYoungError": "you must be over 13 in order to use the app",
   "privateProfileEditButton": "edit profile",
   "editRulesTitle": "edit rules",
@@ -1527,5 +1527,8 @@
     "placeholders": {
       "years": {}
     }
-  }
+  },
+  "moreLabel": "More",
+  "searchCountries": "search countries",
+  "phoneNumberLabel": "phone number"
 }

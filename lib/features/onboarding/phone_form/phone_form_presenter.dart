@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:picnic_app/constants/constants.dart';
+import 'package:picnic_app/core/domain/model/country_with_dial_code.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/analytics/domain/model/analytics_event.dart';
@@ -34,20 +35,28 @@ class PhoneFormPresenter extends Cubit<CongratsFormViewModel> {
     _requestPhoneCode();
   }
 
-  void onChangedCountryCode(String? countryCode, String? dialCode) => tryEmit(
+  void onChangedCountry(CountryWithDialCode country) => tryEmit(
         _model.byUpdatingVerificationData(
           (data) => data.copyWith(
-            dialCode: dialCode,
-            countryCode: countryCode,
+            country: country,
           ),
         ),
       );
 
-  void onChangedPhone(String value) => tryEmit(
-        _model.byUpdatingVerificationData(
-          (data) => data.copyWith(phoneNumber: value),
-        ),
-      );
+  void onChangedPhone(String value) {
+    tryEmit(
+      _model.byUpdatingVerificationData(
+        (data) => data.copyWith(phoneNumber: value),
+      ),
+    );
+  }
+
+  Future<void> onTapCountryCode() async {
+    await navigator.showCountryCodePickerBottomSheet(
+      countriesList: _model.countriesList,
+      onTapCountry: onChangedCountry,
+    );
+  }
 
   void onTapTerms() => navigator.openUrl(Constants.termsUrl);
 

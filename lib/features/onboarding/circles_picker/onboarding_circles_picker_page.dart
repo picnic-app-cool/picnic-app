@@ -7,6 +7,7 @@ import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/onboarding_circles_picker_presenter.dart';
 import 'package:picnic_app/features/onboarding/circles_picker/widgets/interests_selection_section.dart';
+import 'package:picnic_app/features/onboarding/circles_picker/widgets/more_interests_selection_widget.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/top_navigation/picnic_app_bar.dart';
@@ -45,7 +46,6 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
     final colors = theme.colors;
-    final darkBlue = colors.darkBlue;
     final blackAndWhite600 = colors.blackAndWhite.shade600;
     return Scaffold(
       appBar: const PicnicAppBar(),
@@ -54,25 +54,30 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
           builder: (context, state) => Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Assets.images.profileIconPlaceholder.image(
-                  width: _personIconSize,
-                  height: _personIconSize,
-                  fit: BoxFit.contain,
-                  color: darkBlue,
+                Center(
+                  child: Assets.images.multiplePersons.image(
+                    width: _personIconSize,
+                    height: _personIconSize,
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 const Gap(8),
-                Text(
-                  textAlign: TextAlign.center,
-                  appLocalizations.pickInterestsTitle,
-                  style: theme.styles.title60,
+                Center(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    appLocalizations.pickInterestsTitle,
+                    style: theme.styles.title60,
+                  ),
                 ),
                 const Gap(8),
-                Text(
-                  appLocalizations.pickInterestsDescription,
-                  style: theme.styles.body30.copyWith(color: blackAndWhite600),
-                  textAlign: TextAlign.center,
+                Center(
+                  child: Text(
+                    appLocalizations.pickInterestsDescription,
+                    style: theme.styles.body30.copyWith(color: blackAndWhite600),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 const Gap(24),
                 AnimatedSwitcher(
@@ -84,18 +89,29 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
                           onTapInterest: presenter.onTapInterest,
                         ),
                 ),
+                const Gap(24),
+                if (state.hasMoreInterests)
+                  MoreInterestsSelectionWidget(
+                    selectableInterests: state.moreInterests,
+                    onTapInterest: presenter.onTapInterest,
+                    onTapMore: presenter.onTapMore,
+                    isExpanded: state.isMoreInterestsExpanded,
+                  ),
                 const Spacer(),
                 stateObserver(
-                  builder: (context, state) => PicnicButton(
-                    opacity: state.isAcceptButtonEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
-                    onTap: state.isAcceptButtonEnabled ? presenter.onTapContinue : null,
-                    color: colors.blue,
-                    title: state.isAcceptButtonEnabled
-                        ? appLocalizations.continueAction
-                        : appLocalizations.youSelectedSome(
-                            state.currentSelectionsCount,
-                            OnBoardingCirclesPickerPresentationModel.requiredNumberOfInterestsInOnBoarding,
-                          ),
+                  builder: (context, state) => SizedBox(
+                    width: double.infinity,
+                    child: PicnicButton(
+                      opacity: state.isAcceptButtonEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
+                      onTap: state.isAcceptButtonEnabled ? presenter.onTapContinue : null,
+                      color: colors.blue,
+                      title: state.isAcceptButtonEnabled
+                          ? appLocalizations.continueAction
+                          : appLocalizations.youSelectedSome(
+                              state.currentSelectionsCount,
+                              OnBoardingCirclesPickerPresentationModel.requiredNumberOfInterestsInOnBoarding,
+                            ),
+                    ),
                   ),
                 ),
               ],
