@@ -98,8 +98,7 @@ class Constants {
   static const androidUrl = 'https://play.google.com/store/apps/details?id=';
 
   static const termsUrl = 'https://www.notion.so/picnic-app/Terms-Conditions-34c0ed24030144d7b75d2a41fafee75c';
-  static const policiesUrl =
-      'https://picnic-app.notion.site/picnic-app/Privacy-Policy-a1428111659f4469a43d75a0bb520e6e';
+  static const policiesUrl = 'https://picnic.zone/legal/privacy-policy';
 
   //don't use values below 20 seconds, otherwise backend will fail
   static const shortLivedTokenTTLSeconds = 20;
