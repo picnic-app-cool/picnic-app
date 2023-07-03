@@ -305,6 +305,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
       ),
     );
     await navigator.openCircleDetails(CircleDetailsInitialParams(circleId: _model.post.circle.id));
+    await _refreshPostDetails();
   }
 
   void didUpdateDependencies({

@@ -97,7 +97,7 @@ class PicnicDynamicAuthor extends StatelessWidget {
           ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 6),
+            padding: const EdgeInsets.only(bottom: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -131,21 +131,24 @@ class PicnicDynamicAuthor extends StatelessWidget {
                         ),
                         const Gap(4),
                         if (onTapJoinCircle != null)
-                          InkWell(
-                            onTap: onTapJoinCircle,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(_joinButtonRadius),
-                                border: Border.all(
-                                  color: datesViewsColor,
+                          Opacity(
+                            opacity: iJoined ? 0 : 1.0,
+                            child: InkWell(
+                              onTap: onTapJoinCircle,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(_joinButtonRadius),
+                                  border: Border.all(
+                                    color: datesViewsColor,
+                                  ),
                                 ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
-                                child: Text(
-                                  iJoined ? appLocalizations.joinedButtonActionTitle : appLocalizations.joinAction,
-                                  style: styles.subtitle10.copyWith(color: joinButtonTextColor),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
+                                  child: Text(
+                                    iJoined ? appLocalizations.joinedButtonActionTitle : appLocalizations.joinAction,
+                                    style: styles.subtitle10.copyWith(color: joinButtonTextColor),
+                                  ),
                                 ),
                               ),
                             ),
