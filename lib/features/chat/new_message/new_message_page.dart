@@ -39,6 +39,7 @@ class _NewMessagePageState extends State<NewMessagePage>
   @override
   void initState() {
     super.initState();
+    presenter.onInitState();
     focusNodeSearchInput = FocusNode();
     focusNodeGroupInput = FocusNode();
     focusNodeChatBarInput = FocusNode();
@@ -104,7 +105,7 @@ class _NewMessagePageState extends State<NewMessagePage>
                 ),
               NewMessageUsersList(
                 users: state.users,
-                loadMore: presenter.loadMoreUsers,
+                loadMore: Future.value,
                 onTapAddRecipient: _onAddRecipient,
               ),
               ChatInputBar(

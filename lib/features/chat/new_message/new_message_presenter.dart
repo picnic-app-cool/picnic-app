@@ -79,6 +79,10 @@ class NewMessagePresenter extends Cubit<NewMessageViewModel> with SubscriptionsM
   Future<Either<CreateGroupChatFailure, BasicChat>> get _createGroupChat =>
       _createGroupChatUseCase.execute(name: _model.groupName, userIds: _model.userIds);
 
+  void onInitState() {
+    loadMoreUsers();
+  }
+
   void searchInputFocusChanged({required bool hasFocus}) {
     if (hasFocus) {
       tryEmit(
