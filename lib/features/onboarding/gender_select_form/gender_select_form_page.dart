@@ -54,59 +54,71 @@ class _GenderSelectFormPageState extends State<GenderSelectFormPage>
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Assets.images.profileIconPlaceholder.image(
-                  width: _personIconSize,
-                  height: _personIconSize,
-                  fit: BoxFit.contain,
-                  color: darkBlue,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Assets.images.profileIconPlaceholder.image(
+                            width: _personIconSize,
+                            height: _personIconSize,
+                            fit: BoxFit.contain,
+                            color: darkBlue,
+                          ),
+                          const Gap(8),
+                          Text(
+                            textAlign: TextAlign.center,
+                            appLocalizations.aboutYou,
+                            style: theme.styles.title60,
+                          ),
+                          const Gap(8),
+                          Text(
+                            appLocalizations.aboutYouDescription,
+                            style: theme.styles.body30.copyWith(color: blackAndWhite600),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Gap(16),
+                          Text(
+                            textAlign: TextAlign.center,
+                            appLocalizations.iAm,
+                            style: theme.styles.subtitle15.copyWith(color: blackAndWhite600),
+                          ),
+                          const Gap(16),
+                          stateObserver(
+                            builder: (context, state) {
+                              return GenderSelectFormDialogContent(
+                                theme: theme,
+                                state: state,
+                                onTapSelectGender: presenter.onTapSelectGender,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const Gap(16),
+                      const Spacer(),
+                      stateObserver(
+                        builder: (context, state) => PicnicButton(
+                          opacity: state.isContinueEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
+                          onTap: state.isContinueEnabled ? presenter.onTapContinue : null,
+                          color: colors.blue,
+                          title: appLocalizations.continueAction,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const Gap(8),
-                Text(
-                  textAlign: TextAlign.center,
-                  appLocalizations.aboutYou,
-                  style: theme.styles.title60,
-                ),
-                const Gap(8),
-                Text(
-                  appLocalizations.aboutYouDescription,
-                  style: theme.styles.body30.copyWith(color: blackAndWhite600),
-                  textAlign: TextAlign.center,
-                ),
-                const Gap(16),
-                Text(
-                  textAlign: TextAlign.center,
-                  appLocalizations.iAm,
-                  style: theme.styles.subtitle15.copyWith(color: blackAndWhite600),
-                ),
-                const Gap(16),
-                stateObserver(
-                  builder: (context, state) {
-                    return GenderSelectFormDialogContent(
-                      theme: theme,
-                      state: state,
-                      onTapSelectGender: presenter.onTapSelectGender,
-                    );
-                  },
-                ),
-              ],
-            ),
-            const Spacer(),
-            stateObserver(
-              builder: (context, state) => PicnicButton(
-                opacity: state.isContinueEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
-                onTap: state.isContinueEnabled ? presenter.onTapContinue : null,
-                color: colors.blue,
-                title: appLocalizations.continueAction,
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

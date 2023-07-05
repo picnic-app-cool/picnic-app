@@ -50,73 +50,85 @@ class _OnboardingCirclesPickerPageState extends State<OnboardingCirclesPickerPag
     return Scaffold(
       appBar: const PicnicAppBar(),
       body: SafeArea(
-        child: stateObserver(
-          builder: (context, state) => Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Assets.images.multiplePersons.image(
-                    width: _personIconSize,
-                    height: _personIconSize,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                const Gap(8),
-                Center(
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    appLocalizations.pickInterestsTitle,
-                    style: theme.styles.title60,
-                  ),
-                ),
-                const Gap(8),
-                Center(
-                  child: Text(
-                    appLocalizations.pickInterestsDescription,
-                    style: theme.styles.body30.copyWith(color: blackAndWhite600),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const Gap(24),
-                AnimatedSwitcher(
-                  duration: const ShortDuration(),
-                  child: state.isLoading
-                      ? const PicnicLoadingIndicator()
-                      : InterestsSelectionSection(
-                          selectableInterests: state.selectableInterests,
-                          onTapInterest: presenter.onTapInterest,
-                        ),
-                ),
-                const Gap(24),
-                if (state.hasMoreInterests)
-                  MoreInterestsSelectionWidget(
-                    selectableInterests: state.moreInterests,
-                    onTapInterest: presenter.onTapInterest,
-                    onTapMore: presenter.onTapMore,
-                    isExpanded: state.isMoreInterestsExpanded,
-                  ),
-                const Spacer(),
-                stateObserver(
-                  builder: (context, state) => SizedBox(
-                    width: double.infinity,
-                    child: PicnicButton(
-                      opacity: state.isAcceptButtonEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
-                      onTap: state.isAcceptButtonEnabled ? presenter.onTapContinue : null,
-                      color: colors.blue,
-                      title: state.isAcceptButtonEnabled
-                          ? appLocalizations.continueAction
-                          : appLocalizations.youSelectedSome(
-                              state.currentSelectionsCount,
-                              OnBoardingCirclesPickerPresentationModel.requiredNumberOfInterestsInOnBoarding,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: stateObserver(
+                    builder: (context, state) => Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Assets.images.multiplePersons.image(
+                              width: _personIconSize,
+                              height: _personIconSize,
+                              fit: BoxFit.contain,
                             ),
+                          ),
+                          const Gap(8),
+                          Center(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              appLocalizations.pickInterestsTitle,
+                              style: theme.styles.title60,
+                            ),
+                          ),
+                          const Gap(8),
+                          Center(
+                            child: Text(
+                              appLocalizations.pickInterestsDescription,
+                              style: theme.styles.body30.copyWith(color: blackAndWhite600),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const Gap(24),
+                          AnimatedSwitcher(
+                            duration: const ShortDuration(),
+                            child: state.isLoading
+                                ? const PicnicLoadingIndicator()
+                                : InterestsSelectionSection(
+                                    selectableInterests: state.selectableInterests,
+                                    onTapInterest: presenter.onTapInterest,
+                                  ),
+                          ),
+                          const Gap(24),
+                          if (state.hasMoreInterests)
+                            MoreInterestsSelectionWidget(
+                              selectableInterests: state.moreInterests,
+                              onTapInterest: presenter.onTapInterest,
+                              onTapMore: presenter.onTapMore,
+                              isExpanded: state.isMoreInterestsExpanded,
+                            ),
+                          const Gap(16),
+                          const Spacer(),
+                          stateObserver(
+                            builder: (context, state) => SizedBox(
+                              width: double.infinity,
+                              child: PicnicButton(
+                                opacity: state.isAcceptButtonEnabled ? _enabledButtonOpacity : _disabledButtonOpacity,
+                                onTap: state.isAcceptButtonEnabled ? presenter.onTapContinue : null,
+                                color: colors.blue,
+                                title: state.isAcceptButtonEnabled
+                                    ? appLocalizations.continueAction
+                                    : appLocalizations.youSelectedSome(
+                                        state.currentSelectionsCount,
+                                        OnBoardingCirclesPickerPresentationModel.requiredNumberOfInterestsInOnBoarding,
+                                      ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

@@ -26,6 +26,8 @@ class SplashPage extends StatefulWidget with HasPresenter<SplashPresenter> {
 
 class _SplashPageState extends State<SplashPage>
     with PresenterStateMixin<SplashViewModel, SplashPresenter, SplashPage> {
+  static const _picnicLogoSize = 32.0;
+
   @override
   Widget build(BuildContext context) {
     final theme = PicnicTheme.of(context);
@@ -35,67 +37,91 @@ class _SplashPageState extends State<SplashPage>
     final blue = theme.colors.blue;
     final body20Blue = styles.body20.copyWith(color: colors.darkBlue.shade600);
 
+    final titleStyle = PicnicTheme.of(context).styles.display10.copyWith(color: colors.darkBlue.shade800);
+
     const edgeInsets = EdgeInsets.symmetric(horizontal: 24.0);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Spacer(),
-        Padding(
-          padding: edgeInsets,
-          child: Row(
-            children: [
-              // ignore: no-magic-number
-              Assets.images.picnicLogo.image(scale: 1.5),
-              const Gap(8),
-              Text(appLocalizations.picnic, style: PicnicTheme.of(context).styles.display10),
-            ],
-          ),
-        ),
-        const Spiral(),
-        Padding(
-          padding: edgeInsets,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(appLocalizations.congratsFormTitle, style: styles.display50),
-              const Gap(6.0),
-              Text(appLocalizations.appSubtitle, style: body20Blue),
-            ],
-          ),
-        ),
-        const Spacer(),
-        Padding(
-          padding: edgeInsets,
-          child: PicnicButton(
-            title: appLocalizations.getStartedAction,
-            color: blue,
-            minWidth: double.infinity,
-            onTap: presenter.onTapGetStarted,
-          ),
-        ),
-        Padding(
-          padding: edgeInsets,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                appLocalizations.alreadyHaveAnAccountMessage,
-                style: body20Blue,
-              ),
-              TextButton(
-                onPressed: presenter.onTapLogin,
-                child: Text(
-                  appLocalizations.logInAction,
-                  style: styles.body20.copyWith(
-                    color: blue,
-                  ),
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(16),
+                    Padding(
+                      padding: edgeInsets,
+                      child: Row(
+                        children: [
+                          // ignore: no-magic-number
+                          Image.asset(
+                            Assets.images.picnicLogo.path,
+                            width: _picnicLogoSize,
+                            height: _picnicLogoSize,
+                          ),
+                          const Gap(8),
+                          Text(
+                            appLocalizations.picnic,
+                            style: titleStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Gap(16),
+                    const Spiral(),
+                    const Gap(16),
+                    Padding(
+                      padding: edgeInsets,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(appLocalizations.congratsFormTitle, style: styles.display50),
+                          const Gap(6.0),
+                          Text(appLocalizations.appSubtitle, style: body20Blue),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: edgeInsets,
+                      child: PicnicButton(
+                        title: appLocalizations.getStartedAction,
+                        color: blue,
+                        minWidth: double.infinity,
+                        onTap: presenter.onTapGetStarted,
+                      ),
+                    ),
+                    Padding(
+                      padding: edgeInsets,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            appLocalizations.alreadyHaveAnAccountMessage,
+                            style: body20Blue,
+                          ),
+                          TextButton(
+                            onPressed: presenter.onTapLogin,
+                            child: Text(
+                              appLocalizations.logInAction,
+                              style: styles.body20.copyWith(
+                                color: blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
