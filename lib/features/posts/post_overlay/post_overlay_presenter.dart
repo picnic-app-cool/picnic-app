@@ -36,6 +36,7 @@ import 'package:picnic_app/features/posts/domain/use_cases/unreact_to_post_use_c
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_navigator.dart';
 import 'package:picnic_app/features/posts/post_overlay/post_overlay_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_overlay/widgets/saved_post_snackbar.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_initial_params.dart';
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_initial_params.dart';
@@ -213,7 +214,7 @@ class PostOverlayPresenter extends Cubit<PostOverlayViewModel> {
         target: AnalyticsTapTarget.postShareButton,
       ),
     );
-    navigator.shareText(text: _model.post.shareLink);
+    navigator.openPostShare(PostShareInitialParams(post: _model.post));
 
     _sharePostUseCase
         .execute(

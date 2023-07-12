@@ -1,5 +1,6 @@
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
 import 'package:picnic_app/features/chat/data/model/gql_chat_circle_invite_json.dart';
+import 'package:picnic_app/features/chat/data/model/gql_chat_component_post_json.dart';
 import 'package:picnic_app/features/chat/data/model/gql_chat_glitter_bomb_json.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_component.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_component_type.dart';
@@ -26,6 +27,8 @@ class GqlChatComponentJson {
         return GqlChatCircleInviteJson.fromJson(payload).toDomain();
       case ChatComponentType.glitterBomb:
         return GqlChatGlitterBombJson.fromJson(payload).toDomain();
+      case ChatComponentType.post:
+        return GqlChatComponentPostJson.fromJson(payload).toDomain();
       case ChatComponentType.unknown:
         return GqlChatCircleInviteJson.fromJson(payload).toDomain();
     }

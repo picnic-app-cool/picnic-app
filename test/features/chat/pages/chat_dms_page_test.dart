@@ -12,8 +12,8 @@ import 'package:picnic_app/features/chat/chat_dms/chat_dms_presentation_model.da
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_presenter.dart';
 import 'package:picnic_app/features/chat/chat_dms/widgets/dms_list.dart';
 import 'package:picnic_app/features/chat/chat_dms/widgets/empty_chats_container.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_list_item_displayable.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_type.dart';
-import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item_displayable.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';

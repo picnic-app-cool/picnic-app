@@ -3,6 +3,7 @@ import 'package:picnic_app/core/data/graphql/templates/gql_template_attachment.d
 import 'package:picnic_app/core/data/graphql/templates/gql_template_chat_member.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_chat_message_reaction.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_circle.dart';
+import 'package:picnic_app/core/data/graphql/templates/gql_template_post.dart';
 import 'package:picnic_app/core/data/graphql/templates/gql_template_user.dart';
 import 'package:picnic_app/features/chat/data/model/templates/gql_template_embed.dart';
 
@@ -28,6 +29,7 @@ component {
     payload {
       $_payloadCircleInvite
       $_payloadGlitterBomb
+      $_payloadPost
     }
 }
 attachmentIds
@@ -64,6 +66,15 @@ replyContent {
       id,
       username,
       }
+}
+''';
+
+  String get _payloadPost => '''
+... on ChatMessagePost {
+    postId
+    post {
+      ${GqlTemplate().post}
+    }
 }
 ''';
 }

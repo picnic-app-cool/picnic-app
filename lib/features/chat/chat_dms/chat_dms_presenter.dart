@@ -14,6 +14,7 @@ import 'package:picnic_app/features/analytics/domain/use_cases/log_analytics_eve
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_navigator.dart';
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_presentation_model.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_list_item_displayable.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_type.dart';
 import 'package:picnic_app/features/chat/domain/model/unread_chat.dart';
 import 'package:picnic_app/features/chat/domain/use_cases/get_chats_use_case.dart';
@@ -22,7 +23,6 @@ import 'package:picnic_app/features/chat/domain/use_cases/leave_chat_use_case.da
 import 'package:picnic_app/features/chat/group_chat/group_chat_initial_params.dart';
 import 'package:picnic_app/features/chat/new_message/new_message_initial_params.dart';
 import 'package:picnic_app/features/chat/single_chat/single_chat_initial_params.dart';
-import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item_displayable.dart';
 
 class ChatDmsPresenter extends Cubit<ChatDmsViewModel> with SubscriptionsMixin {
   ChatDmsPresenter(

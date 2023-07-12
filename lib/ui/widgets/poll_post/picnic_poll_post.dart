@@ -13,6 +13,7 @@ class PicnicPollPost extends StatelessWidget {
     required this.onVote,
     this.onDoubleTap,
     this.userImageUrl = const ImageUrl.empty(),
+    this.showAvatar = true,
     this.vote,
     this.leftImage = const ImageUrl.empty(),
     this.leftVotes = 0,
@@ -44,6 +45,8 @@ class PicnicPollPost extends StatelessWidget {
 
   ///The user's image url to show in the vote.
   final ImageUrl userImageUrl;
+
+  final bool showAvatar;
 
   ///The callback to call when the user votes.
   ///Returns the user's vote.
@@ -77,6 +80,7 @@ class PicnicPollPost extends StatelessWidget {
                   child: PicnicPollChoice(
                     key: const ValueKey(PicnicPollVote.left),
                     userImageUrl: userImageUrl,
+                    showAvatar: showAvatar,
                     votesPercentage: leftVotes,
                     showResult: voteExists || isLoading,
                     voted: voteExists && vote == PicnicPollVote.left,
@@ -92,6 +96,7 @@ class PicnicPollPost extends StatelessWidget {
                   child: PicnicPollChoice(
                     key: const ValueKey(PicnicPollVote.right),
                     userImageUrl: userImageUrl,
+                    showAvatar: showAvatar,
                     votesPercentage: rightVotes,
                     showResult: voteExists || isLoading,
                     voted: voteExists && vote == PicnicPollVote.right,

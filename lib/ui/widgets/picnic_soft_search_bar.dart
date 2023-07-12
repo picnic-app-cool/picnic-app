@@ -12,6 +12,7 @@ class PicnicSoftSearchBar extends StatefulWidget {
     this.onChanged,
     this.contentPadding,
     this.hintTextStyle,
+    this.prefix,
   })  : assert(
           controller == null || onChanged == null,
           "you cannot specify both controller and onChanged",
@@ -24,6 +25,7 @@ class PicnicSoftSearchBar extends StatefulWidget {
   final Function(String)? onChanged;
   final EdgeInsets? contentPadding;
   final TextStyle? hintTextStyle;
+  final Widget? prefix;
 
   @override
   State<PicnicSoftSearchBar> createState() => _PicnicSoftSearchBarState();
@@ -61,6 +63,8 @@ class _PicnicSoftSearchBarState extends State<PicnicSoftSearchBar> {
     return PicnicTextInput(
       textController: controller,
       hintText: widget.hintText,
+      hintTextStyle: widget.hintTextStyle,
+      prefix: widget.prefix,
       focusNode: focusNode,
       onChanged: widget.onChanged,
       padding: 0,

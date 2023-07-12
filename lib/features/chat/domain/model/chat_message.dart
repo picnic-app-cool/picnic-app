@@ -129,6 +129,8 @@ class ChatMessage extends Equatable {
 
   bool get isComponentType => chatMessageType == ChatMessageType.component;
 
+  bool get isComponentPost => isComponentType && component?.type == ChatComponentType.post;
+
   bool get isGlitterBomb => isComponentType && component?.type == ChatComponentType.glitterBomb;
 
   bool get isCircleInvitation => isComponentType && component?.type == ChatComponentType.circleInvite;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:picnic_app/core/data/graphql/gql_get_recommended_chats_context.dart';
 import 'package:picnic_app/core/data/graphql/graphql_client.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_connection.dart';
 import 'package:picnic_app/core/data/graphql/model/connection/gql_cursor_input.dart';
@@ -9,6 +10,8 @@ import 'package:picnic_app/core/data/graphql/model/gql_success_payload.dart';
 import 'package:picnic_app/core/data/utils/safe_convert.dart';
 import 'package:picnic_app/core/domain/model/chat_member.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
+import 'package:picnic_app/core/domain/model/get_recommended_chats_failure.dart';
+import 'package:picnic_app/core/domain/model/get_recommended_chats_input.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/data/chat_queries.dart';
@@ -318,6 +321,30 @@ class GraphqlChatRepository with FutureRetarder implements ChatRepository {
           .mapSuccess(
             (connection) => connection.toDomain(nodeMapper: (node) => GqlChatJson.fromJson(node).toDomain()),
           );
+
+  @override
+  Future<Either<GetRecommendedChatsFailure, PaginatedList<Chat>>> getRecommendedChats({
+    required GetRecommendedChatsInput input,
+  }) {
+    return gqlClient
+        .query(
+          document: getRecommendedChatsQuery,
+          variables: {
+            'kind': input.kind.name,
+            'search': input.search,
+            'context': input.context.toJson(),
+            'cursor': input.cursor.toGqlCursorInput(),
+          },
+          parseData: (json) {
+            final data = json['getRecommendedChats'] as Map<String, dynamic>;
+            return GqlConnection.fromJson(data);
+          },
+        )
+        .mapFailure(GetRecommendedChatsFailure.unknown)
+        .mapSuccess(
+          (connection) => connection.toDomain(nodeMapper: (node) => GqlChatJson.fromJson(node).toDomain()),
+        );
+  }
 
   @override
   Future<Either<GetChatMembersFailure, PaginatedList<ChatMember>>> getChatMembers({

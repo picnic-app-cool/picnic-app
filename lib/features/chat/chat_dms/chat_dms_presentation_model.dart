@@ -6,10 +6,10 @@ import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/core/utils/paginated_list_presenter/paginated_list_presentation_model.dart';
 import 'package:picnic_app/features/chat/chat_dms/chat_dms_initial_params.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_list_item_displayable.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message.dart';
 import 'package:picnic_app/features/chat/domain/model/get_chat_messages_list_failure.dart';
 import 'package:picnic_app/features/chat/domain/model/get_single_chat_recipient_failure.dart';
-import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item_displayable.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class ChatDmsPresentationModel implements ChatDmsViewModel {

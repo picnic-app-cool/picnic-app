@@ -603,6 +603,9 @@ void _configureMvp() {
             getIt(param1: initialParams),
             getIt(),
             getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
           ),
         )
         ..registerFactory<CreateNewCollectionNavigator>(

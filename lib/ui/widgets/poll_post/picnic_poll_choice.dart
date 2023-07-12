@@ -16,6 +16,7 @@ class PicnicPollChoice extends StatelessWidget {
     required this.imagePosition,
     this.userImageUrl = const ImageUrl.empty(),
     this.showResult = false,
+    this.showAvatar = true,
     this.imageUrl = const ImageUrl.empty(),
     this.votesPercentage = 0,
     this.withRoundedCorners = false,
@@ -26,6 +27,7 @@ class PicnicPollChoice extends StatelessWidget {
   final PicnicPollImagePosition imagePosition;
   final bool voted;
   final bool showResult;
+  final bool showAvatar;
   final ImageUrl userImageUrl;
 
   ///The [votesPercentage] argument must be between 0.0 and 1.0 inclusive.
@@ -101,16 +103,18 @@ class PicnicPollChoice extends StatelessWidget {
                   opacity: voted ? 1 : 0,
                   child: Column(
                     children: [
-                      PicnicAvatar(
-                        backgroundColor: blue.shade100,
-                        size: _userAvatarSize,
-                        boxFit: PicnicAvatarChildBoxFit.cover,
-                        imageSource: PicnicImageSource.url(
-                          userImageUrl,
-                          fit: BoxFit.cover,
+                      if (showAvatar) ...[
+                        PicnicAvatar(
+                          backgroundColor: blue.shade100,
+                          size: _userAvatarSize,
+                          boxFit: PicnicAvatarChildBoxFit.cover,
+                          imageSource: PicnicImageSource.url(
+                            userImageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      const Gap(6),
+                        const Gap(6),
+                      ],
                       Text(
                         appLocalizations.pollVoteLabel,
                         style: theme.styles.body10.copyWith(

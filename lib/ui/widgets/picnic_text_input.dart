@@ -31,6 +31,7 @@ class PicnicTextInput extends StatelessWidget {
     this.maxLines = 1,
     this.maxLength,
     this.showMaxLengthCounter = true,
+    this.counterTextStyle,
     this.outerLabel,
     this.innerLabel,
     this.autocorrect = true,
@@ -64,6 +65,7 @@ class PicnicTextInput extends StatelessWidget {
   final int? maxLines;
   final int? maxLength;
   final bool showMaxLengthCounter;
+  final TextStyle? counterTextStyle;
   final Text? outerLabel;
   final Text? innerLabel;
   final bool autocorrect;
@@ -200,6 +202,7 @@ class PicnicTextInput extends StatelessWidget {
               child: _TextInputCounter(
                 currentLength: currentLength ?? 0,
                 maxLength: maxLength ?? 0,
+                style: counterTextStyle,
               ),
             ),
           ),
@@ -214,10 +217,12 @@ class _TextInputCounter extends StatelessWidget {
     Key? key,
     required this.maxLength,
     required this.currentLength,
+    this.style,
   }) : super(key: key);
 
   final int currentLength;
   final int maxLength;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -228,9 +233,10 @@ class _TextInputCounter extends StatelessWidget {
         currentLength,
         maxLength,
       ),
-      style: theme.styles.body20.copyWith(
-        color: theme.colors.blackAndWhite.shade600,
-      ),
+      style: style ??
+          theme.styles.body20.copyWith(
+            color: theme.colors.blackAndWhite.shade600,
+          ),
     );
   }
 }

@@ -6,6 +6,8 @@ class PicnicCircleRectangleAvatar extends StatelessWidget {
   const PicnicCircleRectangleAvatar({
     required this.avatarSize,
     required this.emojiSize,
+    //ignore: no-magic-number
+    this.verifiedBadgeSize = 18.0,
     this.image = '',
     this.emoji = '😃',
     this.bgColor,
@@ -19,6 +21,7 @@ class PicnicCircleRectangleAvatar extends StatelessWidget {
   final String emoji;
   final double avatarSize;
   final double emojiSize;
+  final double verifiedBadgeSize;
   final Color? bgColor;
   final Color? borderColor;
   final bool isVerified;
@@ -26,7 +29,6 @@ class PicnicCircleRectangleAvatar extends StatelessWidget {
 
   static const _borderRadius = 4.0;
   static const _borderWidth = 1.5;
-  static const _verifiedBadgeSize = 18.0;
   static const _avatarPadding = 6.0;
   static const _emojiHeight = 1.5;
 
@@ -78,8 +80,8 @@ class PicnicCircleRectangleAvatar extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Image.asset(
                   verifiedBadge,
-                  height: _verifiedBadgeSize,
-                  width: _verifiedBadgeSize,
+                  height: verifiedBadgeSize,
+                  width: verifiedBadgeSize,
                 ),
               ),
           ],

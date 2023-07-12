@@ -78,7 +78,7 @@ class ChatMessageRow extends StatelessWidget {
         if (isContinuationMessage) ...[
           const Gap(40),
         ] else if (message.chatMessageSender == ChatMessageSender.friend) ...[
-          if (!message.isComponentType) picnicAvatar,
+          if (!message.isComponentType || message.isComponentPost) picnicAvatar,
           const Gap(10),
         ] else if (message.chatMessageSender == ChatMessageSender.user) ...[
           const Gap(30),

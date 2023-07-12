@@ -4,7 +4,7 @@ import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/features/chat/chat_my_circles/chat_my_circles_initial_params.dart';
 import 'package:picnic_app/features/chat/domain/model/chat.dart';
-import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item_displayable.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_list_item_displayable.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/model/badged_title_displayable.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)

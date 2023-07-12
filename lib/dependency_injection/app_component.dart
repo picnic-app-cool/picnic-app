@@ -112,6 +112,7 @@ import 'package:picnic_app/core/domain/use_cases/get_featured_pods_use_case.dart
 import 'package:picnic_app/core/domain/use_cases/get_phone_contacts_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_phone_gallery_assets_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_post_creation_circles_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/get_recommended_chats_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_runtime_permission_status_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_should_show_circles_selection_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/get_slice_members_by_role_use_case.dart';
@@ -753,6 +754,9 @@ void _configureUseCases() {
         )
         ..registerFactory<GetSlicesUseCase>(
           () => GetSlicesUseCase(getIt()),
+        )
+        ..registerFactory<GetRecommendedChatsUseCase>(
+          () => GetRecommendedChatsUseCase(getIt()),
         )
         ..registerFactory<GetSliceMembersByRoleUseCase>(
           () => GetSliceMembersByRoleUseCase(getIt()),

@@ -72,6 +72,19 @@ String get getChatsWithCircleQuery => '''
     }
 ''';
 
+String get getRecommendedChatsQuery => '''
+    query(\$kind: ChatRecommendationKind!, \$search: String, \$context: GetRecommendedChatsContext, \$cursor: CursorInput) {
+        getRecommendedChats(input: {
+          kind: \$kind,
+          search: \$search,
+          context: \$context,
+          cursor: \$cursor
+        }) {
+            ${GqlTemplate().connection(nodeTemplate: GqlTemplate().chatWithCircle + GqlTemplate().chatParticipantsConnection)}
+        }
+    }
+''';
+
 String get getChatFeedsQuery => '''
     query(\$cursor: CursorInput) {
         chatFeedConnection(cursor: \$cursor) {

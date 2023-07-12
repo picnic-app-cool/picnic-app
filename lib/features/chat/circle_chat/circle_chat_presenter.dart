@@ -39,6 +39,8 @@ import 'package:picnic_app/features/image_picker/utils/image_source_type.dart';
 import 'package:picnic_app/features/in_app_events/domain/use_cases/add_in_app_notifications_filter_use_case.dart';
 import 'package:picnic_app/features/in_app_events/domain/use_cases/remove_in_app_notifications_filter_use_case.dart';
 import 'package:picnic_app/features/media_picker/media_picker_presenter.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
+import 'package:picnic_app/features/posts/post_details/post_details_initial_params.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_initial_params.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_initial_params.dart';
 import 'package:picnic_app/features/reports/domain/model/report_entity_type.dart';
@@ -85,6 +87,7 @@ class CircleChatPresenter extends Cubit<CircleChatViewModel> with SubscriptionsM
         onTapLink: onTapLink,
         onTapPdf: onTapPdf,
         onTapFriendProfile: onTapFriendAvatar,
+        onTapPost: onTapPost,
       );
 
   CircleChatPresentationModel get _model => state as CircleChatPresentationModel;
@@ -262,6 +265,22 @@ class CircleChatPresenter extends Cubit<CircleChatViewModel> with SubscriptionsM
   }
 
   void onTapLink(String url) => navigator.openWebView(url);
+
+  void onTapPost(Post post, ChatMessage chatMessage) {
+    navigator.openPostDetails(
+      PostDetailsInitialParams(
+        postId: post.id,
+        onPostUpdated: (post) {
+          tryEmit(
+            _model.byUpdatingPostInChatMessage(
+              post: post,
+              chatMessage: chatMessage,
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   void onDragStart(double offset) {
     tryEmit(_model.copyWith(dragOffset: offset));

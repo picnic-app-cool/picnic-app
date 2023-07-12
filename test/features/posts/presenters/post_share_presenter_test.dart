@@ -4,8 +4,10 @@ import 'package:picnic_app/features/posts/post_share/post_share_initial_params.d
 import 'package:picnic_app/features/posts/post_share/post_share_presentation_model.dart';
 import 'package:picnic_app/features/posts/post_share/post_share_presenter.dart';
 
+import '../../../mocks/mocks.dart';
 import '../../../mocks/stubs.dart';
 import '../../analytics/mocks/analytics_mocks.dart';
+import '../../chat/mocks/chat_mocks.dart';
 import '../mocks/posts_mock_definitions.dart';
 
 void main() {
@@ -46,6 +48,9 @@ void main() {
       model,
       navigator,
       AnalyticsMocks.logAnalyticsEventUseCase,
+      Mocks.getRecommendedChatsUseCase,
+      ChatMocks.sendChatMessageUseCase,
+      Mocks.userStore,
     );
   });
 }

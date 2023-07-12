@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/domain/model/chat_member.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
+import 'package:picnic_app/core/domain/model/get_recommended_chats_failure.dart';
+import 'package:picnic_app/core/domain/model/get_recommended_chats_input.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
 import 'package:picnic_app/features/chat/domain/model/chat.dart';
@@ -68,6 +70,10 @@ abstract class ChatRepository {
   Future<Either<GetChatFailure, PaginatedList<Chat>>> getCircleChats({
     String? searchQuery,
     required Cursor nextPageCursor,
+  });
+
+  Future<Either<GetRecommendedChatsFailure, PaginatedList<Chat>>> getRecommendedChats({
+    required GetRecommendedChatsInput input,
   });
 
   Future<Either<GetChatFeedsFailure, PaginatedList<ChatExcerpt>>> getChatFeeds({

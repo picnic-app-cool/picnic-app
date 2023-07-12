@@ -4,6 +4,7 @@ import 'package:picnic_app/core/data/graphql/model/watch_query_options.dart';
 import 'package:picnic_app/core/domain/model/auth_result.dart';
 import 'package:picnic_app/core/domain/model/collection.dart';
 import 'package:picnic_app/core/domain/model/displayable_failure.dart';
+import 'package:picnic_app/core/domain/model/get_recommended_chats_input.dart';
 import 'package:picnic_app/core/domain/model/phone_verification_data.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission.dart';
 import 'package:picnic_app/core/domain/model/runtime_permission_status.dart';
@@ -248,6 +249,7 @@ class Mocks {
   static late MockGetUserScopedPodTokenFailure getUserScopedPodTokenFailure;
   static late MockGetUserScopedPodTokenUseCase getUserScopedPodTokenUseCase;
   static late MockGetTrendingPodsUseCase getTrendingPodsUseCase;
+  static late MockGetRecommendedChatsUseCase getRecommendedChatsUseCase;
   static late MockSearchPodsUseCase searchPodsUseCase;
 
 //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
@@ -570,6 +572,7 @@ class Mocks {
     getUserScopedPodTokenFailure = MockGetUserScopedPodTokenFailure();
     getUserScopedPodTokenUseCase = MockGetUserScopedPodTokenUseCase();
     getTrendingPodsUseCase = MockGetTrendingPodsUseCase();
+    getRecommendedChatsUseCase = MockGetRecommendedChatsUseCase();
     searchPodsUseCase = MockSearchPodsUseCase();
 
 //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
@@ -890,6 +893,7 @@ class Mocks {
     registerFallbackValue(MockLocalStorageValueListener<String>());
     registerFallbackValue(const WatchQueryOptions.defaultOptions());
     registerFallbackValue(Duration.zero);
+    registerFallbackValue(const GetRecommendedChatsInput.empty());
     registerFallbackValue(const CreateCollectionInput.empty());
     registerFallbackValue(const AuthToken.empty());
     registerFallbackValue(const SearchPodInput.empty());

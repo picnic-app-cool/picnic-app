@@ -1,6 +1,7 @@
 enum ChatComponentType {
   circleInvite('CIRCLE_INVITE'),
   glitterBomb('GLITTER_BOMB'),
+  post('POST'),
   unknown('');
 
   const ChatComponentType(this.stringVal);

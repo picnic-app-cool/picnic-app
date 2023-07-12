@@ -794,6 +794,7 @@
     }
   },
   "shareToTitle": "share to",
+  "sendToTitle": "send to",
   "selectCircleTitle": "select circle",
   "circleResultsTitle": "circle results",
   "seeCircleChat": "see circle chat",
@@ -1100,6 +1101,7 @@
   "sendToFriends": "send to friends",
   "inviteCircle": "invite to circle",
   "sharePost": "share post",
+  "sharePostMessageHint": "write a message",
   "inviteFriend": "invite friend",
   "addFriend": "add friend",
   "inviteChat": "invite to chat",

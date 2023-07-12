@@ -11,8 +11,10 @@ import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_message_post_payload.dart';
 import 'package:picnic_app/features/chat/domain/model/displayable_chat_message.dart';
 import 'package:picnic_app/features/chat/group_chat/group_chat_initial_params.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class GroupChatPresentationModel extends GroupChatViewModel {
@@ -147,6 +149,31 @@ class GroupChatPresentationModel extends GroupChatViewModel {
         isMediaPickerVisible: !isMediaPickerVisible,
         clearSelectedMediaAttachment: clearSelectedMediaAttachment,
       );
+
+  GroupChatViewModel byUpdatingPostInChatMessage({
+    required Post post,
+    required ChatMessage chatMessage,
+  }) {
+    return copyWith(
+      displayableMessages: displayableMessages.byUpdatingItem(
+        update: (displayableMessage) {
+          final component = displayableMessage.chatMessage.component;
+          final payload = component?.payload;
+          if (payload is ChatMessagePostPayload) {
+            return displayableMessage.copyWith(
+              chatMessage: displayableMessage.chatMessage.copyWith(
+                component: component?.copyWith(
+                  payload: payload.copyWith(post: post),
+                ),
+              ),
+            );
+          }
+          return displayableMessage;
+        },
+        itemFinder: (displayableChatMessage) => displayableChatMessage.chatMessage.id == chatMessage.id,
+      ),
+    );
+  }
 
   GroupChatPresentationModel copyWith({
     CurrentTimeProvider? currentTimeProvider,

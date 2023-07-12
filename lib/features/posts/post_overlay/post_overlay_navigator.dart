@@ -2,6 +2,7 @@ import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/circles/reported_content/reported_content_navigator.dart';
 import 'package:picnic_app/features/posts/comment_chat/comment_chat_navigator.dart';
+import 'package:picnic_app/features/posts/post_share/post_share_navigator.dart';
 import 'package:picnic_app/features/posts/save_post_to_collection/save_post_to_collection_navigator.dart';
 import 'package:picnic_app/features/profile/common/profile_route.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
@@ -22,6 +23,7 @@ class PostOverlayNavigator
         ErrorBottomSheetRoute,
         CloseRoute,
         ReportFormRoute,
+        PostShareRoute,
         CommentActionsRoute,
         SnackBarRoute,
         SavePostToCollectionRoute {

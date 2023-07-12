@@ -149,6 +149,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/chat_outlined_medium.webp
   AssetGenImage get chatOutlinedMedium => const AssetGenImage('assets/images/chat_outlined_medium.webp');
 
+  /// File path: assets/images/chat_post_play.webp
+  AssetGenImage get chatPostPlay => const AssetGenImage('assets/images/chat_post_play.webp');
+
   /// File path: assets/images/chat_stroked.webp
   AssetGenImage get chatStroked => const AssetGenImage('assets/images/chat_stroked.webp');
 
@@ -581,6 +584,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/search_glass.webp
   AssetGenImage get searchGlass => const AssetGenImage('assets/images/search_glass.webp');
 
+  /// File path: assets/images/search_small.webp
+  AssetGenImage get searchSmall => const AssetGenImage('assets/images/search_small.webp');
+
   /// File path: assets/images/see_no_evil.webp
   AssetGenImage get seeNoEvil => const AssetGenImage('assets/images/see_no_evil.webp');
 
@@ -824,6 +830,7 @@ class $AssetsImagesGen {
         chatNavigationOutlinedWhite,
         chatOutlined,
         chatOutlinedMedium,
+        chatPostPlay,
         chatStroked,
         chats,
         check,
@@ -968,6 +975,7 @@ class $AssetsImagesGen {
         search,
         searchChat,
         searchGlass,
+        searchSmall,
         seeNoEvil,
         seed,
         send,

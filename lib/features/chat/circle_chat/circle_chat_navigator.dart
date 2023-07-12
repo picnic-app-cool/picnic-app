@@ -5,6 +5,7 @@ import 'package:picnic_app/features/chat/circle_chat/circle_chat_page.dart';
 import 'package:picnic_app/features/chat/circle_chat_settings/circle_chat_settings_navigator.dart';
 import 'package:picnic_app/features/chat/fullscreen_attachment/fullscreen_attachment_navigator.dart';
 import 'package:picnic_app/features/chat/message_actions/message_actions_navigator.dart';
+import 'package:picnic_app/features/posts/post_details/post_details_navigator.dart';
 import 'package:picnic_app/features/profile/private_profile/private_profile_navigator.dart';
 import 'package:picnic_app/features/profile/public_profile/public_profile_navigator.dart';
 import 'package:picnic_app/features/reports/report_form/report_form_navigator.dart';
@@ -27,6 +28,7 @@ class CircleChatNavigator
         MessageActionsRoute,
         PrivateProfileRoute,
         WebViewRoute,
+        PostDetailsRoute,
         FullscreenAttachmentRoute,
         SaveAttachmentsRoute,
         NoAccessToGalleryRoute,

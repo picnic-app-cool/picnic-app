@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_circle_invite.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_glitter_bomb.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_message_post_payload.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message_sender.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message_type.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_special_message.dart';
@@ -12,6 +13,7 @@ import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_conte
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_attachments.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_card.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_link_preview.dart';
+import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_post.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_reply.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_text.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_emoji_content.dart';
@@ -165,6 +167,14 @@ class ChatMessageContent extends StatelessWidget {
           },
           glitterBomb: (ChatGlitterBomb content) {
             return ChatMessageGlitterBombItem(displayableMessage: displayableMessage, chatStyle: chatStyle);
+          },
+          post: (ChatMessagePostPayload content) {
+            return ChatMessageContentPost(
+              post: content.post,
+              onTap: () => chatMessageContentActions.onTapPost(content.post, displayableMessage.chatMessage),
+              displayableMessage: displayableMessage,
+              chatStyle: chatStyle,
+            );
           },
           unknownContent: () {
             return const SizedBox.shrink();

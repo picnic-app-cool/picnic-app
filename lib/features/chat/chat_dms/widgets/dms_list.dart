@@ -4,8 +4,8 @@ import 'package:picnic_app/constants/constants.dart';
 import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/features/chat/chat_dms/widgets/swipe_item_dismissible.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
+import 'package:picnic_app/features/chat/domain/model/chat_list_item_displayable.dart';
 import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item.dart';
-import 'package:picnic_app/features/chat/widgets/chat_list_item/chat_list_item_displayable.dart';
 import 'package:picnic_app/ui/widgets/paging_list/picnic_paging_list_view.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_loading_indicator.dart';
 

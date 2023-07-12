@@ -2,6 +2,7 @@ import 'package:picnic_app/features/chat/domain/model/attachment.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/chat/message_actions/model/message_actions_open_event.dart';
+import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 
 class ChatMessageContentActions {
   ChatMessageContentActions({
@@ -15,6 +16,7 @@ class ChatMessageContentActions {
     required this.onDoubleTapMessage,
     required this.onTapPdf,
     required this.onTapFriendProfile,
+    required this.onTapPost,
   });
 
   ChatMessageContentActions.empty()
@@ -27,7 +29,8 @@ class ChatMessageContentActions {
         onTapAttachment = ((_) => {}),
         onDoubleTapMessage = ((_) => {}),
         onTapPdf = ((_) => {}),
-        onTapFriendProfile = ((_) => {});
+        onTapFriendProfile = ((_) => {}),
+        onTapPost = ((_, __) => {});
 
   final Function(ChatMessage) onMessageSelected;
   final OnMessageLongPress onMessageLongPress;
@@ -39,6 +42,7 @@ class ChatMessageContentActions {
   final Function(ChatMessage) onDoubleTapMessage;
   final Function(Attachment) onTapPdf;
   final Function(Id) onTapFriendProfile;
+  final Function(Post, ChatMessage) onTapPost;
 
   ChatMessageContentActions copyWith({
     Function(ChatMessage)? onMessageSelected,
@@ -51,6 +55,7 @@ class ChatMessageContentActions {
     Function(ChatMessage)? onDoubleTapMessage,
     Function(Attachment)? onTapPdf,
     Function(Id)? onTapFriendProfile,
+    Function(Post, ChatMessage)? onTapPost,
   }) {
     return ChatMessageContentActions(
       onMessageSelected: onMessageSelected ?? this.onMessageSelected,
@@ -63,6 +68,7 @@ class ChatMessageContentActions {
       onDoubleTapMessage: onDoubleTapMessage ?? this.onDoubleTapMessage,
       onTapPdf: onTapPdf ?? this.onTapPdf,
       onTapFriendProfile: onTapFriendProfile ?? this.onTapFriendProfile,
+      onTapPost: onTapPost ?? this.onTapPost,
     );
   }
 }

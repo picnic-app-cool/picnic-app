@@ -1,7 +1,9 @@
+//ignore_for_file: nullable_field_in_domain_entity, forbidden_import_in_domain
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:picnic_app/core/domain/model/basic_circle.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
+import 'package:picnic_app/features/chat/domain/model/chat.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_type.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/ui/widgets/achievement_badge/model/badged_title_displayable.dart';
@@ -42,7 +44,7 @@ class ChatListItemDisplayable extends Equatable {
   }
 }
 
-extension ChatToChatListItemDisplayableMapper on BasicChat {
+extension BasicChatToChatListItemDisplayableMapper on BasicChat {
   ChatListItemDisplayable toChatListItemDisplayable(Id currentUserId) {
     final title = chatType == ChatType.single
         ? participants //
@@ -53,6 +55,23 @@ extension ChatToChatListItemDisplayableMapper on BasicChat {
 
     return ChatListItemDisplayable(
       chat: this,
+      title: title,
+    );
+  }
+}
+
+extension ChatToChatListItemDisplayableMapper on Chat {
+  ChatListItemDisplayable toChatListItemDisplayable(Id currentUserId) {
+    final title = chatType == ChatType.single
+        ? participants //
+                .firstWhereOrNull((user) => user.id != currentUserId)
+                ?.toBadgedAuthorDisplayable() ??
+            const BadgedTitleDisplayable.empty()
+        : BadgedTitleDisplayable(name: name);
+
+    return ChatListItemDisplayable(
+      chat: toBasicChat(),
+      circle: circle,
       title: title,
     );
   }
