@@ -1518,7 +1518,7 @@
       "weeks": {}
     }
   },
-  "monthsTime": "{months}d",
+  "monthsTime": "{months}mo",
   "@monthsTime": {
     "placeholders": {
       "months": {}
