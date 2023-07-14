@@ -208,11 +208,11 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: sa-devops@picnic.zone
+          username: sa-notify@picnic.zone
           password: ${{ secrets.NOTIFY_EMAIL_PASSWORD }}
           subject: Frontend release failed
           to: frontend@picnic.zone
-          cc: devops@picnic.zone,qa@picnic.zone,all-openg@picnic.zone
+          cc: devops@picnic.zone,qa@picnic.zone,all-openg@picnic.zone,nick@picnic.zone
           from: GitHub Actions
           body: |
             Release candidate failed :(
@@ -235,11 +235,11 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: sa-devops@picnic.zone
+          username: sa-notify@picnic.zone
           password: ${{ secrets.NOTIFY_EMAIL_PASSWORD }}
           subject: Frontend release succeeded
           to: frontend@picnic.zone
-          cc: devops@picnic.zone,qa@picnic.zone,all-openg@picnic.zone
+          cc: devops@picnic.zone,qa@picnic.zone,all-openg@picnic.zone,nick@picnic.zone
           from: GitHub Actions
           body: |
             Release candidate succeeded 🍉
