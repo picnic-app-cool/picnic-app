@@ -9,7 +9,6 @@ import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 import 'package:picnic_ui_components/ui/widgets/picnic_button.dart';
-import 'package:picnic_ui_components/ui/widgets/picnic_text_button.dart';
 
 class PermissionsFormPage extends StatefulWidget with HasPresenter<PermissionsFormPresenter> {
   const PermissionsFormPage({
@@ -44,7 +43,7 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
         final blackAndWhite = themeData.colors.blackAndWhite;
         return FractionallySizedBox(
           // ignore: no-magic-number
-          heightFactor: 0.6,
+          heightFactor: 0.45,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
             child: Column(
@@ -100,18 +99,6 @@ class _PermissionsFormPageState extends State<PermissionsFormPage>
                 ),
                 const Spacer(),
                 // ignore: no-magic-number
-                PicnicTextButton(
-                  label: "skip for now",
-                  labelStyle: theme.styles.link30.copyWith(
-                    color: const Color.fromRGBO(
-                      110,
-                      126,
-                      145,
-                      1,
-                    ),
-                  ),
-                  onTap: presenter.onTapSkip,
-                ),
               ],
             ),
           ),

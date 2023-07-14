@@ -59,13 +59,6 @@ class PermissionsFormPresenter extends Cubit<PermissionsFormViewModel> {
         );
   }
 
-  void onTapSkip() {
-    _logAnalyticsEventUseCase.execute(
-      AnalyticsEvent.tap(target: AnalyticsTapTarget.onboardingSkipPermissionButton),
-    );
-    _model.onContinueCallback(_model.notificationsPermissionStatus);
-  }
-
   void _checkRuntimePermissions() {
     _getRuntimePermissionStatusUseCase
         .execute(permission: RuntimePermission.notifications) //
