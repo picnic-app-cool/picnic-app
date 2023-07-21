@@ -159,12 +159,6 @@ void main() {
       fakeAsync((async) {
         // GIVEN
         when(() => navigator.openImagePicker(any())).thenAnswer((_) async => file);
-        when(
-          () => navigator.showImageEditor(
-            filePath: any(named: 'filePath'),
-            forceCrop: any(named: 'forceCrop'),
-          ),
-        ).thenAnswer((_) => Future.value('path'));
 
         // WHEN
         presenter.onTapShowImagePicker();
@@ -173,12 +167,6 @@ void main() {
         // THEN
         verify(
           () => navigator.openImagePicker(any()),
-        ).called(1);
-        verify(
-          () => navigator.showImageEditor(
-            filePath: any(named: 'filePath'),
-            forceCrop: any(named: 'forceCrop'),
-          ),
         ).called(1);
         verifyNever(
           () => ProfileMocks.updateProfileImageUseCase.execute(any()),
@@ -198,12 +186,6 @@ void main() {
         () => navigator.openImagePicker(any()),
       ).called(1);
       verifyNever(
-        () => navigator.showImageEditor(
-          filePath: any(named: 'filePath'),
-          forceCrop: any(named: 'forceCrop'),
-        ),
-      );
-      verifyNever(
         () => ProfileMocks.updateProfileImageUseCase.execute(any()),
       );
     });
@@ -212,12 +194,6 @@ void main() {
       fakeAsync((async) {
         // GIVEN
         when(() => navigator.openImagePicker(any())).thenAnswer((_) async => file);
-        when(
-          () => navigator.showImageEditor(
-            filePath: any(named: 'filePath'),
-            forceCrop: any(named: 'forceCrop'),
-          ),
-        ).thenAnswer((_) => Future.value());
 
         // WHEN
         presenter.onTapShowImagePicker();
@@ -226,12 +202,6 @@ void main() {
         // THEN
         verify(
           () => navigator.openImagePicker(any()),
-        ).called(1);
-        verify(
-          () => navigator.showImageEditor(
-            filePath: any(named: 'filePath'),
-            forceCrop: any(named: 'forceCrop'),
-          ),
         ).called(1);
         verifyNever(
           () => ProfileMocks.updateProfileImageUseCase.execute(any()),

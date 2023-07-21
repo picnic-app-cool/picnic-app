@@ -1044,29 +1044,6 @@ class $AssetsImagesGen {
       ];
 }
 
-class $AssetsImglyGen {
-  const $AssetsImglyGen();
-
-  /// File path: assets/imgly/README.md
-  String get readme => 'assets/imgly/README.md';
-
-  /// File path: assets/imgly/pesdk_license.android
-  String get pesdkLicenseAndroid => 'assets/imgly/pesdk_license.android';
-
-  /// File path: assets/imgly/pesdk_license.ios
-  String get pesdkLicenseIos => 'assets/imgly/pesdk_license.ios';
-
-  /// File path: assets/imgly/vesdk_license_video.android
-  String get vesdkLicenseVideoAndroid => 'assets/imgly/vesdk_license_video.android';
-
-  /// File path: assets/imgly/vesdk_license_video.ios
-  String get vesdkLicenseVideoIos => 'assets/imgly/vesdk_license_video.ios';
-
-  /// List of all assets
-  List<String> get values =>
-      [readme, pesdkLicenseAndroid, pesdkLicenseIos, vesdkLicenseVideoAndroid, vesdkLicenseVideoIos];
-}
-
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
@@ -1094,7 +1071,6 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const $AssetsImglyGen imgly = $AssetsImglyGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
   static const String sampleVideo = 'assets/sample_video.mp4';
 

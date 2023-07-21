@@ -131,12 +131,8 @@ class EditProfilePresenter extends Cubit<EditProfileViewModel> {
     if (image == null) {
       return;
     }
-    final newPath = await navigator.showImageEditor(filePath: image.path, forceCrop: true);
-    if (newPath == null) {
-      return;
-    }
 
-    tryEmit(_model.copyWith(avatar: newPath, userSelectedNewAvatar: true));
+    tryEmit(_model.copyWith(avatar: image.path, userSelectedNewAvatar: true));
   }
 
   Future<void> _checkUsername(

@@ -336,7 +336,6 @@ class Mocks {
   static late MockPicnicCameraController cameraController;
   static late MockEnvironmentConfigProvider environmentConfigProvider;
   static late MockDevicePlatformProvider devicePlatformProvider;
-  static late MockImglyWrapper imglyWrapper;
   static late MockAssetsLoader assetsLoader;
   static late MockFxEffect fxEffect;
   static late MockAnalyticsObserver analyticsObserver;
@@ -641,7 +640,6 @@ class Mocks {
     cameraController = MockPicnicCameraController();
     environmentConfigProvider = MockEnvironmentConfigProvider();
     devicePlatformProvider = MockDevicePlatformProvider();
-    imglyWrapper = MockImglyWrapper();
     assetsLoader = MockAssetsLoader();
     fxEffect = MockFxEffect();
     analyticsObserver = MockAnalyticsObserver();
@@ -881,7 +879,6 @@ class Mocks {
     registerFallbackValue(SecureLocalStorageKey.gqlAccessToken);
     registerFallbackValue(MockEnvironmentConfigProvider());
     registerFallbackValue(MockDevicePlatformProvider());
-    registerFallbackValue(MockImglyWrapper());
     registerFallbackValue(MockAssetsLoader());
     registerFallbackValue(const Attachment.empty());
     registerFallbackValue(const UploadAttachment.empty());

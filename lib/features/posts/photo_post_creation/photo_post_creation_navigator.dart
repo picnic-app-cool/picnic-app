@@ -5,17 +5,10 @@ import 'package:picnic_app/features/posts/photo_post_creation/photo_post_creatio
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
 import 'package:picnic_app/navigation/get_image_route.dart';
-import 'package:picnic_app/navigation/image_editor_route.dart';
 import 'package:picnic_app/navigation/no_access_to_gallery_route.dart';
 
 class PhotoPostCreationNavigator
-    with
-        ImageEditorRoute,
-        PhotoPostCreationRoute,
-        GetImageRoute,
-        ChooseMediaRoute,
-        ErrorBottomSheetRoute,
-        NoAccessToGalleryRoute {
+    with PhotoPostCreationRoute, GetImageRoute, ChooseMediaRoute, ErrorBottomSheetRoute, NoAccessToGalleryRoute {
   PhotoPostCreationNavigator(this.appNavigator);
 
   @override

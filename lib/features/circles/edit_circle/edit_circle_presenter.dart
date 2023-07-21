@@ -65,11 +65,7 @@ class EditCirclePresenter extends Cubit<EditCircleViewModel> {
     if (image == null) {
       return;
     }
-    final imagePath = await navigator.showImageEditor(filePath: image.path, forceCrop: true);
-    if (imagePath == null) {
-      return;
-    }
-    tryEmit(_model.byUpdatingImage(imagePath));
+    tryEmit(_model.byUpdatingImage(image.path));
   }
 
   Future<void> onTapCoverEdit() async {
@@ -77,13 +73,7 @@ class EditCirclePresenter extends Cubit<EditCircleViewModel> {
     if (cover == null) {
       return;
     }
-    final coverPath = await navigator.showImageEditor(
-      filePath: cover.path,
-    );
-    if (coverPath == null) {
-      return;
-    }
-    tryEmit(_model.byUpdatingCover(coverPath));
+    tryEmit(_model.byUpdatingCover(cover.path));
   }
 
   Future<void> onTapUploadEmoji() async {

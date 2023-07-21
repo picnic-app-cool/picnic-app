@@ -8,7 +8,6 @@ import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/close_route.dart';
 import 'package:picnic_app/navigation/close_with_result_route.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
-import 'package:picnic_app/navigation/image_editor_route.dart';
 
 //ignore_for_file: unused-code, unused-files
 class CreateSliceNavigator
@@ -16,7 +15,6 @@ class CreateSliceNavigator
         AvatarSelectionRoute,
         ErrorBottomSheetRoute,
         ImagePickerRoute,
-        ImageEditorRoute,
         CloseRoute,
         SliceDetailsRoute,
         CloseWithResultRoute<bool> {

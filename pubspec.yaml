@@ -97,12 +97,6 @@ dependencies:
   # dio
   dio: 5.0.2
 
-  #photo editor
-  photo_editor_sdk: 2.7.1
-
-  #video editor
-  video_editor_sdk: 2.7.1
-
   #in app notificatipns
   another_flushbar: 1.12.29
 
@@ -232,7 +226,6 @@ flutter:
     - assets/
     - assets/images/
     - assets/lottie/
-    - assets/imgly/
   fonts:
     - family: Figtree
       fonts:

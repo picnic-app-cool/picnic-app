@@ -15,7 +15,6 @@ import 'package:picnic_app/features/seeds/about_elections/about_elections_naviga
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
-import 'package:picnic_app/navigation/image_editor_route.dart';
 import 'package:picnic_app/ui/widgets/picnic_bottom_sheet.dart';
 import 'package:picnic_app/ui/widgets/two_options_bottom_sheet.dart';
 
@@ -29,7 +28,6 @@ class CreateCircleNavigator
         CircleCreationSuccessRoute,
         ChangeCircleAvatarRoute,
         ImagePickerRoute,
-        ImageEditorRoute,
         AboutElectionsRoute,
         CircleConfigRoute {
   CreateCircleNavigator(this.appNavigator);

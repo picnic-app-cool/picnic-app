@@ -58,19 +58,11 @@ class ProfilePhotoFormPresenter extends Cubit<ProfilePhotoFormViewModel> {
       return onTapContinue();
     }
 
-    final path = await _editPhoto(image.path);
-
     tryEmit(
       _model.copyWith(
         formType: ProfilePhotoFormType.afterPhotoSelection,
-        photoPath: path ?? ' ',
+        photoPath: image.path,
       ),
     );
-  }
-
-  Future<String?> _editPhoto(String path) async {
-    final newPath = await navigator.showImageEditor(filePath: path, forceCrop: true);
-
-    return newPath;
   }
 }

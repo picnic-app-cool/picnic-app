@@ -3,9 +3,8 @@ import 'package:picnic_app/features/image_picker/image_picker_navigator.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_initial_params.dart';
 import 'package:picnic_app/features/photo_editor/photo_editor_page.dart';
 import 'package:picnic_app/navigation/app_navigator.dart';
-import 'package:picnic_app/navigation/image_editor_route.dart';
 
-class PhotoEditorNavigator with ImagePickerRoute, ImageEditorRoute {
+class PhotoEditorNavigator with ImagePickerRoute {
   PhotoEditorNavigator(this.appNavigator);
 
   @override

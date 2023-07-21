@@ -13,7 +13,6 @@ import 'package:picnic_app/navigation/close_route.dart';
 import 'package:picnic_app/navigation/close_with_result_route.dart';
 import 'package:picnic_app/navigation/confirmation_bottom_sheet_route.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
-import 'package:picnic_app/navigation/image_editor_route.dart';
 import 'package:picnic_app/ui/widgets/confirmation_bottom_sheet.dart';
 import 'package:picnic_app/ui/widgets/picnic_bottom_sheet.dart';
 
@@ -25,8 +24,7 @@ class EditCircleNavigator
         CloseRoute,
         DiscardCircleInfoChangesRoute,
         ChangeCircleAvatarRoute,
-        ImagePickerRoute,
-        ImageEditorRoute {
+        ImagePickerRoute {
   EditCircleNavigator(this.appNavigator);
 
   @override

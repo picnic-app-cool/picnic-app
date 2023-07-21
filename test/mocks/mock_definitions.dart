@@ -8,7 +8,6 @@ import 'package:picnic_app/core/data/assets_loader.dart';
 import 'package:picnic_app/core/data/firebase/actions/firebase_actions_factory.dart';
 import 'package:picnic_app/core/data/firebase/actions/log_in_with_phone_action.dart';
 import 'package:picnic_app/core/data/graphql/graphql_client.dart';
-import 'package:picnic_app/core/data/imgly_wrapper.dart';
 import 'package:picnic_app/core/data/session_invalidated_listeners_container.dart';
 import 'package:picnic_app/core/data/shared_preferences_provider.dart';
 import 'package:picnic_app/core/domain/get_auth_token_failure.dart';
@@ -574,8 +573,6 @@ class MockPicnicCameraController extends Mock implements PicnicCameraController 
 class MockEnvironmentConfigProvider extends Mock implements EnvironmentConfigProvider {}
 
 class MockDevicePlatformProvider extends Mock implements DevicePlatformProvider {}
-
-class MockImglyWrapper extends Mock implements ImglyWrapper {}
 
 class MockAssetsLoader extends Mock implements AssetsLoader {}
 

@@ -7,16 +7,9 @@ import 'package:picnic_app/navigation/app_navigator.dart';
 import 'package:picnic_app/navigation/error_bottom_sheet_route.dart';
 import 'package:picnic_app/navigation/get_video_route.dart';
 import 'package:picnic_app/navigation/no_access_to_gallery_route.dart';
-import 'package:picnic_app/navigation/video_editor_route.dart';
 
 class VideoPostCreationNavigator
-    with
-        CreateCircleRoute,
-        VideoPostRecordingRoute,
-        VideoEditorRoute,
-        GetVideoRoute,
-        ErrorBottomSheetRoute,
-        NoAccessToGalleryRoute {
+    with CreateCircleRoute, VideoPostRecordingRoute, GetVideoRoute, ErrorBottomSheetRoute, NoAccessToGalleryRoute {
   VideoPostCreationNavigator(this.appNavigator);
 
   @override

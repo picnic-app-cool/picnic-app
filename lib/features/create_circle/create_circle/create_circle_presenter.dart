@@ -41,16 +41,10 @@ class CreateCirclePresenter extends Cubit<CreateCircleViewModel> {
     if (cover == null) {
       return;
     }
-    final coverPath = await navigator.showImageEditor(
-      filePath: cover.path,
-    );
-    if (coverPath == null) {
-      return;
-    }
     tryEmit(
       _model.byUpdatingForm(
         (form) => form.copyWith(
-          coverImage: coverPath,
+          coverImage: cover.path,
           userSelectedNewCover: true,
         ),
       ),
@@ -62,15 +56,11 @@ class CreateCirclePresenter extends Cubit<CreateCircleViewModel> {
     if (image == null) {
       return;
     }
-    final imagePath = await navigator.showImageEditor(filePath: image.path, forceCrop: true);
-    if (imagePath == null) {
-      return;
-    }
 
     tryEmit(
       _model.byUpdatingForm(
         (form) => form.copyWith(
-          image: imagePath,
+          image: image.path,
           emoji: '',
           userSelectedNewImage: true,
         ),

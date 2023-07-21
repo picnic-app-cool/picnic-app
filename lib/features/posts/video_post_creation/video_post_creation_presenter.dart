@@ -56,11 +56,7 @@ class VideoPostCreationPresenter extends Cubit<VideoPostCreationViewModel> {
     if (isClosed || path == null) {
       return;
     }
-    final editedVideoPath = await navigator.editVideo(path);
-    if (isClosed || editedVideoPath == null) {
-      return;
-    }
-    final model = _model.createPostInput(editedVideoPath);
+    final model = _model.createPostInput(path);
     _model.onPostUpdatedCallback(model);
   }
 }

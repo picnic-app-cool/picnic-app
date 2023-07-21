@@ -36,11 +36,7 @@ class CreateSlicePresenter extends Cubit<CreateSliceViewModel> {
     if (image == null) {
       return;
     }
-    final newPath = await navigator.showImageEditor(filePath: image.path, forceCrop: true);
-    if (newPath == null) {
-      return;
-    }
-    tryEmit(_model.byUpdatingForm((form) => form.copyWith(imagePath: newPath)));
+    tryEmit(_model.byUpdatingForm((form) => form.copyWith(imagePath: image.path)));
   }
 
   void onChangedName(String value) => tryEmit(

@@ -43,8 +43,6 @@ import 'package:picnic_app/core/data/hive/hive_client_primitive_factory.dart';
 import 'package:picnic_app/core/data/hive/hive_initializer.dart';
 import 'package:picnic_app/core/data/hive/hive_path_provider.dart';
 import 'package:picnic_app/core/data/hive_local_storage_repository.dart';
-import 'package:picnic_app/core/data/imgly_initializer.dart';
-import 'package:picnic_app/core/data/imgly_wrapper.dart';
 import 'package:picnic_app/core/data/impl_deep_links_repository.dart';
 import 'package:picnic_app/core/data/impl_session_expired_repository.dart';
 import 'package:picnic_app/core/data/local_user_preferences_repository.dart';
@@ -356,7 +354,6 @@ void _configureGeneralDependencies(
         ..registerFactory(() => GraphQLLogger(getIt()))
         ..registerFactory(() => const GraphQLFailureMapper())
         ..registerFactory(() => GraphQLVariablesProcessor())
-        ..registerFactory(() => ImglyWrapper())
         ..registerFactory(() => AssetsLoader())
         ..registerFactory(
           () {
@@ -391,7 +388,6 @@ void _configureGeneralDependencies(
           () => [
             AppTrackingTransparencyInitializer(),
             HiveInitializer(),
-            ImglyInitializer(getIt(), getIt()),
             PhotoManagerInitializer(getIt()),
             FirebaseDynamicLinksInitializer(getIt()),
             UniversalLinksInitializer(),

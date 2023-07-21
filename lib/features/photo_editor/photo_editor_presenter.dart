@@ -15,9 +15,6 @@ class PhotoEditorPresenter extends Cubit<PhotoEditorViewModel> {
   PhotoEditorPresentationModel get _model => state as PhotoEditorPresentationModel;
 
   Future<void> onTapPickImage() async {
-    final file = await navigator.openImagePicker(const ImagePickerInitialParams());
-    if (file != null) {
-      await navigator.showImageEditor(filePath: file.path);
-    }
+    await navigator.openImagePicker(const ImagePickerInitialParams());
   }
 }

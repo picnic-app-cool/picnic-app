@@ -78,12 +78,8 @@ class PhotoPostCreationPresenter extends Cubit<PhotoPostCreationViewModel> {
       return;
     }
 
-    final newPath = await navigator.showImageEditor(filePath: path);
-
-    if (newPath != null) {
-      final model = _model.createPostInput(newPath);
-      _model.onPostUpdatedCallback(model);
-      await saveWatermarkPhoto(newPath);
-    }
+    final model = _model.createPostInput(path);
+    _model.onPostUpdatedCallback(model);
+    await saveWatermarkPhoto(path);
   }
 }
