@@ -1,13 +1,14 @@
 import 'dart:isolate';
 
 import 'package:picnic_app/core/data/graphql/graphql_failure.dart';
+import 'package:picnic_app/core/data/graphql/isolate/graphql_executor_result.dart';
 import 'package:picnic_app/core/data/graphql/isolate/graphql_isolate.dart';
 import 'package:picnic_app/core/data/graphql/isolate/messages/graphql_isolate_message.dart';
 import 'package:picnic_app/core/data/graphql/model/watch_query_options.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 
-class WatchQueryIsolateMessage<T> implements GraphQLIsolateMessage<CacheableResult<GraphQLFailure, T>?> {
+class WatchQueryIsolateMessage<T> implements GraphQLIsolateMessage<GraphQLExecutorResult<T>?> {
   WatchQueryIsolateMessage({
     required this.document,
     required this.parseData,
@@ -23,7 +24,7 @@ class WatchQueryIsolateMessage<T> implements GraphQLIsolateMessage<CacheableResu
   @override
   void handleMessageInIsolate(
     GraphQLIsolate isolate,
-    TypedSendPort<CacheableResult<GraphQLFailure, T>?> responsePort,
+    TypedSendPort<GraphQLExecutorResult<T>?> responsePort,
   ) {
     isolate.gqlExecutor
         .watchQuery(
@@ -34,17 +35,26 @@ class WatchQueryIsolateMessage<T> implements GraphQLIsolateMessage<CacheableResu
     )
         .listen(
       (event) {
-        responsePort.send(event.castSuccess());
+        responsePort.send(
+          GraphQLExecutorResult<T>(
+            cacheableResult: event.cacheableResult.mapSuccess((value) => value as T),
+            response: event.response,
+          ),
+        );
       },
       onDone: () {
         responsePort.send(null);
       },
       onError: (error) {
-        responsePort.send(CacheableResult(result: failure(GraphQLFailure.unknown(error))));
+        responsePort.send(
+          GraphQLExecutorResult(
+            cacheableResult: CacheableResult(result: failure(GraphQLFailure.unknown(error))),
+          ),
+        );
       },
     );
   }
 
   @override
-  TypedSendPort<CacheableResult<GraphQLFailure, T>?> buildTypedSendPort(SendPort sendPort) => TypedSendPort(sendPort);
+  TypedSendPort<GraphQLExecutorResult<T>?> buildTypedSendPort(SendPort sendPort) => TypedSendPort(sendPort);
 }

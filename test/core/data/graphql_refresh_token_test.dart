@@ -90,10 +90,14 @@ void main() {
   });
 }
 
-Future<Either<GraphQLFailure, Map<String, dynamic>>> _feedsQuery(GraphQLExecutor client) => client.query(
-      document: getFeedsQuery,
-      parseData: (json) => json,
-    );
+Future<Either<GraphQLFailure, Map<String, dynamic>>> _feedsQuery(GraphQLExecutor client) async {
+  final result = await client.query(
+    document: getFeedsQuery,
+    parseData: (json) => json,
+  );
+
+  return result.cacheableResult.result;
+}
 
 const expiredAccessToken = 'expired token';
 const validAccessToken = 'valid token';

@@ -1,12 +1,10 @@
 import 'dart:isolate';
 
-import 'package:dartz/dartz.dart';
-import 'package:picnic_app/core/data/graphql/graphql_failure.dart';
+import 'package:picnic_app/core/data/graphql/isolate/graphql_executor_result.dart';
 import 'package:picnic_app/core/data/graphql/isolate/graphql_isolate.dart';
 import 'package:picnic_app/core/data/graphql/isolate/messages/graphql_isolate_message.dart';
-import 'package:picnic_app/core/utils/either_extensions.dart';
 
-class QueryIsolateMessage<T> implements GraphQLIsolateMessage<Either<GraphQLFailure, T>> {
+class QueryIsolateMessage<T> implements GraphQLIsolateMessage<GraphQLExecutorResult<T>> {
   const QueryIsolateMessage({
     required this.document,
     required this.parseData,
@@ -20,16 +18,20 @@ class QueryIsolateMessage<T> implements GraphQLIsolateMessage<Either<GraphQLFail
   @override
   Future<void> handleMessageInIsolate(
     GraphQLIsolate isolate,
-    TypedSendPort<Either<GraphQLFailure, T>> responsePort,
+    TypedSendPort<GraphQLExecutorResult<T>> responsePort,
   ) async {
     final result = await isolate.gqlExecutor.query(
       document: document,
       variables: variables,
       parseData: parseData,
     );
-    responsePort.send(result.mapSuccess((value) => value as T));
+    final executorResult = GraphQLExecutorResult<T>(
+      cacheableResult: result.cacheableResult.mapSuccess((value) => value as T),
+      response: result.response,
+    );
+    responsePort.send(executorResult);
   }
 
   @override
-  TypedSendPort<Either<GraphQLFailure, T>> buildTypedSendPort(SendPort sendPort) => TypedSendPort(sendPort);
+  TypedSendPort<GraphQLExecutorResult<T>> buildTypedSendPort(SendPort sendPort) => TypedSendPort(sendPort);
 }

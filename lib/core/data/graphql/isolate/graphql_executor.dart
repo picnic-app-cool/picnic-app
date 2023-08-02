@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:graphql/client.dart' as gql;
 import 'package:picnic_app/core/data/graphql/graphql_client_factory.dart';
 import 'package:picnic_app/core/data/graphql/graphql_failure.dart';
@@ -8,6 +7,7 @@ import 'package:picnic_app/core/data/graphql/graphql_failure_mapper.dart';
 import 'package:picnic_app/core/data/graphql/graphql_logger.dart';
 import 'package:picnic_app/core/data/graphql/graphql_unauthenticated_failure_handler.dart';
 import 'package:picnic_app/core/data/graphql/graphql_variables_processor.dart';
+import 'package:picnic_app/core/data/graphql/isolate/graphql_executor_result.dart';
 import 'package:picnic_app/core/data/graphql/model/gql_extensions.dart';
 import 'package:picnic_app/core/data/graphql/model/graphql_response.dart';
 import 'package:picnic_app/core/data/graphql/model/watch_query_options.dart';
@@ -34,7 +34,7 @@ class GraphQLExecutor {
   final CurrentTimeProvider _currentTimeProvider;
   gql.GraphQLClient? _client;
 
-  Future<Either<GraphQLFailure, T>> query<T>({
+  Future<GraphQLExecutorResult<T>> query<T>({
     required String document,
     required T Function(Map<String, dynamic> data) parseData,
     Map<String, dynamic> variables = const {},
@@ -51,7 +51,7 @@ class GraphQLExecutor {
     ).networkResult;
   }
 
-  Stream<CacheableResult<GraphQLFailure, T>> watchQuery<T>({
+  Stream<GraphQLExecutorResult<T>> watchQuery<T>({
     required String document,
     required T Function(Map<String, dynamic> data) parseData,
     Map<String, dynamic> variables = const {},
@@ -71,11 +71,10 @@ class GraphQLExecutor {
             return event.source != gql.QueryResultSource.loading;
           })
           .map(
-            (result) => _mapQueryResult<T>(
-              requestId,
-              result,
-              executionDate,
-              parseData,
+            (result) => GraphQLExecutorResult<T>(
+              // ignore: prefer-trailing-comma
+              cacheableResult: _mapQueryResult(requestId, result, executionDate, parseData),
+              response: result,
             ),
           )
           .transform(
@@ -87,28 +86,33 @@ class GraphQLExecutor {
           );
     } catch (ex, stack) {
       logError(ex, stack: stack);
-      yield await _handleFailure(ex, stackTrace: stack);
+      yield GraphQLExecutorResult(
+        cacheableResult: await _handleFailure(ex, stackTrace: stack),
+      );
     }
   }
 
-  Future<Either<GraphQLFailure, T>> mutate<T>({
+  Future<GraphQLExecutorResult<T>> mutate<T>({
     required String document,
     required T Function(Map<String, dynamic> data) parseData,
     Map<String, dynamic> variables = const {},
   }) async {
     final client = await _ensureGraphQLClient();
-    return _variablesProcessor.processVariablesMap(variables).flatMap((vars) async {
-      try {
-        return await _performMutate(
-          document,
-          vars,
-          client,
-          parseData,
-        );
-      } catch (ex, stack) {
-        return (await _handleFailure<T>(ex, stackTrace: stack)).result;
-      }
-    });
+    final vars = await _variablesProcessor.processVariablesMap(variables);
+
+    try {
+      return await _performMutate(
+        document,
+        vars.getOrElse(() => const {}),
+        client,
+        parseData,
+      );
+    } catch (ex, stack) {
+      final failureResult = await _handleFailure<T>(ex, stackTrace: stack);
+      return GraphQLExecutorResult(
+        cacheableResult: failureResult,
+      );
+    }
   }
 
   Future<gql.WatchQueryOptions<GraphQlResponse>> _buildWatchableOptions(
@@ -127,7 +131,7 @@ class GraphQLExecutor {
     );
   }
 
-  StreamTransformer<CacheableResult<GraphQLFailure, T>, CacheableResult<GraphQLFailure, T>> _streamTransformer<T>(
+  StreamTransformer<GraphQLExecutorResult<T>, GraphQLExecutorResult<T>> _streamTransformer<T>(
     WatchQueryOptions options,
     gql.WatchQueryOptions<GraphQlResponse> gqlOptions,
     gql.ObservableQuery<GraphQlResponse> observableQuery,
@@ -135,16 +139,22 @@ class GraphQLExecutor {
     return StreamTransformer.fromHandlers(
       handleData: (data, sink) {
         sink.add(data);
-        if (data.source == CacheableSource.network && !options.continueWatchingAfterNetworkResponse) {
+        if (data.cacheableResult.source == CacheableSource.network && !options.continueWatchingAfterNetworkResponse) {
           observableQuery.close();
           sink.close();
         }
       },
-      //ignore: prefer-trailing-comma
-      handleError: (error, stack, sink) async {
-        // ignore: prefer-trailing-comma
-        final cacheableResult = await _handleFailure<T>(error, request: gqlOptions.asRequest, stackTrace: stack);
-        sink.add(cacheableResult);
+      handleError: (
+        error,
+        stack,
+        sink,
+      ) async {
+        final cacheableResult = await _handleFailure<T>(
+          error,
+          request: gqlOptions.asRequest,
+          stackTrace: stack,
+        );
+        sink.add(GraphQLExecutorResult(cacheableResult: cacheableResult));
         observableQuery.close();
         sink.close();
       },
@@ -199,7 +209,7 @@ class GraphQLExecutor {
   }
 
   //ignore: long-parameter-list
-  Future<Either<GraphQLFailure, T>> _performMutate<T>(
+  Future<GraphQLExecutorResult<T>> _performMutate<T>(
     String document,
     Map<String, dynamic> vars,
     gql.GraphQLClient client,
@@ -228,9 +238,16 @@ class GraphQLExecutor {
         result: result,
         request: options.asRequest,
       );
-      return handledResult.result;
+      return GraphQLExecutorResult(
+        cacheableResult: handledResult,
+        response: result,
+      );
     }
 
-    return success(parseData(result.parsedData?.data ?? {}));
+    return GraphQLExecutorResult(
+      cacheableResult: CacheableResult(
+        result: success(parseData(result.parsedData?.data ?? {})),
+      ),
+    );
   }
 }

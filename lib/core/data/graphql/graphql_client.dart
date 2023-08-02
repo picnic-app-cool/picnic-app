@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gql/ast.dart';
+import 'package:gql/language.dart';
 import 'package:picnic_app/core/data/graphql/graphql_failure.dart';
 import 'package:picnic_app/core/data/graphql/graphql_unauthenticated_failure_handler.dart';
+import 'package:picnic_app/core/data/graphql/isolate/graphql_executor_result.dart';
 import 'package:picnic_app/core/data/graphql/isolate/graphql_isolate_manager.dart';
 import 'package:picnic_app/core/data/graphql/isolate/messages/graphql_perform_mutation_message.dart';
 import 'package:picnic_app/core/data/graphql/isolate/messages/query_isolate_message.dart';
@@ -12,6 +16,8 @@ import 'package:picnic_app/core/data/graphql/model/watch_query_options.dart';
 import 'package:picnic_app/core/data/hive/hive_path_provider.dart';
 import 'package:picnic_app/core/domain/repositories/auth_token_repository.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
+import 'package:picnic_app/core/utils/either_extensions.dart';
+import 'package:picnic_app/core/utils/logging.dart';
 
 class GraphQLClient {
   GraphQLClient(
@@ -37,7 +43,7 @@ class GraphQLClient {
   }) async {
     await _ensureIsolateInitialized();
 
-    return isolateManager
+    final isolateResult = await isolateManager
         .sendMessageToIsolate(
           QueryIsolateMessage<T>(
             document: document,
@@ -46,6 +52,13 @@ class GraphQLClient {
           ),
         )
         .first;
+
+    _logGraphQL<T>(
+      doc: document,
+      vars: variables,
+      result: isolateResult,
+    );
+    return isolateResult.cacheableResult.result;
   }
 
   Stream<CacheableResult<GraphQLFailure, T>> watchQuery<T>({
@@ -55,6 +68,7 @@ class GraphQLClient {
     WatchQueryOptions options = const WatchQueryOptions.defaultOptions(),
   }) async* {
     await _ensureIsolateInitialized();
+
     final stream = isolateManager.sendMessageToIsolate(
       WatchQueryIsolateMessage<T>(
         document: document,
@@ -67,7 +81,12 @@ class GraphQLClient {
       if (result == null) {
         return;
       }
-      yield result;
+      _logGraphQL<T>(
+        doc: document,
+        vars: variables,
+        result: result,
+      );
+      yield result.cacheableResult;
     }
   }
 
@@ -77,7 +96,8 @@ class GraphQLClient {
     Map<String, dynamic> variables = const {},
   }) async {
     await _ensureIsolateInitialized();
-    return isolateManager
+
+    final isolateResult = await isolateManager
         .sendMessageToIsolate(
           GraphQLPerformMutationMessage<T>(
             document,
@@ -86,6 +106,14 @@ class GraphQLClient {
           ),
         )
         .first;
+
+    _logGraphQL<T>(
+      doc: document,
+      vars: variables,
+      result: isolateResult,
+    );
+
+    return isolateResult.cacheableResult.result;
   }
 
   void dispose() {
@@ -104,6 +132,42 @@ class GraphQLClient {
       _isInitializedCompleter!.complete();
     } else {
       return _isInitializedCompleter!.future;
+    }
+  }
+
+  void _logGraphQL<T>({
+    required String doc,
+    required Map<String, dynamic> vars,
+    GraphQLExecutorResult<T>? result,
+  }) {
+    final response = result?.response;
+    final fail = result?.cacheableResult.result.getFailure();
+
+    debugLog(
+      """
+↗️ GQL REQUEST
+${printNode(
+        transform(
+          parseString(doc),
+          [],
+        ),
+      )}
+👉🏻 variables:
+${_tryJsonEncode(vars)}
+👉🏻 response:
+${_tryJsonEncode(response?.data ?? {})}
+👉🏻 failure:
+$fail
+""",
+    );
+  }
+
+  String _tryJsonEncode(dynamic jsonMap) {
+    try {
+      return const JsonEncoder.withIndent("  ").convert(jsonMap);
+    } catch (ex) {
+      debugLog("Error encoding: $jsonMap");
+      return jsonMap.toString();
     }
   }
 }
