@@ -101,7 +101,9 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>speech</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>We’ll use this to make sure your in-app experience is awesome by collecting crash data and analytics</string>
+  <string>We will utilize this information to enhance your in-app experience, collecting crash data and analytics through third-party statistics. The data will be protected and accessible only to the Picnic team.
+
+These data will only be used to improve algorithms and enhance engagement. We do not utilize personal data for advertising purposes, nor do we sell personal data. Examples of usage include analyzing growing communities to facilitate faster growth, assessing the most popular posts along with related metrics such as comments, shares, and views, and updating recommendation algorithms.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
