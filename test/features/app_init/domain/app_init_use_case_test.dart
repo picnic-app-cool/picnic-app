@@ -46,10 +46,10 @@ void main() {
 
       // THEN
       verifyInOrder([
-        () => PushNotificationsMocks.listenDeviceTokenUpdatesUseCase.execute(),
         () => Mocks.localStoreRepository.getCurrentUser(),
         () => Mocks.userStore.privateProfile = user,
         () => ChatMocks.getUnreadChatsUseCase.execute(),
+        () => PushNotificationsMocks.listenDeviceTokenUpdatesUseCase.execute(),
       ]);
       expect(result.isRight(), true);
     },

@@ -50,9 +50,6 @@ class AppInitUseCase {
 
     await _setAppInfoUseCase.execute();
 
-    /// ignoring the result, if listening fails, we can only log the problem (which is done internally)
-    await _listenDeviceTokenUpdatesUseCase.execute();
-
     return _getCurrentUserFromStorage().doOnSuccessWait(
       (privateProfile) async {
         _userStore.privateProfile = privateProfile ?? const PrivateProfile.empty();
@@ -65,6 +62,9 @@ class AppInitUseCase {
                 .doOn(success: (unreadChats) => _unreadCountersStore.unreadChats = unreadChats),
           );
         }
+
+        /// ignoring the result, if listening fails, we can only log the problem (which is done internally)
+        await _listenDeviceTokenUpdatesUseCase.execute();
       },
     ).mapSuccess((_) => unit);
   }
