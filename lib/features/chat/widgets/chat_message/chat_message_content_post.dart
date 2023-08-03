@@ -12,6 +12,7 @@ import 'package:picnic_app/features/posts/domain/model/post_contents/video_post_
 import 'package:picnic_app/features/posts/domain/model/post_type.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 import 'package:picnic_app/features/posts/link_post/widgets/link_placeholder.dart';
+import 'package:picnic_app/localization/app_localizations_utils.dart';
 import 'package:picnic_app/resources/assets.gen.dart';
 import 'package:picnic_app/ui/widgets/picnic_image.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
@@ -54,6 +55,24 @@ class ChatMessageContentPost extends StatelessWidget {
     );
 
     Widget postContentWidget = const SizedBox();
+
+    if (post == const Post.empty()) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: _containerBorderRadius,
+          border: Border.all(
+            color: borderColor,
+          ),
+        ),
+        child: Padding(
+          padding: _contentPadding,
+          child: Text(
+            appLocalizations.postNotAvailable,
+            style: contentTextStyle,
+          ),
+        ),
+      );
+    }
 
     switch (post.type) {
       case PostType.text:
