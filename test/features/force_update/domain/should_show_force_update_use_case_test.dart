@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
@@ -14,10 +15,12 @@ void main() {
 
   setUp(() {
     when(() => Mocks.appInfoStore.appInfo).thenReturn(Stubs.appInfo);
+    when(() => Mocks.setAppInfoUseCase.execute()).thenAnswer((_) => successFuture(unit));
 
     useCase = ShouldShowForceUpdateUseCase(
       ForceUpdateMocks.getMinAppVersionUseCase,
       Mocks.appInfoStore,
+      Mocks.setAppInfoUseCase,
     );
   });
 

@@ -81,7 +81,11 @@ void _configureUseCases() {
 
   getIt
         ..registerFactory<ShouldShowForceUpdateUseCase>(
-          () => ShouldShowForceUpdateUseCase(getIt(), getIt()),
+          () => ShouldShowForceUpdateUseCase(
+            getIt(),
+            getIt(),
+            getIt(),
+          ),
         )
 
 //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
