@@ -6,11 +6,14 @@ import 'package:picnic_app/core/data/graphql/graphql_auth_link.dart';
 import 'package:picnic_app/core/data/graphql/graphql_failure_mapper.dart';
 import 'package:picnic_app/core/data/graphql/graphql_headers_link.dart';
 import 'package:picnic_app/core/data/graphql/graphql_logger.dart';
+import 'package:picnic_app/core/data/graphql/graphql_version_link.dart';
 import 'package:picnic_app/core/data/graphql/refresh_auth_token_link.dart';
 import 'package:picnic_app/core/domain/repositories/auth_token_repository.dart';
 import 'package:picnic_app/core/domain/repositories/background_api_repository.dart';
+import 'package:picnic_app/core/domain/stores/app_info_store.dart';
 import 'package:picnic_app/core/domain/use_cases/get_auth_token_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_auth_token_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/set_app_info_use_case.dart';
 import 'package:picnic_app/core/environment_config/environment_config_provider.dart';
 import 'package:picnic_app/main.dart';
 
@@ -22,7 +25,9 @@ class GraphqlClientFactory {
     this._saveAuthTokenUseCase,
     this._getAuthTokenUseCase,
     this._logger,
-    this._backgroundApiRepository, {
+    this._backgroundApiRepository,
+    this._appInfoStore,
+    this._setAppInfoUseCase, {
     this.dioClient,
     this.store,
   });
@@ -40,7 +45,10 @@ class GraphqlClientFactory {
   final GetAuthTokenUseCase _getAuthTokenUseCase;
   final GraphQLLogger _logger;
   final BackgroundApiRepository _backgroundApiRepository;
+  final AppInfoStore _appInfoStore;
+  final SetAppInfoUseCase _setAppInfoUseCase;
 
+  //ignore: long-method
   Future<gql.GraphQLClient> createClient() async {
     final config = await _configProvider.getConfig();
     final baseUrl = config.baseGraphQLUrl;
@@ -66,6 +74,10 @@ class GraphqlClientFactory {
         ),
         GraphQLHeadersLink(_configProvider),
         GraphQLAuthLink(_authTokenRepository),
+        GraphQLVersionLink(
+          _appInfoStore,
+          _setAppInfoUseCase,
+        ),
         dioLink,
       ]),
       cache: gql.GraphQLCache(

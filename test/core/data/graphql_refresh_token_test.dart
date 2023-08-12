@@ -13,6 +13,7 @@ import 'package:picnic_app/core/data/graphql/isolate/graphql_executor.dart';
 import 'package:picnic_app/core/domain/repositories/auth_token_repository.dart';
 import 'package:picnic_app/core/domain/use_cases/get_auth_token_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_auth_token_use_case.dart';
+import 'package:picnic_app/core/domain/use_cases/set_app_info_use_case.dart';
 import 'package:picnic_app/core/environment_config/environment_config_provider.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/dependency_injection/app_component.dart';
@@ -20,7 +21,9 @@ import 'package:picnic_app/features/feed/data/feed_queries.dart';
 import 'package:picnic_app/features/onboarding/domain/model/auth_token.dart';
 
 import '../../mocks/mocks.dart';
+import '../../mocks/stubs.dart';
 import '../../test_utils/test_auth_token_repository.dart';
+import '../../test_utils/test_utils.dart';
 
 void main() {
   late GraphQLExecutor client;
@@ -65,6 +68,7 @@ void main() {
         refreshToken: 'refreshToken',
       ),
     );
+    getIt.registerFactory<SetAppInfoUseCase>(() => Mocks.setAppInfoUseCase);
     client = GraphQLExecutor(
       getIt(),
       getIt(),
@@ -77,6 +81,8 @@ void main() {
         GetAuthTokenUseCase(authTokenRepo),
         GraphQLLogger(Mocks.currentTimeProvider),
         Mocks.backgroundApiRepository,
+        Mocks.appInfoStore,
+        Mocks.setAppInfoUseCase,
         dioClient: Mocks.dioClient,
         store: gql.InMemoryStore(),
       ),
@@ -87,6 +93,8 @@ void main() {
         .thenAnswer((_) => getIt<EnvironmentConfigProvider>().getConfig());
     when(() => Mocks.environmentConfigProvider.shouldUseShortLivedAuthTokens()).thenAnswer((_) async => true);
     when(() => Mocks.environmentConfigProvider.getAdditionalGraphQLHeaders()).thenAnswer((_) => Future.value({}));
+    when(() => Mocks.setAppInfoUseCase.execute()).thenAnswer((_) => successFuture(unit));
+    when(() => Mocks.appInfoStore.appInfo).thenReturn(Stubs.appInfo);
   });
 }
 

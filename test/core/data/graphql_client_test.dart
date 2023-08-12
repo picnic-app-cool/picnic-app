@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart' as gql;
@@ -27,6 +28,7 @@ import 'package:picnic_app/features/onboarding/domain/model/auth_token.dart';
 import 'package:picnic_app/picnic_app_init_params.dart';
 
 import '../../mocks/mocks.dart';
+import '../../mocks/stubs.dart';
 import '../../test_utils/test_auth_token_repository.dart';
 import '../../test_utils/test_utils.dart';
 
@@ -200,6 +202,8 @@ class TestGraphQLIsolateDependenciesConfigurator implements GraphQLIsolateDepend
           getIt.get<GetAuthTokenUseCase>(),
           getIt(),
           Mocks.backgroundApiRepository,
+          Mocks.appInfoStore,
+          Mocks.setAppInfoUseCase,
           dioClient: Mocks.dioClient,
           store: gql.InMemoryStore(),
         );
@@ -219,6 +223,8 @@ class TestGraphQLIsolateDependenciesConfigurator implements GraphQLIsolateDepend
     });
     when(() => Mocks.environmentConfigProvider.shouldUseShortLivedAuthTokens()).thenAnswer((_) async => true);
     when(() => Mocks.environmentConfigProvider.getAdditionalGraphQLHeaders()).thenAnswer((_) => Future.value({}));
+    when(() => Mocks.setAppInfoUseCase.execute()).thenAnswer((_) => successFuture(unit));
+    when(() => Mocks.appInfoStore.appInfo).thenReturn(Stubs.appInfo);
     when(
       () => Mocks.dioClient.post<dynamic>(
         any(),

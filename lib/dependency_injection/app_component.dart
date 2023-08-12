@@ -369,6 +369,8 @@ void _configureGeneralDependencies(
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
+            getIt(),
           ),
         )
         ..registerLazySingleton<GraphQLClient>(
