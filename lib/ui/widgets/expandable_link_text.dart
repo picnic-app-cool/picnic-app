@@ -94,10 +94,25 @@ class _ExpandableLinkTextState extends State<ExpandableLinkText> {
     );
     final expandTextLength = expandTextSpan.text?.length ?? 0;
 
-    final expandTextOffset = ellipsisSpanLength + gapSpanLength + expandTextLength;
+    var expandTextOffset = ellipsisSpanLength + gapSpanLength + expandTextLength;
 
-    final firstText = widget.text.substring(0, splitOffset - expandTextOffset);
-    final secondText = widget.text.substring(splitOffset - expandTextOffset);
+    try {
+      final beforeSplitOffset =
+          textPainter.getPositionForOffset(Offset(0, preferredLineHeightWithStyle * (maxLines - 1))).offset;
+      final lastLineLength = splitOffset - beforeSplitOffset;
+
+      //ignore: no-magic-number
+      if (lastLineLength < 10) {
+        expandTextOffset = 0;
+      }
+    } catch (_) {
+      expandTextOffset = 0;
+    }
+
+    final lineCutOffset = splitOffset - expandTextOffset;
+
+    final firstText = widget.text.substring(0, lineCutOffset);
+    final secondText = widget.text.substring(lineCutOffset);
 
     final combinedSpan = TextSpan(
       children: [
