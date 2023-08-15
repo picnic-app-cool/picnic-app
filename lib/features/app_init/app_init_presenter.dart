@@ -78,6 +78,7 @@ class AppInitPresenter extends Cubit<AppInitViewModel> with SubscriptionsMixin {
   Future<void> _onAppInitSuccess() async {
     if (_model.isUserLoggedIn) {
       await _navigateBasedOnUserAgreement();
+      setAmplitudeEventUseCase.execute(_userStore.privateProfile.user);
     } else {
       await navigator.openOnboarding(const OnboardingInitialParams());
     }

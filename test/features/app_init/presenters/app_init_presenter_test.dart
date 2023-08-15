@@ -99,6 +99,8 @@ void main() {
     () async {
       fakeAsync((async) {
         // GIVEN
+        when(() => Mocks.userStore.privateProfile).thenAnswer((_) => const PrivateProfile.empty());
+        when(() => AmplitudeMocks.setAmplitudeUserUseCase.execute(any())).thenAnswer((_) => unit);
         when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
         when(
           () => navigator.openUserAgreementBottomSheet(
