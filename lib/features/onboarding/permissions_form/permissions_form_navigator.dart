@@ -19,6 +19,7 @@ mixin PermissionsFormRoute {
     return showPicnicBottomSheet(
       getIt<PermissionsFormPage>(param1: initialParams),
       useRootNavigator: true,
+      isDismissible: false,
     );
   }
 
