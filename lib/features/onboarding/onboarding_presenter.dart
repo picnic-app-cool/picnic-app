@@ -373,15 +373,15 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
         );
   }
 
-  void _checkRuntimePermissions() {
-    _getRuntimePermissionStatusUseCase
+  Future<void> _checkRuntimePermissions() async {
+    await _getRuntimePermissionStatusUseCase
         .execute(
           permission: RuntimePermission.notifications,
         )
         .doOn(
           success: (status) => _handleNotificationsPermissionResponse(status),
         );
-    _getRuntimePermissionStatusUseCase
+    await _getRuntimePermissionStatusUseCase
         .execute(
           permission: RuntimePermission.contacts,
         )
@@ -392,16 +392,16 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
   }
 
   void _handleNotificationsPermissionResponse(RuntimePermissionStatus status) {
-    _model.copyWith(notificationsPermissionStatus: status);
+    tryEmit(_model.copyWith(notificationsPermissionStatus: status));
   }
 
   void _handleContactsPermissionResponse(RuntimePermissionStatus status) {
-    _model.copyWith(contactsPermissionStatus: status);
+    tryEmit(_model.copyWith(contactsPermissionStatus: status));
   }
 
   void _continueIfNothingToRequest() {
     if (!_model.showPermissionsScreen) {
-      _model.byRemovingScreen(OnboardingScreen.permissions);
+      tryEmit(_model.byRemovingScreen(OnboardingScreen.permissions));
     }
     _openNextScreen();
   }
