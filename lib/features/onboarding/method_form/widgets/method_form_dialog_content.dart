@@ -73,7 +73,7 @@ class MethodFormDialogContent extends StatelessWidget {
                   method: _google,
                 ),
               const Gap(6),
-              if (state.signInWithDiscordEnabled)
+              if (state.signInWithDiscordEnabled && state.formType != OnboardingFlowType.signUp)
                 _SignInButton(
                   formType: state.formType,
                   image: Assets.images.discordWhite.path,
