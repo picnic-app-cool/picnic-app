@@ -12,7 +12,10 @@ class DarkStatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
+      value: SystemUiOverlayStyle.dark.copyWith(
+        // Only for Android
+        statusBarColor: Colors.transparent,
+      ),
       child: child,
     );
   }
