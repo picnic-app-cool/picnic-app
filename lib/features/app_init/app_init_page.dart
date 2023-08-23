@@ -6,6 +6,7 @@ import 'package:picnic_app/features/app_init/app_init_presentation_model.dart';
 import 'package:picnic_app/features/app_init/app_init_presenter.dart';
 import 'package:picnic_app/features/onboarding/widgets/centered_picnic_logo.dart';
 import 'package:picnic_app/picnic_app.dart';
+import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class AppInitPage extends StatefulWidget with HasPresenter<AppInitPresenter> {
@@ -31,16 +32,18 @@ class _AppInitPageState extends State<AppInitPage>
 
   @override
   Widget build(BuildContext context) {
-    return stateListener(
-      listener: (context, state) {
-        if (state.isUserLoggedIn) {
-          PicnicApp.of(context)?.setLocale(Locale(state.user.languages.first));
-        }
-      },
-      child: CenteredPicnicLogo(
-        backgroundColor: PicnicTheme.of(context).colors.blackAndWhite.shade100,
-        animated: true,
-        onAnimationEnd: presenter.onLogoAnimationEnd,
+    return DarkStatusBar(
+      child: stateListener(
+        listener: (context, state) {
+          if (state.isUserLoggedIn) {
+            PicnicApp.of(context)?.setLocale(Locale(state.user.languages.first));
+          }
+        },
+        child: CenteredPicnicLogo(
+          backgroundColor: PicnicTheme.of(context).colors.blackAndWhite.shade100,
+          animated: true,
+          onAnimationEnd: presenter.onLogoAnimationEnd,
+        ),
       ),
     );
   }
