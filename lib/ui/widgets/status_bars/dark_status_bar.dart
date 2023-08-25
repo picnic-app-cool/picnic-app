@@ -15,6 +15,7 @@ class DarkStatusBar extends StatelessWidget {
       value: SystemUiOverlayStyle.dark.copyWith(
         // Only for Android
         statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
       ),
       child: child,
     );

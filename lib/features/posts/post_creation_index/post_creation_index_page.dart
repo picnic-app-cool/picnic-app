@@ -18,6 +18,8 @@ import 'package:picnic_app/features/posts/video_post_creation/video_post_creatio
 import 'package:picnic_app/features/posts/video_post_creation/video_post_creation_page.dart';
 import 'package:picnic_app/features/posts/widgets/post_creation_preview.dart';
 import 'package:picnic_app/features/posts/widgets/post_creation_tab_bar.dart';
+import 'package:picnic_app/ui/widgets/status_bars/dark_status_bar.dart';
+import 'package:picnic_app/ui/widgets/status_bars/light_status_bar.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_theme.dart';
 
 class PostCreationIndexPage extends StatefulWidget with HasPresenter<PostCreationIndexPresenter> {
@@ -93,32 +95,36 @@ class _PostCreationIndexPageState extends State<PostCreationIndexPage>
               child: Material(
                 color: PicnicTheme.of(context).colors.blackAndWhite.shade100,
                 child: state.isFullScreen
-                    ? Stack(
-                        children: [
-                          Positioned.fill(
-                            child: postCreationPreview,
-                          ),
-                          Positioned(
-                            bottom: MediaQuery.of(context).viewPadding.bottom,
-                            left: 0,
-                            right: 0,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: postCreationTabBar,
-                            ),
-                          ),
-                        ],
-                      )
-                    : SafeArea(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    ? LightStatusBar(
+                        child: Stack(
                           children: [
-                            Expanded(
+                            Positioned.fill(
                               child: postCreationPreview,
                             ),
-                            postCreationTabBar,
+                            Positioned(
+                              bottom: MediaQuery.of(context).viewPadding.bottom,
+                              left: 0,
+                              right: 0,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: postCreationTabBar,
+                              ),
+                            ),
                           ],
+                        ),
+                      )
+                    : DarkStatusBar(
+                        child: SafeArea(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: postCreationPreview,
+                              ),
+                              postCreationTabBar,
+                            ],
+                          ),
                         ),
                       ),
               ),
