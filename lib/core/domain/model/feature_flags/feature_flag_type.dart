@@ -46,7 +46,8 @@ enum FeatureFlagType {
   circleConfig,
   attachmentNativePicker,
   enableEectionCountDownWidget,
-  signInWithDiscordEnabled;
+  signInWithDiscordEnabled,
+  seedsTutorialAfterCircleCreation;
 
   // ignore: long-method
   String get description {
@@ -147,6 +148,8 @@ enum FeatureFlagType {
         return 'Enable election countdown widget';
       case FeatureFlagType.signInWithDiscordEnabled:
         return 'Enable sign in with discord';
+      case FeatureFlagType.seedsTutorialAfterCircleCreation:
+        return 'Enable seeds tutorial after circle creation';
     }
   }
 

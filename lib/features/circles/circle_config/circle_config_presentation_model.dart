@@ -77,6 +77,9 @@ class CircleConfigPresentationModel implements CircleConfigViewModel {
   bool get showSeeds => featureFlags[FeatureFlagType.areSeedsEnabled];
 
   @override
+  bool get showSeedsTutorial => featureFlags[FeatureFlagType.seedsTutorialAfterCircleCreation];
+
+  @override
   bool get isCreatingCircle => createCircleFutureResult.isPending();
 
   CircleConfigPresentationModel copyWith({
@@ -130,4 +133,6 @@ abstract class CircleConfigViewModel {
   bool get showSeeds;
 
   bool get isCreatingCircle;
+
+  bool get showSeedsTutorial;
 }

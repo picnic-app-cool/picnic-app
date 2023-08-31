@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:picnic_app/core/domain/model/circle.dart';
 import 'package:picnic_app/core/domain/model/update_circle_input.dart';
 import 'package:picnic_app/core/domain/use_cases/update_circle_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
@@ -8,7 +9,9 @@ import 'package:picnic_app/features/circles/circle_config/circle_config_presenta
 import 'package:picnic_app/features/circles/domain/model/circle_config.dart';
 import 'package:picnic_app/features/circles/domain/use_cases/get_default_circle_config_use_case.dart';
 import 'package:picnic_app/features/create_circle/circle_creation_rules/circle_creation_rules_initial_params.dart';
+import 'package:picnic_app/features/create_circle/circle_creation_success/circle_creation_success_initial_params.dart';
 import 'package:picnic_app/features/create_circle/domain/use_cases/create_circle_use_case.dart';
+import 'package:picnic_app/features/posts/domain/model/create_post_input.dart';
 import 'package:picnic_app/features/seeds/about_elections/about_elections_initial_params.dart';
 import 'package:picnic_app/localization/app_localizations_utils.dart';
 
@@ -71,21 +74,34 @@ class CircleConfigPresenter extends Cubit<CircleConfigViewModel> {
 
           if (_model.showSeeds) {
             navigator.openCircleCreationRules(
-              CircleCreationRulesInitialParams(
-                circle: newCircle,
-                createPostInput: createPostInput,
-              ),
+              CircleCreationRulesInitialParams(circle: newCircle, createPostInput: createPostInput),
             );
+            return;
+          }
+
+          if (_model.showSeedsTutorial) {
+            _navigateToAboutElections(newCircle, createPostInput);
           } else {
-            navigator.openAboutElections(
-              AboutElectionsInitialParams(
-                circle: newCircle,
-                createPostInput: createPostInput,
-                createCircleWithoutPost: _model.createCircleWithoutPost,
-              ),
-            );
+            _navigateToCircleCreationSuccess(newCircle, createPostInput);
           }
         },
+      );
+
+  void _navigateToAboutElections(Circle newCircle, CreatePostInput createPostInput) => navigator.openAboutElections(
+        AboutElectionsInitialParams(
+          circle: newCircle,
+          createPostInput: createPostInput,
+          createCircleWithoutPost: _model.createCircleWithoutPost,
+        ),
+      );
+
+  void _navigateToCircleCreationSuccess(Circle newCircle, CreatePostInput createPostInput) =>
+      navigator.openCircleCreationSuccess(
+        CircleCreationSuccessInitialParams(
+          circle: newCircle,
+          createPostInput: createPostInput,
+          createCircleWithoutPost: _model.createCircleWithoutPost,
+        ),
       );
 
   void _updateCircle() => _updateCircleUseCase

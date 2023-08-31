@@ -116,6 +116,8 @@ class FeatureFlagsDefaults extends Equatable {
         return false;
       case FeatureFlagType.signInWithDiscordEnabled:
         return true;
+      case FeatureFlagType.seedsTutorialAfterCircleCreation:
+        return false;
     }
   }
 
