@@ -477,19 +477,12 @@ class GroupChatPresenter extends Cubit<GroupChatViewModel> with SubscriptionsMix
         ),
       );
 
-  Future<void> _onTapReport() async {
-    final reportSuccessful = await navigator.openReportForm(
-          ReportFormInitialParams(
-            entityId: _model.selectedMessage.id,
-            reportEntityType: ReportEntityType.message,
-          ),
-        ) ??
-        false;
-
-    if (reportSuccessful) {
-      navigator.close();
-    }
-  }
+  void _onTapReport() => navigator.openReportForm(
+        ReportFormInitialParams(
+          entityId: _model.selectedMessage.id,
+          reportEntityType: ReportEntityType.message,
+        ),
+      );
 
   void _onTapReplyAction() {
     tryEmit(

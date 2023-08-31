@@ -452,20 +452,14 @@ class CircleChatPresenter extends Cubit<CircleChatViewModel> with SubscriptionsM
         ),
       );
 
-  Future<void> _onTapReport() async {
-    final reportSuccessful = await navigator.openReportForm(
-          ReportFormInitialParams(
-            circleId: _model.circle.id,
-            entityId: _model.selectedMessage.id,
-            contentAuthorId: _model.selectedMessage.authorId,
-            reportEntityType: ReportEntityType.message,
-          ),
-        ) ??
-        false;
-    if (reportSuccessful) {
-      navigator.close();
-    }
-  }
+  void _onTapReport() => navigator.openReportForm(
+        ReportFormInitialParams(
+          circleId: _model.circle.id,
+          entityId: _model.selectedMessage.id,
+          contentAuthorId: _model.selectedMessage.authorId,
+          reportEntityType: ReportEntityType.message,
+        ),
+      );
 
   void _onTapReplyAction() {
     tryEmit(
