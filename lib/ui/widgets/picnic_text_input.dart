@@ -29,6 +29,7 @@ class PicnicTextInput extends StatelessWidget {
     this.suffix,
     this.onTap,
     this.maxLines = 1,
+    this.minLines,
     this.maxLength,
     this.showMaxLengthCounter = true,
     this.counterTextStyle,
@@ -63,6 +64,7 @@ class PicnicTextInput extends StatelessWidget {
   final Widget? prefix;
   final VoidCallback? onTap;
   final int? maxLines;
+  final int? minLines;
   final int? maxLength;
   final bool showMaxLengthCounter;
   final TextStyle? counterTextStyle;
@@ -130,6 +132,7 @@ class PicnicTextInput extends StatelessWidget {
             onTap: onTap,
             maxLength: maxLength,
             maxLines: maxLines,
+            minLines: minLines,
             onChanged: onChanged,
             autocorrect: autocorrect,
             buildCounter: maxLength != null && showMaxLengthCounter ? _buildCounter : null,

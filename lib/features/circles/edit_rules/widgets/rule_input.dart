@@ -12,7 +12,9 @@ class RuleInput extends StatelessWidget {
 
   final ValueChanged<String> onChangedRule;
   final String rules;
+
   static const _textFieldReportDescriptionMaxLines = 6;
+  static const _textFieldMinLines = 6;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,9 @@ class RuleInput extends StatelessWidget {
       onChanged: onChangedRule,
       hintText: appLocalizations.editRulesHint,
       maxLines: _textFieldReportDescriptionMaxLines,
+      minLines: _textFieldMinLines,
       inputTextStyle: textStyleBody20,
+      keyboardType: TextInputType.multiline,
     );
   }
 }
