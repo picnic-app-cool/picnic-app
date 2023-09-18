@@ -73,19 +73,31 @@ class PollPostPresentationModel implements PollPostViewModel {
   bool get showReportAction => displayOptions.detailsMode == PostDetailsMode.report;
 
   PollPostPresentationModel byUpdatingPostVotedAnswer({required Id answerId}) {
+    final previousVotedAnswerId = pollContent.votedAnswerId;
+    var updatedTotalVotes = pollContent.votesTotal;
+
     final updatedAnswers = pollContent.answers.map((it) {
       var updatedAnswer = it;
       if (it.id == answerId) {
         updatedAnswer = it.copyWith(votesCount: it.votesCount + 1);
       }
+
+      if (it.id == previousVotedAnswerId) {
+        updatedAnswer = it.copyWith(votesCount: it.votesCount - 1);
+      }
+
       return updatedAnswer;
     }).toList();
+
+    if (previousVotedAnswerId.isNone) {
+      updatedTotalVotes = updatedTotalVotes + 1;
+    }
 
     return copyWith(
       post: post.copyWith(
         content: pollContent.copyWith(
           answers: updatedAnswers,
-          votesTotal: pollContent.votesTotal + 1,
+          votesTotal: updatedTotalVotes,
           votedAnswerId: answerId,
         ),
       ),

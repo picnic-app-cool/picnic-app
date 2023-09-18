@@ -76,7 +76,7 @@ class PicnicPollPost extends StatelessWidget {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: voteExists ? null : () => onVote(PicnicPollVote.left),
+                  onTap: vote != PicnicPollVote.left ? () => onVote(PicnicPollVote.left) : null,
                   child: PicnicPollChoice(
                     key: const ValueKey(PicnicPollVote.left),
                     userImageUrl: userImageUrl,
@@ -92,7 +92,7 @@ class PicnicPollPost extends StatelessWidget {
               ),
               Expanded(
                 child: GestureDetector(
-                  onTap: voteExists ? null : () => onVote(PicnicPollVote.right),
+                  onTap: vote != PicnicPollVote.right ? () => onVote(PicnicPollVote.right) : null,
                   child: PicnicPollChoice(
                     key: const ValueKey(PicnicPollVote.right),
                     userImageUrl: userImageUrl,

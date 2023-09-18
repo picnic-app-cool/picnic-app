@@ -531,14 +531,14 @@ class Stubs {
           question: 'left or right?',
           answers: [
             const PollAnswer(
-              id: Id.empty(),
+              id: Id('Left'),
               imageUrl: ImageUrl(
                 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/fairytale-town-of-hallstatt-austria-royalty-free-image-1570204697.jpg?crop=0.447xw:1.00xh;0.211xw,0&resize=980:*',
               ),
               votesCount: 2000,
             ),
             const PollAnswer(
-              id: Id.empty(),
+              id: Id('Right'),
               imageUrl: ImageUrl(
                 'https://thumbs.dreamstime.com/b/beautiful-golden-autumn-scenery-trees-golden-leaves-sunshine-scotland-united-kingdom-beautiful-golden-autumn-124278811.jpg',
               ),
