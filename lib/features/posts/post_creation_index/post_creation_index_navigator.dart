@@ -1,4 +1,5 @@
 import 'package:picnic_app/dependency_injection/app_component.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_details_navigator.dart';
 import 'package:picnic_app/features/main/main_navigator.dart';
 import 'package:picnic_app/features/posts/link_post_creation/link_post_creation_navigator.dart';
 import 'package:picnic_app/features/posts/photo_post_creation/photo_post_creation_navigator.dart';
@@ -22,7 +23,8 @@ class PostCreationIndexNavigator
         PhotoPostCreationRoute,
         UploadMediaRoute,
         SelectCircleRoute,
-        ErrorBottomSheetRoute {
+        ErrorBottomSheetRoute,
+        CircleDetailsRoute {
   PostCreationIndexNavigator(this.appNavigator);
 
   @override

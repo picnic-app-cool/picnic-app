@@ -41,13 +41,13 @@ void main() {
   );
 
   test(
-    'should call CreatePostUseCase and close until main if circle is not empty',
+    'should call CreatePostUseCase and open circle details page if circle is not empty',
     () async {
       final createPostInput = const CreatePostInput.empty().copyWith(circleId: Stubs.createImagePostInput.circleId);
       _initMvp(createPostInput: createPostInput);
-      when(() => navigator.closeUntilMain()).thenAnswer((_) => Future.value());
+      when(() => navigator.openCircleDetails(any())).thenAnswer((_) => Future.value());
       await presenter.onTapPost();
-      verify(() => navigator.closeUntilMain());
+      verify(() => navigator.openCircleDetails(captureAny()));
       verify(() => PostsMocks.createPostUseCase.execute(createPostInput: any(named: 'createPostInput')));
     },
   );

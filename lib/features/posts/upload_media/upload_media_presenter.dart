@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/image_picker/utils/image_source_type.dart';
 import 'package:picnic_app/features/posts/choose_media/choose_media_initial_params.dart';
 import 'package:picnic_app/features/posts/domain/model/post_contents/image_post_content_input.dart';
@@ -28,7 +29,9 @@ class UploadMediaPresenter extends Cubit<UploadMediaViewModel> {
   UploadMediaPresentationModel get _model => state as UploadMediaPresentationModel;
 
   Future<void> onTapPost() async {
-    if (_model.createPostInput.circleId == const Id.empty()) {
+    final _circleId = _model.createPostInput.circleId;
+
+    if (_circleId == const Id.empty()) {
       await navigator.openSelectCircle(
         SelectCircleInitialParams(
           createPostInput: _model.createPostInput,
@@ -38,7 +41,13 @@ class UploadMediaPresenter extends Cubit<UploadMediaViewModel> {
       await _createPostUseCase.execute(
         createPostInput: _model.createPostInput,
       );
+
       navigator.closeUntilMain();
+      await navigator.openCircleDetails(
+        CircleDetailsInitialParams(
+          circleId: _circleId,
+        ),
+      );
     }
   }
 

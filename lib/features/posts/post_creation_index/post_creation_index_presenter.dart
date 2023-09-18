@@ -7,6 +7,7 @@ import 'package:picnic_app/core/domain/use_cases/upload_contacts_use_case.dart';
 import 'package:picnic_app/core/utils/bloc_extensions.dart';
 import 'package:picnic_app/core/utils/either_extensions.dart';
 import 'package:picnic_app/features/chat/domain/model/id.dart';
+import 'package:picnic_app/features/circles/circle_details/circle_details_initial_params.dart';
 import 'package:picnic_app/features/posts/domain/model/create_post_input.dart';
 import 'package:picnic_app/features/posts/domain/post_creation_preview_type.dart';
 import 'package:picnic_app/features/posts/domain/use_cases/create_post_use_case.dart';
@@ -106,7 +107,11 @@ class PostCreationIndexPresenter extends Cubit<PostCreationIndexViewModel> {
     await _createPostUseCase.execute(
       createPostInput: postInput,
     );
+
     navigator.closeUntilMain();
+    await navigator.openCircleDetails(
+      CircleDetailsInitialParams(circleId: postInput.circleId),
+    );
   }
 
   Future<void> _openUploadMedia(CreatePostInput postInput) async => navigator.openUploadMedia(

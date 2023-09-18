@@ -132,12 +132,14 @@ void main() {
         when(() => PostsMocks.createPostUseCase.execute(createPostInput: any(named: 'createPostInput'))).thenAnswer(
           (_) => successFuture(unit),
         );
+        when(() => navigator.openCircleDetails(any())).thenAnswer((_) async => true);
 
         // WHEN
         await presenter.onTapPost(input);
 
         // THEN
         verify(() => PostsMocks.createPostUseCase.execute(createPostInput: any(named: 'createPostInput')));
+        verify(() => navigator.openCircleDetails(captureAny()));
       },
     );
   });
