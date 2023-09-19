@@ -292,6 +292,13 @@ class _PicnicVideoPlayerState extends State<PicnicVideoPlayer> {
   void _handleVideoError(VideoPlayerController controller) {
     _errorDescription = controller.value.errorDescription;
     _log("error in video playback of ${widget.url}\n: $_errorDescription");
+    Timer(
+      const Duration(milliseconds: 500),
+      //ignore: prefer-extracting-callbacks
+      () async {
+        unawaited(_ensureVideoController());
+      },
+    );
   }
 
   void _onAspectRatioChanged(double aspectRatio) {
