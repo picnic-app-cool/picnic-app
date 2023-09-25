@@ -333,6 +333,7 @@ class OnboardingPresenter extends Cubit<OnboardingViewModel> with SubscriptionsM
 
           _checkRuntimePermissions();
         },
+        onChangedUsername: presenter.onChangeUsername,
         onTapLogin: () => _switchToSignIn(),
       ),
     );

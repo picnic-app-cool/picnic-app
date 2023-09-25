@@ -52,6 +52,7 @@ class _MethodFormPageState extends State<MethodFormPage>
                             onTapAppleSignIn: presenter.onTapAppleLogIn,
                             onTapTerms: presenter.onTapTerms,
                             onTapPolicies: presenter.onTapPolicies,
+                            onTapUsernameSignIn: presenter.onTapUsernameSignIn,
                           ),
                           const Spacer(),
                           if (state.formType == OnboardingFlowType.signUp) ...[

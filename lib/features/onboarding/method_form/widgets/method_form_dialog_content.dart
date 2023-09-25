@@ -18,11 +18,13 @@ class MethodFormDialogContent extends StatelessWidget {
     required this.onTapDiscordSignIn,
     required this.onTapTerms,
     required this.onTapPolicies,
+    required this.onTapUsernameSignIn,
   });
 
   final VoidCallback onTapContinue;
   final VoidCallback onTapGoogleSignIn;
   final VoidCallback onTapDiscordSignIn;
+  final VoidCallback onTapUsernameSignIn;
 
   final VoidCallback onTapAppleSignIn;
   final VoidCallback onTapTerms;
@@ -33,6 +35,7 @@ class MethodFormDialogContent extends StatelessWidget {
   static const _apple = 'Apple';
   static const _discord = 'Discord';
   static const _phone = 'phone number';
+  static const _username = 'username';
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +98,15 @@ class MethodFormDialogContent extends StatelessWidget {
                 method: _phone,
               ),
               const Gap(6),
+              if (state.formType != OnboardingFlowType.signUp) ...[
+                _SignInButton(
+                  formType: state.formType,
+                  image: Assets.images.usernameIcon.path,
+                  onTap: onTapContinue,
+                  method: _username,
+                ),
+                const Gap(6),
+              ],
               TermsAndPoliciesDisclaimer(
                 onTapTerms: onTapTerms,
                 onTapPolicies: onTapPolicies,

@@ -61,6 +61,10 @@ class MethodFormPresenter extends Cubit<MethodFormViewModel> {
     _model.onPhoneCallback.call();
   }
 
+  void onTapUsernameSignIn() {
+    _model.onPhoneCallback.call();
+  }
+
   Future<void> onTapGoogleLogIn() async {
     _logAnalyticsEventUseCase.execute(
       AnalyticsEvent.tap(target: AnalyticsTapTarget.onboardingSignUpGoogle),

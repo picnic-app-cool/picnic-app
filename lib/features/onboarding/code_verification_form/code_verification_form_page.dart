@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:picnic_app/constants/constants.dart';
+import 'package:picnic_app/core/domain/model/sign_in_method.dart';
 import 'package:picnic_app/core/utils/mvp_extensions.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presentation_model.dart';
 import 'package:picnic_app/features/onboarding/code_verification_form/code_verification_form_presenter.dart';
@@ -98,7 +99,13 @@ class _CodeVerificationFormPageState extends State<CodeVerificationFormPage>
                                 ),
                                 const Gap(8),
                                 Text(
-                                  appLocalizations.codeVerificationDescription,
+                                  state.isUsernameLogin
+                                      ? state.signInMethod == SignInMethod.phone
+                                          ? appLocalizations
+                                              .usernameCodeVerificationDescriptionPhone(state.maskedIdentifier)
+                                          : appLocalizations
+                                              .usernameCodeVerificationDescriptionEmail(state.maskedIdentifier)
+                                      : appLocalizations.codeVerificationDescription,
                                   style:
                                       themeData.styles.body30.copyWith(color: themeData.colors.blackAndWhite.shade600),
                                   overflow: TextOverflow.ellipsis,
