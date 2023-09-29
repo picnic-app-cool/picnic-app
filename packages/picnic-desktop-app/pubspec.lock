@@ -1206,10 +1206,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
+      sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.6"
+    version: "0.13.5"
   http_multi_server:
     dependency: transitive
     description:
@@ -2052,6 +2052,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  tenor:
+    dependency: transitive
+    description:
+      name: tenor
+      sha256: "6ad55346364fe9506c89458420930a1303584397c85e6449ca7f95706f88c6f9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.9"
   term_glyph:
     dependency: transitive
     description:
@@ -2132,6 +2140,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      sha256: "06866290206d196064fd61df4c7aea1ffe9a4e7c4ccaa8fcded42dd41948005d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   universal_platform:
     dependency: transitive
     description:
