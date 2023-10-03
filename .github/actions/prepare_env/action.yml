@@ -22,12 +22,6 @@ runs:
         echo "/opt/homebrew/bin" >> $GITHUB_PATH
       shell: bash
 
-    - name: Fix ruby for windows
-      if: ${{ runner.os == 'Windows' }}
-      run: |
-        ruby -e 'print File.dirname(RbConfig.ruby)' >> $GITHUB_PATH
-      shell: bash
-
     - name: Prepare GITHUB_BUILD_URL
       run: |
         echo "GITHUB_BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV

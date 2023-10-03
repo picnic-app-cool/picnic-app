@@ -164,35 +164,6 @@ jobs:
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
           if-no-files-found: error
 
-  build-windows:
-    timeout-minutes: 20
-    runs-on:
-      - self-hosted
-      - windows
-    permissions:
-      contents: read # to checkout
-
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.sha_commit }}
-
-      - name: Build Windows
-        id: build
-        uses: ./.github/actions/build_windows
-        with:
-          buildType: "profile"
-          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: windows
-          path: ${{ steps.build.outputs.zip-path }}
-          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
-          if-no-files-found: error
-
   upload-desktop:
     timeout-minutes: 10
     runs-on:
@@ -205,13 +176,10 @@ jobs:
         include:
           - os: macos
             name: picnic-app.dmg
-          - os: windows
-            name: picnic-app-windows.zip
 
     needs:
       # matrix usage is not supported here, so we just wait both of them
       - build-macos
-      - build-windows
 
     if: ${{ !inputs.disable_deploy }}
 

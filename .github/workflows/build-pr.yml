@@ -299,33 +299,6 @@ jobs:
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
           if-no-files-found: error
 
-  build-windows:
-    timeout-minutes: 20
-    runs-on:
-      - self-hosted
-      - windows
-    permissions:
-      contents: read # to checkout
-
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
-      - name: Build Windows
-        id: build
-        uses: ./.github/actions/build_windows
-        with:
-          buildType: "profile"
-          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: windows
-          path: ${{ steps.build.outputs.zip-path }}
-          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
-          if-no-files-found: error
-
   drop-previous-artifacts:
     timeout-minutes: 2
     runs-on:
@@ -384,7 +357,6 @@ jobs:
       - build-android
       - build-ios
       - build-macos
-      - build-windows
 
     steps:
       - name: Checkout branch

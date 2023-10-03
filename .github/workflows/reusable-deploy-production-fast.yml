@@ -56,8 +56,6 @@ jobs:
         include:
           - os: macos
             name: picnic-app.dmg
-          - os: windows
-            name: picnic-app-windows.zip
 
     steps:
       - name: Setup Cloud SDK

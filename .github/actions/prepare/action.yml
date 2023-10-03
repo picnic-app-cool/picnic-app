@@ -27,15 +27,6 @@ runs:
         channel: ${{ env.FLUTTER_CHANNEL }}
         flutter-version: ${{ env.FLUTTER_VERSION }}
 
-    - name: Fix flutter lock on windows
-      if: ${{ runner.os == 'Windows' }}
-      run: |
-        cd "${{ runner.tool_cache }}/flutter/${FLUTTER_CHANNEL}-${FLUTTER_VERSION}-${ARCH,,}/bin/cache"
-        rm -rf .upgrade_lock lockfile
-      shell: bash
-      env:
-        ARCH: ${{ runner.arch }} # to lowercase with bash
-
     - name: Add empty .env file
       run: |
         cp .env.example .env
