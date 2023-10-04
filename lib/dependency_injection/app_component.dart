@@ -45,6 +45,7 @@ import 'package:picnic_app/core/data/hive/hive_path_provider.dart';
 import 'package:picnic_app/core/data/hive_local_storage_repository.dart';
 import 'package:picnic_app/core/data/impl_deep_links_repository.dart';
 import 'package:picnic_app/core/data/impl_session_expired_repository.dart';
+import 'package:picnic_app/core/data/jwt_token_decoder_repository.dart';
 import 'package:picnic_app/core/data/local_user_preferences_repository.dart';
 import 'package:picnic_app/core/data/mobile_feature_flags_repository.dart';
 import 'package:picnic_app/core/data/native_recaptcha_repository.dart';
@@ -83,6 +84,7 @@ import 'package:picnic_app/core/domain/repositories/seeds_repository.dart';
 import 'package:picnic_app/core/domain/repositories/session_expired_repository.dart';
 import 'package:picnic_app/core/domain/repositories/slices_repository.dart';
 import 'package:picnic_app/core/domain/repositories/social_accounts_repository.dart';
+import 'package:picnic_app/core/domain/repositories/token_decoder_repository.dart';
 import 'package:picnic_app/core/domain/repositories/user_preferences_repository.dart';
 import 'package:picnic_app/core/domain/repositories/users_repository.dart';
 import 'package:picnic_app/core/domain/stores/app_info_store.dart';
@@ -371,6 +373,7 @@ void _configureGeneralDependencies(
             getIt(),
             getIt(),
             getIt(),
+            getIt(),
           ),
         )
         ..registerLazySingleton<GraphQLClient>(
@@ -526,6 +529,9 @@ void _configureRepositories() {
           () => SecureStorageAuthTokenRepository(
             getIt(),
           ),
+        )
+        ..registerLazySingleton<TokenDecoderRepository>(
+          () => JwtTokenDecoderRepository(),
         )
         ..registerFactory<PodsRepository>(
           () => GraphqlPodsRepository(

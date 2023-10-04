@@ -32,6 +32,8 @@ void main() {
   test(
     '403 from backend should trigger refreshTokens',
     () async {
+      when(() => Mocks.tokenDecoderRepository.isExpired(expiredAccessToken)).thenReturn(true);
+      when(() => Mocks.tokenDecoderRepository.isExpired('refreshToken')).thenReturn(false);
       final feedsQueryFuture = _feedsQuery(client);
       _mockHttpResponses(
         Mocks.dioClient,
@@ -48,14 +50,13 @@ void main() {
         ),
       ).captured;
 
-      expect((requestsList[1] as dio.Options).headers!['Authorization'], "Bearer expired token");
-      final secondRequestData = requestsList[2] as Map<String, dynamic>;
-      final query = secondRequestData['query'] as String;
-      final variables = secondRequestData['variables'] as Map<String, dynamic>;
+      final tokenRefreshRequestData = requestsList[0] as Map<String, dynamic>;
+      final query = tokenRefreshRequestData['query'] as String;
+      final variables = tokenRefreshRequestData['variables'] as Map<String, dynamic>;
       expect(query.contains("mutation refreshTokens"), isNotNull);
       expect(variables['refreshToken'], 'refreshToken');
       expect(variables["accessToken"], expiredAccessToken);
-      expect((requestsList[5] as dio.Options).headers!['Authorization'], "Bearer valid token");
+      expect((requestsList[3] as dio.Options).headers!['Authorization'], "Bearer valid token");
       expect(result.isSuccess, true);
     },
   );
@@ -76,6 +77,7 @@ void main() {
       GraphqlClientFactory(
         Mocks.environmentConfigProvider,
         authTokenRepo,
+        Mocks.tokenDecoderRepository,
         const GraphQLFailureMapper(),
         SaveAuthTokenUseCase(authTokenRepo),
         GetAuthTokenUseCase(authTokenRepo),

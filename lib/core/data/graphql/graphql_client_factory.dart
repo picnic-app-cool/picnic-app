@@ -10,6 +10,7 @@ import 'package:picnic_app/core/data/graphql/graphql_version_link.dart';
 import 'package:picnic_app/core/data/graphql/refresh_auth_token_link.dart';
 import 'package:picnic_app/core/domain/repositories/auth_token_repository.dart';
 import 'package:picnic_app/core/domain/repositories/background_api_repository.dart';
+import 'package:picnic_app/core/domain/repositories/token_decoder_repository.dart';
 import 'package:picnic_app/core/domain/stores/app_info_store.dart';
 import 'package:picnic_app/core/domain/use_cases/get_auth_token_use_case.dart';
 import 'package:picnic_app/core/domain/use_cases/save_auth_token_use_case.dart';
@@ -21,6 +22,7 @@ class GraphqlClientFactory {
   const GraphqlClientFactory(
     this._configProvider,
     this._authTokenRepository,
+    this._tokenDecoderRepository,
     this._failureMapper,
     this._saveAuthTokenUseCase,
     this._getAuthTokenUseCase,
@@ -39,6 +41,7 @@ class GraphqlClientFactory {
   //used for overriding in tests
   final gql.Store? store;
   final AuthTokenRepository _authTokenRepository;
+  final TokenDecoderRepository _tokenDecoderRepository;
   final EnvironmentConfigProvider _configProvider;
   final GraphQLFailureMapper _failureMapper;
   final SaveAuthTokenUseCase _saveAuthTokenUseCase;
@@ -73,7 +76,15 @@ class GraphqlClientFactory {
           _logger,
         ),
         GraphQLHeadersLink(_configProvider),
-        GraphQLAuthLink(_authTokenRepository),
+        GraphQLAuthLink(
+          _authTokenRepository,
+          _tokenDecoderRepository,
+          _saveAuthTokenUseCase,
+          _getAuthTokenUseCase,
+          refreshTokenClient,
+          _configProvider,
+          _logger,
+        ),
         GraphQLVersionLink(
           _appInfoStore,
           _setAppInfoUseCase,

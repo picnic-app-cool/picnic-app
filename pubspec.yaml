@@ -108,6 +108,9 @@ dependencies:
 
   chewie: 1.4.0
 
+  #jwt_decoder:
+  jwt_decoder: ^2.0.1
+
   #dismissible_page
   dismissible_page: 1.0.1
 

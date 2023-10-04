@@ -197,6 +197,7 @@ class TestGraphQLIsolateDependenciesConfigurator implements GraphQLIsolateDepend
         return GraphqlClientFactory(
           getIt<EnvironmentConfigProvider>(),
           getIt.get<AuthTokenRepository>(),
+          Mocks.tokenDecoderRepository,
           getIt.get<GraphQLFailureMapper>(),
           SaveAuthTokenUseCase(getIt.get<AuthTokenRepository>()),
           getIt.get<GetAuthTokenUseCase>(),

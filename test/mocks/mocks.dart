@@ -306,6 +306,8 @@ class Mocks {
 
   static late MockAuthTokenRepository authTokenRepository;
 
+  static late MockTokenDecoderRepository tokenDecoderRepository;
+
   static late MockPodsRepository podsRepository;
   static late MockSocialAccountsRepository socialAccountsRepository;
 //DO-NOT-REMOVE REPOSITORIES_MOCKS_STATIC_FIELD
@@ -611,6 +613,7 @@ class Mocks {
     cacheManagementRepository = MockCacheManagementRepository();
     postsRepository = MockPostsRepository();
     authTokenRepository = MockAuthTokenRepository();
+    tokenDecoderRepository = MockTokenDecoderRepository();
     podsRepository = MockPodsRepository();
     socialAccountsRepository = MockSocialAccountsRepository();
 //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS
