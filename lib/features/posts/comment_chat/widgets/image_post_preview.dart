@@ -24,6 +24,7 @@ class ImagePostPreview extends StatelessWidget {
         height: postHeight,
         width: double.infinity,
         child: Container(
+          color: blackColor,
           foregroundDecoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -39,7 +40,7 @@ class ImagePostPreview extends StatelessWidget {
           ),
           child: Image.network(
             imageUrl.url,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         ),
       ),
