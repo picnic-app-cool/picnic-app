@@ -263,41 +263,41 @@ jobs:
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
           if-no-files-found: error
 
-  build-macos:
-    timeout-minutes: 20
-    runs-on:
-      - self-hosted
-      - macosx
-    permissions:
-      contents: read # to checkout
-
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
-      - name: Build MacOS
-        id: build
-        uses: ./.github/actions/build_macos
-        with:
-          buildType: "profile"
-          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
-          matchPassword: ${{ secrets.MATCH_PASSWORD }}
-          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
-          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
-          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
-          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
-          appstoreConnectAPIKey: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
-          IOSKeyID: ${{ secrets.PICNIC_IOS_KEY_ID }}
-          IOSKeyIssuerID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
-          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: macos
-          path: ${{ steps.build.outputs.dmg-path }}
-          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
-          if-no-files-found: error
+#  build-macos:
+#    timeout-minutes: 20
+#    runs-on:
+#      - self-hosted
+#      - macosx
+#    permissions:
+#      contents: read # to checkout
+#
+#    steps:
+#      - name: Checkout branch
+#        uses: actions/checkout@v3
+#
+#      - name: Build MacOS
+#        id: build
+#        uses: ./.github/actions/build_macos
+#        with:
+#          buildType: "profile"
+#          fastlaneCertificatesSSHPrivateKey: ${{ secrets.FASTLANE_CERTIFICATES_SSH_PRIVATE_KEY }}
+#          matchPassword: ${{ secrets.MATCH_PASSWORD }}
+#          vesdkLicenseVideoIos: ${{ secrets.VESDK_LICENSE_VIDEO_IOS_BASE64 }}
+#          vesdkLicenseVideoAndroid: ${{ secrets.VESDK_LICENSE_VIDEO_ANDROID_BASE64 }}
+#          pesdkLicenseIos: ${{ secrets.PESDK_LICENSE_IOS_BASE64 }}
+#          pesdkLicenseAndroid: ${{ secrets.PESDK_LICENSE_ANDROID_BASE64 }}
+#          appstoreConnectAPIKey: ${{ secrets.PICNIC_APPSTORECONNECT_API_KEY }}
+#          IOSKeyID: ${{ secrets.PICNIC_IOS_KEY_ID }}
+#          IOSKeyIssuerID: ${{ secrets.PICNIC_IOS_KEY_ISSUER_ID }}
+#          ENVIRONMENT_CONFIG_PRODUCTION: ${{ secrets.ENVIRONMENT_CONFIG_PRODUCTION }}
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: macos
+#          path: ${{ steps.build.outputs.dmg-path }}
+#          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+#          if-no-files-found: error
 
   drop-previous-artifacts:
     timeout-minutes: 2
@@ -356,7 +356,6 @@ jobs:
     needs:
       - build-android
       - build-ios
-      - build-macos
 
     steps:
       - name: Checkout branch
