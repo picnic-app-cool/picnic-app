@@ -13,8 +13,16 @@ runs:
     - name: Prepare environment variables
       uses: ./.github/actions/prepare_env
 
+    - name: Setup ruby
+      run: |
+        rbenv versions
+        rbenv global 2.7.5
+      shell: bash
+      if: ${{ runner.os == 'macOS' }}
+
     - name: Install bundler
       run: |
+        eval "$(rbenv init - bash)"
         gem install bundler
       shell: bash
 
