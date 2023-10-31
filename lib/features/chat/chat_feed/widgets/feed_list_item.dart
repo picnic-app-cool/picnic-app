@@ -77,27 +77,29 @@ class FeedListItem extends StatelessWidget {
                   ),
             ),
             const Gap(4),
-            Container(
-              height: _messageContainerHeight,
-              decoration: BoxDecoration(
-                color: chatEnabled
-                    ? boxBackgroundColor
-                    : blackAndWhiteColor.shade900.withOpacity(_disabledBackgroundOpacity),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(_borderRadius),
-                  bottomRight: Radius.circular(_borderRadius),
+            IgnorePointer(
+              child: Container(
+                height: _messageContainerHeight,
+                decoration: BoxDecoration(
+                  color: chatEnabled
+                      ? boxBackgroundColor
+                      : blackAndWhiteColor.shade900.withOpacity(_disabledBackgroundOpacity),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(_borderRadius),
+                    bottomRight: Radius.circular(_borderRadius),
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: (messageIdToScrollTo != null)
-                    ? ScrollableFeedListMessage(
-                        chatMessages: chatMessagesFeed.messages,
-                        messageIdToScrollTo: messageIdToScrollTo,
-                      )
-                    : NonScrollableFeedListMessage(
-                        chatMessages: chatMessagesFeed.messages,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: (messageIdToScrollTo != null)
+                      ? ScrollableFeedListMessage(
+                          chatMessages: chatMessagesFeed.messages,
+                          messageIdToScrollTo: messageIdToScrollTo,
+                        )
+                      : NonScrollableFeedListMessage(
+                          chatMessages: chatMessagesFeed.messages,
+                        ),
+                ),
               ),
             ),
             if (!chatEnabled)
