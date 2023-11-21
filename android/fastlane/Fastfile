@@ -81,7 +81,6 @@ uploads the build to firebase and adds a JIRA comment to every mentioned issue w
       track: 'alpha',
       json_key_data: json_key,
       skip_upload_changelogs: true,
-      changes_not_sent_for_review: true,
       )
   end
 end
