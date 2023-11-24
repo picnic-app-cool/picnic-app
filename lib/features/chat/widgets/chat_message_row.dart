@@ -10,6 +10,10 @@ import 'package:picnic_app/ui/widgets/picnic_avatar.dart';
 import 'package:picnic_app/ui/widgets/picnic_image_source.dart';
 import 'package:picnic_ui_components/ui/theme/picnic_colors.dart';
 
+typedef OnTapFriendAvatar = void Function(
+  ChatMessage message,
+);
+
 class ChatMessageRow extends StatelessWidget {
   const ChatMessageRow({
     Key? key,
@@ -27,7 +31,7 @@ class ChatMessageRow extends StatelessWidget {
   final ChatMessage message;
   final Color? avatarBorderColor;
   final Widget picnicMessage;
-  final VoidCallback onTapFriendAvatar;
+  final OnTapFriendAvatar onTapFriendAvatar;
   final VoidCallback onTapOwnAvatar;
 
   static const _avatarSize = 32.0;
@@ -49,7 +53,8 @@ class ChatMessageRow extends StatelessWidget {
     }
 
     Widget picnicAvatar = InkWell(
-      onTap: message.chatMessageSender == ChatMessageSender.friend ? onTapFriendAvatar : onTapOwnAvatar,
+      onTap: () =>
+          message.chatMessageSender == ChatMessageSender.friend ? onTapFriendAvatar.call(message) : onTapOwnAvatar,
       child: PicnicAvatar(
         borderImage: borderImage,
         boxFit: PicnicAvatarChildBoxFit.cover,

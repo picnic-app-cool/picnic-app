@@ -68,6 +68,8 @@ class _SingleChatPageState extends State<SingleChatPage>
             appBar: SingleChatAppBar(
               user: state.recipientUser,
               onTapChatSettings: () => presenter.onTapChatSettings(state.recipientUser),
+              isLoading: state.isLoadingChatParticipants,
+              chat: state.chat,
             ),
             body: Padding(
               padding: padding,
@@ -82,7 +84,7 @@ class _SingleChatPageState extends State<SingleChatPage>
                       child: AutomaticKeyboardHide(
                         child: SingleChatMessagesList(
                           messages: state.displayableMessages,
-                          onTapFriendAvatar: () => presenter.onTapFriendAvatar(state.recipientUser.id),
+                          onTapFriendAvatar: (message) => presenter.onTapFriendAvatar(message.authorId),
                           onTapOwnAvatar: () => presenter.onTapOwnAvatar(),
                           loadMore: presenter.loadMoreMessages,
                           now: state.now,

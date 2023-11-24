@@ -4,6 +4,7 @@ import 'package:picnic_app/core/domain/model/paginated_list.dart';
 import 'package:picnic_app/features/chat/domain/model/displayable_chat_message.dart';
 import 'package:picnic_app/features/chat/single_chat/widgets/single_chat_row.dart';
 import 'package:picnic_app/features/chat/widgets/chat_message/chat_message_content_actions.dart';
+import 'package:picnic_app/features/chat/widgets/chat_message_row.dart';
 import 'package:picnic_app/features/chat/widgets/chat_messages_list/chat_messages_list.dart';
 
 class SingleChatMessagesList extends StatelessWidget {
@@ -21,7 +22,7 @@ class SingleChatMessagesList extends StatelessWidget {
   final PaginatedList<DisplayableChatMessage> messages;
   final Future<void> Function() loadMore;
   final DateTime now;
-  final VoidCallback onTapFriendAvatar;
+  final OnTapFriendAvatar onTapFriendAvatar;
   final VoidCallback onTapOwnAvatar;
   final ChatMessageContentActions chatMessageContentActions;
   final double dragOffset;

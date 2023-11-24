@@ -46,12 +46,13 @@ class ChatListItemDisplayable extends Equatable {
 
 extension BasicChatToChatListItemDisplayableMapper on BasicChat {
   ChatListItemDisplayable toChatListItemDisplayable(Id currentUserId) {
+    final emptyPlaceholder = BadgedTitleDisplayable(name: name);
     final title = chatType == ChatType.single
         ? participants //
                 .firstWhereOrNull((user) => user.id != currentUserId)
                 ?.toBadgedAuthorDisplayable() ??
-            const BadgedTitleDisplayable.empty()
-        : BadgedTitleDisplayable(name: name);
+            emptyPlaceholder
+        : emptyPlaceholder;
 
     return ChatListItemDisplayable(
       chat: this,

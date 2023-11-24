@@ -423,6 +423,9 @@ class SingleChatPresenter extends Cubit<SingleChatViewModel> with SubscriptionsM
         chatId: _model.chat.id,
         nextPageCursor: const Cursor.firstPage(),
       )
+      .observeStatusChanges(
+        (result) => tryEmit(_model.copyWith(chatParticipantsResult: result)),
+      )
       .doOn(
         fail: (fail) => logError(fail.displayableFailure()),
         success: (participants) {

@@ -28,7 +28,7 @@ class SingleChatRow extends StatelessWidget {
   final DisplayableChatMessage displayableMessage;
   final bool isContinuationMessage;
   final bool isLastItem;
-  final VoidCallback onTapFriendAvatar;
+  final OnTapFriendAvatar onTapFriendAvatar;
   final VoidCallback onTapOwnAvatar;
   final DateTime now;
   final ChatMessageContentActions chatMessageContentActions;

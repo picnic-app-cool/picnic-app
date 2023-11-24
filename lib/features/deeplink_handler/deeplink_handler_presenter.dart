@@ -85,12 +85,16 @@ class DeeplinkHandlerPresenter {
   }
 
   void _openProfile(Id userId) {
-    _navigator.openProfile(userId: userId);
+    if (!userId.isNone) {
+      _navigator.openProfile(userId: userId);
+    }
   }
 
   void _openCircleDetails(Id circleId) {
-    _navigator.openCircleDetails(
-      CircleDetailsInitialParams(circleId: circleId),
-    );
+    if (!circleId.isNone) {
+      _navigator.openCircleDetails(
+        CircleDetailsInitialParams(circleId: circleId),
+      );
+    }
   }
 }

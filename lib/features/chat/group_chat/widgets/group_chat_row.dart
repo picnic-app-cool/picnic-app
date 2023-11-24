@@ -33,7 +33,7 @@ class GroupChatRow extends StatelessWidget {
   ///The border color of the avatar for [ChatMessageSender.friend]
   final Color avatarBorderColor;
 
-  final VoidCallback onTapFriendAvatar;
+  final OnTapFriendAvatar onTapFriendAvatar;
   final VoidCallback onTapOwnAvatar;
   final ChatMessageContentActions chatMessageContentActions;
   final double dragOffset;

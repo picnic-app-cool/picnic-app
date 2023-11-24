@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:picnic_app/core/domain/model/cursor.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flag_type.dart';
 import 'package:picnic_app/core/domain/model/feature_flags/feature_flags.dart';
@@ -7,12 +8,14 @@ import 'package:picnic_app/core/domain/stores/feature_flags_store.dart';
 import 'package:picnic_app/core/domain/stores/user_store.dart';
 import 'package:picnic_app/core/presentation/model/selectable.dart';
 import 'package:picnic_app/core/utils/current_time_provider.dart';
+import 'package:picnic_app/core/utils/future_result.dart';
 import 'package:picnic_app/features/chat/domain/model/attachment.dart';
 import 'package:picnic_app/features/chat/domain/model/basic_chat.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_circle_invite.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message.dart';
 import 'package:picnic_app/features/chat/domain/model/chat_message_post_payload.dart';
 import 'package:picnic_app/features/chat/domain/model/displayable_chat_message.dart';
+import 'package:picnic_app/features/chat/domain/model/get_chat_participants_failure.dart';
 import 'package:picnic_app/features/chat/single_chat/single_chat_initial_params.dart';
 import 'package:picnic_app/features/posts/domain/model/posts/post.dart';
 
@@ -34,7 +37,8 @@ class SingleChatPresentationModel implements SingleChatViewModel {
         dragOffset = 0,
         isMediaPickerVisible = false,
         clearSelectedMediaAttachment = false,
-        attachments = const PaginatedList.empty();
+        attachments = const PaginatedList.empty(),
+        chatParticipantsResult = const FutureResult.empty();
 
   /// Used for the copyWith method
   SingleChatPresentationModel._({
@@ -51,6 +55,7 @@ class SingleChatPresentationModel implements SingleChatViewModel {
     required this.isMediaPickerVisible,
     required this.clearSelectedMediaAttachment,
     required this.attachments,
+    required this.chatParticipantsResult,
   });
 
   @override
@@ -59,6 +64,7 @@ class SingleChatPresentationModel implements SingleChatViewModel {
   @override
   final ChatMessage selectedMessage;
 
+  @override
   final BasicChat chat;
 
   final UserStore userStore;
@@ -66,6 +72,8 @@ class SingleChatPresentationModel implements SingleChatViewModel {
   final FeatureFlags featureFlags;
 
   final CurrentTimeProvider currentTimeProvider;
+
+  final FutureResult<Either<GetChatParticipantsFailure, PaginatedList<User>>> chatParticipantsResult;
 
   @override
   final PaginatedList<DisplayableChatMessage> displayableMessages;
@@ -104,6 +112,9 @@ class SingleChatPresentationModel implements SingleChatViewModel {
 
   @override
   bool get isChatInputAttachmentNativePickerEnabled => featureFlags[FeatureFlagType.attachmentNativePicker];
+
+  @override
+  bool get isLoadingChatParticipants => chatParticipantsResult.isPending() || chatParticipantsResult.isNotStarted;
 
   SingleChatViewModel byUpdatingSelectedMessage({ChatMessage? selectedMessage}) => copyWith(
         selectedMessage: selectedMessage,
@@ -197,6 +208,7 @@ class SingleChatPresentationModel implements SingleChatViewModel {
     bool? isMediaPickerVisible,
     bool? clearSelectedMediaAttachment,
     PaginatedList<Attachment>? attachments,
+    FutureResult<Either<GetChatParticipantsFailure, PaginatedList<User>>>? chatParticipantsResult,
   }) {
     return SingleChatPresentationModel._(
       pendingMessage: pendingMessage ?? this.pendingMessage,
@@ -212,6 +224,7 @@ class SingleChatPresentationModel implements SingleChatViewModel {
       isMediaPickerVisible: isMediaPickerVisible ?? this.isMediaPickerVisible,
       clearSelectedMediaAttachment: clearSelectedMediaAttachment ?? this.clearSelectedMediaAttachment,
       attachments: attachments ?? this.attachments,
+      chatParticipantsResult: chatParticipantsResult ?? this.chatParticipantsResult,
     );
   }
 }
@@ -245,4 +258,8 @@ abstract class SingleChatViewModel {
   bool get clearSelectedMediaAttachment;
 
   PaginatedList<Attachment> get attachments;
+
+  bool get isLoadingChatParticipants;
+
+  BasicChat get chat;
 }

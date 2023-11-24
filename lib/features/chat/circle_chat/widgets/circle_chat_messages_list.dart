@@ -54,7 +54,7 @@ class CircleChatMessagesList extends StatelessWidget {
                 isContinuationMessage: !displayableMessage.isFirstInGroup,
                 isLastInTheGroup: displayableMessage.isLastInGroup,
                 displayableMessage: displayableMessage,
-                onTapFriendAvatar: () => onTapFriendAvatar(displayableMessage.chatMessage.authorId),
+                onTapFriendAvatar: (message) => onTapFriendAvatar(displayableMessage.chatMessage.authorId),
                 onTapOwnAvatar: onTapOwnAvatar,
                 chatMessageContentActions: chatMessageContentActions,
                 dragOffset: dragOffset,
