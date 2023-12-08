@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:picnic_app/features/chat/domain/model/id.dart';
 import 'package:picnic_app/features/deeplink_handler/domain/model/deep_link_post.dart';
 import 'package:picnic_app/features/posts/domain/model/view_post_failure.dart';
 import 'package:picnic_app/features/posts/post_details/post_details_initial_params.dart';
@@ -34,12 +33,17 @@ void main() {
   }
 
   test(
-    'should properly call viewPost if opened from deeplink',
+    'should fetch post details and then call viewPost when opened from deeplink',
     () async {
-      when(() => Mocks.viewPostUseCase.execute(postId: any(named: 'postId'))) //
-          .thenSuccess((_) => unit);
-      when(() => PostsMocks.getPostUseCase.execute(postId: any(named: 'postId'))) //
-          .thenSuccess((_) => Stubs.textPost);
+      // GIVEN
+      final postIdFromDeepLink = Stubs.id.copyWith(value: '222cbe60-8ad7-4378-a3a1-168fb0e5f170');
+      final stubPost = Stubs.textPost.copyWith(id: postIdFromDeepLink);
+
+      when(() => Mocks.viewPostUseCase.execute(postId: postIdFromDeepLink))
+          .thenAnswer((_) async => successFuture(unit));
+      when(() => PostsMocks.getPostUseCase.execute(postId: postIdFromDeepLink))
+          .thenAnswer((_) async => successFuture(stubPost));
+
       _initPresenter(
         initialParams: PostDetailsInitialParams.fromDeepLink(
           deepLink: DeepLinkPost.fromUri(
@@ -48,15 +52,12 @@ void main() {
         ),
       );
 
-      //WHEN
+      // WHEN
       await presenter.onInit();
 
-      verify(
-        () => Mocks.viewPostUseCase.execute(postId: const Id("222cbe60-8ad7-4378-a3a1-168fb0e5f170")),
-      );
-      verify(
-        () => PostsMocks.getPostUseCase.execute(postId: const Id("222cbe60-8ad7-4378-a3a1-168fb0e5f170")),
-      );
+      // THEN
+      verify(() => PostsMocks.getPostUseCase.execute(postId: postIdFromDeepLink)).called(1);
+      verify(() => Mocks.viewPostUseCase.execute(postId: postIdFromDeepLink)).called(1);
     },
   );
 

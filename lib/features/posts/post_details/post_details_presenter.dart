@@ -45,11 +45,14 @@ class PostDetailsPresenter extends Cubit<PostDetailsViewModel> with Subscription
   PostDetailsPresentationModel get _model => state as PostDetailsPresentationModel;
 
   Future<void> onInit() async {
-    await Future.wait([
-      _increasePostViews(),
-      if (_model.post == const Post.empty() && _model.postId != const Id.empty()) //
-        _fetchPostDetails(),
-    ]);
+    if (_model.post == const Post.empty() && _model.postId != const Id.empty()) {
+      await _fetchPostDetails();
+      // Because the post is empty since it comes from a deeplink, it is necessary to fetch the data first
+      // otherwise we wrongly use short id to increase post view
+      await _increasePostViews(postId: _model.post.id);
+    } else {
+      await _increasePostViews(postId: _model.postId);
+    }
   }
 
   void onTapDeletePost() {
@@ -95,7 +98,7 @@ class PostDetailsPresenter extends Cubit<PostDetailsViewModel> with Subscription
       );
 
   //intentionally not showing error if viewPost fails
-  Future<void> _increasePostViews() => _viewPostUseCase.execute(postId: _model.postId);
+  Future<void> _increasePostViews({required Id postId}) => _viewPostUseCase.execute(postId: postId);
 
   Future<void> _fetchPostDetails() => _getPostUseCase
       .execute(postId: _model.postId) //
