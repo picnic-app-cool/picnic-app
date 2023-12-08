@@ -206,19 +206,31 @@ class CommentChatPresenter extends Cubit<CommentChatViewModel> with Subscription
         target: AnalyticsTapTarget.postBookmarkButton,
       ),
     );
+
+    final previousState = _model.feedPost.context.saved;
+
+    void emitStatus({required bool saved}) {
+      _emitAndNotify(_model.byUpdatingSavedStatus(saved: saved));
+      _model.onPostUpdatedCallback?.call(_model.feedPost);
+    }
+
+    emitStatus(saved: !previousState);
+
     _savePostToCollectionUseCase
         .execute(
           input: SavePostInput(
             postId: _model.feedPost.id,
-            save: !_model.feedPost.context.saved,
+            save: !previousState,
           ),
         )
         .observeStatusChanges(
           (result) => tryEmit(_model.copyWith(savingPostResult: result)),
         )
         .doOn(
-          success: (post) => tryEmit(_model.byUpdatingSavedStatus(saved: post.context.saved)),
-          fail: (fail) => navigator.showError(fail.displayableFailure()),
+          success: (post) {
+            emitStatus(saved: post.context.saved);
+          },
+          fail: (fail) => emitStatus(saved: previousState),
         );
   }
 

@@ -259,7 +259,7 @@ class CommentChatPresentationModel implements CommentChatViewModel {
       );
 
   CommentChatPresentationModel byUpdatingSavedStatus({required bool saved}) => copyWith(
-        feedPost: feedPost.copyWith(context: feedPost.context.copyWith(saved: saved)),
+        feedPost: feedPost.byUpdatingSavedStatus(iSaved: saved),
       );
 
   CommentChatPresentationModel byUpdatingAuthorWithFollow({required bool follow}) {
