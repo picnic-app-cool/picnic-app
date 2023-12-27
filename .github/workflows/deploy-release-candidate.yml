@@ -34,7 +34,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v3
         with:
-          token: "${{ secrets.JIRA_ACCESS_TOKEN }}"
+          token: "${{ secrets.PAT_COMMIT_MAIN_NEW }}"
 
       - name: Prepare environment
         uses: ./.github/actions/prepare
