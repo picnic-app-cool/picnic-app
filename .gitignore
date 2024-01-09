@@ -156,5 +156,5 @@ flutter_sdk
 local.properties
 .env
 config.zip
-GoogleService-Info.plist
-google-services.json
+**/GoogleService-Info.plist
+**/google-services.json
